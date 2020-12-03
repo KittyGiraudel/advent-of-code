@@ -1,9 +1,7 @@
 const readInput = require('../helpers/readInput')
 
-const split = row => row.split('')
 const isTree = char => char === '#'
-const getTreeCountForSlope = (input, vector) => {
-  const rows = input.map(split)
+const getTreeCountForSlope = (rows, vector) => {
   const width = rows[0].length
   const coords = [0, 0]
   const length = Math.ceil(rows.length / vector[1])
