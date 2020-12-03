@@ -5,16 +5,15 @@ const isTree = char => char === '#'
 const getTreeCountForSlope = (input, vector) => {
   const rows = input.map(split)
   const width = rows[0].length
-  const pings = []
   const coords = [0, 0]
+  const length = Math.ceil(rows.length / vector[1])
 
-  while (coords[1] < rows.length) {
-    pings.push(rows[coords[1]][coords[0] % width])
+  return Array.from({ length }, _ => {
+    const ping = rows[coords[1]][coords[0] % width]
     coords[0] += vector[0]
     coords[1] += vector[1]
-  }
-
-  return pings.filter(isTree).length
+    return ping
+  }).filter(isTree).length
 }
 
 const getResult = (input, vectors) =>
