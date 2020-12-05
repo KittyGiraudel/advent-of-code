@@ -1,6 +1,6 @@
 const isClamped = (input, min, max) => input >= min && input <= max
 const parse = input => input.split(':')[1]
-const FIELDS = {
+const VALIDATORS = {
   byr: input => isClamped(+input, 1920, 2002),
   iyr: input => isClamped(+input, 2010, 2020),
   eyr: input => isClamped(+input, 2020, 2030),
@@ -13,15 +13,17 @@ const FIELDS = {
 }
 
 const isValidLoose = input =>
-  Object.keys(FIELDS).every(field =>
+  Object.keys(VALIDATORS).every(field =>
     input.split(/\s+/g).find(chunk => chunk.startsWith(field))
   )
 
 const isValidStrict = input =>
-  Object.keys(FIELDS).every(field =>
+  Object.keys(VALIDATORS).every(key =>
     input
       .split(/\s+/g)
-      .find(value => value.startsWith(field) && FIELDS[field](parse(value)))
+      .find(
+        value => value.startsWith(`${key}:`) && VALIDATORS[key](parse(value))
+      )
   )
 
-module.exports = { isValidLoose, isValidStrict, FIELDS }
+module.exports = { isValidLoose, isValidStrict, VALIDATORS }
