@@ -1,5 +1,5 @@
 const test = require('ava')
-const { isValidLoose, isValidStrict, FIELDS } = require('.')
+const { isValidLoose, isValidStrict, VALIDATORS } = require('.')
 const readInput = require('../helpers/readInput')
 const input = readInput('./src/day-4/input.txt', '\n\n')
 
@@ -30,20 +30,20 @@ test('Day 4.1', t => {
 })
 
 test('Day 4.2', t => {
-  t.is(FIELDS.byr('2002'), true)
-  t.is(FIELDS.byr('2003'), false)
-  t.is(FIELDS.eyr('1920'), false)
-  t.is(FIELDS.hgt('60in'), true)
-  t.is(FIELDS.hgt('190cm'), true)
-  t.is(FIELDS.hgt('190in'), false)
-  t.is(FIELDS.hgt('190'), false)
-  t.is(FIELDS.hcl('#123abc'), true)
-  t.is(FIELDS.hcl('#123abz'), false)
-  t.is(FIELDS.hcl('123abc'), false)
-  t.is(FIELDS.ecl('brn'), true)
-  t.is(FIELDS.ecl('wat'), false)
-  t.is(FIELDS.pid('000000001'), true)
-  t.is(FIELDS.pid('0123456789'), false)
+  t.is(VALIDATORS.byr('2002'), true)
+  t.is(VALIDATORS.byr('2003'), false)
+  t.is(VALIDATORS.eyr('1920'), false)
+  t.is(VALIDATORS.hgt('60in'), true)
+  t.is(VALIDATORS.hgt('190cm'), true)
+  t.is(VALIDATORS.hgt('190in'), false)
+  t.is(VALIDATORS.hgt('190'), false)
+  t.is(VALIDATORS.hcl('#123abc'), true)
+  t.is(VALIDATORS.hcl('#123abz'), false)
+  t.is(VALIDATORS.hcl('123abc'), false)
+  t.is(VALIDATORS.ecl('brn'), true)
+  t.is(VALIDATORS.ecl('wat'), false)
+  t.is(VALIDATORS.pid('000000001'), true)
+  t.is(VALIDATORS.pid('0123456789'), false)
 
   t.is(
     isValidStrict(`eyr:1972 cid:100
