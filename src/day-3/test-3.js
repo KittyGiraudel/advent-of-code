@@ -1,6 +1,7 @@
 const test = require('ava')
 const readInput = require('../helpers/readInput')
-const { getTreeCountForSlope, getResult } = require('.')
+const { getTreeCountForSlope, getResult } = require('./')
+
 const input = readInput('./src/day-3/input.txt')
 
 const example = `
@@ -25,7 +26,6 @@ test('Day 3.1', t => {
   t.is(getTreeCountForSlope(example, [5, 1]), 3)
   t.is(getTreeCountForSlope(example, [7, 1]), 4)
   t.is(getTreeCountForSlope(example, [1, 2]), 2)
-  t.is(getTreeCountForSlope(input, [3, 1]), 218)
 })
 
 test('Day 3.2', t => {
@@ -39,6 +39,10 @@ test('Day 3.2', t => {
     ]),
     336
   )
+})
+
+test('Day 3 — Solutions', t => {
+  t.is(getTreeCountForSlope(input, [3, 1]), 218)
   t.is(
     getResult(input, [
       [1, 1],

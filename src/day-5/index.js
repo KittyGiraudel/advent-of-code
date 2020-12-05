@@ -27,4 +27,13 @@ const getSeatId = input => {
   return row * 8 + col
 }
 
-module.exports = { getCoords, getSeatId }
+const getSeat = input => {
+  const ids = input
+    .map(getSeatId)
+    .map(Number)
+    .sort((a, b) => a - b)
+
+  return ids.find((id, index) => id !== index + Math.min(...ids)) - 1
+}
+
+module.exports = { getCoords, getSeatId, getSeat }

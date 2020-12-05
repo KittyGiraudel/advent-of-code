@@ -1,5 +1,5 @@
 const test = require('ava')
-const { getCoords, getSeatId } = require('./')
+const { getCoords, getSeatId, getSeat } = require('./')
 const readInput = require('../helpers/readInput')
 const input = readInput('./src/day-5/input.txt')
 
@@ -12,5 +12,9 @@ test('Day 5.1', t => {
   t.is(getSeatId('FFFBBBFRRR'), 119)
   t.deepEqual(getCoords('BBFFBBFRLL'), [102, 4])
   t.is(getSeatId('BBFFBBFRLL'), 820)
+})
+
+test('Day 5 — Solutions', t => {
   t.is(Math.max(...input.map(getSeatId)), 855)
+  t.is(getSeat(input), 552)
 })

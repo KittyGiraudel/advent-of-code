@@ -1,5 +1,3 @@
-const readInput = require('../helpers/readInput')
-
 const isTree = char => char === '#'
 const getTreeCountForSlope = (rows, vector) => {
   const width = rows[0].length
