@@ -26,7 +26,6 @@ test('Day 4.1', t => {
   iyr:2011 ecl:brn hgt:59in`),
     false
   )
-  t.is(input.filter(isValidLoose).length, 190)
 })
 
 test('Day 4.2', t => {
@@ -91,6 +90,9 @@ hcl:#623a2f`),
     ),
     true
   )
+})
 
+test('Day 4 — Solutions', t => {
+  t.is(input.filter(isValidLoose).length, 190)
   t.is(input.filter(isValidStrict).length, 121)
 })

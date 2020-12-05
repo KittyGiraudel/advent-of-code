@@ -1,16 +1,22 @@
 const test = require('ava')
-const { isValidPassword1, isValidPassword2, getResult } = require('.')
+const readInput = require('../helpers/readInput')
+const { isValidLoose, isValidStrict } = require('./')
+
+const policies = readInput('./src/day-2/input.txt')
 
 test('Day 2.1', t => {
-  t.is(isValidPassword1('1-3 a: abcde'), true)
-  t.is(isValidPassword1('1-3 b: cdefg'), false)
-  t.is(isValidPassword1('2-9 c: ccccccccc'), true)
-  t.is(getResult(isValidPassword1), 500)
+  t.is(isValidLoose('1-3 a: abcde'), true)
+  t.is(isValidLoose('1-3 b: cdefg'), false)
+  t.is(isValidLoose('2-9 c: ccccccccc'), true)
 })
 
 test('Day 2.2', t => {
-  t.is(isValidPassword2('1-3 a: abcde'), true)
-  t.is(isValidPassword2('1-3 b: cdefg'), false)
-  t.is(isValidPassword2('2-9 c: ccccccccc'), false)
-  t.is(getResult(isValidPassword2), 313)
+  t.is(isValidStrict('1-3 a: abcde'), true)
+  t.is(isValidStrict('1-3 b: cdefg'), false)
+  t.is(isValidStrict('2-9 c: ccccccccc'), false)
+})
+
+test('Day 2 — Solutions', t => {
+  t.is(policies.filter(isValidLoose).length, 500)
+  t.is(policies.filter(isValidStrict).length, 313)
 })
