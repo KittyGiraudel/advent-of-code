@@ -6,8 +6,7 @@ const {
   mapRestrictions,
   countContainers,
 } = require('./')
-const readInput = require('../helpers/readInput')
-const input = readInput('./src/day-7/input.txt')
+const restrictions = require('../helpers/readInput')(__dirname)
 
 const example1 = `
 light red bags contain 1 bright white bag, 2 muted yellow bags.
@@ -69,7 +68,7 @@ test('Day 7.2', t => {
 })
 
 test('Day 7 — Solutions', t => {
-  const map = mapRestrictions(input)
+  const map = mapRestrictions(restrictions)
   const type = 'shiny gold'
 
   t.is(countContainers(map, type), 268)

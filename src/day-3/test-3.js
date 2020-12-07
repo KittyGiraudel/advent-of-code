@@ -1,8 +1,6 @@
 const test = require('ava')
-const readInput = require('../helpers/readInput')
 const { getTreeCountForSlope, getResult } = require('./')
-
-const input = readInput('./src/day-3/input.txt')
+const input = require('../helpers/readInput')(__dirname)
 
 const example = `
 ..##.......
