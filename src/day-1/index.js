@@ -1,14 +1,12 @@
 const getCombinations = require('../helpers/getCombinations')
+const sum = require('../helpers/sum')
+const product = require('../helpers/product')
 
-const getProduct = (input, size) =>
-  findMatches(input, size).reduce((a, b) => a * b, 1)
+// Find set of `size` items from `input` array summing to 2020.
+// @param {Number[]} input - Array of numbers
+// @param {Number} size - Amount of items whose sum is 2020
+// @return {Number[]}
+const findMatches = (numbers, size) =>
+  getCombinations(numbers, size).find(set => sum(set) === 2020)
 
-const findMatches = (input, size) =>
-  getCombinations(input, size).find(
-    set => set.reduce((a, b) => a + b, 0) === 2020
-  )
-
-module.exports = {
-  getProduct,
-  findMatches,
-}
+module.exports = { findMatches }

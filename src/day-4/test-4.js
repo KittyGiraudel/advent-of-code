@@ -1,7 +1,6 @@
 const test = require('ava')
 const { isValidLoose, isValidStrict, VALIDATORS } = require('.')
-const readInput = require('../helpers/readInput')
-const input = readInput('./src/day-4/input.txt', '\n\n')
+const passports = require('../helpers/readInput')(__dirname, '\n\n')
 
 test('Day 4.1', t => {
   t.is(
@@ -93,6 +92,6 @@ hcl:#623a2f`),
 })
 
 test('Day 4 — Solutions', t => {
-  t.is(input.filter(isValidLoose).length, 190)
-  t.is(input.filter(isValidStrict).length, 121)
+  t.is(passports.filter(isValidLoose).length, 190)
+  t.is(passports.filter(isValidStrict).length, 121)
 })

@@ -1,5 +1,11 @@
+const sum = require('../helpers/sum')
+
 const LETTERS = 'abcdefghijklmnopqrstuvwxyz'.split('')
 
+// Count how many questions match `predicate` in the given `group`.
+// @param {Function} predicate - Validator predicate (`.some` or `.every`)
+// @param {String} group - Raw group
+// @return {Number}
 const getCountForGroup = predicate => group => {
   const persons = group.split('\n')
   const hasAnsweredYes = letter => person => person.includes(letter)
@@ -11,11 +17,7 @@ const getCountForGroup = predicate => group => {
 const getLooseCountForGroup = getCountForGroup(Array.prototype.some)
 const getStrictCountForGroup = getCountForGroup(Array.prototype.every)
 
-const getTotalCount = (groups, mapper) =>
-  groups.map(mapper).reduce((a, b) => a + b, 0)
-
 module.exports = {
   getLooseCountForGroup,
   getStrictCountForGroup,
-  getTotalCount,
 }

@@ -1,5 +1,8 @@
 const fs = require('fs')
 const path = require('path')
 
-module.exports = (file, delimiter = '\n') =>
-  fs.readFileSync(path.resolve(file), 'utf8').trim().split(delimiter)
+module.exports = (dir, delimiter = '\n') =>
+  fs
+    .readFileSync(path.resolve(dir + '/input.txt'), 'utf8')
+    .trim()
+    .split(delimiter)

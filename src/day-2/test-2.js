@@ -1,8 +1,6 @@
 const test = require('ava')
-const readInput = require('../helpers/readInput')
 const { isValidLoose, isValidStrict } = require('./')
-
-const policies = readInput('./src/day-2/input.txt')
+const policies = require('../helpers/readInput')(__dirname)
 
 test('Day 2.1', t => {
   t.is(isValidLoose('1-3 a: abcde'), true)

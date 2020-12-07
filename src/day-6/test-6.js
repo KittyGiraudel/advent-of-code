@@ -1,11 +1,7 @@
 const test = require('ava')
-const {
-  getLooseCountForGroup,
-  getStrictCountForGroup,
-  getTotalCount,
-} = require('./')
-const readInput = require('../helpers/readInput')
-const groups = readInput('./src/day-6/input.txt', '\n\n')
+const { getLooseCountForGroup, getStrictCountForGroup } = require('./')
+const sum = require('../helpers/sum')
+const groups = require('../helpers/readInput')(__dirname, '\n\n')
 
 test('Day 6.1', t => {
   t.is(getLooseCountForGroup('abc'), 3)
@@ -25,6 +21,6 @@ test('Day 6.2', t => {
 })
 
 test('Day 6 — Solutions', t => {
-  t.is(getTotalCount(groups, getLooseCountForGroup), 6703)
-  t.is(getTotalCount(groups, getStrictCountForGroup), 3430)
+  t.is(sum(groups.map(getLooseCountForGroup)), 6703)
+  t.is(sum(groups.map(getStrictCountForGroup)), 3430)
 })

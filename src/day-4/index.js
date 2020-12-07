@@ -1,5 +1,10 @@
+// Return whether the given input is contained within min and max.
+// @param {Number} input - Input to validate
+// @param {Number} min - Minimum
+// @param {Number} max - Maximum
+// @return {Boolena}
 const isClamped = (input, min, max) => input >= min && input <= max
-const parse = input => input.split(':')[1]
+
 const VALIDATORS = {
   byr: input => isClamped(+input, 1920, 2002),
   iyr: input => isClamped(+input, 2010, 2020),
@@ -12,18 +17,28 @@ const VALIDATORS = {
   pid: input => /^\d{9}$/.test(input),
 }
 
-const isValidLoose = input =>
+// Return the value for a given key/value colon-separated pair.
+// @param {String} input - Input to parse
+// @return {String}
+const parse = input => input.split(':')[1]
+
+// Loosely validate the given passport by ensuring all fields are listed.
+// @param {String} passport - Passport to validate
+// @return {Boolean} Whether the passport is valid
+const isValidLoose = passport =>
   Object.keys(VALIDATORS).every(field =>
-    input.split(/\s+/g).find(chunk => chunk.startsWith(field))
+    passport.split(/\s+/g).find(chunk => chunk.startsWith(field))
   )
 
+// Strictly validate the given passport by ensuring all fields are listed and
+// valid.
+// @param {String} passport - Passport to validate
+// @return {Boolean} Whether the passport is valid
 const isValidStrict = input =>
   Object.keys(VALIDATORS).every(key =>
     input
       .split(/\s+/g)
-      .find(
-        value => value.startsWith(`${key}:`) && VALIDATORS[key](parse(value))
-      )
+      .find(value => value.startsWith(key) && VALIDATORS[key](parse(value)))
   )
 
 module.exports = { isValidLoose, isValidStrict, VALIDATORS }
