@@ -1,8 +1,13 @@
 {
   "scripts": {
-    "test": "ava"
+    "test": "ava --verbose"
   },
   "devDependencies": {
     "ava": "^3.13.0"
+  },
+  "ava": {
+    "files": [
+      "./src/**/test.js"
+    ]
   }
 }
