@@ -14,19 +14,21 @@ const findWeakness = (input, size = 25) =>
 
 // Find a contiguous set of at least two numbers whose sum is equal to the
 // input’s weakness, and sum the lowest and highest numbers of this set.
+// See: https://github.com/constb/aoc2020/blob/main/09/index2.js#L20
 // @param {Number[]} input - Array of numbers
 // @param {Number} size - Size of the preamble
 // @return {Number}
 const breakWeakness = (input, size = 25) => {
   const weakness = findWeakness(input, size)
+  const range = [0, 1]
 
-  for (let i = 0; i < input.length; i += 1) {
-    for (let j = i + 1; j < input.length; j += 1) {
-      const range = input.slice(i, j)
-      const total = sum(range)
-      if (total > weakness) break
-      if (total === weakness) return Math.min(...range) + Math.max(...range)
-    }
+  while (range[1] < input.length) {
+    const slice = input.slice(...range)
+    const total = sum(slice)
+
+    if (total === weakness) return Math.min(...slice) + Math.max(...slice)
+    else if (total > weakness) range[0]++
+    else range[1]++
   }
 
   return null
