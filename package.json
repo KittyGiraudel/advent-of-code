@@ -9,5 +9,6 @@
     "files": [
       "./src/**/test.js"
     ]
-  }
+  },
+  "dependencies": {}
 }
