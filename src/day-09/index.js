@@ -1,5 +1,5 @@
 const sum = require('../helpers/sum')
-const { findMatches } = require('../day-1')
+const { findMatches } = require('../day-01')
 
 // Find the first number in `input` which cannot be obtained by summing 2
 // numbers in its preamble (`size` previous numbers).

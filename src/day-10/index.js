@@ -6,7 +6,7 @@ const isClamped = require('../helpers/isClamped')
 // @param {Number} current - Current adapter in chain
 // @param {Map} cache - Cache to make recursion faster (i.e. possible)
 // @return {Number}
-function countPathsToEnd(adapters, current, cache = new Map()) {
+function countPathsToEnd(adapters, current = adapters[0], cache = new Map()) {
   // If we have already computed whether the current value leads to the device,
   // return the value from the cache.
   if (cache.has(current)) return cache.get(current)
@@ -58,6 +58,6 @@ const getDifferenceProduct = adapters => {
 // outlet (0) to the device (highest adapter joltage + 3).
 // @param {Number[]} adapters - Array of adapters
 // @return {Number}
-const countArrangements = input => countPathsToEnd(sortAdapters(input), 0)
+const countArrangements = input => countPathsToEnd(sortAdapters(input))
 
 module.exports = { getDifferenceProduct, countArrangements }
