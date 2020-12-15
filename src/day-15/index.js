@@ -3,13 +3,18 @@
 // @param {Number[]} numbers - Initial set of numbers
 // @param {Number} rounds - Rounds to play
 const get = (numbers, rounds = 1) => {
-  const map = new Map(numbers.map((n, i) => [n, i]))
-  let last = numbers[numbers.length - 1]
+  const map = new Uint32Array(rounds)
+  let last = 0
 
-  for (let i = numbers.length; i < rounds; i++) {
-    const value = map.has(last) ? i - map.get(last) - 1 : 0
-    map.set(last, i - 1)
-    last = value
+  for (let i = 0; i < rounds; i++) {
+    if (i < numbers.length) {
+      last = numbers[i]
+      map[last] = i + 1
+    } else {
+      const lastIndex = map[last] || null
+      map[last] = i
+      last = lastIndex === null ? 0 : i - lastIndex
+    }
   }
 
   return last
