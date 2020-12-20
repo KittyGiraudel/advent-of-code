@@ -16,7 +16,7 @@ const wrap = rule => (rule.includes('|') ? '(?:' + rule + ')' : rule)
 // @return {String}
 const resolveRule = (rule, map, depth = 0) =>
   rule.replace(/\d+/g, match =>
-    depth > 4 ? match : wrap(resolveRule(map.get(+match), map, depth + 1))
+    depth > 4 ? match : wrap(resolveRule(map.get(match), map, depth + 1))
   )
 
 // Get the resolved regular expression for the rules, applying fixes beforehand
@@ -30,13 +30,13 @@ const getRegularExpression = (input, fixes) => {
     .split('\n')
     .map(line => (line in fixes ? fixes[line] : line))
     .map(line => line.match(/^(\d+): (.+)$/))
-    .reduce((acc, match) => acc.set(+match[1], match[2]), new Map())
+    .reduce((acc, match) => acc.set(match[1], match[2]), new Map())
 
   for (let [key, value] of map.entries()) {
     map.set(key, resolveRule(value, map))
   }
 
-  return new RegExp('^' + map.get(0).replace(/\s+/g, '') + '$')
+  return new RegExp('^' + map.get('0').replace(/\s+/g, '') + '$')
 }
 
 // Count the amount of messages matching rules.
