@@ -25,14 +25,15 @@ const parseFood = food => {
 // @return {Object}
 const mapFood = input =>
   mapAllergens(
-    input.reduce((acc, food) => {
-      const { ingredients, allergens } = parseFood(food)
-      allergens.forEach(allergen => {
-        if (typeof acc[allergen] === 'undefined') acc[allergen] = { foods: [] }
-        acc[allergen].foods.push(ingredients)
-      })
-      return acc
-    }, {})
+    input.map(parseFood).reduce(
+      (acc, { ingredients, allergens }) =>
+        allergens.reduce((acc, allergen) => {
+          acc[allergen] = acc[allergen] || { foods: [] }
+          acc[allergen].foods.push(ingredients)
+          return acc
+        }, acc),
+      {}
+    )
   )
 
 // Map allergens to a specific ingredient.
