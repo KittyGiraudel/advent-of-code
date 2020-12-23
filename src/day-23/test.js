@@ -1,17 +1,18 @@
 const test = require('ava')
-const { play, anchor } = require('.')
-const input = 496138527
+const { play, serialiseChain, getChainValue } = require('.')
+const input = require('../helpers/readInput')(__dirname).map(Number)
+const example = '389125467'.split('').map(Number)
 
-const getOrder = cups => anchor(cups, 1).join('').slice(1)
 test('Day 23.1', t => {
-  t.is(getOrder(play('389125467', 10)), '92658374')
-  t.is(getOrder(play('389125467', 100)), '67384529')
+  t.is(serialiseChain(play(example, 10)), 92658374)
+  t.is(serialiseChain(play(example, 100)), 67384529)
 })
 
 test('Day 23.2', t => {
-  t.is(play('389125467', 10_000_000, 1_000_000), '92658374')
+  t.is(getChainValue(play(example, 10_000_000, 1_000_000)), 149245887792)
 })
 
 test('Day 23 — Solutions', t => {
-  t.is(getOrder(play('496138527', 100)), '69425837')
+  t.is(serialiseChain(play(input, 100)), 69425837)
+  t.is(getChainValue(play(input, 10_000_000, 1_000_000)), 218882971435)
 })
