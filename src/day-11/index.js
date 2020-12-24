@@ -1,3 +1,5 @@
+const applyVector = require('../helpers/applyVector')
+
 const DIRECTIONAL_VECTORS = [
   [-1, 0],
   [-1, +1],
@@ -15,12 +17,6 @@ const DIRECTIONAL_VECTORS = [
 // @return {String|void}
 const read = (layout, coords) => layout?.[coords[1]]?.[coords[0]]
 
-// Apply the given vector to the given X,Y coords.
-// @param {Number[]} coords - Set of X,Y coords
-// @param {Number[]} vector - Vector to shift coords by
-// @return {Number[]}
-const apply = (coords, vector) => [coords[0] + vector[0], coords[1] + vector[1]]
-
 // Get the first seat in layout in the direction given by vector from the given
 // set of X,Y coords.
 // @param {String[]} layout - Seating layout
@@ -28,8 +24,9 @@ const apply = (coords, vector) => [coords[0] + vector[0], coords[1] + vector[1]]
 // @param {Number[]} vector - Vector to walk
 // @return {String|void}
 const getFirstSeat = (layout, coords, vector) => {
-  let position = apply(coords, vector)
-  while (read(layout, position) === '.') position = apply(position, vector)
+  let position = applyVector(coords, vector)
+  while (read(layout, position) === '.')
+    position = applyVector(position, vector)
   return read(layout, position)
 }
 
@@ -38,7 +35,7 @@ const getFirstSeat = (layout, coords, vector) => {
 // @param {Number[]} coords - Set of X,Y coords
 // @return {String[]}
 const getAdjacentSeats = (layout, coords) =>
-  DIRECTIONAL_VECTORS.map(vector => read(layout, apply(coords, vector)))
+  DIRECTIONAL_VECTORS.map(vector => read(layout, applyVector(coords, vector)))
 
 // Get the 8 visible seats around the one at given position.
 // @param {String[]} layout - Seating layout
