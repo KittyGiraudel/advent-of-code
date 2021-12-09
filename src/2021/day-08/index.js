@@ -33,8 +33,8 @@ const decode = line => {
   values[8] = patterns.find(pattern => pattern.length === 7)
 
   // The remaining 6 patterns are divided into 2 groups:
-  // - 5 segments (2, 3 and 5)
-  // - 6 segments (0, 6 and 9)
+  // - Those with 5 segments (2, 3 and 5)
+  // - Those with 6 segments (0, 6 and 9)
   let with5Segments = patterns.filter(pattern => pattern.length === 5)
   let with6Segments = patterns.filter(pattern => pattern.length === 6)
 
