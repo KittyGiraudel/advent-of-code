@@ -5,10 +5,7 @@ const parseInput = ([coords, instructions]) => {
     return [axis, +line]
   })
 
-  return {
-    dots,
-    folds,
-  }
+  return { dots, folds }
 }
 
 const foldOnce = (dots, [axis, line]) =>
@@ -37,25 +34,11 @@ const render = dots => {
   const coords = Array.from(dots, dot => dot.split(',').map(Number))
   const xMax = Math.max(...coords.map(dot => dot[0])) + 1
   const yMax = Math.max(...coords.map(dot => dot[1])) + 1
-  const grid = Array.from(
-    {
-      length: yMax,
-    },
-    (_, y) =>
-      Array.from(
-        {
-          length: xMax,
-        },
-        (_, x) => (isDot(x, y) ? '#' : ' ')
-      )
+  const grid = Array.from({ length: yMax }, (_, y) =>
+    Array.from({ length: xMax }, (_, x) => (isDot(x, y) ? '#' : ' '))
   )
 
   return grid.map(row => row.join(' ')).join('\n')
 }
 
-module.exports = {
-  parseInput,
-  foldOnce,
-  foldAll,
-  render,
-}
+module.exports = { parseInput, foldOnce, foldAll, render }

@@ -1,10 +1,10 @@
 const getEpsilonAndGamma = items =>
   Array.from({ length: items[0].length }).reduce(
-    (acc, _, index) => {
-      const digits = items.map(item => +item[index])
-      const gamma = digits.filter(Boolean).length >= items.length / 2 ? 1 : 0
+    (acc, _, i) => {
+      const column = items.map(item => item[i]).join('')
+      const gamma = column.match(/1/g).length > items.length / 2
 
-      acc.gamma += gamma
+      acc.gamma += +gamma
       acc.epsilon += +!gamma
 
       return acc
@@ -13,12 +13,12 @@ const getEpsilonAndGamma = items =>
   )
 
 const getGasValue = predicate => items =>
-  Array.from({ length: items[0].length }).reduce((acc, _, index) => {
-    const digits = acc.map(item => +item[index])
-    const hasMore1 = digits.filter(Boolean).length >= digits.length / 2
+  Array.from({ length: items[0].length }).reduce((acc, _, i) => {
+    const column = acc.map(item => item[i]).join('')
+    const hasMore1 = column.match(/1/g)?.length >= acc.length / 2
     const main = predicate(hasMore1)
 
-    return acc.length === 1 ? acc : acc.filter(item => +item[index] === main)
+    return acc.length === 1 ? acc : acc.filter(item => +item[i] === main)
   }, items)[0]
 
 const getOxygen = getGasValue(hasMore1 => +hasMore1)

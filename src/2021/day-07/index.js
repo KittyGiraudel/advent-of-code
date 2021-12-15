@@ -1,18 +1,7 @@
 const sum = require('../../helpers/sum')
-
-function getMedian(values) {
-  values = values.slice(0).sort((a, b) => a - b)
-
-  const half = Math.floor(values.length / 2)
-
-  return values.length % 2
-    ? values[half]
-    : (values[half - 1] + values[half]) / 2
-}
-
-const getAverage = values => sum(values) / values.length
-
-const getTriangularNumber = upper => (upper * (1 + upper)) / 2
+const getMedian = require('../../helpers/getMedian')
+const getAverage = require('../../helpers/getAverage')
+const getTriangularNumber = require('../../helpers/getTriangularNumber')
 
 const getFuelConsumption = numbers => {
   const median = getMedian(numbers)
