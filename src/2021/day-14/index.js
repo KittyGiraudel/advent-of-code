@@ -1,10 +1,5 @@
 const countOccurrences = require('../../helpers/countOccurrences')
-
-const countInString = (haystack, needle) => {
-  const re = new RegExp(`(?=(${needle}))`, 'gi')
-
-  return Array.from(haystack.matchAll(re)).length || 0
-}
+const countInString = require('../../helpers/countInString')
 
 const count = (input, iterations = 1) => {
   const string = input[0]
@@ -59,14 +54,10 @@ const count = (input, iterations = 1) => {
   }
 
   // Once the iterations are over, compute the score by subtracting the lowest
-  // counter to the highest one.
+  // counter from the highest one.
   const counts = Object.values(counters)
-  const max = Math.max(...counts)
-  const min = Math.min(...counts)
 
-  return max - min
+  return Math.max(...counts) - Math.min(...counts)
 }
 
-module.exports = {
-  count,
-}
+module.exports = { count }

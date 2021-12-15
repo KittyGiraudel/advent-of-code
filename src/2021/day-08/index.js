@@ -1,3 +1,5 @@
+const sum = require('../../helpers/sum')
+
 const parseInput = line =>
   line
     .split(' | ')
@@ -88,12 +90,14 @@ const decode = line => {
   values[9] = with6Segments[1]
 
   // Finally, we can map each digit to a pattern, and figure out the resulting
-  // number (provided as a string in case it starts with a 0).
-  return encodedDigits
-    .map(encodedDigit => values.findIndex(value => value === encodedDigit))
-    .join('')
+  // number.
+  return Number(
+    encodedDigits
+      .map(encodedDigit => values.findIndex(value => value === encodedDigit))
+      .join('')
+  )
 }
 
-const total = lines => lines.map(decode).reduce((a, b) => a + Number(b), 0)
+const total = lines => sum(lines.map(decode))
 
 module.exports = { count, decode, total }

@@ -1,22 +1,17 @@
 const Graph = require('node-dijkstra')
-
-const getNeighborCoords = (ri, ci) => [
-  [ri - 1, ci],
-  [ri, ci + 1],
-  [ri + 1, ci],
-  [ri, ci - 1],
-]
+const isClamped = require('../../helpers/isClamped')
+const { getBorderingCoords } = require('../../helpers/getNeighborCoords')
 
 const createGraph = grid => {
-  const xMax = grid[0].length
-  const yMax = grid.length
+  const xMax = grid[0].length - 1
+  const yMax = grid.length - 1
   const getValue = ([ri, ci]) => grid[ri][ci]
   const route = new Graph()
 
   grid.forEach((row, ri) => {
     row.forEach((_, ci) => {
-      const neighbors = getNeighborCoords(ri, ci)
-        .filter(([ri, ci]) => !(ri < 0 || ci < 0 || ri >= xMax || ci >= yMax))
+      const neighbors = getBorderingCoords(ri, ci)
+        .filter(([ri, ci]) => isClamped(ri, 0, xMax) && isClamped(ci, 0, yMax))
         .reduce(
           (acc, coords) => ({ ...acc, [coords.join(',')]: getValue(coords) }),
           {}
@@ -28,8 +23,6 @@ const createGraph = grid => {
 
   return route
 }
-
-const createGrid = rows => rows.map(row => row.split('').map(Number))
 
 const createMegaGrid = rows => {
   const ratio = 5
@@ -61,4 +54,4 @@ const getLowestRisk = grid =>
     cost: true,
   }).cost
 
-module.exports = { createGrid, createMegaGrid, getLowestRisk }
+module.exports = { createMegaGrid, getLowestRisk }

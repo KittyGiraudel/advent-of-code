@@ -16,8 +16,7 @@ const sample = `00100
 01010`.split('\n')
 
 test('Day 3.1', t => {
-  const gamma = getEpsilonAndGamma(sample).gamma
-  const epsilon = getEpsilonAndGamma(sample).epsilon
+  const { gamma, epsilon } = getEpsilonAndGamma(sample)
   const power = parseInt(gamma, 2) * parseInt(epsilon, 2)
 
   t.is(gamma, '10110')
@@ -36,8 +35,7 @@ test('Day 3.2', t => {
 })
 
 test('Day 3 — Solutions', t => {
-  const gamma = getEpsilonAndGamma(items).gamma
-  const epsilon = getEpsilonAndGamma(items).epsilon
+  const { gamma, epsilon } = getEpsilonAndGamma(items)
   const power = parseInt(gamma, 2) * parseInt(epsilon, 2)
   t.is(power, 4103154)
 

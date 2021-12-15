@@ -1,23 +1,12 @@
+const sum = require('../../helpers/sum')
+const createGrid = require('../../helpers/createGrid')
+const { getSurroundingCoords } = require('../../helpers/getNeighborCoords')
+
 const makeGrid = rows =>
-  rows.map(row => row.split('').map(oc => ({ value: +oc, flashed: false })))
+  createGrid(rows, oc => ({ value: +oc, flashed: false }))
 
 const countNewFlashes = grid =>
-  grid.reduce(
-    (total, row) =>
-      total + row.reduce((subTotal, oc) => subTotal + +oc.flashed, 0),
-    0
-  )
-
-const getNeighborCoords = (ri, ci) => [
-  /* N  */ [ri - 1, ci],
-  /* NE */ [ri - 1, ci + 1],
-  /* E  */ [ri, ci + 1],
-  /* SE */ [ri + 1, ci + 1],
-  /* S  */ [ri + 1, ci],
-  /* SW */ [ri + 1, ci - 1],
-  /* W  */ [ri, ci - 1],
-  /* NW */ [ri - 1, ci - 1],
-]
+  sum(grid.map(row => row.map(oc => +oc.flashed)).flat())
 
 const processFlashes = grid => {
   const toIncrement = []
@@ -26,7 +15,7 @@ const processFlashes = grid => {
     row.forEach((oc, ci) => {
       if (!oc.flashed && oc.value > 9) {
         oc.flashed = true
-        toIncrement.push(...getNeighborCoords(ri, ci))
+        toIncrement.push(...getSurroundingCoords(ri, ci))
       }
     })
   })
@@ -60,36 +49,24 @@ const cycle = grid => {
   return flashes
 }
 
-const printGrid = grid => {
-  console.log('')
-  console.log(
-    grid
-      .map(row => row.map(oc => String(oc.value).padStart(2, ' ')).join(' '))
-      .join('\n')
-  )
-  console.log('')
-}
-
 const countFlashes = (rows, steps) => {
-  let flashes = 0
   const grid = makeGrid(rows)
+  let flashes = 0
 
   for (let s = 0; s < steps; s++) flashes += cycle(grid)
 
   return flashes
 }
 
-const areOcSynced = grid => grid.every(row => row.every(oc => oc.value === 0))
+const isSynced = grid => grid.every(row => row.every(oc => oc.value === 0))
 
 const findSynchronocity = rows => {
   const grid = makeGrid(rows)
   let i = 0
 
-  while (true) {
-    i++
-    cycle(grid)
-    if (areOcSynced(grid)) return i
-  }
+  while (!isSynced(grid)) i++, cycle(grid)
+
+  return i
 }
 
 module.exports = { countFlashes, findSynchronocity }
