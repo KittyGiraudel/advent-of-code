@@ -1,0 +1,15 @@
+const test = require('ava')
+const { draw, getInitialState, initComputer } = require('./')
+const [input] = require('../../helpers/readInput')(__dirname)
+
+test.skip('Day 13.1', t => {})
+test.skip('Day 13.2', t => {})
+
+test('Day 13 — Solutions', t => {
+  const state = getInitialState(initComputer(input))
+  const tiles = Array.from(state.board.values())
+  const { score } = draw(input)
+
+  t.is(tiles.filter(t => t === 2).length, 280)
+  t.is(score, 13298)
+})
