@@ -1,3 +1,6 @@
+// Return the median value for the given numbers.
+// @param {Number[]} values - Numbers to get the median from
+// @return {Number}
 const getMedian = values => {
   values = values.slice(0).sort((a, b) => a - b)
 
