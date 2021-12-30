@@ -1,4 +1,4 @@
-const product = require('../../helpers/product')
+const $ = require('../../helpers')
 
 // Count the amount of trees encountered on a slope defined by given vector.
 // @param {String[]} grid - Rows of strings
@@ -25,6 +25,6 @@ const getTreeCountForSlope = (rows, vector) => {
 // @param {Number[][]} vectors - Array of X,Y vectors
 // @return {Number}
 const getResult = (rows, vectors) =>
-  product(vectors.map(vector => getTreeCountForSlope(rows, vector)))
+  $.product(vectors.map(vector => getTreeCountForSlope(rows, vector)))
 
 module.exports = { getTreeCountForSlope, getResult }

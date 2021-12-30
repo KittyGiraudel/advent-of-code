@@ -1,6 +1,4 @@
-const sum = require('../../helpers/sum')
-const product = require('../../helpers/product')
-const isClamped = require('../../helpers/isClamped')
+const $ = require('../../helpers')
 
 // Parse the given values
 // @param {String} rawRules - Raw rules
@@ -24,7 +22,7 @@ const parseInput = ([rawRules, rawTicket, rawNearbyTickets]) => ({
 // @param {Rule} rule - Rule to validate the value against
 // @return {Boolean}
 const isValueMatchingRule = (value, rule) =>
-  isClamped(value, ...rule[1]) || isClamped(value, ...rule[2])
+  $.isClamped(value, ...rule[1]) || $.isClamped(value, ...rule[2])
 
 // Return whether a given value matches some of the given rules.
 // @param {Number} value - Value to validate
@@ -46,7 +44,7 @@ const isTicketValid = (ticket, rules) =>
 // @param {Rule[]} rules - Rules to validate the tickets against
 // @return {Number}
 const getScanningErrorRate = (tickets, rules) =>
-  sum(tickets.flat().filter(value => !isValueValid(value, rules)))
+  $.sum(tickets.flat().filter(value => !isValueValid(value, rules)))
 
 // Return whether the given value is an array with a single item.
 // @param {String|String[]} entry - Entry to test
@@ -71,6 +69,7 @@ const getRulesPossibilities = (tickets, rules) => {
       if (allPass) possibilities[i].push(name)
     }
   })
+
   return possibilities
 }
 
@@ -117,7 +116,7 @@ const getTicketValue = input => {
   const tickets = nearbyTickets.filter(ticket => isTicketValid(ticket, rules))
   const sortedRules = getRulesOrder(tickets, rules)
 
-  return product(
+  return $.product(
     ticket.map((v, i) => (/^departure/.test(sortedRules[i]) ? v : 1))
   )
 }

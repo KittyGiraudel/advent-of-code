@@ -1,24 +1,23 @@
 const Graph = require('node-dijkstra')
-const isClamped = require('../../helpers/isClamped')
-const { getBorderingCoords } = require('../../helpers/getNeighborCoords')
+const $ = require('../../helpers')
 
 const createGraph = grid => {
   const xMax = grid[0].length - 1
   const yMax = grid.length - 1
   const getValue = ([ri, ci]) => grid[ri][ci]
+  const isWithinBounds = ([ri, ci]) =>
+    $.isClamped(ri, 0, xMax) && $.isClamped(ci, 0, yMax)
   const route = new Graph()
 
-  grid.forEach((row, ri) => {
-    row.forEach((_, ci) => {
-      const neighbors = getBorderingCoords(ri, ci)
-        .filter(([ri, ci]) => isClamped(ri, 0, xMax) && isClamped(ci, 0, yMax))
-        .reduce(
-          (acc, coords) => ({ ...acc, [coords.join(',')]: getValue(coords) }),
-          {}
-        )
+  $.gridForEach(grid, (_, ri, ci) => {
+    const neighbors = $.getBorderingCoords(ri, ci)
+      .filter(isWithinBounds)
+      .reduce(
+        (acc, coords) => ({ ...acc, [coords.join(',')]: getValue(coords) }),
+        {}
+      )
 
-      route.addNode(ri + ',' + ci, neighbors)
-    })
+    route.addNode(ri + ',' + ci, neighbors)
   })
 
   return route

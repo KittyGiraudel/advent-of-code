@@ -1,10 +1,9 @@
-const countOccurrences = require('../../helpers/countOccurrences')
-const countInString = require('../../helpers/countInString')
+const $ = require('../../helpers')
 
 const count = (input, iterations = 1) => {
   const string = input[0]
   // Initialize letter counters based on the characters of the initial string.
-  const counters = countOccurrences(string.split(''))
+  const counters = $.countOccurrences(string.split(''))
   // Parse the instructions.
   const instructions = input[1]
     .split('\n')
@@ -14,7 +13,7 @@ const count = (input, iterations = 1) => {
   // pair in the original string. Every iteration then will based its counting
   // map on the previous one.
   let curr = instructions.reduce((acc, [needle]) => {
-    acc[needle] = countInString(string, needle)
+    acc[needle] = $.countInString(string, needle)
     return acc
   }, {})
   let next = {}

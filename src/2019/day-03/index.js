@@ -1,4 +1,4 @@
-const sum = require('../../helpers/sum')
+const $ = require('../../helpers')
 
 const parseLine = line => line.split(',').map(i => [i[0], +i.slice(1)])
 const draw = line => {
@@ -34,7 +34,7 @@ const findIntersections = lines => {
 const findClosestIntersection = lines => {
   const { intersections } = findIntersections(lines)
   const distances = intersections.map(coords =>
-    sum(coords.split(',').map(value => Math.abs(+value)))
+    $.sum(coords.split(',').map(value => Math.abs(+value)))
   )
 
   return Math.min(...distances)
@@ -43,7 +43,7 @@ const findClosestIntersection = lines => {
 const findFastestIntersection = lines => {
   const { maps, intersections } = findIntersections(lines)
   const steps = intersections.map(coords =>
-    sum(maps.map(map => map.get(coords)))
+    $.sum(maps.map(map => map.get(coords)))
   )
 
   return Math.min(...steps)

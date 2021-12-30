@@ -1,4 +1,4 @@
-const applyVector = require('../../helpers/applyVector')
+const $ = require('../../helpers')
 
 const VECTORS = {
   e: [+2, 0],
@@ -35,7 +35,7 @@ const parseLine = line => {
 const processLines = lines =>
   lines
     .map(parseLine)
-    .map(vectors => vectors.reduce(applyVector, [0, 0]))
+    .map(vectors => vectors.reduce($.applyVector, [0, 0]))
     .map(coords => coords.join(','))
     .reduce(
       (acc, key) => acc.set(key, acc.get(key) === 'B' ? 'W' : 'B'),
@@ -46,18 +46,18 @@ const processLines = lines =>
 // @param {String} key - Stringified coordinates
 // @param {Map} cache - Coordinates cache
 // @return {String[]} Stringified coordinates of all 6 neighbours
-const getNeighbourCoords = (key, cache) => {
+const getNeighborCoords = (key, cache) => {
   const coords = key.split(',').map(Number)
 
   if (cache.has(key)) return cache.get(key)
 
-  const neighbourCoords = Object.values(VECTORS)
-    .map(vector => applyVector(coords, vector))
+  const neighborCoords = Object.values(VECTORS)
+    .map(vector => $.applyVector(coords, vector))
     .map(coords => coords.join(','))
 
-  cache.set(key, neighbourCoords)
+  cache.set(key, neighborCoords)
 
-  return neighbourCoords
+  return neighborCoords
 }
 
 // Flip a given tile based on its current side and the amount of black tiles it
@@ -80,8 +80,8 @@ const flip = (color, count) =>
 // @return {String}
 const transition = (coords, origin, cache) => {
   const cell = origin.get(coords)
-  const neighbourCoords = getNeighbourCoords(coords, cache)
-  const neighbours = neighbourCoords.map(coords => origin.get(coords))
+  const neighborCoords = getNeighborCoords(coords, cache)
+  const neighbours = neighborCoords.map(coords => origin.get(coords))
   const count = neighbours.filter(tile => tile === 'B').length
 
   return flip(cell || 'W', count)
@@ -92,8 +92,8 @@ const transition = (coords, origin, cache) => {
 // @param {Map} cache - Coordinates cache
 // @return {Map}
 const cycle = (origin, cache) =>
-  [...origin.keys()].reduce((acc, key) => {
-    getNeighbourCoords(key, cache).forEach(coords => {
+  Array.from(origin.keys()).reduce((acc, key) => {
+    getNeighborCoords(key, cache).forEach(coords => {
       if (acc.has(coords)) return
       acc.set(coords, transition(coords, origin, cache))
     })

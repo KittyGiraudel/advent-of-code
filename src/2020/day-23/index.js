@@ -75,7 +75,7 @@ const play = (input, rounds = 10, size = input.length) => {
 // Serialise the chain from the number 1 onwards, omitting it.
 // @param {UInt32Array} map - Map of links
 // @return {Number}
-const serialiseChain = map => {
+const serializeChain = map => {
   let output = ''
   let current = map[1]
 
@@ -92,4 +92,4 @@ const serialiseChain = map => {
 // @return {Number}
 const getChainValue = map => map[1] * map[map[1]]
 
-module.exports = { play, serialiseChain, getChainValue }
+module.exports = { play, serializeChain, getChainValue }

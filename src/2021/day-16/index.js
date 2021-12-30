@@ -1,9 +1,6 @@
-const compose = require('../../helpers/compose')
-const sum = require('../../helpers/sum')
-const product = require('../../helpers/product')
+const $ = require('../../helpers')
 
-const hexToBin = hex => parseInt(hex, 16).toString(2).padStart(4, '0')
-const parseHex = hex => Array.from(hex, hexToBin).join('')
+const parseHex = hex => Array.from(hex, $.hexToBin).join('')
 
 const decode = string => {
   // For a given packet, the version is expressed over the first 3 bits, and the
@@ -92,9 +89,9 @@ const getPacketValue = packet => {
 
   switch (id) {
     case 0:
-      return sum(packets.map(getPacketValue))
+      return $.sum(packets.map(getPacketValue))
     case 1:
-      return product(packets.map(getPacketValue))
+      return $.product(packets.map(getPacketValue))
     case 2:
       return Math.min(...packets.map(getPacketValue))
     case 3:
@@ -127,9 +124,9 @@ const render = (packet, depth = 1) => {
   )
 }
 
-const getVersionSums = compose(sumVersions, decode, parseHex)
-const evaluate = compose(getPacketValue, decode, parseHex)
-const visualize = compose(render, decode, parseHex)
+const getVersionSums = $.compose(sumVersions, decode, parseHex)
+const evaluate = $.compose(getPacketValue, decode, parseHex)
+const visualize = $.compose(render, decode, parseHex)
 
 // Class-oriented approach authored once finished based on that elegant version
 // found on GitHub: https://github.com/Awjin/advent-of-code/blob/main/2021/16/utils.ts
@@ -153,9 +150,9 @@ class Packet {
 
     switch (id) {
       case 0:
-        return sum(packets.map(getPacketValue))
+        return $.sum(packets.map(getPacketValue))
       case 1:
-        return product(packets.map(getPacketValue))
+        return $.product(packets.map(getPacketValue))
       case 2:
         return Math.min(...packets.map(getPacketValue))
       case 3:

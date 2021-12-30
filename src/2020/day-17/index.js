@@ -1,30 +1,29 @@
-const updateAtIndex = require('../../helpers/updateAtIndex')
-const compose = require('../../helpers/compose')
+const $ = require('../../helpers')
 
-const W = coords => updateAtIndex(coords, 0, coords[0] - 1)
-const E = coords => updateAtIndex(coords, 0, coords[0] + 1)
-const N = coords => updateAtIndex(coords, 1, coords[1] - 1)
-const S = coords => updateAtIndex(coords, 1, coords[1] + 1)
-const B = coords => updateAtIndex(coords, 2, coords[2] - 1)
-const F = coords => updateAtIndex(coords, 2, coords[2] + 1)
-const H = coords => updateAtIndex(coords, 3, coords[3] - 1)
-const C = coords => updateAtIndex(coords, 3, coords[3] + 1)
-const NE = compose(N, E)
-const SE = compose(S, E)
-const SW = compose(S, W)
-const NW = compose(N, W)
+const W = coords => $.updateAtIndex(coords, 0, coords[0] - 1)
+const E = coords => $.updateAtIndex(coords, 0, coords[0] + 1)
+const N = coords => $.updateAtIndex(coords, 1, coords[1] - 1)
+const S = coords => $.updateAtIndex(coords, 1, coords[1] + 1)
+const B = coords => $.updateAtIndex(coords, 2, coords[2] - 1)
+const F = coords => $.updateAtIndex(coords, 2, coords[2] + 1)
+const H = coords => $.updateAtIndex(coords, 3, coords[3] - 1)
+const C = coords => $.updateAtIndex(coords, 3, coords[3] + 1)
+const NE = $.compose(N, E)
+const SE = $.compose(S, E)
+const SW = $.compose(S, W)
+const NW = $.compose(N, W)
 
 const FNS = {}
 FNS['2'] = [N, NE, E, SE, S, SW, W, NW]
 FNS['3'] = [
   ...FNS['2'],
-  ...FNS['2'].map(fn => compose(fn, B)).concat(B),
-  ...FNS['2'].map(fn => compose(fn, F)).concat(F),
+  ...FNS['2'].map(fn => $.compose(fn, B)).concat(B),
+  ...FNS['2'].map(fn => $.compose(fn, F)).concat(F),
 ]
 FNS['4'] = [
   ...FNS['3'],
-  ...FNS['3'].map(fn => compose(fn, H)).concat(H),
-  ...FNS['3'].map(fn => compose(fn, C)).concat(C),
+  ...FNS['3'].map(fn => $.compose(fn, H)).concat(H),
+  ...FNS['3'].map(fn => $.compose(fn, C)).concat(C),
 ]
 
 // Return the coordinates of all the neighbourds of the cell at the given coord-
@@ -33,7 +32,7 @@ FNS['4'] = [
 // @param {Number} dimensions - Either 3 or 4 dimensions
 // @param {Map} cache - Coordinates cache
 // @return {String[]} Stringified coordinates of all neighbours (26 or 80)
-const getNeighbourCoords = (coords, dimensions, cache) => {
+const getNeighborCoords = (coords, dimensions, cache) => {
   if (cache.has(coords)) return cache.get(coords)
 
   const coordinates = coords.split(',').map(Number)
@@ -72,7 +71,7 @@ const mutate = (cell, count) =>
 // @return {String}
 const transition = (coords, origin, dimensions, cache) => {
   const cell = origin.get(coords)
-  const neighbourCoords = getNeighbourCoords(coords, dimensions, cache)
+  const neighbourCoords = getNeighborCoords(coords, dimensions, cache)
   const neighbours = neighbourCoords.map(coords => origin.get(coords))
   const count = neighbours.filter(isAlive).length
 
@@ -89,7 +88,7 @@ const cycle = (origin, dimensions, cache) =>
     // Get the coordinates of all the neighbours to the current cell. For each
     // neighbouring coordinates which does not exist in the dimensional space,
     // compute the value of the cell and set it in the dimensional space.
-    getNeighbourCoords(key, dimensions, cache).forEach(coords => {
+    getNeighborCoords(key, dimensions, cache).forEach(coords => {
       if (acc.has(coords)) return
       acc.set(coords, transition(coords, origin, dimensions, cache))
     })

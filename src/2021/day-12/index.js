@@ -1,4 +1,4 @@
-const countOccurrences = require('../../helpers/countOccurrences')
+const $ = require('../../helpers')
 
 const createNode = cave => ({
   small: cave === cave.toLowerCase(),
@@ -36,7 +36,7 @@ const getPaths = (graph, cave, withDuplicate = false, path = []) => {
     // - *and* there was already a small cave visited twice somewhere in the
     // path (and therefore cannot be another one).
     else if (withDuplicate) {
-      const occurrences = countOccurrences(path)
+      const occurrences = $.countOccurrences(path)
       const hasDuplicate = path
         .filter(cave => graph[cave].small)
         .some(cave => occurrences[cave] > 1)

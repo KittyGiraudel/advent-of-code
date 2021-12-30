@@ -1,3 +1,5 @@
+const $ = require('../../helpers/')
+
 const isGridComplete = grid => {
   const hasFullRow = grid.some(row => row.every(item => item.marked))
   const hasFullCol = grid[0].some((_, i) => grid.every(row => row[i].marked))
@@ -7,21 +9,14 @@ const isGridComplete = grid => {
 
 const roll = (grids, number) => {
   grids.forEach(grid => {
-    grid.forEach(row => {
-      row.forEach(col => {
-        if (col.value === number) col.marked = true
-      })
+    $.gridForEach(grid, item => {
+      if (item.value === number) item.marked = true
     })
   })
 }
 
 const computeGridScore = grid =>
-  grid.reduce(
-    (total, row) =>
-      total +
-      row.reduce((subTotal, col) => subTotal + (col.marked ? 0 : col.value), 0),
-    0
-  )
+  $.sum($.gridMap(grid, item => (item.marked ? 0 : item.value)).flat())
 
 const getBingos = input => {
   const [numbers, ...grids] = parseInput(input)

@@ -1,5 +1,3 @@
-const sum = require('../../helpers/sum')
-
 const LETTERS = 'abcdefghijklmnopqrstuvwxyz'.split('')
 
 // Count how many questions match `predicate` in the given `group`.

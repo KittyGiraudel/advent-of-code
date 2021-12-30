@@ -1,5 +1,3 @@
-const updateAtIndex = require('../../helpers/updateAtIndex')
-
 // If the rule contains a pipe, wrap it in a non-capturing group as it needs to
 // be scoped to be meaningful on its one. The group has to be non-capturing to
 // avoid a “too many captures” error, and to speed up compilation.

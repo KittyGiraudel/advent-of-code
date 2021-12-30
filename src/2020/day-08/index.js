@@ -1,4 +1,4 @@
-const updateAtIndex = require('../../helpers/updateAtIndex')
+const $ = require('../../helpers')
 
 // Execute the given array of instructions.
 // @param {String[]} instructions - List of instructions making the program
@@ -49,7 +49,7 @@ const patchInstruction = instruction =>
 // @return {Object} `accumulator` value and 0 or 1 `exit` code
 const runPatchedProgram = (instructions, index) =>
   runProgram(
-    updateAtIndex(instructions, index, patchInstruction(instructions[index]))
+    $.updateAtIndex(instructions, index, patchInstruction(instructions[index]))
   )
 
 // Monkey-patch and execute the given set instructions to find the faulty line

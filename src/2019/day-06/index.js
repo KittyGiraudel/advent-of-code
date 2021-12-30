@@ -1,4 +1,4 @@
-const sum = require('../../helpers/sum')
+const $ = require('../../helpers')
 
 const createGraph = lines => {
   const map = new Map()
@@ -27,7 +27,7 @@ const getPaths = (graph, curr, end = 'COM', path = []) => {
 const countOrbits = graph =>
   Array.from(graph.keys()).reduce(
     (total, key) =>
-      total + sum(getPaths(graph, key, 'COM').map(path => path.length - 1)),
+      total + $.sum(getPaths(graph, key, 'COM').map(path => path.length - 1)),
     0
   )
 

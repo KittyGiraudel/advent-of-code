@@ -1,4 +1,4 @@
-const sum = require('../../helpers/sum')
+const $ = require('../../helpers')
 const { findMatches } = require('../day-01')
 
 // Find the first number in `input` which cannot be obtained by summing 2
@@ -24,7 +24,7 @@ const breakWeakness = (input, size = 25) => {
 
   while (range[1] < input.length) {
     const slice = input.slice(...range)
-    const total = sum(slice)
+    const total = $.sum(slice)
 
     if (total === weakness) return Math.min(...slice) + Math.max(...slice)
     else if (total > weakness) range[0]++

@@ -1,4 +1,4 @@
-const isClamped = require('../../helpers/isClamped')
+const $ = require('../../helpers')
 
 // Count the amount of paths that go from the `current` value to the last one in
 // sorted `input`.
@@ -22,7 +22,7 @@ function countPathsToEnd(adapters, current = adapters[0], cache = new Map()) {
   // current adapter’s value +1 and +3. Then, compute the possible paths for
   // each of them recursively.
   const count = adapters
-    .filter(value => isClamped(value, current + 1, current + 3))
+    .filter(value => $.isClamped(value, current + 1, current + 3))
     .reduce((acc, value) => acc + countPathsToEnd(adapters, value, cache), 0)
 
   // Once we have computed how many paths lead to the device from the current

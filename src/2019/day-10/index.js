@@ -1,4 +1,4 @@
-const findGCD = require('../../helpers/findGCD')
+const $ = require('../../helpers')
 
 const mapOutSpace = grid => {
   const map = new Map()
@@ -17,7 +17,7 @@ const mapOutSpace = grid => {
     const vectors = asteroids.map(asteroid => {
       const [xD, yD] = asteroid.split(',').map(Number)
       const vector = [xD - xC, yD - yC]
-      const gcd = findGCD(...vector)
+      const gcd = $.findGCD(...vector)
 
       return vector.map(value => value / Math.abs(gcd)).join(',')
     })

@@ -1,4 +1,4 @@
-const sum = require('../../helpers/sum')
+const $ = require('../../helpers/')
 
 const parseInput = line =>
   line
@@ -98,6 +98,6 @@ const decode = line => {
   )
 }
 
-const total = lines => sum(lines.map(decode))
+const total = lines => $.sum(lines.map(decode))
 
 module.exports = { count, decode, total }
