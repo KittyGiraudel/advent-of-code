@@ -1,7 +1,4 @@
-const getCombinations = require('../../helpers/getCombinations')
-const findLCM = require('../../helpers/findLCM')
-const sum = require('../../helpers/sum')
-const applyVector = require('../../helpers/applyVector')
+const $ = require('../../helpers')
 
 const prepareMoon = (line, index) => ({
   position: line.match(/(-?\d+)/g).map(Number),
@@ -27,10 +24,10 @@ const applyGravity = ([a, b]) => {
 }
 
 const applyVelocity = moon => {
-  moon.position = applyVector(moon.position, moon.velocity)
+  moon.position = $.applyVector(moon.position, moon.velocity)
 }
 
-const makePairs = array => getCombinations(array, 2)
+const makePairs = array => $.getCombinations(array, 2)
 
 const step = moons => {
   makePairs(moons).forEach(applyGravity)
@@ -39,10 +36,10 @@ const step = moons => {
 }
 
 const calculateMoonEnergy = ({ position, velocity }) =>
-  sum(position.map(Math.abs)) * sum(velocity.map(Math.abs))
+  $.sum(position.map(Math.abs)) * $.sum(velocity.map(Math.abs))
 
 const steps = (input, amount = 1) =>
-  sum(
+  $.sum(
     Array.from({ length: amount })
       .reduce(step, prepare(input))
       .map(calculateMoonEnergy)
@@ -74,6 +71,6 @@ const findRepeatAxis = (axis, input) => {
 const findRepeat = input =>
   [0, 1, 2]
     .map(axis => findRepeatAxis(axis, input))
-    .reduce((acc, value) => findLCM(acc, value), 1)
+    .reduce((acc, value) => $.findLCM(acc, value), 1)
 
 module.exports = { steps, findRepeat }

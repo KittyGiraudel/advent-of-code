@@ -1,5 +1,4 @@
-const sum = require('../../helpers/sum')
-const intersection = require('../../helpers/intersection')
+const $ = require('../../helpers')
 
 // Parse a food to retrieve its ingredient and allergens.
 // @param {String} food - Raw food
@@ -46,7 +45,9 @@ const mapAllergens = map => {
 
   while (!Object.keys(map).every(isResolved)) {
     Object.keys(map).forEach(allergen => {
-      const candidates = intersection(...map[allergen].foods).filter(isNotFound)
+      const candidates = $.intersection(...map[allergen].foods).filter(
+        isNotFound
+      )
 
       if (candidates.length === 1) {
         found.add(candidates[0])
@@ -86,7 +87,7 @@ const countAllergenFreeOccurrences = input => {
     .filter(ingredient => ingredients.includes(ingredient))
     .reduce(count, {})
 
-  return sum(Object.values(occurrences))
+  return $.sum(Object.values(occurrences))
 }
 
 // Compute the canonical dangerous list.

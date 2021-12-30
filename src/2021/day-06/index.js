@@ -1,4 +1,4 @@
-const sum = require('../../helpers/sum')
+const $ = require('../../helpers/')
 
 const countFish = (fish, days = 80) => {
   let curr = new Map()
@@ -17,7 +17,7 @@ const countFish = (fish, days = 80) => {
     curr = next
   }
 
-  return sum(Array.from(curr.values()))
+  return $.sum(Array.from(curr.values()))
 }
 
 module.exports = { countFish }

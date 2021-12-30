@@ -1,4 +1,4 @@
-const product = require('../../helpers/product')
+const $ = require('../../helpers')
 
 const getTop = image => image[0]
 const getBottom = image => image[image.length - 1]
@@ -228,7 +228,7 @@ const getFullImageId = rawTiles => {
   const size = Math.sqrt(rawTiles.length)
   const matrix = completeJigsaw(rawTiles)
 
-  return product(
+  return $.product(
     [
       matrix[0][0],
       matrix[0][size - 1],

@@ -1,12 +1,12 @@
-const isClamped = require('../../helpers/isClamped')
+const $ = require('../../helpers')
 
 const VALIDATORS = {
-  byr: input => isClamped(+input, 1920, 2002),
-  iyr: input => isClamped(+input, 2010, 2020),
-  eyr: input => isClamped(+input, 2020, 2030),
+  byr: input => $.isClamped(+input, 1920, 2002),
+  iyr: input => $.isClamped(+input, 2010, 2020),
+  eyr: input => $.isClamped(+input, 2020, 2030),
   hgt: input =>
-    (input.endsWith('cm') && isClamped(parseInt(input), 150, 193)) ||
-    (input.endsWith('in') && isClamped(parseInt(input), 59, 76)),
+    (input.endsWith('cm') && $.isClamped(parseInt(input), 150, 193)) ||
+    (input.endsWith('in') && $.isClamped(parseInt(input), 59, 76)),
   hcl: input => /^#[0-9a-f]{6}$/i.test(input),
   ecl: input => 'amb,blu,brn,gry,grn,hzl,oth'.split(',').includes(input),
   pid: input => /^\d{9}$/.test(input),

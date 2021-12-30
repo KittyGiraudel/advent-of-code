@@ -2,7 +2,7 @@ const isNotEmpty = deck => deck.length > 0
 const draw = decks => decks.map(deck => deck.shift())
 const getWinningIndex = cards =>
   cards.findIndex(card => card === Math.max(...cards))
-const serialiseGame = decks => decks.map(deck => deck.join(',')).join(';')
+const serializeGame = decks => decks.map(deck => deck.join(',')).join(';')
 
 // Compute the score of a given deck.
 // @param {Number[]} cards - Cards from the deck
@@ -24,7 +24,7 @@ const parseInput = input =>
 // @param {Number[]} b - Deck B
 // @return {Object} Outcome with `index` (0 or 1) and `decks` (final decks)
 const fightRegular = decks => {
-  while (decks.every(deck => deck.length)) {
+  while (decks.every(isNotEmpty)) {
     const cards = draw(decks)
     const index = getWinningIndex(cards)
     decks[index].push(cards[index], cards[+!index])
@@ -39,7 +39,7 @@ const fightRegular = decks => {
 // @return {Object} Outcome with `index` (0 or 1) and `decks` (final decks)
 const fightRecursive = (decks, cache = new Set()) => {
   while (decks.every(isNotEmpty)) {
-    const key = serialiseGame(decks)
+    const key = serializeGame(decks)
 
     if (cache.has(key)) return { index: 0, decks }
     else cache.add(key)

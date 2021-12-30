@@ -1,4 +1,4 @@
-const sum = require('../../helpers/sum')
+const $ = require('../../helpers')
 
 const computeFuelCost = mass => Math.floor(mass / 3) - 2
 const computeIterativeFuelCost = mass => {
@@ -7,7 +7,7 @@ const computeIterativeFuelCost = mass => {
   while (computeFuelCost(iterations[0]) > 0)
     iterations.unshift(computeFuelCost(iterations[0]))
 
-  return sum(iterations)
+  return $.sum(iterations)
 }
 
 module.exports = { computeFuelCost, computeIterativeFuelCost }

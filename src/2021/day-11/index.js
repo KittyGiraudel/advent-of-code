@@ -1,23 +1,18 @@
-const sum = require('../../helpers/sum')
-const createGrid = require('../../helpers/createGrid')
-const { getSurroundingCoords } = require('../../helpers/getNeighborCoords')
+const $ = require('../../helpers')
 
 const makeGrid = rows =>
-  createGrid(rows, oc => ({ value: +oc, flashed: false }))
+  $.createGrid(rows, oc => ({ value: +oc, flashed: false }))
 
-const countNewFlashes = grid =>
-  sum(grid.map(row => row.map(oc => +oc.flashed)).flat())
+const countNewFlashes = grid => $.sum($.gridMap(grid, oc => +oc.flashed).flat())
 
 const processFlashes = grid => {
   const toIncrement = []
 
-  grid.forEach((row, ri) => {
-    row.forEach((oc, ci) => {
-      if (!oc.flashed && oc.value > 9) {
-        oc.flashed = true
-        toIncrement.push(...getSurroundingCoords(ri, ci))
-      }
-    })
+  $.gridForEach(grid, (oc, ri, ci) => {
+    if (!oc.flashed && oc.value > 9) {
+      oc.flashed = true
+      toIncrement.push(...$.getSurroundingCoords(ri, ci))
+    }
   })
 
   toIncrement.forEach(([ri, ci]) => {
@@ -30,7 +25,7 @@ const processFlashes = grid => {
 
 const cycle = grid => {
   // 1. Increment
-  grid.forEach(row => row.forEach(oc => oc.value++))
+  $.gridForEach(grid, oc => oc.value++)
 
   // 2. Flashes
   processFlashes(grid)
@@ -39,11 +34,9 @@ const cycle = grid => {
   const flashes = countNewFlashes(grid)
 
   // 3. Reset
-  grid.forEach(row => {
-    row.forEach(oc => {
-      oc.flashed = false
-      if (oc.value > 9) oc.value = 0
-    })
+  $.gridForEach(grid, oc => {
+    oc.flashed = false
+    if (oc.value > 9) oc.value = 0
   })
 
   return flashes
@@ -58,7 +51,7 @@ const countFlashes = (rows, steps) => {
   return flashes
 }
 
-const isSynced = grid => grid.every(row => row.every(oc => oc.value === 0))
+const isSynced = grid => $.gridEvery(grid, oc => oc.value === 0)
 
 const findSynchronocity = rows => {
   const grid = makeGrid(rows)

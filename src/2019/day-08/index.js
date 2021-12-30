@@ -1,12 +1,11 @@
-const chunk = require('../../helpers/chunk')
-const countOccurrences = require('../../helpers/countOccurrences')
+const $ = require('../../helpers')
 
 const parse = (input, size) =>
-  chunk(Array.from(input).map(Number), size.width * size.height)
+  $.chunk(Array.from(input).map(Number), size.width * size.height)
 
 const validate = (input, size) => {
   const [{ count }] = parse(input, size)
-    .map(layer => ({ layer, count: countOccurrences(layer) }))
+    .map(layer => ({ layer, count: $.countOccurrences(layer) }))
     .sort((a, b) => a.count['0'] - b.count['0'])
 
   return count['1'] * count['2']
@@ -20,7 +19,7 @@ const recompose = (input, size) => {
 
   for (let i = 0; i < layers.length; i++) {
     const layer = layers[i]
-    const rows = chunk(layer, size.width)
+    const rows = $.chunk(layer, size.width)
 
     for (let ri = 0; ri < rows.length; ri++) {
       const row = rows[ri]

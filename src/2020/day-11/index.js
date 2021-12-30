@@ -1,4 +1,4 @@
-const applyVector = require('../../helpers/applyVector')
+const $ = require('../../helpers')
 
 const DIRECTIONAL_VECTORS = [
   [-1, 0],
@@ -24,9 +24,9 @@ const read = (layout, coords) => layout?.[coords[1]]?.[coords[0]]
 // @param {Number[]} vector - Vector to walk
 // @return {String|void}
 const getFirstSeat = (layout, coords, vector) => {
-  let position = applyVector(coords, vector)
+  let position = $.applyVector(coords, vector)
   while (read(layout, position) === '.')
-    position = applyVector(position, vector)
+    position = $.applyVector(position, vector)
   return read(layout, position)
 }
 
@@ -35,7 +35,7 @@ const getFirstSeat = (layout, coords, vector) => {
 // @param {Number[]} coords - Set of X,Y coords
 // @return {String[]}
 const getAdjacentSeats = (layout, coords) =>
-  DIRECTIONAL_VECTORS.map(vector => read(layout, applyVector(coords, vector)))
+  DIRECTIONAL_VECTORS.map(vector => read(layout, $.applyVector(coords, vector)))
 
 // Get the 8 visible seats around the one at given position.
 // @param {String[]} layout - Seating layout

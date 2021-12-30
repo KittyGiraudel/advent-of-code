@@ -1,5 +1,5 @@
+const $ = require('../../helpers')
 const { Intcode } = require('../day-05')
-const getPermutations = require('../../helpers/getPermutations')
 
 const amplify = (numbers, sequence) => {
   let signal = 0
@@ -34,7 +34,9 @@ const loop = (numbers, sequence) => {
 
 const findHighestSignal = numbers =>
   Math.max(
-    ...getPermutations([9, 8, 7, 6, 5]).map(sequence => loop(numbers, sequence))
+    ...$.getPermutations([9, 8, 7, 6, 5]).map(sequence =>
+      loop(numbers, sequence)
+    )
   )
 
 module.exports = { amplify, loop, findHighestSignal }

@@ -1,5 +1,4 @@
-const isClamped = require('../../helpers/isClamped')
-const applyVector = require('../../helpers/applyVector')
+const $ = require('../../helpers')
 
 // Read the landing area’s boundaries from the given input knowing that the
 // *lowest* Y value will be the first one of the pair, and not the second one,
@@ -18,7 +17,7 @@ const getBoundaries = input => {
 // 3. Apply gravity, decreasing velocity’s Y axis.
 const drag = x => (x > 0 ? x - 1 : x < 0 ? x + 1 : x)
 const step = ({ probe, velocity }) => ({
-  probe: applyVector(probe, velocity),
+  probe: $.applyVector(probe, velocity),
   velocity: [drag(velocity[0]), velocity[1] - 1],
 })
 
@@ -33,7 +32,7 @@ const isSuccessfulLaunch = ([[xMin, xMax], [yMin, yMax]], velocity) => {
     const [x, y] = curr.probe
     heights.push(y)
 
-    if (isClamped(x, xMin, xMax) && isClamped(y, yMax, yMin))
+    if ($.isClamped(x, xMin, xMax) && $.isClamped(y, yMax, yMin))
       return Math.max(...heights)
 
     curr = step(curr)

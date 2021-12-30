@@ -1,3 +1,5 @@
+const $ = require('../../helpers')
+
 // Loosely validate a password by making sure the amount of occurrences of
 // `letter` in `password` is comprised between `i` and `j`.
 // @param {Number} i - Minimum amount of occurrences
@@ -5,10 +7,8 @@
 // @param {String} letter - Letter to find
 // @param {String} password - Password to validate
 // @return {Boolean}
-const validateLoose = ([i, j, letter, password]) => {
-  const occurrences = password.match(new RegExp(letter, 'g'))?.length ?? 0
-  return occurrences >= i && occurrences <= j
-}
+const validateLoose = ([i, j, letter, password]) =>
+  $.isClamped($.countInString(password, letter), i, j)
 
 // Strictly validate a password by making sure the character at index `i` or the
 // character at index `j` in `password` is `letter` (but not both).

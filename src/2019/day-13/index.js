@@ -1,5 +1,5 @@
 const { Intcode } = require('../day-09')
-const chunk = require('../../helpers/chunk')
+const $ = require('../../helpers')
 
 const SYMBOLS = [' ', 'x', '▫️', '_', 'o']
 
@@ -20,7 +20,7 @@ const render = board => {
 const tick = (state, computer) => {
   computer.run()
 
-  const tiles = chunk(computer.outputs, 3)
+  const tiles = $.chunk(computer.outputs, 3)
   computer.outputs = []
 
   tiles.forEach(([x, y, t]) => {
