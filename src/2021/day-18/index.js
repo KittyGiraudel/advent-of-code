@@ -1,181 +1,189 @@
-const parseLine = line => (Array.isArray(line) ? line : JSON.parse(line))
-const split = value => [Math.floor(value / 2), Math.ceil(value / 2)]
-const isNumber = value => typeof value === 'number'
-const isPair = value => Array.isArray(value)
+const $ = require('../../helpers')
 
-const findPrevNumber = layer =>
-  isNumber(layer[1]) ? { layer, index: 1 } : findPrevNumber(layer[1])
+const split = value => `[${Math.floor(value / 2)},${Math.ceil(value / 2)}]`
 
-const findNextNumber = layer =>
-  isNumber(layer[0]) ? { layer, index: 0 } : findNextNumber(layer[0])
+const handleExplosions = string => {
+  let left = null
+  let right = null
+  let current = ''
+  let openings = []
 
-const handleLeftExplosion = (layers, fish) => {
-  const layer = layers.pop()
-  if (!layer) return null
+  for (let i = 0; i < string.length; i++) {
+    const char = string[i]
 
-  if (Object.is(layer[1], fish)) {
-    return isNumber(layer[0]) ? { layer, index: 0 } : findPrevNumber(layer[0])
+    if (char === '[') {
+      openings.push(i)
+    } else if (char === ']') {
+      let openingIndex = openings.pop()
+      right = +current
+      current = ''
+
+      // If the closed pair is within 4 pairs or more, it should be exploded.
+      if (openings.length >= 4) {
+        // The right side you should be added to the first number found on the
+        // right of the current pair. To find it, we look for the next number in
+        // the string.
+        const rightMatch = string.slice(i).match(/\d+/)
+
+        // If we have found one (which is always the case unless dealing with
+        // the last pair in the string), we update the string by updating that
+        // number with the value of the right side. To do so, we take:
+        // 1. Everything up til the index at which the next number is found.
+        // 2. The new value (old value + right side).
+        // 3. Everything after the next number up to the end of the string.
+        if (rightMatch) {
+          const value = +rightMatch[0]
+          const pivot = i + rightMatch.index
+          const start = string.slice(0, pivot)
+          const end = string.slice(pivot + String(value).length)
+
+          string = start + (right + value) + end
+        }
+
+        // The left side you should be added to the first number found on the
+        // left of the current pair. To find it, we look for the first number
+        // found before the opening bracket.
+        const leftMatch = $.matchLast(string.slice(0, openingIndex), /\d+/g)
+
+        // If we have found one (which is always the case unless dealing with
+        // the first pair in the string), we update the string by updating that
+        // number with the value of the left side. To do so, we take:
+        // 1. Everything up til the index at which the previous number is found.
+        // 2. The new value (old value + left side).
+        // 3. Everything after the previous number up to the end of the string.
+        if (leftMatch) {
+          const { value, index } = leftMatch
+          const newValue = left + value
+          const oldValueLength = String(value).length
+          const newValueLength = String(newValue).length
+
+          // If updating the previous number has caused a length shift (by
+          // going from a single digit number to a two digits number for
+          // instance), update the opening index so the removal the exploded
+          // pair is done at the right place.
+          if (newValueLength > oldValueLength) {
+            openingIndex += newValueLength - oldValueLength
+          }
+
+          const start = string.slice(0, index)
+          const end = string.slice(index + String(value).length)
+
+          string = start + newValue + end
+        }
+
+        // Finally, remove the exploded the string by replacing it with a 0.
+        // To do so, take:
+        // 1. Everything up to the opening bracket (excluded).
+        // 2. A literal 0.
+        // 3. Everything after the closing bracket, computed by taking the index
+        //    of the opening bracket, the length of the left-side number, the
+        //    length of the right side number, and adding 3 for both brackets
+        //    and the comma.
+        const start = string.slice(0, openingIndex)
+        const leftLength = String(left).length
+        const rightLength = String(right).length
+        const end = string.slice(openingIndex + leftLength + rightLength + 3)
+
+        // Once the explosion has been dealt with, recursively look for next
+        // explosions.
+        return handleExplosions(start + '0' + end)
+      }
+    } else if (char === ',') {
+      left = +current
+      current = ''
+    } else {
+      current += char
+    }
   }
 
-  return handleLeftExplosion(layers, layer)
+  return string
 }
 
-const handleRightExplosion = (layers, fish) => {
-  const layer = layers.pop()
-  if (!layer) return null
+// This function performs under the assumption that no explosion can be done, as
+// they have all been resolved already.
+const handleLeftMostSplit = string => {
+  let left = null
+  let right = null
+  let current = ''
 
-  if (Object.is(layer[0], fish)) {
-    return isNumber(layer[1]) ? { layer, index: 1 } : findNextNumber(layer[1])
+  for (let i = 0; i < string.length; i++) {
+    const char = string[i]
+
+    if (char === ']') {
+      right = +current
+      current = ''
+
+      // Once the closing bracket is found, check if the right-side value
+      // (provided it’s a number of course) is equal to or greater than 10. If
+      // it is, split the number and return the updated string. The new string
+      // is made of:
+      // 1. Everything from the start to the most recent comma.
+      // 2. The new pair made from the splitted value.
+      // 3. The rest of the string (closing bracket onwards).
+      if (right >= 10) {
+        const pivot = $.matchLast(string.slice(0, i), /,/g).index + 1
+        const start = string.slice(0, pivot)
+        const pair = split(right)
+        const end = string.slice(i)
+
+        return start + pair + end
+      }
+    } else if (char === ',') {
+      left = +current
+      current = ''
+
+      // Once the comma is found, check if the left-side value (provided it’s a
+      // number of course) is equal to or greater than 10. If it is, split the
+      // number and return the updated string. The new string is made of:
+      // 1. Everything from the start to the most recent opening bracket.
+      // 2. The new pair made from the splitted value.
+      // 3. The rest of the string (closing bracket onwards).
+      if (left >= 10) {
+        const pivot = $.matchLast(string.slice(0, i), /\[/g).index + 1
+        const start = string.slice(0, pivot)
+        const pair = split(left)
+        const end = string.slice(i)
+
+        return start + pair + end
+      }
+    } else if (char !== '[') {
+      current += char
+    }
   }
 
-  return handleRightExplosion(layers, layer)
+  return string
 }
 
-const explode = (fish, parents) => {
-  console.log('Explode', fish)
-  const parent = parents[parents.length - 1]
-  const indexOfFishInParent = parent.indexOf(fish)
-  if (indexOfFishInParent === -1) return false
+// The reducing logic is as follow:
+// 1. First do all explosions that can be done.
+// 2. Once no more explosions can be done, perform the left-most split.
+// 3. Repeat step 1 and 2 until the string no longer changes.
+const reduce = string => {
+  let curr = string
 
-  // Handle explosion
-  const eLeft = handleLeftExplosion([...parents], fish)
-  if (eLeft) eLeft.layer[eLeft.index] += fish[0]
-  const eRight = handleRightExplosion([...parents], fish)
-  if (eRight) eRight.layer[eRight.index] += fish[1]
-
-  // Replace
-  parent[indexOfFishInParent] = 0
-  return true
-}
-
-const reduce = (fish, parents = []) => {
   while (true) {
-    if (parents.length >= 4 && fish.every(isNumber)) {
-      if (explode(fish, parents)) continue
-    }
-
-    const splitIndex = fish.findIndex(item => isNumber(item) && item >= 10)
-    if (splitIndex > -1) {
-      fish[splitIndex] = split(fish[splitIndex])
-      continue
-    }
-    break
+    let next = handleLeftMostSplit(handleExplosions(curr))
+    let done = next === curr
+    curr = next
+    if (done) break
   }
 
-  fish.forEach((item, index, array) => {
-    if (isPair(item)) reduce(array[index], [...parents, array])
-  })
-
-  return fish
+  return curr
 }
 
 const computeMagnitude = ([left, right]) =>
-  (isNumber(left) ? left : computeMagnitude(left)) * 3 +
-  (isNumber(right) ? right : computeMagnitude(right)) * 2
+  (typeof left === 'number' ? left : computeMagnitude(left)) * 3 +
+  (typeof right === 'number' ? right : computeMagnitude(right)) * 2
 
-/*
-const parseLine = line => (Array.isArray(line) ? line : JSON.parse(line))
-const isNumber = value => typeof value === 'number'
-const isPair = value => Array.isArray(value)
+const sumFish = (...fishes) =>
+  fishes.reduce((acc, fish) => (acc ? reduce(`[${acc},${fish}]`) : fish))
 
-const findPrevNumber = layer =>
-  isNumber(layer[1]) ? { layer, index: 1 } : findPrevNumber(layer[1])
+const findHighestMagnitude = (...fishes) => {
+  const pairs = $.getCombinations(fishes.slice(0), 2)
 
-const findNextNumber = layer =>
-  isNumber(layer[0]) ? { layer, index: 0 } : findNextNumber(layer[0])
-
-const handleLeftExplosion = (layers, fish) => {
-  const layer = layers.pop()
-  if (!layer) return null
-
-  // If the exploding pair is on the right side of its own pair, check if the
-  // left side is a number. If it is, that’s the incremented one, otherwise
-  // dig into the left side pair to find the first number.
-  if (Object.is(layer[1], fish)) {
-    return isNumber(layer[0]) ? { layer, index: 0 } : findPrevNumber(layer[0])
-  }
-
-  return handleLeftExplosion(layers, layer)
+  return Math.max(
+    ...pairs.map(pair => computeMagnitude(JSON.parse(sumFish(...pair))))
+  )
 }
 
-// Find the left-most number value on the right of the current pair. Return the
-// array to modify, and the position in that array.
-const handleRightExplosion = (layers, fish) => {
-  const layer = layers.pop()
-  if (!layer) return null
-
-  // If the exploding pair is on the left side of its own pair, check if the
-  // right side is a number. If it is, that’s the incremented one, otherwise
-  // dig into the right side pair to find the first number.
-  if (Object.is(layer[0], fish)) {
-    return isNumber(layer[1]) ? { layer, index: 1 } : findNextNumber(layer[1])
-  }
-
-  // If the exploding pair sits on the right side of its own pair though, we
-  // need to go one layer up.
-  return handleRightExplosion(layers, layer)
-}
-
-const split = value => [Math.floor(value / 2), Math.ceil(value / 2)]
-
-const reduce = (pair, layers = []) => {
-  const [left, right] = pair
-
-  // If we are 4 layers deep and the pair is made solely of numeric values, it
-  // should be exploded.
-  if (layers.length >= 4 && pair.every(isNumber)) {
-    // Update left-most and right-most numeric value with the ones from the
-    // exploded pair.
-    const eLeft = handleLeftExplosion([...layers], pair)
-    if (eLeft) eLeft.layer[eLeft.index] += left
-    const eRight = handleRightExplosion([...layers], pair)
-    if (eRight) eRight.layer[eRight.index] += right
-
-    // Replace the pair with a 0.
-    const lastLayer = layers.pop()
-    const index = lastLayer.indexOf(pair)
-    lastLayer[index] = 0
-
-    // Once the pair has been exploded, its parent should be reduced again
-    // because it might need another pass.
-    return reduce(layers.pop(), layers)
-  }
-
-  // If the left side of the current pair is a number and is above 10, it should
-  // be split.
-  if (isNumber(left) && left >= 10) {
-    pair[0] = split(left)
-    // Once the value has been split, its parent should be reduced again because
-    // it might need another pass.
-    return reduce(layers.pop(), layers)
-  }
-  // If the left side of the current pair is a number and is above 10, it should
-  // be split.
-  else if (isNumber(right) && right >= 10) {
-    pair[1] = split(right)
-    // Once the value has been split, its parent should be reduced again because
-    // it might need another pass.
-    return reduce(layers.pop(), layers)
-  }
-
-  // Once the pair has been reduced, its children pairs need to be reduced as
-  // well. We push the current pair into the layer stack.
-  if (isPair(pair[0])) reduce(pair[0], [...layers, pair])
-  if (isPair(pair[1])) reduce(pair[1], [...layers, pair])
-
-  return pair
-}
-
-*/
-
-const sumFish = fishes =>
-  fishes
-    .map(parseLine)
-    .reduce((acc, fish) => (acc ? reduce([acc, fish]) : fish))
-
-module.exports = {
-  parseLine,
-  reduce,
-  sumFish,
-  computeMagnitude,
-}
+module.exports = { reduce, computeMagnitude, sumFish, findHighestMagnitude }
