@@ -20,6 +20,7 @@ const hexToBin = require('./hexToBin')
 const intersection = require('./intersection')
 const isClamped = require('./isClamped')
 const { gridMap, gridForEach, gridEvery } = require('./loopOnGrid')
+const matchLast = require('./matchLast')
 const product = require('./product')
 const readInput = require('./readInput')
 const stringMap = require('./stringMap')
@@ -51,6 +52,7 @@ module.exports = {
   hexToBin,
   intersection,
   isClamped,
+  matchLast,
   product,
   readInput,
   stringMap,
