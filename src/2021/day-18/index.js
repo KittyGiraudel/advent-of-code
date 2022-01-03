@@ -9,150 +9,47 @@ const handleExplosions = string => {
   let openings = []
 
   for (let i = 0; i < string.length; i++) {
-    const char = string[i]
-
-    if (char === '[') {
+    if (string[i] === '[') {
       openings.push(i)
-    } else if (char === ']') {
+    } else if (string[i] === ']') {
       let openingIndex = openings.pop()
       right = +current
       current = ''
 
       // If the closed pair is within 4 pairs or more, it should be exploded.
       if (openings.length >= 4) {
-        // The right side you should be added to the first number found on the
-        // right of the current pair. To find it, we look for the next number in
-        // the string.
-        const rightMatch = string.slice(i).match(/\d+/)
-
-        // If we have found one (which is always the case unless dealing with
-        // the last pair in the string), we update the string by updating that
-        // number with the value of the right side. To do so, we take:
-        // 1. Everything up til the index at which the next number is found.
-        // 2. The new value (old value + right side).
-        // 3. Everything after the next number up to the end of the string.
-        if (rightMatch) {
-          const value = +rightMatch[0]
-          const pivot = i + rightMatch.index
-          const start = string.slice(0, pivot)
-          const end = string.slice(pivot + String(value).length)
-
-          string = start + (right + value) + end
-        }
-
-        // The left side you should be added to the first number found on the
-        // left of the current pair. To find it, we look for the first number
-        // found before the opening bracket.
-        const leftMatch = $.matchLast(string.slice(0, openingIndex), /\d+/g)
-
-        // If we have found one (which is always the case unless dealing with
-        // the first pair in the string), we update the string by updating that
-        // number with the value of the left side. To do so, we take:
-        // 1. Everything up til the index at which the previous number is found.
-        // 2. The new value (old value + left side).
-        // 3. Everything after the previous number up to the end of the string.
-        if (leftMatch) {
-          const { value, index } = leftMatch
-          const newValue = left + value
-          const oldValueLength = String(value).length
-          const newValueLength = String(newValue).length
-
-          // If updating the previous number has caused a length shift (by
-          // going from a single digit number to a two digits number for
-          // instance), update the opening index so the removal the exploded
-          // pair is done at the right place.
-          if (newValueLength > oldValueLength) {
-            openingIndex += newValueLength - oldValueLength
-          }
-
-          const start = string.slice(0, index)
-          const end = string.slice(index + String(value).length)
-
-          string = start + newValue + end
-        }
-
-        // Finally, remove the exploded the string by replacing it with a 0.
-        // To do so, take:
-        // 1. Everything up to the opening bracket (excluded).
-        // 2. A literal 0.
-        // 3. Everything after the closing bracket, computed by taking the index
-        //    of the opening bracket, the length of the left-side number, the
-        //    length of the right side number, and adding 3 for both brackets
-        //    and the comma.
-        const start = string.slice(0, openingIndex)
-        const leftLength = String(left).length
-        const rightLength = String(right).length
-        const end = string.slice(openingIndex + leftLength + rightLength + 3)
-
-        // Once the explosion has been dealt with, recursively look for next
-        // explosions.
-        return handleExplosions(start + '0' + end)
+        // To explode the current pair (`[[6,[5,[4,[3,2]]]],1]` for instance):
+        // 1. Take everything up to the opening bracket (excluded), in which
+        //    update the last number found with the left value. In the example,
+        //    that would be `[[6,[5,[4,`, updated as `[[6,[5,[7,`.
+        // 2. Add a zero replacing the exploding pair. So, `[[6,[5,[7,0`.
+        // 3. Take everything after the closing bracket (excluded), in which the
+        //    first number found is updated with the right value. In the
+        //    example, that would be `]]],1]`, updated as `]]],3]`, for a final
+        //    expression of `[[6,[5,[7,0]]],3]`.
+        // 4. Then start again from the beginning of the string.
+        return handleExplosions(
+          string
+            .slice(0, openingIndex)
+            .replace(/(\d+)([^\d]*)$/, (_, n, rest) => +n + left + rest) +
+            '0' +
+            string.slice(i + 1).replace(/\d+/, n => +n + right)
+        )
       }
-    } else if (char === ',') {
+    } else if (string[i] === ',') {
       left = +current
       current = ''
     } else {
-      current += char
+      current += string[i]
     }
   }
 
   return string
 }
 
-// This function performs under the assumption that no explosion can be done, as
-// they have all been resolved already.
-const handleLeftMostSplit = string => {
-  let left = null
-  let right = null
-  let current = ''
+const handleLeftMostSplit = string => string.replace(/(\d{2,})/, split)
 
-  for (let i = 0; i < string.length; i++) {
-    const char = string[i]
-
-    if (char === ']') {
-      right = +current
-      current = ''
-
-      // Once the closing bracket is found, check if the right-side value
-      // (provided it’s a number of course) is equal to or greater than 10. If
-      // it is, split the number and return the updated string. The new string
-      // is made of:
-      // 1. Everything from the start to the most recent comma.
-      // 2. The new pair made from the splitted value.
-      // 3. The rest of the string (closing bracket onwards).
-      if (right >= 10) {
-        const pivot = $.matchLast(string.slice(0, i), /,/g).index + 1
-        const start = string.slice(0, pivot)
-        const pair = split(right)
-        const end = string.slice(i)
-
-        return start + pair + end
-      }
-    } else if (char === ',') {
-      left = +current
-      current = ''
-
-      // Once the comma is found, check if the left-side value (provided it’s a
-      // number of course) is equal to or greater than 10. If it is, split the
-      // number and return the updated string. The new string is made of:
-      // 1. Everything from the start to the most recent opening bracket.
-      // 2. The new pair made from the splitted value.
-      // 3. The rest of the string (closing bracket onwards).
-      if (left >= 10) {
-        const pivot = $.matchLast(string.slice(0, i), /\[/g).index + 1
-        const start = string.slice(0, pivot)
-        const pair = split(left)
-        const end = string.slice(i)
-
-        return start + pair + end
-      }
-    } else if (char !== '[') {
-      current += char
-    }
-  }
-
-  return string
-}
+const reduceFish = $.compose(handleLeftMostSplit, handleExplosions)
 
 // The reducing logic is as follow:
 // 1. First do all explosions that can be done.
@@ -160,15 +57,14 @@ const handleLeftMostSplit = string => {
 // 3. Repeat step 1 and 2 until the string no longer changes.
 const reduce = string => {
   let curr = string
+  let next = reduceFish(curr)
 
-  while (true) {
-    let next = handleLeftMostSplit(handleExplosions(curr))
-    let done = next === curr
+  while (curr !== next) {
     curr = next
-    if (done) break
+    next = reduceFish(curr)
   }
 
-  return curr
+  return next
 }
 
 const computeMagnitude = ([left, right]) =>
@@ -178,12 +74,12 @@ const computeMagnitude = ([left, right]) =>
 const sumFish = (...fishes) =>
   fishes.reduce((acc, fish) => (acc ? reduce(`[${acc},${fish}]`) : fish))
 
-const findHighestMagnitude = (...fishes) => {
-  const pairs = $.getCombinations(fishes.slice(0), 2)
-
-  return Math.max(
-    ...pairs.map(pair => computeMagnitude(JSON.parse(sumFish(...pair))))
+const findHighestMagnitude = (...fishes) =>
+  Math.max(
+    ...$.getCombinations(fishes, 2)
+      .map(pair => sumFish(...pair))
+      .map(JSON.parse)
+      .map(computeMagnitude)
   )
-}
 
 module.exports = { reduce, computeMagnitude, sumFish, findHighestMagnitude }
