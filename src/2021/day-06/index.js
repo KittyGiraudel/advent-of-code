@@ -1,23 +1,19 @@
 const $ = require('../../helpers/')
 
 const countFish = (fish, days = 80) => {
-  let curr = new Map()
+  let curr = Array.from({ length: 9 }, (_, i) => $.countInString(fish, i))
 
-  for (let i = 0; i <= 8; i++) {
-    curr.set(i, fish.filter(fish => fish === i).length)
-  }
+  while (days--) {
+    let next = []
 
-  for (let d = 0; d < days; d++) {
-    let next = new Map()
-
-    for (let a = 7; a >= 0; a--) next.set(a, curr.get(a + 1))
-    next.set(8, curr.get(0))
-    next.set(6, next.get(6) + curr.get(0))
+    for (let a = 7; a >= 0; a--) next[a] = curr[a + 1]
+    next[8] = curr[0]
+    next[6] = next[6] + curr[0]
 
     curr = next
   }
 
-  return $.sum(Array.from(curr.values()))
+  return $.sum(curr)
 }
 
 module.exports = { countFish }
