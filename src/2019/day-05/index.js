@@ -37,7 +37,7 @@ class Intcode {
 
   setInput(input) {
     this.log('➡️ Recording input', input)
-    this.inputs.push(input)
+    Array.isArray(input) ? this.inputs.push(...input) : this.inputs.push(input)
 
     return this
   }
