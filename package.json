@@ -11,6 +11,8 @@
     ]
   },
   "dependencies": {
-    "node-dijkstra": "^2.5.0"
+    "javascript-astar": "^0.4.1",
+    "node-dijkstra": "^2.5.0",
+    "pathfinding": "^0.4.18"
   }
 }
