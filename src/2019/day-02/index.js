@@ -16,10 +16,9 @@ class Intcode {
     return this.memory.join(',')
   }
 
-  prepare(replacements) {
-    for (const [key, value] of Object.entries(replacements)) {
-      this.memory[+key] = value
-    }
+  updateMemory(address, value) {
+    this.memory[address] = value
+
     return this
   }
 
@@ -57,7 +56,10 @@ const findInitParams = input => {
 
   for (let n = 0; n < 100; n++) {
     for (let v = 0; v < n; v++) {
-      if (computer.reset().prepare({ 1: n, 2: v }).run() === 19690720)
+      if (
+        computer.reset().updateMemory(1, n).updateMemory(2, v).run() ===
+        19690720
+      )
         return n * 100 + v
     }
   }

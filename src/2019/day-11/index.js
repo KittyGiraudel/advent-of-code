@@ -41,10 +41,7 @@ const next = (computer, state) => {
   // Second, it will output a value indicating the direction the robot should
   // turn: 0 means it should turn left 90 degrees, and 1 means it should turn
   // right 90 degrees.
-  // Outputs are popped from the end, so the rotation should be read before
-  // the color.
-  const rotation = computer.getOutput()
-  const color = computer.getOutput()
+  const [color, rotation] = computer.getOutput()
 
   // Record the new color for the current tile.
   state.record.set(coords, color)
