@@ -13,6 +13,9 @@ test.skip('Day 2.1', t => {
 test.skip('Day 2.2', t => {})
 
 test('Day 2 — Solutions', t => {
-  t.is(new Intcode(numbers).prepare({ 1: 12, 2: 2 }).run(), 3790689)
+  t.is(
+    new Intcode(numbers).updateMemory(1, 12).updateMemory(2, 2).run(),
+    3790689
+  )
   t.is(findInitParams(numbers), 6533)
 })

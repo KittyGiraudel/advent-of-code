@@ -43,10 +43,20 @@ class Intcode {
   }
 
   getOutput() {
-    const output = this.outputs.pop()
+    const output =
+      this.outputs.length === 1 ? this.outputs[0] : this.outputs.slice(0)
+
     this.log('↩️ Returning output', output)
+    this.outputs.length = 0
 
     return output
+  }
+
+  updateMemory(address, value) {
+    this.log('✏️ Overwriting address', address, 'with', value)
+    this.memory[address] = value
+
+    return this
   }
 
   hasHalted() {
@@ -71,16 +81,6 @@ class Intcode {
     this.log('🖨 Printing memory')
 
     return this.memory.join(',')
-  }
-
-  prepare(replacements) {
-    this.log('⏳ Preparing memory')
-
-    for (const [key, value] of Object.entries(replacements)) {
-      this.memory[+key] = value
-    }
-
-    return this
   }
 
   parseOpcode(opcode) {

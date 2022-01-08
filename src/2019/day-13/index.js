@@ -50,8 +50,7 @@ const getInitialState = computer =>
 // expected:
 // > Memory address 0 represents the number of quarters that have been inserted;
 // > set it to 2 to play for free.
-const initComputer = input =>
-  new Intcode([2, ...input.split(',').map(Number).slice(1)])
+const initComputer = input => new Intcode(input).updateMemory(0, 2)
 
 const draw = input => {
   const computer = initComputer(input)

@@ -6,7 +6,7 @@ const sample = ''
 
 test('Day 9.1', t => {
   const sampleA = '109,1,204,-1,1001,100,1,100,1008,100,16,101,1006,101,0,99'
-  t.is(new Intcode(sampleA).run().outputs.join(','), sampleA)
+  t.is(new Intcode(sampleA).run().getOutput().join(','), sampleA)
   t.is(
     (new Intcode('1102,34915192,34915192,7,4,7,99,0').run().getOutput() + '')
       .length,
