@@ -13,7 +13,6 @@
   "dependencies": {
     "javascript-astar": "^0.4.1",
     "js-levenshtein": "^1.1.6",
-    "node-dijkstra": "^2.5.0",
     "pathfinding": "^0.4.18"
   }
 }
