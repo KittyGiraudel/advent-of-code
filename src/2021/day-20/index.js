@@ -1,7 +1,7 @@
 const $ = require('../../helpers')
 
 const getTilingCoords = (ri, ci) => {
-  const [N, NE, E, SE, S, SW, W, NW] = $.getSurroundingCoords(ri, ci)
+  const [N, NE, E, SE, S, SW, W, NW] = $.neighbors.surrounding(ri, ci)
   const C = [ri, ci]
 
   // prettier-ignore
@@ -21,10 +21,10 @@ const padInput = (input, defaultChar = '.') => {
 
 const step = (algorithm, input, defaultChar = '.') => {
   const rows = padInput(input, defaultChar)
-  const curr = $.createGrid(rows)
-  const next = $.createGrid(rows)
+  const curr = $.grid.create(rows)
+  const next = $.grid.clone(curr)
 
-  $.gridForEach(curr, (_, ri, ci) => {
+  $.grid.forEach(curr, (_, ri, ci) => {
     const value = $.toDec(
       getTilingCoords(ri, ci)
         .map(([ri, ci]) => curr?.[ri]?.[ci] ?? defaultChar)
@@ -35,11 +35,11 @@ const step = (algorithm, input, defaultChar = '.') => {
     next[ri][ci] = algorithm[value]
   })
 
-  return next.map(row => row.join('')).join('\n')
+  return $.grid.render(next)
 }
 
 const processImage = (algorithm, image, iterations = 1) =>
-  Array.from({ length: iterations }).reduce(
+  $.array(iterations).reduce(
     acc => {
       const image = step(algorithm, acc.image, acc.char)
 

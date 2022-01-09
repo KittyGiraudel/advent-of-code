@@ -2,7 +2,6 @@ const $ = require('../../helpers')
 const { Intcode } = require('../day-05')
 
 const print = codes => codes.map(code => String.fromCharCode(code)).join('')
-const encode = string => (string + '\n').split('').map(a => a.charCodeAt())
 
 const run = (input, mode = 'WALK') => {
   const computer = new Intcode(input)
@@ -24,12 +23,12 @@ const run = (input, mode = 'WALK') => {
 
   const output = computer
     .run()
-    .setInput(instructions.map(encode).flat())
+    .setInput(instructions.map(i => $.toAscii(i)).flat())
     .run()
     .getOutput()
 
   // Print debug information
-  console.log(print(output))
+  // console.log(print(output))
 
   return output.pop()
 }

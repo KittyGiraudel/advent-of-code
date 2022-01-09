@@ -2,7 +2,6 @@ const $ = require('../../helpers')
 
 const run = (instructions, inputs) => {
   const data = { w: 0, x: 0, y: 0, z: 0 }
-  console.log('Trying', inputs.join(''))
 
   instructions.forEach(line => {
     const [operation, variable, value] = line.split(' ')

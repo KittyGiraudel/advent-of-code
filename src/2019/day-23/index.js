@@ -5,9 +5,7 @@ class Network {
   constructor(input, size, withLogs) {
     this.outputs = []
     this.NAT = null
-    this.nodes = Array.from({ length: size }, (_, i) =>
-      this.createNode(i, input)
-    )
+    this.nodes = $.array(size).map((_, i) => this.createNode(i, input))
     this.withLogs = withLogs
   }
 
@@ -35,6 +33,9 @@ class Network {
         if (address === 255) this.updateNAT(coords)
         else {
           this.nodes[address].queue.push(coords)
+          // This next line is important: the only way to get the correct result
+          // is to let the receiver process the new packet immediately. Waiting
+          // for the next loop run causes the result to be incorrect.
           this.runNode(this.nodes[address])
         }
       })

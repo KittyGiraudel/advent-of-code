@@ -1,13 +1,13 @@
 const $ = require('../../helpers')
 
-const prepareMoon = (line, index) => ({
+const prepareMoon = line => ({
   position: line.match(/(-?\d+)/g).map(Number),
   velocity: [0, 0, 0],
 })
 
 const prepare = moons => moons.map(prepareMoon)
 
-const applyPartialGravity = axis => (a, b) => {
+const applyPartialGravity = (axis, a, b) => {
   if (a.position[axis] > b.position[axis]) {
     a.velocity[axis]--
     b.velocity[axis]++
@@ -18,16 +18,16 @@ const applyPartialGravity = axis => (a, b) => {
 }
 
 const applyGravity = ([a, b]) => {
-  applyPartialGravity(0)(a, b)
-  applyPartialGravity(1)(a, b)
-  applyPartialGravity(2)(a, b)
+  applyPartialGravity(0, a, b)
+  applyPartialGravity(1, a, b)
+  applyPartialGravity(2, a, b)
 }
 
 const applyVelocity = moon => {
   moon.position = $.applyVector(moon.position, moon.velocity)
 }
 
-const makePairs = array => $.getCombinations(array, 2)
+const makePairs = array => $.combinations(array, 2)
 
 const step = moons => {
   makePairs(moons).forEach(applyGravity)
@@ -39,11 +39,7 @@ const calculateMoonEnergy = ({ position, velocity }) =>
   $.sum(position.map(Math.abs)) * $.sum(velocity.map(Math.abs))
 
 const steps = (input, amount = 1) =>
-  $.sum(
-    Array.from({ length: amount })
-      .reduce(step, prepare(input))
-      .map(calculateMoonEnergy)
-  )
+  $.sum($.array(amount).reduce(step, prepare(input)).map(calculateMoonEnergy))
 
 const serialize = (moons, axis) =>
   moons.map(moon => moon.position[axis] + ';' + moon.velocity[axis]).join(',')
@@ -71,6 +67,6 @@ const findRepeatAxis = (axis, input) => {
 const findRepeat = input =>
   [0, 1, 2]
     .map(axis => findRepeatAxis(axis, input))
-    .reduce((acc, value) => $.findLCM(acc, value), 1)
+    .reduce((acc, value) => $.lcm(acc, value), 1)
 
 module.exports = { steps, findRepeat }

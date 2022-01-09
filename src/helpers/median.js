@@ -1,7 +1,7 @@
 // Return the median value for the given numbers.
 // @param {Number[]} values - Numbers to get the median from
 // @return {Number}
-const getMedian = values => {
+const median = values => {
   values = values.slice(0).sort((a, b) => a - b)
 
   const half = Math.floor(values.length / 2)
@@ -11,4 +11,4 @@ const getMedian = values => {
     : (values[half - 1] + values[half]) / 2
 }
 
-module.exports = getMedian
+module.exports = median

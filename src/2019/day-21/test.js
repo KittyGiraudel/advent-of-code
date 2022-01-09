@@ -2,7 +2,6 @@ const test = require('ava')
 const { run } = require('./')
 const [input] = require('../../helpers/readInput')(__dirname)
 
-run(input)
 test.skip('Day 21.1', t => {})
 
 test.skip('Day 21.2', t => {})

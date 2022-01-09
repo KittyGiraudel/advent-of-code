@@ -1,4 +1,4 @@
-const { Intcode } = require('../day-09')
+const { Intcode } = require('../day-05')
 const $ = require('../../helpers')
 
 const SYMBOLS = [' ', 'x', '▫️', '_', 'o']
@@ -8,13 +8,13 @@ const render = board => {
   const coords = keys.map(coords => coords.split(',').map(Number))
   const maxX = Math.max(...coords.map(tuple => tuple[0]))
   const maxY = Math.max(...coords.map(tuple => tuple[1]))
+  const grid = $.grid.init(
+    maxX + 1,
+    maxY + 1,
+    (x, y) => SYMBOLS[board.get(`${x},${y}`)]
+  )
 
-  return Array.from({ length: maxY + 1 }, (_, y) =>
-    Array.from(
-      { length: maxX + 1 },
-      (_, x) => SYMBOLS[board.get(`${x},${y}`)]
-    ).join(' ')
-  ).join('\n')
+  return $.grid.render(grid, ' ')
 }
 
 const tick = (state, computer) => {
@@ -63,4 +63,4 @@ const draw = input => {
   return state
 }
 
-module.exports = { draw, getInitialState, initComputer }
+module.exports = { draw, getInitialState, initComputer, render }

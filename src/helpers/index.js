@@ -1,63 +1,61 @@
 const applyVector = require('./applyVector')
+const array = require('./array')
+const average = require('./average')
 const chunk = require('./chunk')
+const combinations = require('./combinations')
 const compose = require('./compose')
+const count = require('./count')
 const countInString = require('./countInString')
-const countOccurrences = require('./countOccurrences')
-const createGrid = require('./createGrid')
-const findGCD = require('./findGCD')
-const findLCM = require('./findLCM')
-const getAverage = require('./getAverage')
-const getCombinations = require('./getCombinations')
-const getMedian = require('./getMedian')
-const {
-  getBorderingCoords,
-  getSurroundingCoords,
-} = require('./getNeighborCoords')
-const getPermutations = require('./getPermutations')
-const getTriangularNumber = require('./getTriangularNumber')
+const gcd = require('./gcd')
+const grid = require('./grid')
 const groupBy = require('./groupBy')
 const hexToBin = require('./hexToBin')
 const intersection = require('./intersection')
 const isClamped = require('./isClamped')
-const { gridMap, gridForEach, gridEvery } = require('./loopOnGrid')
+const lcm = require('./lcm')
+const loopIndex = require('./loopIndex')
 const matchLast = require('./matchLast')
+const median = require('./median')
+const neighbors = require('./neighbors')
+const permutations = require('./permutations')
 const product = require('./product')
 const readInput = require('./readInput')
 const stringMap = require('./stringMap')
 const sum = require('./sum')
+const toAscii = require('./toAscii')
 const toBin = require('./toBin')
 const toDec = require('./toDec')
+const triangular = require('./triangular')
 const updateAtIndex = require('./updateAtIndex')
 
 module.exports = {
   applyVector,
+  array,
+  average,
   chunk,
+  combinations,
   compose,
+  count,
   countInString,
-  countOccurrences,
-  createGrid,
-  findGCD,
-  findLCM,
-  getAverage,
-  getBorderingCoords,
-  getCombinations,
-  getMedian,
-  getPermutations,
-  getSurroundingCoords,
-  getTriangularNumber,
-  gridMap,
-  gridForEach,
-  gridEvery,
+  gcd,
+  grid,
   groupBy,
   hexToBin,
   intersection,
   isClamped,
+  lcm,
+  loopIndex,
   matchLast,
+  median,
+  neighbors,
+  permutations,
   product,
   readInput,
   stringMap,
   sum,
+  toAscii,
   toBin,
   toDec,
+  triangular,
   updateAtIndex,
 }

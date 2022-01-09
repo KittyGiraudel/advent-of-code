@@ -76,7 +76,7 @@ const rotateMatrix = rows => {
 // @param {Matrix} matrix - Matrix to flip
 // @return {Matrix}
 const flip = matrix => {
-  const out = generateGrid(matrix.length)
+  const out = $.grid.init(matrix.length)
 
   for (let row = 0; row < out.length; row++) {
     for (let col = 0; col < out.length; col++) {
@@ -120,16 +120,10 @@ const parseImage = input => {
   return { id, variants: getVariants(rows) }
 }
 
-// Generate an empty square grid of given size.
-// @param {Number} length - Size
-// @return {Matrix}
-const generateGrid = length =>
-  Array.from({ length }, () => Array.from({ length }))
-
 const recompose = input => {
   const matrix = completeJigsaw(input)
   const width = matrix.length * (matrix[0][0].variants[0].length - 2)
-  const image = generateGrid(width)
+  const image = $.grid.init(width)
 
   for (let ri = 0; ri < matrix.length; ri++) {
     const row = matrix[ri]
@@ -214,7 +208,7 @@ const findMonsters = rawTiles => {
 // @return {Object[]}
 const completeJigsaw = rawTiles => {
   const size = Math.sqrt(rawTiles.length)
-  const matrix = generateGrid(size)
+  const matrix = $.grid.init(size)
 
   checkTile(rawTiles.map(parseImage), new Set(), matrix, 0, 0, size)
 

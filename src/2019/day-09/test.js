@@ -1,5 +1,5 @@
 const test = require('ava')
-const { Intcode } = require('./')
+const { Intcode } = require('../day-05')
 const [input] = require('../../helpers/readInput')(__dirname)
 
 const sample = ''

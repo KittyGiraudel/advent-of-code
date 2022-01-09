@@ -9,8 +9,9 @@ const createGraph = grid => {
     $.isClamped(ri, 0, xMax) && $.isClamped(ci, 0, yMax)
   const route = new Graph()
 
-  $.gridForEach(grid, (_, ri, ci) => {
-    const neighbors = $.getBorderingCoords(ri, ci)
+  $.grid.forEach(grid, (_, ri, ci) => {
+    const neighbors = $.neighbors
+      .bordering(ri, ci)
       .filter(isWithinBounds)
       .reduce(
         (acc, coords) => ({ ...acc, [coords.join(',')]: getValue(coords) }),
@@ -29,8 +30,8 @@ const createMegaGrid = rows => {
 
   // Generate the entire first row of the mega grid. If the initial grid as 10
   // rows for instance, this generates a grid of 10 rows * 50 columns.
-  const grid = Array.from({ length: rows.length }).reduce((acc, _, ri) => {
-    const row = Array.from({ length: ratio - 1 }).reduce(
+  const grid = $.array(rows.length).reduce((acc, _, ri) => {
+    const row = $.array(ratio - 1).reduce(
       (acc, _, index) => [...acc, acc[index].map(inc)],
       [rows[ri].split('').map(Number)]
     )
@@ -40,7 +41,7 @@ const createMegaGrid = rows => {
 
   // Generate the the missing rows from the mega grid now that all columns are
   // defined.
-  return Array.from({ length: ratio - 1 })
+  return $.array(ratio - 1)
     .reduce(
       (acc, _, index) => [...acc, acc[index].map(row => row.map(inc))],
       [grid]

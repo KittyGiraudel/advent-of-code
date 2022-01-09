@@ -1,13 +1,12 @@
 const $ = require('../../helpers')
 
-const mapOutSpace = grid => {
+const mapOutSpace = rows => {
   const map = new Map()
+  const grid = $.grid.create(rows)
 
-  grid.forEach((row, y) =>
-    row.split('').forEach((item, x) => {
-      if (item === '#') map.set(`${x},${y}`, 0)
-    })
-  )
+  $.grid.forEach(grid, (v, ri, ci) => {
+    if (v === '#') map.set(`${ci},${ri}`, 0)
+  })
 
   const keys = Array.from(map.keys())
 
@@ -17,7 +16,7 @@ const mapOutSpace = grid => {
     const vectors = asteroids.map(asteroid => {
       const [xD, yD] = asteroid.split(',').map(Number)
       const vector = [xD - xC, yD - yC]
-      const gcd = $.findGCD(...vector)
+      const gcd = $.gcd(...vector)
 
       return vector.map(value => value / Math.abs(gcd)).join(',')
     })
@@ -32,10 +31,8 @@ const findBestSpot = grid => {
   const map = mapOutSpace(grid)
 
   return Array.from(map.keys()).reduce((acc, key) => {
-    const value = [...new Set(map.get(key))].length
-    if (!acc) return [key, value]
-    if (acc[1] < value) return [key, value]
-    return acc
+    const value = new Set(map.get(key)).size
+    return !acc || acc[1] < value ? [key, value] : acc
   }, null)
 }
 
@@ -86,7 +83,7 @@ const vaporize = grid => {
   // At each iteration, take the first item of each group (if there is any item
   // left in groups), and push it onto the final order. This corresponds to the
   // canon rotations.
-  return Array.from({ length: max }).reduce(order => {
+  return $.array(max).reduce(order => {
     groups
       .filter(group => group.items.length)
       .forEach(group => order.push(group.items.shift()))

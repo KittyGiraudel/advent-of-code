@@ -123,10 +123,7 @@ const count = map => Array.from(map.values()).filter(isAlive).length
 // @return {Number}
 const gameOfLife = (input, cycles, dimensions = 3, cache = new Map()) =>
   count(
-    Array.from({ length: cycles }).reduce(
-      map => cycle(map, dimensions, cache),
-      init(input)
-    )
+    $.array(cycles).reduce(map => cycle(map, dimensions, cache), init(input))
   )
 
 module.exports = { gameOfLife }

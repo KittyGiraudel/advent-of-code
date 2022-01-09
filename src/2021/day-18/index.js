@@ -3,10 +3,10 @@ const $ = require('../../helpers')
 const split = value => `[${Math.floor(value / 2)},${Math.ceil(value / 2)}]`
 
 const handleExplosions = string => {
+  const openings = []
   let left = null
   let right = null
   let current = ''
-  let openings = []
 
   for (let i = 0; i < string.length; i++) {
     if (string[i] === '[') {
@@ -76,7 +76,7 @@ const sumFish = (...fishes) =>
 
 const findHighestMagnitude = (...fishes) =>
   Math.max(
-    ...$.getCombinations(fishes, 2)
+    ...$.combinations(fishes, 2)
       .map(pair => sumFish(...pair))
       .map(JSON.parse)
       .map(computeMagnitude)

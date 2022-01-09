@@ -2,9 +2,9 @@
 // mapping items to their count.
 // @param {Array} array - Array to count occurrences from
 // @return {Object}
-const countOccurrences = array =>
+const count = array =>
   array.reduce((acc, curr) => {
     return acc[curr] ? ++acc[curr] : (acc[curr] = 1), acc
   }, {})
 
-module.exports = countOccurrences
+module.exports = count

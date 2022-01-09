@@ -4,7 +4,7 @@ const { getGrid, calibrate, scaffold } = require('./')
 const [input] = require('../../helpers/readInput')(__dirname)
 
 test('Day 17.1', t => {
-  const grid = $.createGrid(
+  const grid = $.grid.create(
     `
 ..#..........
 ..#..........

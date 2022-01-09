@@ -1,3 +1,4 @@
+const $ = require('../../helpers')
 const { Intcode } = require('../day-05')
 
 const ORIENTIATIONS = ['UP', 'RIGHT', 'DOWN', 'LEFT']
@@ -30,10 +31,9 @@ const next = (computer, state) => {
   // white panel. All of the panels are currently black (default value).
   const coords = state.position.join(',')
   const tile = state.record.get(coords) || 0
-  computer.setInput(tile)
 
   // Run the program.
-  computer.run()
+  computer.setInput(tile).run()
 
   // First, it will output a value indicating the color to paint the panel the
   // robot is over: 0 means to paint the panel black, and 1 means to paint the
@@ -68,14 +68,19 @@ const render = record => {
   const coords = Array.from(record.keys()).map(coords =>
     coords.split(',').map(Number)
   )
-  const maxX = Math.max(...coords.map(tuple => tuple[0]))
-  const maxY = Math.max(...coords.map(tuple => tuple[1]))
+  const xs = coords.map(tuple => tuple[0])
+  const ys = coords.map(tuple => tuple[1])
+  const minX = Math.min(...xs)
+  const maxX = Math.max(...xs) + 1
+  const minY = Math.min(...ys)
+  const maxY = Math.max(...ys) + 1
 
-  return Array.from({ length: maxY + 1 }, (_, y) =>
-    Array.from({ length: maxX + 1 }, (_, x) =>
-      record.get(`${x},${y}`) === 1 ? '#' : ' '
-    ).join(' ')
-  ).join('\n')
+  return $.grid.render(
+    $.grid.init(maxX - minX, maxY - minY, (x, y) =>
+      record.get(`${x + minX},${y + minY}`) ? '#' : ' '
+    ),
+    ' '
+  )
 }
 
 module.exports = { paint, turn, move, render }

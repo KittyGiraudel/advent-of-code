@@ -1,7 +1,7 @@
 const $ = require('../../helpers')
 
 const getEpsilonAndGamma = items =>
-  Array.from({ length: items[0].length }).reduce(
+  $.array(items[0].length).reduce(
     (acc, _, i) => {
       const column = items.map(item => item[i]).join('')
       const gamma = $.countInString(column, '1') > items.length / 2
@@ -15,7 +15,7 @@ const getEpsilonAndGamma = items =>
   )
 
 const getGasValue = predicate => items =>
-  Array.from({ length: items[0].length }).reduce((acc, _, i) => {
+  $.array(items[0].length).reduce((acc, _, i) => {
     const column = acc.map(item => item[i]).join('')
     const hasMore1 = $.countInString(column, '1') >= acc.length / 2
     const main = predicate(hasMore1)

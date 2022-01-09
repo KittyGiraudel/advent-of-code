@@ -9,14 +9,14 @@ const isGridComplete = grid => {
 
 const roll = (grids, number) => {
   grids.forEach(grid => {
-    $.gridForEach(grid, item => {
+    $.grid.forEach(grid, item => {
       if (item.value === number) item.marked = true
     })
   })
 }
 
 const computeGridScore = grid =>
-  $.sum($.gridMap(grid, item => (item.marked ? 0 : item.value)).flat())
+  $.sum($.grid.map(grid, item => (item.marked ? 0 : item.value)).flat())
 
 const getBingos = input => {
   const [numbers, ...grids] = parseInput(input)
