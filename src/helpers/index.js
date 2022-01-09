@@ -20,6 +20,7 @@ const median = require('./median')
 const neighbors = require('./neighbors')
 const permutations = require('./permutations')
 const product = require('./product')
+const range = require('./range')
 const readInput = require('./readInput')
 const stringMap = require('./stringMap')
 const sum = require('./sum')
@@ -52,6 +53,7 @@ module.exports = {
   neighbors,
   permutations,
   product,
+  range,
   readInput,
   stringMap,
   sum,
