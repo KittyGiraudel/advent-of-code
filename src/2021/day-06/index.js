@@ -1,7 +1,7 @@
 const $ = require('../../helpers/')
 
 const countFish = (fish, days = 80) => {
-  let curr = Array.from({ length: 9 }, (_, i) => $.countInString(fish, i))
+  let curr = $.array(9).map((_, i) => $.countInString(fish, i))
 
   while (days--) {
     let next = []

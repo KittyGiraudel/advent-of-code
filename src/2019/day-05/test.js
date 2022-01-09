@@ -19,6 +19,6 @@ test('Day 5.2', t => {
 })
 
 test('Day 5 — Solutions', t => {
-  t.is(new Intcode(numbers).setInput(1).run().getOutput(), 13933662)
+  t.is(new Intcode(numbers).setInput(1).run().getOutput().pop(), 13933662)
   t.is(new Intcode(numbers).setInput(5).run().getOutput(), 2369720)
 })

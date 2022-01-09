@@ -115,10 +115,7 @@ const countBlackTiles = map =>
 // @return {Number}
 const gameOfLife = (lines, cycles = 1, cache = new Map()) =>
   countBlackTiles(
-    Array.from({ length: cycles }).reduce(
-      map => cycle(map, cache),
-      processLines(lines)
-    )
+    $.array(cycles).reduce(map => cycle(map, cache), processLines(lines))
   )
 
 module.exports = { gameOfLife }

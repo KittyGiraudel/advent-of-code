@@ -1,3 +1,5 @@
+const $ = require('../../helpers')
+
 const DIRECTIONS = {
   N: { R: 'E', L: 'W' },
   E: { R: 'S', L: 'N' },
@@ -21,8 +23,8 @@ const rotate = (orientation, direction, degrees) => {
 // @param {String} orientation - Initial orientation
 // @return {Number} Manatthan distance
 const navigateLoose = (instructions, orientation = 'E') =>
-  instructions
-    .reduce(
+  $.sum(
+    instructions.reduce(
       (coords, instruction) => {
         const operation = instruction.slice(0, 1)
         const value = Number(instruction.slice(1))
@@ -41,15 +43,15 @@ const navigateLoose = (instructions, orientation = 'E') =>
       },
       [0, 0]
     )
-    .reduce((a, b) => a + b, 0)
+  )
 
 // Navigate the ship while following the strict instructions regarding the
 // waypoint.
 // @param {String[]} instructions - List of instructions
 // @return {Number} Manatthan distance
 const navigateStrict = instructions =>
-  instructions
-    .reduce(
+  $.sum(
+    instructions.reduce(
       ({ ship, waypoint }, instruction) => {
         const operation = instruction.slice(0, 1)
         const value = Number(instruction.slice(1))
@@ -73,7 +75,7 @@ const navigateStrict = instructions =>
         return { ship, waypoint }
       },
       { ship: [0, 0], waypoint: [10, -1] }
-    )
-    .ship.reduce((a, b) => a + b, 0)
+    ).ship
+  )
 
 module.exports = { navigateLoose, navigateStrict }

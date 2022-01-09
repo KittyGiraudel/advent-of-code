@@ -8,7 +8,8 @@ const getLowPoints = rows =>
     (lowPoints, row, ri) =>
       row
         .map((point, ci) =>
-          $.getBorderingCoords(ri, ci)
+          $.neighbors
+            .bordering(ri, ci)
             .map(([ri, ci]) => rows[ri]?.[ci] ?? Infinity)
             .every(n => n > point)
             ? [ri, ci]
@@ -25,10 +26,10 @@ const getBasin = (grid, point, evaluated = []) => {
   // - Have not been visited yet.
   // - Exist (as in, are within the bounds of the grid).
   // - Are not high points (value of 9).
-  const neighbors = $.getBorderingCoords(...point).filter(([nRow, nCol]) => {
-    if (evaluated.includes([nRow, nCol].join(','))) return false
-    if (typeof grid[nRow]?.[nCol] === 'undefined') return false
-    if (grid[nRow]?.[nCol] === 9) return false
+  const neighbors = $.neighbors.bordering(...point).filter(([ri, ci]) => {
+    if (evaluated.includes([ri, ci].join(','))) return false
+    if (typeof grid[ri]?.[ci] === 'undefined') return false
+    if (grid[ri]?.[ci] === 9) return false
     return true
   })
 
@@ -43,14 +44,14 @@ const getBasin = (grid, point, evaluated = []) => {
 }
 
 const sumLowPointsRisk = rows => {
-  const grid = $.createGrid(rows, Number)
+  const grid = $.grid.create(rows, Number)
   const lowPoints = getLowPoints(grid)
 
   return $.sum(lowPoints.map(([ri, ci]) => grid[ri][ci]).map(p => p + 1))
 }
 
 const getProductOfBiggestBasins = (rows, amount = 3) => {
-  const grid = $.createGrid(rows, Number)
+  const grid = $.grid.create(rows, Number)
   const lowPoints = getLowPoints(grid)
 
   return $.product(

@@ -2,15 +2,13 @@ const $ = require('../../helpers')
 const PF = require('pathfinding')
 const input = require('../../helpers/readInput')(__dirname)
 
-const finder = new PF.AStarFinder()
-
 const getGraph = rows => {
-  const grid = $.createGrid(rows)
-  const matrix = $.gridMap(grid, v => +(v === '#' || /[A-Z]/.test(v)))
+  const grid = $.grid.create(rows)
+  const matrix = $.grid.map(grid, v => +(v === '#' || /[A-Z]/.test(v)))
   const doors = new Map()
   const keys = []
 
-  $.gridForEach(grid, (v, ri, ci) => {
+  $.grid.forEach(grid, (v, ri, ci) => {
     if (/[a-z]/.test(v)) keys.push({ key: v, coords: [ci, ri] })
     if (/[A-Z]/.test(v)) doors.set(v, [ci, ri])
   })
@@ -40,5 +38,3 @@ const getGraph = rows => {
 
   return state
 }
-
-console.log(getGraph(input))

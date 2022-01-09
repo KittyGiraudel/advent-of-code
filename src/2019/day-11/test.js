@@ -33,5 +33,5 @@ test('Day 11 — Solutions', t => {
   const startOnWhite = paint(input, 1)
 
   t.is(Array.from(startOnBlack.keys()).length, 2160)
-  console.log(render(startOnWhite))
+  // console.log(render(startOnWhite))
 })

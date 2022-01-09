@@ -3,7 +3,7 @@ const $ = require('../../helpers')
 const count = (input, iterations = 1) => {
   const string = input[0]
   // Initialize letter counters based on the characters of the initial string.
-  const counters = $.countOccurrences(string.split(''))
+  const counters = $.count(string.split(''))
   // Parse the instructions.
   const instructions = input[1]
     .split('\n')

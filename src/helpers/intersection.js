@@ -1,9 +1,13 @@
-const intersection = (...lists) => {
+// Return the intersections of several arrays.
+// @param {Array[]} arrays - Arrays to find the intersection of
+// @return {Array}
+const intersection = (...arrays) => {
   const result = new Set()
 
-  for (let i = 0; i < lists.length; i++) {
-    for (let y = 0; y < lists[i].length; y++) {
-      if (lists.every(obj => obj.includes(lists[i][y]))) result.add(lists[i][y])
+  for (let i = 0; i < arrays.length; i++) {
+    for (let y = 0; y < arrays[i].length; y++) {
+      if (arrays.every(obj => obj.includes(arrays[i][y])))
+        result.add(arrays[i][y])
     }
   }
 

@@ -1,33 +1,36 @@
 const $ = require('../../helpers')
 const { Intcode } = require('../day-05')
-const [input] = require('../../helpers/readInput')(__dirname)
 
 const getGrid = input => {
-  const comp = new Intcode(input)
+  const computer = new Intcode(input)
 
   // A little puzzled why the computer is marked “halted” before the end though.
   // Basically it reaches opcode 99 after every interaction (there are indeed
-  // many occurrences of opcode 99 in the input), and you need to keep poking it
-  // until eventually it finishes, but you also don’t really know when besides
+  // many occurrences of opcode 99 in the input), and we need to keep poking it
+  // until it eventually finishes, but we also don’t really know when besides
   // getting a new output value.
-  while (comp.outputs.length !== comp.run().outputs.length) comp.run()
+  while (computer.outputs.length !== computer.run().outputs.length)
+    computer.run()
 
-  const output = comp.getOutput()
-  const width = output.findIndex(v => v === 10)
-  const grid = $.chunk(output, width + 1).map(row =>
-    row.slice(0, -1).map(c => String.fromCharCode(c))
-  )
-
-  return grid
+  // Convert the array of ASCII codes into their respective characters, then
+  // join them all together to have a single large string. Then, split the
+  // string on line breaks (formerly ASCII code 10), and split each row on
+  // individual characters to make grid.
+  return computer
+    .getOutput()
+    .map(code => String.fromCharCode(code))
+    .join('')
+    .split('\n')
+    .map(row => row.split(''))
 }
 
 const calibrate = grid => {
   let calibration = 0
 
-  $.gridForEach(grid, (v, ri, ci) => {
+  $.grid.forEach(grid, (v, ri, ci) => {
     if (v !== '#') return
 
-    const neighborcoords = $.getBorderingCoords(ri, ci)
+    const neighborcoords = $.neighbors.bordering(ri, ci)
     const neighbors = neighborcoords.map(([ri, ci]) => grid?.[ri]?.[ci])
     const intersection = neighbors.every(neighbor => neighbor === '#')
 
@@ -37,14 +40,12 @@ const calibrate = grid => {
   return calibration
 }
 
-const encode = string => (string + '\n').split('').map(a => a.charCodeAt())
-
 const scaffold = input => {
   const computer = new Intcode(input).updateMemory(0, 2)
 
   // Helper function to minimize repeatition; totally sugar.
   computer.execute = function (input) {
-    return this.setInput(encode(input)).run()
+    return this.setInput($.toAscii(input)).run()
   }
 
   // The inputs were manually resolved by printing the map and listing out all

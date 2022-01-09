@@ -1,20 +1,11 @@
 const $ = require('../../helpers')
 
-function* deterministicDice() {
-  let index = 0
-
-  while (true) {
-    yield ++index
-    if (index === 100) index = 0
-  }
-}
-
 const playDeterministically = (p1p, p2p, max = 1000) => {
   const players = [
     { position: p1p, score: 0 },
     { position: p2p, score: 0 },
   ]
-  const dice = deterministicDice()
+  const dice = $.loopIndex(1, 100)
   let currentPlayerIndex = 0
   let count = 0
 

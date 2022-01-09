@@ -57,7 +57,7 @@ const hasSingleOption = entry => Array.isArray(entry) && entry.length === 1
 // @param {Rule[]} rules - Rules to validate the tickets against
 // @return {String[][]}
 const getRulesPossibilities = (tickets, rules) => {
-  let possibilities = Array.from({ length: rules.length }, () => [])
+  let possibilities = $.array(rules.length).map(() => [])
 
   rules.forEach(rule => {
     const name = rule[0]

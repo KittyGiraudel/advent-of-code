@@ -34,8 +34,8 @@ const getFirstSeat = (layout, coords, vector) => {
 // @param {String[]} layout - Seating layout
 // @param {Number[]} coords - Set of X,Y coords
 // @return {String[]}
-const getAdjacentSeats = (layout, coords) =>
-  DIRECTIONAL_VECTORS.map(vector => read(layout, $.applyVector(coords, vector)))
+const getSurroundingSeats = (layout, coords) =>
+  $.neighbors.surrounding(...coords).map(neighbor => read(layout, neighbor))
 
 // Get the 8 visible seats around the one at given position.
 // @param {String[]} layout - Seating layout
@@ -59,7 +59,7 @@ const processSeat = (mapper, threshold) => (layout, y) => (seat, x) => {
   return seat
 }
 
-const processSeatLoose = processSeat(getAdjacentSeats, 4)
+const processSeatLoose = processSeat(getSurroundingSeats, 4)
 const processSeatStrict = processSeat(getVisibleSeats, 5)
 
 // Process the entire seating layout.

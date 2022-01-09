@@ -1,18 +1,18 @@
 const $ = require('../../helpers')
 
 const step = grid => {
-  const horizontal = $.gridMap(grid, () => '.')
+  const horizontal = $.grid.map(grid, () => '.')
 
-  $.gridForEach(grid, (v, ri, ci) => {
+  $.grid.forEach(grid, (v, ri, ci) => {
     if (v !== '>') return
     const right = ci === grid[ri].length - 1 ? 0 : ci + 1
     const canMove = grid[ri][right] === '.'
     horizontal[ri][canMove ? right : ci] = '>'
   })
 
-  const vertical = $.createGrid(serialize(horizontal).split('\n'))
+  const vertical = $.grid.clone(horizontal)
 
-  $.gridForEach(grid, (v, ri, ci) => {
+  $.grid.forEach(grid, (v, ri, ci) => {
     if (v !== 'v') return
     const bottom = ri === grid.length - 1 ? 0 : ri + 1
     const canMove = grid[bottom][ci] !== 'v' && horizontal[bottom][ci] === '.'
@@ -22,13 +22,13 @@ const step = grid => {
   return vertical
 }
 
-const serialize = grid => grid.map(row => row.join('')).join('\n')
+const serialize = grid => $.grid.render(grid)
 
 const steps = (input, count) =>
-  Array.from({ length: count }).reduce(acc => step(acc), $.createGrid(input))
+  $.array(count).reduce(step, $.grid.create(input))
 
 const run = input => {
-  let curr = $.createGrid(input)
+  let curr = $.grid.create(input)
   let next = step(curr)
   let i = 1
 
