@@ -1,28 +1,5 @@
-const Graph = require('node-dijkstra')
+const { Graph, astar } = require('javascript-astar')
 const $ = require('../../helpers')
-
-const createGraph = grid => {
-  const xMax = grid[0].length - 1
-  const yMax = grid.length - 1
-  const getValue = ([ri, ci]) => grid[ri][ci]
-  const isWithinBounds = ([ri, ci]) =>
-    $.isClamped(ri, 0, xMax) && $.isClamped(ci, 0, yMax)
-  const route = new Graph()
-
-  $.grid.forEach(grid, (_, ri, ci) => {
-    const neighbors = $.neighbors
-      .bordering(ri, ci)
-      .filter(isWithinBounds)
-      .reduce(
-        (acc, coords) => ({ ...acc, [coords.join(',')]: getValue(coords) }),
-        {}
-      )
-
-    route.addNode(ri + ',' + ci, neighbors)
-  })
-
-  return route
-}
 
 const createMegaGrid = rows => {
   const ratio = 5
@@ -49,9 +26,14 @@ const createMegaGrid = rows => {
     .flat()
 }
 
-const getLowestRisk = grid =>
-  createGraph(grid).path('0,0', `${grid.length - 1},${grid[0].length - 1}`, {
-    cost: true,
-  }).cost
+const getLowestRisk = grid => {
+  const graph = new Graph(grid)
+  const height = graph.grid.length - 1
+  const width = graph.grid[0].length - 1
+  const start = graph.grid[0][0]
+  const end = graph.grid[height][width]
+
+  return $.sum(astar.search(graph, start, end).map(node => node.weight))
+}
 
 module.exports = { createMegaGrid, getLowestRisk }
