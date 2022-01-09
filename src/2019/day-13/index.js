@@ -18,10 +18,8 @@ const render = board => {
 }
 
 const tick = (state, computer) => {
-  computer.run()
-
-  const tiles = $.chunk(computer.outputs, 3)
-  computer.outputs = []
+  const output = computer.run().getOutput()
+  const tiles = $.chunk(output, 3)
 
   tiles.forEach(([x, y, t]) => {
     if (x === -1 && y === 0) state.score = t
