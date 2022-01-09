@@ -30,9 +30,11 @@ const countOverlappingInches = input => {
   })
 
   const counts = $.count(grid.flat())
-  const overlaps = Object.values(counts).slice(2)
 
-  return $.sum(overlaps)
+  delete counts['0']
+  delete counts['1']
+
+  return $.sum(Object.values(counts))
 }
 
 const getIntersection = (a, b) => {
