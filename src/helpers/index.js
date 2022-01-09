@@ -6,6 +6,7 @@ const combinations = require('./combinations')
 const compose = require('./compose')
 const count = require('./count')
 const countInString = require('./countInString')
+const fromAscii = require('./fromAscii')
 const gcd = require('./gcd')
 const grid = require('./grid')
 const groupBy = require('./groupBy')
@@ -37,6 +38,7 @@ module.exports = {
   compose,
   count,
   countInString,
+  fromAscii,
   gcd,
   grid,
   groupBy,
