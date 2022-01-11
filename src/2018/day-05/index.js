@@ -17,8 +17,6 @@ const findShortestPolymer = input =>
       .map(polymer => polymer.length)
   )
 
-const peek = stack => stack[stack.length - 1]
-
 const reduce = input => {
   // This is my initial version, which works fine but is super slow because it
   // uses a big regular expression on a big string I guess.
@@ -32,7 +30,7 @@ const reduce = input => {
   // https://www.reddit.com/r/adventofcode/comments/a3912m/2018_day_5_solutions/
   return Array.from(input)
     .reduce((acc, char) => {
-      if (!acc.length || (peek(acc).charCodeAt() ^ char.charCodeAt()) !== 32)
+      if (!acc.length || ($.peek(acc).charCodeAt() ^ char.charCodeAt()) !== 32)
         acc.push(char)
       else acc.pop()
       return acc
