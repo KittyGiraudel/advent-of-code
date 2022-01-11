@@ -1,6 +1,7 @@
 const applyVector = require('./applyVector')
 const array = require('./array')
 const average = require('./average')
+const boundaries = require('./boundaries')
 const chunk = require('./chunk')
 const combinations = require('./combinations')
 const compose = require('./compose')
@@ -15,9 +16,11 @@ const intersection = require('./intersection')
 const isClamped = require('./isClamped')
 const lcm = require('./lcm')
 const loopIndex = require('./loopIndex')
+const manhattan = require('./manhattan')
 const matchLast = require('./matchLast')
 const median = require('./median')
 const neighbors = require('./neighbors')
+const peek = require('./peek')
 const permutations = require('./permutations')
 const product = require('./product')
 const range = require('./range')
@@ -34,6 +37,7 @@ module.exports = {
   applyVector,
   array,
   average,
+  boundaries,
   chunk,
   combinations,
   compose,
@@ -48,9 +52,11 @@ module.exports = {
   isClamped,
   lcm,
   loopIndex,
+  manhattan,
   matchLast,
   median,
   neighbors,
+  peek,
   permutations,
   product,
   range,
