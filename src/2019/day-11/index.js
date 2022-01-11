@@ -68,15 +68,10 @@ const render = record => {
   const coords = Array.from(record.keys()).map(coords =>
     coords.split(',').map(Number)
   )
-  const xs = coords.map(tuple => tuple[0])
-  const ys = coords.map(tuple => tuple[1])
-  const minX = Math.min(...xs)
-  const maxX = Math.max(...xs) + 1
-  const minY = Math.min(...ys)
-  const maxY = Math.max(...ys) + 1
+  const { minX, maxX, minY, maxY } = $.boundaries(coords)
 
   return $.grid.render(
-    $.grid.init(maxX - minX, maxY - minY, (x, y) =>
+    $.grid.init(maxX + 1 - minX, maxY + 1 - minY, (x, y) =>
       record.get(`${x + minX},${y + minY}`) ? '#' : ' '
     ),
     ' '

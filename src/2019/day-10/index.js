@@ -41,8 +41,6 @@ const toObj = point => {
   return { x: points[0], y: points[1] }
 }
 
-const getDistanceToPoint = pointA => pointB =>
-  Math.sqrt(Math.pow(pointB.x - pointA.x, 2) + Math.pow(pointB.y - pointA.y, 2))
 const getAngleFromPoint = pointA => pointB =>
   90 + (Math.atan2(pointB.y - pointA.y, pointB.x - pointA.x) * 180) / Math.PI
 
@@ -50,7 +48,6 @@ const vaporize = grid => {
   const map = mapOutSpace(grid)
   const [spot] = findBestSpot(grid)
   const center = toObj(spot)
-  const getDistanceToCenter = getDistanceToPoint(center)
   const getAngleFromCenter = getAngleFromPoint(center)
   const asteroids = Array.from(map.keys())
     .filter(asteroid => asteroid !== spot)
@@ -63,7 +60,7 @@ const vaporize = grid => {
     .sort((a, b) =>
       a.angle !== b.angle
         ? a.angle - b.angle
-        : getDistanceToCenter(a) - getDistanceToCenter(b)
+        : $.manhattan(center, a) - $.manhattan(center, b)
     )
 
   // Group asteroids per angle, so that we end up with an array of groups in
