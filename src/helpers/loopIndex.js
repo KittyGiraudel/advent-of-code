@@ -7,7 +7,7 @@ function* loopIndex(min, max) {
   let index = min
   while (true) {
     yield index++
-    if (index === max + 1) index = min
+    if (index > max) index = min
   }
 }
 
