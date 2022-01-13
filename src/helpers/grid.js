@@ -18,7 +18,7 @@ const gridEvery = loopOnGrid('every')
 
 const identity = value => value
 const createGrid = (rows, mapper = identity) =>
-  rows.map(row => row.split('').map(mapper))
+  rows.map((row, ri) => row.split('').map((value, ci) => mapper(value, ri, ci)))
 const cloneGrid = grid => grid.slice(0).map(row => row.slice(0))
 
 const initGrid = (width, height = width, value = null) =>
