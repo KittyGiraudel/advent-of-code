@@ -32,7 +32,6 @@ const cook1 = count => {
 const cook2 = (needle, upper) => {
   const board = [3, 7]
   const players = [0, 1]
-  let i = 0
 
   // Interestingly, it’s the check that’s costly, and not the moves per se,
   // which is why iterating an arbitrary high number of times is significantly
@@ -44,7 +43,8 @@ const cook2 = (needle, upper) => {
   //    !board.join('').endsWith(needle)
   //    board.join('').indexOf(needle) !== -1
   //    board.join('').search(needle) !== -1
-  while (upper ? i++ < upper : !board.join('').endsWith(needle))
+  //    !board.slice(-1 * needle.length).every((s, i) => s === needle[i])
+  while (typeof upper === 'number' ? upper-- : !board.join('').endsWith(needle))
     play(board, players)
 
   return upper ? board.join('').search(needle) : board.length - needle.length
