@@ -11,40 +11,26 @@ const getNextValue = (value, neighbors) => {
     return neighbors.find(isTree) && neighbors.find(isLumberyard) ? '#' : '.'
 }
 
-const getScore = cache => {
-  const counters = $.count(Object.values(cache).map(a => a.curr))
+const getScore = grid => {
+  const counters = $.count(grid.flat())
 
   return counters['#'] * counters['|']
 }
 
 const run = (rows, iterations = 1) => {
   const history = []
-  const cache = $.grid.reduce(
-    $.grid.create(rows),
-    (acc, value, ri, ci) => {
-      const key = ri + ',' + ci
-      const neighbors = $.neighbors.surrounding(ri, ci).map(c => c.join(','))
-      acc[key] = { neighbors, curr: value }
-      return acc
-    },
-    {}
-  )
+  let curr = $.grid.create(rows)
 
   for (let i = 0; i < iterations; i++) {
-    // My original implementation used a bi-dimensional grid, but when reaching
-    // part 2, I thought I might be able to get away with brute-force with some
-    // performance optimizations. It made no difference though because whether
-    // I store data in a grid or an object, ultimately I still need to iterate
-    // over the 50x50 cells, so the performance is the same. I guess the
-    // neighbor lookups are slightly faster here, but it’s probably marginal.
-    for (let key in cache) {
-      const { neighbors, curr } = cache[key]
-      const surroundings = neighbors.map(c => cache[c]?.curr)
-      cache[key].next = getNextValue(curr, surroundings)
-    }
-    for (let key in cache) cache[key].curr = cache[key].next
+    curr = $.grid.map($.grid.clone(curr), (value, ri, ci) => {
+      const neighbors = $.neighbors
+        .surrounding(ri, ci)
+        .map(([ri, ci]) => curr?.[ri]?.[ci])
 
-    const score = getScore(cache)
+      return getNextValue(value, neighbors)
+    })
+
+    const score = getScore(curr)
     const index = history.indexOf(score)
 
     // If the score has already been found in the history *and* the score before
@@ -61,7 +47,7 @@ const run = (rows, iterations = 1) => {
     } else history.push(score)
   }
 
-  return getScore(cache)
+  return getScore(curr)
 }
 
 module.exports = { run }
