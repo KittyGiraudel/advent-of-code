@@ -6,7 +6,7 @@ const SYMBOLS = [' ', 'x', '▫️', '_', 'o']
 const render = board => {
   const keys = Array.from(board.keys())
   const coords = keys.map(coords => coords.split(',').map(Number))
-  const { maxX, maxY } = $.boundaries(coords)
+  const [, maxX, , maxY] = $.boundaries(coords)
   const grid = $.grid.init(
     maxX + 1,
     maxY + 1,

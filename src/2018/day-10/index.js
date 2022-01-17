@@ -7,9 +7,9 @@ const applyVelocity = ([position, velocity]) => [
 
 const parseLine = line => $.chunk(line.match(/(-?\d+)/g).map(Number), 2)
 
-const getDimensions = boundaries => [
-  boundaries.maxX + 1 - boundaries.minX,
-  boundaries.maxY + 1 - boundaries.minY,
+const getDimensions = ([minX, maxX, minY, maxY]) => [
+  maxX + 1 - minX,
+  maxY + 1 - minY,
 ]
 
 const render = curr => {
@@ -17,7 +17,7 @@ const render = curr => {
   const coords = positions.map(p => p.join(','))
   const boundaries = $.boundaries(positions)
   const grid = $.grid.init(...getDimensions(boundaries))
-  const { minX, minY } = boundaries
+  const [minX, , minY] = boundaries
 
   $.grid.forEach(grid, (_, ri, ci) => {
     const key = `${ci + minX},${ri + minY}`
