@@ -8,7 +8,7 @@ const toObj = point => {
 const mapOut = (points, limit) => {
   const counters = new Map()
   const edges = new Set()
-  const { minX, maxX, minY, maxY } = $.boundaries(
+  const [minX, maxX, minY, maxY] = $.boundaries(
     points.map(line => line.split(', ').map(Number))
   )
   let regionSize = 0

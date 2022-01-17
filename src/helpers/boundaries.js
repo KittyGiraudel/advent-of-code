@@ -6,7 +6,7 @@ const boundaries = points => {
   const maxX = Math.max(...xs)
   const maxY = Math.max(...ys)
 
-  return { minX, maxX, minY, maxY }
+  return [minX, maxX, minY, maxY]
 }
 
 module.exports = boundaries

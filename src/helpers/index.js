@@ -3,6 +3,7 @@ const array = require('./array')
 const average = require('./average')
 const boundaries = require('./boundaries')
 const chunk = require('./chunk')
+const clone = require('./clone')
 const combinations = require('./combinations')
 const compose = require('./compose')
 const count = require('./count')
@@ -39,6 +40,7 @@ module.exports = {
   average,
   boundaries,
   chunk,
+  clone,
   combinations,
   compose,
   count,
