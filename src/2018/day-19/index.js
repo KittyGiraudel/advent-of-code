@@ -35,7 +35,7 @@ const sumFactors = n => {
 }
 
 const run = (input, init = 0) => {
-  const registers = new Uint32Array(6)
+  const registers = new Int32Array(6)
   registers[0] = init
 
   const [pointer, ...lines] = input
@@ -55,7 +55,5 @@ const run = (input, init = 0) => {
 
   return registers[0]
 }
-
-run(require('../../helpers/readInput')(__dirname), 1)
 
 module.exports = { run }

@@ -9,14 +9,12 @@ const sample = `1, 1
 5, 5
 8, 9`.split('\n')
 
-console.log()
-
 test('Day 6.1', t => {
-  t.is(mapOut(sample)[0], 17)
+  t.is(mapOut(sample).largestRegionSize, 17)
 })
 
 test('Day 6.2', t => {
-  t.is(mapOut(sample, 32)[1], 16)
+  t.is(mapOut(sample, 32).safeRegionSize, 16)
 })
 
 test('Day 6 — Solutions', t => {
