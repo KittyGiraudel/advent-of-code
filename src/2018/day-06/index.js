@@ -53,7 +53,7 @@ const mapOut = (points, limit) => {
 
   return {
     safeRegionSize: regionSize,
-    largestPoolSize: Array.from(counters.entries())
+    largestRegionSize: Array.from(counters.entries())
       .filter(([n]) => !edges.has(n))
       .sort((a, b) => a[1] - b[1])
       .pop()[1],

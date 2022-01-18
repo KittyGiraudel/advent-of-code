@@ -11,7 +11,7 @@ class Scanner {
   }
 
   findVectorsBetweenBeacons() {
-    const pairs = $.getCombinations(this.beacons, 2)
+    const pairs = $.combinations(this.beacons, 2)
     const vectors = new Map()
 
     pairs.forEach(([a, b]) => {
