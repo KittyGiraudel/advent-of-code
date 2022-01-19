@@ -21,8 +21,8 @@ const VECTORS = {
 
 const rotate = cart => ROTATIONS[cart.orientation][cart.index.next().value]
 
-const move = (grid, coords, cart) => {
-  const [ri, ci] = coords.split(',').map(Number)
+const move = (grid, point, cart) => {
+  const [ri, ci] = $.toCoords(point)
   // Compute the new orientation for the cart. If it’s sitting on an
   // intersection, its internal counter determines the new orientation,
   // otherwise it just goes straight (orientation does not change).
@@ -37,20 +37,20 @@ const move = (grid, coords, cart) => {
   // to be adjusted based on the corner tile.
   if (nextCell in CORNERS) orientation = CORNERS[nextCell][orientation]
 
-  return { coords: [nextRi, nextCi].join(','), orientation }
+  return { point: $.toPoint([nextRi, nextCi]), orientation }
 }
 
 const gridOrder = (a, b) => {
-  const [aRi, aCi] = a.split(',').map(Number)
-  const [bRi, bCi] = b.split(',').map(Number)
+  const [aRi, aCi] = $.toCoords(a)
+  const [bRi, bCi] = $.toCoords(b)
   return aRi - bRi || aCi - bCi
 }
 
 const tick = (grid, carts, cleanUp = false) => {
   Object.keys(carts)
     .sort(gridOrder)
-    .forEach(coords => {
-      const cart = carts[coords]
+    .forEach(point => {
+      const cart = carts[point]
 
       // This cannot be done with a `.filter` because that would be resolved
       // before iterating, while the object of carts gets updated within every
@@ -59,19 +59,19 @@ const tick = (grid, carts, cleanUp = false) => {
 
       // Get the coordinates of the destination cell, as well as the orientation
       // for the cart once moved.
-      const next = move(grid, coords, cart)
+      const next = move(grid, point, cart)
 
       // If there is already a cart in the destination cell, mark the existing
       // cart as crashed (or delete it altogether if runnijng in cleanup mode).
-      if (next.coords in carts) {
-        if (cleanUp) delete carts[next.coords]
-        else carts[next.coords].crashed = true
+      if (next.point in carts) {
+        if (cleanUp) delete carts[next.point]
+        else carts[next.point].crashed = true
       } else {
-        carts[next.coords] = { ...cart, orientation: next.orientation }
+        carts[next.point] = { ...cart, orientation: next.orientation }
       }
 
       // The cart has either moved or crashed, so it should always be deleted.
-      delete carts[coords]
+      delete carts[point]
     })
 }
 
@@ -102,9 +102,9 @@ const run = (rows, cleanUp) => {
 
   // Finally, we can return the crash site, or the last cart standing, without
   // forgetting to flip the coordinates.
-  const coords = Object.keys(carts)
-  const flip = coords => coords.split(',').reverse().map(Number)
-  const interest = coords.find(coords => carts[coords].crashed) || coords[0]
+  const points = Object.keys(carts)
+  const flip = point => $.toCoords(point).reverse()
+  const interest = points.find(point => carts[point].crashed) || points[0]
 
   return flip(interest)
 }

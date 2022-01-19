@@ -105,17 +105,17 @@ const getScore = data => {
 
 const go = (axis, direction) => (map, state) => {
   state.position[axis] += direction
-  if (!map.has(state.position.join(','))) {
-    map.set(state.position.join(','), { value: axis === 0 ? '—' : '|' })
+  if (!map.has($.toPoint(state.position))) {
+    map.set($.toPoint(state.position), { value: axis === 0 ? '—' : '|' })
   }
 
   state.position[axis] += direction
   state.steps++
-  if (!map.has(state.position.join(','))) {
+  if (!map.has($.toPoint(state.position))) {
     // To get the same result as `getScore` with this function, the steps need
     // to be incremented even if we have already reached this room (one line up)
     // which I don’t quite get why I must say.
-    map.set(state.position.join(','), { value: '.', steps: state.steps })
+    map.set($.toPoint(state.position), { value: '.', steps: state.steps })
   }
 }
 
@@ -146,7 +146,7 @@ const drawMap = (map, state, item) => {
 }
 
 const createGrid = map => {
-  const coords = Array.from(map.keys()).map(a => a.split(',').map(Number))
+  const coords = Array.from(map.keys()).map($.toCoords)
   const [minY, maxY, minX, maxX] = $.boundaries(coords)
 
   // Initialize grid.
@@ -177,7 +177,7 @@ const mapOut = input => {
   const map = new Map()
   const state = { position: [0, 0], steps: 0 }
 
-  map.set(state.position.join(','), { value: '@', steps: state.steps })
+  map.set($.toPoint(state.position), { value: '@', steps: state.steps })
   drawMap(map, state, data)
 
   //fs.writeFileSync('./dump.1.txt', $.grid.render(createGrid(map)))

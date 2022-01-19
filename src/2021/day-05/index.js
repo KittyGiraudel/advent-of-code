@@ -1,9 +1,9 @@
+const $ = require('../../helpers')
+
 const getOverlappingPoints = (lines, withDiagonals = false) => {
   // Break down every line into a pair of vectors, each vector being a pair of
   // number (x,y coordinates).
-  const vectors = lines.map(line =>
-    line.split(' -> ').map(point => point.split(',').map(Number))
-  )
+  const vectors = lines.map(line => line.split(' -> ').map($.toCoords))
 
   const map = vectors.reduce((acc, vector) => {
     const [start, end] = vector

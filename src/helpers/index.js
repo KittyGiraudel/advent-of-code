@@ -31,7 +31,9 @@ const stringMap = require('./stringMap')
 const sum = require('./sum')
 const toAscii = require('./toAscii')
 const toBin = require('./toBin')
+const toCoords = require('./toCoords')
 const toDec = require('./toDec')
+const toPoint = require('./toPoint')
 const triangular = require('./triangular')
 const updateAtIndex = require('./updateAtIndex')
 
@@ -69,7 +71,9 @@ module.exports = {
   sum,
   toAscii,
   toBin,
+  toCoords,
   toDec,
+  toPoint,
   triangular,
   updateAtIndex,
 }

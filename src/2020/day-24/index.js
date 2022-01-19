@@ -36,7 +36,7 @@ const processLines = lines =>
   lines
     .map(parseLine)
     .map(vectors => vectors.reduce($.applyVector, [0, 0]))
-    .map(coords => coords.join(','))
+    .map($.toPoint)
     .reduce(
       (acc, key) => acc.set(key, acc.get(key) === 'B' ? 'W' : 'B'),
       new Map()
@@ -47,13 +47,13 @@ const processLines = lines =>
 // @param {Map} cache - Coordinates cache
 // @return {String[]} Stringified coordinates of all 6 neighbours
 const getNeighborCoords = (key, cache) => {
-  const coords = key.split(',').map(Number)
+  const coords = $.toCoords(key)
 
   if (cache.has(key)) return cache.get(key)
 
   const neighborCoords = Object.values(VECTORS)
     .map(vector => $.applyVector(coords, vector))
-    .map(coords => coords.join(','))
+    .map($.toPoint)
 
   cache.set(key, neighborCoords)
 

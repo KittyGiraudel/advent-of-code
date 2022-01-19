@@ -11,14 +11,14 @@ const mapOutSpace = rows => {
   const keys = Array.from(map.keys())
 
   keys.forEach(current => {
-    const [xC, yC] = current.split(',').map(Number)
+    const [xC, yC] = $.toCoords(current)
     const asteroids = Array.from(map.keys()).filter(key => current !== key)
     const vectors = asteroids.map(asteroid => {
-      const [xD, yD] = asteroid.split(',').map(Number)
+      const [xD, yD] = $.toCoords(asteroid)
       const vector = [xD - xC, yD - yC]
       const gcd = $.gcd(...vector)
 
-      return vector.map(value => value / Math.abs(gcd)).join(',')
+      return $.toPoint(vector.map(value => value / Math.abs(gcd)))
     })
 
     map.set(current, vectors)
@@ -37,7 +37,7 @@ const findBestSpot = grid => {
 }
 
 const toObj = point => {
-  const points = point.split(',').map(Number)
+  const points = $.toCoords(point)
   return { x: points[0], y: points[1] }
 }
 

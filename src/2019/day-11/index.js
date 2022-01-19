@@ -29,7 +29,7 @@ const turn = (state, value) => {
 const next = (computer, state) => {
   // Provide 0 if the robot is over a black panel or 1 if the robot is over a
   // white panel. All of the panels are currently black (default value).
-  const coords = state.position.join(',')
+  const coords = $.toPoint(state.position)
   const tile = state.record.get(coords) || 0
 
   // Run the program.
@@ -65,9 +65,7 @@ const paint = (input, start = 0) => {
 }
 
 const render = record => {
-  const coords = Array.from(record.keys()).map(coords =>
-    coords.split(',').map(Number)
-  )
+  const coords = Array.from(record.keys()).map($.toCoords)
   const [minX, maxX, minY, maxY] = $.boundaries(coords)
 
   return $.grid.render(

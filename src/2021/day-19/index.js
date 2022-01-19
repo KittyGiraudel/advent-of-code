@@ -15,14 +15,14 @@ class Scanner {
     const vectors = new Map()
 
     pairs.forEach(([a, b]) => {
-      const vectorsA = vectors.get(a.join(',')) || new Set()
-      const vectorsB = vectors.get(b.join(',')) || new Set()
+      const vectorsA = vectors.get($.toPoint(a)) || new Set()
+      const vectorsB = vectors.get($.toPoint(b)) || new Set()
 
-      vectorsA.add(findVector(a, b).join(','))
-      vectorsB.add(findVector(b, a).join(','))
+      vectorsA.add($.toPoint(findVector(a, b)))
+      vectorsB.add($.toPoint(findVector(b, a)))
 
-      vectors.set(a.join(','), vectorsA)
-      vectors.set(b.join(','), vectorsB)
+      vectors.set($.toPoint(a), vectorsA)
+      vectors.set($.toPoint(b), vectorsB)
     })
 
     this.vectors = vectors
@@ -37,8 +37,8 @@ const findOverlaps = (scannerA, scannerB) => {
   ])
 
   beaconPairs.forEach(([a, b]) => {
-    const vectorsA = scannerA.vectors.get(a.join(','))
-    const vectorsB = scannerB.vectors.get(b.join(','))
+    const vectorsA = scannerA.vectors.get($.toPoint(a))
+    const vectorsB = scannerB.vectors.get($.toPoint(b))
 
     const intersection = $.intersection(
       Array.from(vectorsA),
@@ -46,9 +46,9 @@ const findOverlaps = (scannerA, scannerB) => {
     )
 
     if (intersection.length >= 12) {
-      const overlapsA = overlaps.get(a.join(','))
-      overlapsA.add(b.join(','))
-      overlaps.set(a.join(','), overlapsA)
+      const overlapsA = overlaps.get($.toPoint(a))
+      overlapsA.add($.toPoint(b))
+      overlaps.set($.toPoint(a), overlapsA)
     }
   })
 

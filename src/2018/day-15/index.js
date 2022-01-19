@@ -21,7 +21,7 @@ class Unit {
   }
 
   get point() {
-    return this.coords.join(',')
+    return $.toPoint(this.coords)
   }
 
   get neighbors() {
@@ -177,10 +177,10 @@ const findMove = (grid, units, start, type) => {
     if (queue.length === 0) return null
     curr = queue.pop()
 
-    const [N, E, S, W] = $.neighbors.bordering(...curr.split(',').map(Number))
+    const [N, E, S, W] = $.neighbors.bordering(...$.toCoords(curr))
     const neighbors = [N, W, E, S]
       .filter(([ri, ci]) => grid[ri][ci] === '.')
-      .map(coords => coords.join(','))
+      .map($.toPoint)
 
     for (let i = 0; i < neighbors.length; i++) {
       let next = neighbors[i]
@@ -192,7 +192,7 @@ const findMove = (grid, units, start, type) => {
         // Backtrack the path to the starting node.
         next = curr
         while (visited.get(next) !== start) next = visited.get(next)
-        return next.split(',').map(Number)
+        return $.toCoords(next)
       }
 
       if (!unit && !visited.has(next)) {

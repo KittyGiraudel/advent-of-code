@@ -35,9 +35,9 @@ FNS['4'] = [
 const getNeighborCoords = (coords, dimensions, cache) => {
   if (cache.has(coords)) return cache.get(coords)
 
-  const coordinates = coords.split(',').map(Number)
+  const coordinates = $.toCoords(coords)
   const functions = FNS[String(dimensions)]
-  const neighbourCoords = functions.map(fn => fn(coordinates).join(','))
+  const neighbourCoords = functions.map(fn => $.toPoint(fn(coordinates)))
 
   cache.set(coords, neighbourCoords)
 
@@ -105,7 +105,10 @@ const init = rows =>
     (map, row, y) =>
       row
         .split('')
-        .reduce((map, value, x) => map.set([x, y, 0, 0].join(','), value), map),
+        .reduce(
+          (map, value, x) => map.set($.toPoint([x, y, 0, 0]), value),
+          map
+        ),
     new Map()
   )
 
