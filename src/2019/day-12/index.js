@@ -42,7 +42,7 @@ const steps = (input, amount = 1) =>
   $.sum($.array(amount).reduce(step, prepare(input)).map(calculateMoonEnergy))
 
 const serialize = (moons, axis) =>
-  moons.map(moon => moon.position[axis] + ';' + moon.velocity[axis]).join(',')
+  $.toPoint(moons.map(moon => moon.position[axis] + ';' + moon.velocity[axis]))
 
 const findRepeatAxis = (axis, input) => {
   // Compute the initial state and snapshot it. It’s the state we try to get

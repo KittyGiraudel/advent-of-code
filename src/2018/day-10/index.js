@@ -14,7 +14,7 @@ const getDimensions = ([minX, maxX, minY, maxY]) => [
 
 const render = curr => {
   const positions = curr.map(([position]) => position)
-  const coords = positions.map(p => p.join(','))
+  const coords = positions.map($.toPoint)
   const boundaries = $.boundaries(positions)
   const grid = $.grid.init(...getDimensions(boundaries))
   const [minX, , minY] = boundaries

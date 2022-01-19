@@ -20,14 +20,14 @@ const getLowPoints = rows =>
     []
   )
 
-const getBasin = (grid, point, evaluated = []) => {
+const getBasin = (grid, coords, evaluated = []) => {
   // Look for the neighbors of the current point, and preserve only the
   // neighbors that:
   // - Have not been visited yet.
   // - Exist (as in, are within the bounds of the grid).
   // - Are not high points (value of 9).
-  const neighbors = $.neighbors.bordering(...point).filter(([ri, ci]) => {
-    if (evaluated.includes([ri, ci].join(','))) return false
+  const neighbors = $.neighbors.bordering(...coords).filter(([ri, ci]) => {
+    if (evaluated.includes($.toPoint([ri, ci]))) return false
     if (typeof grid[ri]?.[ci] === 'undefined') return false
     if (grid[ri]?.[ci] === 9) return false
     return true
@@ -35,11 +35,11 @@ const getBasin = (grid, point, evaluated = []) => {
 
   // Start from the neighbors of the current point, and recursively find the
   // neighbors of each neighbor that belong to the basin.
-  return neighbors.reduce((points, neighbor) => {
-    const pointsAsStrings = points.map(neighbor => neighbor.join(','))
-    const nPoints = getBasin(grid, neighbor, evaluated.concat(pointsAsStrings))
+  return neighbors.reduce((coords, neighbor) => {
+    const points = coords.map($.toPoint)
+    const nCoords = getBasin(grid, neighbor, evaluated.concat(points))
 
-    return points.concat(nPoints)
+    return coords.concat(nCoords)
   }, neighbors)
 }
 

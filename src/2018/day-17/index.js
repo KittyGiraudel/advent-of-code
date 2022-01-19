@@ -71,9 +71,7 @@ const fillFrom = (grid, [x, y], maxY) => {
 
 const scan = (input, source = [500, 0]) => {
   const map = generateMap(input)
-  const [, maxX, minY, maxY] = $.boundaries(
-    Object.keys(map).map(coords => coords.split(',').map(Number))
-  )
+  const [, maxX, minY, maxY] = $.boundaries(Object.keys(map).map($.toCoords))
   const grid = $.grid.init(
     maxX + 1,
     maxY + 1,

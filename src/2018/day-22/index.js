@@ -39,8 +39,6 @@ const getRisk = (depth, target) => {
   return $.sum(grid.flat())
 }
 
-const hash = (x, y, tool) => [x, y, tool].join(',')
-
 const getNeighbors = memo((x, y, width, height) =>
   $.neighbors
     .bordering(x, y)
@@ -55,7 +53,7 @@ const getDuration = (depth, target) => {
 
   while (heap.length) {
     const [min, x, y, tool] = heap.shift()
-    const key = hash(x, y, tool)
+    const key = $.toPoint([x, y, tool])
     const bestTime = timeMap.get(key) || Infinity
 
     if (bestTime <= min) {
@@ -70,7 +68,7 @@ const getDuration = (depth, target) => {
 
     for (let i = 0; i < 3; i++) {
       if (i !== tool && i !== getRiskLevel(x, y, target, depth)) {
-        const bestTime = timeMap.get(hash(x, y, i)) || Infinity
+        const bestTime = timeMap.get($.toPoint([x, y, i])) || Infinity
         if (bestTime > min + 7) heap.push([min + 7, x, y, i])
       }
     }
@@ -78,13 +76,13 @@ const getDuration = (depth, target) => {
     getNeighbors(x, y, width, height)
       .filter(([x, y]) => getRiskLevel(x, y, target, depth) !== tool)
       .forEach(([x, y]) => {
-        const bestTime = timeMap.get(hash(x, y, tool)) || Infinity
+        const bestTime = timeMap.get($.toPoint([x, y, tool])) || Infinity
         if (bestTime > min + 1) heap.push([min + 1, x, y, tool])
       })
 
     let hashes = heap
       .sort((a, b) => a[0] - b[0])
-      .map(([min, ...params]) => hash(...params))
+      .map(([min, ...params]) => $.toPoint(params))
 
     // Sort the heap by time, then keep only the best time for every hash.
     for (let i = 0; i < hashes.length; i++) {

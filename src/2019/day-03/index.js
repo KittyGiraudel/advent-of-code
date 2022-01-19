@@ -8,7 +8,7 @@ const draw = line => {
 
   line.forEach(([direction, value]) => {
     for (let i = 0; i < value; i++) {
-      const key = curr.join(',')
+      const key = $.toPoint(curr)
       if (direction === 'R') curr[0] += 1
       if (direction === 'L') curr[0] -= 1
       if (direction === 'U') curr[1] -= 1
