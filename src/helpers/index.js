@@ -21,6 +21,7 @@ const loopIndex = require('./loopIndex')
 const manhattan = require('./manhattan')
 const matchLast = require('./matchLast')
 const median = require('./median')
+const memo = require('./memo')
 const neighbors = require('./neighbors')
 const peek = require('./peek')
 const permutations = require('./permutations')
@@ -61,6 +62,7 @@ module.exports = {
   manhattan,
   matchLast,
   median,
+  memo,
   neighbors,
   peek,
   permutations,
