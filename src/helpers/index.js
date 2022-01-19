@@ -8,6 +8,7 @@ const combinations = require('./combinations')
 const compose = require('./compose')
 const count = require('./count')
 const countInString = require('./countInString')
+const dump = require('./dump')
 const fromAscii = require('./fromAscii')
 const gcd = require('./gcd')
 const grid = require('./grid')
@@ -45,6 +46,7 @@ module.exports = {
   compose,
   count,
   countInString,
+  dump,
   fromAscii,
   gcd,
   grid,
