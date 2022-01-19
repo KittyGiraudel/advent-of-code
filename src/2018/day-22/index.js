@@ -1,17 +1,5 @@
 const $ = require('../../helpers')
 
-const memo = fn => {
-  const cache = new Map()
-
-  return (...args) => {
-    const key = JSON.stringify(args)
-    if (cache.has(key)) return cache.get(key)
-    const result = fn(...args)
-    cache.set(key, result)
-    return result
-  }
-}
-
 const getGeologicIndex = (x, y, target, depth) => {
   if ((x === 0 && y === 0) || (x === target[0] && y === target[1])) return 0
   if (y === 0) return x * 16807
@@ -22,7 +10,7 @@ const getGeologicIndex = (x, y, target, depth) => {
   )
 }
 
-const getErosionLevel = memo(
+const getErosionLevel = $.memo(
   (x, y, target, depth) =>
     (getGeologicIndex(x, y, target, depth) + depth) % 20183
 )
