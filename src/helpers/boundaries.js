@@ -1,12 +1,16 @@
 const boundaries = points => {
-  const xs = points.map(point => point[0])
-  const ys = points.map(point => point[1])
-  const minX = Math.min(...xs)
-  const minY = Math.min(...ys)
-  const maxX = Math.max(...xs)
-  const maxY = Math.max(...ys)
+  const xs = points.map(point => point.x || point[0])
+  const ys = points.map(point => point.y || point[1])
+  const zs = points.map(point => point.z || point[2])
 
-  return [minX, maxX, minY, maxY]
+  return [
+    Math.min(...xs),
+    Math.max(...xs),
+    Math.min(...ys),
+    Math.max(...ys),
+    Math.min(...zs),
+    Math.max(...zs),
+  ]
 }
 
 module.exports = boundaries
