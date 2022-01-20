@@ -1,3 +1,8 @@
+// Return the manhattan distance between two coordinates, expressed either as
+// objects with x, y (and possibly z and even t) or arrays of numbers.
+// @param {Object|Array} a - First point
+// @param {Object|Array} a - Second point
+// @return {Number}
 const manhattan = (a, b) => {
   const aX = Array.isArray(a) ? a[0] : a.x
   const aY = Array.isArray(a) ? a[1] : a.y
