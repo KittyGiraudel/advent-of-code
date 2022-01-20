@@ -21,7 +21,7 @@ const run = (input, mode = 'WALK') => {
 
   const output = computer
     .run()
-    .setInput(instructions.map(i => $.toAscii(i)).flat())
+    .setInput(instructions.flatMap(i => $.toAscii(i)))
     .run()
     .getOutput()
 

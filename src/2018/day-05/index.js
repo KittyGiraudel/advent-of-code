@@ -3,10 +3,10 @@ const $ = require('../../helpers')
 const ALPHABET = 'abcdefghijklmnopqrstuvwxyz'.split('')
 const makeRegExp = pairs => new RegExp('(' + pairs.join('|') + ')')
 const GLOBAL_RE = makeRegExp(
-  ALPHABET.map(letter => [
+  ALPHABET.flatMap(letter => [
     letter + letter.toUpperCase(),
     letter.toUpperCase() + letter,
-  ]).flat()
+  ])
 )
 
 const findShortestPolymer = input =>
