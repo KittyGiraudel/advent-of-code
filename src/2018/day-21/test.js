@@ -23,5 +23,5 @@ test('Day 21 — Solutions', t => {
   // a few minutes to hit 10,000+ values of register 1, the script eventually
   // halts and the answer is the last non-repeated value (13846724).
   // https://www.reddit.com/r/adventofcode/comments/a86jgt/comment/ec8fnq8/
-  run(input, 10332277)
+  t.truthy(run(input, 10332277))
 })
