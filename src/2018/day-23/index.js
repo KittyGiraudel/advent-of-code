@@ -26,7 +26,7 @@ const findStrongestBot = input => {
   // loop calculates the maximum number of overlapping segments, and the point
   // where the maximum is hit, which is the answer.
   const { distance } = bots
-    .map(bot => [
+    .flatMap(bot => [
       // This tuple indicates the start of the “segment”, which is defined by
       // the left side of the square surrounding the bot (its center minus its
       // radius). The +1 means that within that segment, this bot contributes to
@@ -38,7 +38,6 @@ const findStrongestBot = input => {
       // contributes to the overlap.
       [bot.distance + bot.r, -1],
     ])
-    .flat()
     .sort((a, b) => a[0] - b[0])
     .reduce(
       (acc, [distance, e]) => {

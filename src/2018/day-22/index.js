@@ -18,14 +18,12 @@ const getErosionLevel = $.memo(
 const getRiskLevel = (x, y, target, depth) =>
   getErosionLevel(x, y, target, depth) % 3
 
-const getRisk = (depth, target) => {
-  const grid = $.grid.map(
-    $.grid.init(target[0] + 1, target[1] + 1),
-    (v, ri, ci) => getRiskLevel(ci, ri, target, depth)
+const getRisk = (depth, target) =>
+  $.sum(
+    $.grid.flatMap($.grid.init(target[0] + 1, target[1] + 1), (v, ri, ci) =>
+      getRiskLevel(ci, ri, target, depth)
+    )
   )
-
-  return $.sum(grid.flat())
-}
 
 const getNeighbors = memo((x, y, width, height) =>
   $.neighbors

@@ -18,12 +18,7 @@ const getFuelStrict = serial => {
   const grid = getGrid(serial)
 
   const square = (x, y, size = 3) =>
-    $.sum(
-      grid
-        .slice(y, y + size)
-        .map(row => row.slice(x, x + size))
-        .flat()
-    )
+    $.sum(grid.slice(y, y + size).flatMap(row => row.slice(x, x + size)))
 
   for (let y = 0; y < SIZE; y++) {
     for (let x = 0; x < SIZE; x++) {
