@@ -1,20 +1,19 @@
-const loopOnGrid =
+const _loopOnGrid =
   (handler = 'forEach') =>
   (grid, callback) =>
     grid[handler]((row, ri) =>
       row[handler]((item, ci) => callback(item, ri, ci))
     )
 
+const gridForEach = _loopOnGrid('forEach')
+const gridMap = _loopOnGrid('map')
+const gridEvery = _loopOnGrid('every')
 const gridReduce = (grid, callback, acc) =>
   grid.reduce(
     (accRow, row, ri) =>
       row.reduce((accCol, item, ci) => callback(accCol, item, ri, ci), accRow),
     acc
   )
-
-const gridForEach = loopOnGrid('forEach')
-const gridMap = loopOnGrid('map')
-const gridEvery = loopOnGrid('every')
 
 const identity = value => value
 const createGrid = (rows, mapper = identity) =>

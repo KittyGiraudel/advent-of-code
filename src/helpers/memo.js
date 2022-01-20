@@ -1,3 +1,7 @@
+// Memoize a function’s results using the JSON serialization of its arguments
+// as a key
+// @param {Function} fn - Function to memoize
+// @return {Function}
 const memo = fn => {
   const cache = new Map()
 
