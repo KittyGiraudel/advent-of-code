@@ -25,6 +25,7 @@ const memo = require('./memo')
 const neighbors = require('./neighbors')
 const peek = require('./peek')
 const permutations = require('./permutations')
+const PriorityQueue = require('./PriorityQueue')
 const product = require('./product')
 const range = require('./range')
 const readInput = require('./readInput')
@@ -66,6 +67,7 @@ module.exports = {
   neighbors,
   peek,
   permutations,
+  PriorityQueue,
   product,
   range,
   readInput,
