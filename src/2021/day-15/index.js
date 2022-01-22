@@ -1,4 +1,3 @@
-const { Graph, astar } = require('javascript-astar')
 const $ = require('../../helpers')
 
 const createMegaGrid = rows => {
@@ -26,14 +25,58 @@ const createMegaGrid = rows => {
     .flat()
 }
 
-const getLowestRisk = grid => {
-  const graph = new Graph(grid)
-  const height = graph.grid.length - 1
-  const width = graph.grid[0].length - 1
-  const start = graph.grid[0][0]
-  const end = graph.grid[height][width]
+const getPath = (grid, start, end) => {
+  const graph = createGraph(grid, start, end)
+  const path = []
+  let current = end
 
-  return $.sum(astar.search(graph, start, end).map(node => node.weight))
+  while (current.point != start.point) {
+    path.push(current.coords)
+    current = graph[current.point]
+  }
+
+  return path
+}
+
+const createGraph = (grid, start, end) => {
+  const frontier = new $.PriorityQueue([start, 0])
+  const from = { [start.point]: null }
+  const costs = { [start.point]: 0 }
+
+  while (frontier.length) {
+    const [curr] = frontier.pop()
+
+    if (curr.point === end.point) break
+
+    $.neighbors
+      .bordering(...curr.coords)
+      .filter(([ri, ci]) => typeof grid?.[ri]?.[ci] === 'number')
+      .map(coords => ({ point: $.toPoint(coords), coords }))
+      .forEach(next => {
+        const newCost = costs[curr.point] + grid[next.coords[0]][next.coords[1]]
+
+        // If the node hasn’t been visited yet, or if the new path is cheaper
+        // than the previously recorded one, visit the node.
+        if (!(next.point in costs) || newCost < costs[next.point]) {
+          const priority = newCost + $.manhattan(end.coords, next.coords)
+          costs[next.point] = newCost
+          from[next.point] = curr
+          frontier.push([next, priority])
+        }
+      })
+  }
+
+  return from
+}
+
+const getLowestRisk = grid => {
+  const height = grid.length - 1
+  const width = grid[0].length - 1
+  const start = { point: '0,0', coords: [0, 0] }
+  const end = { point: height + ',' + width, coords: [height, width] }
+  const path = getPath(grid, start, end)
+
+  return $.sum(path.map(([ri, ci]) => grid[ri][ci]))
 }
 
 module.exports = { createMegaGrid, getLowestRisk }
