@@ -14,22 +14,27 @@ const run = input => {
   let position = [0, grid[0].findIndex(v => v === '|')]
   let vector = VECTORS[2]
   let letters = ''
+  let value = null
 
-  while (read(position)) {
-    position = $.applyVector(position, vector)
-    visited.push($.toPoint(position))
-    const value = read(position)
+  // While on the circuit …
+  while ((value = read(position))) {
+    // … pick up letters we find …
     if (/[A-Z]/.test(value)) letters += value
-
+    // … change direction when hitting a corner …
     if (value === '+') {
       const index = $.neighbors
         .bordering(...position)
+        // … by finding the neighboring track that’s not yet visited …
         .findIndex(
           coords =>
             !visited.includes($.toPoint(coords)) && Boolean(read(coords))
         )
       vector = VECTORS[index]
     }
+
+    // … update the position and record the tile as visited.
+    position = $.applyVector(position, vector)
+    visited.push($.toPoint(position))
   }
 
   return [letters, visited.length]

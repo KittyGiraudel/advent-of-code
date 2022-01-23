@@ -3,7 +3,7 @@
 // @param {Object|Array} a - First point
 // @param {Object|Array} a - Second point
 // @return {Number}
-const manhattan = (a, b) => {
+const manhattan = (a, b = [0, 0, 0, 0]) => {
   const aX = Array.isArray(a) ? a[0] : a.x
   const aY = Array.isArray(a) ? a[1] : a.y
   const aZ = (Array.isArray(a) ? a[2] : a.z) || 0
