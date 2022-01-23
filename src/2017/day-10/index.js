@@ -70,4 +70,4 @@ class Computer {
 const getHash = string => new Computer(string).round(64).getHash()
 const run = (lengths, list) => new Computer(lengths, list).round().check()
 
-module.exports = { run, getHash }
+module.exports = { run, getHash, Computer }
