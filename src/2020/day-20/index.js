@@ -191,7 +191,7 @@ const findMonsters = rawTiles => {
         line.forEach((_, col) => {
           const shape = getMonsterShapeCoords(row, col)
 
-          if (shape.every(coord => image?.[coord[0]]?.[coord[1]] === '#')) {
+          if (shape.every(coords => $.access(image, coords) === '#')) {
             shape.forEach(coord => (image[coord[0]][coord[1]] = 'X'))
           }
         })

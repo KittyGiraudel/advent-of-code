@@ -41,10 +41,7 @@ const resolve2 = bound => {
     position = $.applyVector(position, vector)
 
     const sum = $.sum(
-      $.neighbors
-        .surrounding(...position)
-        .map($.toPoint)
-        .map(point => map.get(point) || 0)
+      $.surrounding(position, 'POINTS').map(point => map.get(point) || 0)
     )
 
     map.set($.toPoint(position), sum)

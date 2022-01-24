@@ -1,3 +1,4 @@
+const access = require('./access')
 const applyVector = require('./applyVector')
 const array = require('./array')
 const average = require('./average')
@@ -22,7 +23,7 @@ const manhattan = require('./manhattan')
 const matchLast = require('./matchLast')
 const median = require('./median')
 const memo = require('./memo')
-const neighbors = require('./neighbors')
+const { bordering, surrounding } = require('./neighbors')
 const peek = require('./peek')
 const permutations = require('./permutations')
 const PriorityQueue = require('./PriorityQueue')
@@ -40,9 +41,11 @@ const triangular = require('./triangular')
 const updateAtIndex = require('./updateAtIndex')
 
 module.exports = {
+  access,
   applyVector,
   array,
   average,
+  bordering,
   boundaries,
   chunk,
   clone,
@@ -64,7 +67,6 @@ module.exports = {
   matchLast,
   median,
   memo,
-  neighbors,
   peek,
   permutations,
   PriorityQueue,
@@ -73,6 +75,7 @@ module.exports = {
   readInput,
   stringMap,
   sum,
+  surrounding,
   toAscii,
   toBin,
   toCoords,

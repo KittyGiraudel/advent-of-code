@@ -12,12 +12,12 @@ const processFlashes = grid => {
   $.grid.forEach(grid, (oc, ri, ci) => {
     if (!oc.flashed && oc.value > 9) {
       oc.flashed = true
-      toIncrement.push(...$.neighbors.surrounding(ri, ci))
+      toIncrement.push(...$.surrounding([ri, ci], 'COORDS'))
     }
   })
 
-  toIncrement.forEach(([ri, ci]) => {
-    const oc = grid?.[ri]?.[ci]
+  toIncrement.forEach(coords => {
+    const oc = $.access(grid, coords)
     if (oc) oc.value++
   })
 

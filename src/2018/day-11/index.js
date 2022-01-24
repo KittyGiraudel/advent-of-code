@@ -47,7 +47,7 @@ const getFuelLoose = serial => {
   // The following algorithm is inspired from this Ruby version:
   // https://www.reddit.com/r/adventofcode/comments/a53r6i/comment/ebjsc3u/?utm_source=reddit&utm_medium=web2x&context=3
   $.grid.forEach(summed, (v, ri, ci) => {
-    const get = (ri, ci) => summed?.[ri]?.[ci] ?? 0
+    const get = (ri, ci) => $.access(summed, [ri, ci]) ?? 0
 
     summed[ri][ci] = v + get(ri - 1, ci) + get(ri, ci - 1) - get(ri - 1, ci - 1)
   })

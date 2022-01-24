@@ -1,7 +1,7 @@
 const $ = require('../../helpers')
 
 const getTilingCoords = (ri, ci) => {
-  const [N, NE, E, SE, S, SW, W, NW] = $.neighbors.surrounding(ri, ci)
+  const [N, NE, E, SE, S, SW, W, NW] = $.surrounding([ri, ci], 'COORDS')
   const C = [ri, ci]
 
   // prettier-ignore
@@ -27,7 +27,7 @@ const step = (algorithm, input, defaultChar = '.') => {
   $.grid.forEach(curr, (_, ri, ci) => {
     const value = $.toDec(
       getTilingCoords(ri, ci)
-        .map(([ri, ci]) => curr?.[ri]?.[ci] ?? defaultChar)
+        .map(coords => $.access(curr, coords) ?? defaultChar)
         .map(value => +(value === '#'))
         .join('')
     )

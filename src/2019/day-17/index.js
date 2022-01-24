@@ -30,8 +30,8 @@ const calibrate = grid => {
   $.grid.forEach(grid, (v, ri, ci) => {
     if (v !== '#') return
 
-    const neighborcoords = $.neighbors.bordering(ri, ci)
-    const neighbors = neighborcoords.map(([ri, ci]) => grid?.[ri]?.[ci])
+    const neighborcoords = $.bordering([ri, ci], 'COORDS')
+    const neighbors = neighborcoords.map(coords => $.access(grid, coords))
     const intersection = neighbors.every(neighbor => neighbor === '#')
 
     if (intersection) calibration += ri * ci

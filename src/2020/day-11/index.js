@@ -35,7 +35,7 @@ const getFirstSeat = (layout, coords, vector) => {
 // @param {Number[]} coords - Set of X,Y coords
 // @return {String[]}
 const getSurroundingSeats = (layout, coords) =>
-  $.neighbors.surrounding(...coords).map(neighbor => read(layout, neighbor))
+  $.surrounding(coords, 'COORDS').map(neighbor => read(layout, neighbor))
 
 // Get the 8 visible seats around the one at given position.
 // @param {String[]} layout - Seating layout

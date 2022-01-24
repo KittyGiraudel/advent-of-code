@@ -23,9 +23,9 @@ const run = (rows, iterations = 1) => {
 
   for (let i = 0; i < iterations; i++) {
     curr = $.grid.map($.grid.clone(curr), (value, ri, ci) => {
-      const neighbors = $.neighbors
-        .surrounding(ri, ci)
-        .map(([ri, ci]) => curr?.[ri]?.[ci])
+      const neighbors = $.surrounding([ri, ci], 'COORDS').map(coords =>
+        $.access(curr, coords)
+      )
 
       return getNextValue(value, neighbors)
     })

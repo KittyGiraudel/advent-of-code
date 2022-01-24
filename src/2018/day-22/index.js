@@ -20,15 +20,17 @@ const getRiskLevel = (x, y, target, depth) =>
 
 const getRisk = (depth, target) =>
   $.sum(
-    $.grid.flatMap($.grid.init(target[0] + 1, target[1] + 1), (v, ri, ci) =>
-      getRiskLevel(ci, ri, target, depth)
-    )
+    $.grid
+      .map($.grid.init(target[0] + 1, target[1] + 1), (v, ri, ci) =>
+        getRiskLevel(ci, ri, target, depth)
+      )
+      .flat()
   )
 
-const getNeighbors = memo((x, y, width, height) =>
-  $.neighbors
-    .bordering(x, y)
-    .filter(([x, y]) => x >= 0 && x < width && y >= 0 && y < height)
+const getNeighbors = $.memo((x, y, width, height) =>
+  $.bordering([x, y], 'COORDS').filter(
+    ([x, y]) => x >= 0 && x < width && y >= 0 && y < height
+  )
 )
 
 const getDuration = (depth, target) => {
