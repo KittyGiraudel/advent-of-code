@@ -27,6 +27,9 @@ const initGrid = (width, height = width, value = null) =>
     )
   )
 
+const gridRotate = grid =>
+  grid[0].map((_, index) => grid.map(row => row[index]).reverse())
+
 const renderGrid = (grid, separator = '', mapper = v => v) =>
   grid.map(row => row.map(mapper).join(separator)).join('\n')
 
@@ -34,6 +37,7 @@ const grid = {
   forEach: gridForEach,
   map: gridMap,
   every: gridEvery,
+  rotate: gridRotate,
   reduce: gridReduce,
   create: createGrid,
   clone: cloneGrid,
