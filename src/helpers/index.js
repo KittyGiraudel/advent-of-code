@@ -39,6 +39,7 @@ const toDec = require('./toDec')
 const toPoint = require('./toPoint')
 const triangular = require('./triangular')
 const updateAtIndex = require('./updateAtIndex')
+const zip = require('./zip')
 
 module.exports = {
   access,
@@ -83,4 +84,5 @@ module.exports = {
   toPoint,
   triangular,
   updateAtIndex,
+  zip,
 }
