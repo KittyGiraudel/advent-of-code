@@ -8,9 +8,8 @@ const getLowPoints = rows =>
     (lowPoints, row, ri) =>
       row
         .map((point, ci) =>
-          $.neighbors
-            .bordering(ri, ci)
-            .map(([ri, ci]) => rows[ri]?.[ci] ?? Infinity)
+          $.bordering([ri, ci], 'COORDS')
+            .map(coords => $.access(rows, coords) ?? Infinity)
             .every(n => n > point)
             ? [ri, ci]
             : null
@@ -20,24 +19,24 @@ const getLowPoints = rows =>
     []
   )
 
-const getBasin = (grid, coords, evaluated = []) => {
+const getBasin = (grid, position, evaluated = []) => {
   // Look for the neighbors of the current point, and preserve only the
   // neighbors that:
   // - Have not been visited yet.
   // - Exist (as in, are within the bounds of the grid).
   // - Are not high points (value of 9).
-  const neighbors = $.neighbors.bordering(...coords).filter(([ri, ci]) => {
-    if (evaluated.includes($.toPoint([ri, ci]))) return false
-    if (typeof grid[ri]?.[ci] === 'undefined') return false
-    if (grid[ri]?.[ci] === 9) return false
+  const neighbors = $.bordering(position).filter(({ coords, point }) => {
+    if (evaluated.includes(point)) return false
+    if (typeof $.access(grid, coords) === 'undefined') return false
+    if ($.access(grid, coords) === 9) return false
     return true
   })
 
   // Start from the neighbors of the current point, and recursively find the
   // neighbors of each neighbor that belong to the basin.
   return neighbors.reduce((coords, neighbor) => {
-    const points = coords.map($.toPoint)
-    const nCoords = getBasin(grid, neighbor, evaluated.concat(points))
+    const points = coords.map(({ point }) => point)
+    const nCoords = getBasin(grid, neighbor.coords, evaluated.concat(points))
 
     return coords.concat(nCoords)
   }, neighbors)
@@ -47,7 +46,7 @@ const sumLowPointsRisk = rows => {
   const grid = $.grid.create(rows, Number)
   const lowPoints = getLowPoints(grid)
 
-  return $.sum(lowPoints.map(([ri, ci]) => grid[ri][ci]).map(p => p + 1))
+  return $.sum(lowPoints.map(coords => $.access(grid, coords)).map(p => p + 1))
 }
 
 const getProductOfBiggestBasins = (rows, amount = 3) => {
@@ -56,7 +55,7 @@ const getProductOfBiggestBasins = (rows, amount = 3) => {
 
   return $.product(
     lowPoints
-      .map(point => getBasin(grid, point).length)
+      .map(position => getBasin(grid, position).length)
       .sort((a, b) => a - b)
       .slice(amount * -1)
   )

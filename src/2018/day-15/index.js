@@ -25,7 +25,7 @@ class Unit {
   }
 
   get neighbors() {
-    const [N, E, S, W] = $.neighbors.bordering(...this.position)
+    const [N, E, S, W] = $.bordering(this.position, 'COORDS')
     return [N, W, E, S]
   }
 
@@ -177,13 +177,13 @@ const findMove = (grid, units, start, type) => {
     if (queue.length === 0) return null
     curr = queue.pop()
 
-    const [N, E, S, W] = $.neighbors.bordering(...$.toCoords(curr))
-    const neighbors = [N, W, E, S]
-      .filter(([ri, ci]) => grid[ri][ci] === '.')
-      .map($.toPoint)
+    const [N, E, S, W] = $.bordering($.toCoords(curr), 'BOTH')
+    const neighbors = [N, W, E, S].filter(
+      ({ coords }) => $.access(grid, coords) === '.'
+    )
 
     for (let i = 0; i < neighbors.length; i++) {
-      let next = neighbors[i]
+      let next = neighbors[i].point
       const unit = units.find(unit => unit.isAt(next) && unit.alive)
 
       if (unit?.isEnemy(type)) {

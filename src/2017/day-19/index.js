@@ -9,7 +9,7 @@ const VECTORS = [
 
 const run = input => {
   const grid = $.grid.create(input)
-  const read = ([ri, ci]) => grid?.[ri]?.[ci]?.trim()
+  const read = coords => $.access(grid, coords)?.trim()
   const visited = []
   let position = [0, grid[0].findIndex(v => v === '|')]
   let vector = VECTORS[2]
@@ -22,12 +22,11 @@ const run = input => {
     if (/[A-Z]/.test(value)) letters += value
     // … change direction when hitting a corner …
     if (value === '+') {
-      const index = $.neighbors
-        .bordering(...position)
+      const index = $.bordering(position)
         // … by finding the neighboring track that’s not yet visited …
         .findIndex(
-          coords =>
-            !visited.includes($.toPoint(coords)) && Boolean(read(coords))
+          ({ coords, point }) =>
+            !visited.includes(point) && Boolean(read(coords))
         )
       vector = VECTORS[index]
     }

@@ -17,12 +17,9 @@ const run = key => {
   // Starting from the cell at the given coordinates, explore the active and not
   // yet explored neighbors, marking them all part of the same group.
   const walk = (coords, group) =>
-    $.neighbors
-      .bordering(...coords)
-      .filter(([ri, ci]) => grid?.[ri]?.[ci])
-      .forEach(coords => {
-        const point = $.toPoint(coords)
-
+    $.bordering(coords)
+      .filter(({ coords }) => $.access(grid, coords))
+      .forEach(({ coords, point }) => {
         if (!(point in visited)) {
           visited[point] = group
           walk(coords, group)

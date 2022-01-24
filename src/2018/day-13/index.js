@@ -22,22 +22,23 @@ const VECTORS = {
 const rotate = cart => ROTATIONS[cart.orientation][cart.index.next().value]
 
 const move = (grid, point, cart) => {
-  const [ri, ci] = $.toCoords(point)
+  const coords = $.toCoords(point)
   // Compute the new orientation for the cart. If it’s sitting on an
   // intersection, its internal counter determines the new orientation,
   // otherwise it just goes straight (orientation does not change).
-  let orientation = grid[ri][ci] === '+' ? rotate(cart) : cart.orientation
+  let orientation =
+    $.access(grid, coords) === '+' ? rotate(cart) : cart.orientation
   // Determine the coordinates of the destination cell by applying a vector
   // defined by the orientation.
-  const [nextRi, nextCi] = $.applyVector([ri, ci], VECTORS[orientation])
+  const nextCoords = $.applyVector(coords, VECTORS[orientation])
   // Check the orientation of the track on the destination cell. Namely, we‘re
   // looking for corners, as they cause the cart to rotate some more.
-  const nextCell = grid[nextRi][nextCi]
+  const nextCell = $.access(grid, nextCoords)
   // If the destination cell is indeed a corner, the cart orientation needs
   // to be adjusted based on the corner tile.
   if (nextCell in CORNERS) orientation = CORNERS[nextCell][orientation]
 
-  return { point: $.toPoint([nextRi, nextCi]), orientation }
+  return { point: $.toPoint(nextCoords), orientation }
 }
 
 const gridOrder = (a, b) => {

@@ -16,7 +16,7 @@ const roll = (grids, number) => {
 }
 
 const computeGridScore = grid =>
-  $.sum($.grid.flatMap(grid, item => (item.marked ? 0 : item.value)))
+  $.sum($.grid.map(grid, item => (item.marked ? 0 : item.value)).flat())
 
 const getBingos = input => {
   const [numbers, ...grids] = parseInput(input)

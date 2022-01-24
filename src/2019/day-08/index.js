@@ -21,7 +21,7 @@ const recompose = (input, size) => {
     const grid = $.chunk(layer, size.width)
 
     $.grid.forEach(grid, (pixel, ri, ci) => {
-      if (image[ri][ci] === null || image[ri][ci] === 2) {
+      if ([null, 2].includes($.access(image, [ri, ci]))) {
         image[ri][ci] = pixel
       }
     })

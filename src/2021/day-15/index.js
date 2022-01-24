@@ -48,12 +48,10 @@ const createGraph = (grid, start, end) => {
 
     if (curr.point === end.point) break
 
-    $.neighbors
-      .bordering(...curr.coords)
-      .filter(([ri, ci]) => typeof grid?.[ri]?.[ci] === 'number')
-      .map(coords => ({ point: $.toPoint(coords), coords }))
+    $.bordering(curr.coords)
+      .filter(({ coords }) => typeof $.access(grid, coords) === 'number')
       .forEach(next => {
-        const newCost = costs[curr.point] + grid[next.coords[0]][next.coords[1]]
+        const newCost = costs[curr.point] + $.access(grid, next.coords)
 
         // If the node hasn’t been visited yet, or if the new path is cheaper
         // than the previously recorded one, visit the node.
@@ -76,7 +74,7 @@ const getLowestRisk = grid => {
   const end = { point: height + ',' + width, coords: [height, width] }
   const path = getPath(grid, start, end)
 
-  return $.sum(path.map(([ri, ci]) => grid[ri][ci]))
+  return $.sum(path.map(coords => $.access(grid, coords)))
 }
 
 module.exports = { createMegaGrid, getLowestRisk }
