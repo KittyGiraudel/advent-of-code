@@ -5,6 +5,7 @@ const average = require('./average')
 const boundaries = require('./boundaries')
 const chunk = require('./chunk')
 const clone = require('./clone')
+const column = require('./column')
 const combinations = require('./combinations')
 const compose = require('./compose')
 const count = require('./count')
@@ -30,6 +31,7 @@ const PriorityQueue = require('./PriorityQueue')
 const product = require('./product')
 const range = require('./range')
 const readInput = require('./readInput')
+const rotate = require('./rotate')
 const stringMap = require('./stringMap')
 const sum = require('./sum')
 const toAscii = require('./toAscii')
@@ -51,6 +53,7 @@ module.exports = {
   boundaries,
   chunk,
   clone,
+  column,
   combinations,
   compose,
   count,
@@ -75,6 +78,7 @@ module.exports = {
   product,
   range,
   readInput,
+  rotate,
   stringMap,
   sum,
   surrounding,
