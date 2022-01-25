@@ -1,31 +1,6 @@
 const $ = require('../../helpers')
 const { Intcode } = require('../day-05')
 
-const ORIENTIATIONS = ['UP', 'RIGHT', 'DOWN', 'LEFT']
-
-const move = state => {
-  if (state.orientation === 'UP') state.position[1]--
-  if (state.orientation === 'RIGHT') state.position[0]++
-  if (state.orientation === 'DOWN') state.position[1]++
-  if (state.orientation === 'LEFT') state.position[0]--
-
-  return state
-}
-
-const turn = (state, value) => {
-  if (value === 0) {
-    state.orientation =
-      ORIENTIATIONS[ORIENTIATIONS.indexOf(state.orientation) - 1] ||
-      ORIENTIATIONS[ORIENTIATIONS.length - 1]
-  } else if (value === 1) {
-    state.orientation =
-      ORIENTIATIONS[ORIENTIATIONS.indexOf(state.orientation) + 1] ||
-      ORIENTIATIONS[0]
-  }
-
-  return state
-}
-
 const next = (computer, state) => {
   // Provide 0 if the robot is over a black panel or 1 if the robot is over a
   // white panel. All of the panels are currently black (default value).
@@ -48,13 +23,16 @@ const next = (computer, state) => {
 
   // Reorientate the robot. After the robot turns, it should always move forward
   // exactly one panel.
-  return move(turn(state, rotation))
+  state.direction = (rotation ? $.turn.right : $.turn.left)(state.direction)
+  state.position = $.applyVector(state.position, state.direction)
+
+  return state
 }
 
 const paint = (input, start = 0) => {
   const computer = new Intcode(input)
   const state = {
-    direction: 'UP',
+    direction: $.turn.DIRECTIONS[0],
     position: [0, 0],
     record: new Map([['0,0', start]]),
   }
@@ -76,4 +54,4 @@ const render = record => {
   )
 }
 
-module.exports = { paint, turn, move, render }
+module.exports = { paint, render }

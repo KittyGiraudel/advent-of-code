@@ -38,6 +38,7 @@ const toCoords = require('./toCoords')
 const toDec = require('./toDec')
 const toPoint = require('./toPoint')
 const triangular = require('./triangular')
+const turn = require('./turn')
 const updateAtIndex = require('./updateAtIndex')
 const zip = require('./zip')
 
@@ -83,6 +84,7 @@ module.exports = {
   toDec,
   toPoint,
   triangular,
+  turn,
   updateAtIndex,
   zip,
 }
