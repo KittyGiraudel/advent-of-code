@@ -5,7 +5,6 @@ const run = (instructions, inputs) => {
 
   instructions.forEach(line => {
     const [operation, variable, value] = line.split(' ')
-    if (operation === '#') return
     const resolved = value in data ? data[value] : +value
 
     switch (operation) {
