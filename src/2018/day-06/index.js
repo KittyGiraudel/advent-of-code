@@ -38,7 +38,7 @@ const mapOut = (points, limit) => {
 
       // Unless the current tile is equi-distant to 2+ points from the list, it
       // belongs to the pool defined by the closest point.
-      if (closest.dist !== $.peek(pointsByDist).dist) {
+      if (closest.dist !== $.last(pointsByDist).dist) {
         const id = points.indexOf(closest.point)
         counters.set(id, (counters.get(id) || 0) + 1)
 

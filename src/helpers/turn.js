@@ -1,4 +1,4 @@
-const peek = require('./peek')
+const last = require('./last')
 
 const DIRECTIONS = [
   /* N */ [0, -1],
@@ -10,7 +10,7 @@ const DIRECTIONS = [
 const turnLeft = (direction, directions = DIRECTIONS) => {
   const index = directions.indexOf(direction)
 
-  return index === 0 ? peek(directions) : directions[index - 1]
+  return index === 0 ? last(directions) : directions[index - 1]
 }
 
 const turnRight = (direction, directions = DIRECTIONS) => {

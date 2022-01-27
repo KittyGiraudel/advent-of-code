@@ -31,7 +31,7 @@ const getSides = grid =>
   [
     /* Top    */ grid[0],
     /* Right  */ $.column(grid, grid.length - 1),
-    /* Bottom */ $.peek(grid),
+    /* Bottom */ $.last(grid),
     /* Left   */ $.column(grid, 0),
   ].map(line => line.join(''))
 
