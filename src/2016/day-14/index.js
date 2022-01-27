@@ -1,47 +1,41 @@
 const $ = require('../../helpers')
 const crypto = require('crypto')
 
-const hash = (value, iterations = 1) => {
-  while (iterations--)
-    value = crypto.createHash('md5').update(value).digest('hex')
-  return value
-}
-
 const run = (salt, iterations = 1) => {
-  const keys = []
-  const re = /(\w)\1{2}/
-  const hashes = new Map()
-  let index = 0
+  // Declare the hash function within this scope because the memoization is more
+  // effective when there is only one argument, as it doesn’t perform JSON
+  // serialization on the args to get a key.
+  const hash = $.memo(value => {
+    for (let i = 0; i < iterations; i++)
+      value = crypto.createHash('md5').update(value).digest('hex')
+    return value
+  })
 
-  while (keys.length < 64) {
-    const currSalt = salt + index
-    const curr = hashes.get(currSalt) || hash(currSalt, iterations)
-    const match = curr.match(re)
+  const cache = new Map()
+  const keys = new Set()
+  const re5 = /(\w)\1{4}/
+  const re3 = /(\w)\1{2}/
+  let index = -1
 
-    if (match) {
-      for (let i = 1; i <= 1000; i++) {
-        const nextSalt = salt + (index + i)
-        const next = hashes.get(nextSalt) || hash(nextSalt, iterations)
-        const needle = match[1][0].repeat(5)
+  while (keys.size < 64) {
+    const currSalt = salt + ++index
+    const curr = hash(currSalt)
+    const match5 = curr.match(re5)
+    const match3 = curr.match(re3)?.[1][0]
 
-        hashes.set(nextSalt, next)
+    cache.set(currSalt, match3)
 
-        if (!next.includes(needle)) continue
+    if (!match5) continue
 
-        keys.push({ index, hash: curr })
-        console.log('Found key', keys.length, curr, 'at index', index)
-        break
-      }
+    for (let i = Math.max(0, index - 1000); i < index; i++) {
+      let match3 = cache.get(salt + i)
+      if (keys.has(i) || !match3 || match3 !== match5[1][0]) continue
+      keys.add(i)
+      console.log('Found key', keys.size, 'at index', i)
     }
-
-    index++
   }
 
-  console.log(keys)
-
-  return $.last(keys).index
+  return Array.from(keys).slice(0, 64).pop()
 }
-
-console.log(run('jlmsuwbz', 2017))
 
 module.exports = { run }
