@@ -1,3 +1,5 @@
+const $ = require('../../helpers')
+
 // Get the destination cup number.
 // @param {Number} current - Current cup value
 // @param {Number[]} picks - 3 picked cups
@@ -42,7 +44,7 @@ const init = (input, size) => {
   // map to the first provided number.
   if (size > input.length) {
     map[size] = input[0]
-    map[input[input.length - 1]] = input.length + 1
+    map[$.last(input)] = input.length + 1
   }
 
   return map

@@ -8,10 +8,10 @@ const serializeGame = decks => decks.map(deck => deck.join(',')).join(';')
 // @param {Number[]} cards - Cards from the deck
 // @return {Number}
 const computeScore = cards =>
-  cards
-    .slice(0)
-    .reverse()
-    .reduce((total, card, index) => total + card * (index + 1), 0)
+  cards.reduceRight(
+    (total, card, index, array) => total + card * (array.length - index),
+    0
+  )
 
 // Parse the given input.
 // @param {String[]} input - Raw input

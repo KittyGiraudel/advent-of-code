@@ -34,9 +34,10 @@ const foldAll = input => {
 const render = dots => {
   const isDot = (x, y) => dots.has($.toPoint([x, y]))
   const coords = Array.from(dots, $.toCoords)
-  const xMax = Math.max(...coords.map(dot => dot[0])) + 1
-  const yMax = Math.max(...coords.map(dot => dot[1])) + 1
-  const grid = $.grid.init(xMax, yMax, (x, y) => (isDot(x, y) ? '#' : ' '))
+  const [, xMax, , yMax] = $.boundaries(coords)
+  const grid = $.grid.init(xMax + 1, yMax + 1, (x, y) =>
+    isDot(x, y) ? '#' : ' '
+  )
 
   return $.grid.render(grid, ' ')
 }

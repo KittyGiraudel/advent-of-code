@@ -50,7 +50,7 @@ const processImage = (algorithm, image, iterations = 1) =>
       // necessary because the example and the input have different edges.
       if (acc.char === '.' && algorithm[0] === '#') {
         acc.char = '#'
-      } else if (acc.char === '#' && algorithm[algorithm.length - 1] === '.') {
+      } else if (acc.char === '#' && $.last(algorithm) === '.') {
         acc.char = '.'
       }
 

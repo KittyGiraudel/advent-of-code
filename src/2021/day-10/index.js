@@ -39,12 +39,10 @@ const getCorruptionScore = lines =>
 const getCompletionScore = lines => {
   const scores = getLinesFromType(lines, 'INCOMPLETE')
     .map(line =>
-      line.opened
-        .reverse()
-        .reduce(
-          (score, character) => score * 5 + COMPLETION_SCORE_MAP[character],
-          0
-        )
+      line.opened.reduceRight(
+        (score, character) => score * 5 + COMPLETION_SCORE_MAP[character],
+        0
+      )
     )
     .sort((a, b) => b - a)
 
