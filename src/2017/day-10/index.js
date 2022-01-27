@@ -1,5 +1,4 @@
 const $ = require('../../helpers')
-const Deque = require('dqs')
 
 class Computer {
   SUFFIX = [17, 31, 73, 47, 23]
@@ -7,7 +6,7 @@ class Computer {
   constructor(input, memory) {
     this.pointer = 0
     this.skip = 0
-    this.memory = new Deque(memory || $.range(256, 0))
+    this.memory = new $.CircularArray(memory || $.range(256, 0))
     this.lengths = Array.isArray(input)
       ? input
       : $.toAscii(input, false).concat(this.SUFFIX)
@@ -23,26 +22,17 @@ class Computer {
   sliceOut(length) {
     const slice = []
 
-    for (let i = 0; i < length; i++) {
-      // This is a hack because the `dqs` library does not allow popping the
-      // last item of the list. To work around the problem, we inject a null
-      // node that we ignore later so the list is never truly empty.
-      if (this.memory.length === 1) {
-        this.memory.insert(null)
-      }
-
-      slice.unshift(this.memory.popLeft())
-    }
+    for (let i = 0; i < length; i++) slice.unshift(this.memory.shift())
 
     return slice
   }
 
   rebuild(length) {
     const slice = this.sliceOut(length)
-    const rest = this.memory.all().filter(a => a !== null)
-    const next = new Deque(slice)
+    const rest = this.memory.toArray().filter(a => a !== null)
+    const next = new $.CircularArray(slice)
 
-    for (let i = 0; i < rest.length; i++) next.insert(rest[i])
+    for (let i = 0; i < rest.length; i++) next.push(rest[i])
 
     return next
   }
@@ -56,14 +46,14 @@ class Computer {
   }
 
   getHash() {
-    return $.chunk(this.memory.all(), 16)
+    return $.chunk(this.memory.toArray(), 16)
       .map(chunk => chunk.reduce((a, b) => a ^ b, 0))
       .map(n => n.toString(16).padStart(2, '0'))
       .join('')
   }
 
   check() {
-    return $.product(this.memory.all().slice(0, 2))
+    return $.product(this.memory.toArray().slice(0, 2))
   }
 }
 
