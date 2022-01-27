@@ -38,7 +38,7 @@ const mapOut = input => {
     if (char === 'W') step(-1, 0)
     if (char === '(') stack.push(curr)
     if (char === ')') curr = stack.pop()
-    if (char === '|') curr = $.peek(stack)
+    if (char === '|') curr = $.last(stack)
   })
 
   return Array.from(map.values()).map(room => room.distance)

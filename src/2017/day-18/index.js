@@ -113,7 +113,7 @@ const run = instructions => {
 
   while (!network.halted) network.run()
 
-  return $.peek(network.nodes).counters.send
+  return $.last(network.nodes).counters.send
 }
 
 module.exports = { run }

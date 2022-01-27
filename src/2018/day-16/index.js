@@ -27,7 +27,7 @@ const parseSample = ([before, op, after]) => ({
 
 const debug = input => {
   const capacity = Object.keys(OPCODES).length
-  const program = $.peek(input)
+  const program = $.last(input)
     .split('\n')
     .map(line => line.split(' ').map(Number))
   const registry = input

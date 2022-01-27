@@ -30,7 +30,7 @@ const reduce = input => {
   // https://www.reddit.com/r/adventofcode/comments/a3912m/2018_day_5_solutions/
   return Array.from(input)
     .reduce((acc, char) => {
-      if (!acc.length || ($.peek(acc).charCodeAt() ^ char.charCodeAt()) !== 32)
+      if (!acc.length || ($.last(acc).charCodeAt() ^ char.charCodeAt()) !== 32)
         acc.push(char)
       else acc.pop()
       return acc

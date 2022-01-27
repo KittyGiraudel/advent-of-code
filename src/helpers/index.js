@@ -27,7 +27,7 @@ const matchLast = require('./matchLast')
 const median = require('./median')
 const memo = require('./memo')
 const { bordering, surrounding } = require('./neighbors')
-const peek = require('./peek')
+const last = require('./last')
 const permutations = require('./permutations')
 const PriorityQueue = require('./PriorityQueue')
 const product = require('./product')
@@ -76,7 +76,7 @@ module.exports = {
   matchLast,
   median,
   memo,
-  peek,
+  last,
   permutations,
   PriorityQueue,
   product,

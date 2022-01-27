@@ -10,7 +10,7 @@ const run = lines => {
 
   return [
     counters.map(counter => counter[0][0]).join(''),
-    counters.map(counter => $.peek(counter)[0]).join(''),
+    counters.map(counter => $.last(counter)[0]).join(''),
   ]
 }
 
