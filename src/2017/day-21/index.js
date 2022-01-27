@@ -3,30 +3,12 @@ const $ = require('../../helpers')
 const asGrid = string => string.split('/').map(row => Array.from(row))
 const asString = grid => grid.map(row => row.join('')).join('/')
 
-const rotate = (grid, rotations = 0) => {
-  for (let i = 0; i < rotations; i++) grid = $.grid.rotate(grid)
-  return grid
-}
-
-const getVariants = curr => {
-  const variants = []
-  const grid = asGrid(curr)
-
-  for (let i = 0; i <= 3; i++) {
-    const matrix = rotate(grid, i)
-    variants.push(asString(matrix))
-    variants.push(asString(matrix.reverse()))
-  }
-
-  return variants
-}
-
 const getPatterns = lines => {
   const patterns = {}
 
   lines.forEach(line => {
     const [input, output] = line.split(' => ')
-    const variants = getVariants(input)
+    const variants = $.grid.variants(asGrid(input)).map(asString)
     const out = output.split('/')
 
     // Pre-compute the 8 rotated varients of a given pattern to avoid having

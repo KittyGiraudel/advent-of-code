@@ -33,6 +33,24 @@ const gridRotate = grid =>
 const renderGrid = (grid, separator = '', mapper = v => v) =>
   grid.map(row => row.map(mapper).join(separator)).join('\n')
 
+const gridVariants = grid => {
+  const variants = []
+  const clone = cloneGrid(grid)
+
+  const rotate = (grid, rotations = 0) => {
+    for (let i = 0; i < rotations; i++) grid = gridRotate(grid)
+    return grid
+  }
+
+  for (let i = 0; i <= 3; i++) {
+    const matrix = rotate(clone, i)
+    variants.push(matrix)
+    variants.push(matrix.slice(0).reverse())
+  }
+
+  return variants
+}
+
 const grid = {
   forEach: gridForEach,
   map: gridMap,
@@ -43,6 +61,7 @@ const grid = {
   clone: cloneGrid,
   init: initGrid,
   render: renderGrid,
+  variants: gridVariants,
 }
 
 module.exports = grid
