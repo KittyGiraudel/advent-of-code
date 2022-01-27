@@ -1,10 +1,8 @@
 const test = require('ava')
-const { getFullImageId, findMonsters } = require('.')
-
+const { run, getFullImageId, findMonsters } = require('.')
 const input = require('../../helpers/readInput')(__dirname, '\n\n')
 
-test('Day 20.1', t => {
-  const example = `
+const example = `
 Tile 2311:
 ..##.#..#.
 ##..#.....
@@ -113,13 +111,13 @@ Tile 3079:
 ..#.......
 ..#.###...
 `
-    .trim()
-    .split('\n\n')
+  .trim()
+  .split('\n\n')
 
-  t.is(getFullImageId(example), 20899048083289)
+test('Day 20.1', t => {
+  t.deepEqual(run(example), [20899048083289, 273])
 })
 
 test('Day 20 — Solutions', t => {
-  t.is(getFullImageId(input), 8272903687921)
-  t.is(findMonsters(input), 2304)
+  t.deepEqual(run(input), [8272903687921, 2304])
 })
