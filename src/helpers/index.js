@@ -4,6 +4,7 @@ const array = require('./array')
 const average = require('./average')
 const boundaries = require('./boundaries')
 const chunk = require('./chunk')
+const CircularArray = require('./CircularArray')
 const clone = require('./clone')
 const column = require('./column')
 const combinations = require('./combinations')
@@ -16,6 +17,7 @@ const gcd = require('./gcd')
 const grid = require('./grid')
 const groupBy = require('./groupBy')
 const hexToBin = require('./hexToBin')
+const inspect = require('./inspect')
 const intersection = require('./intersection')
 const isClamped = require('./isClamped')
 const lcm = require('./lcm')
@@ -52,6 +54,7 @@ module.exports = {
   bordering,
   boundaries,
   chunk,
+  CircularArray,
   clone,
   column,
   combinations,
@@ -64,6 +67,7 @@ module.exports = {
   grid,
   groupBy,
   hexToBin,
+  inspect,
   intersection,
   isClamped,
   lcm,

@@ -11,7 +11,6 @@
     ]
   },
   "dependencies": {
-    "dqs": "^1.0.1",
     "javascript-astar": "^0.4.1",
     "js-levenshtein": "^1.1.6",
     "pathfinding": "^0.4.18"

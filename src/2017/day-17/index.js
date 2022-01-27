@@ -1,17 +1,13 @@
 const $ = require('../../helpers')
-const Deque = require('dqs')
 
 const run = offset => {
-  const memory = new Deque([0])
+  const memory = new $.CircularArray([0])
 
   // For part 1, we can use a double-ended queue that we rotate by the offset at
   // every iteration.
-  for (let i = 1; i <= 2017; i++) {
-    memory.rotate(offset * -1)
-    memory.insert(i)
-  }
+  for (let i = 1; i <= 2017; i++) memory.rotate(offset * -1).push(i)
 
-  return memory.all()[0]
+  return memory.shift()
 }
 
 const run2 = offset => {
