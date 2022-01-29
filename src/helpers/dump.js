@@ -1,9 +1,8 @@
 const fs = require('fs')
 const path = require('path')
-const crypto = require('crypto')
+const md5 = require('./md5')
 
-const getFileName = content =>
-  crypto.createHash('md5').update(content).digest('hex') + '.log'
+const getFileName = content => md5(content) + '.log'
 
 // Write the given data on a file on disk provided the file doesn’t already
 // exist.

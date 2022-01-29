@@ -24,6 +24,7 @@ const lcm = require('./lcm')
 const loopIndex = require('./loopIndex')
 const manhattan = require('./manhattan')
 const matchLast = require('./matchLast')
+const md5 = require('./md5')
 const median = require('./median')
 const memo = require('./memo')
 const { bordering, surrounding } = require('./neighbors')
@@ -74,6 +75,7 @@ module.exports = {
   loopIndex,
   manhattan,
   matchLast,
+  md5,
   median,
   memo,
   last,
