@@ -22,10 +22,7 @@ const memo = fn => {
 
   return (...args) => {
     const key = getKey(...args)
-    if (cache.has(key)) {
-      console.log('Hit for', key)
-      return cache.get(key)
-    }
+    if (cache.has(key)) return cache.get(key)
     const result = fn(...args)
     cache.set(key, result)
     return result
