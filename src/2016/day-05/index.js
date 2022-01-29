@@ -1,7 +1,4 @@
 const $ = require('../../helpers')
-const crypto = require('crypto')
-
-const hash = value => crypto.createHash('md5').update(value).digest('hex')
 
 const run = salt => {
   let password1 = []
@@ -10,7 +7,7 @@ const run = salt => {
   let curr = null
 
   while (true) {
-    do curr = hash(salt + ++i)
+    do curr = $.md5(salt + ++i)
     while (!curr.startsWith('00000'))
 
     const sixth = curr[5]

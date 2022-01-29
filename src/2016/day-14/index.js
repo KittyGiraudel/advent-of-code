@@ -1,13 +1,11 @@
 const $ = require('../../helpers')
-const crypto = require('crypto')
 
 const run = (salt, iterations = 1) => {
   // Declare the hash function within this scope because the memoization is more
   // effective when there is only one argument, as it doesn’t perform JSON
   // serialization on the args to get a key.
   const hash = $.memo(value => {
-    for (let i = 0; i < iterations; i++)
-      value = crypto.createHash('md5').update(value).digest('hex')
+    for (let i = 0; i < iterations; i++) value = $.md5(value)
     return value
   })
 
