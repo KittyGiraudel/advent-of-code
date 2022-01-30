@@ -3,7 +3,11 @@
 // @param {Number} n - Number of iterations
 // @return {Array}
 const rotate = (array, n = 1) => {
-  while (n--) array.unshift(array.pop())
+  if (n > 0) {
+    while (n--) array.unshift(array.pop())
+  } else if (n < 0) {
+    while (n++) array.push(array.shift())
+  }
   return array
 }
 
