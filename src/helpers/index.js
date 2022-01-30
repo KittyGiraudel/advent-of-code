@@ -37,6 +37,7 @@ const readInput = require('./readInput')
 const rotate = require('./rotate')
 const stringMap = require('./stringMap')
 const sum = require('./sum')
+const swap = require('./swap')
 const toAscii = require('./toAscii')
 const toBin = require('./toBin')
 const toCoords = require('./toCoords')
@@ -87,6 +88,7 @@ module.exports = {
   rotate,
   stringMap,
   sum,
+  swap,
   surrounding,
   toAscii,
   toBin,
