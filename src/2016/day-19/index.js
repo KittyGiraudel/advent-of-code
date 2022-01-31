@@ -7,7 +7,7 @@ const run = (size, advanced = false) => {
   // pointer. This is how we’ll avoid aggressively rotating the circle back and
   // forth to delete items.
   let offset = Math.floor(circle.size / 2) - 1
-  let pointer = circle.head
+  let pointer = circle.pointer
   while (offset--) pointer = pointer.next
 
   // Iterate until we have only one item remaining.
@@ -17,8 +17,7 @@ const run = (size, advanced = false) => {
       // to that item, and connect its edges to essentially remove it from the
       // linked list and manually update the list size.
       pointer = pointer.next
-      pointer.prev.next = pointer.next
-      pointer.next.prev = pointer.prev
+      pointer.remove()
       circle.size--
 
       // If there is an even number of items in the circle, move the pointer by
