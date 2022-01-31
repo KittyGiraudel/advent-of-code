@@ -3,12 +3,17 @@ class Node {
     this.value = value
     this.next = this.prev = null
   }
+
+  remove() {
+    this.prev.next = this.next
+    this.next.prev = this.prev
+  }
 }
 
 class CircularArray {
   constructor(values = []) {
     this.size = 0
-    this.head = this.tail = null
+    this.pointer = null
 
     if (Array.isArray(values)) values.forEach(value => this.push(value))
     else this.push(values)
@@ -21,7 +26,7 @@ class CircularArray {
 
     // Shortcut for `.length = 0` usages where the goal is to empty the array.
     if (n === 0) {
-      this.head = this.tail = null
+      this.pointer = null
     } else {
       let diff = this.size - n
       while (diff--) this.pop()
@@ -34,20 +39,24 @@ class CircularArray {
 
   insert(value, direction = +1) {
     const node = new Node(value)
+    const push = direction === -1
+    const unshift = direction === +1
 
     this.size++
 
-    if (!this.head) {
-      node.next = node.prev = this.head = this.tail = node
+    if (!this.pointer) {
+      node.next = node.prev = this.pointer = node
     } else {
-      if (direction === -1) {
-        node.next = this.head
-        node.prev = this.tail
-        this.head.prev = this.tail.next = this.head = node
-      } else if (direction === +1) {
-        node.prev = this.tail
-        node.next = this.head
-        this.tail.next = this.head.prev = this.tail = node
+      if (push) {
+        node.next = this.pointer.next
+        node.prev = this.pointer
+        node.next.prev = node
+        this.pointer.next = node
+      } else if (unshift) {
+        node.next = this.pointer
+        node.prev = this.pointer.prev
+        node.prev.next = node
+        this.pointer.prev = node
       }
     }
 
@@ -63,21 +72,21 @@ class CircularArray {
   }
 
   remove(direction = +1) {
-    const value = direction === -1 ? this.head.value : this.tail.value
+    const value =
+      direction === -1 ? this.pointer.value : this.pointer.prev.value
+    const pop = direction === +1
+    const shift = direction === -1
 
     this.size--
 
     if (this.size === 0) {
-      this.tail = this.head = null
+      this.pointer = null
     } else {
-      if (direction === +1) {
-        this.tail = this.tail.prev
-        this.tail.next = this.head
-        this.head.prev = this.tail
-      } else if (direction === -1) {
-        this.head = this.head.next
-        this.head.prev = this.tail
-        this.tail.next = this.head
+      if (pop) {
+        this.pointer.prev.remove()
+      } else if (shift) {
+        this.pointer = this.pointer.next
+        this.pointer.prev.remove()
       }
     }
 
@@ -103,49 +112,20 @@ class CircularArray {
     return this
   }
 
-  // In a clockwise rotation, the current head becomes the 2nd item, the 2nd
-  // item the 3rd, and so on, the second-to-last item becomes the new tail, and
-  // the current tail becomes the new head.
+  // In a clockwise rotation, the current pointer becomes the previous item.
   // [0, 1, 2] -> [2, 0, 1] -> [2, 0, 1]
-  //  H     T  ->  T  H     ->  H     T
+  //  P        ->     P     ->  P
   rotateRight() {
-    const tail = this.tail
-    const head = this.head
-    // Mark the current tail as the previous item of the current head, and the
-    // current head as the next item of the current tail.
-    head.prev = tail
-    tail.next = head
-    // Make the previous tail the new head, and the previous second-to-last item
-    // as the new tail.
-    this.head = tail
-    this.tail = this.tail.prev
-    // Connect the new head and tail together.
-    this.tail.next = this.head
-    this.head.prev = this.tail
+    this.pointer = this.pointer.prev
 
     return this
   }
 
-  // In a counter-clockwise rotation, the current head becomes the new tail, the
-  // 2nd item becomes the new head, the 3rd item becomes the 2nd, and so on, and
-  // the current tail becomes the second-to-last item.
+  // In a counter-clockwise rotation, the current head becomes the next item.
   // [0, 1, 2] -> [1, 2, 0] -> [1, 2, 0]
-  //  H     T  ->     T  H  ->  H     T
+  //  P        ->        P  ->  P
   rotateLeft() {
-    const tail = this.tail
-    const head = this.head
-
-    // Mark the current tail as the previous item of the current head, and the
-    // current head as the next item of the current tail.
-    head.prev = tail
-    tail.next = head
-    // Make the previous head the new tail, and the previous second item as the
-    // new head.
-    this.tail = head
-    this.head = this.head.next
-    // Connect the new head and tail together.
-    this.head.prev = this.tail
-    this.tail.next = this.head
+    this.pointer = this.pointer.next
 
     return this
   }
@@ -155,15 +135,15 @@ class CircularArray {
 
     if (!this.size) return items
 
-    let node = this.head
+    let node = this.pointer
 
     // The list is looped, so we can’t keep iterating until there is no more
     // next node since it never happens. We need to iterate until we find the
-    // head again — this is when we’ve gone full circle.
+    // pointer again — this is when we’ve gone full circle.
     do {
       items.push(node.value)
       node = node.next
-    } while (!Object.is(node, this.head))
+    } while (!Object.is(node, this.pointer))
 
     return items
   }
