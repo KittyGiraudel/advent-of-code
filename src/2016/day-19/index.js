@@ -1,7 +1,8 @@
 const $ = require('../../helpers')
+const Circularray = require('circularray')
 
 const run = (size, advanced = false) => {
-  const circle = new $.CircularArray($.range(size, 1))
+  const circle = new Circularray($.range(size, 1))
 
   // Find the node that’s on the opposite site of the circle, and store it as a
   // pointer. This is how we’ll avoid aggressively rotating the circle back and

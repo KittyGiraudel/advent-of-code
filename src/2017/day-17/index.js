@@ -1,7 +1,8 @@
 const $ = require('../../helpers')
+const Circularray = require('circularray')
 
 const run = offset => {
-  const memory = new $.CircularArray([0])
+  const memory = new Circularray([0])
 
   // For part 1, we can use a double-ended queue that we rotate by the offset at
   // every iteration.

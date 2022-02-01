@@ -1,11 +1,12 @@
 const $ = require('../../helpers')
+const Circularray = require('circularray')
 
 // Usage of a double-ended queue inspired by this comment on Reddit, and using
 // a library to avoid having to implement it myself.
 // https://www.reddit.com/r/adventofcode/comments/a4i97s/2018_day_9_solutions/
 const play = (players, max) => {
   const scores = $.array(players).map(() => 0)
-  const circle = new $.CircularArray([0])
+  const circle = new Circularray([0])
 
   for (let marble = 1; marble <= max; marble++) {
     // If the marble is a multiple of 23, rotate the circle 7 items counter-

@@ -1,4 +1,5 @@
 const $ = require('../../helpers')
+const Circularray = require('circularray')
 
 class Computer {
   SUFFIX = [17, 31, 73, 47, 23]
@@ -6,7 +7,7 @@ class Computer {
   constructor(input, memory) {
     this.pointer = 0
     this.skip = 0
-    this.memory = new $.CircularArray(memory || $.range(256, 0))
+    this.memory = new Circularray(memory || $.range(256, 0))
     this.lengths = Array.isArray(input)
       ? input
       : $.toAscii(input, false).concat(this.SUFFIX)
@@ -30,7 +31,7 @@ class Computer {
   rebuild(length) {
     const slice = this.sliceOut(length)
     const rest = this.memory.toArray().filter(a => a !== null)
-    const next = new $.CircularArray(slice)
+    const next = new Circularray(slice)
 
     for (let i = 0; i < rest.length; i++) next.push(rest[i])
 
