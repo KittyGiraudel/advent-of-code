@@ -4,7 +4,6 @@ const array = require('./array')
 const average = require('./average')
 const boundaries = require('./boundaries')
 const chunk = require('./chunk')
-const CircularArray = require('./CircularArray')
 const clone = require('./clone')
 const column = require('./column')
 const combinations = require('./combinations')
@@ -56,7 +55,6 @@ module.exports = {
   bordering,
   boundaries,
   chunk,
-  CircularArray,
   clone,
   column,
   combinations,
