@@ -1,6 +1,5 @@
 const test = require('ava')
-const { createMegaGrid, getLowestRisk } = require('./')
-const $ = require('../../helpers')
+const { getLowestRisk } = require('./')
 const input = require('../../helpers/readInput')(__dirname)
 
 const sample = `1163751742
@@ -15,14 +14,14 @@ const sample = `1163751742
 2311944581`.split('\n')
 
 test('Day 15.1', t => {
-  t.is(getLowestRisk($.grid.create(sample, Number)), 40)
+  t.is(getLowestRisk(sample), 40)
 })
 
 test('Day 15.2', t => {
-  t.is(getLowestRisk(createMegaGrid(sample)), 315)
+  t.is(getLowestRisk(sample, 5), 315)
 })
 
 test('Day 15 — Solutions', t => {
-  t.is(getLowestRisk($.grid.create(input, Number)), 361)
-  t.is(getLowestRisk(createMegaGrid(input)), 2838)
+  t.is(getLowestRisk(input), 361)
+  t.is(getLowestRisk(input, 5), 2838)
 })
