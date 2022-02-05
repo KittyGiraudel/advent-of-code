@@ -1,40 +1,78 @@
 const $ = require('../../helpers')
-const PF = require('pathfinding')
-const input = require('../../helpers/readInput')(__dirname)
 
-const getGraph = rows => {
-  const grid = $.grid.create(rows)
-  const matrix = $.grid.map(grid, v => +(v === '#' || /[A-Z]/.test(v)))
-  const doors = new Map()
-  const keys = []
+const isDoorAtCell = cell => /[A-Z]/.test(cell)
+const isKeyAtCell = cell => /[a-z]/.test(cell)
 
-  $.grid.forEach(grid, (v, ri, ci) => {
-    if (/[a-z]/.test(v)) keys.push({ key: v, coords: [ci, ri] })
-    if (/[A-Z]/.test(v)) doors.set(v, [ci, ri])
-  })
+const createGraph = (grid, start, locations) => {
+  const count = Object.keys(locations).filter(isKeyAtCell).length
+  const frontier = new $.PriorityQueue([
+    { ...start, keys: [], path: [], doors: [] },
+    10_000,
+  ])
 
-  const pfGrid = new PF.Grid(matrix)
-  const finder = new PF.AStarFinder()
-  const state = { position: [40, 40], steps: 0, collected: [] }
+  while (frontier.length) {
+    const [curr] = frontier.pop()
 
-  while (state.collected.length < keys.length) {
-    const reachableKeys = keys
-      .filter(key => !state.collected.includes(key.key))
-      .map(key => {
-        const grid = pfGrid.clone()
-        const path = finder.findPath(...state.position, ...key.coords, grid)
-        key.distance = path.length
-        return key
+    if (curr.keys.length === count) return curr
+
+    console.log(curr)
+
+    $.bordering(curr.coords, 'BOTH')
+      .filter(({ coords }) => {
+        const cell = $.access(grid, coords)
+
+        if (isDoorAtCell(cell)) {
+          return curr.keys.includes(cell.toLowerCase())
+        }
+
+        return cell !== '#'
       })
-      .filter(key => key.distance > 0)
-      .sort((a, b) => a.distance - b.distance)
+      .forEach(next => {
+        const cell = $.access(grid, next.coords)
+        const doors = [...curr.doors]
+        const keys = [...curr.keys]
+        const path = [...curr.path, curr.point]
 
-    const next = reachableKeys[0]
-    state.position = next.coords
-    state.steps += next.distance
-    state.collected.push(next.key)
-    pfGrid.setWalkableAt(...doors.get(next.key.toUpperCase()), true)
+        if (isKeyAtCell(cell) && !keys.includes(cell)) keys.push(cell)
+        if (isDoorAtCell(cell) && !doors.includes(cell)) doors.push(cell)
+
+        let priority = 10_000
+        const unmatchedKeys = keys.filter(
+          key => !doors.includes(key.toUpperCase())
+        )
+
+        if (unmatchedKeys.length) {
+          const nextDoor = $.last(unmatchedKeys).toUpperCase()
+
+          if (nextDoor in locations) {
+            priority = $.manhattan(next.coords, locations[nextDoor])
+          }
+        }
+
+        frontier.push([{ ...next, keys, doors, path }, priority])
+      })
   }
 
-  return state
+  return from
 }
+
+const run = input => {
+  const locations = {}
+
+  const grid = $.grid.create(input, (v, ri, ci) => {
+    const isKey = /[a-z]/.test(v)
+    const isDoor = /[A-Z]/.test(v)
+    const isStart = v === '@'
+    if (isKey || isDoor || isStart) locations[v] = [ri, ci]
+    return v
+  })
+
+  const startCoords = locations['@']
+  const start = { coords: startCoords, point: $.toPoint(startCoords) }
+  const graph = createGraph(grid, start, locations)
+
+  console.log(graph)
+  return graph.path.length
+}
+
+module.exports = { run }
