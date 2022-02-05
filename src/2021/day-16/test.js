@@ -28,5 +28,3 @@ test('Day 16 — Solutions', t => {
   t.is(getVersionSums(input), 889)
   t.is(evaluate(input), 739303923668)
 })
-
-//fs.writeFileSync('./day-16.log', visualize(input))
