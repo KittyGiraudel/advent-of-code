@@ -20,14 +20,6 @@ const createGraph = (input, withOneself) => {
   return graph
 }
 
-// `Math.max(…)` causes a ‘Maximum call stack size exceeded’ error when passing
-// too many items, so we have to resort to a good ol’ loop.
-const getMax = array => {
-  let max = -Infinity
-  array.forEach(value => value > max && (max = value))
-  return max
-}
-
 const getArrangementScore = graph => arrangement =>
   arrangement.reduce((acc, item, index, array) => {
     const next = array[index + 1] || array[0]
@@ -41,7 +33,7 @@ const run = (input, withOneself = false) => {
   const arrangements = $.permutations(keys)
   const getScore = getArrangementScore(graph)
 
-  return getMax(arrangements.map(getScore))
+  return $.max(arrangements.map(getScore))
 }
 
 module.exports = { run }

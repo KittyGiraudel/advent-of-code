@@ -23,6 +23,7 @@ const lcm = require('./lcm')
 const loopIndex = require('./loopIndex')
 const manhattan = require('./manhattan')
 const matchLast = require('./matchLast')
+const max = require('./max')
 const md5 = require('./md5')
 const median = require('./median')
 const memo = require('./memo')
@@ -74,6 +75,7 @@ module.exports = {
   loopIndex,
   manhattan,
   matchLast,
+  max,
   md5,
   median,
   memo,
