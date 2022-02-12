@@ -29,8 +29,8 @@ const run = (input, inspect = []) => {
     const max = next.pop()
     const min = next.pop()
 
-    if (max === inspect[1] && min === inspect[0])
-      console.log('Bot', index, 'comparing', inspect)
+    // if (max === inspect[1] && min === inspect[0])
+    // console.log('Bot', index, 'comparing', inspect)
 
     const [low, high] = pipelines[index]
 

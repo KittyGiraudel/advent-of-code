@@ -15,8 +15,6 @@ const createGraph = (grid, start, locations) => {
 
     if (curr.keys.length === count) return curr
 
-    console.log(curr)
-
     $.bordering(curr.coords, 'BOTH')
       .filter(({ coords }) => {
         const cell = $.access(grid, coords)
@@ -71,7 +69,6 @@ const run = input => {
   const start = { coords: startCoords, point: $.toPoint(startCoords) }
   const graph = createGraph(grid, start, locations)
 
-  console.log(graph)
   return graph.path.length
 }
 

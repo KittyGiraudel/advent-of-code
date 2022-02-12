@@ -9,7 +9,6 @@ const run = (instructions, a = 0) => {
 
   for (let i = 0; i < instructions.length; i++) {
     const [code, x, y] = instructions[i]
-    console.log(i, code, x, y, registers)
     if (code === 'cpy' && y in registers) registers[y] = read(x)
     else if (code === 'inc' && x in registers) registers[x]++
     else if (code === 'dec' && x in registers) registers[x]--
