@@ -29,7 +29,6 @@ const run = (salt, iterations = 1) => {
       let match3 = cache.get(salt + i)
       if (keys.has(i) || !match3 || match3 !== match5[1][0]) continue
       keys.add(i)
-      console.log('Found key', keys.size, 'at index', i)
     }
   }
 
