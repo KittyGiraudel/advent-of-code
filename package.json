@@ -3,7 +3,7 @@
     "test": "ava --verbose --timeout=20s"
   },
   "devDependencies": {
-    "ava": "^3.14.0"
+    "ava": "^5.1.0"
   },
   "ava": {
     "files": [
