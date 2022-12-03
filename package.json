@@ -1,13 +1,14 @@
 {
   "scripts": {
-    "test": "ava --verbose --timeout=20s"
+    "test": "ava --verbose --timeout=20s",
+    "tiles": "python3 AoCTiles/create_aoc_tiles.py"
   },
   "devDependencies": {
     "ava": "^5.1.0"
   },
   "ava": {
     "files": [
-      "./src/**/*test.js"
+      "./**/*test.js"
     ]
   },
   "dependencies": {
