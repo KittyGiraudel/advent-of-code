@@ -7,6 +7,7 @@ const _loopOnGrid =
 
 const gridForEach = _loopOnGrid('forEach')
 const gridMap = _loopOnGrid('map')
+const gridFlatMap = _loopOnGrid('flatMap')
 const gridEvery = _loopOnGrid('every')
 const gridReduce = (grid, callback, acc) =>
   grid.reduce(
@@ -54,6 +55,7 @@ const gridVariants = grid => {
 const grid = {
   forEach: gridForEach,
   map: gridMap,
+  flatMap: gridFlatMap,
   every: gridEvery,
   rotate: gridRotate,
   reduce: gridReduce,
