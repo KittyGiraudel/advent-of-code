@@ -1,17 +1,11 @@
-// Return the intersections of several arrays.
+// Return the intersections of several arrays. To do so, iterate over the items
+// of the first array and preserve only the ones that exist in *all* the other
+// arrays. If an item doesn’t exist in some arrays, it will not be returned. And
+// because of looping on the first array only, items that are present in other
+// arrays but not the first are also not returned.
 // @param {Array[]} arrays - Arrays to find the intersection of
 // @return {Array}
-const intersection = (...arrays) => {
-  const result = new Set()
-
-  for (let i = 0; i < arrays.length; i++) {
-    for (let y = 0; y < arrays[i].length; y++) {
-      if (arrays.every(obj => obj.includes(arrays[i][y])))
-        result.add(arrays[i][y])
-    }
-  }
-
-  return [...result]
-}
+const intersection = (...arrays) =>
+  arrays.shift().filter(item => arrays.every(array => array.includes(item)))
 
 module.exports = intersection
