@@ -3,3 +3,4 @@ node_modules
 *.log
 session.cookie
 AoCTiles/.aoc_tiles_cache
+aoc-gitcrypt.key
