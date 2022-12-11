@@ -13,10 +13,8 @@
   },
   "dependencies": {
     "circularray": "^0.1.0",
-    "javascript-astar": "^0.4.1",
     "js-levenshtein": "^1.1.6",
-    "js-yaml": "^4.1.0",
-    "pathfinding": "^0.4.18"
+    "js-yaml": "^4.1.0"
   },
   "engines": {
     "node": "18"
