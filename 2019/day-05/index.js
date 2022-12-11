@@ -255,6 +255,21 @@ class Intcode {
 
     return this
   }
+
+  snapshot() {
+    const output = new Intcode(this.backup)
+
+    output.halted = this.halted
+    output.memory = this.memory.slice(0)
+    output.backup = this.backup.slice(0)
+    output.pointer = this.pointer
+    output.inputs = this.inputs.slice(0)
+    output.outputs = this.outputs.slice(0)
+    output.withLogs = this.withLogs
+    output.base = this.base
+
+    return output
+  }
 }
 
 module.exports = { Intcode }
