@@ -2,12 +2,18 @@ const $ = require('../../helpers')
 const { Intcode } = require('../day-05')
 
 const DIRECTIONS = [1, 4, 2, 3]
-const VECTORS = [
-  [+1, 0],
-  [0, +1],
-  [-1, 0],
-  [0, -1],
-]
+
+const getPathLength = (graph, start, end) => {
+  let current = end
+  let length = 0
+
+  while (current && current !== start) {
+    length++
+    current = graph[current]
+  }
+
+  return length
+}
 
 const discover = input => {
   const start = { point: '0,0', coords: [0, 0], program: new Intcode(input) }
@@ -42,7 +48,7 @@ const discover = input => {
 const getDistanceToOxygen = input => {
   const { from, start, end } = discover(input)
 
-  return $.pathLength(from, start.point, end.point)
+  return getPathLength(from, start.point, end.point)
 }
 
 const padGrid = (grid, width) => [
