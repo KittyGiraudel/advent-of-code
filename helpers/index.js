@@ -29,6 +29,7 @@ const median = require('./median')
 const memo = require('./memo')
 const { bordering, surrounding } = require('./neighbors')
 const last = require('./last')
+const pathLength = require('./pathLength')
 const permutations = require('./permutations')
 const PriorityQueue = require('./PriorityQueue')
 const product = require('./product')
@@ -80,6 +81,7 @@ module.exports = {
   median,
   memo,
   last,
+  pathLength,
   permutations,
   PriorityQueue,
   product,

@@ -33,25 +33,13 @@ const createGraph = (start, end, n) => {
   return from
 }
 
-const getPathLength = (graph, start, end) => {
-  let length = 0
-  let current = end
-
-  while (current !== start) {
-    length++
-    current = graph[current]
-  }
-
-  return length
-}
-
 const run = (target, n, reach = 50) => {
   const start = { point: '1,1', coords: [1, 1] }
   const end = { point: target, coords: $.toCoords(target).reverse() }
   const graph = createGraph(start, end, n)
-  const pathLength = getPathLength(graph, start.point, end.point)
+  const pathLength = $.pathLength(graph, start.point, end.point)
   const withinReach = Object.keys(graph).filter(
-    from => getPathLength(graph, start.point, from) <= reach
+    from => $.pathLength(graph, start.point, from) <= reach
   )
 
   return [pathLength, withinReach.length]
