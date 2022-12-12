@@ -13,7 +13,7 @@ const findStrongestBot = input => {
 
   // I spent quite a lot of time trying to figure that one out, but to no avail.
   // I tried some intersection reduction, and also learnt the line sweeping
-  // algorithm, which I am pretty is what the solution below really is.
+  // algorithm, which I am pretty sure is what the solution below really is.
   // Ultimately, I needed Reddit to figure it out.
   // https://www.reddit.com/r/adventofcode/comments/a8s17l/comment/ecfreod/
   //

@@ -13,9 +13,9 @@ const findBoundaries = claims =>
 // fail miserably on any input that’s bigger than that (either in terms of
 // amount of claims, or in terms of size). But I couldn’t figure out the logic
 // to figure out the right result based on intersections only.
-// So this one literally render every rectangle, then group the inches based on
-// how many times they were drawn over. The final result is found by discarding
-// the inches that have not been drawn over at all, or only once (no
+// So this one literally renders every rectangle, then groups the inches based
+// on how many times they were drawn over. The final result is found
+// discarding the inches that have not been drawn over at all, or only once (no
 // intersection), and that’s the result.
 // @param {String[]} input - Raw unparsed lines
 // @return {Number}

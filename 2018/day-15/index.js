@@ -169,14 +169,11 @@ const cheat = rows => {
 // (adapted from Python):
 // https://www.reddit.com/r/adventofcode/comments/a6chwa/2018_day_15_solutions/ebu4jmx/
 const findMove = (grid, units, start, type) => {
-  const queue = [start]
+  const frontier = [start]
   const visited = new Map()
-  let curr = null
 
-  while (true) {
-    if (queue.length === 0) return null
-    curr = queue.pop()
-
+  while (frontier.length) {
+    const curr = frontier.pop()
     const [N, E, S, W] = $.bordering($.toCoords(curr), 'BOTH')
     const neighbors = [N, W, E, S].filter(
       ({ coords }) => $.access(grid, coords) === '.'
@@ -196,7 +193,7 @@ const findMove = (grid, units, start, type) => {
       }
 
       if (!unit && !visited.has(next)) {
-        queue.unshift(next)
+        frontier.unshift(next)
         visited.set(next, curr)
       }
     }

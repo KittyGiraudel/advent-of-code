@@ -1,10 +1,5 @@
 const $ = require('../../helpers')
 
-const toObj = point => {
-  const [x, y] = point.split(', ').map(Number)
-  return { x, y }
-}
-
 const mapOut = (points, limit) => {
   const counters = new Map()
   const edges = new Set()
@@ -19,12 +14,12 @@ const mapOut = (points, limit) => {
   for (let ci = minX; ci <= maxX; ci++) {
     for (let ri = minY; ri <= maxY; ri++) {
       const current = `${ci}, ${ri}`
-      const coords = toObj(current)
+      const coords = $.toCoords(current)
 
       // Compute the Manhattan distances between the current point and every
       // point in the list.
       const pointsByDist = points
-        .map(p => ({ point: p, dist: $.manhattan(toObj(p), coords) }))
+        .map(p => ({ point: p, dist: $.manhattan($.toCoords(p), coords) }))
         .sort((a, b) => b.dist - a.dist)
 
       // If the sum of all the distances is within the self-imposed limit (32

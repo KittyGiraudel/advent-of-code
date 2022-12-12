@@ -2,6 +2,6 @@
 // coordinates.
 // @param {String} point - Point to split
 // @return {Number[]}
-const toCoords = point => point.split(',').map(Number)
+const toCoords = point => point.split(/,\s?/g).map(Number)
 
 module.exports = toCoords

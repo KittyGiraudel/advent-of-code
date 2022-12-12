@@ -1,8 +1,7 @@
 const $ = require('../../helpers')
 const Circularray = require('circularray')
 
-// Usage of a double-ended queue inspired by this comment on Reddit, and using
-// a library to avoid having to implement it myself.
+// Usage of a double-ended queue inspired by this comment on Reddit.
 // https://www.reddit.com/r/adventofcode/comments/a4i97s/2018_day_9_solutions/
 const play = (players, max) => {
   const scores = $.array(players).map(() => 0)

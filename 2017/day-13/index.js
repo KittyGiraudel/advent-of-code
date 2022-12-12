@@ -87,12 +87,12 @@ const run = input => {
 }
 
 // I managed to solve part 1 as described in the puzzle (see `Firewall` class),
-// but could not figure  out how to solve part 2 without brute-force, so I
+// but could not figure out how to solve part 2 without brute-force, so I
 // resorted in implementing that Python solution:
 // https://www.reddit.com/r/adventofcode/comments/7jgyrt/2017_day_13_solutions/dr6bxce/
 const cross = input => {
   const graph = getGraph(input)
-  const layers = Array.from(Object.keys(graph))
+  const layers = Object.keys(graph)
   let delay = 0
 
   while (layers.some(layer => !pass(graph[layer], delay + +layer))) delay++

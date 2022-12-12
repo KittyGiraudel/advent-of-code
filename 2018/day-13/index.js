@@ -63,7 +63,7 @@ const tick = (grid, carts, cleanUp = false) => {
       const next = move(grid, point, cart)
 
       // If there is already a cart in the destination cell, mark the existing
-      // cart as crashed (or delete it altogether if runnijng in cleanup mode).
+      // cart as crashed (or delete it altogether if running in cleanup mode).
       if (next.point in carts) {
         if (cleanUp) delete carts[next.point]
         else carts[next.point].crashed = true

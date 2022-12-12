@@ -1,6 +1,6 @@
 class Intcode {
   constructor(memory) {
-    // Holds whether the program has reached an opcode 99 instructions, causing
+    // Holds whether the program has reached an opcode 99 instruction, causing
     // it to halt permanently.
     this.halted = false
     // Holds the mutable array of numbers for the program to run.

@@ -27,7 +27,7 @@ const observe = input => {
     // Otherwise, it should do 2 things:
     // 1. Be added to the first host it belongs to.
     // 2. All the other hosts should be merged into the first and deleted, since
-    //    that point served as a bridge to bring merge these constellations.
+    //    that point served as a bridge to bring and merge these constellations.
     else {
       const first = hosts.shift()
 

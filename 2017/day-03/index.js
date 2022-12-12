@@ -14,9 +14,9 @@ const resolve = bound => {
   const step = vector => coords.push($.applyVector($.last(coords), vector))
 
   let steps = 0
-  // Populating the grid goes like this: go east, then north, then south, then
-  // west, and increment the amount of steps to take by 1 every 2 directions. So
-  // the first directions are: E1, N1, W2, S2, E3, N3, W4, S4, E5, N5, W6, S6…
+  // Populating the grid goes like this: go east, then north, then west, then
+  // south, and increment the amount of steps to take by 1 every 2 directions.
+  // The first directions are: E1, N1, W2, S2, E3, N3, W4, S4, E5, N5, W6, S6…
   while (coords.length <= bound) {
     steps++
     for (let i = 0; i < steps; i++) step(EAST)

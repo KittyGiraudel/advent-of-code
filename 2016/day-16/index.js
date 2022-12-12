@@ -16,7 +16,7 @@ const run = (input, size) => {
   while (disk.length < size) {
     disk.push(0)
     // So what’s interesting is that performance relies a lot on having a single
-    // array that gets mutated instead of creating another array or astring at
+    // array that gets mutated instead of creating another array or a string at
     // every round. The problem is that we can’t use `.push()` with a lot of
     // arguments, since it blows up the stack. And `.concat()` is not mutative
     // so it would create a new array. By iterating from one character at the

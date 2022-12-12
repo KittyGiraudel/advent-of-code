@@ -7,7 +7,7 @@ const inspect = input => {
   // Played manually because a) nothing beats the excitment of old school text-
   // based RPG games and b) I am not smart enough to come up with a programmatic
   // solver. Below is the series of moves, starting in Hull Breach, that got me
-  // to the pass the security checkpoint.
+  // to pass the security checkpoint.
   // SC — HC — NA                 SC = Security Checkpoint NA = Navigation
   //           |                  HC = Hot Chocolate Fountain
   //           AR — OB — HW       AR = Arcade              OB = Observatory
