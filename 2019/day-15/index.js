@@ -3,44 +3,33 @@ const { Intcode } = require('../day-05')
 
 const DIRECTIONS = [1, 4, 2, 3]
 
-const getPathLength = (graph, start, end) => {
-  let current = end
-  let length = 0
-
-  while (current && current !== start) {
-    length++
-    current = graph[current]
-  }
-
-  return length
-}
+const addProgramCopy = curr => (next, index) => ({
+  ...next,
+  program: curr.program.snapshot().setInput(DIRECTIONS[index]).run(),
+})
 
 const discover = input => {
   const start = { point: '0,0', coords: [0, 0], program: new Intcode(input) }
-  const frontier = [start]
-  const from = { [start.point]: null }
   let end = null
 
-  while (frontier.length) {
-    const curr = frontier.pop()
-    const neighbors = $.bordering(curr.coords, 'BOTH')
-
-    if (curr.program.getOutput() === 2) {
-      end = curr
-      // break
+  const from = $.astar.graph(
+    start,
+    end,
+    curr =>
+      $.bordering(curr.coords)
+        .map(addProgramCopy(curr))
+        .filter(next => next.program.outputs[0]),
+    {
+      skipVisited: true,
+      endCheck: curr => {
+        // A little odd here, but essentially we a) do not know where the end is
+        // until we find it and b) want to map out the entire place before
+        // exiting, so instead of cutting the walk as soon as we find the end,
+        // we just store it.
+        if (curr.program.getOutput() === 2) end = curr
+      },
     }
-
-    neighbors.forEach((next, index) => {
-      if (next.point in from) return
-
-      const clone = curr.program.snapshot().setInput(DIRECTIONS[index]).run()
-
-      if (clone.outputs[0]) {
-        from[next.point] = curr.point
-        frontier.unshift({ ...next, program: clone })
-      }
-    })
-  }
+  )
 
   return { from, start, end }
 }
@@ -48,7 +37,7 @@ const discover = input => {
 const getDistanceToOxygen = input => {
   const { from, start, end } = discover(input)
 
-  return getPathLength(from, start.point, end.point)
+  return $.astar.path(from, start.point, end.point).length
 }
 
 const padGrid = (grid, width) => [

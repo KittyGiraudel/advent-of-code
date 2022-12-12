@@ -24,36 +24,25 @@ const isWithinBounds =
     $.isClamped(ri, 0, grid.length - 1) &&
     $.isClamped(ci, 0, grid[0].length - 1)
 
-const getPath = (grid, start, end) => {
-  const frontier = [start]
-  const from = { [start.point]: null }
-
-  while (frontier.length) {
-    const curr = frontier.pop()
-
-    if (curr.point === end.point) break
-
+const walk = (grid, start, end) =>
+  $.astar.graph(start, end, (curr, from) =>
     $.bordering(curr.coords)
       .filter(isWithinBounds(grid))
+      // Note that using `skipVisited` would work just as well but would be
+      // significantly slower because we’d run the next `.map` (and `.filter`)
+      // on nodes we actually don’t need to walk.
       .filter(next => !(next.point in from))
       .map(next => ({ ...next, elevation: $.access(grid, next.coords) }))
       .filter(next => next.elevation - curr.elevation <= 1)
-      .forEach(next => {
-        from[next.point] = curr.point
-        frontier.unshift(next)
-      })
-  }
-
-  return from
-}
+  )
 
 const process = input => {
   const start = {}
   const end = {}
   const grid = $.grid.create(input, remapGrid(start, end))
-  const from = getPath(grid, start, end)
+  const from = walk(grid, start, end)
 
-  return $.pathLength(from, start.point, end.point)
+  return $.astar.path(from, start.point, end.point).length
 }
 
 const findShortestPath = input => {
@@ -65,11 +54,11 @@ const findShortestPath = input => {
       .flatMap(grid, (v, ri, ci) => {
         if (v === 'a'.charCodeAt()) {
           const start = { point: `${ri},${ci}`, coords: [ri, ci], elevation: v }
-          const path = getPath(grid, start, end)
+          const path = walk(grid, start, end)
 
           if (!(end.point in path)) return null
 
-          return $.pathLength(path, start.point, end.point)
+          return $.astar.path(path, start.point, end.point).length
         }
 
         return null

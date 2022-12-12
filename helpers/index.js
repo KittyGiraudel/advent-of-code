@@ -1,6 +1,7 @@
 const access = require('./access')
 const applyVector = require('./applyVector')
 const array = require('./array')
+const astar = require('./astar')
 const average = require('./average')
 const boundaries = require('./boundaries')
 const chunk = require('./chunk')
@@ -53,6 +54,7 @@ module.exports = {
   access,
   applyVector,
   array,
+  astar,
   average,
   bordering,
   boundaries,
