@@ -1,0 +1,125 @@
+const $ = require('../../helpers')
+
+const BLOCK = '#'
+const SAND = 'o'
+
+class Cave {
+  constructor(walls, source, withFloor = false) {
+    this.source = source
+
+    // My first version was using a 2D grid to store the data, which was pretty
+    // convenient to debug the code since I could print it to visualize the
+    // cave. However, it turned out to be unsurprisingly super slow so I
+    // refactored it using a map to speed up lookups.
+    //
+    // Worth mentioning that there is also this nice Python implementation on
+    // Reddit which skips the lookup at all for part 2 and compute the amount of
+    // sand by doing math line by line, which is need. I actually re-implemented
+    // it in JS before landing on a Map() so I can confirm it works (and is very
+    // fast).
+    // Ref: Ref: https://github.com/PBearson/Advent_Of_Code_2022/blob/main/day_14/infinite_floor_fast.py
+    this.map = new Map()
+
+    // Compute the boundaries while considering the position of the source as
+    // well.
+    const [minX, maxX, minY, maxY] = $.boundaries(
+      walls.flat().concat([this.source])
+    )
+
+    // If the floor should be added (part 2), update the boundaries to reflect
+    // the position of the floor, then add a block at the bottom left and bottom
+    // right corners so the floor gets drawn as well with `erectWalls()`.
+    if (withFloor) {
+      this.minY = minY
+      this.maxY = maxY + 2
+      this.minX = this.source[0] - this.maxY
+      this.maxX = this.source[0] + this.maxY
+
+      walls.push([
+        [this.minX, this.maxY],
+        [this.maxX, this.maxY],
+      ])
+    } else {
+      this.minX = minX
+      this.maxX = maxX
+      this.minY = minY
+      this.maxY = maxY
+    }
+
+    // Erect all the walls based on the input data (and added floor if needed).
+    this.erectWalls(walls)
+  }
+
+  erectWalls(walls) {
+    walls.forEach(wall => {
+      wall.forEach((curr, index) => {
+        // Mark the current cell as a wall brick.
+        this.set(...curr, BLOCK)
+
+        if (index === 0) return
+
+        // If not the first wall brick of the line, read the position of the
+        // previous wall brick and mark every slot between the two as bricks.
+        const prev = wall[index - 1]
+
+        // Vertical walls of rocks
+        if (prev[1] === curr[1]) {
+          const min = Math.min(prev[0], curr[0])
+          const max = Math.max(prev[0], curr[0])
+          for (let i = min; i < max; i++) this.set(i, curr[1], BLOCK)
+        }
+
+        // Horizontal walls of rocks
+        else if (prev[0] === curr[0]) {
+          const min = Math.min(prev[1], curr[1])
+          const max = Math.max(prev[1], curr[1])
+          for (let i = min; i < max; i++) this.set(curr[0], i, BLOCK)
+        }
+      })
+    })
+
+    return this
+  }
+
+  get(x, y) {
+    return this.map.get(x + ',' + y)
+  }
+
+  set(x, y, value) {
+    this.map.set(x + ',' + y, value)
+    return this
+  }
+
+  fill() {
+    // For as long as we can pour more sand into the cave, do it.
+    while (this.fillAt(...this.source)) {}
+
+    return this
+  }
+
+  fillAt(x, y) {
+    // Respectively part 1 and part 2 loop breakers: whether we have reached the
+    // abyss (out of bounds), or whether we’ve completed the mountain (source).
+    if (y >= this.maxY || this.get(x, y) === 'o') return false
+
+    // Check the south, south-west, south-east cells in that order and fill the
+    // first one that’s empty. If none is, mark the current cell as resting.
+    if (!this.get(x, y + 1)) return this.fillAt(x, y + 1)
+    else if (!this.get(x - 1, y + 1)) return this.fillAt(x - 1, y + 1)
+    else if (!this.get(x + 1, y + 1)) return this.fillAt(x + 1, y + 1)
+    else return this.set(x, y, SAND)
+  }
+
+  count() {
+    return Array.from(this.map.values()).filter(v => v === SAND).length
+  }
+}
+
+const countSandUnits = (input, withFloor) => {
+  const walls = input.map(wall => wall.split(' -> ').map($.toCoords))
+  const cave = new Cave(walls, [500, 0], withFloor)
+
+  return cave.fill().count()
+}
+
+module.exports = { countSandUnits }
