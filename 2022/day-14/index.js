@@ -4,9 +4,7 @@ const BLOCK = '#'
 const SAND = 'o'
 
 class Cave {
-  constructor(walls, source, withFloor = false) {
-    this.source = source
-
+  constructor(walls, withFloor = false) {
     // My first version was using a 2D grid to store the data, which was pretty
     // convenient to debug the code since I could print it to visualize the
     // cave. However, it turned out to be unsurprisingly super slow so I
@@ -22,18 +20,16 @@ class Cave {
 
     // Compute the boundaries while considering the position of the source as
     // well.
-    const [minX, maxX, minY, maxY] = $.boundaries(
-      walls.flat().concat([this.source])
-    )
+    const [minX, maxX, minY, maxY] = $.boundaries(walls.flat())
 
     // If the floor should be added (part 2), update the boundaries to reflect
     // the position of the floor, then add a block at the bottom left and bottom
     // right corners so the floor gets drawn as well with `erectWalls()`.
     if (withFloor) {
-      this.minY = minY
+      this.minY = 0
       this.maxY = maxY + 2
-      this.minX = this.source[0] - this.maxY
-      this.maxX = this.source[0] + this.maxY
+      this.minX = 500 - this.maxY
+      this.maxX = 500 + this.maxY
 
       walls.push([
         [this.minX, this.maxY],
@@ -42,7 +38,7 @@ class Cave {
     } else {
       this.minX = minX
       this.maxX = maxX
-      this.minY = minY
+      this.minY = 0
       this.maxY = maxY
     }
 
@@ -90,9 +86,9 @@ class Cave {
     return this
   }
 
-  fill() {
+  fill(source) {
     // For as long as we can pour more sand into the cave, do it.
-    while (this.fillAt(...this.source)) {}
+    while (this.fillAt(...source)) {}
 
     return this
   }
@@ -117,9 +113,9 @@ class Cave {
 
 const countSandUnits = (input, withFloor) => {
   const walls = input.map(wall => wall.split(' -> ').map($.toCoords))
-  const cave = new Cave(walls, [500, 0], withFloor)
+  const cave = new Cave(walls, withFloor)
 
-  return cave.fill().count()
+  return cave.fill([500, 0]).count()
 }
 
 module.exports = { countSandUnits }
