@@ -11,57 +11,26 @@ const VECTORS = {
 
 // See: https://www.redblobgames.com/grids/hexagons/#distances
 const distance = $.memo((pA, pB) => {
-  const [xA, yA] = $.toCoords(pA)
-  const [xB, yB] = $.toCoords(pB)
+  const [xA, yA] = pA.coords || $.toCoords(pA)
+  const [xB, yB] = pB.coords || $.toCoords(pB)
   const dX = Math.abs(xA - xB)
   const dY = Math.abs(yA - yB)
 
   return dX + Math.max(0, (dY - dX) / 2)
 })
 
-const getNeighbors = $.memo(point =>
+const getNeighbors = curr =>
   Object.values(VECTORS)
-    .map(vector => $.applyVector($.toCoords(point), vector))
-    .map($.toPoint)
-)
+    .map(vector => $.applyVector(curr.coords, vector))
+    .map(coords => ({ coords, point: $.toPoint(coords) }))
 
-const getPath = (start, end) => {
-  const graph = createGraph(start, end)
-  const path = []
-  let current = end
-
-  while (current != start) {
-    path.push(current)
-    current = graph[current]
-  }
-
-  return path
-}
-
-const createGraph = (start, end) => {
-  // The use of a priority queue over a regular array is really only to speed up
-  // the whole thing with a distance, otherwise it’s excrutiatingly slow.
-  const frontier = new $.PriorityQueue([start, 0])
-  const from = { [start]: null }
-
-  while (frontier.length) {
-    const [curr] = frontier.pop()
-    if (curr === end) break
-
-    getNeighbors(curr)
-      .filter(next => !(next in from))
-      .forEach(next => {
-        // In theory, we could just unshift (push left) the next item in the
-        // queue, but we can optimize performance by computing the distance
-        // between the next item and the goal, so that we visit nodes in order
-        // of closest to furthest.
-        frontier.push([next, distance(end, next)])
-        from[next] = curr
-      })
-  }
-
-  return from
-}
+const createGraph = (start, end) =>
+  $.astar.graph(
+    { point: start, coords: $.toCoords(start) },
+    { point: end, coords: $.toCoords(end) },
+    getNeighbors,
+    { skipVisited: true, heuristic: distance }
+  )
 
 const walk = steps =>
   steps.reduce(
@@ -73,6 +42,9 @@ const walk = steps =>
     { position: [0, 0], visited: new Set(['0,0']) }
   )
 
+const getPathLength = (start, end) =>
+  $.astar.path(createGraph(start, end), start, end).length
+
 const run = instructions => {
   const { position, visited } = walk(instructions)
   const start = '0,0'
@@ -83,9 +55,9 @@ const run = instructions => {
 
   return [
     // Find the minimum amount of steps to reach the destination.
-    getPath(start, end).length,
+    getPathLength(start, end),
     // Find the maximum amount of steps ever reached.
-    getPath(start, furthest).length,
+    getPathLength(start, furthest),
   ]
 }
 
