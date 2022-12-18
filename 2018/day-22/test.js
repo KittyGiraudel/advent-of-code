@@ -1,11 +1,8 @@
 const test = require('ava')
 const { getRisk, getDuration } = require('./')
 
-test('Day 22.1', t => {
+test('Day 22 — Sample', t => {
   t.is(getRisk(510, [10, 10]), 114)
-})
-
-test('Day 22.2', t => {
   t.is(getDuration(510, [10, 10]), 45)
 })
 

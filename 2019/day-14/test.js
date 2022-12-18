@@ -40,11 +40,11 @@ const sampleD = `2 VPVL, 7 FWMGM, 2 CXFTF, 11 MNCFX => 1 STKFG
 1 VJHF, 6 MNCFX => 4 RFSQX
 176 ORE => 6 VJHF`.split('\n')
 
-test.skip('Day 14.1', t => {
+test.skip('Day 14 — Sample', t => {
   t.is(computeFuelCost(sampleA), 31)
   t.is(computeFuelCost(sampleB), 165)
   t.is(computeFuelCost(sampleC), 13312)
   t.is(computeFuelCost(sampleD), 180697)
 })
-test.skip('Day 14.2', t => {})
+
 test.skip('Day 14 — Solutions', t => {})

@@ -7,11 +7,9 @@ jio a, +2
 tpl a
 inc a`.split('\n')
 
-test('Day 23.1', t => {
+test('Day 23 — Sample', t => {
   t.is(run(sample).a, 2)
 })
-
-test.skip('Day 23.2', t => {})
 
 test('Day 23 — Solutions', t => {
   t.is(run(input).b, 307)

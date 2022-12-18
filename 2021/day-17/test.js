@@ -9,7 +9,7 @@ const [input] = require('../../helpers/readInput')(__dirname)
 
 const sample = `target area: x=20..30, y=-10..-5`
 
-test('Day 17.1', t => {
+test('Day 17 — Sample', t => {
   const boundaries = getBoundaries(sample)
   t.truthy(typeof isSuccessfulLaunch(boundaries, [7, 2]) === 'number')
   t.truthy(typeof isSuccessfulLaunch(boundaries, [6, 3]) === 'number')
@@ -17,9 +17,6 @@ test('Day 17.1', t => {
   t.truthy(typeof isSuccessfulLaunch(boundaries, [23, -10]) === 'number')
   t.truthy(typeof isSuccessfulLaunch(boundaries, [20, -10]) === 'number')
   t.is(findMaxHeight(sample), 45)
-})
-
-test('Day 17.2', t => {
   t.is(findSuccessfulLaunches(sample).length, 112)
 })
 

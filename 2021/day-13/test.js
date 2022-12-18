@@ -24,15 +24,13 @@ const sample = `6,10
 fold along y=7
 fold along x=5`.split('\n\n')
 
-test('Day 13.1', t => {
+test('Day 13 — Sample', t => {
   const data = parseInput(sample)
   const dotsAfterFirstFold = foldOnce(data.dots, data.folds[0])
   const dotsAfterSecondFold = foldOnce(dotsAfterFirstFold, data.folds[1])
   t.is(dotsAfterFirstFold.size, 17)
   t.is(dotsAfterSecondFold.size, 16)
 })
-
-// test('Day 13.2', t => {})
 
 test('Day 13 — Solutions', t => {
   const data = parseInput(input)

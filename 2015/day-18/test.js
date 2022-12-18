@@ -9,11 +9,8 @@ const sample = `.#.#.#
 #.#..#
 ####..`.split('\n')
 
-test('Day 18.1', t => {
+test('Day 18 — Sample', t => {
   t.is(run(sample, 4), 4)
-})
-
-test('Day 18.2', t => {
   t.is(run(sample, 5, true), 17)
 })
 

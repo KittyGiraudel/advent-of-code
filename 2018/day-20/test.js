@@ -11,7 +11,7 @@ const SAMPLES = [
   '^(E|SSEENNW)S$',
 ]
 
-test('Day 20.1', t => {
+test('Day 20 — Sample', t => {
   t.is(getLongestDistance(SAMPLES[0]), 3)
   t.is(getLongestDistance(SAMPLES[1]), 10)
   t.is(getLongestDistance(SAMPLES[2]), 18)
@@ -21,8 +21,6 @@ test('Day 20.1', t => {
   // found on Reddit fail on this example.
   // t.is(getLongestDistance(SAMPLES[5]), 4)
 })
-
-test.skip('Day 20.2', t => {})
 
 test('Day 20 — Solutions', t => {
   t.is(getLongestDistance(input), 3806)

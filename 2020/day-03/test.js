@@ -18,15 +18,12 @@ const example = `
   .trim()
   .split('\n')
 
-test('Day 3.1', t => {
+test('Day 03 — Sample', t => {
   t.is(getTreeCountForSlope(example, [1, 1]), 2)
   t.is(getTreeCountForSlope(example, [3, 1]), 7)
   t.is(getTreeCountForSlope(example, [5, 1]), 3)
   t.is(getTreeCountForSlope(example, [7, 1]), 4)
   t.is(getTreeCountForSlope(example, [1, 2]), 2)
-})
-
-test('Day 3.2', t => {
   t.is(
     getResult(example, [
       [1, 1],
@@ -39,7 +36,7 @@ test('Day 3.2', t => {
   )
 })
 
-test('Day 3 — Solutions', t => {
+test('Day 03 — Solutions', t => {
   t.is(getTreeCountForSlope(input, [3, 1]), 218)
   t.is(
     getResult(input, [

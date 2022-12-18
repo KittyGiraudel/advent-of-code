@@ -7,12 +7,10 @@ rotate column x=1 by 1
 rotate row y=0 by 4
 rotate column x=1 by 1`.split('\n')
 
-test('Day 8.1', t => {
+test('Day 08 — Sample', t => {
   t.is(run(sample, [7, 3]), 6)
 })
 
-test.skip('Day 8.2', t => {})
-
-test('Day 8 — Solutions', t => {
+test('Day 08 — Solutions', t => {
   t.is(run(input), 121)
 })

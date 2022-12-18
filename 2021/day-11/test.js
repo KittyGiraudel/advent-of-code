@@ -19,11 +19,8 @@ const sample = `5483143223
 4846848554
 5283751526`.split('\n')
 
-test('Day 11.1', t => {
+test('Day 11 — Sample', t => {
   t.is(countFlashes(sample, 100), 1656)
-})
-
-test('Day 11.2', t => {
   t.is(findSynchronocity(sample), 195)
 })
 

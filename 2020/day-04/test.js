@@ -2,7 +2,7 @@ const test = require('ava')
 const { isValidLoose, isValidStrict, VALIDATORS } = require('.')
 const passports = require('../../helpers/readInput')(__dirname, '\n\n')
 
-test('Day 4.1', t => {
+test('Day 04 — Sample', t => {
   t.is(
     isValidLoose(`ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
   byr:1937 iyr:2017 cid:147 hgt:183cm`),
@@ -25,9 +25,6 @@ test('Day 4.1', t => {
   iyr:2011 ecl:brn hgt:59in`),
     false
   )
-})
-
-test('Day 4.2', t => {
   t.is(VALIDATORS.byr('2002'), true)
   t.is(VALIDATORS.byr('2003'), false)
   t.is(VALIDATORS.eyr('1920'), false)
@@ -91,7 +88,7 @@ hcl:#623a2f`),
   )
 })
 
-test('Day 4 — Solutions', t => {
+test('Day 04 — Solutions', t => {
   t.is(passports.filter(isValidLoose).length, 190)
   t.is(passports.filter(isValidStrict).length, 121)
 })

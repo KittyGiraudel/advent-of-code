@@ -7,15 +7,12 @@ RRDDD
 LURDL
 UUUUD`.split('\n')
 
-test('Day 2.1', t => {
+test('Day 02 — Sample', t => {
   t.is(run(sample), '1985')
-})
-
-test('Day 2.2', t => {
   t.is(run(sample, true), '5DB3')
 })
 
-test('Day 2 — Solutions', t => {
+test('Day 02 — Solutions', t => {
   t.is(run(input), '78985')
   t.is(run(input, true), '57DD8')
 })

@@ -1,11 +1,9 @@
 const test = require('ava')
 const { run, run2 } = require('./')
 
-test('Day 17.1', t => {
+test('Day 17 — Sample', t => {
   t.is(run(3, 15), 638)
 })
-
-test.skip('Day 17.2', t => {})
 
 test('Day 17 — Solutions', t => {
   t.is(run(394), 926)

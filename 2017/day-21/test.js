@@ -5,11 +5,9 @@ const input = require('../../helpers/readInput')(__dirname)
 const sampleA = `../.# => ##./#../...
 .#./..#/### => #..#/..../..../#..#`.split('\n')
 
-test('Day 21.1', t => {
+test('Day 21 — Sample', t => {
   t.is(run(sampleA, 2), 12)
 })
-
-test.skip('Day 21.2', t => {})
 
 test('Day 21 — Solutions', t => {
   t.is(run(input, 5), 197)

@@ -10,11 +10,9 @@ cpy 1 a
 dec a
 dec a`.split('\n')
 
-test('Day 23.1', t => {
+test('Day 23 — Sample', t => {
   t.is(run(sample), 3)
 })
-
-test.skip('Day 23.2', t => {})
 
 test('Day 23 — Solutions', t => {
   // t.is(run(input, 7), 11739)

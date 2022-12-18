@@ -13,16 +13,9 @@ const sample =
 ..#..
 ..###`.split('\n\n')
 
-test('Day 20.1', t => {
-  const image = processImage(...sample, 2)
-  const lights = $.countInString(image, '#')
-  t.is(lights, 35)
-})
-
-test('Day 20.2', t => {
-  const image = processImage(...sample, 50)
-  const lights = $.countInString(image, '#')
-  t.is(lights, 3351)
+test('Day 20 — Sample', t => {
+  t.is($.countInString(processImage(...sample, 2), '#'), 35)
+  t.is($.countInString(processImage(...sample, 50), '#'), 3351)
 })
 
 test('Day 20 — Solutions', t => {

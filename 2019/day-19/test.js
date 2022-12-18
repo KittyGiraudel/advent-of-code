@@ -3,9 +3,7 @@ const $ = require('../../helpers')
 const { run } = require('./')
 const [input] = require('../../helpers/readInput')(__dirname)
 
-test.skip('Day 19.1', t => {})
-
-test.skip('Day 19.2', t => {})
+test.skip('Day 19 — Sample', t => {})
 
 test('Day 19 — Solutions', t => {
   t.is($.countInString(run(input).flat().join(''), '1'), 169)

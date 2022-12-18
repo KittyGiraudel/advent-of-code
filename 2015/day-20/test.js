@@ -1,7 +1,7 @@
 const test = require('ava')
 const { run } = require('./')
 
-test('Day 20.1', t => {
+test('Day 20 — Sample', t => {
   t.deepEqual(run(150), [8, 8])
 })
 

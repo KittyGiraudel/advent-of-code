@@ -10,11 +10,8 @@ const sample = `0 <-> 2
 5 <-> 6
 6 <-> 4, 5`.split('\n')
 
-test('Day 12.1', t => {
+test('Day 12 — Sample', t => {
   t.is(run(sample)[0], 6)
-})
-
-test('Day 12.2', t => {
   t.is(run(sample)[1], 2)
 })
 

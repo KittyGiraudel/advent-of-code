@@ -18,15 +18,12 @@ const sample = `1000
 10000
 `.split('\n\n')
 
-test('Day 1.1', t => {
+test('Day 01 — Sample', t => {
   t.is(findHighestGroup(sample), 24000)
-})
-
-test('Day 1.2', t => {
   t.is(findHighestGroups(sample, 3), 45000)
 })
 
-test('Day 1 — Solutions', t => {
+test('Day 01 — Solutions', t => {
   t.is(findHighestGroup(input), 70369)
   t.is(findHighestGroups(input, 3), 203002)
 })

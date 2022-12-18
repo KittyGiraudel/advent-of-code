@@ -1,19 +1,16 @@
 const test = require('ava')
 const { countIncreases, countWindowIncreases } = require('./')
-const numbers = require('../../helpers/readInput')(__dirname).map(Number)
+const input = require('../../helpers/readInput')(__dirname).map(Number)
 
-test('Day 1.1', t => {
+test('Day 01 — Sample', t => {
   t.is(countIncreases([199, 200, 208, 210, 200, 207, 240, 269, 260, 263]), 7)
-})
-
-test('Day 1.2', t => {
   t.is(
     countWindowIncreases([199, 200, 208, 210, 200, 207, 240, 269, 260, 263]),
     5
   )
 })
 
-test('Day 1 — Solutions', t => {
-  t.is(countIncreases(numbers), 1681)
+test('Day 01 — Solutions', t => {
+  t.is(countIncreases(input), 1681)
   t.is(countWindowIncreases(numbers), 1704)
 })

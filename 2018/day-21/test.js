@@ -2,9 +2,7 @@ const test = require('ava')
 const { run } = require('../day-19')
 const input = require('../../helpers/readInput')(__dirname)
 
-test.skip('Day 21.1', t => {})
-
-test.skip('Day 21.2', t => {})
+test.skip('Day 21 — Sample', t => {})
 
 test('Day 21 — Solutions', t => {
   // Day 21 was solved without writing new code, just by fiddling with the code

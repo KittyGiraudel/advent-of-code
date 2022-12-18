@@ -13,7 +13,7 @@ const sample = `[({(<(())[]>[[{[]{<()<>>
 <{([([[(<>()){}]>(<<{{
 <{([{{}}[<[[[<>{}]]]>[]]`.split('\n')
 
-test('Day 10.1', t => {
+test('Day 10 — Sample', t => {
   t.is(processLine('(]').type, 'CORRUPTED')
   t.is(processLine('{()()()>').type, 'CORRUPTED')
   t.is(processLine('(((()))}').type, 'CORRUPTED')
@@ -24,9 +24,6 @@ test('Day 10.1', t => {
   t.is(processLine('[<(<(<(<{}))><([]([]()').type, 'CORRUPTED')
   t.is(processLine('<{([([[(<>()){}]>(<<{{').type, 'CORRUPTED')
   t.is(getCorruptionScore(sample), 26397)
-})
-
-test('Day 10.2', t => {
   t.is(getCompletionScore(sample), 288957)
 })
 

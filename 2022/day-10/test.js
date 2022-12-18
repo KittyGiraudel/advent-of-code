@@ -150,11 +150,8 @@ noop
 noop`.split('\n')
 const program = new Computer(sample)
 
-test('Day 10.1', t => {
+test('Day 10 — Sample', t => {
   t.is(program.strength, 13140)
-})
-
-test('Day 10.2', t => {
   t.is(
     program.print(),
     `

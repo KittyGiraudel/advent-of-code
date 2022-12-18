@@ -9,11 +9,8 @@ F---|----E|--+
     |  |  |  D
     +B-+  +--+`.split('\n')
 
-test('Day 19.1', t => {
+test('Day 19 — Sample', t => {
   t.is(run(sampleA)[0], 'ABCDEF')
-})
-
-test('Day 19.2', t => {
   t.is(run(sampleA)[1], 38)
 })
 

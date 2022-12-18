@@ -30,11 +30,8 @@ Monkey 3:
     If true: throw to monkey 0
     If false: throw to monkey 1`.split('\n\n')
 
-test('Day 11.1', t => {
+test('Day 11 — Sample', t => {
   t.is(play(sample), 10605)
-})
-
-test('Day 11.2', t => {
   t.is(play(sample, true), 2713310158)
 })
 

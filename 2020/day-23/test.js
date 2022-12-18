@@ -3,12 +3,9 @@ const { play, serializeChain, getChainValue } = require('.')
 const input = require('../../helpers/readInput')(__dirname).map(Number)
 const example = '389125467'.split('').map(Number)
 
-test('Day 23.1', t => {
+test('Day 23 — Sample', t => {
   t.is(serializeChain(play(example, 10)), 92658374)
   t.is(serializeChain(play(example, 100)), 67384529)
-})
-
-test('Day 23.2', t => {
   t.is(getChainValue(play(example, 10_000_000, 1_000_000)), 149245887792)
 })
 

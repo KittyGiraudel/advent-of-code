@@ -20,11 +20,8 @@ Player 2:
   .trim()
   .split('\n\n')
 
-test('Day 22.1', t => {
+test('Day 22 — Sample', t => {
   t.is(getGameScore(example), 306)
-})
-
-test('Day 22.2', t => {
   t.is(getGameScore(example, fightRecursive), 291)
 })
 

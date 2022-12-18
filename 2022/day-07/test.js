@@ -29,15 +29,12 @@ $ ls
 const sampleDrive = parseOutput(sample)
 const drive = parseOutput(input)
 
-test('Day 7.1', t => {
+test('Day 07 — Sample', t => {
   t.is(getSmallDirsSize(sampleDrive), 95437)
-})
-
-test('Day 7.2', t => {
   t.is(findFreeableSpace(sampleDrive), 24933642)
 })
 
-test('Day 7 — Solutions', t => {
+test('Day 07 — Solutions', t => {
   t.is(getSmallDirsSize(drive), 1513699)
   t.is(findFreeableSpace(drive), 7991939)
 })

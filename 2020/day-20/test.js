@@ -114,7 +114,7 @@ Tile 3079:
   .trim()
   .split('\n\n')
 
-test('Day 20.1', t => {
+test('Day 20 — Sample', t => {
   t.deepEqual(run(example), [20899048083289, 273])
 })
 

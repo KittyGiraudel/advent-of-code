@@ -11,13 +11,9 @@ x=498, y=10..13
 x=504, y=10..13
 y=13, x=498..504`.split('\n')
 
-test('Day 16.1', t => {
+test('Day 16 — Sample', t => {
   const counts = scan(sampleA)
   t.is(counts[0] + counts[1], 57)
-})
-
-test('Day 16.2', t => {
-  const counts = scan(sampleA)
   t.is(counts[0], 29)
 })
 

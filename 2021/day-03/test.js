@@ -1,6 +1,6 @@
 const test = require('ava')
 const { getEpsilonAndGamma, getOxygen, getCO2 } = require('./')
-const items = require('../../helpers/readInput')(__dirname)
+const input = require('../../helpers/readInput')(__dirname)
 
 const sample = `00100
 11110
@@ -15,16 +15,14 @@ const sample = `00100
 00010
 01010`.split('\n')
 
-test('Day 3.1', t => {
+test('Day 03 — Sample', t => {
   const { gamma, epsilon } = getEpsilonAndGamma(sample)
   const power = parseInt(gamma, 2) * parseInt(epsilon, 2)
 
   t.is(gamma, '10110')
   t.is(epsilon, '01001')
   t.is(power, 198)
-})
 
-test('Day 3.2', t => {
   const oxygen = getOxygen(sample)
   const CO2 = getCO2(sample)
   const life = parseInt(oxygen, 2) * parseInt(CO2, 2)
@@ -34,13 +32,13 @@ test('Day 3.2', t => {
   t.is(life, 230)
 })
 
-test('Day 3 — Solutions', t => {
-  const { gamma, epsilon } = getEpsilonAndGamma(items)
+test('Day 03 — Solutions', t => {
+  const { gamma, epsilon } = getEpsilonAndGamma(input)
   const power = parseInt(gamma, 2) * parseInt(epsilon, 2)
   t.is(power, 4103154)
 
-  const oxygen = getOxygen(items)
-  const CO2 = getCO2(items)
+  const oxygen = getOxygen(input)
+  const CO2 = getCO2(input)
   const life = parseInt(oxygen, 2) * parseInt(CO2, 2)
   t.is(life, 4245351)
 })

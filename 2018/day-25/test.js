@@ -44,14 +44,12 @@ const sampleD = `1,-1,-1,-2
 1,2,2,0
 -1,-2,0,-2`.split('\n')
 
-test('Day 25.1', t => {
+test('Day 25 — Sample', t => {
   t.is(observe(sampleA), 2)
   t.is(observe(sampleB), 4)
   t.is(observe(sampleC), 3)
   t.is(observe(sampleD), 8)
 })
-
-test.skip('Day 25.2', t => {})
 
 test('Day 25 — Solutions', t => {
   t.is(observe(input), 375)

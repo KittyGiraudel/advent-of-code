@@ -9,15 +9,12 @@ wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
 ttgJtRGJQctTZtZT
 CrZsJsPPZsGzwwsLwLmpwMDw`.split('\n')
 
-test('Day 3.1', t => {
+test('Day 03 — Sample', t => {
   t.is(process(sample), 157)
-})
-
-test('Day 3.2', t => {
   t.is(processGroups(sample), 70)
 })
 
-test('Day 3 — Solutions', t => {
+test('Day 03 — Solutions', t => {
   t.is(process(input), 8394)
   t.is(processGroups(input), 2413)
 })

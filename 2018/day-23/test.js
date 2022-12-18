@@ -19,11 +19,8 @@ pos=<14,14,14>, r=6
 pos=<50,50,50>, r=200
 pos=<10,10,10>, r=5`.split('\n')
 
-test('Day 23.1', t => {
+test('Day 23 — Sample', t => {
   t.is(findStrongestBot(sampleA)[0], 7)
-})
-
-test('Day 23.2', t => {
   t.is(findStrongestBot(sampleB)[1], 36)
 })
 

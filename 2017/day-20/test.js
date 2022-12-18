@@ -5,11 +5,9 @@ const input = require('../../helpers/readInput')(__dirname)
 const sampleA = `p=<3,0,0>, v=<2,0,0>, a=<-1,0,0>
 p=<4,0,0>, v=<0,0,0>, a=<-2,0,0>`.split('\n')
 
-test('Day 20.1', t => {
+test('Day 20 — Sample', t => {
   t.is(run(sampleA)[0], 0)
 })
-
-test.skip('Day 20.2', t => {})
 
 test('Day 20 — Solutions', t => {
   t.deepEqual(run(input), [364, 420])

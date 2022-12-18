@@ -8,9 +8,7 @@ const sample = `.....
 .....
 .....`.split('\n')
 
-test.skip('Day 11.1', t => {})
-
-test.skip('Day 11.2', t => {})
+test.skip('Day 11 — Sample', t => {})
 
 test('Day 11 — Solutions', t => {
   const startOnBlack = paint(input, 0)

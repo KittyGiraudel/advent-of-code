@@ -10,15 +10,12 @@ const sampleB = `5 9 2 8
 9 4 7 3
 3 8 6 5`.split('\n')
 
-test('Day 2.1', t => {
+test('Day 02 — Sample', t => {
   t.is(checksum(sampleA), 18)
-})
-
-test('Day 2.2', t => {
   t.is(checksum(sampleB, true), 9)
 })
 
-test('Day 2 — Solutions', t => {
+test('Day 02 — Solutions', t => {
   t.is(checksum(input), 46402)
   t.is(checksum(input, true), 265)
 })

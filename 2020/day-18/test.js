@@ -3,15 +3,12 @@ const { computeLoose, computeStrict } = require('.')
 const sum = require('../../helpers/sum')
 const input = require('../../helpers/readInput')(__dirname)
 
-test('Day 18.1', t => {
+test('Day 18 — Sample', t => {
   t.is(computeLoose('1 + (2 * 3) + (4 * (5 + 6))'), 51)
   t.is(computeLoose('2 * 3 + (4 * 5)'), 26)
   t.is(computeLoose('5 + (8 * 3 + 9 + 3 * 4 * 3)'), 437)
   t.is(computeLoose('5 * 9 * (7 * 3 * 3 + 9 * 3 + (8 + 6 * 4))'), 12240)
   t.is(computeLoose('((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2'), 13632)
-})
-
-test('Day 18.2', t => {
   t.is(computeStrict('1 + (2 * 3) + (4 * (5 + 6))'), 51)
   t.is(computeStrict('2 * 3 + (4 * 5)'), 46)
   t.is(computeStrict('5 + (8 * 3 + 9 + 3 * 4 * 3)'), 1445)

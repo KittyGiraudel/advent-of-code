@@ -21,7 +21,7 @@ v>v.vv.v..
 v.v..>>v.v
 ....v..v.>`.split('\n')
 
-test('Day 25.1', t => {
+test('Day 25 — Sample', t => {
   t.is(
     serialize(steps(sampleA, 4)),
     `>......
@@ -73,8 +73,6 @@ vvv.....>>
 
   t.is(run(sampleB), 58)
 })
-
-test.skip('Day 25.2', t => {})
 
 test('Day 25 — Solutions', t => {
   t.is(run(input), 417)

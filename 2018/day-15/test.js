@@ -84,17 +84,12 @@ const sampleF = `
   .trim()
   .split('\n')
 
-test('Day 15.1', t => {
-  // Works correctly: t.is(battle(sample0), 0)
-  // Passing:
+test('Day 15 — Sample', t => {
   t.is(battle(sampleA), 27730)
   t.is(battle(sampleD), 28944)
   t.is(battle(sampleE), 18740)
   t.is(battle(sampleB), 36334)
   t.is(battle(sampleC), 39514)
-})
-
-test('Day 15.2', t => {
   t.is(cheat(sampleA), 4988)
   t.is(cheat(sampleC), 31284)
   t.is(cheat(sampleF), 3478)

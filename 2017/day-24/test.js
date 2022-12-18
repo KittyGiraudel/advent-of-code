@@ -16,11 +16,8 @@ const sortByScore = (a, b) => b.score - a.score
 const sortByLength = (a, b) => b.length - a.length || sortByScore(a, b)
 const getBest = bridges => bridges[0].score
 
-test('Day 24.1', t => {
+test('Day 24 — Sample', t => {
   t.is(getBest(outputA.sort(sortByScore)), 31)
-})
-
-test('Day 24.2', t => {
   t.is(getBest(outputA.sort(sortByLength)), 19)
 })
 

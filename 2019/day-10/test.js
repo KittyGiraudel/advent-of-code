@@ -68,15 +68,12 @@ const sampleF = `.#....#####...#..
 ..#.....#...###..
 ..#.#.....#....##`.split('\n')
 
-test('Day 10.1', t => {
+test('Day 10 — Sample', t => {
   t.is(findBestSpot(sampleA)[0], '3,4')
   t.is(findBestSpot(sampleB)[0], '5,8')
   t.is(findBestSpot(sampleC)[0], '1,2')
   t.is(findBestSpot(sampleD)[0], '6,3')
   t.is(findBestSpot(sampleE)[0], '11,13')
-})
-
-test('Day 10.2', t => {
   const orderF = vaporize(sampleF)
   t.is(
     orderF.map(o => o.x + ',' + o.y).join(';'),

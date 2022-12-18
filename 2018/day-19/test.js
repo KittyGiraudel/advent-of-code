@@ -11,11 +11,9 @@ setr 1 0 0
 seti 8 0 4
 seti 9 0 5`.split('\n')
 
-test('Day 19.1', t => {
+test('Day 19 — Sample', t => {
   t.is(run(sample), 6)
 })
-
-test.skip('Day 19.2', t => {})
 
 test('Day 19 — Solutions', t => {
   t.is(run(input, 0), 1536)

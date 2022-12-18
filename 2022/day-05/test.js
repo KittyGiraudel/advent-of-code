@@ -14,15 +14,12 @@ move 2 from 2 to 1
 move 1 from 1 to 2
 `.split('\n\n')
 
-test('Day 5.1', t => {
+test('Day 05 — Sample', t => {
   t.is(process(sample), 'CMZ')
-})
-
-test('Day 5.2', t => {
   t.is(process(sample, true), 'MCD')
 })
 
-test('Day 5 — Solutions', t => {
+test('Day 05 — Solutions', t => {
   t.is(process(input), 'DHBJQJCCW')
   t.is(process(input, true), 'WJVRLSJJT')
 })

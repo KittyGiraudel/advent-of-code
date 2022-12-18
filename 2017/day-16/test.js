@@ -2,11 +2,9 @@ const test = require('ava')
 const { dance } = require('./')
 const input = require('../../helpers/readInput')(__dirname, ',')
 
-test('Day 16.1', t => {
+test('Day 16 — Sample', t => {
   t.is(dance('s1,x3/4,pe/b'.split(','), 5), 'baedc')
 })
-
-test.skip('Day 16.2', t => {})
 
 test('Day 16 — Solutions', t => {
   t.is(dance(input), 'ehdpincaogkblmfj')

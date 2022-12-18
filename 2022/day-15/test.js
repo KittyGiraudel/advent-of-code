@@ -17,11 +17,8 @@ Sensor at x=16, y=7: closest beacon is at x=15, y=3
 Sensor at x=14, y=3: closest beacon is at x=15, y=3
 Sensor at x=20, y=1: closest beacon is at x=15, y=3`.split('\n')
 
-test('Day 15.1', t => {
+test('Day 15 — Sample', t => {
   t.is(detect(sample, 10), 26)
-})
-
-test('Day 15.2', t => {
   t.is(detect(sample, null, 20), 56000011)
 })
 

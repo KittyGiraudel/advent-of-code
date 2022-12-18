@@ -13,15 +13,12 @@ const sample = `0,9 -> 5,9
 0,0 -> 8,8
 5,5 -> 8,2`.split('\n')
 
-test('Day 5.1', t => {
+test('Day 05 — Sample', t => {
   t.is(getOverlappingPoints(sample), 5)
-})
-
-test('Day 5.2', t => {
   t.is(getOverlappingPoints(sample, true), 12)
 })
 
-test('Day 5 — Solutions', t => {
+test('Day 05 — Solutions', t => {
   t.is(getOverlappingPoints(input), 7269)
   t.is(getOverlappingPoints(input, true), 21140)
 })

@@ -21,11 +21,8 @@ BC -> B
 CC -> N
 CN -> C`.split('\n\n')
 
-test('Day 14.1', t => {
+test('Day 14 — Sample', t => {
   t.is(count(sample, 10), 1588)
-})
-
-test('Day 14.2', t => {
   t.is(count(sample, 40), 2188189693529)
 })
 

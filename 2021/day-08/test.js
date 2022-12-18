@@ -16,11 +16,8 @@ gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce
     '\n'
   )
 
-test('Day 8.1', t => {
+test('Day 08 — Sample', t => {
   t.is(count(sample), 26)
-})
-
-test('Day 8.2', t => {
   t.is(
     decode(
       'acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf'
@@ -90,7 +87,7 @@ test('Day 8.2', t => {
   t.is(total(sample), 61229)
 })
 
-test('Day 8 — Solutions', t => {
+test('Day 08 — Solutions', t => {
   t.is(count(input), 554)
   t.is(total(input), 990964)
 })

@@ -2,8 +2,7 @@ const test = require('ava')
 const { draw, getInitialState, initComputer, render } = require('./')
 const [input] = require('../../helpers/readInput')(__dirname)
 
-test.skip('Day 13.1', t => {})
-test.skip('Day 13.2', t => {})
+test.skip('Day 13 — Sample', t => {})
 
 test('Day 13 — Solutions', t => {
   const state = getInitialState(initComputer(input))

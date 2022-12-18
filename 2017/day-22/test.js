@@ -6,13 +6,10 @@ const sampleA = `..#
 #..
 ...`.split('\n')
 
-test('Day 22.1', t => {
+test('Day 22 — Sample', t => {
   t.is(run(sampleA, 7), 5)
   t.is(run(sampleA, 70), 41)
   t.is(run(sampleA, 10_000), 5587)
-})
-
-test('Day 22.2', t => {
   t.is(run(sampleA, 100, true), 26)
   t.is(run(sampleA, 10_000_000, true), 2511944)
 })

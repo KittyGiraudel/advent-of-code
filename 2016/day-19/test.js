@@ -1,11 +1,8 @@
 const test = require('ava')
 const { run } = require('./')
 
-test('Day 19.1', t => {
+test('Day 19 — Sample', t => {
   t.is(run(5), 3)
-})
-
-test('Day 19.2', t => {
   t.is(run(5, true), 2)
 })
 

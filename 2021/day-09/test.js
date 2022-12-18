@@ -8,15 +8,12 @@ const sample = `2199943210
 8767896789
 9899965678`.split('\n')
 
-test('Day 9.1', t => {
+test('Day 09 — Sample', t => {
   t.is(sumLowPointsRisk(sample), 15)
-})
-
-test('Day 9.2', t => {
   t.is(getProductOfBiggestBasins(sample), 1134)
 })
 
-test('Day 9 — Solutions', t => {
+test('Day 09 — Solutions', t => {
   t.is(sumLowPointsRisk(input), 500)
   t.is(getProductOfBiggestBasins(input), 970200)
 })

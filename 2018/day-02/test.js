@@ -2,7 +2,7 @@ const test = require('ava')
 const { checksum, findId } = require('./')
 const input = require('../../helpers/readInput')(__dirname)
 
-test('Day 2.1', t => {
+test('Day 02 — Sample', t => {
   t.is(
     checksum([
       'abcdef',
@@ -17,9 +17,7 @@ test('Day 2.1', t => {
   )
 })
 
-test.skip('Day 2.2', t => {})
-
-test('Day 2 — Solutions', t => {
+test('Day 02 — Solutions', t => {
   t.is(checksum(input), 6916)
   t.is(findId(input), 'oeylbtcxjqnzhgyylfapviusr')
 })

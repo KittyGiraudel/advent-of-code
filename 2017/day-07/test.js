@@ -16,15 +16,12 @@ ugml (68) -> gyxo, ebii, jptl
 gyxo (61)
 cntj (57)`.split('\n')
 
-test('Day 7.1', t => {
+test('Day 07 — Sample', t => {
   t.is(run(sample).root, 'tknk')
-})
-
-test('Day 7.2', t => {
   t.is(run(sample).fix, 60)
 })
 
-test('Day 7 — Solutions', t => {
+test('Day 07 — Solutions', t => {
   t.is(run(input).root, 'vtzay')
   t.is(run(input).fix, 910)
 })

@@ -10,15 +10,12 @@ Step B must be finished before step E can begin.
 Step D must be finished before step E can begin.
 Step F must be finished before step E can begin.`.split('\n')
 
-test('Day 7.1', t => {
+test('Day 07 — Sample', t => {
   t.is(sequential(sample, 1, 0), 'CABDFE')
-})
-
-test('Day 7.2', t => {
   t.deepEqual(parallel(sample, 2, 0), { duration: 15, order: 'CABFDE' })
 })
 
-test('Day 7 — Solutions', t => {
+test('Day 07 — Solutions', t => {
   t.is(sequential(input), 'GKRVWBESYAMZDPTIUCFXQJLHNO')
   t.deepEqual(parallel(input, 5, 60), {
     duration: 903,

@@ -24,15 +24,12 @@ const sample = `7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,
 
 const sampleBingos = getBingos(sample)
 
-test('Day 4.1', t => {
+test('Day 04 — Sample', t => {
   t.is(sampleBingos[0], 4512)
-})
-
-test('Day 4.2', t => {
   t.is(sampleBingos[sampleBingos.length - 1], 1924)
 })
 
-test('Day 4 — Solutions', t => {
+test('Day 04 — Solutions', t => {
   const bingos = getBingos(input)
 
   t.is(bingos[0], 45031)

@@ -139,11 +139,9 @@ const sample = `--- scanner 0 ---
 -652,-548,-490
 30,-46,-14`.split('\n\n')
 
-test.skip('Day 19.1', t => {
+test.skip('Day 19 — Sample', t => {
   const scanners = parse(sample)
   const overlaps = findOverlaps(scanners[0], scanners[1])
 })
-
-test.skip('Day 19.2', t => {})
 
 test.skip('Day 19 — Solutions', t => {})

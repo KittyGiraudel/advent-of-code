@@ -7,11 +7,8 @@ const sample = `0: 3
 4: 4
 6: 4`.split('\n')
 
-test('Day 13.1', t => {
+test('Day 13 — Sample', t => {
   t.is(run(sample), 24)
-})
-
-test('Day 13.2', t => {
   t.is(cross(sample), 10)
 })
 

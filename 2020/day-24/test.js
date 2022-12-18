@@ -27,11 +27,8 @@ wseweeenwnesenwwwswnew
   .trim()
   .split('\n')
 
-test('Day 24.1', t => {
+test('Day 24 — Sample', t => {
   t.is(gameOfLife(example, 0), 10)
-})
-
-test('Day 24.2', t => {
   t.is(gameOfLife(example, 1), 15)
   t.is(gameOfLife(example, 2), 12)
   t.is(gameOfLife(example, 10), 37)

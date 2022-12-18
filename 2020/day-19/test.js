@@ -7,7 +7,7 @@ const PATCH = {
   '11: 42 31': '11: 42 31 | 42 11 31',
 }
 
-test('Day 19.1', t => {
+test('Day 19 — Sample', t => {
   const example = `
 0: 4 1 5
 1: 2 3 | 3 2
@@ -25,10 +25,7 @@ aaaabbb
     .trim()
     .split('\n\n')
   t.is(count(...example), 2)
-})
-
-test('Day 19.2', t => {
-  const example = `
+  const example2 = `
 42: 9 14 | 10 1
 9: 14 27 | 1 26
 10: 23 14 | 28 1
@@ -79,7 +76,7 @@ aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba
 `
     .trim()
     .split('\n\n')
-  const example2 = `
+  const example3 = `
 0: 8 11
 8: 42
 42: "a"
@@ -94,8 +91,8 @@ aaab
 `
     .trim()
     .split('\n\n')
-  t.is(count(...example, PATCH), 12)
-  t.is(count(...example2, PATCH), 1)
+  t.is(count(...example2, PATCH), 12)
+  t.is(count(...example3, PATCH), 1)
 })
 
 test('Day 19 — Solutions', t => {

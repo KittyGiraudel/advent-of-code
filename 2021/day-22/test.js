@@ -91,12 +91,9 @@ off x=-70369..-16548,y=22648..78696,z=-1892..86821
 on x=-53470..21291,y=-120233..-33476,z=-44150..38147
 off x=-93533..-4276,y=-16170..68771,z=-104985..-24507`.split('\n')
 
-test('Day 22.1', t => {
+test('Day 22 — Sample', t => {
   t.is(reboot(sampleA, 50), 39)
   t.is(reboot(sampleB, 50), 590784)
-})
-
-test('Day 22.2', t => {
   t.is(reboot(sampleC, Infinity), 2758514936282235)
 })
 

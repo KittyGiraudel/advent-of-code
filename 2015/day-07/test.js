@@ -11,7 +11,7 @@ y RSHIFT 2 -> g
 NOT x -> h
 NOT y -> i`.split('\n')
 
-test('Day 7.1', t => {
+test('Day 07 — Sample', t => {
   t.is(run(sample).d, 72)
   t.is(run(sample).e, 507)
   t.is(run(sample).f, 492)
@@ -22,9 +22,7 @@ test('Day 7.1', t => {
   t.is(run(sample).i, 65079)
 })
 
-test.skip('Day 7.2', t => {})
-
-test('Day 7 — Solutions', t => {
+test('Day 07 — Solutions', t => {
   t.is(run(input).a, 16076)
   t.is(run(input, { b: 16076 }).a, 2797)
 })

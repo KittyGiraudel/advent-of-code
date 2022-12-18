@@ -3,11 +3,8 @@ const { getNextDeparture, getEarliestTimestamp } = require('.')
 const product = require('../../helpers/product')
 const input = require('../../helpers/readInput')(__dirname)
 
-test('Day 13.1', t => {
+test('Day 13 — Sample', t => {
   t.is(product(getNextDeparture('939\n7,13,x,x,59,x,31,19'.split('\n'))), 295)
-})
-
-test('Day 13.2', t => {
   t.is(getEarliestTimestamp('\n7,13'.split('\n')), 77)
   t.is(getEarliestTimestamp('\n7,13,x'.split('\n')), 77)
   t.is(getEarliestTimestamp('\n7,13,x,x,59'.split('\n')), 350)

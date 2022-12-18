@@ -8,11 +8,8 @@ accszExk
 acctuvwj
 abdefghi`.split('\n')
 
-test('Day 12.1', t => {
+test('Day 12 — Sample', t => {
   t.is(process(sample), 31)
-})
-
-test('Day 12.2', t => {
   t.is(findShortestPath(sample), 29)
 })
 

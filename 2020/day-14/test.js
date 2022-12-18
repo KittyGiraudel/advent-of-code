@@ -7,7 +7,7 @@ const {
 } = require('.')
 const input = require('../../helpers/readInput')(__dirname)
 
-test('Day 14.1', t => {
+test('Day 14 — Sample', t => {
   const example = `
   mask = XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X
   mem[8] = 11
@@ -23,10 +23,7 @@ test('Day 14.1', t => {
     [8, 0],
   ])
   t.is(executeProgram(example, processLoose), 165)
-})
-
-test('Day 14.2', t => {
-  const example = `
+  const example2 = `
 mask = 000000000000000000000000000000X1001X
 mem[42] = 100
 mask = 00000000000000000000000000000000X0XX
@@ -34,7 +31,7 @@ mem[26] = 1
 `
     .trim()
     .split('\n')
-  t.is(executeProgram(example, processStrict), 208)
+  t.is(executeProgram(example2, processStrict), 208)
 })
 
 test('Day 14 — Solutions', t => {

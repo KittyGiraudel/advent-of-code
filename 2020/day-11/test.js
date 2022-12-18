@@ -98,16 +98,13 @@ L.#.L..#..
   .trim()
   .split('\n')
 
-test('Day 11.1', t => {
+test('Day 11 — Sample', t => {
   t.deepEqual(processLayout(GEN_1, processSeatLoose), GEN_2)
   t.deepEqual(processLayout(GEN_2, processSeatLoose), GEN_3)
   t.deepEqual(processLayout(GEN_3, processSeatLoose), GEN_4)
   t.deepEqual(processLayout(GEN_4, processSeatLoose), GEN_5)
   t.deepEqual(processLayout(GEN_5, processSeatLoose), GEN_6)
   t.is(waitAndCountOccupiedSeats(GEN_1, processSeatLoose), 37)
-})
-
-test('Day 11.2', t => {
   t.is(
     getVisibleSeats(
       `

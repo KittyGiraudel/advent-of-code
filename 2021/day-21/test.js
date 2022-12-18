@@ -1,11 +1,8 @@
 const test = require('ava')
 const { playDeterministically, playQuantum } = require('./')
 
-test('Day 21.1', t => {
+test('Day 21 — Sample', t => {
   t.is(playDeterministically(4, 8).value, 739785)
-})
-
-test('Day 21.2', t => {
   t.is(playQuantum(4, 8), 444356092776315)
 })
 

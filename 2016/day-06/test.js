@@ -19,12 +19,10 @@ vrdear
 dvrsen
 enarar`.split('\n')
 
-test('Day 6.1', t => {
+test('Day 06 — Sample', t => {
   t.deepEqual(run(sample), ['advent', 'easter'])
 })
 
-test.skip('Day 6.2', t => {})
-
-test('Day 6 — Solutions', t => {
+test('Day 06 — Solutions', t => {
   t.deepEqual(run(input), ['myregdnr', 'tzstqsua'])
 })

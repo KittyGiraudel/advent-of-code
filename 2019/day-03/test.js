@@ -12,19 +12,16 @@ const sampleC = [
   'U98,R91,D20,R16,D67,R40,U7,R15,U6,R7',
 ]
 
-test('Day 3.1', t => {
+test('Day 03 — Sample', t => {
   t.is(findClosestIntersection(sampleA), 6)
   t.is(findClosestIntersection(sampleB), 159)
   t.is(findClosestIntersection(sampleC), 135)
-})
-
-test('Day 3.2', t => {
   t.is(findFastestIntersection(sampleA), 30)
   t.is(findFastestIntersection(sampleB), 610)
   t.is(findFastestIntersection(sampleC), 410)
 })
 
-test('Day 3 — Solutions', t => {
+test('Day 03 — Solutions', t => {
   t.is(findClosestIntersection(lines), 806)
   t.is(findFastestIntersection(lines), 66076)
 })

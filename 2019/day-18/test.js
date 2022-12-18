@@ -20,11 +20,9 @@ const sampleB = `
   .trim()
   .split('\n')
 
-test('Day 18.1', t => {
+test('Day 18 — Sample', t => {
   t.is(run(sampleA), 8)
   //t.is(run(sampleB), 86)
 })
-
-test.skip('Day 18.2', t => {})
 
 test.skip('Day 18 — Solutions', t => {})

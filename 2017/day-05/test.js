@@ -10,15 +10,12 @@ const sample = `0
   .split('\n')
   .map(Number)
 
-test('Day 5.1', t => {
+test('Day 05 — Sample', t => {
   t.is(run(sample), 5)
-})
-
-test('Day 5.2', t => {
   t.is(run(sample, 3), 10)
 })
 
-test('Day 5 — Solutions', t => {
+test('Day 05 — Solutions', t => {
   t.is(run(input), 372671)
   t.is(run(input, 3), 25608480)
 })

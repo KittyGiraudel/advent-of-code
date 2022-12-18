@@ -13,11 +13,8 @@ const sample = `1163751742
 1293138521
 2311944581`.split('\n')
 
-test('Day 15.1', t => {
+test('Day 15 — Sample', t => {
   t.is(getLowestRisk(sample), 40)
-})
-
-test('Day 15.2', t => {
   t.is(getLowestRisk(sample, 5), 315)
 })
 

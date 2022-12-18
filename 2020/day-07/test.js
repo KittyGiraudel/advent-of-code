@@ -35,7 +35,7 @@ dark violet bags contain no other bags.
   .trim()
   .split('\n')
 
-test('Day 7.1', t => {
+test('Day 07 — Sample', t => {
   t.deepEqual(
     parseRestriction(
       'light red bags contain 1 bright white bag, 2 muted yellow bags.'
@@ -60,14 +60,11 @@ test('Day 7.1', t => {
   t.is(canContain(map1, 'bright white', 'shiny gold'), true)
   t.is(canContain(map1, 'dark orange', 'shiny gold'), true)
   t.is(countContainers(mapRestrictions(example1), 'shiny gold'), 4)
-})
-
-test('Day 7.2', t => {
   t.is(countBagsWithin(mapRestrictions(example1), 'shiny gold'), 32)
   t.is(countBagsWithin(mapRestrictions(example2), 'shiny gold'), 126)
 })
 
-test('Day 7 — Solutions', t => {
+test('Day 07 — Solutions', t => {
   const map = mapRestrictions(restrictions)
   const type = 'shiny gold'
 

@@ -8,11 +8,8 @@ Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3`.split(
     '\n'
   )
 
-test('Day 15.1', t => {
+test('Day 15 — Sample', t => {
   t.is(run(sample), 62842880)
-})
-
-test('Day 15.2', t => {
   t.is(run(sample, 500), 57600000)
 })
 

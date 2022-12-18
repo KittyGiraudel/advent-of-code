@@ -40,12 +40,9 @@ zg-he
 pj-fs
 start-RW`.split('\n')
 
-test('Day 12.1', t => {
+test('Day 12 — Sample', t => {
   t.is(findPaths(sampleA).length, 10)
   t.is(findPaths(sampleB).length, 19)
-})
-
-test('Day 12.2', t => {
   t.is(findPaths(sampleA, true).length, 36)
   t.is(findPaths(sampleB, true).length, 103)
   t.is(findPaths(sampleC, true).length, 3509)

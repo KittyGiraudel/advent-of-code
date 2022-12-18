@@ -28,15 +28,12 @@ K)L
 K)YOU
 I)SAN`.split('\n')
 
-test('Day 6.1', t => {
+test('Day 06 — Sample', t => {
   t.is(countOrbits(createGraph(sampleA)), 42)
-})
-
-test('Day 6.2', t => {
   t.is(countTransfers(createGraph(sampleB)), 4)
 })
 
-test('Day 6 — Solutions', t => {
+test('Day 06 — Solutions', t => {
   t.is(countOrbits(createGraph(input)), 292387)
   t.is(countTransfers(createGraph(input)), 433)
 })

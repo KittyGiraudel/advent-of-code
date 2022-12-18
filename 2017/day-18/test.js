@@ -21,15 +21,12 @@ rcv b
 rcv c
 rcv d`.split('\n')
 
-test.skip('Day 18.1', t => {
+test.skip('Day 18 — Sample', t => {
   t.is(run(sampleA), 4)
-})
-
-test('Day 18.2', t => {
   t.is(run(sampleB), 3)
 })
 
 test('Day 18 — Solutions', t => {
-  //t.is(run(input), 1187)
+  // t.is(run(input), 1187)
   t.is(run(input), 5969)
 })

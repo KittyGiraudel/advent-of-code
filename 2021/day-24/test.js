@@ -10,13 +10,11 @@ inp x
 mul z 3
 eql z x`.split('\n')
 
-test('Day 24.1', t => {
+test('Day 24 — Sample', t => {
   t.is(run(sampleA, [7]).x, -7)
   t.is(run(sampleB, [3, 8]).z, 0)
   t.is(run(sampleB, [3, 9]).z, 1)
 })
-
-test.skip('Day 24.2', t => {})
 
 test('Day 24 — Solutions', t => {
   t.is(resolve(input, true), 53999995829399)

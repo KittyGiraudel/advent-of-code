@@ -13,11 +13,9 @@ Valve HH has flow rate=22; tunnel leads to valve GG
 Valve II has flow rate=0; tunnels lead to valves AA, JJ
 Valve JJ has flow rate=21; tunnel leads to valve II`.split('\n')
 
-test('Day 16.1', t => {
+test('Day 16 — Sample', t => {
   t.is(releasePressure(sample), 1651)
 })
-
-test.skip('Day 16.2', t => {})
 
 test('Day 16 — Solutions', t => {
   t.is(releasePressure(input), 1944)

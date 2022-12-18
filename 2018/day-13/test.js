@@ -17,11 +17,8 @@ const sampleB = `/>-<\\
   |   ^
   \\<->/`.split('\n')
 
-test('Day 13.1', t => {
+test('Day 13 — Sample', t => {
   t.is(run(sampleA).join(','), '7,3')
-})
-
-test('Day 13.2', t => {
   t.is(run(sampleB, true).join(','), '6,4')
 })
 

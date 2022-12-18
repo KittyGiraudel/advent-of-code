@@ -7,7 +7,7 @@ const {
 } = require('.')
 const input = require('../../helpers/readInput')(__dirname, '\n\n')
 
-test('Day 16.1', t => {
+test('Day 16 — Sample', t => {
   const example = `
 class: 1-3 or 5-7
 row: 6-11 or 33-44

@@ -11,11 +11,9 @@ move position 3 to position 0
 rotate based on position of letter b
 rotate based on position of letter d`.split('\n')
 
-test('Day 21.1', t => {
+test('Day 21 — Sample', t => {
   t.is(run(sample, 'abcde'), 'decab')
 })
-
-test.skip('Day 21.2', t => {})
 
 test('Day 21 — Solutions', t => {
   t.is(run(input, 'abcdefgh'), 'gfdhebac')

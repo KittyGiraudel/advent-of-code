@@ -13,11 +13,9 @@ const sample = `.#.#...|#.
 |.||||..|.
 ...#.|..|.`.split('\n')
 
-test('Day 18.1', t => {
+test('Day 18 — Sample', t => {
   t.is(run(sample, 10), 1147)
 })
-
-test.skip('Day 18.2', t => {})
 
 test('Day 18 — Solutions', t => {
   t.is(run(input, 10), 394420)

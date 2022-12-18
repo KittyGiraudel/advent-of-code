@@ -11,11 +11,8 @@ sqjhc mxmxvkd sbzzf (contains fish)
   .trim()
   .split('\n')
 
-test('Day 21.1', t => {
+test('Day 21 — Sample', t => {
   t.is(countAllergenFreeOccurrences(example), 5)
-})
-
-test('Day 21.2', t => {
   t.is(getCanonicalDangerousList(example), 'mxmxvkd,sqjhc,fvjkl')
 })
 
