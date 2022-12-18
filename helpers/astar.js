@@ -1,5 +1,7 @@
 const PriorityQueue = require('./PriorityQueue')
 
+const key = item => item?.point ?? item
+
 // A rather simple A* implementation with limited customization options.
 // @param {Object} start - An object representing the starting node
 // @param {Object} [end] - An object representing the ending node
@@ -17,13 +19,13 @@ const getGraph = (
   {
     heuristic = null,
     skipVisited = false,
-    endCheck = (curr, end) => curr.point === end.point,
+    endCheck = (curr, end) => key(curr) === key(end),
   } = {}
 ) => {
   // If we are given a heuristic function, we switch from a simple array to a
   // proper priority queue as we have a way to optimize the walk.
   const frontier = heuristic ? new PriorityQueue([start, 0]) : [start]
-  const from = { [start.point]: null }
+  const from = { [key(start)]: null }
 
   while (frontier.length) {
     let curr = frontier.pop()
@@ -39,10 +41,10 @@ const getGraph = (
     const nodes = getNext(curr, from)
       // If we are given the `skipVisited` option, we should discard the next
       // nodes we have already visited.
-      .filter(next => !skipVisited || !(next.point in from))
+      .filter(next => !skipVisited || !(key(next) in from))
 
     nodes.forEach(next => {
-      from[next.point] = curr.point
+      from[key(next)] = key(curr)
 
       if (heuristic) {
         frontier.push([next, heuristic(end, next, curr)])
