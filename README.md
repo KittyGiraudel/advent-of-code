@@ -2,7 +2,7 @@
 
 <!-- AOC TILES BEGIN -->
 <h1 align="center">
-  2022 - 30 ⭐
+  2022 - 46 ⭐
 </h1>
 <a href="2022/day-01/index.js">
   <img src="Media/2022/01.png" alt="Day 1 2022: Complete" width="161px">
@@ -48,6 +48,36 @@
 </a>
 <a href="2022/day-15/index.js">
   <img src="Media/2022/15.png" alt="Day 15 2022: Complete" width="161px">
+</a>
+<a href="2022/day-16/index.js">
+  <img src="Media/2022/16.png" alt="Day 16 2022: Partially complete" width="161px">
+</a>
+<a href="2022/day-17/index.js">
+  <img src="Media/2022/17.png" alt="Day 17 2022: Complete" width="161px">
+</a>
+<a href="2022/day-18/index.js">
+  <img src="Media/2022/18.png" alt="Day 18 2022: Complete" width="161px">
+</a>
+<a href="2022/day-19/index.js">
+  <img src="Media/2022/19.png" alt="Day 19 2022: Complete" width="161px">
+</a>
+<a href="2022/day-20/index.js">
+  <img src="Media/2022/20.png" alt="Day 20 2022: Complete" width="161px">
+</a>
+<a href="2022/day-21/index.js">
+  <img src="Media/2022/21.png" alt="Day 21 2022: Complete" width="161px">
+</a>
+<a href="2022/day-22/index.js">
+  <img src="Media/2022/22.png" alt="Day 22 2022: Complete" width="161px">
+</a>
+<a href="2022/day-23/index.js">
+  <img src="Media/2022/23.png" alt="Day 23 2022: Complete" width="161px">
+</a>
+<a href="2022/day-24/index.js">
+  <img src="Media/2022/24.png" alt="Day 24 2022: Complete" width="161px">
+</a>
+<a href="2022/day-25/index.js">
+  <img src="Media/2022/25.png" alt="Day 25 2022: Partially complete" width="161px">
 </a>
 <h1 align="center">
   2021 - 45 ⭐
