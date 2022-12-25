@@ -13,8 +13,7 @@
   },
   "dependencies": {
     "circularray": "^0.1.0",
-    "js-levenshtein": "^1.1.6",
-    "js-yaml": "^4.1.0"
+    "js-levenshtein": "^1.1.6"
   },
   "engines": {
     "node": "18"
