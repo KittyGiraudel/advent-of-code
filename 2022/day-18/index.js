@@ -25,15 +25,13 @@ const getSurfaceArea = (points, advanced = false) => {
   // of the bounding box on purpose, and flood the gaps (which are positions
   // that are not listed as part of our input).
   const start = [minX - 1, minY - 1, minZ - 1]
-  const seen = $.astar.graph(
+  const { from: seen } = $.pathfinding.search({
     start,
-    null,
-    coords =>
+    getNeighbors: coords =>
       getSides(coords)
         .filter(coords => !points.includes($.toPoint(coords)))
         .filter(isWithinBounds),
-    { skipVisited: true }
-  )
+  })
 
   return getArea(cubes, point => point in seen)
 }

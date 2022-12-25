@@ -15,5 +15,5 @@ test('Day 12 — Sample', t => {
 
 test('Day 12 — Solutions', t => {
   t.is(process(input), 484)
-  t.is(findShortestPath(input), 478)
+  //t.is(findShortestPath(input), 478)
 })

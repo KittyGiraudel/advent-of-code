@@ -1,17 +1,15 @@
 const $ = require('../../helpers')
 
 const remapGrid = (start, end) => (value, ri, ci) => {
-  const coords = [ri, ci]
+  const position = [ri, ci]
 
   if (value === 'S') {
-    start.point = $.toPoint(coords)
-    start.coords = coords
+    start.position = position
     return (start.elevation = 'a'.charCodeAt())
   }
 
   if (value === 'E') {
-    end.point = $.toPoint(coords)
-    end.coords = coords
+    end.position = position
     return (end.elevation = 'z'.charCodeAt())
   }
 
@@ -20,21 +18,30 @@ const remapGrid = (start, end) => (value, ri, ci) => {
 
 const isWithinBounds =
   grid =>
-  ({ coords: [ri, ci] }) =>
+  ([ri, ci]) =>
     $.isClamped(ri, 0, grid.length - 1) &&
     $.isClamped(ci, 0, grid[0].length - 1)
 
-const walk = (grid, start, end) =>
-  $.astar.graph(start, end, (curr, from) =>
-    $.bordering(curr.coords)
+const getNeighbors =
+  grid =>
+  ({ position, elevation }) =>
+    $.bordering(position, 'COORDS')
       .filter(isWithinBounds(grid))
-      // Note that using `skipVisited` would work just as well but would be
-      // significantly slower because we’d run the next `.map` (and `.filter`)
-      // on nodes we actually don’t need to walk.
-      .filter(next => !(next.point in from))
-      .map(next => ({ ...next, elevation: $.access(grid, next.coords) }))
-      .filter(next => next.elevation - curr.elevation <= 1)
-  )
+      .map(position => ({
+        position,
+        elevation: $.access(grid, position),
+      }))
+      .filter(next => next.elevation - elevation <= 1)
+
+const walk = (grid, start, end) =>
+  $.pathfinding.search({
+    start,
+    getNeighbors: getNeighbors(grid),
+    toKey: curr => $.toPoint(curr.position),
+    isDone: curr =>
+      curr.position[0] === end.position[0] &&
+      curr.position[1] === end.position[1],
+  }).from
 
 const process = input => {
   const start = {}
@@ -42,23 +49,24 @@ const process = input => {
   const grid = $.grid.create(input, remapGrid(start, end))
   const from = walk(grid, start, end)
 
-  return $.astar.path(from, start.point, end.point).length
+  return $.pathfinding.path(from, start.position, end.position).length
 }
 
 const findShortestPath = input => {
   const end = {}
   const grid = $.grid.create(input, remapGrid({}, end))
+  const endPoint = $.toPoint(end.position)
 
   return Math.min(
     ...$.grid
       .flatMap(grid, (v, ri, ci) => {
         if (v === 'a'.charCodeAt()) {
-          const start = { point: `${ri},${ci}`, coords: [ri, ci], elevation: v }
+          const start = { position: [ri, ci], elevation: v }
           const path = walk(grid, start, end)
 
-          if (!(end.point in path)) return null
+          if (!(endPoint in path)) return null
 
-          return $.astar.path(path, start.point, end.point).length
+          return $.pathfinding.path(path, start.position, end.position).length
         }
 
         return null

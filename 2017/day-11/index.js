@@ -10,9 +10,7 @@ const VECTORS = {
 }
 
 // See: https://www.redblobgames.com/grids/hexagons/#distances
-const distance = $.memo((pA, pB) => {
-  const [xA, yA] = pA.coords || $.toCoords(pA)
-  const [xB, yB] = pB.coords || $.toCoords(pB)
+const distance = $.memo(([xA, yA], [xB, yB]) => {
   const dX = Math.abs(xA - xB)
   const dY = Math.abs(yA - yB)
 
@@ -20,17 +18,15 @@ const distance = $.memo((pA, pB) => {
 })
 
 const getNeighbors = curr =>
-  Object.values(VECTORS)
-    .map(vector => $.applyVector(curr.coords, vector))
-    .map(coords => ({ coords, point: $.toPoint(coords) }))
+  Object.values(VECTORS).map(vector => $.applyVector(curr, vector))
 
 const createGraph = (start, end) =>
-  $.astar.graph(
-    { point: start, coords: $.toCoords(start) },
-    { point: end, coords: $.toCoords(end) },
+  $.pathfinding.search({
+    start,
     getNeighbors,
-    { skipVisited: true, heuristic: distance }
-  )
+    isDone: curr => curr[0] === end[0] && curr[1] === end[1],
+    heuristic: next => distance(next, end),
+  }).from
 
 const walk = steps =>
   steps.reduce(
@@ -43,13 +39,13 @@ const walk = steps =>
   )
 
 const getPathLength = (start, end) =>
-  $.astar.path(createGraph(start, end), start, end).length
+  $.pathfinding.path(createGraph(start, end), start, end).length
 
 const run = instructions => {
-  const { position, visited } = walk(instructions)
-  const start = '0,0'
-  const end = $.toPoint(position)
+  const { position: end, visited } = walk(instructions)
+  const start = [0, 0]
   const furthest = Array.from(visited)
+    .map($.toCoords)
     .sort((a, b) => distance(a, start) - distance(b, start))
     .pop()
 

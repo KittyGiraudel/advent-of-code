@@ -55,9 +55,10 @@ const getGrids = input => {
 
 const findDoor = row => row.split('').findIndex(col => col === '.')
 
-const getMoves = $.memo(coords =>
-  $.bordering(coords, 'COORDS').concat([coords])
-)
+const getMoves = curr =>
+  $.bordering(curr.coords, 'COORDS')
+    .concat([curr.coords])
+    .map(coords => ({ coords, time: curr.time + 1 }))
 
 const cross = (grids, startCoords, endCoords, time = 0) => {
   const start = { coords: startCoords, time }
@@ -72,22 +73,22 @@ const cross = (grids, startCoords, endCoords, time = 0) => {
 
     if ($.toPoint(curr.coords) === $.toPoint(endCoords)) return curr.time
 
-    const candidates = getMoves(curr.coords).filter(
-      coords =>
+    const candidates = getMoves(curr).filter(
+      next =>
         // The grid only arrays, so a given array has no item, it means it’s
         // a free cell (no wall and no blizzard).
-        $.access(grid, coords)?.length === 0 &&
+        $.access(grid, next.coords)?.length === 0 &&
         // This is pretty much the part that I failed to figure out on my own:
         // I knew a cell *can* be walked several time, which is why the
         // visited check should consider the current time to avoid loops.
-        !visited.has($.toPoint(coords) + index)
+        !visited.has($.toPoint(next.coords) + index)
     )
 
-    candidates.forEach(coords => {
+    candidates.forEach(next => {
       const priority = $.manhattan(curr.coords, endCoords) + curr.time + 1
 
-      frontier.push([{ coords, time: curr.time + 1 }, priority])
-      visited.add($.toPoint(coords) + index)
+      frontier.push([next, priority])
+      visited.add($.toPoint(next.coords) + index)
     })
   }
 }

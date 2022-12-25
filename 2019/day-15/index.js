@@ -9,27 +9,27 @@ const addProgramCopy = curr => (next, index) => ({
 })
 
 const discover = input => {
-  const start = { point: '0,0', coords: [0, 0], program: new Intcode(input) }
+  const start = { position: [0, 0], program: new Intcode(input) }
   let end = null
+  const getNeighbors = curr =>
+    $.bordering(curr.position, 'COORDS')
+      .map(coords => ({ position: coords }))
+      .map(addProgramCopy(curr))
+      .filter(next => next.program.outputs[0])
 
-  const from = $.astar.graph(
+  const { from } = $.pathfinding.search({
     start,
-    end,
-    curr =>
-      $.bordering(curr.coords)
-        .map(addProgramCopy(curr))
-        .filter(next => next.program.outputs[0]),
-    {
-      skipVisited: true,
-      endCheck: curr => {
-        // A little odd here, but essentially we a) do not know where the end is
-        // until we find it and b) want to map out the entire place before
-        // exiting, so instead of cutting the walk as soon as we find the end,
-        // we just store it.
-        if (curr.program.getOutput() === 2) end = curr
-      },
-    }
-  )
+    getNeighbors,
+    toKey: curr => $.toPoint(curr.position),
+    isDone: curr => {
+      // A little odd here, but essentially we a) do not know where the end is
+      // until we find it and b) want to map out the entire place before
+      // exiting, so instead of cutting the walk as soon as we find the end,
+      // we just store it.
+      if (curr.program.getOutput() === 2) end = curr
+      return false
+    },
+  })
 
   return { from, start, end }
 }
@@ -37,7 +37,7 @@ const discover = input => {
 const getDistanceToOxygen = input => {
   const { from, start, end } = discover(input)
 
-  return $.astar.path(from, start.point, end.point).length
+  return $.pathfinding.path(from, start.position, end.position).length
 }
 
 const padGrid = (grid, width) => [
@@ -62,22 +62,23 @@ const render = ({ from, end }) => {
 
 const getOxygenDuration = input => {
   const { from, end } = discover(input)
-  const start = { ...end, minutes: 0 }
+  const start = { position: end.position, minutes: 0 }
   const frontier = [start]
   const visited = new Set()
   let maxMinutes = 0
 
   while (frontier.length) {
     const curr = frontier.pop()
+    const key = $.toPoint(curr.position)
 
-    if (visited.has(curr.point)) continue
-    else visited.add(curr.point)
+    if (visited.has(key)) continue
+    else visited.add(key)
 
-    if (curr.point in from) {
+    if (key in from) {
       maxMinutes = Math.max(curr.minutes, maxMinutes)
 
-      $.bordering(curr.coords).forEach(next =>
-        frontier.unshift({ ...next, minutes: curr.minutes + 1 })
+      $.bordering(curr.position, 'COORDS').forEach(next =>
+        frontier.unshift({ position: next, minutes: curr.minutes + 1 })
       )
     }
   }

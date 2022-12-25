@@ -1,7 +1,6 @@
 const access = require('./access')
 const applyVector = require('./applyVector')
 const array = require('./array')
-const astar = require('./astar')
 const average = require('./average')
 const boundaries = require('./boundaries')
 const chunk = require('./chunk')
@@ -30,7 +29,7 @@ const median = require('./median')
 const memo = require('./memo')
 const { bordering, surrounding } = require('./neighbors')
 const last = require('./last')
-const pathLength = require('./pathLength')
+const pathfinding = require('./pathfinding')
 const permutations = require('./permutations')
 const PriorityQueue = require('./PriorityQueue')
 const product = require('./product')
@@ -54,7 +53,6 @@ module.exports = {
   access,
   applyVector,
   array,
-  astar,
   average,
   bordering,
   boundaries,
@@ -83,7 +81,7 @@ module.exports = {
   median,
   memo,
   last,
-  pathLength,
+  pathfinding,
   permutations,
   PriorityQueue,
   product,

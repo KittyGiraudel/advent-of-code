@@ -2,7 +2,7 @@ const $ = require('../../helpers')
 
 const isOpenSpace =
   n =>
-  ({ coords: [y, x] }) => {
+  ([y, x]) => {
     if (x < 0 || y < 0) return false
 
     const value = x * x + 3 * x + 2 * x * y + y + y * y + n
@@ -12,24 +12,27 @@ const isOpenSpace =
     return ones % 2 === 0
   }
 
-const createGraph = (start, end, n) =>
-  $.astar.graph(
+const run = (end, n, reach = 50) => {
+  const neighbors = curr => $.bordering(curr, 'COORDS').filter(isOpenSpace(n))
+  const start = [1, 1]
+  const { from: graph } = $.pathfinding.search({
     start,
-    end,
-    curr => $.bordering(curr.coords, 'BOTH').filter(isOpenSpace(n)),
-    { skipVisited: true }
-  )
+    getNeighbors: neighbors,
+    isDone: ([ri, ci]) => ri === end[0] && ci === end[1],
+  })
 
-const run = (target, n, reach = 50) => {
-  const start = { point: '1,1', coords: [1, 1] }
-  const end = { point: target, coords: $.toCoords(target).reverse() }
-  const graph = createGraph(start, end, n)
-  const pathLength = $.astar.path(graph, start.point, end.point).length
-  const withinReach = Object.keys(graph).filter(
-    from => $.astar.path(graph, start.point, from).length <= reach
-  )
+  const getDistanceFromStart = from =>
+    $.pathfinding.path(graph, start, from).length
 
-  return [pathLength, withinReach.length]
+  return [
+    // Part 1
+    getDistanceFromStart(end),
+
+    // Part 2
+    Object.keys(graph)
+      .map(getDistanceFromStart)
+      .filter(distance => distance <= reach).length,
+  ]
 }
 
 module.exports = { run }
