@@ -3,11 +3,11 @@ const $ = require('../../helpers')
 let DEBUG = false
 const WIDTH = 7
 const ROCKS = [
-  'AAAA'.split('\n'),
-  '.B.\nBBB\n.B.'.split('\n'),
-  '..C\n..C\nCCC'.split('\n'),
-  'D\nD\nD\nD'.split('\n'),
-  'EE\nEE'.split('\n'),
+  '####'.split('\n'),
+  '.#.\n###\n.#.'.split('\n'),
+  '..#\n..#\n###'.split('\n'),
+  '#\n#\n#\n#'.split('\n'),
+  '##\n##'.split('\n'),
 ]
 const EMPTY_ROW = '.'.repeat(WIDTH)
 

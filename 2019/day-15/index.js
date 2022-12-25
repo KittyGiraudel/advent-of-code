@@ -62,26 +62,24 @@ const render = ({ from, end }) => {
 
 const getOxygenDuration = input => {
   const { from, end } = discover(input)
-  const start = { position: end.position, minutes: 0 }
-  const frontier = [start]
-  const visited = new Set()
   let maxMinutes = 0
 
-  while (frontier.length) {
-    const curr = frontier.pop()
-    const key = $.toPoint(curr.position)
+  $.pathfinding.search({
+    start: { position: end.position, minutes: 0 },
+    toKey: curr => $.toPoint(curr.position),
+    getNeighbors: curr => {
+      // If the position does not appear in the graph, it means it’s a wall and
+      // should therefore not continue any further.
+      if (!($.toPoint(curr.position) in from)) return []
 
-    if (visited.has(key)) continue
-    else visited.add(key)
-
-    if (key in from) {
       maxMinutes = Math.max(curr.minutes, maxMinutes)
 
-      $.bordering(curr.position, 'COORDS').forEach(next =>
-        frontier.unshift({ position: next, minutes: curr.minutes + 1 })
-      )
-    }
-  }
+      return $.bordering(curr.position, 'COORDS').map(position => ({
+        position,
+        minutes: curr.minutes + 1,
+      }))
+    },
+  })
 
   return maxMinutes
 }

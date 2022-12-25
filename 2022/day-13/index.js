@@ -21,8 +21,8 @@ const isNumber = value => typeof value === 'number'
 // @param {Number|Number[]|undefined} b - Second value
 // @return {Boolean|undefined}
 const compare = (a, b) => {
-  if (isDefined(a) && !isDefined(b)) return false
-  if (!isDefined(a) && isDefined(b)) return true
+  if (!isDefined(b)) return false
+  if (!isDefined(a)) return true
 
   if (isNumber(a) && isNumber(b))
     return a < b ? true : a > b ? false : undefined

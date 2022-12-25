@@ -8,8 +8,8 @@ test('Day 17 — Sample', t => {
   t.is(tetris(sample), 3068)
 })
 
-test.only('Day 17 — Solutions', t => {
-  t.is(tetris(input, 10_000), 3224)
+test('Day 17 — Solutions', t => {
+  t.is(tetris(input), 3224)
   // Part 2 was done manually with a generous explanation found on Reddit.
   // The height after 1 trillion rocks is the height of the tower before the
   // cycle begins + the height done by full cycles + the height done by the

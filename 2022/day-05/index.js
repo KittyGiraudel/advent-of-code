@@ -37,7 +37,7 @@ const process = (input, batch = false) => {
         map[to - 1].unshift(map[from - 1].shift())
   })
 
-  return map.map(column => column[0]).join('')
+  return $.column(map, 0).join('')
 }
 
 module.exports = { process }

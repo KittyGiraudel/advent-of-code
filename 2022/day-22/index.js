@@ -1,10 +1,6 @@
 const $ = require('../../helpers')
 
-const RIGHT = '>'
-const BOTTOM = 'v'
-const LEFT = '<'
-const TOP = '^'
-const ORIENTATIONS = [RIGHT, BOTTOM, LEFT, TOP]
+const ORIENTATIONS = ['>', 'v', '<', '^']
 const WALL = '#'
 const SPACE = '.'
 const VECTORS = [
@@ -28,9 +24,9 @@ const VECTORS = [
 // Then for each face, it specifies:
 // - Its neighboring faces in that specific order: right, bottom, left, top.
 //   Each neighbor is ultimately an object with the index of the face (from 0 to
-//   5) and the new orientation when entering that face.
-// - Its top-left corner position ([ri,ci]).
-// - Its grid with coords spreading from 0,0 to 49,49.
+//   5) and the new orientation when entering that face (>, v, <, or ^).
+// - Its top-left corner position ([ri, ci]).
+// - Its subgrid with coords spreading from 0, 0 to 49, 49.
 const getSubgrids = grid =>
   [
     { neighbors: ['1>', '2v', '3>', '5>'], boundaries: [0, 50] },
@@ -59,55 +55,27 @@ const rotate = (orientation, instruction) => {
   return ORIENTATIONS.at(nextIndex)
 }
 
-const getWrapAroundNeighbors = (grid, ri, ci) => {
+const getWrapNeighbors = (grid, ri, ci) => {
   const findLastIndex = (acc = 0, item, index) => (item ? index : acc)
   const findFirstIndex = Boolean
+  const row = grid[ri]
+  const column = $.column(grid, ci)
 
-  const right = {
-    adjacent: [ri, ci + 1],
-    wrapAround: [ri, grid[ri].findIndex(findFirstIndex)],
-  }
-  const bottom = {
-    adjacent: [ri + 1, ci],
-    wrapAround: [$.column(grid, ci).findIndex(findFirstIndex), ci],
-  }
-  const left = {
-    adjacent: [ri, ci - 1],
-    wrapAround: [ri, grid[ri].reduce(findLastIndex)],
-  }
-  const top = {
-    adjacent: [ri - 1, ci],
-    wrapAround: [$.column(grid, ci).reduce(findLastIndex), ci],
-  }
-
-  return [right, bottom, left, top].map(({ adjacent, wrapAround }) => {
+  return [
+    { adjacent: [ri, ci + 1], wrap: [ri, row.findIndex(findFirstIndex)] },
+    { adjacent: [ri + 1, ci], wrap: [column.findIndex(findFirstIndex), ci] },
+    { adjacent: [ri, ci - 1], wrap: [ri, row.reduce(findLastIndex)] },
+    { adjacent: [ri - 1, ci], wrap: [column.reduce(findLastIndex), ci] },
+  ].map(({ adjacent, wrap }) => {
     if ($.access(grid, adjacent) === '.') return adjacent
-    else if ($.access(grid, adjacent) === '#') return null
-    else if ($.access(grid, wrapAround) === '.') return wrapAround
-    else return null
+    if ($.access(grid, adjacent) === '#') return null
+    if ($.access(grid, wrap) === '.') return wrap
+    return null
   })
 }
 
-const getNeighbors = (grid, subgrids) => (acc, _, ri, ci) => {
-  // This is for part 1: there is no concept of subgrids per se, it’s just a
-  // wrap-around logic.
-  if (!subgrids) {
-    acc[[ri, ci]] = getWrapAroundNeighbors(grid, ri, ci)
-
-    return acc
-  }
-
-  const subgrid = subgrids.find(
-    ({ boundaries, grid }) =>
-      $.isClamped(ri, boundaries[0], boundaries[0] + grid.length - 1) &&
-      $.isClamped(ci, boundaries[1], boundaries[1] + grid.length - 1)
-  )
-
-  if (!subgrid) {
-    return acc
-  }
-
-  acc[[ri, ci]] = VECTORS.map((vector, i) => {
+const getCubicNeighbors = (grid, ri, ci) => {
+  return VECTORS.map((vector, i) => {
     const nextPos = $.applyVector([ri, ci], vector)
     const nextValue = $.access(grid, nextPos)
 
@@ -120,9 +88,16 @@ const getNeighbors = (grid, subgrids) => (acc, _, ri, ci) => {
     // If the next position does not exist however, it means we need to change
     // cube face, and things get more complicated.
     else {
+      const subgrids = getSubgrids(grid)
+      const currSubgrid = subgrids.find(
+        ({ boundaries, grid }) =>
+          $.isClamped(ri, boundaries[0], boundaries[0] + grid.length - 1) &&
+          $.isClamped(ci, boundaries[1], boundaries[1] + grid.length - 1)
+      )
+
       // Which grid we land on depends on both which subgrid we are currently
       // on, and which orientation we’re facing.
-      const next = subgrid.neighbors[i]
+      const next = currSubgrid.neighbors[i]
       const { grid: nextSubgrid, boundaries } = subgrids[next.index]
       // Since we’re dealing with a cube, faces are squares so we don’t have to
       // check width and height separately.
@@ -135,16 +110,16 @@ const getNeighbors = (grid, subgrids) => (acc, _, ri, ci) => {
       // If we’re entering the next grid from the left (therefore facing right),
       // the column is necessarily the first one. The row depends on the current
       // orientation.
-      if (next.orientation === RIGHT) {
+      if (next.orientation === '>') {
         nextCoords[0] = [ari, last - aci, last - ari, aci][i]
         nextCoords[1] = 0
-      } else if (next.orientation === BOTTOM) {
+      } else if (next.orientation === 'v') {
         nextCoords[0] = 0
         nextCoords[1] = [last - ari, aci, ari, last - aci][i]
-      } else if (next.orientation === LEFT) {
+      } else if (next.orientation === '<') {
         nextCoords[0] = [last - ari, aci, ari, last - aci][i]
         nextCoords[1] = last
-      } else if (next.orientation === TOP) {
+      } else if (next.orientation === '^') {
         nextCoords[0] = last
         nextCoords[1] = [ari, last - aci, last - ari, aci][i]
       }
@@ -160,6 +135,14 @@ const getNeighbors = (grid, subgrids) => (acc, _, ri, ci) => {
       if (cell === WALL) return null
     }
   })
+}
+
+const getNeighbors = (grid, asCube) => (acc, _, ri, ci) => {
+  if ($.access(grid, [ri, ci])) {
+    acc[[ri, ci]] = asCube
+      ? getCubicNeighbors(grid, ri, ci)
+      : getWrapNeighbors(grid, ri, ci)
+  }
 
   return acc
 }
@@ -169,11 +152,10 @@ const maze = (input, asCube = false) => {
   const instructions = last.match(/(\d+|L|R)/g).map(v => +v || v)
   const rows = map.split('\n').filter(Boolean)
   const grid = $.grid.create(rows, v => (v === ' ' ? '' : v))
-  const subgrids = asCube ? getSubgrids(grid) : null
-  const neighborMap = $.grid.reduce(grid, getNeighbors(grid, subgrids), {})
+  const neighborMap = $.grid.reduce(grid, getNeighbors(grid, asCube), {})
 
   let position = [0, grid[0].findIndex((_, ci) => grid[0][ci] === SPACE)]
-  let orientation = RIGHT
+  let orientation = '>'
 
   instructions.slice(0).forEach(instruction => {
     if (typeof instruction === 'string') {

@@ -25,7 +25,7 @@ const getSurfaceArea = (points, advanced = false) => {
   // of the bounding box on purpose, and flood the gaps (which are positions
   // that are not listed as part of our input).
   const start = [minX - 1, minY - 1, minZ - 1]
-  const { from: seen } = $.pathfinding.search({
+  const { from: flooded } = $.pathfinding.search({
     start,
     getNeighbors: coords =>
       getSides(coords)
@@ -33,7 +33,7 @@ const getSurfaceArea = (points, advanced = false) => {
         .filter(isWithinBounds),
   })
 
-  return getArea(cubes, point => point in seen)
+  return getArea(cubes, point => point in flooded)
 }
 
 module.exports = { getSurfaceArea }

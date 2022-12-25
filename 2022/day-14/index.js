@@ -12,7 +12,7 @@ class Cave {
     //
     // Worth mentioning that there is also this nice Python implementation on
     // Reddit which skips the lookup at all for part 2 and compute the amount of
-    // sand by doing math line by line, which is need. I actually re-implemented
+    // sand by doing math line by line, which is neat. I actually re-implemented
     // it in JS before landing on a Map() so I can confirm it works (and is very
     // fast).
     // Ref: Ref: https://github.com/PBearson/Advent_Of_Code_2022/blob/main/day_14/infinite_floor_fast.py
@@ -96,7 +96,7 @@ class Cave {
   fillAt(x, y) {
     // Respectively part 1 and part 2 loop breakers: whether we have reached the
     // abyss (out of bounds), or whether we’ve completed the mountain (source).
-    if (y >= this.maxY || this.get(x, y) === 'o') return false
+    if (y >= this.maxY || this.get(x, y) === 'o') return null
 
     // Check the south, south-west, south-east cells in that order and fill the
     // first one that’s empty. If none is, mark the current cell as resting.

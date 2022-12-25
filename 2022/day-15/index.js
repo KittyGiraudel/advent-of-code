@@ -15,7 +15,6 @@ const isValidCandidate = (signals, coords, max) =>
 // by any of the sensor (because they all detect another beacon closer to them).
 // This means there must be only one set of coords in the 0,4000000->0,4000000
 // space that is not detected by any sensor.
-
 const detect = (input, y, max) => {
   const data = input.map(line => line.match(/-?\d+/g).map(Number))
   const sensors = data.map(([sx, sy, bx, by]) => {
@@ -67,7 +66,7 @@ const detect = (input, y, max) => {
   // approaches.
   // Ref: https://www.reddit.com/r/adventofcode/comments/zmjzu7/2022_day_15_part_2_no_search_formula/
   // Ref: https://www.reddit.com/r/adventofcode/comments/zmcn64/comment/j0d915u/?utm_source=share&utm_medium=web2x&context=3
-
+  //
   // We loop through all sensors until we find what we’re looking for, at which
   // point we stop early. For each sensor, we iterate through its perimeter,
   // right outside of its detection range. If the current cell on that edge is

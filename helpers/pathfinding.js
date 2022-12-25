@@ -13,6 +13,7 @@ const pathfinding = ({
   const frontier = [[start, 0]]
   const from = { [toKey(start)]: null }
   const costs = { [toKey(start)]: 0 }
+  let end = null
 
   while (frontier.length) {
     if (withPriority) frontier.sort(([, aP], [, bP]) => bP - aP)
@@ -20,7 +21,10 @@ const pathfinding = ({
     const [curr] = frontier.pop()
     const currKey = toKey(curr)
 
-    if (isDone(curr)) break
+    if (isDone(curr)) {
+      end = curr
+      break
+    }
 
     getNeighbors(curr).forEach(next => {
       const nextKey = toKey(next)
@@ -37,7 +41,7 @@ const pathfinding = ({
     })
   }
 
-  return { from, costs }
+  return { from, costs, end }
 }
 
 const reconstruct = (graph, start, end) => {

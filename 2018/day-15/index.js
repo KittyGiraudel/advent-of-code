@@ -1,5 +1,10 @@
 const $ = require('../../helpers')
 
+const getBorderingSpace = (grid, curr) => {
+  const [N, E, S, W] = $.bordering(curr, 'COORDS')
+  return [N, W, E, S].filter(neighbor => $.access(grid, neighbor) === '.')
+}
+
 class Unit {
   constructor(type, coords, power = 3) {
     this.type = type
@@ -63,9 +68,29 @@ class Unit {
   }
 
   move(grid, units) {
-    const next = findMove(grid, units, this.point, this.type)
+    const alive = units.filter(unit => unit.alive)
+    const enemies = alive.filter(unit => unit.isEnemy(this.type))
 
-    if (next) this.coords = next
+    const graph = $.pathfinding.search({
+      start: this.coords,
+      getNeighbors: curr =>
+        getBorderingSpace(grid, curr).filter(
+          neighbor => !alive.find(unit => unit.isAt(neighbor))
+        ),
+      isDone: curr =>
+        getBorderingSpace(grid, curr).some(neighbor =>
+          enemies.find(unit => unit.isAt(neighbor))
+        ),
+    })
+
+    // If we found a target that we can reach, and we are not already in melee
+    // range of it, move one step towards that target.
+    if (graph.end) {
+      const path = $.pathfinding.path(graph.from, this.coords, graph.end)
+      const point = path.pop()
+
+      if (point) this.coords = $.toCoords(point)
+    }
   }
 
   findEnemy(units) {
@@ -157,46 +182,6 @@ const cheat = rows => {
     const game = new Game(rows, ++elvishPower)
     while (!game.done) game.round()
     if (game.perfect) return game.score
-  }
-}
-
-// I originally drafted a pretty convoluted solution using the `pathfinding`
-// library. Even though I managed to have all tests passing + the correct result
-// for part 1, I couldn’t find the right result for part 2. That’s because I
-// couldn’t solve all tie-breaks exactly like the puzzle intended it, since the
-// library is ultimately only about finding the shortest path. So I ended up
-// looking for a moving algorithm on Reddit to solve part 2 and found this one
-// (adapted from Python):
-// https://www.reddit.com/r/adventofcode/comments/a6chwa/2018_day_15_solutions/ebu4jmx/
-const findMove = (grid, units, start, type) => {
-  const frontier = [start]
-  const visited = new Map()
-
-  while (frontier.length) {
-    const curr = frontier.pop()
-    const [N, E, S, W] = $.bordering($.toCoords(curr), 'BOTH')
-    const neighbors = [N, W, E, S].filter(
-      ({ coords }) => $.access(grid, coords) === '.'
-    )
-
-    for (let i = 0; i < neighbors.length; i++) {
-      let next = neighbors[i].point
-      const unit = units.find(unit => unit.isAt(next) && unit.alive)
-
-      if (unit?.isEnemy(type)) {
-        // Immediate melee target found so no movement required.
-        if (curr === start) return null
-        // Backtrack the path to the starting node.
-        next = curr
-        while (visited.get(next) !== start) next = visited.get(next)
-        return $.toCoords(next)
-      }
-
-      if (!unit && !visited.has(next)) {
-        frontier.unshift(next)
-        visited.set(next, curr)
-      }
-    }
   }
 }
 
