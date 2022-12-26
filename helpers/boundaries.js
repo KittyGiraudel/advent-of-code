@@ -5,9 +5,9 @@
 // @param {Object[]|Array[]} points - Array of coordinates
 // @return {Number[]}
 const boundaries = points => {
-  const xs = points.map(point => point.x || point[0])
-  const ys = points.map(point => point.y || point[1])
-  const zs = points.map(point => point.z || point[2])
+  const xs = points.map(point => point.x ?? point[0])
+  const ys = points.map(point => point.y ?? point[1])
+  const zs = points.map(point => point.z ?? point[2])
 
   return [
     Math.min(...xs),
