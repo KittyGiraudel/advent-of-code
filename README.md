@@ -58,8 +58,8 @@
 <a href="2022/day-18/index.js">
   <img src="Media/2022/18.png" alt="Day 18 2022: Complete" width="161px">
 </a>
-<a href="2022/day-19/index.js">
-  <img src="Media/2022/19.png" alt="Day 19 2022: Complete" width="161px">
+<a href="#">
+  <img src="Media/2022/19.png" alt="Day 19 2022: Incomplete" width="161px">
 </a>
 <a href="2022/day-20/index.js">
   <img src="Media/2022/20.png" alt="Day 20 2022: Complete" width="161px">
@@ -548,7 +548,7 @@
   <img src="Media/2016/25.png" alt="Day 25 2016: Incomplete" width="161px">
 </a>
 <h1 align="center">
-  2015 - 48 ⭐
+  2015 - 50 ⭐
 </h1>
 <a href="2015/day-01/index.js">
   <img src="Media/2015/01.png" alt="Day 1 2015: Complete" width="161px">
@@ -605,7 +605,7 @@
   <img src="Media/2015/18.png" alt="Day 18 2015: Complete" width="161px">
 </a>
 <a href="2015/day-19/index.js">
-  <img src="Media/2015/19.png" alt="Day 19 2015: Partially complete" width="161px">
+  <img src="Media/2015/19.png" alt="Day 19 2015: Complete" width="161px">
 </a>
 <a href="2015/day-20/index.js">
   <img src="Media/2015/20.png" alt="Day 20 2015: Complete" width="161px">
@@ -623,6 +623,6 @@
   <img src="Media/2015/24.png" alt="Day 24 2015: Complete" width="161px">
 </a>
 <a href="2015/day-25/index.js">
-  <img src="Media/2015/25.png" alt="Day 25 2015: Partially complete" width="161px">
+  <img src="Media/2015/25.png" alt="Day 25 2015: Complete" width="161px">
 </a>
 <!-- AOC TILES END -->
