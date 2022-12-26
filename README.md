@@ -470,7 +470,7 @@
   <img src="Media/2017/25.png" alt="Day 25 2017: Complete" width="161px">
 </a>
 <h1 align="center">
-  2016 - 43 ⭐
+  2016 - 45 ⭐
 </h1>
 <a href="2016/day-01/index.js">
   <img src="Media/2016/01.png" alt="Day 1 2016: Complete" width="161px">
@@ -542,7 +542,7 @@
   <img src="Media/2016/23.png" alt="Day 23 2016: Complete" width="161px">
 </a>
 <a href="2016/day-24/index.js">
-  <img src="Media/2016/24.png" alt="Day 24 2016: Incomplete" width="161px">
+  <img src="Media/2016/24.png" alt="Day 24 2016: Complete" width="161px">
 </a>
 <a href="2016/day-25/index.js">
   <img src="Media/2016/25.png" alt="Day 25 2016: Incomplete" width="161px">
