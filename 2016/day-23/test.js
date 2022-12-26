@@ -15,6 +15,6 @@ test('Day 23 — Sample', t => {
 })
 
 test('Day 23 — Solutions', t => {
-  // t.is(run(input, 7), 11739)
-  t.is(run(input, 12), 11739)
+  t.is(run(input, 7), 11739)
+  // t.is(run(input, 12), 479008299) // Takes several minutes…
 })
