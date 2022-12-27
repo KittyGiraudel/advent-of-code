@@ -1,7 +1,7 @@
 {
   "scripts": {
     "test": "ava --verbose --timeout=20s",
-    "tiles": "python3 AoCTiles/create_aoc_tiles.py"
+    "tiles": "rm -rf AoCTiles/.aoc_tiles_cache && python3 AoCTiles/create_aoc_tiles.py"
   },
   "devDependencies": {
     "ava": "^5.1.0"
