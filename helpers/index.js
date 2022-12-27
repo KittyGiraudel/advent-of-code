@@ -2,6 +2,7 @@ const access = require('./access')
 const applyVector = require('./applyVector')
 const array = require('./array')
 const average = require('./average')
+const binarySearch = require('./binarySearch')
 const boundaries = require('./boundaries')
 const chunk = require('./chunk')
 const clone = require('./clone')
@@ -54,8 +55,9 @@ module.exports = {
   applyVector,
   array,
   average,
-  bordering,
+  binarySearch,
   boundaries,
+  bordering,
   chunk,
   clone,
   column,
