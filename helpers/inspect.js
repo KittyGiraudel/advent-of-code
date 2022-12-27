@@ -1,5 +1,6 @@
 const util = require('util')
 
-const inspect = value => util.inspect(value, true, Infinity, true)
+const inspect = (value, showHidden = true, depth = Infinity, color = true) =>
+  util.inspect(value, showHidden, depth, color)
 
 module.exports = inspect
