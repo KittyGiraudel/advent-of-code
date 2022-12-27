@@ -1,5 +1,5 @@
 const test = require('ava')
-const { computeFuelCost } = require('./')
+const { getFuelCost, getFuelAmount } = require('./')
 const input = require('../../helpers/readInput')(__dirname)
 
 const sampleA = `10 ORE => 10 A
@@ -40,11 +40,16 @@ const sampleD = `2 VPVL, 7 FWMGM, 2 CXFTF, 11 MNCFX => 1 STKFG
 1 VJHF, 6 MNCFX => 4 RFSQX
 176 ORE => 6 VJHF`.split('\n')
 
-test.skip('Day 14 — Sample', t => {
-  t.is(computeFuelCost(sampleA), 31)
-  t.is(computeFuelCost(sampleB), 165)
-  t.is(computeFuelCost(sampleC), 13312)
-  t.is(computeFuelCost(sampleD), 180697)
+test('Day 14 — Sample', t => {
+  t.is(getFuelCost(sampleA), 31)
+  t.is(getFuelCost(sampleB), 165)
+  t.is(getFuelCost(sampleC), 13312)
+  t.is(getFuelCost(sampleD), 180697)
+  t.is(getFuelAmount(sampleC), 82892753)
+  t.is(getFuelAmount(sampleD), 5586022)
 })
 
-test.skip('Day 14 — Solutions', t => {})
+test('Day 14 — Solutions', t => {
+  t.is(getFuelCost(input), 1920219)
+  t.is(getFuelAmount(input), 1330066)
+})
