@@ -18,7 +18,7 @@ const gridReduce = (grid, callback, acc) =>
 
 const identity = value => value
 const createGrid = (rows, mapper = identity) =>
-  rows.map((row, ri) => row.split('').map((value, ci) => mapper(value, ri, ci)))
+  rows.map((row, ri) => row.split('').map((item, ci) => mapper(item, ri, ci)))
 const cloneGrid = grid => grid.slice(0).map(row => row.slice(0))
 
 const initGrid = (width, height = width, value = null) =>
@@ -32,7 +32,9 @@ const gridRotate = grid =>
   grid[0].map((_, index) => grid.map(row => row[index]).reverse())
 
 const renderGrid = (grid, separator = '', mapper = v => v) =>
-  grid.map(row => row.map(mapper).join(separator)).join('\n')
+  gridMap(grid, mapper)
+    .map(row => row.join(separator))
+    .join('\n')
 
 const gridVariants = grid => {
   const variants = []
