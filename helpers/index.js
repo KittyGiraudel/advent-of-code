@@ -37,6 +37,7 @@ const product = require('./product')
 const range = require('./range')
 const readInput = require('./readInput')
 const rotate = require('./rotate')
+const sample = require('./sample')
 const stringMap = require('./stringMap')
 const sum = require('./sum')
 const swap = require('./swap')
@@ -90,6 +91,7 @@ module.exports = {
   range,
   readInput,
   rotate,
+  sample,
   stringMap,
   sum,
   swap,
