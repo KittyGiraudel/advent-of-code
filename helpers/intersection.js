@@ -6,6 +6,8 @@
 // @param {Array[]} arrays - Arrays to find the intersection of
 // @return {Array}
 const intersection = (...arrays) =>
-  arrays.shift().filter(item => arrays.every(array => array.includes(item)))
+  Array.from(arrays.shift()).filter(item =>
+    arrays.every(array => array.includes(item))
+  )
 
 module.exports = intersection
