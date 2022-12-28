@@ -24,6 +24,10 @@ const createGraph = (start, end) =>
   $.pathfinding.search({
     start,
     getNeighbors,
+    // Because we need to be able to visit the same points several times, the
+    // cost needs to be lower than 1 — otherwise it means we cannot visit the
+    // same cell twice.
+    getCost: () => 0,
     isDone: curr => curr[0] === end[0] && curr[1] === end[1],
     heuristic: next => distance(next, end),
   }).from

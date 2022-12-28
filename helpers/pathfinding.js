@@ -28,7 +28,7 @@ const pathfinding = ({
 
     getNeighbors(curr).forEach(next => {
       const nextKey = toKey(next)
-      const newCost = costs[currKey] + (getCost?.(curr, next) ?? 0)
+      const newCost = costs[currKey] + (getCost?.(curr, next) ?? 1)
       const shouldVisit = !(nextKey in costs) || newCost < costs[nextKey]
 
       if (shouldVisit) {
