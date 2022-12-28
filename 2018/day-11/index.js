@@ -11,7 +11,7 @@ const computeCellPower = (serial, x, y) => {
 }
 
 const getGrid = serial =>
-  $.grid.init(SIZE, SIZE, (ci, ri) => computeCellPower(serial, ci + 1, ri + 1))
+  $.grid.init(SIZE, SIZE, (ri, ci) => computeCellPower(serial, ci + 1, ri + 1))
 
 const getFuelStrict = serial => {
   const max = { value: -Infinity, coords: [] }

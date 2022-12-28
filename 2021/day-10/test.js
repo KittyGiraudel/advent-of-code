@@ -1,19 +1,21 @@
 const test = require('ava')
+const $ = require('../../helpers')
 const { processLine, getCorruptionScore, getCompletionScore } = require('./')
-const input = require('../../helpers/readInput')(__dirname)
-
-const sample = `[({(<(())[]>[[{[]{<()<>>
-[(()[<>])]({[<{<<[]>>(
-{([(<{}[<>[]}>{[]{[(<()>
-(((({<>}<{<{<>}{[]{[]{}
-[[<[([]))<([[{}[[()]]]
-[{[{({}]{}}([{[{{{}}([]
-{<[[]]>}<{[{[{[]{()[[[]
-[<(<(<(<{}))><([]([]()
-<{([([[(<>()){}]>(<<{{
-<{([{{}}[<[[[<>{}]]]>[]]`.split('\n')
 
 test('Day 10 — Sample', t => {
+  const sample = $.sample(`
+  [({(<(())[]>[[{[]{<()<>>
+  [(()[<>])]({[<{<<[]>>(
+  {([(<{}[<>[]}>{[]{[(<()>
+  (((({<>}<{<{<>}{[]{[]{}
+  [[<[([]))<([[{}[[()]]]
+  [{[{({}]{}}([{[{{{}}([]
+  {<[[]]>}<{[{[{[]{()[[[]
+  [<(<(<(<{}))><([]([]()
+  <{([([[(<>()){}]>(<<{{
+  <{([{{}}[<[[[<>{}]]]>[]]
+  `)
+
   t.is(processLine('(]').type, 'CORRUPTED')
   t.is(processLine('{()()()>').type, 'CORRUPTED')
   t.is(processLine('(((()))}').type, 'CORRUPTED')
@@ -28,6 +30,8 @@ test('Day 10 — Sample', t => {
 })
 
 test('Day 10 — Solutions', t => {
+  const input = $.readInput(__dirname)
+
   t.is(getCorruptionScore(input), 243939)
   t.is(getCompletionScore(input), 2421222841)
 })

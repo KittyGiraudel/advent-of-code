@@ -1,6 +1,6 @@
 const test = require('ava')
+const $ = require('../../helpers')
 const { run, run2 } = require('./')
-const [input] = require('../../helpers/readInput')(__dirname)
 
 test('Day 09 — Sample', t => {
   t.is(run('ADVENT'), 6)
@@ -19,6 +19,8 @@ test('Day 09 — Sample', t => {
 })
 
 test('Day 09 — Solutions', t => {
+  const [input] = $.readInput(__dirname)
+
   t.is(run(input), 150914)
   t.is(run2(input), 11052855125)
 })

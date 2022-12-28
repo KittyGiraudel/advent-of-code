@@ -1,6 +1,6 @@
 const test = require('ava')
+const $ = require('../../helpers')
 const { validate, validateStrict } = require('./')
-const input = require('../../helpers/readInput')(__dirname)
 
 test('Day 04 — Sample', t => {
   t.is(validate('aa bb cc dd ee'), true)
@@ -14,6 +14,8 @@ test('Day 04 — Sample', t => {
 })
 
 test('Day 04 — Solutions', t => {
+  const input = $.readInput(__dirname)
+
   t.is(input.filter(validate).length, 383)
   t.is(input.filter(validateStrict).length, 265)
 })

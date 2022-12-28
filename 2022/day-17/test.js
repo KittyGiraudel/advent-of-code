@@ -1,14 +1,16 @@
 const test = require('ava')
+const $ = require('../../helpers')
 const { tetris } = require('./')
-const [input] = require('../../helpers/readInput')(__dirname)
-
-const sample = `>>><<><>><<<>><>>><<<>>><<<><<<>><>><<>>`
 
 test('Day 17 — Sample', t => {
+  const sample = `>>><<><>><<<>><>>><<<>>><<<><<<>><>><<>>`
+
   t.is(tetris(sample), 3068)
 })
 
 test('Day 17 — Solutions', t => {
+  const [input] = $.readInput(__dirname)
+
   t.is(tetris(input), 3224)
   // Part 2 was done manually with a generous explanation found on Reddit.
   // The height after 1 trillion rocks is the height of the tower before the

@@ -1,6 +1,6 @@
 const test = require('ava')
+const $ = require('../../helpers')
 const { isValidLoose, isValidStrict } = require('./')
-const policies = require('../../helpers/readInput')(__dirname)
 
 test('Day 02 — Sample', t => {
   t.is(isValidLoose('1-3 a: abcde'), true)
@@ -12,6 +12,8 @@ test('Day 02 — Sample', t => {
 })
 
 test('Day 02 — Solutions', t => {
-  t.is(policies.filter(isValidLoose).length, 500)
-  t.is(policies.filter(isValidStrict).length, 313)
+  const input = $.readInput(__dirname)
+
+  t.is(input.filter(isValidLoose).length, 500)
+  t.is(input.filter(isValidStrict).length, 313)
 })

@@ -1,10 +1,10 @@
 const test = require('ava')
+const $ = require('../../helpers')
 const { run } = require('../day-19')
-const input = require('../../helpers/readInput')(__dirname)
-
-test.skip('Day 21 — Sample', t => {})
 
 test('Day 21 — Solutions', t => {
+  const input = $.readInput(__dirname)
+
   // Day 21 was solved without writing new code, just by fiddling with the code
   // from day 19. The answer for part 1 (10332277) was found by logging the
   // registers and trying out the value that appeared in register 1, just on a

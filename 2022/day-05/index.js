@@ -16,7 +16,7 @@ const parseRow = row => $.chunk(row + ' ', 4).map(item => item.trim()[1])
 // [ ['N', 'Z'], ['D', 'C', 'M'], ['P'] ]
 const parseMap = map =>
   $.grid
-    .rotate(map.split('\n').slice(0, -1).map(parseRow))
+    .rotate(map.split('\n').filter(Boolean).slice(0, -1).map(parseRow))
     .map(column => column.filter(Boolean).reverse())
 
 const parseInstructions = instructions =>

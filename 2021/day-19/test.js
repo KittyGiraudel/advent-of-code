@@ -1,6 +1,6 @@
 const test = require('ava')
 const { parse, findOverlaps } = require('./')
-const input = require('../../helpers/readInput')(__dirname, '\n\n')
+const $ = require('../../helpers')
 
 const sample = `--- scanner 0 ---
 404,-588,-901
@@ -144,4 +144,6 @@ test.skip('Day 19 — Sample', t => {
   const overlaps = findOverlaps(scanners[0], scanners[1])
 })
 
-test.skip('Day 19 — Solutions', t => {})
+test.skip('Day 19 — Solutions', t => {
+  const input = $.readInput(__dirname, '\n\n')
+})

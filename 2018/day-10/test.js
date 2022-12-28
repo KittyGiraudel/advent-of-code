@@ -1,9 +1,9 @@
 const test = require('ava')
+const $ = require('../../helpers')
 const { plot } = require('./')
-const input = require('../../helpers/readInput')(__dirname)
-
-test.skip('Day 10 — Sample', t => {})
 
 test('Day 10 — Solutions', t => {
+  const input = $.readInput(__dirname)
+
   t.is(plot(input), 10312)
 })

@@ -1,17 +1,17 @@
 const test = require('ava')
+const $ = require('../../helpers')
 const { getLongestDistance, getDistancesAbove } = require('./')
-const [input] = require('../../helpers/readInput')(__dirname)
-
-const SAMPLES = [
-  '^WNE$',
-  '^ENWWW(NEEE|SSE(EE|N))$',
-  '^ENNWSWW(NEWS|)SSSEEN(WNSE|)EE(SWEN|)NNN$',
-  '^ESSWWN(E|NNENN(EESS(WNSE|)SSS|WWWSSSSE(SW|NNNE)))$',
-  '^WSSEESWWWNW(S|NENNEEEENN(ESSSSW(NWSW|SSEN)|WSWWN(E|WWS(E|SS))))$',
-  '^(E|SSEENNW)S$',
-]
 
 test('Day 20 — Sample', t => {
+  const SAMPLES = [
+    '^WNE$',
+    '^ENWWW(NEEE|SSE(EE|N))$',
+    '^ENNWSWW(NEWS|)SSSEEN(WNSE|)EE(SWEN|)NNN$',
+    '^ESSWWN(E|NNENN(EESS(WNSE|)SSS|WWWSSSSE(SW|NNNE)))$',
+    '^WSSEESWWWNW(S|NENNEEEENN(ESSSSW(NWSW|SSEN)|WSWWN(E|WWS(E|SS))))$',
+    '^(E|SSEENNW)S$',
+  ]
+
   t.is(getLongestDistance(SAMPLES[0]), 3)
   t.is(getLongestDistance(SAMPLES[1]), 10)
   t.is(getLongestDistance(SAMPLES[2]), 18)
@@ -23,7 +23,8 @@ test('Day 20 — Sample', t => {
 })
 
 test('Day 20 — Solutions', t => {
+  const [input] = $.readInput(__dirname)
+
   t.is(getLongestDistance(input), 3806)
   t.is(getDistancesAbove(input, 1000), 8354)
-  // 8328 > result < 8504
 })

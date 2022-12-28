@@ -1,23 +1,26 @@
 const test = require('ava')
+const $ = require('../../helpers')
 const { run } = require('./')
-const input = require('../../helpers/readInput')(__dirname)
-
-const sample = `.#.#...|#.
-.....#|##|
-.|..|...#.
-..|#.....#
-#.#|||#|#|
-...#.||...
-.|....|...
-||...#|.#|
-|.||||..|.
-...#.|..|.`.split('\n')
 
 test('Day 18 — Sample', t => {
+  const sample = $.sample(`.#.#...|#.
+  .....#|##|
+  .|..|...#.
+  ..|#.....#
+  #.#|||#|#|
+  ...#.||...
+  .|....|...
+  ||...#|.#|
+  |.||||..|.
+  ...#.|..|.
+  `)
+
   t.is(run(sample, 10), 1147)
 })
 
 test('Day 18 — Solutions', t => {
+  const input = $.readInput(__dirname)
+
   t.is(run(input, 10), 394420)
 
   // Part 2 — which requires iterating 1 billion times — was initially solved

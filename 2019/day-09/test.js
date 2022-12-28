@@ -1,10 +1,10 @@
 const test = require('ava')
+const $ = require('../../helpers')
 const { Intcode } = require('../day-05')
-const [input] = require('../../helpers/readInput')(__dirname)
-
-const sample = '109,1,204,-1,1001,100,1,100,1008,100,16,101,1006,101,0,99'
 
 test('Day 09 — Sample', t => {
+  const sample = '109,1,204,-1,1001,100,1,100,1008,100,16,101,1006,101,0,99'
+
   t.is(new Intcode(sample).run().getOutput().join(','), sample)
   t.is(
     (new Intcode('1102,34915192,34915192,7,4,7,99,0').run().getOutput() + '')
@@ -18,6 +18,8 @@ test('Day 09 — Sample', t => {
 })
 
 test('Day 09 — Solutions', t => {
+  const [input] = $.readInput(__dirname)
+
   t.is(new Intcode('109,-1,4,1,99').run().getOutput(), -1)
   t.is(new Intcode('109,-1,104,1,99').run().getOutput(), 1)
   t.is(new Intcode('109,-1,204,1,99').run().getOutput(), 109)

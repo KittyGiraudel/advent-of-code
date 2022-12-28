@@ -1,10 +1,9 @@
 const test = require('ava')
+const $ = require('../../helpers')
 const { getNextDeparture, getEarliestTimestamp } = require('.')
-const product = require('../../helpers/product')
-const input = require('../../helpers/readInput')(__dirname)
 
 test('Day 13 — Sample', t => {
-  t.is(product(getNextDeparture('939\n7,13,x,x,59,x,31,19'.split('\n'))), 295)
+  t.is($.product(getNextDeparture('939\n7,13,x,x,59,x,31,19'.split('\n'))), 295)
   t.is(getEarliestTimestamp('\n7,13'.split('\n')), 77)
   t.is(getEarliestTimestamp('\n7,13,x'.split('\n')), 77)
   t.is(getEarliestTimestamp('\n7,13,x,x,59'.split('\n')), 350)
@@ -17,6 +16,8 @@ test('Day 13 — Sample', t => {
 })
 
 test('Day 13 — Solutions', t => {
-  t.is(product(getNextDeparture(input)), 5257)
+  const input = $.readInput(__dirname)
+
+  t.is($.product(getNextDeparture(input)), 5257)
   t.is(getEarliestTimestamp(input), 538703333547789)
 })

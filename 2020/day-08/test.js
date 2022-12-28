@@ -1,36 +1,32 @@
 const test = require('ava')
+const $ = require('../../helpers')
 const { runProgram, runMonkeyPatchedProgram } = require('./')
-const instructions = require('../../helpers/readInput')(__dirname)
-
-const buggyInput = `
-nop +0
-acc +1
-jmp +4
-acc +3
-jmp -3
-acc -99
-acc +1
-jmp -4
-acc +6
-`
-  .trim()
-  .split('\n')
-
-const fixedInput = `
-nop +0
-acc +1
-jmp +4
-acc +3
-jmp -3
-acc -99
-acc +1
-nop -4
-acc +6
-`
-  .trim()
-  .split('\n')
 
 test('Day 08 — Sample', t => {
+  const buggyInput = $.sample(`
+  nop +0
+  acc +1
+  jmp +4
+  acc +3
+  jmp -3
+  acc -99
+  acc +1
+  jmp -4
+  acc +6
+  `)
+
+  const fixedInput = $.sample(`
+  nop +0
+  acc +1
+  jmp +4
+  acc +3
+  jmp -3
+  acc -99
+  acc +1
+  nop -4
+  acc +6
+  `)
+
   const output = runProgram(buggyInput)
   t.is(output.accumulator, 5)
   t.is(output.exit, 1)
@@ -47,11 +43,13 @@ test('Day 08 — Sample', t => {
 })
 
 test('Day 08 — Solutions', t => {
-  const output = runProgram(instructions)
+  const input = $.readInput(__dirname)
+
+  const output = runProgram(input)
   t.is(output.accumulator, 1723)
   t.is(output.exit, 1)
 
-  const fixedOutput = runMonkeyPatchedProgram(instructions)
+  const fixedOutput = runMonkeyPatchedProgram(input)
   t.is(fixedOutput.accumulator, 846)
   t.is(fixedOutput.exit, 0)
 })

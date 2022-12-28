@@ -1,6 +1,6 @@
 const test = require('ava')
+const $ = require('../../helpers')
 const { run } = require('./')
-const input = require('../../helpers/readInput')(__dirname, ',')
 
 test('Day 11 — Sample', t => {
   t.is(run('ne,ne,ne'.split(','))[0], 3)
@@ -10,5 +10,7 @@ test('Day 11 — Sample', t => {
 })
 
 test('Day 11 — Solutions', t => {
+  const input = $.readInput(__dirname, ',')
+
   t.deepEqual(run(input), [650, 1465])
 })

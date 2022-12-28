@@ -1,24 +1,22 @@
 const test = require('ava')
+const $ = require('../../helpers')
 const { getTreeCountForSlope, getResult } = require('./')
-const input = require('../../helpers/readInput')(__dirname)
-
-const example = `
-..##.......
-#...#...#..
-.#....#..#.
-..#.#...#.#
-.#...##..#.
-..#.##.....
-.#.#.#....#
-.#........#
-#.##...#...
-#...##....#
-.#..#...#.#
-`
-  .trim()
-  .split('\n')
 
 test('Day 03 — Sample', t => {
+  const example = $.sample(`
+  ..##.......
+  #...#...#..
+  .#....#..#.
+  ..#.#...#.#
+  .#...##..#.
+  ..#.##.....
+  .#.#.#....#
+  .#........#
+  #.##...#...
+  #...##....#
+  .#..#...#.#
+  `)
+
   t.is(getTreeCountForSlope(example, [1, 1]), 2)
   t.is(getTreeCountForSlope(example, [3, 1]), 7)
   t.is(getTreeCountForSlope(example, [5, 1]), 3)
@@ -37,6 +35,8 @@ test('Day 03 — Sample', t => {
 })
 
 test('Day 03 — Solutions', t => {
+  const input = $.readInput(__dirname)
+
   t.is(getTreeCountForSlope(input, [3, 1]), 218)
   t.is(
     getResult(input, [

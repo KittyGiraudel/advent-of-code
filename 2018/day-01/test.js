@@ -1,7 +1,6 @@
 const test = require('ava')
 const $ = require('../../helpers')
 const { find } = require('./')
-const input = require('../../helpers/readInput')(__dirname).map(Number)
 
 test('Day 01 — Sample', t => {
   t.is(find([+1, -1]), 0)
@@ -11,6 +10,8 @@ test('Day 01 — Sample', t => {
 })
 
 test('Day 01 — Solutions', t => {
+  const input = $.readInput(__dirname).map(Number)
+
   t.is($.sum(input), 406)
   t.is(find(input), 312)
 })

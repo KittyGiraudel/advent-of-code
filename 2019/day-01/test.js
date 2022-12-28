@@ -1,7 +1,6 @@
 const test = require('ava')
 const { computeFuelCost, computeIterativeFuelCost } = require('./')
-const sum = require('../../helpers/sum')
-const numbers = require('../../helpers/readInput')(__dirname).map(Number)
+const $ = require('../../helpers')
 
 test('Day 01 — Sample', t => {
   t.is(computeFuelCost(12), 2)
@@ -13,6 +12,8 @@ test('Day 01 — Sample', t => {
 })
 
 test('Day 01 — Solutions', t => {
-  t.is(sum(numbers.map(computeFuelCost)), 3330521)
-  t.is(sum(numbers.map(computeIterativeFuelCost)), 4992931)
+  const numbers = $.readInput(__dirname).map(Number)
+
+  t.is($.sum(numbers.map(computeFuelCost)), 3330521)
+  t.is($.sum(numbers.map(computeIterativeFuelCost)), 4992931)
 })

@@ -1,23 +1,29 @@
 const test = require('ava')
-const { maze, rotate, findLastIndex, findFirstIndex } = require('./')
-const input = require('../../helpers/readInput')(__dirname, null, false)
-
-const sample = `        ...#
-        .#..
-        #...
-        ....
-...#.......#
-........#...
-..#....#....
-..........#.
-        ...#....
-        .....#..
-        .#......
-        ......#.
-
-10R5L5R10L4R5L5`
+const { maze, rotate } = require('./')
+const $ = require('../../helpers')
 
 test('Day 22 — Sample', t => {
+  const sample = $.sample(
+    `
+            ...#
+            .#..
+            #...
+            ....
+    ...#.......#
+    ........#...
+    ..#....#....
+    ..........#.
+            ...#....
+            .....#..
+            .#......
+            ......#.
+
+    10R5L5R10L4R5L5
+  `,
+    null,
+    false
+  )
+
   t.is(rotate('>', 'L'), '^')
   t.is(rotate('^', 'L'), '<')
   t.is(rotate('<', 'L'), 'v')
@@ -30,6 +36,8 @@ test('Day 22 — Sample', t => {
 })
 
 test('Day 22 — Solutions', t => {
+  const input = $.readInput(__dirname, null, false)
+
   t.is(maze(input), 191010)
   t.is(maze(input, true), 55364)
 })

@@ -1,30 +1,35 @@
 const test = require('ava')
+const $ = require('../../helpers')
 const { parseInput, foldOnce, foldAll, render } = require('./')
-const input = require('../../helpers/readInput')(__dirname, '\n\n')
-
-const sample = `6,10
-0,14
-9,10
-0,3
-10,4
-4,11
-6,0
-6,12
-4,1
-0,13
-10,12
-3,4
-3,0
-8,4
-1,10
-2,14
-8,10
-9,0
-
-fold along y=7
-fold along x=5`.split('\n\n')
 
 test('Day 13 — Sample', t => {
+  const sample = $.sample(
+    `
+  6,10
+  0,14
+  9,10
+  0,3
+  10,4
+  4,11
+  6,0
+  6,12
+  4,1
+  0,13
+  10,12
+  3,4
+  3,0
+  8,4
+  1,10
+  2,14
+  8,10
+  9,0
+
+  fold along y=7
+  fold along x=5
+  `,
+    '\n\n'
+  )
+
   const data = parseInput(sample)
   const dotsAfterFirstFold = foldOnce(data.dots, data.folds[0])
   const dotsAfterSecondFold = foldOnce(dotsAfterFirstFold, data.folds[1])
@@ -33,6 +38,7 @@ test('Day 13 — Sample', t => {
 })
 
 test('Day 13 — Solutions', t => {
+  const input = $.readInput(__dirname, '\n\n')
   const data = parseInput(input)
   const dotsAfterFirstFold = foldOnce(data.dots, data.folds[0])
 

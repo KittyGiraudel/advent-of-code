@@ -1,6 +1,6 @@
 const test = require('ava')
+const $ = require('../../helpers')
 const { findHighestSignal, amplify, loop } = require('./')
-const [input] = require('../../helpers/readInput')(__dirname)
 
 test('Day 07 — Sample', t => {
   t.is(
@@ -44,5 +44,7 @@ test('Day 07 — Sample', t => {
 })
 
 test('Day 07 — Solutions', t => {
+  const [input] = $.readInput(__dirname)
+
   t.is(findHighestSignal(input), 70602018)
 })

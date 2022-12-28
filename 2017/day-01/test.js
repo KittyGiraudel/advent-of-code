@@ -1,6 +1,6 @@
 const test = require('ava')
+const $ = require('../../helpers')
 const { captcha } = require('./')
-const [input] = require('../../helpers/readInput')(__dirname)
 
 test('Day 01 — Sample', t => {
   t.is(captcha('1122', 1), 3)
@@ -15,6 +15,8 @@ test('Day 01 — Sample', t => {
 })
 
 test('Day 01 — Solutions', t => {
+  const [input] = $.readInput(__dirname)
+
   t.is(captcha(input, 1), 1253)
   t.is(captcha(input), 1278)
 })

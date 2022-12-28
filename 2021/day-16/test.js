@@ -1,7 +1,6 @@
-const fs = require('fs')
 const test = require('ava')
-const { evaluate, getVersionSums, visualize, Decoder } = require('./')
-const [input] = require('../../helpers/readInput')(__dirname)
+const $ = require('../../helpers')
+const { evaluate, getVersionSums, Decoder } = require('./')
 
 test('Day 16 — Sample', t => {
   t.is(getVersionSums('8A004A801A8002F478'), 16)
@@ -19,6 +18,7 @@ test('Day 16 — Sample', t => {
 })
 
 test('Day 16 — Solutions', t => {
+  const [input] = $.readInput(__dirname)
   const { packet } = new Decoder(input)
   t.is(packet.sumVersions(), 889)
   t.is(packet.getValue(), 739303923668)

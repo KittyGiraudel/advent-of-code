@@ -1,28 +1,44 @@
 const test = require('ava')
 const { run } = require('./')
-const input = require('../../helpers/readInput')(__dirname, '\n', false)
+const $ = require('../../helpers')
 
-const sampleA = `/->-\\
+test('Day 13 — Sample', t => {
+  const sampleA = $.sample(
+    `
+/->-\\
 |   |  /----\\
 | /-+--+-\\  |
 | | |  | v  |
 \\-+-/  \\-+--/
-  \\------/   `.split('\n')
+  \\------/
+  `,
+    '\n',
+    false,
+    false
+  ).filter(Boolean)
 
-const sampleB = `/>-<\\
+  const sampleB = $.sample(
+    `
+/>-<\\
 |   |
 | /<+-\\
 | | | v
 \\>+</ |
   |   ^
-  \\<->/`.split('\n')
+  \\<->/
+  `,
+    '\n',
+    false,
+    false
+  ).filter(Boolean)
 
-test('Day 13 — Sample', t => {
   t.is(run(sampleA).join(','), '7,3')
   t.is(run(sampleB, true).join(','), '6,4')
 })
 
 test('Day 13 — Solutions', t => {
+  const input = $.readInput(__dirname, '\n', false)
+
   t.is(run(input, false).join(','), '8,9')
   t.is(run(input, true).join(','), '73,33')
 })

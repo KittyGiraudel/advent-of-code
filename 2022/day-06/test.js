@@ -1,8 +1,6 @@
 const test = require('ava')
+const $ = require('../../helpers')
 const { findMarker } = require('./')
-const [input] = require('../../helpers/readInput')(__dirname)
-
-const sample = `mjqjpqmgbljsphdztnvjfqwrcgsmlb`
 
 test('Day 06 — Sample', t => {
   t.is(findMarker('mjqjpqmgbljsphdztnvjfqwrcgsmlb', 4), 7)
@@ -18,6 +16,8 @@ test('Day 06 — Sample', t => {
 })
 
 test('Day 06 — Solutions', t => {
+  const [input] = $.readInput(__dirname)
+
   t.is(findMarker(input, 4), 1804)
   t.is(findMarker(input, 14), 2508)
 })

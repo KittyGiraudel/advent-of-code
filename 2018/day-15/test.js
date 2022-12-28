@@ -1,90 +1,70 @@
 const test = require('ava')
+const $ = require('../../helpers')
 const { battle, cheat } = require('./')
-const input = require('../../helpers/readInput')(__dirname)
-
-const sample0 = `
-#########
-#G..G..G#
-#.......#
-#.......#
-#G..E..G#
-#.......#
-#.......#
-#G..G..G#
-#########`
-  .trim()
-  .split('\n')
-
-const sampleA = `
-#######
-#.G...#
-#...EG#
-#.#.#G#
-#..G#E#
-#.....#
-#######`
-  .trim()
-  .split('\n')
-
-const sampleB = `
-#######
-#G..#E#
-#E#E.E#
-#G.##.#
-#...#E#
-#...E.#
-#######`
-  .trim()
-  .split('\n')
-
-const sampleC = `
-#######
-#E..EG#
-#.#G.E#
-#E.##E#
-#G..#.#
-#..E#.#
-#######`
-  .trim()
-  .split('\n')
-
-const sampleD = `
-#######
-#.E...#
-#.#..G#
-#.###.#
-#E#G#G#
-#...#G#
-#######`
-  .trim()
-  .split('\n')
-
-const sampleE = `
-#########
-#G......#
-#.E.#...#
-#..##..G#
-#...##..#
-#...#...#
-#.G...G.#
-#.....G.#
-#########`
-  .trim()
-  .split('\n')
-
-const sampleF = `
-#######
-#E.G#.#
-#.#G..#
-#G.#.G#
-#G..#.#
-#...E.#
-#######
-`
-  .trim()
-  .split('\n')
 
 test('Day 15 — Sample', t => {
+  const sampleA = $.sample(`
+  #######
+  #.G...#
+  #...EG#
+  #.#.#G#
+  #..G#E#
+  #.....#
+  #######
+  `)
+
+  const sampleB = $.sample(`
+  #######
+  #G..#E#
+  #E#E.E#
+  #G.##.#
+  #...#E#
+  #...E.#
+  #######
+  `)
+
+  const sampleC = $.sample(`
+  #######
+  #E..EG#
+  #.#G.E#
+  #E.##E#
+  #G..#.#
+  #..E#.#
+  #######
+  `)
+
+  const sampleD = $.sample(`
+  #######
+  #.E...#
+  #.#..G#
+  #.###.#
+  #E#G#G#
+  #...#G#
+  #######
+  `)
+
+  const sampleE = $.sample(`
+  #########
+  #G......#
+  #.E.#...#
+  #..##..G#
+  #...##..#
+  #...#...#
+  #.G...G.#
+  #.....G.#
+  #########
+  `)
+
+  const sampleF = $.sample(`
+  #######
+  #E.G#.#
+  #.#G..#
+  #G.#.G#
+  #G..#.#
+  #...E.#
+  #######
+  `)
+
   t.is(battle(sampleA), 27730)
   t.is(battle(sampleD), 28944)
   t.is(battle(sampleE), 18740)
@@ -98,7 +78,8 @@ test('Day 15 — Sample', t => {
 })
 
 test('Day 15 — Solutions', t => {
+  const input = $.readInput(__dirname)
+
   t.is(battle(input), 181522)
-  // Skipping this one because it takes about 7 seconds.
-  // t.is(cheat(input), 68324)
+  t.is(cheat(input), 68324)
 })

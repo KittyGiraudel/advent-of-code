@@ -1,6 +1,6 @@
 const test = require('ava')
+const $ = require('../../helpers')
 const { getSeatCoords, getSeatId, findOwnSeat } = require('./')
-const input = require('../../helpers/readInput')(__dirname)
 
 test('Day 05 — Sample', t => {
   t.deepEqual(getSeatCoords('FBFBBFFRLR'), [44, 5])
@@ -14,6 +14,8 @@ test('Day 05 — Sample', t => {
 })
 
 test('Day 05 — Solutions', t => {
+  const input = $.readInput(__dirname)
+
   t.is(Math.max(...input.map(getSeatId)), 855)
   t.is(findOwnSeat(input), 552)
 })

@@ -1,7 +1,6 @@
 const test = require('ava')
+const $ = require('../../helpers')
 const { getLooseCountForGroup, getStrictCountForGroup } = require('./')
-const sum = require('../../helpers/sum')
-const groups = require('../../helpers/readInput')(__dirname, '\n\n')
 
 test('Day 06 — Sample', t => {
   t.is(getLooseCountForGroup('abc'), 3)
@@ -18,6 +17,8 @@ test('Day 06 — Sample', t => {
 })
 
 test('Day 06 — Solutions', t => {
-  t.is(sum(groups.map(getLooseCountForGroup)), 6703)
-  t.is(sum(groups.map(getStrictCountForGroup)), 3430)
+  const input = $.readInput(__dirname, '\n\n')
+
+  t.is($.sum(input.map(getLooseCountForGroup)), 6703)
+  t.is($.sum(input.map(getStrictCountForGroup)), 3430)
 })

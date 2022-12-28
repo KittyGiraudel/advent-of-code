@@ -1,10 +1,9 @@
 const test = require('ava')
+const $ = require('../../helpers')
 const { debug } = require('./')
-const input = require('../../helpers/readInput')(__dirname, '\n\n')
-
-test.skip('Day 16 — Sample', t => {})
 
 test('Day 16 — Solutions', t => {
-  //t.is(debug(input), 588)
+  const input = $.readInput(__dirname, '\n\n')
+
   t.is(debug(input)[0], 627)
 })

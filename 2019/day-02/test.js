@@ -1,6 +1,6 @@
 const test = require('ava')
+const $ = require('../../helpers')
 const { Intcode, findInitParams } = require('./')
-const [numbers] = require('../../helpers/readInput')(__dirname)
 
 test('Day 02 — Sample', t => {
   t.is(new Intcode('1,0,0,0,99').run(), 2)
@@ -10,6 +10,8 @@ test('Day 02 — Sample', t => {
 })
 
 test('Day 02 — Solutions', t => {
+  const [numbers] = $.readInput(__dirname)
+
   t.is(
     new Intcode(numbers).updateMemory(1, 12).updateMemory(2, 2).run(),
     3790689

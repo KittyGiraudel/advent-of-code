@@ -1,22 +1,22 @@
 const test = require('ava')
+const $ = require('../../helpers')
 const { countAllergenFreeOccurrences, getCanonicalDangerousList } = require('.')
-const input = require('../../helpers/readInput')(__dirname)
-
-const example = `
-mxmxvkd kfcds sqjhc nhms (contains dairy, fish)
-trh fvjkl sbzzf mxmxvkd (contains dairy)
-sqjhc fvjkl (contains soy)
-sqjhc mxmxvkd sbzzf (contains fish)
-`
-  .trim()
-  .split('\n')
 
 test('Day 21 — Sample', t => {
+  const example = $.sample(`
+  mxmxvkd kfcds sqjhc nhms (contains dairy, fish)
+  trh fvjkl sbzzf mxmxvkd (contains dairy)
+  sqjhc fvjkl (contains soy)
+  sqjhc mxmxvkd sbzzf (contains fish)
+  `)
+
   t.is(countAllergenFreeOccurrences(example), 5)
   t.is(getCanonicalDangerousList(example), 'mxmxvkd,sqjhc,fvjkl')
 })
 
 test('Day 21 — Solutions', t => {
+  const input = $.readInput(__dirname)
+
   t.is(countAllergenFreeOccurrences(input), 2280)
   t.is(
     getCanonicalDangerousList(input),

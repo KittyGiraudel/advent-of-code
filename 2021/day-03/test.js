@@ -1,21 +1,23 @@
 const test = require('ava')
+const $ = require('../../helpers')
 const { getEpsilonAndGamma, getOxygen, getCO2 } = require('./')
-const input = require('../../helpers/readInput')(__dirname)
-
-const sample = `00100
-11110
-10110
-10111
-10101
-01111
-00111
-11100
-10000
-11001
-00010
-01010`.split('\n')
 
 test('Day 03 — Sample', t => {
+  const sample = $.sample(`
+  00100
+  11110
+  10110
+  10111
+  10101
+  01111
+  00111
+  11100
+  10000
+  11001
+  00010
+  01010
+  `)
+
   const { gamma, epsilon } = getEpsilonAndGamma(sample)
   const power = parseInt(gamma, 2) * parseInt(epsilon, 2)
 
@@ -33,6 +35,8 @@ test('Day 03 — Sample', t => {
 })
 
 test('Day 03 — Solutions', t => {
+  const input = $.readInput(__dirname)
+
   const { gamma, epsilon } = getEpsilonAndGamma(input)
   const power = parseInt(gamma, 2) * parseInt(epsilon, 2)
   t.is(power, 4103154)
