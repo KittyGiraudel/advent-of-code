@@ -41,7 +41,7 @@ test('Day 11 — Sample', t => {
 })
 
 test('Day 11 — Solutions', t => {
-  const input = $.readInput(import.meta, '\n\n')
+  const input = $.readInput(import.meta, { delimiter: '\n\n' })
 
   t.is(play(input), 58056)
   t.is(play(input, true), 15048718170)

@@ -101,7 +101,7 @@ test('Day 19 — Sample', t => {
 })
 
 test('Day 19 — Solutions', t => {
-  const [rules, messages] = $.readInput(import.meta, '\n\n')
+  const [rules, messages] = $.readInput(import.meta, { delimiter: '\n\n' })
 
   t.is(count(rules, messages), 241)
   t.is(count(rules, messages, PATCH), 424)

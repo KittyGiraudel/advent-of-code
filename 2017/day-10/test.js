@@ -11,7 +11,7 @@ test('Day 10 — Sample', t => {
 })
 
 test('Day 10 — Solutions', t => {
-  const input = $.readInput(import.meta, ',').map(Number)
+  const input = $.readInput(import.meta, { delimiter: ',' }).map(Number)
 
   t.is(run(input), 11375)
   t.is(getHash(input.join(',')), 'e0387e2ad112b7c2ef344e44885fe4d8')

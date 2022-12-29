@@ -29,7 +29,7 @@ test('Day 12 — Sample', t => {
 })
 
 test('Day 12 — Solutions', t => {
-  const input = $.readInput(import.meta, '\n\n')
+  const input = $.readInput(import.meta, { delimiter: '\n\n' })
 
   t.is(cycle(input, 20), 3217)
   t.is(cycle(input, 50000000000), 4000000000866)

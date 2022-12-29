@@ -27,7 +27,7 @@ test('Day 22 — Sample', t => {
 })
 
 test('Day 22 — Solutions', t => {
-  const input = $.readInput(import.meta, '\n\n')
+  const input = $.readInput(import.meta, { delimiter: '\n\n' })
 
   t.is(getGameScore(input), 34664)
   t.is(getGameScore(input, fightRecursive), 32018)

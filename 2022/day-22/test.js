@@ -36,7 +36,7 @@ test('Day 22 — Sample', t => {
 })
 
 test('Day 22 — Solutions', t => {
-  const input = $.readInput(import.meta, null, false)
+  const input = $.readInput(import.meta, { delimiter: null, trim: false })
 
   t.is(maze(input), 191010)
   t.is(maze(input, true), 55364)

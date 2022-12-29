@@ -21,7 +21,7 @@ test('Day 19 — Sample', t => {
 })
 
 test('Day 19 — Solutions', t => {
-  const input = $.readInput(import.meta, '\n', false)
+  const input = $.readInput(import.meta, { trim: false })
 
   t.deepEqual(run(input), ['VTWBPYAQFU', 17358])
 })

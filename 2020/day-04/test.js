@@ -89,7 +89,7 @@ hcl:#623a2f`),
 })
 
 test('Day 04 — Solutions', t => {
-  const input = $.readInput(import.meta, '\n\n')
+  const input = $.readInput(import.meta, { delimiter: '\n\n' })
 
   t.is(input.filter(isValidLoose).length, 190)
   t.is(input.filter(isValidStrict).length, 121)

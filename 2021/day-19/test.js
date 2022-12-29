@@ -145,5 +145,5 @@ test.skip('Day 19 — Sample', t => {
 })
 
 test.skip('Day 19 — Solutions', t => {
-  const input = $.readInput(import.meta, '\n\n')
+  const input = $.readInput(import.meta, { delimiter: '\n\n' })
 })

@@ -28,7 +28,7 @@ test('Day 01 — Sample', t => {
 })
 
 test('Day 01 — Solutions', t => {
-  const input = $.readInput(import.meta, '\n\n')
+  const input = $.readInput(import.meta, { delimiter: '\n\n' })
 
   t.is(findHighestGroup(input), 70369)
   t.is(findHighestGroups(input, 3), 203002)

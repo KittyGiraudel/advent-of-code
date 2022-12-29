@@ -10,7 +10,7 @@ test('Day 08 — Sample', t => {
 })
 
 test('Day 08 — Solutions', t => {
-  const input = $.readInput(import.meta, ' ').map(Number)
+  const input = $.readInput(import.meta, { delimiter: ' ' }).map(Number)
 
   t.is(score(parse(input.slice(0))), 38780)
   t.is(parse(input.slice(0), true).value, 18232)

@@ -120,7 +120,7 @@ test('Day 20 — Sample', t => {
 })
 
 test('Day 20 — Solutions', t => {
-  const input = $.readInput(import.meta, '\n\n')
+  const input = $.readInput(import.meta, { delimiter: '\n\n' })
 
   t.deepEqual(run(input), [8272903687921, 2304])
 })

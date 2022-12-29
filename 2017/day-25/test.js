@@ -35,7 +35,7 @@ test('Day 25 — Sample', t => {
 })
 
 test('Day 25 — Solutions', t => {
-  const input = $.readInput(import.meta, '\n\n')
+  const input = $.readInput(import.meta, { delimiter: '\n\n' })
 
   t.is(run(input), 2526)
 })

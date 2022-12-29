@@ -38,7 +38,7 @@ test('Day 13 — Sample', t => {
 })
 
 test('Day 13 — Solutions', t => {
-  const input = $.readInput(import.meta, '\n\n')
+  const input = $.readInput(import.meta, { delimiter: '\n\n' })
   const data = parseInput(input)
   const dotsAfterFirstFold = foldOnce(data.dots, data.folds[0])
 

@@ -17,7 +17,7 @@ test('Day 06 — Sample', t => {
 })
 
 test('Day 06 — Solutions', t => {
-  const input = $.readInput(import.meta, '\n\n')
+  const input = $.readInput(import.meta, { delimiter: '\n\n' })
 
   t.is($.sum(input.map(getLooseCountForGroup)), 6703)
   t.is($.sum(input.map(getStrictCountForGroup)), 3430)

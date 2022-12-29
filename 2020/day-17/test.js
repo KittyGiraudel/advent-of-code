@@ -16,7 +16,7 @@ test('Day 17 — Sample', t => {
 })
 
 test('Day 17 — Solutions', t => {
-  const input = $.readInput(import.meta, '\n')
+  const input = $.readInput(import.meta)
 
   t.is(gameOfLife(input, cycles), 382)
   t.is(gameOfLife(input, cycles, 4), 2552)

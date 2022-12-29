@@ -7,7 +7,7 @@ test('Day 16 — Sample', t => {
 })
 
 test('Day 16 — Solutions', t => {
-  const input = $.readInput(import.meta, ',')
+  const input = $.readInput(import.meta, { delimiter: ',' })
 
   t.is(dance(input), 'ehdpincaogkblmfj')
   t.is(dance(input, 16, 1_000_000_000), 'bpcekomfgjdlinha')

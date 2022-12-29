@@ -10,7 +10,7 @@ test('Day 01 — Sample', t => {
 })
 
 test('Day 01 — Solutions', t => {
-  const input = $.readInput(import.meta, ', ')
+  const input = $.readInput(import.meta, { delimiter: ', ' })
 
   t.deepEqual(run(input), [239, 141])
 })

@@ -37,7 +37,7 @@ test('Day 13 — Sample', t => {
 })
 
 test('Day 13 — Solutions', t => {
-  const input = $.readInput(import.meta, '\n', false)
+  const input = $.readInput(import.meta, { trim: false })
 
   t.is(run(input, false).join(','), '8,9')
   t.is(run(input, true).join(','), '73,33')

@@ -21,7 +21,7 @@ test('Day 20 — Sample', t => {
 })
 
 test('Day 20 — Solutions', t => {
-  const input = $.readInput(import.meta, '\n\n')
+  const input = $.readInput(import.meta, { delimiter: '\n\n' })
   const image2 = processImage(...input, 2)
   const image50 = processImage(...input, 50)
 

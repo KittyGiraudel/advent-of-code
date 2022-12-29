@@ -24,7 +24,7 @@ move 1 from 1 to 2`,
 })
 
 test('Day 05 — Solutions', t => {
-  const input = $.readInput(import.meta, '\n\n', false)
+  const input = $.readInput(import.meta, { delimiter: '\n\n', trim: false })
 
   t.is(process(input), 'DHBJQJCCW')
   t.is(process(input, true), 'WJVRLSJJT')
