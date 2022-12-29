@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const parse = input => {
   const start = {}
@@ -49,13 +49,13 @@ const getPathLength = (grid, start, end) => {
     : Infinity
 }
 
-const findPath = input => {
+export const findPath = input => {
   const { grid, start, end } = parse(input)
 
   return getPathLength(grid, start, end)
 }
 
-const findShortestPath = input => {
+export const findShortestPath = input => {
   const { grid, end } = parse(input)
 
   return $.grid.reduce(
@@ -67,5 +67,3 @@ const findShortestPath = input => {
     Infinity
   )
 }
-
-module.exports = { findPath, findShortestPath }

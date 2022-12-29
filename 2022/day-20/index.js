@@ -1,5 +1,5 @@
-const $ = require('../../helpers')
-const Circularray = require('circularray')
+import $ from '../../helpers'
+import Circularray from 'circularray'
 
 // My solution uses my double-ended queue library. That being said, it is not
 // better than using arrays considering the volume we’re dealing with. A linked
@@ -10,7 +10,7 @@ const Circularray = require('circularray')
 //
 // Side note, kudos to that solution which is much simpler and faster:
 // https://www.reddit.com/r/adventofcode/comments/zqezkn/comment/j0ywkpy/?utm_source=share&utm_medium=web2x&context=3
-const mix = (numbers, count = 1, multiplier = 1) => {
+export const mix = (numbers, count = 1, multiplier = 1) => {
   const circle = new Circularray(
     numbers.map((n, index) => ({ number: n * multiplier, index }))
   )
@@ -36,5 +36,3 @@ const mix = (numbers, count = 1, multiplier = 1) => {
     array[(zero + 3000) % array.length].number
   )
 }
-
-module.exports = { mix }

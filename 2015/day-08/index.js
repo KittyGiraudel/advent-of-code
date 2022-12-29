@@ -1,9 +1,7 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const decode = strings =>
+export const decode = strings =>
   $.sum(strings.map(raw => raw.length - eval(raw).length))
 
-const encode = strings =>
+export const encode = strings =>
   $.sum(strings.map(raw => JSON.stringify(raw).length - raw.length))
-
-module.exports = { decode, encode }

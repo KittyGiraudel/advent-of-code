@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const run = ([row, col]) => {
+export const run = ([row, col]) => {
   let curr = 20151125
   let diagonal = 1
 
@@ -15,5 +15,3 @@ const run = ([row, col]) => {
     }
   }
 }
-
-module.exports = { run }

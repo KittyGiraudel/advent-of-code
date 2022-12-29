@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { detect } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { detect } from './'
 
 test('Day 15 — Sample', t => {
   const sample = $.sample(`
@@ -25,7 +25,7 @@ test('Day 15 — Sample', t => {
 })
 
 test('Day 15 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(detect(input, 2_000_000), 5127797)
   t.is(detect(input, null, 4_000_000), 12518502636475)

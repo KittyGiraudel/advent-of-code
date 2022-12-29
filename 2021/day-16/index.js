@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const parseHex = hex => Array.from(hex, $.hexToBin).join('')
 
@@ -124,9 +124,9 @@ const render = (packet, depth = 1) => {
   )
 }
 
-const getVersionSums = $.compose(sumVersions, decode, parseHex)
-const evaluate = $.compose(getPacketValue, decode, parseHex)
-const visualize = $.compose(render, decode, parseHex)
+export const getVersionSums = $.compose(sumVersions, decode, parseHex)
+export const evaluate = $.compose(getPacketValue, decode, parseHex)
+export const visualize = $.compose(render, decode, parseHex)
 
 // Class-oriented approach authored once finished based on that elegant version
 // found on GitHub: https://github.com/Awjin/advent-of-code/blob/main/2021/16/utils.ts
@@ -169,7 +169,7 @@ class Packet {
   }
 }
 
-class Decoder {
+export class Decoder {
   constructor(hex) {
     this.bits = parseHex(hex)
     this.packet = this.decode()
@@ -220,5 +220,3 @@ class Decoder {
     return parseInt(bits, 2)
   }
 }
-
-module.exports = { getVersionSums, evaluate, visualize, Decoder }

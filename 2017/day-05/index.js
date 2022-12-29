@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const run = (memory, boundary = Infinity) => {
+export const run = (memory, boundary = Infinity) => {
   memory = memory.slice(0)
   let index = 0
   let i = 0
@@ -14,5 +14,3 @@ const run = (memory, boundary = Infinity) => {
 
   return i
 }
-
-module.exports = { run }

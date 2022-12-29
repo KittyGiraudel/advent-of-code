@@ -1,5 +1,5 @@
-const test = require('ava')
-const { run } = require('./')
+import test from 'ava'
+import { run } from './'
 
 test('Day 20 — Sample', t => {
   t.deepEqual(run(150), [8, 8])

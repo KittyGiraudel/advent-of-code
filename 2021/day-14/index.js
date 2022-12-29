@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const count = (input, iterations = 1) => {
+export const count = (input, iterations = 1) => {
   const string = input[0]
   // Initialize letter counters based on the characters of the initial string.
   const counters = $.count(string.split(''))
@@ -58,5 +58,3 @@ const count = (input, iterations = 1) => {
 
   return Math.max(...counts) - Math.min(...counts)
 }
-
-module.exports = { count }

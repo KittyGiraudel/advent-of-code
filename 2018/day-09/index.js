@@ -1,9 +1,9 @@
-const $ = require('../../helpers')
-const Circularray = require('circularray')
+import $ from '../../helpers'
+import Circularray from 'circularray'
 
 // Usage of a double-ended queue inspired by this comment on Reddit.
 // https://www.reddit.com/r/adventofcode/comments/a4i97s/2018_day_9_solutions/
-const play = (players, max) => {
+export const play = (players, max) => {
   const scores = $.array(players).map(() => 0)
   const circle = new Circularray([0])
 
@@ -43,5 +43,3 @@ const play = (players, max) => {
 
   return Math.max(...scores)
 }
-
-module.exports = { play }

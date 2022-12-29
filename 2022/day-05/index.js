@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 // Pad the row with an extra space, then slice it into chunks of 4 characters
 // which follow this struct: `[A] ` or `    ` (for empty cells). Then trim and
@@ -25,7 +25,7 @@ const parseInstructions = instructions =>
     .filter(Boolean)
     .map(instruction => instruction.match(/\d+/g))
 
-const process = (input, batch = false) => {
+export const process = (input, batch = false) => {
   const map = parseMap(input[0])
   const instructions = parseInstructions(input[1])
 
@@ -39,5 +39,3 @@ const process = (input, batch = false) => {
 
   return $.column(map, 0).join('')
 }
-
-module.exports = { process }

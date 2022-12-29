@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { countFlashes, findSynchronocity } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { countFlashes, findSynchronocity } from './'
 
 test('Day 11 — Sample', t => {
   const sample = $.sample(`
@@ -21,7 +21,7 @@ test('Day 11 — Sample', t => {
 })
 
 test('Day 11 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(countFlashes(input, 100), 1661)
   t.is(findSynchronocity(input), 334)

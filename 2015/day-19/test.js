@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { calibrate, recompose } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { calibrate, recompose } from './'
 
 test('Day 19 — Sample', t => {
   const sampleA = $.sample(`
@@ -24,7 +24,7 @@ test('Day 19 — Sample', t => {
 })
 
 test('Day 19 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(calibrate(input), 509)
   t.is(recompose(input), 195)

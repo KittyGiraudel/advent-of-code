@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 class Computer {
   constructor(input) {
@@ -42,13 +42,13 @@ class Computer {
   }
 }
 
-const run = input => {
+export const run = input => {
   const computer = new Computer(input)
   computer.run()
   return computer.counters.mul
 }
 
-const skip = () => {
+export const skip = () => {
   const r = {
     a: 1,
     b: 105_700,
@@ -79,5 +79,3 @@ const skip = () => {
 
   return r.h
 }
-
-module.exports = { run, skip }

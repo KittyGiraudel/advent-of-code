@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const getBorderingSpace = (grid, curr) => {
   const [N, E, S, W] = $.bordering(curr, 'COORDS')
@@ -169,13 +169,13 @@ class Game {
   }
 }
 
-const battle = rows => {
+export const battle = rows => {
   const game = new Game(rows)
   while (!game.done) game.round()
   return game.score
 }
 
-const cheat = rows => {
+export const cheat = rows => {
   let elvishPower = 3
 
   while (true) {
@@ -184,5 +184,3 @@ const cheat = rows => {
     if (game.perfect) return game.score
   }
 }
-
-module.exports = { battle, cheat }

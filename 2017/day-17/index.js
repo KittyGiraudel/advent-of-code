@@ -1,7 +1,7 @@
-const $ = require('../../helpers')
-const Circularray = require('circularray')
+import $ from '../../helpers'
+import Circularray from 'circularray'
 
-const run = offset => {
+export const run = offset => {
   const memory = new Circularray([0])
 
   // For part 1, we can use a double-ended queue that we rotate by the offset at
@@ -11,7 +11,7 @@ const run = offset => {
   return memory.shift()
 }
 
-const run2 = offset => {
+export const run2 = offset => {
   let position = 0
   let next = null
 
@@ -26,5 +26,3 @@ const run2 = offset => {
 
   return next
 }
-
-module.exports = { run, run2 }

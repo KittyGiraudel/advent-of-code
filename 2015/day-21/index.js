@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 /* Cost, Damage, Armor */
 const WEAPONS = [
@@ -102,7 +102,7 @@ class Fight {
   }
 }
 
-const run = boss => {
+export const run = boss => {
   const gears = getCombinations()
   const matches = gears.map(gear => new Fight(gear, boss).resolve())
 
@@ -111,5 +111,3 @@ const run = boss => {
     Math.max(...matches.filter(match => !match.won).map(match => match.score)),
   ]
 }
-
-module.exports = { run }

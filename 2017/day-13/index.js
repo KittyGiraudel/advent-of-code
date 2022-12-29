@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 /*
 class Firewall {
   constructor(input) {
@@ -78,7 +78,7 @@ const getGraph = lines =>
 
 const pass = (length, time) => time % ((length - 1) * 2)
 
-const run = input => {
+export const run = input => {
   const graph = getGraph(input)
 
   return Array.from(Object.keys(graph))
@@ -90,7 +90,7 @@ const run = input => {
 // but could not figure out how to solve part 2 without brute-force, so I
 // resorted in implementing that Python solution:
 // https://www.reddit.com/r/adventofcode/comments/7jgyrt/2017_day_13_solutions/dr6bxce/
-const cross = input => {
+export const cross = input => {
   const graph = getGraph(input)
   const layers = Object.keys(graph)
   let delay = 0
@@ -99,5 +99,3 @@ const cross = input => {
 
   return delay
 }
-
-module.exports = { run, cross }

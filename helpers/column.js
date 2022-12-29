@@ -4,4 +4,4 @@
 // @return {Array}
 const column = (grid, index) => grid.map(row => row[index])
 
-module.exports = column
+export default column

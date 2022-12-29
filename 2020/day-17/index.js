@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const W = coords => $.updateAtIndex(coords, 0, coords[0] - 1)
 const E = coords => $.updateAtIndex(coords, 0, coords[0] + 1)
@@ -124,9 +124,7 @@ const count = map => Array.from(map.values()).filter(isAlive).length
 // @param {Number} dimensions - Amount of dimensions (3 or 4)
 // @param {Map} cache - Coordinates cache
 // @return {Number}
-const gameOfLife = (input, cycles, dimensions = 3, cache = new Map()) =>
+export const gameOfLife = (input, cycles, dimensions = 3, cache = new Map()) =>
   count(
     $.array(cycles).reduce(map => cycle(map, dimensions, cache), init(input))
   )
-
-module.exports = { gameOfLife }

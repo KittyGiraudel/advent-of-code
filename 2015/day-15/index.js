@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const getPermutationsBy2 = () => $.range(101).map(i => [i, 100 - i])
 const getPermutationsBy4 = () => {
@@ -27,7 +27,7 @@ const getPropertyScore = (ratios, ingredients) => (_, pi) => {
 
 const parseIngredient = line => line.match(/-?\d+/g).map(Number)
 
-const run = (input, calories) => {
+export const run = (input, calories) => {
   // I couldn’t find a solution that works for a dynamic amount of ingredients
   // since I compute the permutations beforehand.
   const permutations = PERMUTATIONS[input.length]
@@ -44,5 +44,3 @@ const run = (input, calories) => {
 
   return $.max(scores, calories)
 }
-
-module.exports = { run }

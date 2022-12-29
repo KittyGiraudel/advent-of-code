@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { tetris } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { tetris } from './'
 
 test('Day 17 — Sample', t => {
   const sample = `>>><<><>><<<>><>>><<<>>><<<><<<>><>><<>>`
@@ -9,7 +9,7 @@ test('Day 17 — Sample', t => {
 })
 
 test('Day 17 — Solutions', t => {
-  const [input] = $.readInput(__dirname)
+  const [input] = $.readInput(import.meta)
 
   t.is(tetris(input), 3224)
   // Part 2 was done manually with a generous explanation found on Reddit.

@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const discover = (input, roundTrip = false) => {
+export const discover = (input, roundTrip = false) => {
   let start
   const locations = []
   const grid = $.grid.create(input, (cell, ...coords) => {
@@ -68,5 +68,3 @@ const discover = (input, roundTrip = false) => {
     return Math.min(count, min)
   }, Infinity)
 }
-
-module.exports = { discover }

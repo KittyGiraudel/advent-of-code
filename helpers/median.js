@@ -11,4 +11,4 @@ const median = values => {
     : (values[half - 1] + values[half]) / 2
 }
 
-module.exports = median
+export default median

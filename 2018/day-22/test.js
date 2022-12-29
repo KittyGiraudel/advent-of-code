@@ -1,5 +1,5 @@
-const test = require('ava')
-const { getRisk, getDuration } = require('./')
+import test from 'ava'
+import { getRisk, getDuration } from './'
 
 test('Day 22 — Sample', t => {
   t.is(getRisk(510, [10, 10]), 114)

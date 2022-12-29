@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { run } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { run } from './'
 
 const sortByScore = (a, b) => b.score - a.score
 const sortByLength = (a, b) => b.length - a.length || sortByScore(a, b)
@@ -25,7 +25,7 @@ test('Day 24 — Sample', t => {
 })
 
 test('Day 24 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
   const bridges = run(input)
 
   t.is(getBest(bridges.sort(sortByScore)), 2006)

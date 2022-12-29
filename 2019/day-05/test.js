@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { Intcode } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { Intcode } from './'
 
 test('Day 05 — Sample', t => {
   const computer = new Intcode('1002,4,3,4,33').setInput(1).run()
@@ -16,7 +16,7 @@ test('Day 05 — Sample', t => {
 })
 
 test('Day 05 — Solutions', t => {
-  const [numbers] = $.readInput(__dirname)
+  const [numbers] = $.readInput(import.meta)
 
   t.is(new Intcode(numbers).setInput(1).run().getOutput().pop(), 13933662)
   t.is(new Intcode(numbers).setInput(5).run().getOutput(), 2369720)

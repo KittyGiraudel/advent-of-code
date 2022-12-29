@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { count } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { count } from './'
 
 test('Day 14 — Sample', t => {
   const sample = $.sample(
@@ -32,7 +32,7 @@ test('Day 14 — Sample', t => {
 })
 
 test('Day 14 — Solutions', t => {
-  const input = $.readInput(__dirname, '\n\n')
+  const input = $.readInput(import.meta, '\n\n')
 
   t.is(count(input, 10), 2321)
   t.is(count(input, 40), 2399822193707)

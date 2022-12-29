@@ -23,7 +23,7 @@ const parseInput = input =>
 // @param {Number[]} a - Deck A
 // @param {Number[]} b - Deck B
 // @return {Object} Outcome with `index` (0 or 1) and `decks` (final decks)
-const fightRegular = decks => {
+export const fightRegular = decks => {
   while (decks.every(isNotEmpty)) {
     const cards = draw(decks)
     const index = getWinningIndex(cards)
@@ -37,7 +37,7 @@ const fightRegular = decks => {
 // @param {Number[]} a - Deck A
 // @param {Number[]} b - Deck B
 // @return {Object} Outcome with `index` (0 or 1) and `decks` (final decks)
-const fightRecursive = (decks, cache = new Set()) => {
+export const fightRecursive = (decks, cache = new Set()) => {
   while (decks.every(isNotEmpty)) {
     const key = serializeGame(decks)
 
@@ -59,11 +59,9 @@ const fightRecursive = (decks, cache = new Set()) => {
 // @param {String[]} input - Raw input
 // @param {Function} resolver - Either `fightRegular` or `fightRecursive`
 // @param {Number}
-const getGameScore = (input, resolver = fightRegular) => {
+export const getGameScore = (input, resolver = fightRegular) => {
   const decks = parseInput(input)
   const outcome = resolver(decks)
 
   return computeScore(outcome.decks[outcome.index])
 }
-
-module.exports = { fightRecursive, fightRegular, getGameScore }

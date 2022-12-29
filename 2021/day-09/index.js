@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 // Find the low points in the grid. To do so, iterate over every row, then every
 // number, and get its 4 neighbors. If all existing neighbors are higher than
@@ -42,14 +42,14 @@ const getBasin = (grid, position, evaluated = []) => {
   }, neighbors)
 }
 
-const sumLowPointsRisk = rows => {
+export const sumLowPointsRisk = rows => {
   const grid = $.grid.create(rows, Number)
   const lowPoints = getLowPoints(grid)
 
   return $.sum(lowPoints.map(coords => $.access(grid, coords)).map(p => p + 1))
 }
 
-const getProductOfBiggestBasins = (rows, amount = 3) => {
+export const getProductOfBiggestBasins = (rows, amount = 3) => {
   const grid = $.grid.create(rows, Number)
   const lowPoints = getLowPoints(grid)
 
@@ -60,5 +60,3 @@ const getProductOfBiggestBasins = (rows, amount = 3) => {
       .slice(amount * -1)
   )
 }
-
-module.exports = { sumLowPointsRisk, getProductOfBiggestBasins }

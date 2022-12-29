@@ -1,3 +1,1 @@
-const { Intcode } = require('../day-05')
-
-module.exports = { Intcode }
+export { Intcode } from '../day-05'

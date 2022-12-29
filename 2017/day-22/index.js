@@ -1,11 +1,11 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const CLEAN = '.'
 const WEAKENED = 'W'
 const INFECTED = '#'
 const FLAGGED = 'F'
 
-const run = (rows, iterations, advanced = false) => {
+export const run = (rows, iterations, advanced = false) => {
   const nodes = new Map()
   const state = {
     position: [Math.floor(rows[0].length / 2), Math.floor(rows.length / 2)],
@@ -48,5 +48,3 @@ const run = (rows, iterations, advanced = false) => {
 
   return infections
 }
-
-module.exports = { run }

@@ -1,4 +1,4 @@
-class Intcode {
+export class Intcode {
   constructor(memory, pointer = 0) {
     this.memory =
       typeof memory === 'string' ? memory.split(',').map(Number) : memory
@@ -51,7 +51,7 @@ class Intcode {
   }
 }
 
-const findInitParams = input => {
+export const findInitParams = input => {
   const computer = new Intcode(input)
 
   for (let n = 0; n < 100; n++) {
@@ -66,5 +66,3 @@ const findInitParams = input => {
 
   return null
 }
-
-module.exports = { Intcode, findInitParams }

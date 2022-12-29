@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const parseIngredient = string => {
   const [amount, type] = string.split(' ')
@@ -72,13 +72,11 @@ const getOreCost = (state, { ingredient, amount }) => {
 // Python on Reddit which I could follow and reimplement with a coding style
 // closer to what I originally wrote (a recursive approach).
 // Ref: https://github.com/jeffjeffjeffrey/advent-of-code/blob/master/2019/day_14.ipynb
-const getFuelCost = (input, amount = 1) =>
+export const getFuelCost = (input, amount = 1) =>
   getOreCost(
     { recipes: parseRecipes(input), supplies: {}, ore: 0 },
     { ingredient: 'FUEL', amount }
   ).ore
 
-const getFuelAmount = (input, supply = 1_000_000_000_000) =>
+export const getFuelAmount = (input, supply = 1_000_000_000_000) =>
   $.binarySearch(1, supply, i => supply - getFuelCost(input, i))
-
-module.exports = { getFuelCost, getFuelAmount }

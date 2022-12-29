@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const run = (steps, init) =>
+export const run = (steps, init) =>
   steps
     .reduce((acc, step) => {
       if (step.startsWith('reverse')) {
@@ -42,9 +42,7 @@ const run = (steps, init) =>
     }, Array.from(init))
     .join('')
 
-const run2 = steps =>
+export const run2 = steps =>
   $.permutations(Array.from('abcdefgh'))
     .find(base => run(steps, base.join('')) === 'fbgdceah')
     .join('')
-
-module.exports = { run, run2 }

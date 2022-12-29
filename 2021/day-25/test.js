@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { run, steps, serialize } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { run, steps } from './'
 
 test('Day 25 — Sample', t => {
   const sampleA = $.sample(`
@@ -26,7 +26,7 @@ test('Day 25 — Sample', t => {
   `)
 
   t.is(
-    serialize(steps(sampleA, 4)),
+    $.grid.render(steps(sampleA, 4)),
     $.sample(
       `
     >......
@@ -40,7 +40,7 @@ test('Day 25 — Sample', t => {
     ).join('\n')
   )
   t.is(
-    serialize(steps(sampleB, 5)),
+    $.grid.render(steps(sampleB, 5)),
     $.sample(
       `
     vv>...>v>.
@@ -57,7 +57,7 @@ test('Day 25 — Sample', t => {
   )
 
   t.is(
-    serialize(steps(sampleB, 10)),
+    $.grid.render(steps(sampleB, 10)),
     $.sample(
       `
     ..>..>>vv.
@@ -74,7 +74,7 @@ test('Day 25 — Sample', t => {
   )
 
   t.is(
-    serialize(steps(sampleB, 58)),
+    $.grid.render(steps(sampleB, 58)),
     $.sample(
       `
     ..>>v>vv..
@@ -94,7 +94,7 @@ test('Day 25 — Sample', t => {
 })
 
 test('Day 25 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(run(input), 417)
 })

@@ -1,6 +1,6 @@
-const test = require('ava')
-const { maze, rotate } = require('./')
-const $ = require('../../helpers')
+import test from 'ava'
+import { maze, rotate } from './'
+import $ from '../../helpers'
 
 test('Day 22 — Sample', t => {
   const sample = $.sample(
@@ -36,7 +36,7 @@ test('Day 22 — Sample', t => {
 })
 
 test('Day 22 — Solutions', t => {
-  const input = $.readInput(__dirname, null, false)
+  const input = $.readInput(import.meta, null, false)
 
   t.is(maze(input), 191010)
   t.is(maze(input, true), 55364)

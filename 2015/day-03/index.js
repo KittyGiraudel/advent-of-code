@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const run = (instructions, advanced = false) => {
+export const run = (instructions, advanced = false) => {
   const map = { '0,0': advanced ? 2 : 1 }
   const position = [
     [0, 0],
@@ -20,5 +20,3 @@ const run = (instructions, advanced = false) => {
 
   return Object.values(map).filter(Boolean).length
 }
-
-module.exports = { run }

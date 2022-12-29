@@ -1,10 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const {
-  getRootNumber,
-  getHumnNumber,
-  getHumnNumberByBruteForce,
-} = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { getRootNumber, getHumnNumber, getHumnNumberByBruteForce } from './'
 
 test('Day 21 — Sample', t => {
   const sample = $.sample(`
@@ -31,7 +27,7 @@ test('Day 21 — Sample', t => {
 })
 
 test('Day 21 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(getRootNumber(input), 82_225_382_988_628)
   t.is(getHumnNumber(input), 3_429_411_069_028)

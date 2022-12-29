@@ -1,7 +1,7 @@
-const $ = require('../../helpers')
-const Circularray = require('circularray')
+import $ from '../../helpers'
+import Circularray from 'circularray'
 
-class Computer {
+export class Computer {
   SUFFIX = [17, 31, 73, 47, 23]
 
   constructor(input, memory) {
@@ -58,7 +58,6 @@ class Computer {
   }
 }
 
-const getHash = string => new Computer(string).round(64).getHash()
-const run = (lengths, list) => new Computer(lengths, list).round().check()
-
-module.exports = { run, getHash, Computer }
+export const getHash = string => new Computer(string).round(64).getHash()
+export const run = (lengths, list) =>
+  new Computer(lengths, list).round().check()

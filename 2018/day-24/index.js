@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const IMMUNE_SYSTEM = 'Immune System'
 const INFECTION = 'Infection'
@@ -179,7 +179,7 @@ const getArmies = data =>
     return army
   })
 
-const battle = data => {
+export const battle = data => {
   const armies = getArmies(data)
   const game = new Game(armies)
 
@@ -188,7 +188,7 @@ const battle = data => {
   return game.score
 }
 
-const cheat = data => {
+export const cheat = data => {
   let boost = 0
 
   while (true) {
@@ -203,5 +203,3 @@ const cheat = data => {
     if (game.winner?.name === IMMUNE_SYSTEM) return game.score
   }
 }
-
-module.exports = { battle, cheat }

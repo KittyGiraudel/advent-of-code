@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { vaporize, findBestSpot } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { vaporize, findBestSpot } from './'
 
 test('Day 10 — Sample', t => {
   const sampleA = $.sample(`
@@ -100,7 +100,7 @@ test('Day 10 — Sample', t => {
 })
 
 test('Day 10 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
   const order = vaporize(input)
 
   t.is(findBestSpot(input)[1], 288)

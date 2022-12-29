@@ -1,8 +1,8 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const isValid = ([a, b, c]) => a + b > c && a + c > b && b + c > a
 
-const run = input => {
+export const run = input => {
   const lines = input.map(line => line.match(/\d+/g).map(Number))
   const part1 = lines.filter(isValid).length
   const part2 = $.chunk(lines, 3)
@@ -12,5 +12,3 @@ const run = input => {
 
   return [part1, part2]
 }
-
-module.exports = { run }

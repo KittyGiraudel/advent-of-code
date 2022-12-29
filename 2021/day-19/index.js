@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const findVector = (a, b) => [b[0] - a[0], b[1] - a[1], b[2] - a[2]]
 
@@ -29,7 +29,7 @@ class Scanner {
   }
 }
 
-const findOverlaps = (scannerA, scannerB) => {
+export const findOverlaps = (scannerA, scannerB) => {
   const overlaps = []
   const beaconPairs = Array.from({ length: scannerA.length }).map((_, i) => [
     scannerA.beacons[i],
@@ -55,12 +55,10 @@ const findOverlaps = (scannerA, scannerB) => {
   return overlaps
 }
 
-const parse = scanners => {
+export const parse = scanners => {
   return scanners.map(scanner => {
     const s = new Scanner(scanner)
     s.findVectorsBetweenBeacons()
     return s
   })
 }
-
-module.exports = { parse, findOverlaps }

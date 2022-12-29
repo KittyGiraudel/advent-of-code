@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { get } = require('.')
+import test from 'ava'
+import $ from '../../helpers'
+import { get } from '.'
 
 test('Day 15 — Sample', t => {
   t.is(get([0, 3, 6], 2020), 436)
@@ -14,7 +14,7 @@ test('Day 15 — Sample', t => {
 })
 
 test('Day 15 — Solutions', t => {
-  const input = $.readInput(__dirname).map(Number)
+  const input = $.readInput(import.meta).map(Number)
 
   t.is(get(input, 2020), 289)
   t.is(get(input, 30000000), 1505722)

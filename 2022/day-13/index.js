@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const toArray = value => (Array.isArray(value) ? value : [value])
 const isDefined = value => typeof value !== 'undefined'
@@ -20,7 +20,7 @@ const isNumber = value => typeof value === 'number'
 // @param {Number|Number[]|undefined} a - First value
 // @param {Number|Number[]|undefined} b - Second value
 // @return {Boolean|undefined}
-const compare = (a, b) => {
+export const compare = (a, b) => {
   if (!isDefined(b)) return false
   if (!isDefined(a)) return true
 
@@ -36,7 +36,7 @@ const compare = (a, b) => {
   }
 }
 
-const getScore = pairs =>
+export const getScore = pairs =>
   $.sum(
     pairs.map((pair, index) =>
       compare(...pair.split('\n').map(JSON.parse)) ? index + 1 : 0
@@ -47,7 +47,7 @@ const getScore = pairs =>
 // pair of dividers, then join all pairs together, and split it on line breaks
 // to get an array of individual packets; parse them all as JSON. Then sort all
 // packets based, and find the index of the dividers again.
-const sort = pairs => {
+export const sort = pairs => {
   const dividers = `[[2]]\n[[6]]`
   const packets = pairs.concat(dividers).join('\n').split('\n').map(JSON.parse)
   const sorted = packets.sort((a, b) => (compare(a, b) ? -1 : +1))
@@ -59,5 +59,3 @@ const sort = pairs => {
 
   return $.product(indices)
 }
-
-module.exports = { compare, getScore, sort }

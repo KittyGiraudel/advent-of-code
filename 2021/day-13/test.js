@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { parseInput, foldOnce, foldAll, render } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { parseInput, foldOnce, foldAll, render } from './'
 
 test('Day 13 — Sample', t => {
   const sample = $.sample(
@@ -38,7 +38,7 @@ test('Day 13 — Sample', t => {
 })
 
 test('Day 13 — Solutions', t => {
-  const input = $.readInput(__dirname, '\n\n')
+  const input = $.readInput(import.meta, '\n\n')
   const data = parseInput(input)
   const dotsAfterFirstFold = foldOnce(data.dots, data.folds[0])
 

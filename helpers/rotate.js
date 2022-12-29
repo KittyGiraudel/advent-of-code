@@ -11,4 +11,4 @@ const rotate = (array, n = 1) => {
   return array
 }
 
-module.exports = rotate
+export default rotate

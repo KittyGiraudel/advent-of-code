@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { checksum } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { checksum } from './'
 
 test('Day 02 — Sample', t => {
   const sampleA = $.sample(`
@@ -20,7 +20,7 @@ test('Day 02 — Sample', t => {
 })
 
 test('Day 02 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(checksum(input), 46402)
   t.is(checksum(input, true), 265)

@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const getTilingCoords = (ri, ci) => {
   const [N, NE, E, SE, S, SW, W, NW] = $.surrounding([ri, ci], 'COORDS')
@@ -38,7 +38,7 @@ const step = (algorithm, input, defaultChar = '.') => {
   return $.grid.render(next)
 }
 
-const processImage = (algorithm, image, iterations = 1) =>
+export const processImage = (algorithm, image, iterations = 1) =>
   $.array(iterations).reduce(
     acc => {
       const image = step(algorithm, acc.image, acc.char)
@@ -58,5 +58,3 @@ const processImage = (algorithm, image, iterations = 1) =>
     },
     { image, char: '.' }
   ).image
-
-module.exports = { processImage }

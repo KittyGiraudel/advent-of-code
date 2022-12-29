@@ -1,7 +1,7 @@
-const $ = require('../../helpers')
-const Circularray = require('circularray')
+import $ from '../../helpers'
+import Circularray from 'circularray'
 
-const run = (size, advanced = false) => {
+export const run = (size, advanced = false) => {
   const circle = new Circularray($.range(size, 1))
 
   // Find the node that’s on the opposite site of the circle, and store it as a
@@ -34,5 +34,3 @@ const run = (size, advanced = false) => {
 
   return circle.toArray().pop()
 }
-
-module.exports = { run }

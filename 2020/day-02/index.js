@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 // Loosely validate a password by making sure the amount of occurrences of
 // `letter` in `password` is comprised between `i` and `j`.
@@ -29,11 +29,9 @@ const parsePolicy = policy => policy.split(/\W+/)
 // Return whether a raw password policy is loosely valid.
 // @param {String} policy - Policy to validate
 // @return {Boolean} Whether the policy is valid
-const isValidLoose = policy => validateLoose(parsePolicy(policy))
+export const isValidLoose = policy => validateLoose(parsePolicy(policy))
 
 // Return whether a raw password policy is strictly valid.
 // @param {String} policy - Policy to validate
 // @return {Boolean} Whether the policy is valid
-const isValidStrict = policy => validateStrict(parsePolicy(policy))
-
-module.exports = { isValidLoose, isValidStrict }
+export const isValidStrict = policy => validateStrict(parsePolicy(policy))

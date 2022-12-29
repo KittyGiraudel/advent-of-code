@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { mapOut } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { mapOut } from './'
 
 test('Day 06 — Sample', t => {
   const sample = $.sample(`
@@ -17,7 +17,7 @@ test('Day 06 — Sample', t => {
 })
 
 test('Day 06 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.deepEqual(mapOut(input, 10000), {
     largestRegionSize: 5941,

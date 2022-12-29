@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const run = (input, advanced = false) => {
+export const run = (input, advanced = false) => {
   const grid = $.grid.init(1000, 1000, 0)
 
   input.forEach(line => {
@@ -20,5 +20,3 @@ const run = (input, advanced = false) => {
 
   return $.grid.reduce(grid, (acc, v) => acc + v, 0)
 }
-
-module.exports = { run }

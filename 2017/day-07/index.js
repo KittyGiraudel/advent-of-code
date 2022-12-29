@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const getRootNode = graph => {
   const values = Object.values(graph).reduce(
@@ -16,7 +16,7 @@ const parseLine = line => {
   return { name, value: +value, children: children }
 }
 
-const run = input => {
+export const run = input => {
   const graph = {}
 
   input.forEach(line => {
@@ -67,5 +67,3 @@ const run = input => {
     fix: fix.node.value - fix.diff,
   }
 }
-
-module.exports = { run }

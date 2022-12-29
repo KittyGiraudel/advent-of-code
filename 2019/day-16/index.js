@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const cycle2 = (input, iterations = 1) => {
+export const cycle2 = (input, iterations = 1) => {
   const offset = +input.slice(0, 7)
   const code = input.split('').map(Number).slice(offset)
   const curr = code.slice()
@@ -35,7 +35,7 @@ const reduceFirst = (acc, value, i) =>
 const reduceAny = (acc, chunk, i) =>
   i % 2 ? acc + $.sum(chunk) * (i % 4 === 1 ? +1 : -1) : acc
 
-const cycle = (input, iterations = 1) => {
+export const cycle = (input, iterations = 1) => {
   let curr = input.split('').map(Number)
   let next = []
 
@@ -56,5 +56,3 @@ const cycle = (input, iterations = 1) => {
 
   return curr.join('')
 }
-
-module.exports = { cycle, cycle2 }

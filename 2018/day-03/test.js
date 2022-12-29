@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { countOverlappingInches, detect } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { countOverlappingInches, detect } from './'
 
 test('Day 03 — Sample', t => {
   const sampleA = $.sample(`
@@ -13,7 +13,7 @@ test('Day 03 — Sample', t => {
 })
 
 test('Day 03 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(countOverlappingInches(input), 114946)
   t.is(detect(input), 877)

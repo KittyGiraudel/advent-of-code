@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const captcha = (input, inc = input.length / 2) => {
+export const captcha = (input, inc = input.length / 2) => {
   let sum = 0
 
   for (let i = 0; i < input.length; i++) {
@@ -12,5 +12,3 @@ const captcha = (input, inc = input.length / 2) => {
 
   return sum
 }
-
-module.exports = { captcha }

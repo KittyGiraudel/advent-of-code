@@ -1,5 +1,5 @@
-const $ = require('../../helpers')
-const { Intcode } = require('../day-05')
+import $ from '../../helpers'
+import { Intcode } from '../day-05'
 
 class Network {
   constructor(input, size, withLogs) {
@@ -77,12 +77,10 @@ class Network {
   }
 }
 
-const boot = (input, size = 50) => {
+export const boot = (input, size = 50) => {
   const network = new Network(input, size)
 
   while (!network.isDone()) network.run()
 
   return network.getOutput()
 }
-
-module.exports = { boot }

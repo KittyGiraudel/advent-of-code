@@ -1,5 +1,5 @@
-const test = require('ava')
-const { playDeterministically, playQuantum } = require('./')
+import test from 'ava'
+import { playDeterministically, playQuantum } from './'
 
 test('Day 21 — Sample', t => {
   t.is(playDeterministically(4, 8).value, 739785)

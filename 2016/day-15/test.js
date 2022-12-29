@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { run } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { run } from './'
 
 test('Day 15 — Sample', t => {
   const sample = $.sample(`
@@ -12,7 +12,7 @@ test('Day 15 — Sample', t => {
 })
 
 test('Day 15 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
   const extraDisk = 'Disc #7 has 11 positions; at time=0, it is at position 0.'
 
   t.is(run(input), 121834)

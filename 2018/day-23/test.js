@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { findStrongestBot } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { findStrongestBot } from './'
 
 test('Day 23 — Sample', t => {
   const sampleA = $.sample(`
@@ -29,7 +29,7 @@ test('Day 23 — Sample', t => {
 })
 
 test('Day 23 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(findStrongestBot(input)[0], 602)
   t.is(findStrongestBot(input)[1], 110620102)

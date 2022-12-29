@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const generateMap = input =>
   input.reduce((acc, line) => {
@@ -69,7 +69,7 @@ const fillFrom = (grid, [x, y], maxY) => {
   }
 }
 
-const scan = (input, source = [500, 0]) => {
+export const scan = (input, source = [500, 0]) => {
   const map = generateMap(input)
   const [, maxX, minY, maxY] = $.boundaries(Object.keys(map).map($.toCoords))
   const grid = $.grid.init(
@@ -90,5 +90,3 @@ const scan = (input, source = [500, 0]) => {
 
   return [counters['~'], counters['|']]
 }
-
-module.exports = { scan }

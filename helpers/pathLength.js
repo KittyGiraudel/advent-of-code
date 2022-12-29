@@ -10,4 +10,4 @@ const pathLength = (graph, start, end) => {
   return length
 }
 
-module.exports = pathLength
+export default pathLength

@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { steps, findRepeat } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { steps, findRepeat } from './'
 
 test('Day 12 — Sample', t => {
   const sampleA = $.sample(`
@@ -23,7 +23,7 @@ test('Day 12 — Sample', t => {
 })
 
 test('Day 12 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(steps(input, 1000), 6849)
   t.is(findRepeat(input), 356658899375688)

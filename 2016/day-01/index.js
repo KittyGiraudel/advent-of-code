@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const run = steps => {
+export const run = steps => {
   let map = new Set()
   let position = [0, 0]
   let direction = $.turn.DIRECTIONS[0]
@@ -24,5 +24,3 @@ const run = steps => {
 
   return [$.manhattan(position), location && $.manhattan(location)]
 }
-
-module.exports = { run }

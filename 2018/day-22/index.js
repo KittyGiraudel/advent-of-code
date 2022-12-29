@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const getGeologicIndex = (x, y, target, depth) => {
   if ((x === 0 && y === 0) || (x === target[0] && y === target[1])) return 0
@@ -18,7 +18,7 @@ const getErosionLevel = $.memo(
 const getRiskLevel = (x, y, target, depth) =>
   getErosionLevel(x, y, target, depth) % 3
 
-const getRisk = (depth, target) =>
+export const getRisk = (depth, target) =>
   $.sum(
     $.grid
       .map($.grid.init(target[0] + 1, target[1] + 1), (v, ri, ci) =>
@@ -33,7 +33,7 @@ const getNeighbors = $.memo((x, y, width, height) =>
   )
 )
 
-const getDuration = (depth, target) => {
+export const getDuration = (depth, target) => {
   const height = 5 + (target[1] + 1)
   const width = 50 + (target[0] + 1)
   const heap = [[0, 0, 0, 1]]
@@ -78,5 +78,3 @@ const getDuration = (depth, target) => {
     }
   }
 }
-
-module.exports = { getRisk, getDuration }

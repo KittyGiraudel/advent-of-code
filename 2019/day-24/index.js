@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const cycle = curr => {
+export const cycle = curr => {
   let next = ''
   let width = Math.sqrt(curr.length)
 
@@ -17,7 +17,7 @@ const cycle = curr => {
   return next
 }
 
-const findBiodiversity = input => {
+export const findBiodiversity = input => {
   const history = []
   let curr = input.join('')
 
@@ -34,5 +34,3 @@ const findBiodiversity = input => {
       .map(i => Math.pow(2, i))
   )
 }
-
-module.exports = { cycle, findBiodiversity }

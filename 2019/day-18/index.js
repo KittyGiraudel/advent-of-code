@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const isDoorAtCell = cell => /[A-Z]/.test(cell)
 const isKeyAtCell = cell => /[a-z]/.test(cell)
@@ -54,7 +54,7 @@ const createGraph = (grid, start, locations) => {
   return from
 }
 
-const run = input => {
+export const run = input => {
   const locations = {}
 
   const grid = $.grid.create(input, (v, ri, ci) => {
@@ -71,5 +71,3 @@ const run = input => {
 
   return graph.path.length
 }
-
-module.exports = { run }

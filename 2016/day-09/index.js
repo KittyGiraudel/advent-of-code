@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const size = string => {
   const closing = string.indexOf(')')
@@ -26,7 +26,7 @@ const size = string => {
   return count * size(reach) + size(rest)
 }
 
-const run = input => {
+export const run = input => {
   let marker = ''
 
   for (let i = 0; i < input.length; i++) {
@@ -50,7 +50,7 @@ const run = input => {
   return input.length
 }
 
-const run2 = input => {
+export const run2 = input => {
   let marker = ''
   let total = 0
 
@@ -74,5 +74,3 @@ const run2 = input => {
 
   return total
 }
-
-module.exports = { run, run2 }

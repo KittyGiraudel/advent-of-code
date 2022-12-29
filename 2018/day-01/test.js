@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { find } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { find } from './'
 
 test('Day 01 — Sample', t => {
   t.is(find([+1, -1]), 0)
@@ -10,7 +10,7 @@ test('Day 01 — Sample', t => {
 })
 
 test('Day 01 — Solutions', t => {
-  const input = $.readInput(__dirname).map(Number)
+  const input = $.readInput(import.meta).map(Number)
 
   t.is($.sum(input), 406)
   t.is(find(input), 312)

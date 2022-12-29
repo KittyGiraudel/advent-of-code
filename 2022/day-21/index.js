@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const parseInput = input =>
   input.reduce((acc, line) => {
@@ -11,7 +11,7 @@ const parseInput = input =>
 // it reduces it until we have found the number for the `root` key. The array
 // check was for part 2, because the brute-force version I initially wrote
 // relied on that function, but passed it a parsed map already.
-const getRootNumber = input => {
+export const getRootNumber = input => {
   const map = Array.isArray(input) ? parseInput(input) : input
 
   while (typeof map.root !== 'number') reduceNext(map)
@@ -63,7 +63,7 @@ const reduceNext = map => {
 // to solve them in order. Basically trying to get the first 2, then a 3, then a
 // 6, and so on and so forth until I was close enough that I could brute-force
 // the actual number within a few seconds.
-const getHumnNumberByBruteForce = input => {
+export const getHumnNumberByBruteForce = input => {
   let { humn, ...map } = parseInput(input)
 
   // By replacing the `+` sign with a `-` sign, we should be getting a `0` for
@@ -103,7 +103,7 @@ const getHumnNumberByBruteForce = input => {
 // Then, they used a binary search to find the right value for `humn` in that
 // expression. This is a cool approach, and significantly more performant than
 // what I’ve done.
-const getHumnNumber = input => {
+export const getHumnNumber = input => {
   const { humn, ...map } = parseInput(input)
 
   while (getNextNumber(map)) reduceNext(map)
@@ -143,5 +143,3 @@ const getHumnNumber = input => {
 
   return value
 }
-
-module.exports = { getRootNumber, getHumnNumber, getHumnNumberByBruteForce }

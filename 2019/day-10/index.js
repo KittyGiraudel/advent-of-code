@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const mapOutSpace = rows => {
+export const mapOutSpace = rows => {
   const map = new Map()
   const grid = $.grid.create(rows)
 
@@ -27,7 +27,7 @@ const mapOutSpace = rows => {
   return map
 }
 
-const findBestSpot = grid => {
+export const findBestSpot = grid => {
   const map = mapOutSpace(grid)
 
   return Array.from(map.keys()).reduce((acc, key) => {
@@ -44,7 +44,7 @@ const toObj = point => {
 const getAngleFromPoint = pointA => pointB =>
   90 + (Math.atan2(pointB.y - pointA.y, pointB.x - pointA.x) * 180) / Math.PI
 
-const vaporize = grid => {
+export const vaporize = grid => {
   const map = mapOutSpace(grid)
   const [spot] = findBestSpot(grid)
   const center = toObj(spot)
@@ -88,5 +88,3 @@ const vaporize = grid => {
     return order
   }, [])
 }
-
-module.exports = { mapOutSpace, findBestSpot, vaporize }

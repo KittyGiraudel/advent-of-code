@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { getLongestDistance, getDistancesAbove } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { getLongestDistance, getDistancesAbove } from './'
 
 test('Day 20 — Sample', t => {
   const SAMPLES = [
@@ -23,7 +23,7 @@ test('Day 20 — Sample', t => {
 })
 
 test('Day 20 — Solutions', t => {
-  const [input] = $.readInput(__dirname)
+  const [input] = $.readInput(import.meta)
 
   t.is(getLongestDistance(input), 3806)
   t.is(getDistancesAbove(input, 1000), 8354)

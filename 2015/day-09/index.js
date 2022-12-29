@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 // This is your typical traversal function. Get the neighbors of the current
 // node that haven’t been visited yet, and recursively walk them until we don’t
@@ -33,12 +33,10 @@ const createGraph = input => {
   return graph
 }
 
-const run = input => {
+export const run = input => {
   const graph = createGraph(input)
 
   return Object.keys(graph)
     .map(key => getPaths(graph, key))
     .flat(Infinity)
 }
-
-module.exports = { run }

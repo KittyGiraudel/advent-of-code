@@ -21,4 +21,4 @@ const manhattan = (a, b = [0, 0, 0, 0]) => {
   )
 }
 
-module.exports = manhattan
+export default manhattan

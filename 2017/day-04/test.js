@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { validate, validateStrict } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { validate, validateStrict } from './'
 
 test('Day 04 — Sample', t => {
   t.is(validate('aa bb cc dd ee'), true)
@@ -14,7 +14,7 @@ test('Day 04 — Sample', t => {
 })
 
 test('Day 04 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(input.filter(validate).length, 383)
   t.is(input.filter(validateStrict).length, 265)

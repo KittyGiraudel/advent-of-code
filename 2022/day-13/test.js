@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { compare, getScore, sort } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { compare, getScore, sort } from './'
 
 test('Day 13 — Sample', t => {
   const sample = $.sample(
@@ -51,7 +51,7 @@ test('Day 13 — Sample', t => {
 })
 
 test('Day 13 — Solutions', t => {
-  const input = $.readInput(__dirname, '\n\n')
+  const input = $.readInput(import.meta, '\n\n')
 
   t.is(getScore(input), 5252)
   t.is(sort(input), 20592)

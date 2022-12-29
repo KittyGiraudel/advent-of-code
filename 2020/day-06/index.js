@@ -12,10 +12,5 @@ const getCountForGroup = predicate => group => {
   return LETTERS.filter(isMatch).length
 }
 
-const getLooseCountForGroup = getCountForGroup(Array.prototype.some)
-const getStrictCountForGroup = getCountForGroup(Array.prototype.every)
-
-module.exports = {
-  getLooseCountForGroup,
-  getStrictCountForGroup,
-}
+export const getLooseCountForGroup = getCountForGroup(Array.prototype.some)
+export const getStrictCountForGroup = getCountForGroup(Array.prototype.every)

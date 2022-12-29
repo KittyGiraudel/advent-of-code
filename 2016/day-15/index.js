@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 class Disk {
   constructor(id, size, initial) {
@@ -24,7 +24,7 @@ class Disk {
   }
 }
 
-const run = instructions => {
+export const run = instructions => {
   const disks = instructions.map(instruction => {
     const [id, size, , initial] = instruction.match(/\d+/g).map(Number)
 
@@ -40,5 +40,3 @@ const run = instructions => {
 
   return delay
 }
-
-module.exports = { run }

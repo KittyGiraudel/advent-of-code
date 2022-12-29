@@ -1,5 +1,5 @@
-const test = require('ava')
-const { cook1, cook2 } = require('./')
+import test from 'ava'
+import { cook1, cook2 } from './'
 
 test('Day 14 — Sample', t => {
   t.is(cook1(9), '5158916779')

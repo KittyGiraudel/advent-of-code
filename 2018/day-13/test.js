@@ -1,6 +1,6 @@
-const test = require('ava')
-const { run } = require('./')
-const $ = require('../../helpers')
+import test from 'ava'
+import { run } from './'
+import $ from '../../helpers'
 
 test('Day 13 — Sample', t => {
   const sampleA = $.sample(
@@ -37,7 +37,7 @@ test('Day 13 — Sample', t => {
 })
 
 test('Day 13 — Solutions', t => {
-  const input = $.readInput(__dirname, '\n', false)
+  const input = $.readInput(import.meta, '\n', false)
 
   t.is(run(input, false).join(','), '8,9')
   t.is(run(input, true).join(','), '73,33')

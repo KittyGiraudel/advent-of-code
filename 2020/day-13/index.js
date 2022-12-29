@@ -3,7 +3,7 @@
 // @param {Number} timestamp - Initial timestamp
 // @param {(Number|x)[]} sequence - Bus lines
 // @return {Number[]}
-const getNextDeparture = ([timestamp, sequence]) => {
+export const getNextDeparture = ([timestamp, sequence]) => {
   const line = sequence
     .split(',')
     .filter(a => a !== 'x')
@@ -57,7 +57,7 @@ const findTimestamp = (sequence, { timestamp, increment }) => {
 // 7. findTimestamp([7, 13, 'x', 'x', 59, 'x', 31], 350, 5369) => 1068781
 // @param {(Number|x)[]} input - Bus lines
 // @return {Number}
-const getEarliestTimestamp = ([, input]) =>
+export const getEarliestTimestamp = ([, input]) =>
   input
     .split(',')
     .map(value => parseInt(value) || 'x')
@@ -68,5 +68,3 @@ const getEarliestTimestamp = ([, input]) =>
       }),
       { increment: 1, timestamp: 0 }
     ).timestamp
-
-module.exports = { getNextDeparture, getEarliestTimestamp }

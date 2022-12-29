@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { createGraph, countOrbits, countTransfers, getPaths } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { createGraph, countOrbits, countTransfers, getPaths } from './'
 
 test('Day 06 — Sample', t => {
   const sampleA = $.sample(`
@@ -38,7 +38,7 @@ test('Day 06 — Sample', t => {
 })
 
 test('Day 06 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(countOrbits(createGraph(input)), 292387)
   t.is(countTransfers(createGraph(input)), 433)

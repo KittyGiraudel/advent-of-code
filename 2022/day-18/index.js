@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const VECTORS = ['1,0,0', '-1,0,0', '0,1,0', '0,-1,0', '0,0,1', '0,0,-1'].map(
   v => v.split(',').map(Number)
@@ -9,7 +9,7 @@ const getSides = curr => VECTORS.map(vector => $.applyVector(curr, vector))
 const getArea = (cubes, predicate) =>
   cubes.flatMap(getSides).map($.toPoint).filter(predicate).length
 
-const getSurfaceArea = (points, advanced = false) => {
+export const getSurfaceArea = (points, advanced = false) => {
   const cubes = points.map(point => point.split(',').map(Number))
   const [minX, maxX, minY, maxY, minZ, maxZ] = $.boundaries(cubes)
   const isWithinBounds = ([x, y, z]) =>
@@ -35,5 +35,3 @@ const getSurfaceArea = (points, advanced = false) => {
 
   return getArea(cubes, point => point in flooded)
 }
-
-module.exports = { getSurfaceArea }

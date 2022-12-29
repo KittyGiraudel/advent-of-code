@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { getBingos } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { getBingos } from './'
 
 test('Day 04 — Sample', t => {
   const sample = $.sample(
@@ -33,7 +33,7 @@ test('Day 04 — Sample', t => {
 })
 
 test('Day 04 — Solutions', t => {
-  const input = $.readInput(__dirname).join('\n')
+  const input = $.readInput(import.meta).join('\n')
   const bingos = getBingos(input)
 
   t.is(bingos[0], 45031)

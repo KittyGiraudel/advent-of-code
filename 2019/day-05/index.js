@@ -1,4 +1,4 @@
-class Intcode {
+export class Intcode {
   constructor(memory) {
     // Holds whether the program has reached an opcode 99 instruction, causing
     // it to halt permanently.
@@ -271,5 +271,3 @@ class Intcode {
     return output
   }
 }
-
-module.exports = { Intcode }

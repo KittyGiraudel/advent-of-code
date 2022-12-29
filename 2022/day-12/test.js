@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { findPath, findShortestPath } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { findPath, findShortestPath } from './'
 
 test('Day 12 — Sample', t => {
   const sample = $.sample(`
@@ -16,7 +16,7 @@ test('Day 12 — Sample', t => {
 })
 
 test('Day 12 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(findPath(input), 484)
   t.is(findShortestPath(input), 478)

@@ -1,6 +1,6 @@
-const fs = require('fs')
-const path = require('path')
-const md5 = require('./md5')
+import fs from 'fs'
+import path from 'path'
+import md5 from './md5'
 
 const getFileName = content => md5(content) + '.log'
 
@@ -21,4 +21,4 @@ const dump = (data, dirName = __dirname, fileName = getFileName(data)) => {
   return false
 }
 
-module.exports = dump
+export default dump

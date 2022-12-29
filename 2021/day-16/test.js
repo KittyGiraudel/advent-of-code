@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { evaluate, getVersionSums, Decoder } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { evaluate, getVersionSums, Decoder } from './'
 
 test('Day 16 — Sample', t => {
   t.is(getVersionSums('8A004A801A8002F478'), 16)
@@ -18,7 +18,7 @@ test('Day 16 — Sample', t => {
 })
 
 test('Day 16 — Solutions', t => {
-  const [input] = $.readInput(__dirname)
+  const [input] = $.readInput(import.meta)
   const { packet } = new Decoder(input)
   t.is(packet.sumVersions(), 889)
   t.is(packet.getValue(), 739303923668)

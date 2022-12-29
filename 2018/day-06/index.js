@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const mapOut = (points, limit) => {
+export const mapOut = (points, limit) => {
   const counters = new Map()
   const edges = new Set()
   const [minX, maxX, minY, maxY] = $.boundaries(
@@ -54,5 +54,3 @@ const mapOut = (points, limit) => {
       .pop()[1],
   }
 }
-
-module.exports = { mapOut }

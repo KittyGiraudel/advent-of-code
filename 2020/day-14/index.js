@@ -1,9 +1,9 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 // Parse the given input into a comprehensible set of instructions.
 // @param {String} input - Input data
 // @return {*[]}
-const parseProgram = input =>
+export const parseProgram = input =>
   input.map(line =>
     line.startsWith('mask')
       ? line.replace('mask = ', '')
@@ -28,7 +28,7 @@ const applyMask = (value, mask) =>
 // @param {String|Number[]} instruction - Mask (string value) or memory (key,
 //                                        value pair of numbers) instruction
 // @return [memory, mask] Memory and mask for further processing
-const processLoose = ([memory, mask], instruction) => {
+export const processLoose = ([memory, mask], instruction) => {
   if (typeof instruction === 'string') return [memory, instruction]
   memory[String(instruction[0])] = applyMask(instruction[1], mask)
   return [memory, mask]
@@ -62,7 +62,7 @@ const getAddresses = (value, mask) =>
 // @param {String|Number[]} instruction - Mask (string value) or memory (key,
 //                                        value pair of numbers) instruction
 // @return [memory, mask] Memory and mask for further processing
-const processStrict = ([memory, mask], instruction) => {
+export const processStrict = ([memory, mask], instruction) => {
   if (typeof instruction === 'string') return [memory, instruction]
   getAddresses(instruction[0], mask).forEach(
     address => (memory[address] = instruction[1])
@@ -74,11 +74,9 @@ const processStrict = ([memory, mask], instruction) => {
 // @param {String[]} input - Raw unparsed program input
 // @param {Function} processor - Processor to treat every instruction
 // @return {Number}
-const executeProgram = (input, processor) => {
+export const executeProgram = (input, processor) => {
   const program = parseProgram(input)
   const [memory] = program.reduce(processor, [{}, null])
 
   return $.sum(Object.values(memory))
 }
-
-module.exports = { parseProgram, executeProgram, processLoose, processStrict }

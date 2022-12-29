@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { count } = require('.')
+import test from 'ava'
+import $ from '../../helpers'
+import { count } from '.'
 
 const PATCH = {
   '8: 42': '8: 42 | 42 8',
@@ -101,7 +101,7 @@ test('Day 19 — Sample', t => {
 })
 
 test('Day 19 — Solutions', t => {
-  const [rules, messages] = $.readInput(__dirname, '\n\n')
+  const [rules, messages] = $.readInput(import.meta, '\n\n')
 
   t.is(count(rules, messages), 241)
   t.is(count(rules, messages, PATCH), 424)

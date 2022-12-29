@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const DIRECTIONAL_VECTORS = [
   [-1, 0],
@@ -41,7 +41,7 @@ const getSurroundingSeats = (layout, coords) =>
 // @param {String[]} layout - Seating layout
 // @param {Number[]} coords - Set of X,Y coords
 // @return {String[]}
-const getVisibleSeats = (layout, coords) =>
+export const getVisibleSeats = (layout, coords) =>
   DIRECTIONAL_VECTORS.map(vector => getFirstSeat(layout, coords, vector))
 
 // Process the given seat to know whether it will become occupied, empty, or
@@ -59,14 +59,14 @@ const processSeat = (mapper, threshold) => (layout, y) => (seat, x) => {
   return seat
 }
 
-const processSeatLoose = processSeat(getSurroundingSeats, 4)
-const processSeatStrict = processSeat(getVisibleSeats, 5)
+export const processSeatLoose = processSeat(getSurroundingSeats, 4)
+export const processSeatStrict = processSeat(getVisibleSeats, 5)
 
 // Process the entire seating layout.
 // @param {String[]} layout - Seating layout
 // @param {Function} mapper - Mapper function to process every individual seat
 // @return {String[]}
-const processLayout = (layout, mapper) =>
+export const processLayout = (layout, mapper) =>
   layout.map((row, y) => row.split('').map(mapper(layout, y)).join(''))
 
 // Count the amount of occupied seats in the given set.
@@ -78,7 +78,7 @@ const countOccupiedSeats = seats => seats.join('').match(/#/g)?.length ?? 0
 // @param {String[]} layout - Seating layout
 // @param {Function} mapper - Mapper function to process every individual seat
 // @return {Number}
-const waitAndCountOccupiedSeats = (layout, mapper) => {
+export const waitAndCountOccupiedSeats = (layout, mapper) => {
   let curr = layout
   let next = processLayout(layout, mapper)
 
@@ -88,12 +88,4 @@ const waitAndCountOccupiedSeats = (layout, mapper) => {
   }
 
   return countOccupiedSeats(next)
-}
-
-module.exports = {
-  processLayout,
-  processSeatStrict,
-  processSeatLoose,
-  waitAndCountOccupiedSeats,
-  getVisibleSeats,
 }

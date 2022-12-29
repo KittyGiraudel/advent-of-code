@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { run } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { run } from './'
 
 test('Day 01 — Sample', t => {
   t.is(run('R2, L3'.split(', '))[0], 5)
@@ -10,7 +10,7 @@ test('Day 01 — Sample', t => {
 })
 
 test('Day 01 — Solutions', t => {
-  const input = $.readInput(__dirname, ', ')
+  const input = $.readInput(import.meta, ', ')
 
   t.deepEqual(run(input), [239, 141])
 })

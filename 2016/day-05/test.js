@@ -1,5 +1,5 @@
-const test = require('ava')
-const { run } = require('./')
+import test from 'ava'
+import { run } from './'
 
 // Too slow to run.
 test.skip('Day 05 — Sample', t => {

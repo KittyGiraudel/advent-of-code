@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const parseInput = ([coords, instructions]) => {
+export const parseInput = ([coords, instructions]) => {
   const dots = new Set(coords.split('\n'))
   const folds = instructions.split('\n').map(instruction => {
     const [, axis, line] = instruction.match(/([xy])=(\d+)$/)
@@ -10,7 +10,7 @@ const parseInput = ([coords, instructions]) => {
   return { dots, folds }
 }
 
-const foldOnce = (dots, [axis, line]) =>
+export const foldOnce = (dots, [axis, line]) =>
   Array.from(dots).reduce((acc, dot) => {
     const [x, y] = $.toCoords(dot)
 
@@ -25,13 +25,13 @@ const foldOnce = (dots, [axis, line]) =>
     return acc
   }, new Set(dots))
 
-const foldAll = input => {
+export const foldAll = input => {
   const { dots, folds } = parseInput(input)
 
   return folds.reduce((acc, fold) => foldOnce(acc, fold), new Set(dots))
 }
 
-const render = dots => {
+export const render = dots => {
   const isDot = (x, y) => dots.has($.toPoint([x, y]))
   const coords = Array.from(dots, $.toCoords)
   const [, xMax, , yMax] = $.boundaries(coords)
@@ -41,5 +41,3 @@ const render = dots => {
 
   return $.grid.render(grid, ' ')
 }
-
-module.exports = { parseInput, foldOnce, foldAll, render }

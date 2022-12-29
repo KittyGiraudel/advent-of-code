@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { getNextDeparture, getEarliestTimestamp } = require('.')
+import test from 'ava'
+import $ from '../../helpers'
+import { getNextDeparture, getEarliestTimestamp } from '.'
 
 test('Day 13 — Sample', t => {
   t.is($.product(getNextDeparture('939\n7,13,x,x,59,x,31,19'.split('\n'))), 295)
@@ -16,7 +16,7 @@ test('Day 13 — Sample', t => {
 })
 
 test('Day 13 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is($.product(getNextDeparture(input)), 5257)
   t.is(getEarliestTimestamp(input), 538703333547789)

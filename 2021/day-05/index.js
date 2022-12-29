@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const getOverlappingPoints = (lines, withDiagonals = false) => {
+export const getOverlappingPoints = (lines, withDiagonals = false) => {
   // Break down every line into a pair of vectors, each vector being a pair of
   // number (x,y coordinates).
   const vectors = lines.map(line => line.split(' -> ').map($.toCoords))
@@ -47,5 +47,3 @@ const getOverlappingPoints = (lines, withDiagonals = false) => {
 
   return Array.from(map.values()).filter(value => value > 1).length
 }
-
-module.exports = { getOverlappingPoints }

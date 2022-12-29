@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { getInclusions, getOverlaps } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { getInclusions, getOverlaps } from './'
 
 test('Day 04 — Sample', t => {
   const sample = $.sample(`
@@ -17,7 +17,7 @@ test('Day 04 — Sample', t => {
 })
 
 test('Day 04 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(getInclusions(input).length, 651)
   t.is(getOverlaps(input).length, 956)

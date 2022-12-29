@@ -4,4 +4,4 @@
 // @return {Number}
 const max = array => array.reduce((a, b) => Math.max(a, b), -Infinity)
 
-module.exports = max
+export default max

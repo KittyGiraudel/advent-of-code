@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { getFuelCost, getFuelAmount } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { getFuelCost, getFuelAmount } from './'
 
 test('Day 14 — Sample', t => {
   const sampleA = $.sample(`
@@ -58,7 +58,7 @@ test('Day 14 — Sample', t => {
 })
 
 test('Day 14 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(getFuelCost(input), 1920219)
   t.is(getFuelAmount(input), 1330066)

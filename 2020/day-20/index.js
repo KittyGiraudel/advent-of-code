@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 // Terminology for this whole file:
 // Snapshot:
@@ -156,11 +156,9 @@ const solve = snapshots =>
     .flat()
     .reduce((acc, tile, _, tiles) => acc || jigsaw(tiles, tile), null)
 
-const run = snapshots => {
+export const run = snapshots => {
   const mozaic = solve(snapshots)
   const image = assemble(mozaic)
 
   return [checksum(mozaic), inspectWaters(image)]
 }
-
-module.exports = { run }

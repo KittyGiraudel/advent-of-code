@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const run = string => {
+export const run = string => {
   let trash = false
   let depth = 0
   let score = 0
@@ -28,5 +28,3 @@ const run = string => {
 
   return { score, chars }
 }
-
-module.exports = { run }

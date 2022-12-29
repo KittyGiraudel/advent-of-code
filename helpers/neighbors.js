@@ -1,4 +1,4 @@
-const toPoint = require('./toPoint')
+import toPoint from './toPoint'
 const cache = new Map()
 
 // Return the coordinates of the cells around (4 or 8, depending on whether
@@ -40,4 +40,5 @@ const getCoords = withDiagonals => {
   }
 }
 
-module.exports = { bordering: getCoords(false), surrounding: getCoords(true) }
+export const bordering = getCoords(false)
+export const surrounding = getCoords(true)

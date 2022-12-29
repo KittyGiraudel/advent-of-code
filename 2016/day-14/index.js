@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const run = (salt, iterations = 1) => {
+export const run = (salt, iterations = 1) => {
   // Declare the hash function within this scope because the memoization is more
   // effective when there is only one argument, as it doesn’t perform JSON
   // serialization on the args to get a key.
@@ -34,5 +34,3 @@ const run = (salt, iterations = 1) => {
 
   return Array.from(keys).slice(0, 64).pop()
 }
-
-module.exports = { run }

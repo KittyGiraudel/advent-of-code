@@ -9,4 +9,4 @@ const applyVector = (coords, vector) =>
     !isNaN(coords[2]) && !isNaN(vector[2]) ? coords[2] + vector[2] : null,
   ].filter(segment => segment !== null)
 
-module.exports = applyVector
+export default applyVector

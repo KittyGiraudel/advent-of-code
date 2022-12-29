@@ -1,4 +1,4 @@
-const last = require('./last')
+import last from './last'
 
 const DIRECTIONS = [
   /* N */ [0, -1],
@@ -19,4 +19,4 @@ const turnRight = (direction, directions = DIRECTIONS) => {
   return index === directions.length - 1 ? directions[0] : directions[index + 1]
 }
 
-module.exports = { left: turnLeft, right: turnRight, DIRECTIONS }
+export default { left: turnLeft, right: turnRight, DIRECTIONS }

@@ -1,12 +1,12 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const {
+import test from 'ava'
+import $ from '../../helpers'
+import {
   processLayout,
   processSeatLoose,
   processSeatStrict,
   getVisibleSeats,
   waitAndCountOccupiedSeats,
-} = require('./')
+} from './'
 
 test('Day 11 — Sample', t => {
   const GEN_1 = $.sample(`
@@ -139,7 +139,7 @@ test('Day 11 — Sample', t => {
 })
 
 test('Day 11 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(waitAndCountOccupiedSeats(input, processSeatLoose), 2261)
   t.is(waitAndCountOccupiedSeats(input, processSeatStrict), 2039)

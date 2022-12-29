@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { sequential, parallel } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { sequential, parallel } from './'
 
 test('Day 07 — Sample', t => {
   const sample = $.sample(`
@@ -18,7 +18,7 @@ test('Day 07 — Sample', t => {
 })
 
 test('Day 07 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(sequential(input), 'GKRVWBESYAMZDPTIUCFXQJLHNO')
   t.deepEqual(parallel(input, 5, 60), {

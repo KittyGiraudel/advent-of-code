@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 // Parse a food to retrieve its ingredient and allergens.
 // @param {String} food - Raw food
@@ -79,7 +79,7 @@ const findAllergenFreeIngredients = input => {
 // Count how many times allergen-free ingredients appear in the food input.
 // @param {String[]} input - Raw foods
 // @return {Number}
-const countAllergenFreeOccurrences = input => {
+export const countAllergenFreeOccurrences = input => {
   const count = (acc, ing) => ({ ...acc, [ing]: acc[ing] + 1 || 1 })
   const ingredients = findAllergenFreeIngredients(input)
   const allIngredients = getAllIngredients(input)
@@ -93,16 +93,11 @@ const countAllergenFreeOccurrences = input => {
 // Compute the canonical dangerous list.
 // @param {String[]} input - Raw foods
 // @return {String}
-const getCanonicalDangerousList = input => {
+export const getCanonicalDangerousList = input => {
   const map = mapFood(input)
 
   return Object.keys(map)
     .sort()
     .map(allergen => map[allergen].food)
     .join(',')
-}
-
-module.exports = {
-  countAllergenFreeOccurrences,
-  getCanonicalDangerousList,
 }

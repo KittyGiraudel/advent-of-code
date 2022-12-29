@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const SAMPLE = {
   children: 3,
@@ -18,7 +18,7 @@ const parseProperties = properties =>
     .map(prop => prop.split(': '))
     .reduce((acc, [name, count]) => ({ ...acc, [name]: +count }), {})
 
-const run = (input, advanced) => {
+export const run = (input, advanced) => {
   const aunts = input.map((line, index) => ({
     id: index + 1,
     properties: parseProperties(line.match(/\w+: \d+/g)),
@@ -40,5 +40,3 @@ const run = (input, advanced) => {
     )
     .pop().id
 }
-
-module.exports = { run }

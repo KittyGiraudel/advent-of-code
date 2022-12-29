@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 // Given a line like the following, break it on the closing bracket. Anything
 // before (but the first char which is an open bracket) is the raw date, and
@@ -66,7 +66,7 @@ const formatData = ([guardId, minutes]) => ({
     .sort((a, b) => b.occurrences - a.occurrences),
 })
 
-const find = input => {
+export const find = input => {
   const data = Object.entries(
     input
       .map(parseLog)
@@ -91,5 +91,3 @@ const find = input => {
     sleepiestMinute.id * sleepiestMinute.counters[0].minute,
   ]
 }
-
-module.exports = { find }

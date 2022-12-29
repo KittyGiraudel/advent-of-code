@@ -1,6 +1,6 @@
-const $ = require('../../helpers/')
+import $ from '../../helpers/'
 
-const getFuelConsumption = numbers => {
+export const getFuelConsumption = numbers => {
   const median = $.median(numbers)
   const getDistFromMedian = number => Math.abs(number - median)
 
@@ -14,10 +14,8 @@ const getIncFuelConsumption = (numbers, round = Math.round) => {
   return $.sum(numbers.map(getDistFromAverage).map($.triangular))
 }
 
-const getIncrementalFuelConsumption = numbers =>
+export const getIncrementalFuelConsumption = numbers =>
   Math.min(
     getIncFuelConsumption(numbers, Math.ceil),
     getIncFuelConsumption(numbers, Math.floor)
   )
-
-module.exports = { getFuelConsumption, getIncrementalFuelConsumption }

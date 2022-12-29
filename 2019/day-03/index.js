@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const parseLine = line => line.split(',').map(i => [i[0], +i.slice(1)])
 const draw = line => {
@@ -31,7 +31,7 @@ const findIntersections = lines => {
   return { maps, intersections }
 }
 
-const findClosestIntersection = lines => {
+export const findClosestIntersection = lines => {
   const { intersections } = findIntersections(lines)
   const distances = intersections.map(coords =>
     $.sum(coords.split(',').map(value => Math.abs(+value)))
@@ -40,16 +40,11 @@ const findClosestIntersection = lines => {
   return Math.min(...distances)
 }
 
-const findFastestIntersection = lines => {
+export const findFastestIntersection = lines => {
   const { maps, intersections } = findIntersections(lines)
   const steps = intersections.map(coords =>
     $.sum(maps.map(map => map.get(coords)))
   )
 
   return Math.min(...steps)
-}
-
-module.exports = {
-  findClosestIntersection,
-  findFastestIntersection,
 }

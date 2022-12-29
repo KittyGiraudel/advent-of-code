@@ -13,4 +13,4 @@ const binarySearch = (lower, upper, compare) => {
   return lower
 }
 
-module.exports = binarySearch
+export default binarySearch

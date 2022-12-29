@@ -1,5 +1,5 @@
-const fs = require('fs')
-const path = require('path')
+import fs from 'fs'
+import path from 'path'
 
 // Read the input file of the given directory, and split its (optionally
 // trimmed) content on the given delimiter.
@@ -16,4 +16,4 @@ const sample = (string, delimiter = '\n', trim = true, deindent = true) => {
   return content
 }
 
-module.exports = sample
+export default sample

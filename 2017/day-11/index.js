@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const VECTORS = {
   n: [0, -2],
@@ -45,7 +45,7 @@ const walk = steps =>
 const getPathLength = (start, end) =>
   $.pathfinding.path(createGraph(start, end), start, end).length
 
-const run = instructions => {
+export const run = instructions => {
   const { position: end, visited } = walk(instructions)
   const start = [0, 0]
   const furthest = Array.from(visited)
@@ -60,5 +60,3 @@ const run = instructions => {
     getPathLength(start, furthest),
   ]
 }
-
-module.exports = { run }

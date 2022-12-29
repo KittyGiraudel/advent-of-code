@@ -1,9 +1,9 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { getDistanceToOxygen, getOxygenDuration } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { getDistanceToOxygen, getOxygenDuration } from './'
 
 test('Day 15 — Solutions', t => {
-  const [input] = $.readInput(__dirname)
+  const [input] = $.readInput(import.meta)
 
   t.is(getDistanceToOxygen(input), 220)
   t.is(getOxygenDuration(input), 334)

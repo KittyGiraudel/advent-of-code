@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { play } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { play } from './'
 
 test('Day 11 — Sample', t => {
   const sample = $.sample(
@@ -41,7 +41,7 @@ test('Day 11 — Sample', t => {
 })
 
 test('Day 11 — Solutions', t => {
-  const input = $.readInput(__dirname, '\n\n')
+  const input = $.readInput(import.meta, '\n\n')
 
   t.is(play(input), 58056)
   t.is(play(input, true), 15048718170)

@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const discard = (set, value) => {
   const next = new Set(set)
@@ -35,7 +35,7 @@ const getPaths = (ports, edge, score = 0, length = 1) => {
   }, [])
 }
 
-const run = input => {
+export const run = input => {
   const starts = input.filter(port => port.startsWith('0/'))
   const bridges = starts
     .map(start => {
@@ -47,5 +47,3 @@ const run = input => {
 
   return bridges
 }
-
-module.exports = { run }

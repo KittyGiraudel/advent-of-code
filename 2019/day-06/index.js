@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const createGraph = lines => {
+export const createGraph = lines => {
   const map = new Map()
 
   lines.forEach(line => {
@@ -14,7 +14,7 @@ const createGraph = lines => {
   return map
 }
 
-const getPaths = (graph, curr, end = 'COM', path = []) => {
+export const getPaths = (graph, curr, end = 'COM', path = []) => {
   if (curr === end) return [[...path, curr]]
   if (path.includes(curr)) return []
   return Array.from(graph.get(curr)).reduce(
@@ -24,14 +24,12 @@ const getPaths = (graph, curr, end = 'COM', path = []) => {
   )
 }
 
-const countOrbits = graph =>
+export const countOrbits = graph =>
   Array.from(graph.keys()).reduce(
     (total, key) =>
       total + $.sum(getPaths(graph, key, 'COM').map(path => path.length - 1)),
     0
   )
 
-const countTransfers = (graph, start = 'YOU', end = 'SAN') =>
+export const countTransfers = (graph, start = 'YOU', end = 'SAN') =>
   getPaths(graph, start, end)[0].length - 3
-
-module.exports = { getPaths, createGraph, countOrbits, countTransfers }

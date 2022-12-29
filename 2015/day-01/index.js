@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const run = string => {
+export const run = string => {
   let floor = 0
   let basement = null
   for (let i = 0; i < string.length; i++) {
@@ -10,5 +10,3 @@ const run = string => {
   }
   return [floor, basement]
 }
-
-module.exports = { run }

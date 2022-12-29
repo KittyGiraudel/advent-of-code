@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const getPriority = letter =>
   letter.charCodeAt() - (letter === letter.toUpperCase() ? 38 : 96)
@@ -23,10 +23,8 @@ const getTotalPriority = groups =>
 
 // For part 1, each line is broken into 2 halves, their intersection is found,
 // its priority is computed and the sum of all priorities is the result.
-const process = rusacks => getTotalPriority(rusacks.map(half))
+export const process = rusacks => getTotalPriority(rusacks.map(half))
 
 // For part 2, lines are grouped by 3, the group intersection is found, its
 // priority is computed and the sum of all group priorities is the result.
-const processGroups = rusacks => getTotalPriority($.chunk(rusacks, 3))
-
-module.exports = { process, processGroups }
+export const processGroups = rusacks => getTotalPriority($.chunk(rusacks, 3))

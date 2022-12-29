@@ -1,5 +1,5 @@
-const test = require('ava')
-const { run } = require('./')
+import test from 'ava'
+import { run } from './'
 
 test('Day 16 — Sample', t => {
   t.is(run('10000', 20), '01100')

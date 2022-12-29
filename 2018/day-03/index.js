@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const findBoundaries = claims =>
   claims.reduce(
@@ -19,7 +19,7 @@ const findBoundaries = claims =>
 // intersection), and that’s the result.
 // @param {String[]} input - Raw unparsed lines
 // @return {Number}
-const countOverlappingInches = input => {
+export const countOverlappingInches = input => {
   const claims = parseClaims(input)
   const boundaries = findBoundaries(claims)
   const grid = $.grid.init(boundaries.xMax + 1, boundaries.yMax + 1, 0)
@@ -65,12 +65,10 @@ const parseClaims = lines =>
 // final one!
 // @param {String[]} input - Raw unparsed lines
 // @return {Number}
-const detect = input =>
+export const detect = input =>
   parseClaims(input).find(
     (claim, _, array) =>
       array
         .filter(c => c.id !== claim.id)
         .filter(b => getIntersection(claim, b)).length === 0
   ).id
-
-module.exports = { detect, countOverlappingInches }

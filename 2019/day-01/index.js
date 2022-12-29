@@ -1,7 +1,7 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const computeFuelCost = mass => Math.floor(mass / 3) - 2
-const computeIterativeFuelCost = mass => {
+export const computeFuelCost = mass => Math.floor(mass / 3) - 2
+export const computeIterativeFuelCost = mass => {
   let iterations = [computeFuelCost(mass)]
 
   while (computeFuelCost(iterations[0]) > 0)
@@ -9,5 +9,3 @@ const computeIterativeFuelCost = mass => {
 
   return $.sum(iterations)
 }
-
-module.exports = { computeFuelCost, computeIterativeFuelCost }

@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const gen = function* (init, factor, modulo = 1) {
   let curr = init
@@ -12,7 +12,7 @@ const gen = function* (init, factor, modulo = 1) {
 
 const tick = gen => $.toBin(gen.next().value).slice(-16)
 
-const run = (a, b, iterations, modA, modB) => {
+export const run = (a, b, iterations, modA, modB) => {
   const genA = gen(a, 16807, modA)
   const genB = gen(b, 48271, modB)
 
@@ -29,5 +29,3 @@ const run = (a, b, iterations, modA, modB) => {
     count += +((genA.next().value & 0xffff) === (genB.next().value & 0xffff))
   return count
 }
-
-module.exports = { run }

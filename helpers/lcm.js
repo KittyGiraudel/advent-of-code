@@ -1,4 +1,4 @@
-const gcd = require('./gcd')
+import gcd from './gcd'
 
 // Find the lowest common denominator for the two given numbers.
 // @param {Number} a
@@ -6,4 +6,4 @@ const gcd = require('./gcd')
 // @return {Number}
 const lcm = (a, b) => (a * b) / gcd(a, b)
 
-module.exports = lcm
+export default lcm

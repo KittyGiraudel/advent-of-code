@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const DIRECTIONS = [
   [[0, -1], 'U'],
@@ -7,7 +7,7 @@ const DIRECTIONS = [
   [[+1, 0], 'R'],
 ]
 
-const run = (input, longest = false) => {
+export const run = (input, longest = false) => {
   const frontier = [{ point: '0,0', coords: [0, 0], path: input }]
   let path = null
 
@@ -50,5 +50,3 @@ const run = (input, longest = false) => {
 
   return path
 }
-
-module.exports = { run }

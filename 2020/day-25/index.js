@@ -36,7 +36,7 @@ const getKey = (subject, loopSize) => {
 // @param {Number} door - Door value
 // @param {Number} card - Card value
 // @return {Number}
-const getEncryptionKey = (door, card) => {
+export const getEncryptionKey = (door, card) => {
   const doorLoopSize = guessLoopSize(7, door)
   const cardLoopSize = guessLoopSize(7, card)
   const doorKey = getKey(door, cardLoopSize)
@@ -44,5 +44,3 @@ const getEncryptionKey = (door, card) => {
 
   if (doorKey === cardKey) return doorKey
 }
-
-module.exports = { getEncryptionKey }

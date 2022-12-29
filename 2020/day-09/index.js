@@ -1,12 +1,12 @@
-const $ = require('../../helpers')
-const { findMatches } = require('../day-01')
+import $ from '../../helpers'
+import { findMatches } from '../day-01'
 
 // Find the first number in `input` which cannot be obtained by summing 2
 // numbers in its preamble (`size` previous numbers).
 // @param {Number[]} input - Array of numbers
 // @param {Number} size - Size of the preamble
 // @return {Number}
-const findWeakness = (input, size = 25) =>
+export const findWeakness = (input, size = 25) =>
   input.find(
     (number, index, array) =>
       index >= size && !findMatches(array.slice(index - size, index), 2, number)
@@ -18,7 +18,7 @@ const findWeakness = (input, size = 25) =>
 // @param {Number[]} input - Array of numbers
 // @param {Number} size - Size of the preamble
 // @return {Number}
-const breakWeakness = (input, size = 25) => {
+export const breakWeakness = (input, size = 25) => {
   const weakness = findWeakness(input, size)
   const range = [0, 1]
 
@@ -33,5 +33,3 @@ const breakWeakness = (input, size = 25) => {
 
   return null
 }
-
-module.exports = { findWeakness, breakWeakness }

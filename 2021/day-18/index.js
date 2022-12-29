@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const split = value => `[${Math.floor(value / 2)},${Math.ceil(value / 2)}]`
 
@@ -55,7 +55,7 @@ const reduceFish = $.compose(handleLeftMostSplit, handleExplosions)
 // 1. First do all explosions that can be done.
 // 2. Once no more explosions can be done, perform the left-most split.
 // 3. Repeat step 1 and 2 until the string no longer changes.
-const reduce = string => {
+export const reduce = string => {
   let curr = string
   let next = reduceFish(curr)
 
@@ -67,19 +67,17 @@ const reduce = string => {
   return next
 }
 
-const computeMagnitude = ([left, right]) =>
+export const computeMagnitude = ([left, right]) =>
   (typeof left === 'number' ? left : computeMagnitude(left)) * 3 +
   (typeof right === 'number' ? right : computeMagnitude(right)) * 2
 
-const sumFish = (...fishes) =>
+export const sumFish = (...fishes) =>
   fishes.reduce((acc, fish) => (acc ? reduce(`[${acc},${fish}]`) : fish))
 
-const findHighestMagnitude = (...fishes) =>
+export const findHighestMagnitude = (...fishes) =>
   Math.max(
     ...$.combinations(fishes, 2)
       .map(pair => sumFish(...pair))
       .map(JSON.parse)
       .map(computeMagnitude)
   )
-
-module.exports = { reduce, computeMagnitude, sumFish, findHighestMagnitude }

@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { run } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { run } from './'
 
 test('Day 23 — Sample', t => {
   const sample = $.sample(`
@@ -17,7 +17,7 @@ test('Day 23 — Sample', t => {
 })
 
 test('Day 23 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(run(input, 7), 11739)
   // t.is(run(input, 12), 479008299) // Takes several minutes…

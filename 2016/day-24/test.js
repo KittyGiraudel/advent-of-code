@@ -1,9 +1,9 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { discover } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { discover } from './'
 
 test('Day 24 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(discover(input), 502)
   t.is(discover(input, true), 724)

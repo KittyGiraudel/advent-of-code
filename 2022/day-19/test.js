@@ -1,5 +1,5 @@
-const test = require('ava')
-const $ = require('../../helpers')
+import test from 'ava'
+import $ from '../../helpers'
 
 test.skip('Day 19 — Sample', t => {})
 

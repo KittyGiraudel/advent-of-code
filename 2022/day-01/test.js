@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { findHighestGroup, findHighestGroups } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { findHighestGroup, findHighestGroups } from './'
 
 test('Day 01 — Sample', t => {
   const sample = $.sample(
@@ -28,7 +28,7 @@ test('Day 01 — Sample', t => {
 })
 
 test('Day 01 — Solutions', t => {
-  const input = $.readInput(__dirname, '\n\n')
+  const input = $.readInput(import.meta, '\n\n')
 
   t.is(findHighestGroup(input), 70369)
   t.is(findHighestGroups(input, 3), 203002)

@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { findMarker } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { findMarker } from './'
 
 test('Day 06 — Sample', t => {
   t.is(findMarker('mjqjpqmgbljsphdztnvjfqwrcgsmlb', 4), 7)
@@ -16,7 +16,7 @@ test('Day 06 — Sample', t => {
 })
 
 test('Day 06 — Solutions', t => {
-  const [input] = $.readInput(__dirname)
+  const [input] = $.readInput(import.meta)
 
   t.is(findMarker(input, 4), 1804)
   t.is(findMarker(input, 14), 2508)

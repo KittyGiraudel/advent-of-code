@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { findFastestIntersection, findClosestIntersection } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { findFastestIntersection, findClosestIntersection } from './'
 
 test('Day 03 — Sample', t => {
   const sampleA = ['R8,U5,L5,D3', 'U7,R6,D4,L4']
@@ -22,7 +22,7 @@ test('Day 03 — Sample', t => {
 })
 
 test('Day 03 — Solutions', t => {
-  const lines = $.readInput(__dirname)
+  const lines = $.readInput(import.meta)
 
   t.is(findClosestIntersection(lines), 806)
   t.is(findFastestIntersection(lines), 66076)

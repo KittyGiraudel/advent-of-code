@@ -1,11 +1,11 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const {
+import test from 'ava'
+import $ from '../../helpers'
+import {
   getBoundaries,
   findMaxHeight,
   findSuccessfulLaunches,
   isSuccessfulLaunch,
-} = require('./')
+} from './'
 
 test('Day 17 — Sample', t => {
   const sample = `target area: x=20..30, y=-10..-5`
@@ -28,7 +28,7 @@ test('Day 17 — Sample', t => {
 })
 
 test('Day 17 — Solutions', t => {
-  const [input] = $.readInput(__dirname)
+  const [input] = $.readInput(import.meta)
 
   t.is(findMaxHeight(input), 13203)
   t.is(findSuccessfulLaunches(input).length, 5644)

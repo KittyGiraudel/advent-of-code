@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const getCost = (grid, [ri, ci]) => {
   const width = grid[0].length
@@ -31,7 +31,5 @@ const getLowestCost = (grid, mapSize = 1) => {
   return costs[end]
 }
 
-const getLowestRisk = (input, mapSize = 1) =>
+export const getLowestRisk = (input, mapSize = 1) =>
   getLowestCost($.grid.create(input, Number), mapSize)
-
-module.exports = { getLowestRisk }

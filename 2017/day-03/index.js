@@ -1,11 +1,11 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const EAST = [+1, 0]
 const WEST = [-1, 0]
 const SOUTH = [0, +1]
 const NORTH = [0, -1]
 
-const resolve = bound => {
+export const resolve = bound => {
   // Given the value increments by 1 for every new cell, use an array where the
   // index serves as the value itself, hence why we skip the first cell (0).
   const coords = [null, [0, 0]]
@@ -29,7 +29,7 @@ const resolve = bound => {
   return $.manhattan(coords[bound], [0, 0])
 }
 
-const resolve2 = bound => {
+export const resolve2 = bound => {
   let steps = 0
   let position = [0, 0]
   const map = new Map([['0,0', 1]])
@@ -60,5 +60,3 @@ const resolve2 = bound => {
     for (let i = 0; i < steps; i++) if (step(SOUTH) > bound) return peek()
   }
 }
-
-module.exports = { resolve, resolve2 }

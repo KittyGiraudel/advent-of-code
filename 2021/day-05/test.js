@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { getOverlappingPoints } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { getOverlappingPoints } from './'
 
 test('Day 05 — Sample', t => {
   const sample = $.sample(`
@@ -21,7 +21,7 @@ test('Day 05 — Sample', t => {
 })
 
 test('Day 05 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(getOverlappingPoints(input), 7269)
   t.is(getOverlappingPoints(input, true), 21140)

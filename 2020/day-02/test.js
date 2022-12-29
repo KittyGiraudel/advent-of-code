@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { isValidLoose, isValidStrict } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { isValidLoose, isValidStrict } from './'
 
 test('Day 02 — Sample', t => {
   t.is(isValidLoose('1-3 a: abcde'), true)
@@ -12,7 +12,7 @@ test('Day 02 — Sample', t => {
 })
 
 test('Day 02 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(input.filter(isValidLoose).length, 500)
   t.is(input.filter(isValidStrict).length, 313)

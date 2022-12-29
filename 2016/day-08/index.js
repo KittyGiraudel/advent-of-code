@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const run = (lines, dimensions = [50, 6]) => {
+export const run = (lines, dimensions = [50, 6]) => {
   const grid = $.grid.init(...dimensions)
 
   lines.forEach(line => {
@@ -22,5 +22,3 @@ const run = (lines, dimensions = [50, 6]) => {
 
   return $.countInString(grid.flat().join(''), '#')
 }
-
-module.exports = { run }

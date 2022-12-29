@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const findMarker = (input, length = 4) => {
+export const findMarker = (input, length = 4) => {
   for (let i = length; i < input.length; i++) {
     const slice = input.slice(i - length, i)
     const uniq = new Set(Array.from(slice))
@@ -10,5 +10,3 @@ const findMarker = (input, length = 4) => {
 
   return null
 }
-
-module.exports = { findMarker }

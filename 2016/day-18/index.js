@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const re = /^001|100|011|110$/
 
@@ -16,7 +16,7 @@ const next = prev => {
   return curr + '.'
 }
 
-const run = (input, size = 40) => {
+export const run = (input, size = 40) => {
   let row = '.' + input + '.'
   let count = $.countInString(row, '\\.') - 2
 
@@ -27,5 +27,3 @@ const run = (input, size = 40) => {
 
   return count
 }
-
-module.exports = { run }

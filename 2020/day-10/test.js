@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { getDifferenceProduct, countArrangements } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { getDifferenceProduct, countArrangements } from './'
 
 test('Day 10 — Sample', t => {
   const a = '16,10,15,5,1,11,7,19,6,12,4'.split(',').map(Number)
@@ -16,7 +16,7 @@ test('Day 10 — Sample', t => {
 })
 
 test('Day 10 — Solutions', t => {
-  const input = $.readInput(__dirname).map(Number)
+  const input = $.readInput(import.meta).map(Number)
 
   t.is(getDifferenceProduct(input), 3034)
   t.is(countArrangements(input), 259172170858496)

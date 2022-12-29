@@ -8,4 +8,4 @@ const swap = (array, a, b) => {
   return array
 }
 
-module.exports = swap
+export default swap

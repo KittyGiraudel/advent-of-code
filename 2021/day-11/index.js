@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const makeGrid = rows =>
   $.grid.create(rows, oc => ({ value: +oc, flashed: false }))
@@ -43,7 +43,7 @@ const cycle = grid => {
   return flashes
 }
 
-const countFlashes = (rows, steps) => {
+export const countFlashes = (rows, steps) => {
   const grid = makeGrid(rows)
   let flashes = 0
 
@@ -54,7 +54,7 @@ const countFlashes = (rows, steps) => {
 
 const isSynced = grid => $.grid.every(grid, oc => oc.value === 0)
 
-const findSynchronocity = rows => {
+export const findSynchronocity = rows => {
   const grid = makeGrid(rows)
   let i = 0
 
@@ -62,5 +62,3 @@ const findSynchronocity = rows => {
 
   return i
 }
-
-module.exports = { countFlashes, findSynchronocity }

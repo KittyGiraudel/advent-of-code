@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 // This function builds *all* the possible mazes mapped to the time they
 // happened at (from 0 to time `h*w-1`). However, cells are not strings, they
@@ -96,7 +96,7 @@ const cross = (grids, startCoords, endCoords, time = 0) => {
 // Unfortunately I could not solve part 1 of this puzzle without help. I did
 // manage to cross the maze successfully (which is something!) but I couldn’t
 // find the shortest path (347 instead of 247).
-const maze = (input, withSnacks = false) => {
+export const maze = (input, withSnacks = false) => {
   const startCoords = [0, findDoor(input[0])]
   const endCoords = [input.length - 1, findDoor($.last(input))]
   const grids = getGrids(input)
@@ -111,5 +111,3 @@ const maze = (input, withSnacks = false) => {
       )
     : time
 }
-
-module.exports = { maze }

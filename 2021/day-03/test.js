@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { getEpsilonAndGamma, getOxygen, getCO2 } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { getEpsilonAndGamma, getOxygen, getCO2 } from './'
 
 test('Day 03 — Sample', t => {
   const sample = $.sample(`
@@ -35,7 +35,7 @@ test('Day 03 — Sample', t => {
 })
 
 test('Day 03 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   const { gamma, epsilon } = getEpsilonAndGamma(input)
   const power = parseInt(gamma, 2) * parseInt(epsilon, 2)

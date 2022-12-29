@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const run = (input, inspect = []) => {
+export const run = (input, inspect = []) => {
   const state = { bot: [], output: [] }
   const pipelines = []
 
@@ -40,5 +40,3 @@ const run = (input, inspect = []) => {
 
   return $.product(state.output.slice(0, 3))
 }
-
-module.exports = { run }

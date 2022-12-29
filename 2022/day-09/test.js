@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { countTailPositions } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { countTailPositions } from './'
 
 test('Day 09 — Sample', t => {
   const sample = $.sample(`
@@ -19,7 +19,7 @@ test('Day 09 — Sample', t => {
 })
 
 test('Day 09 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(countTailPositions(input), 6087)
   t.is(countTailPositions(input, 10), 2493)

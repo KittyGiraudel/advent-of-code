@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { findPaths } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { findPaths } from './'
 
 test('Day 12 — Sample', t => {
   const sampleA = $.sample(`
@@ -55,7 +55,7 @@ test('Day 12 — Sample', t => {
 })
 
 test('Day 12 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(findPaths(input).length, 4775)
   t.is(findPaths(input, true).length, 152480)

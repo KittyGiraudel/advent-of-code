@@ -7,7 +7,7 @@ const MULTIPLY_RE = /(\d+) \* (\d+)/
 // expected precedence level.
 // @param {String} input - Stringified operation
 // @return {Number}
-const computeLoose = input => {
+export const computeLoose = input => {
   let match = input.match(PARENS_RE)
 
   // First recursively resolve the content of parens (from innermost to
@@ -51,12 +51,10 @@ const replace = (input, expression, replacer) =>
 // dence over multiplications.
 // @param {String} input - Stringified operation
 // @return {Number}
-const computeStrict = input => {
+export const computeStrict = input => {
   input = replace(input, PARENS_RE, (_, content) => computeStrict(content))
   input = replace(input, ADD_RE, (_, a, b) => +a + +b)
   input = replace(input, MULTIPLY_RE, (_, a, b) => +a * +b)
 
   return +input
 }
-
-module.exports = { computeLoose, computeStrict }

@@ -1,5 +1,5 @@
-const test = require('ava')
-const { resolve, resolve2 } = require('./')
+import test from 'ava'
+import { resolve, resolve2 } from './'
 
 test('Day 03 — Sample', t => {
   t.is(resolve(1024), 31)

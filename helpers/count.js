@@ -7,4 +7,4 @@ const count = array =>
     return acc[curr] ? ++acc[curr] : (acc[curr] = 1), acc
   }, {})
 
-module.exports = count
+export default count

@@ -9,4 +9,4 @@ const countInString = (haystack, needle, insensitive = true) =>
     )
   ).length || 0
 
-module.exports = countInString
+export default countInString

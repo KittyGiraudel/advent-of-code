@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const VECTORS = {
   e: [+2, 0],
@@ -113,9 +113,7 @@ const countBlackTiles = map =>
 // @param {Number} cycles - Amount of cycles
 // @param {Map} cache - Coordinates cache
 // @return {Number}
-const gameOfLife = (lines, cycles = 1, cache = new Map()) =>
+export const gameOfLife = (lines, cycles = 1, cache = new Map()) =>
   countBlackTiles(
     $.array(cycles).reduce(map => cycle(map, cache), processLines(lines))
   )
-
-module.exports = { gameOfLife }

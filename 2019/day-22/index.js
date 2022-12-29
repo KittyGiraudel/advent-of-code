@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const parseInstruction = line => {
   if (line.startsWith('cut'))
@@ -9,7 +9,7 @@ const parseInstruction = line => {
   throw new Error('Unknown line ' + line)
 }
 
-const shuffle = (lines, size = 10007) =>
+export const shuffle = (lines, size = 10007) =>
   lines.reduce((acc, line) => {
     const { type, value } = parseInstruction(line)
     if (type === 'NEW') return acc.reverse()
@@ -20,5 +20,3 @@ const shuffle = (lines, size = 10007) =>
       return next
     }
   }, Array.from(Array(size).keys()))
-
-module.exports = { shuffle }

@@ -1,8 +1,8 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const RANGE = $.range(50, 1)
 
-const run = input => {
+export const run = input => {
   let elf = 0
   let housesA = []
   let housesB = []
@@ -19,5 +19,3 @@ const run = input => {
     if (results[0] && results[1]) return results
   }
 }
-
-module.exports = { run }

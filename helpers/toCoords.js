@@ -4,4 +4,4 @@
 // @return {Number[]}
 const toCoords = point => point.split(/,\s?/g).map(Number)
 
-module.exports = toCoords
+export default toCoords

@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 // Parse the machine into something like this, where for each state, the first
 // array is the instruction if the current value is 0, and the second one is
@@ -34,7 +34,7 @@ const parse = blocks => {
   return { initial, iterations, states }
 }
 
-const run = input => {
+export const run = input => {
   const data = parse(input)
   const tape = new Map()
   let state = data.initial
@@ -50,5 +50,3 @@ const run = input => {
 
   return Array.from(tape.values()).filter(a => a === 1).length
 }
-
-module.exports = { run }

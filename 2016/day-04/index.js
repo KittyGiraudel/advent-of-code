@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const ALPHABET = 'abcdefghijklmnopqrstuvwxyz'
 
@@ -21,7 +21,7 @@ const parseRoom = line => {
   return { name: rotate(hash, +id), id: +id, valid }
 }
 
-const run = input => {
+export const run = input => {
   const rooms = input.map(parseRoom)
 
   return [
@@ -29,5 +29,3 @@ const run = input => {
     rooms.find(r => r.name.includes('north'))?.id,
   ]
 }
-
-module.exports = { run }

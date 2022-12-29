@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { process, processGroups } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { process, processGroups } from './'
 
 test('Day 03 — Sample', t => {
   const sample = $.sample(`
@@ -17,7 +17,7 @@ test('Day 03 — Sample', t => {
 })
 
 test('Day 03 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(process(input), 8394)
   t.is(processGroups(input), 2413)

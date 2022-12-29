@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { run } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { run } from './'
 
 test('Day 19 — Sample', t => {
   const sample = $.sample(
@@ -21,7 +21,7 @@ test('Day 19 — Sample', t => {
 })
 
 test('Day 19 — Solutions', t => {
-  const input = $.readInput(__dirname, '\n', false)
+  const input = $.readInput(import.meta, '\n', false)
 
   t.deepEqual(run(input), ['VTWBPYAQFU', 17358])
 })

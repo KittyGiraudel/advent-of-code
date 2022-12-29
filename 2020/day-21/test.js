@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { countAllergenFreeOccurrences, getCanonicalDangerousList } = require('.')
+import test from 'ava'
+import $ from '../../helpers'
+import { countAllergenFreeOccurrences, getCanonicalDangerousList } from '.'
 
 test('Day 21 — Sample', t => {
   const example = $.sample(`
@@ -15,7 +15,7 @@ test('Day 21 — Sample', t => {
 })
 
 test('Day 21 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(countAllergenFreeOccurrences(input), 2280)
   t.is(

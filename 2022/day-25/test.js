@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { unsnafu, snafu } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { unsnafu, snafu } from './'
 
 test('Day 25 — Sample', t => {
   const sample = $.sample(`
@@ -67,7 +67,7 @@ test('Day 25 — Sample', t => {
 })
 
 test('Day 25 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(
     snafu(input.map(unsnafu).reduce((a, b) => a + b, 0)),

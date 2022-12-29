@@ -1,9 +1,9 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 // Read the landing area’s boundaries from the given input knowing that the
 // *lowest* Y value will be the first one of the pair, and not the second one,
 // since the area stands below 0. For instance, `y=-10,-5`, and not.
-const getBoundaries = input => {
+export const getBoundaries = input => {
   const [xMin, xMax, yMax, yMin] = input.match(/(-?\d+)/g).map(Number)
 
   return [
@@ -21,7 +21,7 @@ const step = ({ probe, velocity }) => ({
   velocity: [drag(velocity[0]), velocity[1] - 1],
 })
 
-const isSuccessfulLaunch = ([[xMin, xMax], [yMin, yMax]], velocity) => {
+export const isSuccessfulLaunch = ([[xMin, xMax], [yMin, yMax]], velocity) => {
   let curr = step({ probe: [0, 0], velocity })
   let heights = []
 
@@ -41,7 +41,7 @@ const isSuccessfulLaunch = ([[xMin, xMax], [yMin, yMax]], velocity) => {
   return null
 }
 
-const findSuccessfulLaunches = input => {
+export const findSuccessfulLaunches = input => {
   const boundaries = getBoundaries(input)
   const [[, xMax], [, yMax]] = boundaries
   const heights = []
@@ -65,11 +65,4 @@ const findSuccessfulLaunches = input => {
   return heights
 }
 
-const findMaxHeight = input => Math.max(...findSuccessfulLaunches(input))
-
-module.exports = {
-  getBoundaries,
-  isSuccessfulLaunch,
-  findSuccessfulLaunches,
-  findMaxHeight,
-}
+export const findMaxHeight = input => Math.max(...findSuccessfulLaunches(input))

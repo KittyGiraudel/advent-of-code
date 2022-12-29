@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { getGrid, calibrate, scaffold } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { getGrid, calibrate, scaffold } from './'
 
 test('Day 17 — Sample', t => {
   const sample = $.sample(
@@ -19,7 +19,7 @@ test('Day 17 — Sample', t => {
 })
 
 test('Day 17 — Solutions', t => {
-  const [input] = $.readInput(__dirname)
+  const [input] = $.readInput(import.meta)
 
   t.is(calibrate(getGrid(input)), 4864)
   t.is(scaffold(input), 840248)

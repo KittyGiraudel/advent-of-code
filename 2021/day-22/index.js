@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 // Return the boundaries of a cubic area of the given width.
 const getArea = (width = Infinity) => ({
@@ -41,7 +41,7 @@ const getVolume = cuboid =>
   (cuboid.yMax + 1 - cuboid.yMin) *
   (cuboid.zMax + 1 - cuboid.zMin)
 
-const reboot = (input, max) => {
+export const reboot = (input, max) => {
   const area = getArea(max)
   const instructions = input
     .map(parseLine)
@@ -57,5 +57,3 @@ const reboot = (input, max) => {
 
   return $.sum(cuboids.map(cuboid => getVolume(cuboid) * cuboid.sign))
 }
-
-module.exports = { reboot }

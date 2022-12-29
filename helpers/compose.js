@@ -6,4 +6,4 @@ const compose =
   args =>
     functions.reduceRight((arg, fn) => fn(arg), args)
 
-module.exports = compose
+export default compose

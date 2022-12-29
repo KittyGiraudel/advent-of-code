@@ -1,7 +1,7 @@
-const $ = require('../../helpers')
-const { Intcode } = require('../day-05')
+import $ from '../../helpers'
+import { Intcode } from '../day-05'
 
-const getGrid = input => {
+export const getGrid = input => {
   const computer = new Intcode(input)
 
   // A little puzzled why the computer is marked “halted” before the end though.
@@ -24,7 +24,7 @@ const getGrid = input => {
     .map(row => row.split(''))
 }
 
-const calibrate = grid => {
+export const calibrate = grid => {
   let calibration = 0
 
   $.grid.forEach(grid, (v, ri, ci) => {
@@ -40,7 +40,7 @@ const calibrate = grid => {
   return calibration
 }
 
-const scaffold = input => {
+export const scaffold = input => {
   const computer = new Intcode(input).updateMemory(0, 2)
 
   // Helper function to minimize repeatition; totally sugar.
@@ -61,5 +61,3 @@ const scaffold = input => {
     .getOutput()
     .pop()
 }
-
-module.exports = { getGrid, calibrate, scaffold }

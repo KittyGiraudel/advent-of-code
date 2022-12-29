@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const VECTORS = [
   [-1, 0],
@@ -7,7 +7,7 @@ const VECTORS = [
   [0, -1],
 ]
 
-const run = input => {
+export const run = input => {
   const grid = $.grid.create(input)
   const read = coords => $.access(grid, coords)?.trim()
   const visited = []
@@ -38,5 +38,3 @@ const run = input => {
 
   return [letters, visited.length]
 }
-
-module.exports = { run }

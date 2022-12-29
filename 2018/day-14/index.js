@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 // I also tried a version using a string as the board, but it turns out that
 // manipulating long strings is way slower than manipulating large arrays in V8
@@ -20,7 +20,7 @@ const play = (board, players) => {
   players[1] = (players[1] + 1 + recipes[1]) % length
 }
 
-const cook1 = count => {
+export const cook1 = count => {
   const board = [3, 7]
   const players = [0, 1]
 
@@ -29,7 +29,7 @@ const cook1 = count => {
   return board.slice(count, count + 10).join('')
 }
 
-const cook2 = (needle, upper) => {
+export const cook2 = (needle, upper) => {
   const board = [3, 7]
   const players = [0, 1]
 
@@ -49,5 +49,3 @@ const cook2 = (needle, upper) => {
 
   return upper ? board.join('').search(needle) : board.length - needle.length
 }
-
-module.exports = { cook1, cook2 }

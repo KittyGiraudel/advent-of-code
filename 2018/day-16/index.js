@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const OPCODES = {
   addr: (regs, [A, B, C]) => $.updateAtIndex(regs, C, regs[A] + regs[B]),
@@ -25,7 +25,7 @@ const parseSample = ([before, op, after]) => ({
   after: JSON.parse(after.replace('After: ', '')),
 })
 
-const debug = input => {
+export const debug = input => {
   const capacity = Object.keys(OPCODES).length
   const program = $.last(input)
     .split('\n')
@@ -69,5 +69,3 @@ const debug = input => {
     [0, 0, 0, 0]
   )
 }
-
-module.exports = { debug }

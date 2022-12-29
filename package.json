@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "scripts": {
     "test": "ava --verbose --timeout=20s",
     "tiles": "rm -rf AoCTiles/.aoc_tiles_cache && python3 AoCTiles/create_aoc_tiles.py"
@@ -9,6 +10,10 @@
   "ava": {
     "files": [
       "./**/*test.js"
+    ],
+    "nodeArguments": [
+      "--experimental-specifier-resolution=node",
+      "--no-warnings"
     ]
   },
   "dependencies": {

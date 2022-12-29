@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const find = (input, value = 0, cache = new Map([[0, 1]])) => {
+export const find = (input, value = 0, cache = new Map([[0, 1]])) => {
   for (let i = 0; i < input.length; i++) {
     value += input[i]
     if (cache.get(value) === 1) return value
@@ -9,5 +9,3 @@ const find = (input, value = 0, cache = new Map([[0, 1]])) => {
 
   return find(input, value, cache)
 }
-
-module.exports = { find }

@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const run = (lists, MAX, advanced) => {
+export const run = (lists, MAX, advanced) => {
   let blacklists = lists
     .map(a => a.split('-').map(Number))
     .sort((a, b) => a[0] - b[0] || a[1] - b[1])
@@ -33,5 +33,3 @@ const run = (lists, MAX, advanced) => {
 
   return advanced ? count : pointer
 }
-
-module.exports = { run }

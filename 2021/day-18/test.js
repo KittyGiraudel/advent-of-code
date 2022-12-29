@@ -1,11 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const {
-  findHighestMagnitude,
-  reduce,
-  sumFish,
-  computeMagnitude,
-} = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { findHighestMagnitude, reduce, sumFish, computeMagnitude } from './'
 
 test('Day 18 — Sample', t => {
   const sampleA = $.sample(`
@@ -104,7 +99,7 @@ test('Day 18 — Sample', t => {
 })
 
 test('Day 18 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
   const final = sumFish(...input)
   t.is(computeMagnitude(JSON.parse(final)), 3793)
 

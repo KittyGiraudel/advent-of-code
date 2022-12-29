@@ -5,4 +5,4 @@
 // @return {Boolena}
 const isClamped = (input, min, max) => input >= min && input <= max
 
-module.exports = isClamped
+export default isClamped

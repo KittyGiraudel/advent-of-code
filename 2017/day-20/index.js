@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const tick = particle => {
   particle.velocity[0] += particle.acceleration[0]
@@ -22,7 +22,7 @@ const countCollisions = particles =>
       return acc
     }, new Set()).size
 
-const run = input => {
+export const run = input => {
   const particles = input.map((line, index) => {
     const [p, v, a] = line.split(', ')
     const position = $.toCoords(p.slice(3, -1))
@@ -44,5 +44,3 @@ const run = input => {
 
   return [particles.sort(sortByDistance).pop().index, count]
 }
-
-module.exports = { run }

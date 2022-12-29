@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const ORIENTATIONS = ['>', 'v', '<', '^']
 const WALL = '#'
@@ -47,7 +47,7 @@ const getSubgrids = grid =>
     }
   })
 
-const rotate = (orientation, instruction) => {
+export const rotate = (orientation, instruction) => {
   const direction = instruction === 'L' ? -1 : +1
   const currIndex = ORIENTATIONS.indexOf(orientation)
   const nextIndex = (currIndex + direction) % ORIENTATIONS.length
@@ -147,7 +147,7 @@ const getNeighbors = (grid, asCube) => (acc, _, ri, ci) => {
   return acc
 }
 
-const maze = (input, asCube = false) => {
+export const maze = (input, asCube = false) => {
   const [map, last] = input.split('\n\n')
   const instructions = last.match(/(\d+|L|R)/g).map(v => +v || v)
   const rows = map.split('\n').filter(Boolean)
@@ -182,5 +182,3 @@ const maze = (input, asCube = false) => {
     ORIENTATIONS.indexOf(orientation)
   )
 }
-
-module.exports = { maze, rotate }

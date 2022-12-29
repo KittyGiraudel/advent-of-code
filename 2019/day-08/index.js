@@ -1,9 +1,9 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const parse = (input, size) =>
   $.chunk(Array.from(input).map(Number), size.width * size.height)
 
-const validate = (input, size) => {
+export const validate = (input, size) => {
   const { count } = parse(input, size)
     .map(layer => ({ layer, count: $.count(layer) }))
     .sort((a, b) => b.count['0'] - a.count['0'])
@@ -12,7 +12,7 @@ const validate = (input, size) => {
   return count['1'] * count['2']
 }
 
-const recompose = (input, size) => {
+export const recompose = (input, size) => {
   const layers = parse(input, size)
   const image = $.grid.init(size.width, size.height)
 
@@ -30,6 +30,4 @@ const recompose = (input, size) => {
   return image
 }
 
-const render = grid => $.grid.render(grid, ' ', v => v || ' ')
-
-module.exports = { validate, render, recompose }
+export const render = grid => $.grid.render(grid, ' ', v => v || ' ')

@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { parseInput, getScanningErrorRate, getTicketValue } = require('.')
+import test from 'ava'
+import $ from '../../helpers'
+import { parseInput, getScanningErrorRate, getTicketValue } from '.'
 
 test('Day 16 — Sample', t => {
   const example = $.sample(
@@ -34,7 +34,7 @@ test('Day 16 — Sample', t => {
 })
 
 test('Day 16 — Solutions', t => {
-  const input = $.readInput(__dirname, '\n\n')
+  const input = $.readInput(import.meta, '\n\n')
   const data = parseInput(input)
 
   t.is(getScanningErrorRate(data.nearbyTickets, data.rules), 25788)

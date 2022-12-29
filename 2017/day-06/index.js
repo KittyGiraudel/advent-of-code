@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const run = memory => {
+export const run = memory => {
   memory = memory.slice(0)
   const history = []
   let cycles = 0
@@ -28,5 +28,3 @@ const run = memory => {
 
   return [cycles, history.length - history.indexOf(memory.join(','))]
 }
-
-module.exports = { run }

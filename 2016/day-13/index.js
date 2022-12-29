@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const isOpenSpace =
   n =>
@@ -12,7 +12,7 @@ const isOpenSpace =
     return ones % 2 === 0
   }
 
-const run = (end, n, reach = 50) => {
+export const run = (end, n, reach = 50) => {
   const neighbors = curr => $.bordering(curr, 'COORDS').filter(isOpenSpace(n))
   const start = [1, 1]
   const { from: graph } = $.pathfinding.search({
@@ -34,5 +34,3 @@ const run = (end, n, reach = 50) => {
       .filter(distance => distance <= reach).length,
   ]
 }
-
-module.exports = { run }

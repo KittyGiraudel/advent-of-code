@@ -1,4 +1,4 @@
-const proceed = instructions =>
+export const proceed = instructions =>
   instructions
     .map(instruction => instruction.split(' '))
     .reduce(
@@ -11,7 +11,7 @@ const proceed = instructions =>
       { position: 0, depth: 0 }
     )
 
-const proceedWithAim = instructions =>
+export const proceedWithAim = instructions =>
   instructions
     .map(instruction => instruction.split(' '))
     .reduce(
@@ -25,5 +25,3 @@ const proceedWithAim = instructions =>
       },
       { position: 0, depth: 0, aim: 0 }
     )
-
-module.exports = { proceed, proceedWithAim }

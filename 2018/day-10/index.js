@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const applyVelocity = ([position, velocity]) => [
   $.applyVector(position, velocity),
@@ -12,7 +12,7 @@ const getDimensions = ([minX, maxX, minY, maxY]) => [
   maxY + 1 - minY,
 ]
 
-const render = curr => {
+export const render = curr => {
   const positions = curr.map(([position]) => position)
   const coords = positions.map($.toPoint)
   const boundaries = $.boundaries(positions)
@@ -27,7 +27,7 @@ const render = curr => {
   return $.grid.render(grid, ' ')
 }
 
-const plot = input => {
+export const plot = input => {
   let curr = input.map(parseLine)
   let [width, height] = [Infinity, Infinity]
   let seconds = 0
@@ -53,5 +53,3 @@ const plot = input => {
 
   return seconds
 }
-
-module.exports = { plot }

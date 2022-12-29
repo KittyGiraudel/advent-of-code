@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { cycle, findBiodiversity } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { cycle, findBiodiversity } from './'
 
 test('Day 24 — Sample', t => {
   const sampleA = $.sample(`
@@ -16,7 +16,7 @@ test('Day 24 — Sample', t => {
 })
 
 test('Day 24 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(findBiodiversity(input), 32573535)
 })

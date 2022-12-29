@@ -1,4 +1,4 @@
-const $ = require('../../helpers/')
+import $ from '../../helpers/'
 
 const parseInput = line =>
   line
@@ -7,7 +7,7 @@ const parseInput = line =>
       value.split(' ').map(pattern => pattern.split('').sort().join(''))
     )
 
-const count = lines =>
+export const count = lines =>
   lines
     .map(parseInput)
     .map(line => line[1])
@@ -21,7 +21,7 @@ const count = lines =>
 
 const lettersFrom = value => new RegExp('[' + value + ']', 'g')
 
-const decode = line => {
+export const decode = line => {
   let [patterns, encodedDigits] = parseInput(line)
 
   // Store the 10 patterns in the right order in this array.
@@ -98,6 +98,4 @@ const decode = line => {
   )
 }
 
-const total = lines => $.sum(lines.map(decode))
-
-module.exports = { count, decode, total }
+export const total = lines => $.sum(lines.map(decode))

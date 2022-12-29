@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const lookAndSay = input => {
   let output = ''
@@ -15,7 +15,7 @@ const lookAndSay = input => {
   return output
 }
 
-const run = (input, n = 1) => {
+export const run = (input, n = 1) => {
   while (n--) {
     // The loop version is unsurprisingly faster than the regular expression
     // version.
@@ -25,5 +25,3 @@ const run = (input, n = 1) => {
 
   return input.length
 }
-
-module.exports = { run }

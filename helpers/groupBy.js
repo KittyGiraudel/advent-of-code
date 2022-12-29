@@ -9,4 +9,4 @@ const groupBy = (array, key) => {
   }, {})
 }
 
-module.exports = groupBy
+export default groupBy

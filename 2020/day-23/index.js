@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 // Get the destination cup number.
 // @param {Number} current - Current cup value
@@ -56,7 +56,7 @@ const init = (input, size) => {
 // @param {Number} rounds - Amount of rounds to play
 // @param {Number} size - Amount of numbers in the list
 // @return {UInt32Array}
-const play = (input, rounds = 10, size = input.length) => {
+export const play = (input, rounds = 10, size = input.length) => {
   const map = init(input, size)
   let curr = input[0]
 
@@ -77,7 +77,7 @@ const play = (input, rounds = 10, size = input.length) => {
 // Serialise the chain from the number 1 onwards, omitting it.
 // @param {UInt32Array} map - Map of links
 // @return {Number}
-const serializeChain = map => {
+export const serializeChain = map => {
   let output = ''
   let current = map[1]
 
@@ -92,6 +92,4 @@ const serializeChain = map => {
 // Get the product of the 2 cups at right of the one labeled 1.
 // @param {UInt32Array} map - Map of links
 // @return {Number}
-const getChainValue = map => map[1] * map[map[1]]
-
-module.exports = { play, serializeChain, getChainValue }
+export const getChainValue = map => map[1] * map[map[1]]

@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const getValue = (node, withRefs) =>
   $.sum(
@@ -9,7 +9,7 @@ const getValue = (node, withRefs) =>
     ) ?? []
   )
 
-const parse = (numbers, withRefs) => {
+export const parse = (numbers, withRefs) => {
   const node = {
     children: [],
     size: numbers.shift(),
@@ -25,7 +25,5 @@ const parse = (numbers, withRefs) => {
   return node
 }
 
-const score = ({ children, value }, withRefs) =>
+export const score = ({ children, value }, withRefs) =>
   children.reduce((acc, child) => acc + score(child, withRefs), value)
-
-module.exports = { parse, score }

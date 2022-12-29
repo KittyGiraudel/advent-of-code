@@ -29,4 +29,4 @@ const memo = fn => {
   }
 }
 
-module.exports = memo
+export default memo

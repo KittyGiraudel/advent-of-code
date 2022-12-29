@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 // 1. If the value is a number, return it.
 // 2. If the value is an array, recursively walk it.
@@ -13,9 +13,7 @@ const getSum = item => {
   return 0
 }
 
-const run = (input, advanced) =>
+export const run = (input, advanced) =>
   advanced
     ? getSum(JSON.parse(input))
     : $.sum(input.match(/-?\d+/g).map(Number))
-
-module.exports = { run }

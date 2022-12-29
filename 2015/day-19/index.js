@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const indicesOf = (string, from) => {
   const indices = []
@@ -13,7 +13,7 @@ const indicesOf = (string, from) => {
 const replaceAt = (value, from, index, to) =>
   value.slice(0, index) + value.slice(index).replace(from, to)
 
-const calibrate = input => {
+export const calibrate = input => {
   const molecule = $.last(input)
   const molecules = input.slice(0, -2).flatMap(replacement => {
     const [from, to] = replacement.split(' => ')
@@ -33,7 +33,7 @@ const calibrate = input => {
 // should also subtract 1 because we start with `e`.
 // Ref: https://www.reddit.com/r/adventofcode/comments/3xflz8/comment/cy4etju/
 // Ref: https://www.reddit.com/r/adventofcode/comments/3xflz8/comment/cy4h7ji/
-const recompose = input => {
+export const recompose = input => {
   const molecule = $.last(input)
   const tokens = $.countInString(molecule, '[A-Z]', false)
   const Rn = $.countInString(molecule, 'Rn', false)
@@ -42,5 +42,3 @@ const recompose = input => {
 
   return tokens - Rn - Ar - 2 * Y - 1
 }
-
-module.exports = { calibrate, recompose }

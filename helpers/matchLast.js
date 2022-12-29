@@ -16,4 +16,4 @@ const matchLast = (string, regex) => {
   return match
 }
 
-module.exports = matchLast
+export default matchLast

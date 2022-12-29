@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const getArrangements = (numbers, target, curr = []) => {
   if ($.sum(curr) === target) return [curr]
@@ -12,7 +12,7 @@ const getArrangements = (numbers, target, curr = []) => {
   }, [])
 }
 
-const run = (input, target) => {
+export const run = (input, target) => {
   const arrangements = getArrangements(input, target)
   const min = Math.min(...arrangements.map(a => a.length))
 
@@ -21,5 +21,3 @@ const run = (input, target) => {
     arrangements.filter(a => a.length === min).length,
   ]
 }
-
-module.exports = { run }

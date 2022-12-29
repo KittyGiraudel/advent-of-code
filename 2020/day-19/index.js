@@ -42,10 +42,8 @@ const getRegularExpression = (input, fixes) => {
 // @param {String} input - Raw block of messages
 // @param {Object} fixes - Object of fixes (line -> fixed line)
 // @return {Number}
-const count = (rules, input, fixes = {}) => {
+export const count = (rules, input, fixes = {}) => {
   const expression = getRegularExpression(rules, fixes)
 
   return input.split('\n').filter(message => expression.test(message)).length
 }
-
-module.exports = { count }

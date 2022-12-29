@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const DIRECTIONS = {
   N: { R: 'E', L: 'W' },
@@ -22,7 +22,7 @@ const rotate = (orientation, direction, degrees) => {
 // @param {String[]} instructions - List of instructions
 // @param {String} orientation - Initial orientation
 // @return {Number} Manatthan distance
-const navigateLoose = (instructions, orientation = 'E') =>
+export const navigateLoose = (instructions, orientation = 'E') =>
   $.sum(
     instructions.reduce(
       (coords, instruction) => {
@@ -49,7 +49,7 @@ const navigateLoose = (instructions, orientation = 'E') =>
 // waypoint.
 // @param {String[]} instructions - List of instructions
 // @return {Number} Manatthan distance
-const navigateStrict = instructions =>
+export const navigateStrict = instructions =>
   $.sum(
     instructions.reduce(
       ({ ship, waypoint }, instruction) => {
@@ -77,5 +77,3 @@ const navigateStrict = instructions =>
       { ship: [0, 0], waypoint: [10, -1] }
     ).ship
   )
-
-module.exports = { navigateLoose, navigateStrict }

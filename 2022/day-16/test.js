@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { releasePressure } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { releasePressure } from './'
 
 test('Day 16 — Sample', t => {
   const sample = $.sample(`
@@ -20,7 +20,7 @@ test('Day 16 — Sample', t => {
 })
 
 test('Day 16 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(releasePressure(input), 1944)
 })

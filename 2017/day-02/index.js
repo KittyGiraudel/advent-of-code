@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const checksum = (input, advanced) =>
+export const checksum = (input, advanced) =>
   $.sum(
     input.map(row => {
       const numbers = row.split(/\s+/g).map(Number)
@@ -19,5 +19,3 @@ const checksum = (input, advanced) =>
       return pair[0] / pair[1]
     })
   )
-
-module.exports = { checksum }

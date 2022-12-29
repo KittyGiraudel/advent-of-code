@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const createNode = cave => ({
   small: cave === cave.toLowerCase(),
@@ -53,7 +53,5 @@ const getPaths = (graph, cave, withDuplicate = false, path = []) => {
   )
 }
 
-const findPaths = (connections, withDuplicate = false) =>
+export const findPaths = (connections, withDuplicate = false) =>
   getPaths(createGraph(connections), 'start', withDuplicate)
-
-module.exports = { findPaths }

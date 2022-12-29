@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const ALPHABET = 'abcdefghijklmnopqrstuvwxyz'.split('')
 const makeRegExp = pairs => new RegExp('(' + pairs.join('|') + ')')
@@ -9,7 +9,7 @@ const GLOBAL_RE = makeRegExp(
   ])
 )
 
-const findShortestPolymer = input =>
+export const findShortestPolymer = input =>
   Math.min(
     ...ALPHABET.map(letter => new RegExp(letter, 'ig'))
       .map(re => input.replace(re, ''))
@@ -17,7 +17,7 @@ const findShortestPolymer = input =>
       .map(polymer => polymer.length)
   )
 
-const reduce = input => {
+export const reduce = input => {
   // This is my initial version, which works fine but is super slow because it
   // uses a big regular expression on a big string I guess.
   /*
@@ -37,5 +37,3 @@ const reduce = input => {
     }, [])
     .join('')
 }
-
-module.exports = { reduce, findShortestPolymer }

@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const KEYPAD_1 = [
   [1, 2, 3],
@@ -21,7 +21,7 @@ const VECTORS = {
   L: [0, -1],
 }
 
-const run = (instructions, advanced) => {
+export const run = (instructions, advanced) => {
   const keypad = advanced ? KEYPAD_2 : KEYPAD_1
   let position = advanced ? [2, 0] : [1, 1]
 
@@ -38,5 +38,3 @@ const run = (instructions, advanced) => {
     })
     .join('')
 }
-
-module.exports = { run }

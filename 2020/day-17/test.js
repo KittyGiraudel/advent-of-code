@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { gameOfLife } = require('.')
+import test from 'ava'
+import $ from '../../helpers'
+import { gameOfLife } from '.'
 
 const cycles = 6
 
@@ -16,7 +16,7 @@ test('Day 17 — Sample', t => {
 })
 
 test('Day 17 — Solutions', t => {
-  const input = $.readInput(__dirname, '\n')
+  const input = $.readInput(import.meta, '\n')
 
   t.is(gameOfLife(input, cycles), 382)
   t.is(gameOfLife(input, cycles, 4), 2552)

@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 class Deer {
   constructor(line) {
@@ -37,7 +37,7 @@ class Deer {
   }
 }
 
-const run = (input, iterations = 1000) => {
+export const run = (input, iterations = 1000) => {
   const deers = input.map(line => new Deer(line))
 
   for (let i = 0; i < iterations; i++) {
@@ -57,5 +57,3 @@ const run = (input, iterations = 1000) => {
     Math.max(...deers.map(deer => deer.score)),
   ]
 }
-
-module.exports = { run }

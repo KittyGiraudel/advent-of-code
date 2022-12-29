@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { reduce, findShortestPolymer } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { reduce, findShortestPolymer } from './'
 
 test('Day 05 — Sample', t => {
   t.is(reduce('dabAcCaCBAcCcaDA'), 'dabCBAcaDA')
@@ -8,7 +8,7 @@ test('Day 05 — Sample', t => {
 })
 
 test('Day 05 — Solutions', t => {
-  const [input] = $.readInput(__dirname)
+  const [input] = $.readInput(import.meta)
 
   t.is(reduce(input).length, 11364)
   t.is(findShortestPolymer(input), 4212)

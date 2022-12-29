@@ -1,4 +1,4 @@
-const $ = require('../../helpers/')
+import $ from '../../helpers/'
 
 const isGridComplete = grid => {
   const hasFullRow = grid.some(row => row.every(item => item.marked))
@@ -18,7 +18,7 @@ const roll = (grids, number) => {
 const computeGridScore = grid =>
   $.sum($.grid.map(grid, item => (item.marked ? 0 : item.value)).flat())
 
-const getBingos = input => {
+export const getBingos = input => {
   const [numbers, ...grids] = parseInput(input)
   const bingos = []
 
@@ -50,5 +50,3 @@ const parseInput = input => {
 
   return [numbers.split(',').map(Number), ...grids.map(formatGrid)]
 }
-
-module.exports = { getBingos }

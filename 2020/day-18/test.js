@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { computeLoose, computeStrict } = require('.')
+import test from 'ava'
+import $ from '../../helpers'
+import { computeLoose, computeStrict } from '.'
 
 test('Day 18 — Sample', t => {
   t.is(computeLoose('1 + (2 * 3) + (4 * (5 + 6))'), 51)
@@ -16,7 +16,7 @@ test('Day 18 — Sample', t => {
 })
 
 test('Day 18 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is($.sum(input.map(computeLoose)), 280014646144)
   t.is($.sum(input.map(computeStrict)), 9966990988262)

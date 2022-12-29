@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { findHighestSignal, amplify, loop } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { findHighestSignal, amplify, loop } from './'
 
 test('Day 07 — Sample', t => {
   t.is(
@@ -44,7 +44,7 @@ test('Day 07 — Sample', t => {
 })
 
 test('Day 07 — Solutions', t => {
-  const [input] = $.readInput(__dirname)
+  const [input] = $.readInput(import.meta)
 
   t.is(findHighestSignal(input), 70602018)
 })

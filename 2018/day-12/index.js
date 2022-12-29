@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const count = (state, offset) =>
   $.sum(state.map((char, index) => (char === '#' ? index - offset : 0)))
@@ -35,11 +35,13 @@ const next = (curr, patterns) =>
     .map((_, index, array) => getSlice(array, index))
     .map(slice => patterns[slice] || '.')
 
-const cycle = (input, cycles = 1) => {
+export const cycle = (input, cycles = 1) => {
   const [initial, instructions] = input
   const patterns = getPatterns(instructions)
   let curr = getInitialState(initial)
-  let offset = (score = inc = 0)
+  let offset = 0
+  let score = 0
+  let inc = 0
 
   while (cycles--) {
     // If the current state has a plant at index 0, 1, n-2 or n-1, pad the state
@@ -69,5 +71,3 @@ const cycle = (input, cycles = 1) => {
   // When done iterating, return the score.
   return score
 }
-
-module.exports = { cycle }

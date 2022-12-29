@@ -1,5 +1,5 @@
-const test = require('ava')
-const { isValidPassword, findPasswords } = require('./')
+import test from 'ava'
+import { isValidPassword, findPasswords } from './'
 
 test('Day 04 — Sample', t => {
   t.truthy(isValidPassword('111111'))

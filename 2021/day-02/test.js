@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { proceed, proceedWithAim } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { proceed, proceedWithAim } from './'
 
 test('Day 02 — Sample', t => {
   const sample = $.sample(`
@@ -20,7 +20,7 @@ test('Day 02 — Sample', t => {
 })
 
 test('Day 02 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   const data = proceed(input)
   t.is(data.depth * data.position, 1488669)

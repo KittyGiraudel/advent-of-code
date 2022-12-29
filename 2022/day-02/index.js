@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const isRock = value => value === 'A' || value === 'X'
 const isPaper = value => value === 'B' || value === 'Y'
@@ -12,7 +12,7 @@ const ROCK = 1
 const PAPER = 2
 const SCISSORS = 3
 
-const battleA = instructions => {
+export const battleA = instructions => {
   return instructions.reduce((acc, instruction) => {
     const [opponent, self] = instruction.split(' ')
 
@@ -32,7 +32,7 @@ const battleA = instructions => {
   }, 0)
 }
 
-const battleB = instructions => {
+export const battleB = instructions => {
   return instructions.reduce((acc, instruction) => {
     const [opponent, expectation] = instruction.split(' ')
 
@@ -51,5 +51,3 @@ const battleB = instructions => {
     }
   }, 0)
 }
-
-module.exports = { battleA, battleB }

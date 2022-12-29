@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const SIDES = {
   N: ([N, NE, E, SE, S, SW, W, NW]) => [N, NW, NE],
@@ -19,7 +19,7 @@ const mapPositions = input =>
     new Set()
   )
 
-const run = (input, rounds = 10) => {
+export const run = (input, rounds = 10) => {
   const positions = mapPositions(input)
   const directions = ['N', 'S', 'W', 'E']
   const isOccupied = point => positions.has(point)
@@ -61,5 +61,3 @@ const run = (input, rounds = 10) => {
 
   return (maxX + 1 - minX) * (maxY + 1 - minY) - positions.size
 }
-
-module.exports = { run }

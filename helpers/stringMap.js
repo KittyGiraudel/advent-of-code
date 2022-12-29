@@ -5,4 +5,4 @@
 const stringMap = (string, callback) =>
   Array.from(string).map(callback).join('')
 
-module.exports = stringMap
+export default stringMap

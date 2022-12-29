@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 // Elegant generator taken from the following article so we don’t have to pre-
 // compute all possible permutations as it’s too slow.
@@ -18,7 +18,7 @@ function* getCombinations(array) {
   for (let i = 1; i <= array.length; i++) yield* getCombinationsN(array, i)
 }
 
-const run = (weights, count = 3) => {
+export const run = (weights, count = 3) => {
   const totalWeight = $.sum(weights)
   const groups = getCombinations(weights)
   let quantum = Infinity
@@ -41,5 +41,3 @@ const run = (weights, count = 3) => {
 
   return quantum
 }
-
-module.exports = { run }

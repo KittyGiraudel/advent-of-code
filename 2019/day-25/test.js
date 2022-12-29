@@ -1,9 +1,9 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { inspect } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { inspect } from './'
 
 test('Day 25 — Solutions', t => {
-  const [input] = $.readInput(__dirname)
+  const [input] = $.readInput(import.meta)
 
   t.is(inspect(input), 84410376)
 })

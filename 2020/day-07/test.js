@@ -1,12 +1,12 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const {
+import test from 'ava'
+import $ from '../../helpers'
+import {
   canContain,
   countBagsWithin,
   parseRestriction,
   mapRestrictions,
   countContainers,
-} = require('./')
+} from './'
 
 test('Day 07 — Sample', t => {
   const example1 = $.sample(`
@@ -61,7 +61,7 @@ test('Day 07 — Sample', t => {
 })
 
 test('Day 07 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
   const map = mapRestrictions(input)
   const type = 'shiny gold'
 

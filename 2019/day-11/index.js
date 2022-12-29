@@ -1,5 +1,5 @@
-const $ = require('../../helpers')
-const { Intcode } = require('../day-05')
+import $ from '../../helpers'
+import { Intcode } from '../day-05'
 
 const next = (computer, state) => {
   // Provide 0 if the robot is over a black panel or 1 if the robot is over a
@@ -29,7 +29,7 @@ const next = (computer, state) => {
   return state
 }
 
-const paint = (input, start = 0) => {
+export const paint = (input, start = 0) => {
   const computer = new Intcode(input)
   const state = {
     direction: $.turn.DIRECTIONS[0],
@@ -42,7 +42,7 @@ const paint = (input, start = 0) => {
   return state.record
 }
 
-const render = record => {
+export const render = record => {
   const coords = Array.from(record.keys()).map($.toCoords)
   const [minX, maxX, minY, maxY] = $.boundaries(coords)
 
@@ -53,5 +53,3 @@ const render = record => {
     ' '
   )
 }
-
-module.exports = { paint, render }

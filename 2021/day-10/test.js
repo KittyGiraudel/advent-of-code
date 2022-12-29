@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { processLine, getCorruptionScore, getCompletionScore } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { processLine, getCorruptionScore, getCompletionScore } from './'
 
 test('Day 10 — Sample', t => {
   const sample = $.sample(`
@@ -30,7 +30,7 @@ test('Day 10 — Sample', t => {
 })
 
 test('Day 10 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(getCorruptionScore(input), 243939)
   t.is(getCompletionScore(input), 2421222841)

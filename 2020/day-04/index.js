@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const VALIDATORS = {
+export const VALIDATORS = {
   byr: input => $.isClamped(+input, 1920, 2002),
   iyr: input => $.isClamped(+input, 2010, 2020),
   eyr: input => $.isClamped(+input, 2020, 2030),
@@ -20,7 +20,7 @@ const parse = input => input.split(':')[1]
 // Loosely validate the given passport by ensuring all fields are listed.
 // @param {String} passport - Passport to validate
 // @return {Boolean} Whether the passport is valid
-const isValidLoose = passport =>
+export const isValidLoose = passport =>
   Object.keys(VALIDATORS).every(field =>
     passport.split(/\s+/g).find(chunk => chunk.startsWith(field))
   )
@@ -29,11 +29,9 @@ const isValidLoose = passport =>
 // valid.
 // @param {String} passport - Passport to validate
 // @return {Boolean} Whether the passport is valid
-const isValidStrict = input =>
+export const isValidStrict = input =>
   Object.keys(VALIDATORS).every(key =>
     input
       .split(/\s+/g)
       .find(value => value.startsWith(key) && VALIDATORS[key](parse(value)))
   )
-
-module.exports = { isValidLoose, isValidStrict, VALIDATORS }

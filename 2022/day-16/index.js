@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const releasePressure = input => {
+export const releasePressure = input => {
   const map = input.reduce((acc, line) => {
     const [, name, flow, tunnels] = line.match(
       /Valve (\w+) has flow rate=(\d+); tunnels? leads? to valves? ([\w,\s]+)/
@@ -78,5 +78,3 @@ const releasePressure = input => {
 
   return max
 }
-
-module.exports = { releasePressure }

@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const getChecksum = disk => {
   const checksum = []
@@ -10,7 +10,7 @@ const getChecksum = disk => {
   return checksum.length % 2 === 0 ? getChecksum(checksum) : checksum
 }
 
-const run = (input, size) => {
+export const run = (input, size) => {
   const disk = Array.from(input).map(Number)
 
   while (disk.length < size) {
@@ -32,5 +32,3 @@ const run = (input, size) => {
 
   return getChecksum(disk).join('')
 }
-
-module.exports = { run }

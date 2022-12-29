@@ -10,4 +10,4 @@ const updateAtIndex = (array, index, value) => [
   ...array.slice(index + 1),
 ]
 
-module.exports = updateAtIndex
+export default updateAtIndex

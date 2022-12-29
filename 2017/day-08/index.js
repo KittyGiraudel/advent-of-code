@@ -1,10 +1,10 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 // This function takes in an array of raw instructions, executes every
 // instruction to manipulate the value of registers (starting at 0), and return
 // the maximum value reached by a register.
 // Write-up: https://kittygiraudel.com/2022/01/21/exploiting-javascript-quirks-for-fun-and-profit/
-const run = lines => {
+export const run = lines => {
   let absoluteMax = -Infinity
   const registers = {}
 
@@ -23,5 +23,3 @@ const run = lines => {
 
   return { currentMax: Math.max(...Object.values(registers)), absoluteMax }
 }
-
-module.exports = { run }

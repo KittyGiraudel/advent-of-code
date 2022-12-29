@@ -1,7 +1,7 @@
 // Parse a restriction line into a type and an array of possible sub-types.
 // @param {String} restriction - Unparsed restriction
 // @return {Object} Type and capacity
-const parseRestriction = restriction => {
+export const parseRestriction = restriction => {
   const [type, leftover] = restriction.trim().split(' bags contain ')
   const contains = leftover
     .split(',')
@@ -16,7 +16,7 @@ const parseRestriction = restriction => {
 // possible sub-types.
 // @param {String[]} restrictions - Array of unparsed restrictions
 // @return {Object} Map of restrictions
-const mapRestrictions = restrictions =>
+export const mapRestrictions = restrictions =>
   restrictions
     .filter(Boolean)
     .map(parseRestriction)
@@ -28,7 +28,7 @@ const mapRestrictions = restrictions =>
 // @param {String} entry - Entry point type in the map
 // @param {String} expected - Expected type to find
 // @return {Boolean} Whether `entry` type can contain `expected` type (deep)
-const canContain = (map, entry, expected) =>
+export const canContain = (map, entry, expected) =>
   entry === expected ||
   map[entry].some(item => canContain(map, item.type, expected))
 
@@ -36,7 +36,7 @@ const canContain = (map, entry, expected) =>
 // @param {Object} map - Map of restrictions
 // @param {String} expected - Expected type to find
 // @return {Number} Amount of containers for `expected` type
-const countContainers = (map, expected) =>
+export const countContainers = (map, expected) =>
   Object.keys(map)
     .filter(type => type !== expected)
     .filter(type => canContain(map, type, expected)).length
@@ -45,16 +45,8 @@ const countContainers = (map, expected) =>
 // @param {Object} map - Map of restrictions
 // @param {String} entry - Entry point type in the map
 // @return {Number} Amount of bags within given `entry` type
-const countBagsWithin = (map, entry) =>
+export const countBagsWithin = (map, entry) =>
   map[entry].reduce(
     (acc, { count, type }) => acc + count * (1 + countBagsWithin(map, type)),
     0
   )
-
-module.exports = {
-  canContain,
-  countBagsWithin,
-  countContainers,
-  mapRestrictions,
-  parseRestriction,
-}

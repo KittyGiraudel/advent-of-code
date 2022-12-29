@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const countVisibleTrees = rows => {
+export const countVisibleTrees = rows => {
   const grid = $.grid.create(rows)
   const height = grid.length
   const width = grid[0].length
@@ -26,7 +26,7 @@ const countVisibleTrees = rows => {
     .filter(Boolean).length
 }
 
-const getHighestScenicScore = rows => {
+export const getHighestScenicScore = rows => {
   const grid = $.grid.create(rows)
   const height = grid.length
   const width = grid[0].length
@@ -37,7 +37,10 @@ const getHighestScenicScore = rows => {
       if (ri === 0 || ci === 0) return 0
       if (ri === height - 1 || ci === width - 1) return 0
 
-      let top = (right = bottom = left = 0)
+      let top = 0
+      let right = 0
+      let bottom = 0
+      let left = 0
 
       // Start from the previous row and move up until the edge or finding a
       // tree which is as tall or taller than the current tree.
@@ -71,5 +74,3 @@ const getHighestScenicScore = rows => {
     })
   )
 }
-
-module.exports = { countVisibleTrees, getHighestScenicScore }

@@ -54,7 +54,7 @@ const gridVariants = grid => {
   return variants
 }
 
-const grid = {
+export default {
   forEach: gridForEach,
   map: gridMap,
   flatMap: gridFlatMap,
@@ -67,5 +67,3 @@ const grid = {
   render: renderGrid,
   variants: gridVariants,
 }
-
-module.exports = grid

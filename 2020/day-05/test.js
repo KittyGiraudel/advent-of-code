@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { getSeatCoords, getSeatId, findOwnSeat } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { getSeatCoords, getSeatId, findOwnSeat } from './'
 
 test('Day 05 — Sample', t => {
   t.deepEqual(getSeatCoords('FBFBBFFRLR'), [44, 5])
@@ -14,7 +14,7 @@ test('Day 05 — Sample', t => {
 })
 
 test('Day 05 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(Math.max(...input.map(getSeatId)), 855)
   t.is(findOwnSeat(input), 552)

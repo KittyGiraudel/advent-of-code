@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const isWithinSensorRange = ({ position, radius }, coords) =>
   $.manhattan(position, coords) <= radius
@@ -15,7 +15,7 @@ const isValidCandidate = (signals, coords, max) =>
 // by any of the sensor (because they all detect another beacon closer to them).
 // This means there must be only one set of coords in the 0,4000000->0,4000000
 // space that is not detected by any sensor.
-const detect = (input, y, max) => {
+export const detect = (input, y, max) => {
   const data = input.map(line => line.match(/-?\d+/g).map(Number))
   const sensors = data.map(([sx, sy, bx, by]) => {
     const position = [sx, sy]
@@ -115,5 +115,3 @@ const detect = (input, y, max) => {
 
   return candidate[0] * 4_000_000 + candidate[1]
 }
-
-module.exports = { detect }

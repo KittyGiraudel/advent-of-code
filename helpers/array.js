@@ -3,4 +3,4 @@
 // @return {Array}
 const array = length => Array.from({ length: length })
 
-module.exports = array
+export default array

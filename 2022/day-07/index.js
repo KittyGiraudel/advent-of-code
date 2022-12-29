@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const isDir = item => item instanceof Dir
 
@@ -21,7 +21,7 @@ class File {
   }
 }
 
-const parseOutput = lines => {
+export const parseOutput = lines => {
   const drive = new Dir('/', null)
   let cwd = null
 
@@ -71,7 +71,7 @@ const getDirs = drive =>
 // This is part 1: it computes the total size of all directories which have a
 // size below 100,000. To do so, it lists all directories from the drive
 // (recursively), get their size, and filter out the ones that are too big.
-const getSmallDirsSize = drive =>
+export const getSmallDirsSize = drive =>
   $.sum(
     getDirs(drive)
       .map(getSize)
@@ -82,7 +82,7 @@ const getSmallDirsSize = drive =>
 // bring the unused space above 30,000,000. To do so, it lists all directories
 // from the drive (recursively), get their size, and filter out the ones that
 // do not match the predicate, after which it picks the smallest size.
-const findFreeableSpace = (
+export const findFreeableSpace = (
   drive,
   capacity = 70_000_000,
   needed = 30_000_000
@@ -95,5 +95,3 @@ const findFreeableSpace = (
       .filter(size => size + unused >= needed)
   )
 }
-
-module.exports = { parseOutput, getSmallDirsSize, findFreeableSpace }

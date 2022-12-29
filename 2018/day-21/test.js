@@ -1,9 +1,9 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { run } = require('../day-19')
+import test from 'ava'
+import $ from '../../helpers'
+import { run } from '../day-19'
 
 test('Day 21 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   // Day 21 was solved without writing new code, just by fiddling with the code
   // from day 19. The answer for part 1 (10332277) was found by logging the

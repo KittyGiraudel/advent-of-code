@@ -20,4 +20,4 @@ const permutations = array => {
   return permute(array.slice(0))
 }
 
-module.exports = permutations
+export default permutations

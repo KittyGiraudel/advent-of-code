@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const getEpsilonAndGamma = items =>
+export const getEpsilonAndGamma = items =>
   $.array(items[0].length).reduce(
     (acc, _, i) => {
       const column = $.column(items, i).join('')
@@ -23,7 +23,5 @@ const getGasValue = predicate => items =>
     return acc.length === 1 ? acc : acc.filter(item => +item[i] === main)
   }, items)[0]
 
-const getOxygen = getGasValue(hasMore1 => +hasMore1)
-const getCO2 = getGasValue(hasMore1 => +!hasMore1)
-
-module.exports = { getEpsilonAndGamma, getOxygen, getCO2 }
+export const getOxygen = getGasValue(hasMore1 => +hasMore1)
+export const getCO2 = getGasValue(hasMore1 => +!hasMore1)

@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const run = input => {
+export const run = input => {
   const graph = new Map()
 
   input.forEach(line => {
@@ -35,5 +35,3 @@ const run = input => {
 
   return [walk(0).length, groups.length]
 }
-
-module.exports = { run }

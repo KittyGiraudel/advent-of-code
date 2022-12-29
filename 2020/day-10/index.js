@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 // Count the amount of paths that go from the `current` value to the last one in
 // sorted `input`.
@@ -43,7 +43,7 @@ const sortAdapters = adapters =>
 // the series of adapters.
 // @param {Number[]} adapters - Array of adapters
 // @return {Number}
-const getDifferenceProduct = adapters => {
+export const getDifferenceProduct = adapters => {
   const numbers = sortAdapters(adapters)
   const diffs = [0, 0, 0]
 
@@ -58,6 +58,4 @@ const getDifferenceProduct = adapters => {
 // outlet (0) to the device (highest adapter joltage + 3).
 // @param {Number[]} adapters - Array of adapters
 // @return {Number}
-const countArrangements = input => countPathsToEnd(sortAdapters(input))
-
-module.exports = { getDifferenceProduct, countArrangements }
+export const countArrangements = input => countPathsToEnd(sortAdapters(input))

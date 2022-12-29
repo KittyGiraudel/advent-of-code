@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 
 const getGraph = input => {
@@ -16,7 +16,7 @@ const getGraph = input => {
   return graph
 }
 
-const sequential = input => {
+export const sequential = input => {
   const order = []
   const graph = getGraph(input)
 
@@ -40,7 +40,7 @@ const sequential = input => {
   return order.join('')
 }
 
-const parallel = (input, workers = 5, offset = 60) => {
+export const parallel = (input, workers = 5, offset = 60) => {
   const graph = getGraph(input)
   // Contains the letter in order of resolution, just like in the sequential
   // function.
@@ -93,5 +93,3 @@ const parallel = (input, workers = 5, offset = 60) => {
 
   return { duration, order: order.join('') }
 }
-
-module.exports = { sequential, parallel }

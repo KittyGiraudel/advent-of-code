@@ -1,3 +1,1 @@
-const $ = require('../../helpers')
-
-module.exports = {}
+import $ from '../../helpers'

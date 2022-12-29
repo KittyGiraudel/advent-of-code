@@ -1,11 +1,11 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 // Parse the given values
 // @param {String} rawRules - Raw rules
 // @param {String} rawTicket - Raw ticket
 // @param {String} rawNearbyTickets - Raw nearby tickets
 // @return {Object}
-const parseInput = ([rawRules, rawTicket, rawNearbyTickets]) => ({
+export const parseInput = ([rawRules, rawTicket, rawNearbyTickets]) => ({
   rules: rawRules
     .split('\n')
     .map(line => line.match(/([\w\s]+): (\d+)-(\d+) or (\d+)-(\d+)/))
@@ -43,7 +43,7 @@ const isTicketValid = (ticket, rules) =>
 // @param {Number[][]} tickets - Tickets to scan
 // @param {Rule[]} rules - Rules to validate the tickets against
 // @return {Number}
-const getScanningErrorRate = (tickets, rules) =>
+export const getScanningErrorRate = (tickets, rules) =>
   $.sum(tickets.flat().filter(value => !isValueValid(value, rules)))
 
 // Return whether the given value is an array with a single item.
@@ -105,13 +105,13 @@ const resolveRulesPossibitilies = possibilities => {
 // @param {Rule[]} rules - Rules to validate the tickets with and determine the
 //                         order from
 // @return {String[]} Ordered rule names
-const getRulesOrder = (tickets, rules) =>
+export const getRulesOrder = (tickets, rules) =>
   resolveRulesPossibitilies(getRulesPossibilities(tickets, rules))
 
 // Get the ticket value.
 // @param {String[]} input - Raw puzzle input
 // @return {Number}
-const getTicketValue = input => {
+export const getTicketValue = input => {
   const { nearbyTickets, ticket, rules } = parseInput(input)
   const tickets = nearbyTickets.filter(ticket => isTicketValid(ticket, rules))
   const sortedRules = getRulesOrder(tickets, rules)
@@ -119,11 +119,4 @@ const getTicketValue = input => {
   return $.product(
     ticket.map((v, i) => (/^departure/.test(sortedRules[i]) ? v : 1))
   )
-}
-
-module.exports = {
-  parseInput,
-  getScanningErrorRate,
-  getRulesOrder,
-  getTicketValue,
 }

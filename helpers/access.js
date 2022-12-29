@@ -4,4 +4,4 @@
 // @return {*}
 const access = (grid, coords) => grid?.[coords[0]]?.[coords[1]]
 
-module.exports = access
+export default access

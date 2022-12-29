@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { getTreeCountForSlope, getResult } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { getTreeCountForSlope, getResult } from './'
 
 test('Day 03 — Sample', t => {
   const example = $.sample(`
@@ -35,7 +35,7 @@ test('Day 03 — Sample', t => {
 })
 
 test('Day 03 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(getTreeCountForSlope(input, [3, 1]), 218)
   t.is(

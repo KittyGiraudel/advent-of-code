@@ -59,7 +59,7 @@ const createNodes = size => {
   return curr.head
 }
 
-const countTailPositions = (input, size = 2) => {
+export const countTailPositions = (input, size = 2) => {
   const head = createNodes(size)
 
   input.forEach(line => {
@@ -79,5 +79,3 @@ const countTailPositions = (input, size = 2) => {
 
   return head.tail.visited.size
 }
-
-module.exports = { countTailPositions }

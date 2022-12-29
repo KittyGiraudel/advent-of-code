@@ -1,7 +1,7 @@
-const $ = require('../../helpers')
-const { Intcode } = require('../day-05')
+import $ from '../../helpers'
+import { Intcode } from '../day-05'
 
-const run = (input, mode = 'WALK') => {
+export const run = (input, mode = 'WALK') => {
   const computer = new Intcode(input)
   const instructions = [
     // Figured out the commands based on this comment found on Reddit giving
@@ -30,5 +30,3 @@ const run = (input, mode = 'WALK') => {
 
   return output.pop()
 }
-
-module.exports = { run }

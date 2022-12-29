@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const dance = (input, size = 16, iterations = 1) => {
+export const dance = (input, size = 16, iterations = 1) => {
   const programs = $.range(size, 97).map(a => String.fromCharCode(a))
   const history = []
 
@@ -44,5 +44,3 @@ const dance = (input, size = 16, iterations = 1) => {
 
   return programs.join('')
 }
-
-module.exports = { dance }

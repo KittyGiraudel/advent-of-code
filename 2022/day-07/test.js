@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { parseOutput, getSmallDirsSize, findFreeableSpace } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { parseOutput, getSmallDirsSize, findFreeableSpace } from './'
 
 test('Day 07 — Sample', t => {
   const sample = $.sample(`
@@ -35,7 +35,7 @@ test('Day 07 — Sample', t => {
 })
 
 test('Day 07 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
   const drive = parseOutput(input)
 
   t.is(getSmallDirsSize(drive), 1513699)

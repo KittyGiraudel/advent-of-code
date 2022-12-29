@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 let DEBUG = false
 const WIDTH = 7
@@ -58,7 +58,7 @@ const getHeight = grid => grid.filter(row => row.join('') !== EMPTY_ROW).length
 
 const render = grid => [log($.grid.render(grid)), log('')]
 
-const tetris = (input, count = 2022) => {
+export const tetris = (input, count = 2022) => {
   const grid = []
   const sideIndex = $.loopIndex(0, input.length - 1)
 
@@ -89,5 +89,3 @@ const tetris = (input, count = 2022) => {
 
   return getHeight(grid)
 }
-
-module.exports = { tetris }

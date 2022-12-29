@@ -1,6 +1,6 @@
-const test = require('ava')
-const { parse, findOverlaps } = require('./')
-const $ = require('../../helpers')
+import test from 'ava'
+import { parse, findOverlaps } from './'
+import $ from '../../helpers'
 
 const sample = `--- scanner 0 ---
 404,-588,-901
@@ -145,5 +145,5 @@ test.skip('Day 19 — Sample', t => {
 })
 
 test.skip('Day 19 — Solutions', t => {
-  const input = $.readInput(__dirname, '\n\n')
+  const input = $.readInput(import.meta, '\n\n')
 })

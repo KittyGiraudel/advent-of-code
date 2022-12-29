@@ -11,4 +11,4 @@ const chunk = (array, size) => {
   return res
 }
 
-module.exports = chunk
+export default chunk

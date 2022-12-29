@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const parseRange = range => range.split('-').map(Number)
 const parseLine = line => line.split(',').map(parseRange)
@@ -15,10 +15,8 @@ const intersects = (a, b) => {
   return false
 }
 
-const getInclusions = lines =>
+export const getInclusions = lines =>
   lines.map(parseLine).filter(([a, b]) => includes(a, b))
 
-const getOverlaps = lines =>
+export const getOverlaps = lines =>
   lines.map(parseLine).filter(([a, b]) => includes(a, b) || intersects(a, b))
-
-module.exports = { getInclusions, getOverlaps }

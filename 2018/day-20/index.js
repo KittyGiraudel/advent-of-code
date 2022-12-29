@@ -1,5 +1,5 @@
-const $ = require('../../helpers')
-const fs = require('fs')
+import $ from '../../helpers'
+import fs from 'fs'
 
 // I spent a lot of time on this puzzle, but ultimately could not solve part 2.
 // The way I approached it goes like this: recursively parse the regular
@@ -45,7 +45,7 @@ const mapOut = input => {
 }
 
 /*
-const { matchRecursive } = require('xregexp')
+import { matchRecursive } from 'xregexp'
 
 const OPTIONS = [
   '\\(',
@@ -186,9 +186,7 @@ const mapOut = input => {
 }
 */
 
-const getLongestDistance = input => Math.max(...mapOut(input))
+export const getLongestDistance = input => Math.max(...mapOut(input))
 
-const getDistancesAbove = (input, limit) =>
+export const getDistancesAbove = (input, limit) =>
   mapOut(input).filter(distance => distance >= limit).length
-
-module.exports = { getLongestDistance, getDistancesAbove }

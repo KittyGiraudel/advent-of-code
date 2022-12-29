@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 class Network {
   constructor(instructions) {
@@ -105,7 +105,7 @@ class Computer {
   }
 }
 
-const run = instructions => {
+export const run = instructions => {
   const network = new Network(instructions)
 
   network.addNode(new Computer(0))
@@ -115,5 +115,3 @@ const run = instructions => {
 
   return $.last(network.nodes).counters.send
 }
-
-module.exports = { run }

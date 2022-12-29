@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const BLOCK = '#'
 const SAND = 'o'
@@ -111,11 +111,9 @@ class Cave {
   }
 }
 
-const countSandUnits = (input, withFloor) => {
+export const countSandUnits = (input, withFloor) => {
   const walls = input.map(wall => wall.split(' -> ').map($.toCoords))
   const cave = new Cave(walls, withFloor)
 
   return cave.fill([500, 0]).count()
 }
-
-module.exports = { countSandUnits }

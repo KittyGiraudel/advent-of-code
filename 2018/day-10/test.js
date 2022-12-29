@@ -1,9 +1,9 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { plot } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { plot } from './'
 
 test('Day 10 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(plot(input), 10312)
 })

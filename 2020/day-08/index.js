@@ -1,9 +1,9 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 // Execute the given array of instructions.
 // @param {String[]} instructions - List of instructions making the program
 // @return {Object} `accumulator` value and 0 or 1 `exit` code
-const runProgram = instructions => {
+export const runProgram = instructions => {
   const history = []
   let accumulator = 0
   let pointer = 0
@@ -56,7 +56,7 @@ const runPatchedProgram = (instructions, index) =>
 // and successfully return.
 // @param {String[]} instructions - List of instructions making the program
 // @return {Object} `accumulator` value and 0 or 1 `exit` code
-const runMonkeyPatchedProgram = instructions =>
+export const runMonkeyPatchedProgram = instructions =>
   instructions.reduce(
     (output, instruction, index) =>
       instruction.startsWith('acc') || output.exit === 0
@@ -64,5 +64,3 @@ const runMonkeyPatchedProgram = instructions =>
         : runPatchedProgram(instructions, index),
     {}
   )
-
-module.exports = { runProgram, runMonkeyPatchedProgram }

@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { isValidLoose, isValidStrict, VALIDATORS } = require('.')
+import test from 'ava'
+import $ from '../../helpers'
+import { isValidLoose, isValidStrict, VALIDATORS } from '.'
 
 test('Day 04 — Sample', t => {
   t.is(
@@ -89,7 +89,7 @@ hcl:#623a2f`),
 })
 
 test('Day 04 — Solutions', t => {
-  const input = $.readInput(__dirname, '\n\n')
+  const input = $.readInput(import.meta, '\n\n')
 
   t.is(input.filter(isValidLoose).length, 190)
   t.is(input.filter(isValidStrict).length, 121)

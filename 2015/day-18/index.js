@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const run = (input, iterations, advanced) => {
+export const run = (input, iterations, advanced) => {
   let curr = $.grid.create(input)
   const width = curr[0].length
   const height = curr.length
@@ -36,5 +36,3 @@ const run = (input, iterations, advanced) => {
 
   return $.countInString(curr.flat().join(''), '#')
 }
-
-module.exports = { run }

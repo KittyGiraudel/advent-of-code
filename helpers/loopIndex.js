@@ -11,4 +11,4 @@ function* loopIndex(min, max) {
   }
 }
 
-module.exports = loopIndex
+export default loopIndex

@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 class Player {
   constructor({ id, operation, predicate, next, items }) {
@@ -63,7 +63,7 @@ class Game {
   }
 }
 
-const play = (input, worried = false) => {
+export const play = (input, worried = false) => {
   const players = input.map(player => {
     // Courtesy of my brother: https://github.com/lgiraudel/advent-of-code/commit/05327d1fdd617003a3ca010d12119751b87c71dd#diff-5d9f4737b2b36f0267499d0e02982aa39794afb4facb7d805983ad3975fd355eR12
     const regex =
@@ -89,5 +89,3 @@ const play = (input, worried = false) => {
 
   return game.getMonkeyBusinessLevel()
 }
-
-module.exports = { play }

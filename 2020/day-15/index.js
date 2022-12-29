@@ -2,7 +2,7 @@
 // point.
 // @param {Number[]} numbers - Initial set of numbers
 // @param {Number} rounds - Rounds to play
-const get = (numbers, rounds = 1) => {
+export const get = (numbers, rounds = 1) => {
   const map = new Uint32Array(rounds)
   let last = 0
 
@@ -19,5 +19,3 @@ const get = (numbers, rounds = 1) => {
 
   return last
 }
-
-module.exports = { get }

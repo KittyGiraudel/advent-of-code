@@ -3,4 +3,4 @@
 // @return {*}
 const clone = data => JSON.parse(JSON.stringify(data))
 
-module.exports = clone
+export default clone

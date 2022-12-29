@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const run = (instructions, a = 0) => {
+export const run = (instructions, a = 0) => {
   const registers = { a, b: 0, c: 0, d: 0 }
   const read = key => registers[key] || +key
 
@@ -29,5 +29,3 @@ const run = (instructions, a = 0) => {
 
   return registers.a
 }
-
-module.exports = { run }

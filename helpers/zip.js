@@ -4,4 +4,4 @@
 const zip = (arr, ...arrs) =>
   arr.map((val, i) => arrs.reduce((a, arr) => [...a, arr[i]], [val]))
 
-module.exports = zip
+export default zip

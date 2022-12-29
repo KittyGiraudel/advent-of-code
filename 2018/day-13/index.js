@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const CORNERS = {
   '/': { '^': '>', '>': '^', '<': 'v', v: '<' },
@@ -76,7 +76,7 @@ const tick = (grid, carts, cleanUp = false) => {
     })
 }
 
-const run = (rows, cleanUp) => {
+export const run = (rows, cleanUp) => {
   const carts = {}
 
   // Iterate over the grid to:
@@ -109,5 +109,3 @@ const run = (rows, cleanUp) => {
 
   return flip(interest)
 }
-
-module.exports = { run }

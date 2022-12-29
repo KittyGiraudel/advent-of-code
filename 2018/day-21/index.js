@@ -1,3 +1,1 @@
-const { run } = require('../day-19')
-
-module.exports = { run }
+export { run } from '../day-19'

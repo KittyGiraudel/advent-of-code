@@ -18,4 +18,4 @@ const combinations = (array, n, start = [], tmp = []) =>
     return acc
   }, start)
 
-module.exports = combinations
+export default combinations

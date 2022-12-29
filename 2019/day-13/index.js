@@ -1,9 +1,9 @@
-const { Intcode } = require('../day-05')
-const $ = require('../../helpers')
+import { Intcode } from '../day-05'
+import $ from '../../helpers'
 
 const SYMBOLS = [' ', 'x', '▫️', '_', 'o']
 
-const render = board => {
+export const render = board => {
   const keys = Array.from(board.keys())
   const coords = keys.map($.toCoords)
   const [, maxX, , maxY] = $.boundaries(coords)
@@ -40,16 +40,16 @@ const getInput = ({ ball, paddle }) => {
 
 // Initialize the initial state of the game by running a first tick to populate
 // the board and get the position of the ball and the paddle.
-const getInitialState = computer =>
+export const getInitialState = computer =>
   tick({ score: 0, ball: {}, paddle: {}, board: new Map() }, computer)
 
 // Initialize the Intcode computer by overriding the value at index 0 as
 // expected:
 // > Memory address 0 represents the number of quarters that have been inserted;
 // > set it to 2 to play for free.
-const initComputer = input => new Intcode(input).updateMemory(0, 2)
+export const initComputer = input => new Intcode(input).updateMemory(0, 2)
 
-const draw = input => {
+export const draw = input => {
   const computer = initComputer(input)
   let state = getInitialState(computer)
 
@@ -59,5 +59,3 @@ const draw = input => {
 
   return state
 }
-
-module.exports = { draw, getInitialState, initComputer, render }

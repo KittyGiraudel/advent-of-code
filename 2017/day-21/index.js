@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const asGrid = string => string.split('/').map(row => Array.from(row))
 const asString = grid => grid.map(row => row.join('')).join('/')
@@ -67,7 +67,7 @@ const cycle = (curr, patterns, cache) => {
   return curr
 }
 
-const run = (input, iterations = 1) => {
+export const run = (input, iterations = 1) => {
   const patterns = getPatterns(input)
   const cache = {}
   let curr = ['.#.', '..#', '###']
@@ -76,5 +76,3 @@ const run = (input, iterations = 1) => {
 
   return $.countInString(curr.join(''), '#')
 }
-
-module.exports = { run }

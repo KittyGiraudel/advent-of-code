@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const OUT_OF_HEALTH = Infinity
 const OUT_OF_MOVES = Infinity
@@ -72,7 +72,7 @@ const iterate = (actions, position = 0) => {
     iterate(actions, position + 1)
 }
 
-const run = hard => {
+export const run = hard => {
   // The amount of moves it totally arbitrary here. We estimate that the fight
   // will be over in a maximum of 10 moves. This may vary based on the input.
   const actions = Array.from('M'.repeat(10))
@@ -93,5 +93,3 @@ const run = hard => {
 
   return min
 }
-
-module.exports = { run }

@@ -1,7 +1,7 @@
-const $ = require('../../helpers')
-const { Computer } = require('../day-10')
+import $ from '../../helpers'
+import { Computer } from '../day-10'
 
-const run = key => {
+export const run = key => {
   let grid = []
 
   for (let i = 0; i < 128; i++) {
@@ -43,5 +43,3 @@ const run = key => {
 
   return [active, groups.size]
 }
-
-module.exports = { run }

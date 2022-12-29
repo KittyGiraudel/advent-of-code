@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { cycle } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { cycle } from './'
 
 test('Day 12 — Sample', t => {
   const sample = $.sample(
@@ -29,7 +29,7 @@ test('Day 12 — Sample', t => {
 })
 
 test('Day 12 — Solutions', t => {
-  const input = $.readInput(__dirname, '\n\n')
+  const input = $.readInput(import.meta, '\n\n')
 
   t.is(cycle(input, 20), 3217)
   t.is(cycle(input, 50000000000), 4000000000866)

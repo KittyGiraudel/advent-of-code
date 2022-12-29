@@ -1,9 +1,9 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { draw, getInitialState, initComputer, render } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { draw, getInitialState, initComputer, render } from './'
 
 test('Day 13 — Solutions', t => {
-  const [input] = $.readInput(__dirname)
+  const [input] = $.readInput(import.meta)
   const state = getInitialState(initComputer(input))
   const tiles = Array.from(state.board.values())
   const { score, board } = draw(input)

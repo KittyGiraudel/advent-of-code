@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const createGraph = (input, withOneself) => {
   const graph = {}
@@ -27,7 +27,7 @@ const getArrangementScore = graph => arrangement =>
     return acc + graph[item][next] + graph[next][item]
   }, 0)
 
-const run = (input, withOneself = false) => {
+export const run = (input, withOneself = false) => {
   const graph = createGraph(input, withOneself)
   const keys = Object.keys(graph)
   const arrangements = $.permutations(keys)
@@ -35,5 +35,3 @@ const run = (input, withOneself = false) => {
 
   return $.max(arrangements.map(getScore))
 }
-
-module.exports = { run }

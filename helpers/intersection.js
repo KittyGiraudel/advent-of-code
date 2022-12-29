@@ -10,4 +10,4 @@ const intersection = (...arrays) =>
     arrays.every(array => array.includes(item))
   )
 
-module.exports = intersection
+export default intersection

@@ -1,4 +1,4 @@
-const toPoint = require('./toPoint')
+import toPoint from './toPoint'
 
 const pathfinding = ({
   getNeighbors,
@@ -57,4 +57,4 @@ const reconstruct = (graph, start, end) => {
   return path
 }
 
-module.exports = { search: pathfinding, path: reconstruct }
+export default { search: pathfinding, path: reconstruct }

@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const run = (instructions, inputs) => {
+export const run = (instructions, inputs) => {
   const data = { w: 0, x: 0, y: 0, z: 0 }
 
   instructions.forEach(line => {
@@ -55,7 +55,7 @@ const run = (instructions, inputs) => {
   return data
 }
 
-const resolve = (lines, max) =>
+export const resolve = (lines, max) =>
   // Split the instructions into chunks of 18 lines, called “blocks”, starting
   // with an input instruction.
   +$.chunk(lines, 18)
@@ -86,5 +86,3 @@ const resolve = (lines, max) =>
       { digits: Array(14).fill(0), stack: [] }
     )
     .digits.join('')
-
-module.exports = { run, resolve }

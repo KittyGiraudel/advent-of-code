@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const OPERATORS = {
   AND: '&',
@@ -19,7 +19,7 @@ const prepare = string => {
   return string.replace(/[a-z]+/g, a => 'registers.' + a)
 }
 
-const run = (input, registers = {}) => {
+export const run = (input, registers = {}) => {
   const graph = new Map()
 
   input.forEach(line => {
@@ -45,5 +45,3 @@ const run = (input, registers = {}) => {
 
   return registers
 }
-
-module.exports = { run }

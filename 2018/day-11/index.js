@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const SIZE = 300
 
@@ -13,7 +13,7 @@ const computeCellPower = (serial, x, y) => {
 const getGrid = serial =>
   $.grid.init(SIZE, SIZE, (ri, ci) => computeCellPower(serial, ci + 1, ri + 1))
 
-const getFuelStrict = serial => {
+export const getFuelStrict = serial => {
   const max = { value: -Infinity, coords: [] }
   const grid = getGrid(serial)
 
@@ -34,7 +34,7 @@ const getFuelStrict = serial => {
   return max
 }
 
-const getFuelLoose = serial => {
+export const getFuelLoose = serial => {
   const max = { value: -Infinity, coords: [] }
   const grid = getGrid(serial)
   const summed = $.grid.clone(grid)
@@ -76,5 +76,3 @@ const getFuelLoose = serial => {
 
   return max
 }
-
-module.exports = { getFuelStrict, getFuelLoose }

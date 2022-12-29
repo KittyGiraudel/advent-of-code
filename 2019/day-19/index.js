@@ -1,7 +1,7 @@
-const $ = require('../../helpers')
-const { Intcode } = require('../day-05')
+import $ from '../../helpers'
+import { Intcode } from '../day-05'
 
-const run = (input, xAxis = [0, 50], yAxis = xAxis) => {
+export const run = (input, xAxis = [0, 50], yAxis = xAxis) => {
   const computer = new Intcode(input).run()
   const grid = $.grid.init(xAxis[1] - xAxis[0], yAxis[1] - yAxis[0])
 
@@ -37,5 +37,3 @@ const test = input => {
 
   return { valid, value: xOffset * 10000 + yOffset }
 }
-
-module.exports = { run }

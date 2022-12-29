@@ -1,8 +1,8 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const CRT_WIDTH = 40
 
-class Computer {
+export class Computer {
   constructor(input) {
     this.cycle = 0
     this.register = 1
@@ -54,5 +54,3 @@ class Computer {
     })
   }
 }
-
-module.exports = { Computer }

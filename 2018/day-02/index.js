@@ -1,5 +1,5 @@
-const $ = require('../../helpers')
-const levenshtein = require('js-levenshtein')
+import $ from '../../helpers'
+import levenshtein from 'js-levenshtein'
 
 const findSimilarIds = ids => {
   const candidates = []
@@ -18,7 +18,7 @@ const findCommonalities = (a, b) =>
     .filter((char, i) => b[i] === char)
     .join('')
 
-const checksum = input => {
+export const checksum = input => {
   const lines = input.map(line => $.count(Array.from(line)))
   const twos = lines.filter(counts => Object.values(counts).includes(2))
   const threes = lines.filter(counts => Object.values(counts).includes(3))
@@ -26,6 +26,4 @@ const checksum = input => {
   return twos.length * threes.length
 }
 
-const findId = input => findCommonalities(...findSimilarIds(input))
-
-module.exports = { checksum, findId }
+export const findId = input => findCommonalities(...findSimilarIds(input))

@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { getGameScore, fightRecursive } = require('.')
+import test from 'ava'
+import $ from '../../helpers'
+import { getGameScore, fightRecursive } from '.'
 
 test('Day 22 — Sample', t => {
   const example = $.sample(
@@ -27,7 +27,7 @@ test('Day 22 — Sample', t => {
 })
 
 test('Day 22 — Solutions', t => {
-  const input = $.readInput(__dirname, '\n\n')
+  const input = $.readInput(import.meta, '\n\n')
 
   t.is(getGameScore(input), 34664)
   t.is(getGameScore(input, fightRecursive), 32018)

@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const run = salt => {
+export const run = salt => {
   let password1 = []
   let password2 = $.array(8)
   let i = 0
@@ -20,5 +20,3 @@ const run = salt => {
 
   return [password1.join(''), password2.join('')]
 }
-
-module.exports = { run }

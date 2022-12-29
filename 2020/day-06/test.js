@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { getLooseCountForGroup, getStrictCountForGroup } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { getLooseCountForGroup, getStrictCountForGroup } from './'
 
 test('Day 06 — Sample', t => {
   t.is(getLooseCountForGroup('abc'), 3)
@@ -17,7 +17,7 @@ test('Day 06 — Sample', t => {
 })
 
 test('Day 06 — Solutions', t => {
-  const input = $.readInput(__dirname, '\n\n')
+  const input = $.readInput(import.meta, '\n\n')
 
   t.is($.sum(input.map(getLooseCountForGroup)), 6703)
   t.is($.sum(input.map(getStrictCountForGroup)), 3430)

@@ -19,4 +19,4 @@ const boundaries = points => {
   ]
 }
 
-module.exports = boundaries
+export default boundaries

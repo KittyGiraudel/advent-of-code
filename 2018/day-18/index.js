@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const isTree = n => n === '|'
 const isLumberyard = n => n === '#'
@@ -17,7 +17,7 @@ const getScore = grid => {
   return counters['#'] * counters['|']
 }
 
-const run = (rows, iterations = 1) => {
+export const run = (rows, iterations = 1) => {
   const history = []
   let curr = $.grid.create(rows)
 
@@ -49,5 +49,3 @@ const run = (rows, iterations = 1) => {
 
   return getScore(curr)
 }
-
-module.exports = { run }

@@ -1,6 +1,6 @@
-const test = require('ava')
-const { computeFuelCost, computeIterativeFuelCost } = require('./')
-const $ = require('../../helpers')
+import test from 'ava'
+import { computeFuelCost, computeIterativeFuelCost } from './'
+import $ from '../../helpers'
 
 test('Day 01 — Sample', t => {
   t.is(computeFuelCost(12), 2)
@@ -12,7 +12,7 @@ test('Day 01 — Sample', t => {
 })
 
 test('Day 01 — Solutions', t => {
-  const numbers = $.readInput(__dirname).map(Number)
+  const numbers = $.readInput(import.meta).map(Number)
 
   t.is($.sum(numbers.map(computeFuelCost)), 3330521)
   t.is($.sum(numbers.map(computeIterativeFuelCost)), 4992931)

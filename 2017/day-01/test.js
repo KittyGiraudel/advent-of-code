@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { captcha } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { captcha } from './'
 
 test('Day 01 — Sample', t => {
   t.is(captcha('1122', 1), 3)
@@ -15,7 +15,7 @@ test('Day 01 — Sample', t => {
 })
 
 test('Day 01 — Solutions', t => {
-  const [input] = $.readInput(__dirname)
+  const [input] = $.readInput(import.meta)
 
   t.is(captcha(input, 1), 1253)
   t.is(captcha(input), 1278)

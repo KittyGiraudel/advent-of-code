@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { shuffle } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { shuffle } from './'
 
 test('Day 22 — Sample', t => {
   const sampleA = $.sample(`
@@ -41,7 +41,7 @@ test('Day 22 — Sample', t => {
 })
 
 test('Day 22 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(
     shuffle(input).findIndex(c => c === 2019),

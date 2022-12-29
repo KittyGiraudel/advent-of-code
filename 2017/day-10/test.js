@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { run, getHash } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { run, getHash } from './'
 
 test('Day 10 — Sample', t => {
   t.is(run([3, 4, 1, 5], [0, 1, 2, 3, 4]), 12)
@@ -11,7 +11,7 @@ test('Day 10 — Sample', t => {
 })
 
 test('Day 10 — Solutions', t => {
-  const input = $.readInput(__dirname, ',').map(Number)
+  const input = $.readInput(import.meta, ',').map(Number)
 
   t.is(run(input), 11375)
   t.is(getHash(input.join(',')), 'e0387e2ad112b7c2ef344e44885fe4d8')

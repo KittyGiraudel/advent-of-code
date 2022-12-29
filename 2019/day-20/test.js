@@ -1,8 +1,8 @@
-const test = require('ava')
-const {} = require('./')
-const $ = require('../../helpers')
+import test from 'ava'
+import {} from './'
+import $ from '../../helpers'
 
 test.skip('Day 20 — Sample', t => {})
 test.skip('Day 20 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 })

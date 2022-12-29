@@ -1,7 +1,7 @@
 // Return the coords for the given seat encoding.
 // @param {String} input - Seat encoding
 // @return {Number[]} Set of X,Y coords
-const getSeatCoords = input => {
+export const getSeatCoords = input => {
   const x = [0, 127]
   const y = [0, 7]
 
@@ -28,7 +28,7 @@ const getSeatCoords = input => {
 // Return the ID of a given seat encoding.
 // @param {String} input - Seat encoding
 // @return {Number} Seat ID
-const getSeatId = input => {
+export const getSeatId = input => {
   const [row, col] = getSeatCoords(input)
   return row * 8 + col
 }
@@ -36,7 +36,7 @@ const getSeatId = input => {
 // Return the ID of the proper seat based on a list of seat encodings.
 // @param {String[]} input - Seat encodings
 // @return {Number} Seat ID
-const findOwnSeat = input => {
+export const findOwnSeat = input => {
   const ids = input
     .map(getSeatId)
     .map(Number)
@@ -44,5 +44,3 @@ const findOwnSeat = input => {
 
   return ids.find((id, index) => id !== index + Math.min(...ids)) - 1
 }
-
-module.exports = { getSeatCoords, getSeatId, findOwnSeat }

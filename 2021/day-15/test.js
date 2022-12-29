@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { getLowestRisk } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { getLowestRisk } from './'
 
 test('Day 15 — Sample', t => {
   const sample = $.sample(`
@@ -21,7 +21,7 @@ test('Day 15 — Sample', t => {
 })
 
 test('Day 15 — Solutions', t => {
-  const input = $.readInput(__dirname)
+  const input = $.readInput(import.meta)
 
   t.is(getLowestRisk(input), 361)
   // t.is(getLowestRisk(input, 5), 2838)

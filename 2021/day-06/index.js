@@ -1,6 +1,6 @@
-const $ = require('../../helpers/')
+import $ from '../../helpers/'
 
-const countFish = (fish, days = 80) => {
+export const countFish = (fish, days = 80) => {
   let curr = $.array(9).map((_, i) => $.countInString(fish, i))
 
   while (days--) {
@@ -15,5 +15,3 @@ const countFish = (fish, days = 80) => {
 
   return $.sum(curr)
 }
-
-module.exports = { countFish }

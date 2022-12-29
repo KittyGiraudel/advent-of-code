@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const prepareMoon = line => ({
   position: line.match(/(-?\d+)/g).map(Number),
@@ -38,7 +38,7 @@ const step = moons => {
 const calculateMoonEnergy = ({ position, velocity }) =>
   $.sum(position.map(Math.abs)) * $.sum(velocity.map(Math.abs))
 
-const steps = (input, amount = 1) =>
+export const steps = (input, amount = 1) =>
   $.sum($.array(amount).reduce(step, prepare(input)).map(calculateMoonEnergy))
 
 const serialize = (moons, axis) =>
@@ -64,9 +64,7 @@ const findRepeatAxis = (axis, input) => {
   return i
 }
 
-const findRepeat = input =>
+export const findRepeat = input =>
   [0, 1, 2]
     .map(axis => findRepeatAxis(axis, input))
     .reduce((acc, value) => $.lcm(acc, value), 1)
-
-module.exports = { steps, findRepeat }

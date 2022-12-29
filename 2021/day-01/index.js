@@ -2,7 +2,7 @@
 // array.
 // @param {Number[]} input - Array of numbers
 // @return {Number}
-const countIncreases = input =>
+export const countIncreases = input =>
   input.reduce(
     (acc, number, index, array) =>
       acc + (number > (array[index - 1] || number) ? 1 : 0),
@@ -13,7 +13,7 @@ const countIncreases = input =>
 // are higher than the previous one in the array.
 // @param {Number[]} input - Array of numbers
 // @return {Number}
-const countWindowIncreases = input =>
+export const countWindowIncreases = input =>
   countIncreases(
     input.reduce(
       (acc, number, index, array) =>
@@ -23,5 +23,3 @@ const countWindowIncreases = input =>
       []
     )
   )
-
-module.exports = { countIncreases, countWindowIncreases }

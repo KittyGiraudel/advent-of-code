@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const run = lines => {
+export const run = lines => {
   const columns = $.range(lines[0].length).map(i => $.column(lines, i))
   const counters = columns.map(column =>
     Object.entries($.count(column)).sort((a, b) => a[1] - b[1])
@@ -11,5 +11,3 @@ const run = lines => {
     counters.map(counter => $.last(counter)[0]).join(''),
   ]
 }
-
-module.exports = { run }

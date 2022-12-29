@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const parse = string => {
   const [x, y, z, r] = string.match(/(-?\d+)/g).map(Number)
@@ -7,7 +7,7 @@ const parse = string => {
   return { x, y, z, r, distance }
 }
 
-const findStrongestBot = input => {
+export const findStrongestBot = input => {
   const bots = input.map(parse).sort((a, b) => b.r - a.r)
   const inRange = bots.filter(bot => $.manhattan(bot, bots[0]) <= bots[0].r)
 
@@ -55,5 +55,3 @@ const findStrongestBot = input => {
 
   return [inRange.length, distance]
 }
-
-module.exports = { findStrongestBot }

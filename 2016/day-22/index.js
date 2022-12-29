@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const getDisks = dump =>
   dump.slice(2).map(line => {
@@ -9,7 +9,7 @@ const getDisks = dump =>
     return { coords: [y, x], size, used, available }
   })
 
-const run = dump => {
+export const run = dump => {
   const disks = getDisks(dump)
 
   return $.combinations(disks, 2).filter(
@@ -29,7 +29,7 @@ const run = dump => {
 // 3. It assumes there are no oversized disks on the top row.
 // The idea is to move the empty disk around, to the left of the data disk. Then
 // swap both disks. Repeat until the data is in the goal spot (top-left corner).
-const getData = dump => {
+export const getData = dump => {
   const disks = getDisks(dump)
   const maxCi = Math.max(...disks.map(disk => disk.coords[1]))
   const emptyNode = disks.find(disk => disk.used === 0)
@@ -77,5 +77,3 @@ const getData = dump => {
 
   return total
 }
-
-module.exports = { run, getData }

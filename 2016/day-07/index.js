@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const getBracketContent = line => line.match(/\[([^\]]+)\]/g).join(' ')
 const getBaseContent = line => line.replace(/\[[^\]]+\]/g, ' ')
@@ -40,6 +40,4 @@ const TYPES = {
   SSL: supportsSSL,
 }
 
-const run = (lines, type) => lines.filter(TYPES[type]).length
-
-module.exports = { run }
+export const run = (lines, type) => lines.filter(TYPES[type]).length

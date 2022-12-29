@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const step = grid => {
+export const step = grid => {
   const horizontal = $.grid.map(grid, () => '.')
 
   $.grid.forEach(grid, (v, ri, ci) => {
@@ -22,17 +22,15 @@ const step = grid => {
   return vertical
 }
 
-const serialize = grid => $.grid.render(grid)
-
-const steps = (input, count) =>
+export const steps = (input, count) =>
   $.array(count).reduce(step, $.grid.create(input))
 
-const run = input => {
+export const run = input => {
   let curr = $.grid.create(input)
   let next = step(curr)
   let i = 1
 
-  while (serialize(curr) !== serialize(next)) {
+  while ($.grid.render(curr) !== $.grid.render(next)) {
     curr = next
     next = step(curr)
     i++
@@ -40,5 +38,3 @@ const run = input => {
 
   return i
 }
-
-module.exports = { steps, step, run, serialize }

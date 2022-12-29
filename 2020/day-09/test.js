@@ -1,6 +1,6 @@
-const test = require('ava')
-const $ = require('../../helpers')
-const { findWeakness, breakWeakness } = require('./')
+import test from 'ava'
+import $ from '../../helpers'
+import { findWeakness, breakWeakness } from './'
 
 test('Day 09 — Sample', t => {
   const sample =
@@ -13,7 +13,7 @@ test('Day 09 — Sample', t => {
 })
 
 test('Day 09 — Solutions', t => {
-  const input = $.readInput(__dirname).map(Number)
+  const input = $.readInput(import.meta).map(Number)
 
   t.is(findWeakness(input, 25), 41682220)
   t.is(breakWeakness(input, 25), 5388976)

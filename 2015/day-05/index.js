@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 const isValidLoose = line => {
   if (['ab', 'cd', 'pq', 'xy'].some(s => line.includes(s))) return false
@@ -21,7 +21,5 @@ const isValidStrict = line => {
   return Object.values(pairs).some(pair => pair.length > 1)
 }
 
-const run = (input, advanced = false) =>
+export const run = (input, advanced = false) =>
   input.filter(advanced ? isValidStrict : isValidLoose).length
-
-module.exports = { run }

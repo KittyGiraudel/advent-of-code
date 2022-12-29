@@ -1,5 +1,5 @@
-const $ = require('../../helpers')
-const { Intcode } = require('../day-05')
+import $ from '../../helpers'
+import { Intcode } from '../day-05'
 
 const DIRECTIONS = [1, 4, 2, 3]
 
@@ -34,7 +34,7 @@ const discover = input => {
   return { from, start, end }
 }
 
-const getDistanceToOxygen = input => {
+export const getDistanceToOxygen = input => {
   const { from, start, end } = discover(input)
 
   return $.pathfinding.path(from, start.position, end.position).length
@@ -60,7 +60,7 @@ const render = ({ from, end }) => {
   return $.grid.render(padGrid(grid, width))
 }
 
-const getOxygenDuration = input => {
+export const getOxygenDuration = input => {
   const { from, end } = discover(input)
   let maxMinutes = 0
 
@@ -83,5 +83,3 @@ const getOxygenDuration = input => {
 
   return maxMinutes
 }
-
-module.exports = { getDistanceToOxygen, getOxygenDuration }

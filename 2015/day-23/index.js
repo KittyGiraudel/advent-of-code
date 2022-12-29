@@ -1,6 +1,6 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
-const run = (input, a = 0) => {
+export const run = (input, a = 0) => {
   const registers = { a, b: 0 }
   let index = 0
 
@@ -20,5 +20,3 @@ const run = (input, a = 0) => {
 
   return registers
 }
-
-module.exports = { run }

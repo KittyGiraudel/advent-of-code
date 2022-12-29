@@ -1,7 +1,7 @@
-const $ = require('../../helpers')
-const { Intcode } = require('../day-05')
+import $ from '../../helpers'
+import { Intcode } from '../day-05'
 
-const inspect = input => {
+export const inspect = input => {
   const computer = new Intcode(input).run()
 
   // Played manually because a) nothing beats the excitment of old school text-
@@ -44,5 +44,3 @@ const inspect = input => {
 
   return +moves.pop().match(/\d+/)[0]
 }
-
-module.exports = { inspect }

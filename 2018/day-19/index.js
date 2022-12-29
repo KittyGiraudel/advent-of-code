@@ -1,4 +1,4 @@
-const $ = require('../../helpers')
+import $ from '../../helpers'
 
 // Mutative version of day 16’s opcodes for efficiency.
 const OPCODES = {
@@ -34,7 +34,7 @@ const sumFactors = n => {
   return $.sum(result)
 }
 
-const run = (input, init = 0) => {
+export const run = (input, init = 0) => {
   const registers = new Int32Array(6)
   registers[0] = init
 
@@ -55,5 +55,3 @@ const run = (input, init = 0) => {
 
   return registers[0]
 }
-
-module.exports = { run }
