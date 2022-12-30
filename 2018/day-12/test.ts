@@ -22,7 +22,7 @@ test('Day 12 — Sample', t => {
   ###.# => #
   ####. => #
   `,
-    '\n\n'
+    { delimiter: '\n\n' }
   ) as [string, string]
 
   t.is(cycle(sample, 20), 325)

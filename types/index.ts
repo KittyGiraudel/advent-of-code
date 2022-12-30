@@ -6,3 +6,4 @@ export type CoordsAndPoint = { coords: Coords; point: Point }
 export type Point = `${number},${number}`
 export type TriPoint = `${number},${number},${number}`
 export type Grid<Type> = Type[][]
+export type ValueOrArray<T> = T | Array<ValueOrArray<T>>

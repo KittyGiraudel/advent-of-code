@@ -1,12 +1,6 @@
 import $ from '../../helpers'
 import Circularray from 'circularray'
 
-type Node = {
-  value: any
-  next: Node
-  prev: Node
-}
-
 export class Computer {
   pointer: number
   skip: number
@@ -24,14 +18,14 @@ export class Computer {
       : $.toAscii(input, false).concat(this.SUFFIX)
   }
 
-  round(iterations = 1) {
+  round(iterations: number = 1): this {
     while (iterations--)
       this.lengths.forEach(length => this.processLength(length))
 
     return this
   }
 
-  sliceOut(length: number) {
+  sliceOut(length: number): number[] {
     const slice = []
 
     for (let i = 0; i < length; i++) slice.unshift(this.memory.shift())
@@ -39,7 +33,7 @@ export class Computer {
     return slice
   }
 
-  rebuild(length: number) {
+  rebuild(length: number): Circularray<number> {
     const slice = this.sliceOut(length)
     const rest = this.memory.toArray().filter((a: number) => a !== null)
     const next = new Circularray(slice)
@@ -49,7 +43,7 @@ export class Computer {
     return next
   }
 
-  processLength(length) {
+  processLength(length: number) {
     this.memory.rotate(this.pointer * -1)
     this.memory = this.rebuild(length)
     this.memory.rotate(this.pointer)
@@ -57,14 +51,14 @@ export class Computer {
     this.skip++
   }
 
-  getHash() {
+  getHash(): string {
     return $.chunk(this.memory.toArray(), 16)
-      .map((chunk: number[]) => chunk.reduce((a, b) => a ^ b, 0))
+      .map(chunk => chunk.reduce((a, b) => a ^ b, 0))
       .map(n => n.toString(16).padStart(2, '0'))
       .join('')
   }
 
-  check() {
+  check(): number {
     return $.product(this.memory.toArray().slice(0, 2))
   }
 }
@@ -72,5 +66,5 @@ export class Computer {
 export const getHash = (string: string) =>
   new Computer(string).round(64).getHash()
 
-export const run = (lengths: number[], list: number[] = []) =>
+export const run = (lengths: number[], list?: number[]) =>
   new Computer(lengths, list).round().check()

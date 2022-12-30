@@ -13,14 +13,14 @@ const DIRECTIONS: [
   [[+1, 0], 'R'],
 ]
 
-type QueueItem = {
+type Node = {
   point: Point
   coords: Coords
   path: string
 }
 
 export const run = (input: string, longest: boolean = false): string => {
-  const frontier: QueueItem[] = [{ point: '0,0', coords: [0, 0], path: input }]
+  const frontier: Node[] = [{ point: '0,0', coords: [0, 0], path: input }]
   let path = null
 
   while (frontier.length) {

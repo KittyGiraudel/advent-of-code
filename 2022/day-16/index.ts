@@ -1,4 +1,4 @@
-type QueueItem = {
+type QueueNode = {
   name: string
   time: number
   steps: string[]
@@ -42,7 +42,7 @@ export const releasePressure = (input: string[]): number => {
     {}
   )
 
-  const frontier: QueueItem[] = [
+  const frontier: QueueNode[] = [
     {
       name: 'AA',
       remaining: Object.values(map)

@@ -46,8 +46,10 @@ export const debug = (input: string[]) => {
         const [opIndex, ...args] = operation
 
         Object.keys(OPCODES)
-          .map(opcode => OPCODES[opcode](before, args))
-          .filter(result => result.join(',') === after.join(','))
+          .filter(
+            opcode =>
+              OPCODES[opcode](before, args).join(',') === after.join(',')
+          )
           .forEach(option => registry[opIndex].add(option))
 
         return registry

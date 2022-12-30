@@ -11,9 +11,7 @@ test('Day 19 — Sample', t => {
   F---|----E|--+
       |  |  |  D
       +B-+  +--+`,
-    '\n',
-    false,
-    false
+    { trim: false, deindent: false }
   ).slice(1)
 
   t.is(run(sample)[0], 'ABCDEF')

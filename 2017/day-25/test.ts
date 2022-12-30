@@ -28,7 +28,7 @@ test('Day 25 — Sample', t => {
       - Move one slot to the right.
       - Continue with state A.
   `,
-    '\n\n'
+    { delimiter: '\n\n' }
   )
 
   t.is(run(sample), 3)

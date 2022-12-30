@@ -65,12 +65,12 @@ const getGrids = (input: string[]): Grids => {
 const findDoor = (row: string): number =>
   row.split('').findIndex(col => col === '.')
 
-type QueueItem = {
+type Node = {
   coords: Coords
   time: number
 }
 
-const getMoves = (curr: QueueItem): QueueItem[] =>
+const getMoves = (curr: Node): Node[] =>
   $.bordering(curr.coords, 'COORDS')
     .concat([curr.coords])
     .map((coords: Coords) => ({ coords, time: curr.time + 1 }))
@@ -82,7 +82,7 @@ const cross = (
   time = 0
 ): number => {
   const start = { coords: startCoords, time }
-  const frontier = new $.PriorityQueue<QueueItem>([start, 0])
+  const frontier = new $.PriorityQueue<Node>([start, 0])
   const visited: Set<string> = new Set()
 
   while (frontier.length) {

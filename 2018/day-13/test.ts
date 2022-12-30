@@ -12,9 +12,7 @@ test('Day 13 — Sample', t => {
 \\-+-/  \\-+--/
   \\------/
   `,
-    '\n',
-    false,
-    false
+    { trim: false, deindent: false }
   ).filter(Boolean)
 
   const sampleB = $.sample(
@@ -27,9 +25,7 @@ test('Day 13 — Sample', t => {
   |   ^
   \\<->/
   `,
-    '\n',
-    false,
-    false
+    { trim: false, deindent: false }
   ).filter(Boolean)
 
   t.is(run(sampleA).join(','), '7,3')

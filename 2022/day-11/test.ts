@@ -33,7 +33,7 @@ test('Day 11 — Sample', t => {
       If true: throw to monkey 0
       If false: throw to monkey 1
   `,
-    '\n\n'
+    { delimiter: '\n\n' }
   )
 
   t.is(play(sample), 10605)

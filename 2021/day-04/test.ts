@@ -33,7 +33,7 @@ test('Day 04 — Sample', t => {
 })
 
 test('Day 04 — Solutions', t => {
-  const [input] = $.readInput(import.meta, { delimiter: null })
+  const [input] = $.readInput(import.meta, { delimiter: '' })
   const bingos = getBingos(input)
 
   t.is(bingos[0], 45031)

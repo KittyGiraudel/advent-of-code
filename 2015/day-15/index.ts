@@ -34,7 +34,7 @@ const getPropertyScore =
 const parseIngredient = (line: string): number[] =>
   line.match(/-?\d+/g).map(Number)
 
-export const run = (input: string[], calories: number): number => {
+export const run = (input: string[], calories?: number): number => {
   // I couldn’t find a solution that works for a dynamic amount of ingredients
   // since I compute the permutations beforehand.
   const permutations = PERMUTATIONS[input.length]

@@ -24,7 +24,7 @@ test('Day 14 — Sample', t => {
   CC -> N
   CN -> C
   `,
-    '\n\n'
+    { delimiter: '\n\n' }
   )
 
   t.is(count(sample, 10), 1588)

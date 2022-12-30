@@ -1,4 +1,5 @@
 import $ from '../../helpers'
+import { ValueOrArray } from '../../types'
 
 const toArray = (value: any | any[]): any[] =>
   Array.isArray(value) ? value : [value]
@@ -23,8 +24,8 @@ const isNumber = (value: any): boolean => typeof value === 'number'
 // @param a - First value
 // @param b - Second value
 export const compare = (
-  a: number | number[],
-  b: number | number[]
+  a: ValueOrArray<number>,
+  b: ValueOrArray<number>
 ): boolean => {
   if (!isDefined(b)) return false
   if (!isDefined(a)) return true

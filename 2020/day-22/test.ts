@@ -19,7 +19,7 @@ test('Day 22 — Sample', t => {
   7
   10
   `,
-    '\n\n'
+    { delimiter: '\n\n' }
   )
 
   t.is(getGameScore(example), 306)

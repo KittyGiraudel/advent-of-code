@@ -20,7 +20,7 @@ test('Day 01 — Sample', t => {
 
     10000
     `,
-    '\n\n'
+    { delimiter: '\n\n' }
   )
 
   t.is(findHighestGroup(sample), 24000)

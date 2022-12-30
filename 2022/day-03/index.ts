@@ -11,7 +11,7 @@ const half = (string: string): [string, string] => [
 const getTotalPriority = (groups: string[][]): number =>
   $.sum(
     groups
-      .map(group => $.intersection(...group.map(Array.from)))
+      .map(group => $.intersection(...group.map(group => Array.from(group))))
       // There should be only one common item across groups, so the first item
       // in the resulting array needs to be picked.
       .map(intersection => intersection[0])

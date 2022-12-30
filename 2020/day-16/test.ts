@@ -18,7 +18,7 @@ test('Day 16 — Sample', t => {
   55,2,20
   38,6,12
   `,
-    '\n\n'
+    { delimiter: '\n\n' }
   )
   const data = parseInput(example)
 

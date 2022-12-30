@@ -20,8 +20,7 @@ test('Day 22 — Sample', t => {
 
     10R5L5R10L4R5L5
   `,
-    null,
-    false
+    { delimiter: '', trim: false }
   )
 
   t.is(rotate('>', 'L'), '^')
@@ -36,7 +35,10 @@ test('Day 22 — Sample', t => {
 })
 
 test('Day 22 — Solutions', t => {
-  const [input] = $.readInput(import.meta, { delimiter: null, trim: false })
+  const [input] = $.readInput(import.meta, {
+    delimiter: '',
+    trim: false,
+  })
 
   t.is(maze(input), 191010)
   t.is(maze(input, true), 55364)

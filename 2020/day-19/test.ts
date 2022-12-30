@@ -23,7 +23,7 @@ test('Day 19 — Sample', t => {
   aaabbb
   aaaabbb
   `,
-    '\n\n'
+    { delimiter: '\n\n' }
   )
   t.is(count(sample[0], sample[1]), 2)
 
@@ -77,7 +77,7 @@ test('Day 19 — Sample', t => {
   babaaabbbaaabaababbaabababaaab
   aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba
   `,
-    '\n\n'
+    { delimiter: '\n\n' }
   )
 
   const sample3 = $.sample(
@@ -94,7 +94,7 @@ test('Day 19 — Sample', t => {
   b
   aaab
   `,
-    '\n\n'
+    { delimiter: '\n\n' }
   )
   t.is(count(sample2[0], sample2[1], PATCH), 12)
   t.is(count(sample3[0], sample3[1], PATCH), 1)

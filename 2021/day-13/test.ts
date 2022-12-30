@@ -27,7 +27,7 @@ test('Day 13 — Sample', t => {
   fold along y=7
   fold along x=5
   `,
-    '\n\n'
+    { delimiter: '\n\n' }
   )
 
   const data = parseInput(sample)

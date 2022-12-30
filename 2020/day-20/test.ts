@@ -113,7 +113,7 @@ test('Day 20 — Sample', t => {
   ..#.......
   ..#.###...
   `,
-    '\n\n'
+    { delimiter: '\n\n' }
   )
 
   t.deepEqual(run(example), [20899048083289, 273])

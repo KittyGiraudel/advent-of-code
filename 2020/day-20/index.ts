@@ -3,7 +3,7 @@ import { Grid, Coords } from '../../types'
 
 type Tile = {
   id: number
-  grid: Grid<String>
+  grid: Grid<string>
   sides: string[]
 }
 
@@ -34,7 +34,7 @@ const MONSTER_PATTERN: Coords[] = [
 
 // Get every side of the grid, ordered top -> right -> bottom -> left (which
 // matters later on).
-const getSides = (grid: Grid<String>): string[] =>
+const getSides = (grid: Grid<string>): string[] =>
   [
     /* Top    */ grid[0],
     /* Right  */ $.column(grid, grid.length - 1),
@@ -47,7 +47,7 @@ const getSides = (grid: Grid<String>): string[] =>
 const parseSnapshot = (snapshot: string): Tile[] => {
   const [header, ...lines] = snapshot.split('\n')
   const [id] = header.match(/\d+/g)
-  const grid = $.grid.create<String>(lines)
+  const grid = $.grid.create<string>(lines)
 
   return $.grid.variants(grid).map(grid => ({
     sides: getSides(grid),
@@ -99,7 +99,7 @@ const jigsaw = (tiles: Tile[], start: Tile): Grid<Tile> => {
   return mozaic
 }
 
-const assemble = (mozaic: Grid<Tile>): Grid<String> => {
+const assemble = (mozaic: Grid<Tile>): Grid<string> => {
   const grid = []
 
   // For every row of 3 tiles …
@@ -115,24 +115,24 @@ const assemble = (mozaic: Grid<Tile>): Grid<String> => {
   return grid
 }
 
-const isMonsterTail = (image: Grid<String>, ri: number, ci: number): boolean =>
+const isMonsterTail = (image: Grid<string>, ri: number, ci: number): boolean =>
   MONSTER_PATTERN.every(vector => {
     const coords = $.applyVector([ri, ci], vector)
     return $.access(image, coords) === '#'
   })
 
 // Count the amount of sea monsters in the given image.
-const countMonsters = (image: Grid<String>): number =>
+const countMonsters = (image: Grid<string>): number =>
   $.grid.reduce(
     image,
-    (acc, _, ri, ci) => acc + (isMonsterTail(image, ri, ci) ? 1 : 0),
+    (acc, _, ri, ci) => acc + +isMonsterTail(image, ri, ci),
     0
   )
 
 // Iterate over all 8 variants of the given image (rotated and flipped) to find
 // the maximum number of sea monsters that can be spotted. Then, computed how
 // many `#` do not belong to a sea monster pattern.
-const inspectWaters = (image: Grid<String>): number => {
+const inspectWaters = (image: Grid<string>): number => {
   const variants = $.grid.variants(image)
   const monsters = Math.max(...variants.map(countMonsters))
   const sharps = $.countInString(image.flat().join(''), '#')
