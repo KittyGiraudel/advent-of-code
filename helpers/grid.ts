@@ -1,5 +1,6 @@
-import { Coords, Grid } from '../types'
+import { Coords } from '../types'
 
+export type Grid<Type> = Type[][]
 type Mapper<T> = (value: string, ri: number, ci: number) => T
 type Handler = 'forEach' | 'map' | 'flatMap' | 'find' | 'every' | 'some'
 
