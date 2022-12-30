@@ -1,6 +1,5 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { run } from './'
 
 test.skip('Day 18 — Sample', t => {
   const sampleA = $.sample(`
@@ -16,9 +15,6 @@ test.skip('Day 18 — Sample', t => {
   #d.....................#
   ########################
   `)
-
-  t.is(run(sampleA), 8)
-  //t.is(run(sampleB), 86)
 })
 
 test.skip('Day 18 — Solutions', t => {
