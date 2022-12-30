@@ -25,7 +25,7 @@ const findBoundaries = (claims: Boundary[]): Boundary =>
 // on how many times they were drawn over. The final result is found
 // discarding the inches that have not been drawn over at all, or only once (no
 // intersection), and that’s the result.
-// @param {String[]} input - Raw unparsed lines
+// @param input - Raw unparsed lines
 // @return {Number}
 export const countOverlappingInches = (input: string[]): number => {
   const claims = parseClaims(input)

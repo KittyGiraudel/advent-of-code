@@ -62,9 +62,9 @@ const getAddresses = (value: string | number, mask: string) =>
 
 // Strict processor: the mask is used to retrieve possible addresses to write
 // the value at.
-// @param {Object} memory - Memory object
-// @param {String} mask - Bitmask
-// @param {String|Number[]} instruction - Mask (string value) or memory (key,
+// @param memory - Memory object
+// @param mask - Bitmask
+// @param instruction - Mask (string value) or memory (key,
 //                                        value pair of numbers) instruction
 // @return [memory, mask] Memory and mask for further processing
 export const processStrict = (
@@ -79,9 +79,8 @@ export const processStrict = (
 }
 
 // Execute the given program with the given processor.
-// @param {String[]} input - Raw unparsed program input
-// @param {Function} processor - Processor to treat every instruction
-// @return {Number}
+// @param input - Raw unparsed program input
+// @param processor - Processor to treat every instruction
 export const executeProgram = (
   input: string[],
   processor: (acc: Program, value: Instruction) => Program

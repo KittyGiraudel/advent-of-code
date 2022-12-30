@@ -1,9 +1,8 @@
 // Perform a binary search between the lower and upper bounds, using the compare
 // function.
-// @param {number} lower - Initial lower bound
-// @param {number} upper - Initial upper bound
-// @param {Function} compare - Comparison function
-// @return {number}
+// @param lower - Initial lower bound
+// @param upper - Initial upper bound
+// @param compare - Comparison function
 const binarySearch = (
   lower: number,
   upper: number,

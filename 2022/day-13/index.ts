@@ -20,10 +20,12 @@ const isNumber = (value: any): boolean => typeof value === 'number'
 // 3. Force both values as array then iterate over their individual values.
 //    - If the comparison yields a result, return it.
 //    - If the comparison is undetermined, skip to next set of values.
-// @param {Number|Number[]|undefined} a - First value
-// @param {Number|Number[]|undefined} b - Second value
-// @return {Boolean|undefined}
-export const compare = (a, b) => {
+// @param a - First value
+// @param b - Second value
+export const compare = (
+  a: number | number[],
+  b: number | number[]
+): boolean => {
   if (!isDefined(b)) return false
   if (!isDefined(a)) return true
 
