@@ -65,7 +65,7 @@ def get_solution_paths_dict_for_years() -> dict[int, dict[int, list[str]]]:
         for day_dir in get_paths_matching_regex(year_dir, DAY_PATTERN):
             day = find_first_number(day_dir.name)
             solutions = sorted(find_recursive_solution_files(day_dir))
-            solutions = [s for s in solutions if s.name == "index.js"]
+            solutions = [s for s in solutions if s.name == "index.ts"]
             solutions = [solution.relative_to(AOC_DIR) for solution in solutions]
             solution_paths_dict[year][day] = [str(s) for s in solutions]
 
@@ -267,6 +267,7 @@ def generate_day_tile_image(day: str, year: str, languages: list[str], day_score
     path = IMAGE_DIR / f"{year}/{day}.png"
     path.parent.mkdir(parents=True, exist_ok=True)
     image.save(path)
+    print(path)
     return path
 
 def handle_day(day: int, year: int, solutions: list[str], html: HTML, day_scores: DayScores | None):
