@@ -2,7 +2,7 @@ import test from 'ava'
 import $ from '../../helpers'
 import { run } from './'
 
-test('Day 18 — Sample', t => {
+test.skip('Day 18 — Sample', t => {
   const sampleA = $.sample(`
   #########
   #b.A.@.a#
