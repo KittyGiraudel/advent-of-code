@@ -188,7 +188,7 @@ class HTML:
 def darker_color(c: tuple[int, int, int, int]) -> tuple[int, int, int, int]:
     return c[0] - 10, c[1] - 10, c[2] - 10, 255
 
-def get_alternating_background(languages, both_parts_completed=True, *, stripe_width=20):
+def get_alternating_background(languages, part1_completed=False, part2_completed=False, *, stripe_width=20):
     colors = [ImageColor.getrgb(extension_to_color[language]) for language in languages]
     if len(colors) == 1:
         colors.append(darker_color(colors[0]))
@@ -202,8 +202,8 @@ def get_alternating_background(languages, both_parts_completed=True, *, stripe_w
                 image.load()[x, y] = colors[((x + y) // stripe_width) % len(colors)]
 
     fill_with_colors([NOT_COMPLETED_COLOR, darker_color(NOT_COMPLETED_COLOR)], False)
-    if colors:
-        fill_with_colors(colors, not both_parts_completed)
+    if colors and part1_completed:
+        fill_with_colors(colors, not part2_completed)
     return image
 
 def format_time(time: str) -> str:
@@ -227,7 +227,11 @@ def draw_star(drawer: ImageDraw, at: tuple[int, int], size=9, color="#ffff0022",
 
 def generate_day_tile_image(day: str, year: str, languages: list[str], day_scores: DayScores | None) -> Path:
     """Saves a graphic for a given day and year. Returns the path to it."""
-    image = get_alternating_background(languages, not (day_scores is None or day_scores.time2 is None))
+    image = get_alternating_background(
+        languages,
+        not (day_scores is None),
+        day_scores and not (day_scores.time2 is None)
+    )
     drawer = ImageDraw(image)
     font_color = "white"
 
@@ -243,8 +247,8 @@ def generate_day_tile_image(day: str, year: str, languages: list[str], day_score
     for part in (1, 2):
         y = 50 if part == 2 else 0
         time, rank = getattr(day_scores, f"time{part}", None), getattr(day_scores, f"rank{part}", None)
+        drawer.text((104, -5 + y), f"P{part} ", fill=font_color, align="left", font=main_font(25))
         if day_scores is not None and time is not None:
-            drawer.text((104, -5 + y), f"P{part} ", fill=font_color, align="left", font=main_font(25))
             if SHOW_CHECKMARK_INSTEAD_OF_TIME_RANK:
                 drawer.line((160, 35 + y, 150, 25 + y), fill=font_color, width=2)
                 drawer.line((160, 35 + y, 180, 15 + y), fill=font_color, width=2)
@@ -254,11 +258,11 @@ def generate_day_tile_image(day: str, year: str, languages: list[str], day_score
             drawer.text((143, 3 + y), format_time(time), fill=font_color, align="right", font=secondary_font(18))
             drawer.text((133, 23 + y), f"{rank:>6}", fill=font_color, align="right", font=secondary_font(18))
         else:
-            drawer.line((140, 15 + y, 160, 35 + y), fill=font_color, width=2)
-            drawer.line((140, 35 + y, 160, 15 + y), fill=font_color, width=2)
+            drawer.line((155, 15 + y, 175, 35 + y), fill=font_color, width=2)
+            drawer.line((155, 35 + y, 175, 15 + y), fill=font_color, width=2)
 
-    if day_scores is None:
-        drawer.line((15, 85, 85, 85), fill=font_color, width=2)
+    # if day_scores is None:
+    #     drawer.line((15, 85, 85, 85), fill='font_color', width=2)
 
     # === Divider lines ===
     drawer.line((100, 5, 100, 95), fill=font_color, width=1)
@@ -267,7 +271,6 @@ def generate_day_tile_image(day: str, year: str, languages: list[str], day_score
     path = IMAGE_DIR / f"{year}/{day}.png"
     path.parent.mkdir(parents=True, exist_ok=True)
     image.save(path)
-    print(path)
     return path
 
 def handle_day(day: int, year: int, solutions: list[str], html: HTML, day_scores: DayScores | None):
