@@ -1,11 +1,9 @@
-import $ from '../../helpers'
-
 class Deer {
   name: string
   velocity: number
   flyingTime: number
   restingTime: number
-  state: string
+  state: 'FLYING' | 'RESTING'
   distance: number
   current: number
   score: number
@@ -24,7 +22,7 @@ class Deer {
     this.score = 0
   }
 
-  switch(state: string): void {
+  switch(state: 'FLYING' | 'RESTING'): void {
     this.state = state
     this.current = 0
   }

@@ -23,13 +23,16 @@ test('Day 12 — Sample', t => {
   ####. => #
   `,
     '\n\n'
-  )
+  ) as [string, string]
 
   t.is(cycle(sample, 20), 325)
 })
 
 test('Day 12 — Solutions', t => {
-  const input = $.readInput(import.meta, { delimiter: '\n\n' })
+  const input = $.readInput(import.meta, { delimiter: '\n\n' }) as [
+    string,
+    string
+  ]
 
   t.is(cycle(input, 20), 3217)
   t.is(cycle(input, 50000000000), 4000000000866)

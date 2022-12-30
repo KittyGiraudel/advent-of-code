@@ -22,7 +22,10 @@ const VECTORS = {
   L: [0, -1],
 }
 
-export const run = (instructions: string[], advanced: boolean): string => {
+export const run = (
+  instructions: string[],
+  advanced: boolean = false
+): string => {
   const keypad = advanced ? KEYPAD_2 : KEYPAD_1
   let position: Coords = advanced ? [2, 0] : [1, 1]
 

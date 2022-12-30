@@ -39,11 +39,13 @@ export const compare = (a, b) => {
   }
 }
 
-export const getScore = pairs =>
+export const getScore = (pairs: string[]) =>
   $.sum(
-    pairs.map((pair, index) =>
-      compare(...pair.split('\n').map(JSON.parse)) ? index + 1 : 0
-    )
+    pairs.map((pair, index) => {
+      const [a, b] = pair.split('\n').map(value => JSON.parse(value))
+
+      return compare(a, b) ? index + 1 : 0
+    })
   )
 
 // Add divider packets and sort all packets in the right order. To do so, add a

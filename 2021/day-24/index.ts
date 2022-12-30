@@ -2,7 +2,7 @@ import $ from '../../helpers'
 
 export const run = (
   instructions: string[],
-  inputs: string[]
+  inputs: number[]
 ): {
   w: number
   x: number
@@ -69,7 +69,9 @@ export const resolve = (lines: string[], max: number): number =>
   +$.chunk(lines, 18)
     // For each block, retrieve the only 3 moving parameters present on line 5,
     // 6 and 16. The rest of the blocks is identical and therefore irrelevant.
-    .map(block => [4, 5, 15].map(index => +block[index].split(' ').pop()))
+    .map((block: string) =>
+      [4, 5, 15].map(index => +block[index].split(' ').pop())
+    )
     // Reducer shamelessly stolen from this implementation found on Reddit
     // using a stack instead of a brute-force approach.
     // https://gist.github.com/p-a/d811699ea8a4011a613f7702e40493c1

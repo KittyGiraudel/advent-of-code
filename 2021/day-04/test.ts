@@ -37,5 +37,5 @@ test('Day 04 — Solutions', t => {
   const bingos = getBingos(input)
 
   t.is(bingos[0], 45031)
-  t.is($.last(bingos), 2568)
+  t.is(bingos.at(-1), 2568)
 })

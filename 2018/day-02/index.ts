@@ -26,4 +26,5 @@ export const checksum = (input: string[]): number => {
   return twos.length * threes.length
 }
 
-export const findId = input => findCommonalities(...findSimilarIds(input))
+export const findId = (input: string[]) =>
+  findCommonalities(...findSimilarIds(input))

@@ -127,5 +127,5 @@ export const run = (instructions: string[]) => {
 
   while (!network.halted) network.run()
 
-  return $.last(network.nodes).counters.send
+  return network.nodes.at(-1).counters.send
 }

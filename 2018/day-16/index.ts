@@ -33,10 +33,11 @@ const parseSample = ([before, op, after]: string[]): Sample => ({
 
 export const debug = (input: string[]) => {
   const capacity = Object.keys(OPCODES).length
-  const program = $.last(input)
+  const program = input
+    .at(-1)
     .split('\n')
     .map(line => line.split(' ').map(Number))
-  const registry: Set<string>[] = input
+  const registry: (string | Set<string>)[] = input
     .slice(0, -2)
     .map(line => line.split('\n'))
     .map(parseSample)
@@ -45,15 +46,13 @@ export const debug = (input: string[]) => {
         const [opIndex, ...args] = operation
 
         Object.keys(OPCODES)
-          .filter(
-            opcode =>
-              OPCODES[opcode](before, args).join(',') === after.join(',')
-          )
+          .map(opcode => OPCODES[opcode](before, args))
+          .filter(result => result.join(',') === after.join(','))
           .forEach(option => registry[opIndex].add(option))
 
         return registry
       },
-      $.array(capacity).map(() => new Set())
+      $.array(capacity).map(() => new Set<string>())
     )
 
   // The resolution goes as follow:
@@ -63,16 +62,16 @@ export const debug = (input: string[]) => {
   //    their set.
   // 4. Repeat until every index has been associated to a value.
   while (registry.some(item => typeof item !== 'string')) {
-    const opIndex = registry.findIndex(item => item.size === 1)
+    const opIndex = registry.findIndex((item: Set<string>) => item.size === 1)
     registry[opIndex] = Array.from(registry[opIndex]).pop()
     registry
       .filter(item => typeof item !== 'string')
-      .forEach(item => item.delete(registry[opIndex]))
+      .forEach((item: Set<string>) => item.delete(registry[opIndex] as string))
   }
 
   return program.reduce(
     (registers, [opIndex, ...args]) =>
-      OPCODES[registry[opIndex]](registers, args),
+      OPCODES[registry[opIndex] as string](registers, args),
     [0, 0, 0, 0]
   )
 }

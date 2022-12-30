@@ -13,7 +13,7 @@ test('Day 07 — Sample', t => {
   Step F must be finished before step E can begin.
   `)
 
-  t.is(sequential(sample, 1, 0), 'CABDFE')
+  t.is(sequential(sample), 'CABDFE')
   t.deepEqual(parallel(sample, 2, 0), { duration: 15, order: 'CABFDE' })
 })
 

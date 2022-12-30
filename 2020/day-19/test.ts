@@ -8,7 +8,7 @@ const PATCH = {
 }
 
 test('Day 19 — Sample', t => {
-  const example = $.sample(
+  const sample = $.sample(
     `
   0: 4 1 5
   1: 2 3 | 3 2
@@ -25,9 +25,9 @@ test('Day 19 — Sample', t => {
   `,
     '\n\n'
   )
-  t.is(count(...example), 2)
+  t.is(count(sample[0], sample[1]), 2)
 
-  const example2 = $.sample(
+  const sample2 = $.sample(
     `
   42: 9 14 | 10 1
   9: 14 27 | 1 26
@@ -80,7 +80,7 @@ test('Day 19 — Sample', t => {
     '\n\n'
   )
 
-  const example3 = $.sample(
+  const sample3 = $.sample(
     `
   0: 8 11
   8: 42
@@ -96,8 +96,8 @@ test('Day 19 — Sample', t => {
   `,
     '\n\n'
   )
-  t.is(count(...example2, PATCH), 12)
-  t.is(count(...example3, PATCH), 1)
+  t.is(count(sample2[0], sample2[1], PATCH), 12)
+  t.is(count(sample3[0], sample3[1], PATCH), 1)
 })
 
 test('Day 19 — Solutions', t => {

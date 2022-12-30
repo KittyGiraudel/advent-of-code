@@ -6,7 +6,7 @@ const DIRECTIONS = [1, 4, 2, 3]
 
 type Node = {
   position: Coords
-  program: Intcode
+  program?: Intcode
   minutes?: number
 }
 
@@ -75,17 +75,17 @@ export const getOxygenDuration = (input: string): number => {
   const { from, end } = discover(input)
   let maxMinutes = 0
 
-  $.pathfinding.search({
+  $.pathfinding.search<Node>({
     start: { position: end.position, minutes: 0 },
-    toKey: (curr: Node) => $.toPoint(curr.position),
-    getNeighbors: (curr: Node) => {
+    toKey: curr => $.toPoint(curr.position),
+    getNeighbors: curr => {
       // If the position does not appear in the graph, it means it’s a wall and
       // should therefore not continue any further.
       if (!($.toPoint(curr.position) in from)) return []
 
       maxMinutes = Math.max(curr.minutes, maxMinutes)
 
-      return $.bordering(curr.position, 'COORDS').map(position => ({
+      return $.bordering(curr.position, 'COORDS').map((position: Coords) => ({
         position,
         minutes: curr.minutes + 1,
       }))

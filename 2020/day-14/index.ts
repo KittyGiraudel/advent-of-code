@@ -42,7 +42,7 @@ export const processLoose = (
 // Resolve wildcard characters (`X`) in given address to expand it into multiple
 // possible addresses.
 // @param value - Masked value
-const resolveAddresses = (value: string | string[]) =>
+const resolveAddresses = (value: string[]) =>
   value.includes('X')
     ? [
         ...resolveAddresses($.updateAtIndex(value, value.indexOf('X'), '0')),
@@ -55,7 +55,7 @@ const resolveAddresses = (value: string | string[]) =>
 // @param mask - Bitmask
 const getAddresses = (value: string | number, mask: string) =>
   resolveAddresses(
-    $.stringMap($.toBin(+value), (char, i) =>
+    Array.from($.toBin(+value)).map((char, i) =>
       mask[i] !== '0' ? mask[i] : char
     )
   )

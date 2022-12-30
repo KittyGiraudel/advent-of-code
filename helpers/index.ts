@@ -29,7 +29,6 @@ import md5 from './md5'
 import median from './median'
 import memo from './memo'
 import { bordering, surrounding } from './neighbors'
-import last from './last'
 import pathfinding from './pathfinding'
 import permutations from './permutations'
 import PriorityQueue from './PriorityQueue'
@@ -83,7 +82,6 @@ export default {
   md5,
   median,
   memo,
-  last,
   pathfinding,
   permutations,
   PriorityQueue,

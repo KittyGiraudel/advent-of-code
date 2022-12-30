@@ -41,7 +41,7 @@ const createGraph = (grid: Grid<string>, start: CoordsAndPoint, locations) => {
         )
 
         if (unmatchedKeys.length) {
-          const nextDoor = $.last(unmatchedKeys).toUpperCase()
+          const nextDoor = unmatchedKeys.at(-1).toUpperCase()
 
           if (nextDoor in locations) {
             priority = $.manhattan(next.coords, locations[nextDoor])

@@ -31,10 +31,10 @@ const mapOut = (input: string): number[] => {
   function step([dx, dy]: Coords) {
     const x = curr.x + dx
     const y = curr.y + dy
-    const node = map.get(x + ',' + y) || { x, y, distance: Infinity }
+    const node = map.get($.toPoint([x, y])) || { x, y, distance: Infinity }
     node.distance = Math.min(node.distance, curr.distance + 1)
     curr = node
-    map.set(node.x + ',' + node.y, node)
+    map.set($.toPoint([node.x, node.y]), node)
   }
 
   Array.from(input).forEach(char => {
@@ -44,7 +44,7 @@ const mapOut = (input: string): number[] => {
     if (char === 'W') step([-1, 0])
     if (char === '(') stack.push(curr)
     if (char === ')') curr = stack.pop()
-    if (char === '|') curr = $.last(stack)
+    if (char === '|') curr = stack.at(-1)
   })
 
   return Array.from(map.values()).map(room => room.distance)

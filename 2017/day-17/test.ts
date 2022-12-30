@@ -2,7 +2,7 @@ import test from 'ava'
 import { run, run2 } from './'
 
 test('Day 17 — Sample', t => {
-  t.is(run(3, 15), 638)
+  t.is(run(3), 638)
 })
 
 test('Day 17 — Solutions', t => {

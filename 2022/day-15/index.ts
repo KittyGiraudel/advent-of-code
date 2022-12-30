@@ -28,7 +28,7 @@ type Diagonal = {
 // by any of the sensor (because they all detect another beacon closer to them).
 // This means there must be only one set of coords in the 0,4000000->0,4000000
 // space that is not detected by any sensor.
-export const detect = (input: string[], y: number, max: number): number => {
+export const detect = (input: string[], y: number, max?: number): number => {
   const data = input.map(line => line.match(/-?\d+/g).map(Number))
   const sensors: Sensor[] = data.map(([sx, sy, bx, by]) => {
     const position: Coords = [sx, sy]
@@ -46,7 +46,7 @@ export const detect = (input: string[], y: number, max: number): number => {
   if (y && !max) {
     const sorted = sensors.sort((a, b) => a.position[0] - b.position[0])
     const minX = sorted[0].position[0] - sorted[0].radius
-    const maxX = $.last(sorted).position[0] + $.last(sorted).radius
+    const maxX = sorted.at(-1).position[0] + sorted.at(-1).radius
 
     let count = 0
 

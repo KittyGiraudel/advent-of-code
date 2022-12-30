@@ -1,10 +1,10 @@
 // Return all possible unique combinations of size `n` from given `array`.
-const combinations = <T>(
-  array: Array<T>,
+const combinations = <Type>(
+  array: Type[],
   n: number,
   start = [],
   tmp = []
-): Array<Array<T>> =>
+): Type[][] =>
   array.reduce((acc, item, index, array) => {
     if (n > 1) {
       tmp.push(item)

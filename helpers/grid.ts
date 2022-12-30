@@ -78,9 +78,9 @@ const createGrid = <Input>(
 const cloneGrid = <Input>(grid: Grid<Input>): Grid<Input> =>
   grid.slice(0).map(row => row.slice(0))
 
-function isCallable<T>(
-  maybeFunc: T | ((ri: number, ci: number) => T)
-): maybeFunc is (ri: number, ci: number) => T {
+function isCallable<Type>(
+  maybeFunc: Type | ((ri: number, ci: number) => Type)
+): maybeFunc is (ri: number, ci: number) => Type {
   return typeof maybeFunc === 'function'
 }
 

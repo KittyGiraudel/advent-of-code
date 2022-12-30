@@ -5,4 +5,4 @@ export type CoordsObj = { x: number; y: number; z?: number; t?: number }
 export type CoordsAndPoint = { coords: Coords; point: Point }
 export type Point = `${number},${number}`
 export type TriPoint = `${number},${number},${number}`
-export type Grid<T> = T[][]
+export type Grid<Type> = Type[][]

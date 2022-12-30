@@ -16,6 +16,7 @@ const validateLoose = ([i, j, letter, password]: string[]): boolean =>
 // @param letter - Letter to assert
 // @param password - Password to validate
 const validateStrict = ([i, j, letter, password]: string[]): boolean =>
+  // @ts-ignore
   Boolean((password[i - 1] === letter) ^ (password[j - 1] === letter))
 
 // Split the password on sequences of non-word characters, which are the hyphen,

@@ -38,7 +38,7 @@ const getSides = (grid: Grid<String>): string[] =>
   [
     /* Top    */ grid[0],
     /* Right  */ $.column(grid, grid.length - 1),
-    /* Bottom */ $.last(grid),
+    /* Bottom */ grid.at(-1),
     /* Left   */ $.column(grid, 0),
   ].map(line => line.join(''))
 

@@ -1,38 +1,39 @@
 import { Coords, Point } from '../types'
 import toPoint from './toPoint'
 
-type SearchOptions<Node> = {
-  start: Node
-  getNeighbors: (curr: Node) => Node[]
-  getCost?: (curr: Node, next: Node) => number
-  heuristic?: (next: Node) => number
-  toKey?: (next: Node) => string
-  isDone?: (curr: Node) => boolean
+type SearchFrontier<SearchNode> = [SearchNode, number][]
+type SearchOptions<SearchNode> = {
+  start: SearchNode
+  getNeighbors: (curr: SearchNode) => SearchNode[]
+  getCost?: (curr: SearchNode, next: SearchNode) => number
+  heuristic?: (next: SearchNode) => number
+  toKey?: (next: SearchNode) => string
+  isDone?: (curr: SearchNode) => boolean
 }
 
-export type SearchCosts = { [point: Point]: number }
-export type SearchGraph = { [point: Point]: Point }
+export type SearchCosts = Record<Point, number>
+export type SearchGraph = Record<Point, Point>
 
-export type SearchResult<Node> = {
-  end?: Node
+export type SearchResult<SearchNode> = {
+  end?: SearchNode
   from: SearchGraph
   costs: SearchCosts
 }
 
-const pathfinding = <Node>({
+const pathfinding = <SearchNode>({
   getNeighbors,
   getCost,
   start,
   heuristic,
   toKey = curr => toPoint(curr as Coords) as string,
   isDone = () => false,
-}: SearchOptions<Node>): SearchResult<Node> => {
+}: SearchOptions<SearchNode>): SearchResult<SearchNode> => {
   const withPriority =
     typeof getCost === 'function' || typeof heuristic === 'function'
-  const frontier: [unknown, number][] = [[start, 0]]
-  const from = { [toKey(start)]: null }
-  const costs = { [toKey(start)]: 0 }
-  let end = null
+  const frontier: SearchFrontier<SearchNode> = [[start, 0]]
+  const from: SearchGraph = { [toKey(start)]: null }
+  const costs: SearchCosts = { [toKey(start)]: 0 }
+  let end: SearchNode = null
 
   while (frontier.length) {
     if (withPriority) frontier.sort(([, aP], [, bP]) => bP - aP)

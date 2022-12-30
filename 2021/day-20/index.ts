@@ -59,7 +59,7 @@ export const processImage = (
       // necessary because the example and the input have different edges.
       if (acc.char === '.' && algorithm[0] === '#') {
         acc.char = '#'
-      } else if (acc.char === '#' && $.last(algorithm) === '.') {
+      } else if (acc.char === '#' && algorithm.at(-1) === '.') {
         acc.char = '.'
       }
 

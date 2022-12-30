@@ -31,7 +31,7 @@ export const recompose = (
 
   for (let i = 0; i < layers.length; i++) {
     const layer = layers[i]
-    const grid = $.chunk<number>(layer, size.width) as Grid<number>
+    const grid = $.chunk(layer, size.width) as Grid<number>
 
     $.grid.forEach(grid, (pixel, ri, ci) => {
       if ([null, 2].includes($.access(image, [ri, ci]))) {

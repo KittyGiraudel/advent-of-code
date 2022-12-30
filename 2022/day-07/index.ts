@@ -56,7 +56,8 @@ export const parseOutput = (lines: string[]): Dir => {
     else if (line.startsWith('dir')) {
       cwd.add(new Dir(line.split(' ').pop(), cwd))
     } else {
-      cwd.add(new File(...line.split(' ').reverse()))
+      const [size, name] = line.split(' ')
+      cwd.add(new File(name, size))
     }
   })
 

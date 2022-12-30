@@ -3,7 +3,7 @@ import $ from '../../helpers'
 // Elegant generator taken from the following article so we don’t have to pre-
 // compute all possible permutations as it’s too slow.
 // https://feixie1980.medium.com/array-combination-iteration-with-javascript-generator-function-f4718aec1ca0
-function* getCombinationsN(array: string[], n: number): Generator {
+function* getCombinationsN(array: number[], n: number): Generator<number[]> {
   if (n === 1) {
     for (const a of array) yield [a]
   } else {
@@ -14,7 +14,7 @@ function* getCombinationsN(array: string[], n: number): Generator {
   }
 }
 
-function* getCombinations(array) {
+function* getCombinations(array: number[]) {
   for (let i = 1; i <= array.length; i++) yield* getCombinationsN(array, i)
 }
 

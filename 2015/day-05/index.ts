@@ -1,5 +1,3 @@
-import $ from '../../helpers'
-
 const isValidLoose = (line: string): boolean => {
   if (['ab', 'cd', 'pq', 'xy'].some(s => line.includes(s))) return false
   if ((line.match(/[aeiou]/g)?.length ?? 0) < 3) return false
@@ -15,7 +13,7 @@ const isValidStrict = (line: string): boolean => {
   for (let i = 1; i < line.length; i++) {
     const pair = line[i - 1] + line[i]
     if (!(pair in pairs)) pairs[pair] = []
-    if ($.last(pairs[pair]) !== i - 1) pairs[pair].push(i)
+    if (pairs[pair].at(-1) !== i - 1) pairs[pair].push(i)
   }
 
   return Object.values(pairs).some(pair => pair.length > 1)

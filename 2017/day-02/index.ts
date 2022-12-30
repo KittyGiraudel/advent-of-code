@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 
-export const checksum = (input: string[], advanced: boolean): number =>
+export const checksum = (input: string[], advanced: boolean = false): number =>
   $.sum(
     input.map(row => {
       const numbers = row.split(/\s+/g).map(Number)

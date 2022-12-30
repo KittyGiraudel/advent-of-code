@@ -38,7 +38,7 @@ export const run = (rows: string[], iterations: number = 1): number => {
     // it is the same as the previous iteration score, that means we got 2
     // scores in a row that already happened in that order in the past. This is
     // the beginning of a repeated sequence and we can read the final score.
-    if (index >= 0 && history[index - 1] === $.last(history)) {
+    if (index >= 0 && history[index - 1] === history.at(-1)) {
       const sequence = history.slice(index - 1, -1)
       // To find out the score of the last iteration, compute it like this:
       // 1. Subtract the start index of the sequence to 1_000_000_000.

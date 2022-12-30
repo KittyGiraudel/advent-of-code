@@ -1,7 +1,7 @@
 import $ from '../../helpers'
 import { Intcode } from '../day-05'
 
-export const amplify = (numbers: number[], sequence: number[]): number =>
+export const amplify = (numbers: string, sequence: number[]): number =>
   sequence.reduce(
     (acc, digit) =>
       new Intcode(numbers).setInput([digit, acc]).run().getOutput() as number,

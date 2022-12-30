@@ -29,5 +29,5 @@ export const snafu = (input: number): string => {
     input = Math.floor(input / 5)
   }
 
-  return $.stringMap(result, v => DIGITS[DIGITS.length - 1 - v])
+  return $.stringMap(result, value => DIGITS[DIGITS.length - 1 - +value])
 }

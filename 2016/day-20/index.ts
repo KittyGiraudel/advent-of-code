@@ -3,7 +3,7 @@ import $ from '../../helpers'
 export const run = (
   lists: string[],
   MAX: number,
-  advanced: boolean
+  advanced: boolean = false
 ): number => {
   let blacklists = lists
     .map(a => a.split('-').map(Number))

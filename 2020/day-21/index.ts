@@ -20,7 +20,7 @@ const parseFood = (
   }
 }
 
-type Map = Record<string, { foods: string[]; food: string }>
+type Map = Record<string, { foods: string[][]; food: string }>
 
 // Map food input.
 // @param input - Raw foods
@@ -43,9 +43,10 @@ const mapAllergens = (map: Map): Map => {
   const found: Set<string> = new Set()
   const isNotFound = (ingredient: string) => !found.has(ingredient)
   const isResolved = (allergen: string) => Boolean(map[allergen].food)
+  const keys = Object.keys(map)
 
-  while (!Object.keys(map).every(isResolved)) {
-    Object.keys(map).forEach(allergen => {
+  while (!keys.every(isResolved)) {
+    keys.forEach(allergen => {
       const candidates = $.intersection(...map[allergen].foods).filter(
         isNotFound
       )
@@ -70,7 +71,8 @@ const getAllIngredients = (input: string[]): string[] =>
 const findAllergenFreeIngredients = (input: string[]): string[] => {
   const map = mapFood(input)
   const allergenIngredients = Object.values(map).map(({ food }) => food)
-  const isAllergenFree = ingredient => !allergenIngredients.includes(ingredient)
+  const isAllergenFree = (ingredient: string) =>
+    !allergenIngredients.includes(ingredient)
 
   return getAllIngredients(input).filter(isAllergenFree)
 }

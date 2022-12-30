@@ -118,7 +118,7 @@ const cross = (
 // find the shortest path (347 instead of 247).
 export const maze = (input: string[], withSnacks: boolean = false): number => {
   const startCoords: Coords = [0, findDoor(input[0])]
-  const endCoords: Coords = [input.length - 1, findDoor($.last(input))]
+  const endCoords: Coords = [input.length - 1, findDoor(input.at(-1))]
   const grids = getGrids(input)
   const time = cross(grids, startCoords, endCoords)
 

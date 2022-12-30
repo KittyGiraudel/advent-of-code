@@ -1,5 +1,4 @@
 import { Coords } from '../types'
-import last from './last'
 
 const DIRECTIONS: [Coords, Coords, Coords, Coords] = [
   /* N */ [0, -1],
@@ -14,7 +13,7 @@ const turnLeft = (
 ): Coords => {
   const index = directions.indexOf(direction)
 
-  return index === 0 ? last(directions) : directions[index - 1]
+  return index === 0 ? directions.at(-1) : directions[index - 1]
 }
 
 const turnRight = (

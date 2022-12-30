@@ -1,10 +1,10 @@
 import $ from '../../helpers'
-import { Grid, Coords, Point } from '../../types'
+import { Coords, Point } from '../../types'
 
 export const run = (
   input: string[],
   iterations: number,
-  advanced: boolean
+  advanced: boolean = false
 ): number => {
   let curr = $.grid.create<string>(input)
   const width = curr[0].length

@@ -1,5 +1,4 @@
 import test from 'ava'
-import {} from './'
 import $ from '../../helpers'
 
 test.skip('Day 23 — Sample', t => {})

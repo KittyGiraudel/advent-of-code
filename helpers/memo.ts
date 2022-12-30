@@ -17,7 +17,7 @@ const getKey = (...args) =>
 // as a key
 // @param {Function} fn - Function to memoize
 // @return {Function}
-const memo = fn => {
+const memo = (fn: Function): Function => {
   const cache = new Map()
 
   return (...args) => {

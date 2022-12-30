@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords } from '../../types'
+import { Coords, Point } from '../../types'
 
 type Particle = {
   position: Coords
@@ -32,9 +32,9 @@ const countCollisions = (particles: Particle[]): number =>
 export const run = (input: string[]): [number, number] => {
   const particles = input.map((line, index) => {
     const [p, v, a] = line.split(', ')
-    const position = $.toCoords(p.slice(3, -1))
-    const velocity = $.toCoords(v.slice(3, -1))
-    const acceleration = $.toCoords(a.slice(3, -1))
+    const position = $.toCoords(p.slice(3, -1) as Point)
+    const velocity = $.toCoords(v.slice(3, -1) as Point)
+    const acceleration = $.toCoords(a.slice(3, -1) as Point)
 
     return { index, position, velocity, acceleration }
   })

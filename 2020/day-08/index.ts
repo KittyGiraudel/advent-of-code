@@ -51,11 +51,7 @@ const patchInstruction = (instruction: string): string =>
 // @return `accumulator` value and 0 or 1 `exit` code
 const runPatchedProgram = (instructions: string[], index: number): Output =>
   runProgram(
-    $.updateAtIndex(
-      instructions,
-      index,
-      patchInstruction(instructions[index])
-    ) as string[]
+    $.updateAtIndex(instructions, index, patchInstruction(instructions[index]))
   )
 
 // Monkey-patch and execute the given set instructions to find the faulty line

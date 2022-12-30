@@ -1,3 +1,4 @@
+import $ from '../../helpers'
 import { Coords, Point } from '../../types'
 
 // The trail is implemented as a linked list. Each node but the first is
@@ -47,7 +48,7 @@ class Node {
       else if (prev[1] < curr[1]) curr[1]--
     }
 
-    this.visited.add(this.position.join(','))
+    this.visited.add($.toPoint(this.position))
     this.next?.step(axis, direction)
   }
 
@@ -56,7 +57,7 @@ class Node {
   }
 }
 
-const createNodes = (size: number): Node[] => {
+const createNodes = (size: number): Node => {
   let curr = null
 
   for (let i = 0; i < size; i++) {

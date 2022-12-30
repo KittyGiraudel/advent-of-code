@@ -8,11 +8,11 @@ const getPaths = (
   curr: string,
   path: string[] = [],
   score: number = 0
-): number | string[] => {
+): number[] => {
   const cities = Object.keys(graph[curr]).filter(key => !path.includes(key))
 
   if (!cities.length) {
-    return score
+    return [score]
   }
 
   return cities.reduce((acc, city) => {
@@ -25,7 +25,7 @@ const getPaths = (
 }
 
 const createGraph = (input: string[]): Graph => {
-  const graph = {}
+  const graph: Graph = {}
 
   input.forEach(line => {
     const [, a, b, distance] = line.match(/(\w+) to (\w+) = (\d+)/)
@@ -42,6 +42,6 @@ export const run = (input: string[]): number[] => {
   const graph = createGraph(input)
 
   return Object.keys(graph)
-    .map(key => getPaths(graph, key) as number)
+    .flatMap(key => getPaths(graph, key))
     .flat(Infinity)
 }

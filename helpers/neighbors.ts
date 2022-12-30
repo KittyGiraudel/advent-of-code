@@ -20,7 +20,7 @@ const getCoords = (withDiagonals: boolean) => {
       return cache.get(key)
     }
 
-    let neighbors: Coords[] = [
+    const neighbors: Coords[] = [
       /* N  */ [ri - 1, ci],
       withDiagonals && /* NE */ [ri - 1, ci + 1],
       /* E  */ [ri, ci + 1],

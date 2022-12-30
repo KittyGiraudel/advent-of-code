@@ -71,5 +71,6 @@ export class Computer {
 
 export const getHash = (string: string) =>
   new Computer(string).round(64).getHash()
-export const run = (lengths: number[], list: number[]) =>
+
+export const run = (lengths: number[], list: number[] = []) =>
   new Computer(lengths, list).round().check()

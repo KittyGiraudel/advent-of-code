@@ -16,7 +16,7 @@ const parseProperties = (properties: string[]): Record<string, number> =>
     .map(prop => prop.split(': '))
     .reduce((acc, [name, count]) => ({ ...acc, [name]: +count }), {})
 
-export const run = (input: string[], advanced: boolean): number => {
+export const run = (input: string[], advanced: boolean = false): number => {
   const aunts = input.map((line, index) => ({
     id: index + 1,
     properties: parseProperties(line.match(/\w+: \d+/g)),

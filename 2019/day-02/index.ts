@@ -3,7 +3,7 @@ export class Intcode {
   memory: number[]
   backup: number[]
 
-  constructor(memory, pointer = 0) {
+  constructor(memory: string | number[], pointer = 0) {
     this.memory =
       typeof memory === 'string' ? memory.split(',').map(Number) : memory
     this.pointer = pointer
@@ -55,7 +55,7 @@ export class Intcode {
   }
 }
 
-export const findInitParams = (input: number[]): number => {
+export const findInitParams = (input: string | number[]): number => {
   const computer = new Intcode(input)
 
   for (let n = 0; n < 100; n++) {

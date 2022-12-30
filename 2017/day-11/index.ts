@@ -40,7 +40,7 @@ const walk = (steps: string[]): { position: Coords; visited: Set<Point> } =>
       acc.visited.add($.toPoint(acc.position))
       return acc
     },
-    { position: [0, 0] as Coords, visited: new Set(['0,0']) }
+    { position: [0, 0] as Coords, visited: new Set(['0,0']) as Set<Point> }
   )
 
 const getPathLength = (start: Coords, end: Coords): number =>

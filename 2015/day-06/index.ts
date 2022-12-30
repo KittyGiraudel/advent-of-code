@@ -18,5 +18,5 @@ export const run = (input: string[], advanced: boolean = false): number => {
     }
   })
 
-  return $.grid.reduce(grid, (acc, v) => acc + v, 0)
+  return $.grid.reduce(grid, (acc, value) => acc + value, 0)
 }

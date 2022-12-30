@@ -1,10 +1,13 @@
 import $ from '../../helpers'
 
-type Item = [number, number?, number?]
-type Gear = [Item, Item?, Item?]
+type Cost = number
+type Damage = number
+type Armor = number
+type Stats = [Cost, Damage, Armor]
+type Gear = [Stats, Stats?, Stats?, Stats?]
 
 /* Cost, Damage, Armor */
-const WEAPONS: Item[] = [
+const WEAPONS: Stats[] = [
   [8, 4, 0],
   [10, 5, 0],
   [25, 6, 0],
@@ -12,7 +15,7 @@ const WEAPONS: Item[] = [
   [74, 8, 0],
 ]
 
-const ARMORS: Item[] = [
+const ARMORS: Stats[] = [
   [0, 0, 0], // Lack of armor
   [13, 0, 1],
   [31, 0, 2],
@@ -21,7 +24,7 @@ const ARMORS: Item[] = [
   [102, 0, 5],
 ]
 
-const RINGS: Item[] = [
+const RINGS: Stats[] = [
   [0, 0, 0], // Lack of ring
   [0, 0, 0], // Lack of ring
   [25, 1, 0],
@@ -36,21 +39,33 @@ const RINGS: Item[] = [
 // - There must be 1 weapon.
 // - There can be 0-1 armor.
 // - There can be 0-2 rings.
-const getCombinations = () => {
+const getCombinations = (): Stats[] => {
   const gears: Gear[] = []
-  const ringPairs: Item[][] = $.combinations(RINGS, 2)
+  const ringPairs: [Stats, Stats][] = $.combinations(RINGS, 2) as [
+    Stats,
+    Stats
+  ][]
 
   WEAPONS.forEach(weapon => {
     gears.push([weapon])
     ARMORS.forEach(armor => {
       gears.push([weapon, armor])
-      ringPairs.forEach(rings => gears.push([weapon, armor, ...rings]))
+      ringPairs.forEach(rings => {
+        gears.push([weapon, armor, ...rings])
+      })
     })
   })
 
   // Aggregate the stats of all the items in the gear (cost, damage, armor).
   return gears.map(items =>
-    items.reduce((gear, item) => $.zip(gear, item).map($.sum), [0, 0, 0])
+    items.reduce(
+      ([cost, damage, armor], [iCost, iDamage, iArmor]) => [
+        cost + iCost,
+        damage + iDamage,
+        armor + iArmor,
+      ],
+      [0, 0, 0]
+    )
   )
 }
 
@@ -90,7 +105,9 @@ class Fight {
   boss: Unit
 
   constructor(player: number[], boss: number[]) {
+    // @ts-ignore
     this.player = new Unit(...player)
+    // @ts-ignore
     this.boss = new Unit(...boss)
   }
 

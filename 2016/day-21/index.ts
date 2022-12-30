@@ -10,7 +10,7 @@ export const run = (steps: string[], init: string): string =>
       }
 
       if (step.startsWith('rotate based')) {
-        const letter = $.last(step as any)
+        const letter = step.at(-1)
         const index = acc.findIndex(l => letter === l)
         return $.rotate(acc, 1 + index + (index >= 4 ? 1 : 0))
       }

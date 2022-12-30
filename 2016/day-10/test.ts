@@ -12,11 +12,11 @@ test('Day 10 — Sample', t => {
   value 2 goes to bot 2
   `)
 
-  t.is(run(sample, [2, 5]), 30)
+  t.is(run(sample), 30)
 })
 
 test('Day 10 — Solutions', t => {
   const input = $.readInput(import.meta)
 
-  t.is(run(input, [17, 61]), 143153)
+  t.is(run(input), 143153)
 })

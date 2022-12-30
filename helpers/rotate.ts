@@ -1,5 +1,5 @@
 // Rotate the given array to the right `n` times.
-const rotate = (array: any[], n: number = 1) => {
+const rotate = <Type>(array: Type[], n: number = 1): Type[] => {
   if (n > 0) {
     while (n--) array.unshift(array.pop())
   } else if (n < 0) {

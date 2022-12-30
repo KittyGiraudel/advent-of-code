@@ -9,7 +9,7 @@ const SPELL_COST = {
   R: 229,
 }
 
-const fight = (actions: string[], hard: boolean) => {
+const fight = (actions: string[], hard: boolean): number => {
   let effects = { P: 0, S: 0, R: 0 }
   let player = 50
   let boss = 51

@@ -73,7 +73,7 @@ const tick = (
 ): void => {
   Object.keys(carts)
     .sort(gridOrder)
-    .forEach(point => {
+    .forEach((point: Point) => {
       const cart = carts[point]
 
       // This cannot be done with a `.filter` because that would be resolved
@@ -99,7 +99,7 @@ const tick = (
     })
 }
 
-export const run = (rows: string[], cleanUp: boolean): number[] => {
+export const run = (rows: string[], cleanUp: boolean = false): number[] => {
   const carts: CartMap = {}
 
   // Iterate over the grid to:
@@ -129,7 +129,7 @@ export const run = (rows: string[], cleanUp: boolean): number[] => {
 
   // Finally, we can return the crash site, or the last cart standing, without
   // forgetting to flip the coordinates.
-  const points = Object.keys(carts)
+  const points = Object.keys(carts) as Point[]
   const flip = (point: Point): number[] => $.toCoords(point).reverse()
   const interest = points.find(point => carts[point].crashed) || points[0]
 

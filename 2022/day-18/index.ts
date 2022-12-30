@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords } from '../../types'
+import { Coords, Point } from '../../types'
 
 const VECTORS: Coords[] = [
   '1,0,0',
@@ -20,7 +20,7 @@ const getArea = (cubes: Coords[], predicate: Function) =>
     .filter(point => predicate(point)).length
 
 export const getSurfaceArea = (
-  points: string[],
+  points: Point[],
   advanced: boolean = false
 ): number => {
   const cubes = points.map($.toCoords)
@@ -31,7 +31,7 @@ export const getSurfaceArea = (
     $.isClamped(z, minZ - 1, maxZ + 1)
 
   if (!advanced) {
-    return getArea(cubes, point => !points.includes(point))
+    return getArea(cubes, (point: Point) => !points.includes(point))
   }
 
   // Walk the entire space from a water perspective (flood-fill). Start outside
@@ -40,7 +40,7 @@ export const getSurfaceArea = (
   const start = [minX - 1, minY - 1, minZ - 1]
   const { from: flooded } = $.pathfinding.search({
     start,
-    getNeighbors: coords =>
+    getNeighbors: (coords: Coords) =>
       getSides(coords)
         .filter(coords => !points.includes($.toPoint(coords)))
         .filter(isWithinBounds),

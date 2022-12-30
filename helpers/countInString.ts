@@ -3,11 +3,12 @@ const countInString = (
   haystack: string,
   needle: string,
   insensitive: Boolean = true
-): number =>
-  Array.from(
-    haystack.matchAll(
-      new RegExp(`(?=(${needle}))`, ['g', insensitive ? 'i' : ''].join(''))
-    )
-  ).length || 0
+): number => {
+  const flags = ['g', insensitive ? 'i' : ''].join('')
+  const regex = new RegExp(`(?=(${needle}))`, flags)
+  const matches = haystack.matchAll(regex)
+
+  return Array.from(matches).length || 0
+}
 
 export default countInString

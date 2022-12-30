@@ -20,8 +20,8 @@ export const run = (
   a: number,
   b: number,
   iterations: number,
-  modA: number,
-  modB: number
+  modA?: number,
+  modB?: number
 ): number => {
   const genA = gen(a, 16807, modA)
   const genB = gen(b, 48271, modB)

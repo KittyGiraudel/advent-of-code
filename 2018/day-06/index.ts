@@ -1,15 +1,14 @@
 import $ from '../../helpers'
-import { Coords } from '../../types'
+import { Coords, Point } from '../../types'
 
 export const mapOut = (
-  points: string[],
-  limit: number
+  lines: string[],
+  limit?: number
 ): { safeRegionSize: number; largestRegionSize: number } => {
+  const points: Point[] = lines.map(line => line.replace(' ', '')) as Point[]
   const counters: Map<number, number> = new Map()
   const edges: Set<number> = new Set()
-  const [minX, maxX, minY, maxY] = $.boundaries(
-    points.map(line => line.split(', ').map(Number)) as Coords[]
-  )
+  const [minX, maxX, minY, maxY] = $.boundaries(points.map($.toCoords))
   let regionSize = 0
 
   // Iterate between the X position of the leftmost point and the X poxition
@@ -17,13 +16,13 @@ export const mapOut = (
   // topmost point to the Y position of the bottommost point.
   for (let ci = minX; ci <= maxX; ci++) {
     for (let ri = minY; ri <= maxY; ri++) {
-      const current = `${ci}, ${ri}`
+      const current: Point = `${ci},${ri}`
       const coords = $.toCoords(current)
 
       // Compute the Manhattan distances between the current point and every
       // point in the list.
       const pointsByDist = points
-        .map(p => ({ point: p, dist: $.manhattan($.toCoords(p), coords) }))
+        .map(point => ({ point, dist: $.manhattan($.toCoords(point), coords) }))
         .sort((a, b) => b.dist - a.dist)
 
       // If the sum of all the distances is within the self-imposed limit (32
@@ -37,7 +36,7 @@ export const mapOut = (
 
       // Unless the current tile is equi-distant to 2+ points from the list, it
       // belongs to the pool defined by the closest point.
-      if (closest.dist !== $.last(pointsByDist).dist) {
+      if (closest.dist !== pointsByDist.at(-1).dist) {
         const id = points.indexOf(closest.point)
         counters.set(id, (counters.get(id) || 0) + 1)
 
