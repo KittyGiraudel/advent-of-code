@@ -1,0 +1,33 @@
+name: Tests
+
+on: [push]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        ci_index: [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Unlock input files
+        uses: sliteteam/github-action-git-crypt-unlock@1.2.0
+        env:
+          GIT_CRYPT_KEY: ${{ secrets.GIT_CRYPT_KEY }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Run tests
+        run: npm test -- ${{ matrix.ci_index }}
