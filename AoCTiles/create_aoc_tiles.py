@@ -104,7 +104,7 @@ def get_font(size: int, path: str):
 main_font = functools.partial(get_font, path=AOC_TILES_SCRIPT_DIR / "fonts/PaytoneOne.ttf")
 secondary_font = functools.partial(get_font, path=AOC_TILES_SCRIPT_DIR / "fonts/SourceCodePro-Regular.otf")
 DayScores = namedtuple("DayScores", ["time1", "rank1", "score1", "time2", "rank2", "score2"], defaults=[None] * 3)
-extension_to_color: dict[str, str] = { '.js': '#ff3670' }
+extension_to_color: dict[str, str] = { '.ts': '#ff3670' }
 
 def get_paths_matching_regex(path: Path, pattern: str):
     return sorted([p for p in path.iterdir() if re.fullmatch(pattern, p.name)])
