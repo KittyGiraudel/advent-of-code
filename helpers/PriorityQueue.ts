@@ -69,8 +69,10 @@ const MinHeap = {
   },
 }
 
-class PriorityQueue {
-  constructor(initial) {
+class PriorityQueue<Node> {
+  queue: [Node, number][]
+
+  constructor(initial: [Node, number]) {
     this.queue = []
     if (initial) this.push(initial)
   }
@@ -79,7 +81,7 @@ class PriorityQueue {
     return this.queue.length
   }
 
-  push([data, priority]) {
+  push([data, priority]: [Node, number]) {
     MinHeap.push(this.queue, [priority, data])
     return this
   }

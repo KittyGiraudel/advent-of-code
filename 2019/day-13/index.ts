@@ -34,7 +34,7 @@ export const render = (board: Board): string => {
 
 const tick = (state: State, computer: Intcode): State => {
   const output = computer.run().getOutput() as number[]
-  const tiles = $.chunk(output, 3) as number[][]
+  const tiles = $.chunk(output, 3)
 
   tiles.forEach(([x, y, t]) => {
     if (x === -1 && y === 0) state.score = t

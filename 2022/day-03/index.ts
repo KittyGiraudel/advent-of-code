@@ -11,9 +11,7 @@ const half = (string: string): [string, string] => [
 const getTotalPriority = (groups: string[][]): number =>
   $.sum(
     groups
-      // Thankfully, the `intersection` helper works on strings the same as it
-      // does for arrays, so there is no need for casting strings into arrays.
-      .map(group => $.intersection(...group))
+      .map(group => $.intersection(...group.map(Array.from)))
       // There should be only one common item across groups, so the first item
       // in the resulting array needs to be picked.
       .map(intersection => intersection[0])

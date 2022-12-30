@@ -2,7 +2,8 @@
   "type": "module",
   "scripts": {
     "test": "ava --verbose --timeout=20s",
-    "tiles": "rm -rf AoCTiles/.aoc_tiles_cache && python3 AoCTiles/create_aoc_tiles.py"
+    "tiles": "rm -rf AoCTiles/.aoc_tiles_cache && python3 AoCTiles/create_aoc_tiles.py",
+    "compile": "tsc --outDir dist --noEmit"
   },
   "devDependencies": {
     "@swc/core": "^1.3.24",
@@ -24,7 +25,7 @@
     }
   },
   "dependencies": {
-    "circularray": "^0.1.0",
+    "circularray": "^0.2.2",
     "js-levenshtein": "^1.1.6"
   },
   "engines": {

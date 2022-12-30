@@ -10,7 +10,7 @@ type Node = {
 export class Computer {
   pointer: number
   skip: number
-  memory: Node[]
+  memory: Circularray<number>
   lengths: number[]
 
   SUFFIX = [17, 31, 73, 47, 23]
@@ -59,7 +59,7 @@ export class Computer {
 
   getHash() {
     return $.chunk(this.memory.toArray(), 16)
-      .map(chunk => chunk.reduce((a, b) => a ^ b, 0))
+      .map((chunk: number[]) => chunk.reduce((a, b) => a ^ b, 0))
       .map(n => n.toString(16).padStart(2, '0'))
       .join('')
   }

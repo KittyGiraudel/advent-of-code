@@ -82,7 +82,7 @@ const cross = (
   time = 0
 ): number => {
   const start = { coords: startCoords, time }
-  const frontier = new $.PriorityQueue([start, 0])
+  const frontier = new $.PriorityQueue<QueueItem>([start, 0])
   const visited: Set<string> = new Set()
 
   while (frontier.length) {

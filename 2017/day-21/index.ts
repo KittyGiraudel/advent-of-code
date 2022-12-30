@@ -39,7 +39,7 @@ const enhance = (curr: string[], patterns: Patterns, cache: {}): string[] => {
 
 // Disassemble a grid expressed as a string into several subgrids (expressed as
 // strings as well).
-const disassemble = (curr: string[]): string[][] => {
+const disassemble = (curr: string[]): Grid<string> => {
   // If the grid is as small as it can get (2 or 3 cells wide), it cannot be
   // broken down into subgrids.
   if (curr.length <= 3) return [curr]
@@ -47,7 +47,7 @@ const disassemble = (curr: string[]): string[][] => {
   // First, break every row into chunks of the expected size. For instance,
   // `.##.` becomes `['.#', '#.']`.
   const size = curr.length % 2 === 0 ? 2 : 3
-  const rows = curr.map(row => $.chunk(row, size))
+  const rows = curr.map(row => $.chunk.string(row, size))
 
   // Then, group rows into groups of the expected size, and zip their respective
   // items. For instance `[[0, 1], [2, 3]]` becomes `[[0, 2], [1, 3]]`.
@@ -56,7 +56,7 @@ const disassemble = (curr: string[]): string[][] => {
     .flat() as string[][]
 }
 
-const reassemble = grids => {
+const reassemble = (grids: Grid<string>): string[] => {
   // If there is only one subgrid, return it as there is nothing to reassemble.
   if (grids.length === 1) return grids[0]
 
@@ -68,10 +68,8 @@ const reassemble = grids => {
 }
 
 const cycle = (curr: string[], patterns: Patterns, cache: Cache): string[] => {
-  let next = disassemble(curr)
-  next = next.map(sub => enhance(sub, patterns, cache))
-  next = reassemble(next)
-  return next
+  let next = disassemble(curr).map(sub => enhance(sub, patterns, cache))
+  return reassemble(next)
 }
 
 export const run = (input: string[], iterations: number = 1): number => {

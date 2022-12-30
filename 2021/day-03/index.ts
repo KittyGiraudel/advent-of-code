@@ -1,8 +1,8 @@
 import $ from '../../helpers'
 
-export const getEpsilonAndGamma = (
-  items: string[]
-): { gamma: string; epsilon: string } =>
+type Output = { gamma: string; epsilon: string }
+
+export const getEpsilonAndGamma = (items: string[]): Output =>
   $.array(items[0].length).reduce(
     (acc, _, i) => {
       const column = $.column(items, i).join('')

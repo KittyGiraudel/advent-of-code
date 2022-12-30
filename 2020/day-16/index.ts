@@ -88,7 +88,9 @@ const getRulesPossibilities = (
 
 // Resolve rules possibitilies to return an order of rules (mutative).
 // @param possibilities - Rules possibilities
-const resolveRulesPossibitilies = (possibilities: Possibility[]): string[] => {
+const resolveRulesPossibitilies = (
+  possibilities: (string | string[])[]
+): string[] => {
   // Find a position which has a single option
   let index = possibilities.findIndex(hasSingleOption)
 
@@ -97,19 +99,21 @@ const resolveRulesPossibitilies = (possibilities: Possibility[]): string[] => {
 
     // Unwrap it from its array
     // Go through all positions, and remove this option from their array
-    possibilities = possibilities.map((entry, i) =>
-      i === index
-        ? value
-        : Array.isArray(entry)
-        ? entry.filter(e => e !== value)
-        : entry
-    )
+    possibilities.forEach((possibility, i, array) => {
+      if (i === index) {
+        array[i] = value
+      } else {
+        array[i] = Array.isArray(possibility)
+          ? possibility.filter(e => e !== value)
+          : possibility
+      }
+    })
 
     // Look for another entry which has a single option
     index = possibilities.findIndex(hasSingleOption)
   }
 
-  return possibilities
+  return possibilities as string[]
 }
 
 // Get the order of rules (names only) given the tickets’ validity.

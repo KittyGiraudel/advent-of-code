@@ -40,7 +40,7 @@ class Network {
     const isIdle = packet === -1 && !output.length
 
     if (output.length) {
-      $.chunk<number[], number>(output, 3).forEach(([address, ri, ci]) => {
+      $.chunk(output, 3).forEach(([address, ri, ci]) => {
         if (address === 255) this.updateNAT([ri, ci] as Coords)
         else {
           this.nodes[address].queue.push([ri, ci])

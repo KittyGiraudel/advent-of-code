@@ -1,12 +1,18 @@
 import $ from '../../helpers'
 import { Coords, CoordsAndPoint, Grid } from '../../types'
 
+type QueueItem = CoordsAndPoint & {
+  keys: string[]
+  path: string[]
+  doors: string[]
+}
+
 const isDoorAtCell = (cell: string): boolean => /[A-Z]/.test(cell)
 const isKeyAtCell = (cell: string): boolean => /[a-z]/.test(cell)
 
 const createGraph = (grid: Grid<string>, start: CoordsAndPoint, locations) => {
   const count = Object.keys(locations).filter(isKeyAtCell).length
-  const frontier = new $.PriorityQueue([
+  const frontier = new $.PriorityQueue<QueueItem>([
     { ...start, keys: [], path: [], doors: [] },
     10_000,
   ])

@@ -2,6 +2,7 @@ import $ from '../../helpers'
 import { Coords, CoordsObj, Grid, Point } from '../../types'
 
 type CoordsWithAngle = CoordsObj & { angle?: number }
+type Group = { angle: number; items: CoordsObj[] }
 
 export const mapOutSpace = (rows: string[]): Map<Point, Point[]> => {
   const map: Map<Point, Point[]> = new Map()
@@ -72,7 +73,7 @@ export const vaporize = grid => {
   // Group asteroids per angle, so that we end up with an array of groups in
   // ascending order, each group holding coordinates of all asteroids sitting
   // on the same line to the center (thus same angle).
-  const groups = asteroids.reduce((acc, { angle, x, y }) => {
+  const groups: Group[] = asteroids.reduce((acc, { angle, x, y }) => {
     const group = acc.find(group => group.angle === angle)
     if (!group) acc.push({ angle, items: [{ x, y }] })
     else group.items.push({ x, y })

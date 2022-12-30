@@ -1,8 +1,8 @@
 import $ from '../../helpers'
 
 export const run = (salt: string): [string, string] => {
-  let password1 = []
-  let password2 = $.array(8)
+  let password1: string[] = []
+  let password2: string[] = $.array(8)
   let i = 0
   let curr = null
 
