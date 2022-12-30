@@ -54,7 +54,7 @@ const createGraph = (grid: Grid<string>, start: CoordsAndPoint, locations) => {
 }
 
 export const run = (input: string[]): number => {
-  const locations: { [key: string]: Coords } = {}
+  const locations: Record<string, Coords> = {}
 
   const grid = $.grid.create(input, (v, ri, ci) => {
     const isKey = /[a-z]/.test(v)

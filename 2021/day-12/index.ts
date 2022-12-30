@@ -4,7 +4,7 @@ type Node = {
   small: boolean
   siblings: Set<string>
 }
-type Graph = { [key: string]: Node }
+type Graph = Record<string, Node>
 
 const createNode = (cave: string): Node => ({
   small: cave === cave.toLowerCase(),

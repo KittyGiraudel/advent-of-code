@@ -1,10 +1,6 @@
 import $ from '../../helpers'
 
-type Graph = {
-  [key: string]: {
-    [key: string]: number
-  }
-}
+type Graph = Record<string, Record<string, number>>
 
 const createGraph = (input: string[], withOneself: boolean): Graph => {
   const graph: Graph = {}

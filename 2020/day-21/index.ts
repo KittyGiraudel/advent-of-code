@@ -20,7 +20,7 @@ const parseFood = (
   }
 }
 
-type Map = { [key: string]: { foods: string[]; food: string } }
+type Map = Record<string, { foods: string[]; food: string }>
 
 // Map food input.
 // @param input - Raw foods

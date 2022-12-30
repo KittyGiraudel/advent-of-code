@@ -13,7 +13,7 @@ export const run = (key: string): [number, number] => {
     grid.push(bin)
   }
 
-  const visited: { [key: Point]: Point } = {}
+  const visited: Record<Point, Point> = {}
 
   // Starting from the cell at the given coordinates, explore the active and not
   // yet explored neighbors, marking them all part of the same group.

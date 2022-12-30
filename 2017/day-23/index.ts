@@ -1,10 +1,10 @@
 class Computer {
   pointer: number
   instructions: string[]
-  registers: { [key: string]: number }
+  registers: Record<string, number>
   counters: { set: number; sub: number; mul: number; jnz: number }
 
-  constructor(input) {
+  constructor(input: string[]) {
     this.pointer = 0
     this.instructions = input
     this.registers = { a: 0, b: 0, c: 0, d: 0, e: 0, f: 0, g: 0, h: 0 }

@@ -1,13 +1,8 @@
 import $ from '../../helpers'
 import { Grid } from '../../types'
 
-type Patterns = {
-  [key: string]: string[]
-}
-
-type Cache = {
-  [key: string]: string[]
-}
+type Patterns = Record<string, string[]>
+type Cache = Record<string, string[]>
 
 const asGrid = (string: string): Grid<string> =>
   string.split('/').map(row => Array.from(row))

@@ -2,11 +2,11 @@ import $ from '../../helpers'
 
 type Ingredient = { ingredient: string; amount: number }
 type Recipe = { servings: number; ingredients: Ingredient[] }
-type Recipes = { [key: string]: Recipe }
+type Recipes = Record<string, Recipe>
 type State = {
   recipes: Recipes
   ore: number
-  supplies: { [key: string]: number }
+  supplies: Record<string, number>
 }
 
 const parseIngredient = (string: string): Ingredient => {

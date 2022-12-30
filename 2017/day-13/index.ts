@@ -1,4 +1,4 @@
-type Graph = { [key: string]: number }
+type Graph = Record<string, number>
 
 /*
 class Firewall {

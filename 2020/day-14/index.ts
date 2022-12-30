@@ -1,7 +1,7 @@
 import $ from '../../helpers'
 
 type Instruction = string | number[]
-type Memory = { [key: string]: number }
+type Memory = Record<string, number>
 type Program = [Memory, string]
 
 // Parse the given input into a comprehensible set of instructions.

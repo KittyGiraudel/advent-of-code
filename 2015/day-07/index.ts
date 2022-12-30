@@ -1,5 +1,5 @@
 type Graph = Map<string, { deps: RegExpMatchArray; raw: string }>
-type Registers = { [key: string]: number }
+type Registers = Record<string, number>
 
 const OPERATORS = {
   AND: '&',

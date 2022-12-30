@@ -1,8 +1,8 @@
 import $ from '../../helpers'
 import { Grid, Coords, Point } from '../../types'
 
-const generateMap = (input: string[]): { [key: Point]: string } =>
-  input.reduce((acc: { [key: Point]: string }, line) => {
+const generateMap = (input: string[]): Record<Point, string> =>
+  input.reduce((acc: Record<Point, string>, line) => {
     const match = line.match(/([xy])=(\d+), ([xy])=(\d+)..(\d+)/)
 
     for (let i = +match[4]; i <= +match[5]; i++) {

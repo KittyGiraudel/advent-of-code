@@ -1,5 +1,5 @@
 type Item = { type: string; count: number }
-type Map = { [key: string]: Item[] }
+type Map = Record<string, Item[]>
 
 // Parse a restriction line into a type and an array of possible sub-types.
 // @param restriction - Unparsed restriction

@@ -1,7 +1,7 @@
 import $ from '../../helpers'
 import { Coords, Point, SearchGraph } from '../../types'
 
-const VECTORS: { [key: string]: Coords } = {
+const VECTORS: Record<string, Coords> = {
   n: [0, -2],
   ne: [+1, -1],
   se: [+1, +1],

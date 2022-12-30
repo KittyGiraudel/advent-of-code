@@ -40,8 +40,8 @@ class Computer {
   registers: { p: number }
   queue: number[]
   pointer: number
-  counters: { [key: string]: number }
-  listeners: { [key: string]: Function[] }
+  counters: Record<string, number>
+  listeners: Record<string, Function[]>
   instructions: string[]
   waiting: boolean
 

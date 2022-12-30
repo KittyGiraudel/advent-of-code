@@ -1,6 +1,6 @@
 type Instruction = [number, number, string]
 type State = Instruction[]
-type States = { [key: string]: State }
+type States = Record<string, State>
 
 // Parse the machine into something like this, where for each state, the first
 // array is the instruction if the current value is 0, and the second one is

@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 
-type Patterns = { [key: string]: string }
+type Patterns = Record<string, string>
 
 const count = (state: string[], offset: number): number =>
   $.sum(state.map((char, index) => (char === '#' ? index - offset : 0)))

@@ -7,7 +7,7 @@ type Cart = {
   index: Generator
   crashed?: boolean
 }
-type CartMap = { [key: Point]: Cart }
+type CartMap = Record<Point, Cart>
 type Slashes = '/' | '\\'
 
 const CORNERS: {

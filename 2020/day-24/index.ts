@@ -4,7 +4,7 @@ import { Coords, Point } from '../../types'
 type Mappy = Map<Point, string>
 type Cache = Map<string, Point[]>
 
-const VECTORS: { [key: string]: Coords } = {
+const VECTORS: Record<string, Coords> = {
   e: [+2, 0],
   w: [-2, 0],
   nw: [-1, -1],

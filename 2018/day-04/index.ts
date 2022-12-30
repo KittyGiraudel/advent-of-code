@@ -56,9 +56,9 @@ const processEvent = (event: Event, index: number, log: Event[]): Event => {
 // - A dictionary of guards mapping their ID to the amount of time they slept.
 // - An array of minutes that were collectively spent asleep.
 const aggregateEvents = (
-  acc: { [key: string]: number[] },
+  acc: Record<string, number[]>,
   event: Event
-): { [key: string]: number[] } => {
+): Record<string, number[]> => {
   if (!(event.id in acc)) {
     acc[event.id] = []
   }

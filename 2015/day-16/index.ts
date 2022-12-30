@@ -11,7 +11,7 @@ const SAMPLE = {
   perfumes: 1,
 }
 
-const parseProperties = (properties: string[]): { [key: string]: number } =>
+const parseProperties = (properties: string[]): Record<string, number> =>
   properties
     .map(prop => prop.split(': '))
     .reduce((acc, [name, count]) => ({ ...acc, [name]: +count }), {})

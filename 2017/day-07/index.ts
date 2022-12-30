@@ -12,9 +12,7 @@ type Fix = {
   node: Node
 }
 
-type Graph = {
-  [key: string]: Node
-}
+type Graph = Record<string, Node>
 
 const getRootNode = (graph: Graph): string => {
   const values = Object.values(graph).reduce(

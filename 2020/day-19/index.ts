@@ -1,5 +1,5 @@
 type Cache = Map<string, string>
-type Fixes = { [key: string]: string }
+type Fixes = Record<string, string>
 
 // If the rule contains a pipe, wrap it in a non-capturing group as it needs to
 // be scoped to be meaningful on its one. The group has to be non-capturing to

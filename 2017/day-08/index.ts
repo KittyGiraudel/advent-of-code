@@ -8,7 +8,7 @@ export const run = (
   lines: string[]
 ): { currentMax: number; absoluteMax: number } => {
   let absoluteMax = -Infinity
-  const registers: { [key: string]: number } = {}
+  const registers: Record<string, number> = {}
 
   lines.forEach(line => {
     let [expression, condition] = line.split(' if ')
