@@ -3,7 +3,8 @@
   "scripts": {
     "test": "ava --verbose --timeout=20s",
     "tiles": "rm -rf AoCTiles/.aoc_tiles_cache && python3 AoCTiles/create_aoc_tiles.py",
-    "check": "tsc --outDir dist --noEmit"
+    "check": "tsc --outDir dist --noEmit",
+    "exec": "node --loader ts-node/esm --experimental-specifier-resolution=node"
   },
   "devDependencies": {
     "@swc/core": "^1.3.24",
