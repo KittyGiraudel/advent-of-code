@@ -46,16 +46,6 @@ const gridFind = <Input>(
   callback: (item: Input, ri: number, ci: number) => boolean
 ): Input => loopOnGrid<Input, boolean>('find')(grid, callback)
 
-const gridFindCoords = <Input>(
-  grid: Grid<Input>,
-  callback: (item: Input, ri: number, ci: number) => boolean
-): Coords =>
-  (grid.find.bind(grid) as CallableFunction)((row: Input[], ri: number) =>
-    (row.find.bind(row) as CallableFunction)((item: Input, ci: number) =>
-      callback(item, ri, ci) ? ([ri, ci] as Coords) : false
-    )
-  )
-
 const gridReduce = <Input, Output>(
   grid: Grid<Input>,
   callback: (acc: Output, current: Input, ci: number, ri: number) => Output,
@@ -65,6 +55,16 @@ const gridReduce = <Input, Output>(
     (accRow, row, ri) =>
       row.reduce((accCol, item, ci) => callback(accCol, item, ri, ci), accRow),
     initialValue
+  )
+
+const gridFindCoords = <Input>(
+  grid: Grid<Input>,
+  callback: (item: Input, ri: number, ci: number) => boolean
+): Coords =>
+  gridReduce(
+    grid,
+    (acc, item, ri, ci) => acc || (callback(item, ri, ci) ? [ri, ci] : acc),
+    null
   )
 
 const identity: Mapper<string> = (value: string, ri: number, ci: number) =>
