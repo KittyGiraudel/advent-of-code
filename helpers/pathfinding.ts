@@ -25,7 +25,7 @@ const pathfinding = <T>({
   getCost,
   start,
   heuristic,
-  toKey = curr => toPoint(curr as Coords) as string,
+  toKey = curr => String(curr),
   isDone = () => false,
 }: SearchOptions<T>): SearchResult<T> => {
   const withPriority =
@@ -64,14 +64,10 @@ const pathfinding = <T>({
   return { from, costs, end }
 }
 
-const reconstruct = (
-  graph: SearchGraph,
-  start: Coords | Point,
-  end: Coords | Point
-) => {
+const reconstruct = (graph: SearchGraph, start: unknown, end: unknown) => {
   let path = []
-  let current = typeof end === 'string' ? end : toPoint(end)
-  start = typeof start === 'string' ? start : toPoint(start)
+  let current = typeof end === 'string' ? end : String(end)
+  start = typeof start === 'string' ? start : String(start)
 
   while (current !== start) {
     path.push(current)
