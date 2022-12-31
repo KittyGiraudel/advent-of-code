@@ -1,9 +1,9 @@
 // Return all possible permutations of the array.
-const permutations = <Type>(array: Type[]): Type[][] => {
-  const results: Type[][] = []
+const permutations = <T>(array: T[]): T[][] => {
+  const results: T[][] = []
 
-  function permute(arr: Type[], memo: Type[] = []) {
-    let curr: Type[]
+  function permute(arr: T[], memo: T[] = []) {
+    let curr: T[]
 
     for (var i = 0; i < arr.length; i++) {
       curr = arr.splice(i, 1)

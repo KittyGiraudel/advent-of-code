@@ -1,7 +1,7 @@
-const _chunk = <Type>(
-  sliceable: string | Type[],
+const _chunk = <T>(
+  sliceable: string | T[],
   size: number
-): Array<string | Type[]> => {
+): Array<string | T[]> => {
   const result = []
 
   for (let i = 0; i < sliceable.length; i += size)
@@ -11,8 +11,8 @@ const _chunk = <Type>(
 }
 
 // Split the given array into chunks of the given size.
-const chunk = <Type>(array: Type[], size: number): Type[][] =>
-  _chunk(array, size) as Type[][]
+const chunk = <T>(array: T[], size: number): T[][] =>
+  _chunk(array, size) as T[][]
 
 // Split the given string into chunks of the given size.
 chunk.string = (string: string, size: number): string[] =>

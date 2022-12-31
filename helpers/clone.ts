@@ -1,4 +1,4 @@
 // Deep clone a data structure.
-const clone = <Type>(data: Type): Type => JSON.parse(JSON.stringify(data))
+const clone = <T>(data: T): T => JSON.parse(JSON.stringify(data))
 
 export default clone

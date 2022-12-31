@@ -1,5 +1,5 @@
 // Swap the values at indices a and b in given array.
-const swap = <Type>(array: Type[], a: number, b: number): Type[] => {
+const swap = <T>(array: T[], a: number, b: number): T[] => {
   ;[array[a], array[b]] = [array[b], array[a]]
   return array
 }

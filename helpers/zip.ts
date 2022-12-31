@@ -1,5 +1,5 @@
 // Zip several arrays into one by matching entries by index.
-const zip = <Type>(...arrays: Type[][]): Type[][] => {
+const zip = <T>(...arrays: T[][]): T[][] => {
   const array = arrays[0]
   const others = arrays.slice(1)
 

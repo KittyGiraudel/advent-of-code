@@ -1,65 +1,62 @@
 import { Coords } from '../types'
 
-export type Grid<Type> = Type[][]
+export type Grid<T> = T[][]
 type Mapper<T> = (value: string, ri: number, ci: number) => T
 type Handler = 'forEach' | 'map' | 'flatMap' | 'find' | 'every' | 'some'
 
 const loopOnGrid =
-  <Input, Output>(handler: Handler) =>
-  (
-    grid: Grid<Input>,
-    callback: (item: Input, ri: number, ci: number) => Output
-  ) =>
-    (grid[handler].bind(grid) as CallableFunction)((row: Input[], ri: number) =>
-      (row[handler].bind(row) as CallableFunction)((item: Input, ci: number) =>
+  <T, U>(handler: Handler) =>
+  (grid: Grid<T>, callback: (item: T, ri: number, ci: number) => U) =>
+    (grid[handler].bind(grid) as CallableFunction)((row: T[], ri: number) =>
+      (row[handler].bind(row) as CallableFunction)((item: T, ci: number) =>
         callback(item, ri, ci)
       )
     )
 
-const gridForEach = <Input>(
-  grid: Grid<Input>,
-  callback: (item: Input, ri: number, ci: number) => void
-): void => loopOnGrid<Input, void>('forEach')(grid, callback)
+const gridForEach = <T>(
+  grid: Grid<T>,
+  callback: (item: T, ri: number, ci: number) => void
+): void => loopOnGrid<T, void>('forEach')(grid, callback)
 
-const gridMap = <Input, Output>(
-  grid: Grid<Input>,
-  callback: (item: Input, ri: number, ci: number) => Output
-): Grid<Output> => loopOnGrid<Input, Output>('map')(grid, callback)
+const gridMap = <T, U>(
+  grid: Grid<T>,
+  callback: (item: T, ri: number, ci: number) => U
+): Grid<U> => loopOnGrid<T, U>('map')(grid, callback)
 
-const gridFlatMap = <Input, Output>(
-  grid: Grid<Input>,
-  callback: (item: Input, ri: number, ci: number) => Output
-): Output[] => loopOnGrid<Input, Output>('flatMap')(grid, callback)
+const gridFlatMap = <T, U>(
+  grid: Grid<T>,
+  callback: (item: T, ri: number, ci: number) => U
+): U[] => loopOnGrid<T, U>('flatMap')(grid, callback)
 
-const gridEvery = <Input>(
-  grid: Grid<Input>,
-  callback: (item: Input, ri: number, ci: number) => boolean
-): boolean => loopOnGrid<Input, boolean>('every')(grid, callback)
+const gridEvery = <T>(
+  grid: Grid<T>,
+  callback: (item: T, ri: number, ci: number) => boolean
+): boolean => loopOnGrid<T, boolean>('every')(grid, callback)
 
-const gridSome = <Input>(
-  grid: Grid<Input>,
-  callback: (item: Input, ri: number, ci: number) => boolean
-): boolean => loopOnGrid<Input, boolean>('some')(grid, callback)
+const gridSome = <T>(
+  grid: Grid<T>,
+  callback: (item: T, ri: number, ci: number) => boolean
+): boolean => loopOnGrid<T, boolean>('some')(grid, callback)
 
-const gridFind = <Input>(
-  grid: Grid<Input>,
-  callback: (item: Input, ri: number, ci: number) => boolean
-): Input => loopOnGrid<Input, boolean>('find')(grid, callback)
+const gridFind = <T>(
+  grid: Grid<T>,
+  callback: (item: T, ri: number, ci: number) => boolean
+): T => loopOnGrid<T, boolean>('find')(grid, callback)
 
-const gridReduce = <Input, Output>(
-  grid: Grid<Input>,
-  callback: (acc: Output, current: Input, ci: number, ri: number) => Output,
-  initialValue: Output
-): Output =>
+const gridReduce = <T, U>(
+  grid: Grid<T>,
+  callback: (acc: U, current: T, ci: number, ri: number) => U,
+  initialValue: U
+): U =>
   grid.reduce(
     (accRow, row, ri) =>
       row.reduce((accCol, item, ci) => callback(accCol, item, ri, ci), accRow),
     initialValue
   )
 
-const gridFindCoords = <Input>(
-  grid: Grid<Input>,
-  callback: (item: Input, ri: number, ci: number) => boolean
+const gridFindCoords = <T>(
+  grid: Grid<T>,
+  callback: (item: T, ri: number, ci: number) => boolean
 ): Coords =>
   gridReduce(
     grid,
@@ -70,49 +67,49 @@ const gridFindCoords = <Input>(
 const identity: Mapper<string> = (value: string, ri: number, ci: number) =>
   value
 
-const createGrid = <Input>(
+const createGrid = <T>(
   rows: string[],
-  mapper: Mapper<Input> = identity as Mapper<Input>
-): Grid<Input> =>
+  mapper: Mapper<T> = identity as Mapper<T>
+): Grid<T> =>
   rows.map((row, ri) => row.split('').map((item, ci) => mapper(item, ri, ci)))
 
-const cloneGrid = <Input>(grid: Grid<Input>): Grid<Input> =>
+const cloneGrid = <T>(grid: Grid<T>): Grid<T> =>
   grid.slice(0).map(row => row.slice(0))
 
-function isCallable<Type>(
-  maybeFunc: Type | ((ri: number, ci: number) => Type)
-): maybeFunc is (ri: number, ci: number) => Type {
+function isCallable<T>(
+  maybeFunc: T | ((ri: number, ci: number) => T)
+): maybeFunc is (ri: number, ci: number) => T {
   return typeof maybeFunc === 'function'
 }
 
-const initGrid = <Input>(
+const initGrid = <T>(
   width: number,
   height: number = width,
-  value: Input | ((ci: number, ri: number) => Input) = null
-): Grid<Input> =>
+  value: T | ((ci: number, ri: number) => T) = null
+): Grid<T> =>
   Array.from({ length: height }, (_, ri) =>
     Array.from({ length: width }, (_, ci) =>
       isCallable(value) ? value(ci, ri) : value
     )
   )
 
-const gridRotate = <Input>(grid: Grid<Input>): Grid<Input> =>
+const gridRotate = <T>(grid: Grid<T>): Grid<T> =>
   Array.from(grid[0]).map((_, index) => grid.map(row => row[index]).reverse())
 
-const renderGrid = <Input>(
-  grid: Grid<Input>,
+const renderGrid = <T>(
+  grid: Grid<T>,
   separator: string = '',
-  mapper = (value: Input): string => String(value)
+  mapper = (value: T): string => String(value)
 ): string =>
   gridMap(grid, mapper)
     .map(row => row.join(separator))
     .join('\n')
 
-const gridVariants = <Input>(grid: Grid<Input>): Grid<Input>[] => {
+const gridVariants = <T>(grid: Grid<T>): Grid<T>[] => {
   const variants = []
   const clone = cloneGrid(grid)
 
-  const rotate = (grid: Grid<Input>, rotations: number = 0): Grid<Input> => {
+  const rotate = (grid: Grid<T>, rotations: number = 0): Grid<T> => {
     for (let i = 0; i < rotations; i++) grid = gridRotate(grid)
     return grid
   }
