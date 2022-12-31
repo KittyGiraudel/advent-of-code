@@ -1,7 +1,7 @@
 {
   "type": "module",
   "scripts": {
-    "test": "ava --verbose --timeout=20s",
+    "test": "ava --verbose --timeout=30s",
     "tiles": "rm -rf AoCTiles/.aoc_tiles_cache && python3 AoCTiles/create_aoc_tiles.py",
     "check": "tsc --outDir dist --noEmit",
     "exec": "node --loader ts-node/esm --experimental-specifier-resolution=node"
