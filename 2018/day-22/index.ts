@@ -29,12 +29,10 @@ const getRiskLevel = (
 ): number => getErosionLevel(x, y, target, depth) % 3
 
 export const getRisk = (depth: number, target: Coords): number =>
-  $.sum(
-    $.grid
-      .map($.grid.init(target[0] + 1, target[1] + 1), (v, ri, ci) =>
-        getRiskLevel(ci, ri, target, depth)
-      )
-      .flat()
+  $.grid.reduce(
+    $.grid.init(target[0] + 1, target[1] + 1),
+    (acc, value, ri, ci) => acc + getRiskLevel(ci, ri, target, depth),
+    0
   )
 
 const getNeighbors = $.memo(
@@ -47,11 +45,11 @@ const getNeighbors = $.memo(
 export const getDuration = (depth: number, target: Coords): number => {
   const height = 5 + (target[1] + 1)
   const width = 50 + (target[0] + 1)
-  const heap: number[][] = [[0, 0, 0, 1]]
+  const frontier: number[][] = [[0, 0, 0, 1]]
   const timeMap: Map<string, number> = new Map()
 
-  while (heap.length) {
-    const [min, x, y, tool] = heap.shift()
+  while (frontier.length) {
+    const [min, x, y, tool] = frontier.shift()
     const key = $.toPoint([x, y, tool])
     const bestTime = timeMap.get(key) || Infinity
 
@@ -68,7 +66,7 @@ export const getDuration = (depth: number, target: Coords): number => {
     for (let i = 0; i < 3; i++) {
       if (i !== tool && i !== getRiskLevel(x, y, target, depth)) {
         const bestTime = timeMap.get($.toPoint([x, y, i])) || Infinity
-        if (bestTime > min + 7) heap.push([min + 7, x, y, i])
+        if (bestTime > min + 7) frontier.push([min + 7, x, y, i])
       }
     }
 
@@ -76,16 +74,16 @@ export const getDuration = (depth: number, target: Coords): number => {
       .filter(([x, y]) => getRiskLevel(x, y, target, depth) !== tool)
       .forEach(([x, y]) => {
         const bestTime = timeMap.get($.toPoint([x, y, tool])) || Infinity
-        if (bestTime > min + 1) heap.push([min + 1, x, y, tool])
+        if (bestTime > min + 1) frontier.push([min + 1, x, y, tool])
       })
 
-    let hashes = heap
+    let hashes = frontier
       .sort((a, b) => a[0] - b[0])
       .map(([min, ...params]) => $.toPoint(params as Coords))
 
-    // Sort the heap by time, then keep only the best time for every hash.
+    // Sort the frontier by time, then keep only the best time for every hash.
     for (let i = 0; i < hashes.length; i++) {
-      if (hashes.indexOf(hashes[i]) !== i) heap.splice(i, 1)
+      if (hashes.indexOf(hashes[i]) !== i) frontier.splice(i, 1)
     }
   }
 }

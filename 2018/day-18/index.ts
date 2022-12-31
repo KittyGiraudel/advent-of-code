@@ -23,7 +23,7 @@ export const run = (rows: string[], iterations: number = 1): number => {
   let curr = $.grid.create<string>(rows)
 
   for (let i = 0; i < iterations; i++) {
-    curr = $.grid.map($.grid.clone(curr), (value: string, ri, ci) => {
+    curr = $.grid.map(curr, (value, ri, ci) => {
       const neighbors = $.surrounding([ri, ci], 'COORDS').map(
         (coords: Coords) => $.access(curr, coords)
       )

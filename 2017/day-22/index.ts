@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords } from '../../types'
+import { Coords, Point } from '../../types'
 
 type State = {
   position: Coords
@@ -16,16 +16,16 @@ export const run = (
   iterations: number,
   advanced: boolean = false
 ): number => {
-  const nodes: Map<string, string> = new Map()
+  const nodes: Map<Point, string> = $.grid.reduce(
+    $.grid.create(rows),
+    (nodes, value, ri, ci) => nodes.set(ci + ',' + ri, value),
+    new Map()
+  )
   const state: State = {
     position: [Math.floor(rows[0].length / 2), Math.floor(rows.length / 2)],
     direction: $.turn.DIRECTIONS[0],
   }
   let infections = 0
-
-  $.grid.forEach($.grid.create(rows), (v: string, ri, ci) =>
-    nodes.set(ci + ',' + ri, v)
-  )
 
   while (iterations--) {
     const point = $.toPoint(state.position)

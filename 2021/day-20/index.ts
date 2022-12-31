@@ -27,9 +27,7 @@ const step = (
 ): string => {
   const rows = padInput(input, defaultChar)
   const curr = $.grid.create<string>(rows)
-  const next = $.grid.clone(curr)
-
-  $.grid.forEach(curr, (_, ri, ci) => {
+  const next = $.grid.map(curr, (_, ri, ci) => {
     const value = $.toDec(
       getTilingCoords(ri, ci)
         .map(coords => $.access(curr, coords) ?? defaultChar)
@@ -37,7 +35,7 @@ const step = (
         .join('')
     )
 
-    next[ri][ci] = algorithm[value]
+    return algorithm[value]
   })
 
   return $.grid.render(next)

@@ -15,17 +15,15 @@ const getNeighbors = $.memo((point: Point): Point[] =>
 const mapPositions = (input: string[]): Set<Point> =>
   $.grid.reduce(
     $.grid.create(input),
-    (acc, value, ri, ci) => {
-      if (value === '#') acc.add((ri + ',' + ci) as Point)
-      return acc
-    },
+    (acc, value, ri, ci) =>
+      value === '#' ? acc.add((ri + ',' + ci) as Point) : acc,
     new Set()
   )
 
 export const run = (input: string[], rounds: number = 10): number => {
   const positions = mapPositions(input)
   const directions = ['N', 'S', 'W', 'E']
-  const isOccupied = point => positions.has(point)
+  const isOccupied = (point: Point) => positions.has(point)
 
   for (let i = 0; i < rounds; i++) {
     // Stage 1: every elf in the map proposes a move based on their neighbors.

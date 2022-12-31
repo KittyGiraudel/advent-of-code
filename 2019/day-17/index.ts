@@ -24,21 +24,22 @@ export const getGrid = (input: string): Grid<string> => {
     .map(row => row.split(''))
 }
 
-export const calibrate = (grid: Grid<string>): number => {
-  let calibration = 0
+export const calibrate = (grid: Grid<string>): number =>
+  $.grid.reduce(
+    grid,
+    (calibration, value, ri, ci) => {
+      if (value !== '#') return calibration
 
-  $.grid.forEach(grid, (v, ri, ci) => {
-    if (v !== '#') return
+      const neighborcoords: Coords[] = $.bordering([ri, ci], 'COORDS')
+      const neighbors = neighborcoords.map(coords => $.access(grid, coords))
+      const intersection = neighbors.every(neighbor => neighbor === '#')
 
-    const neighborcoords: Coords[] = $.bordering([ri, ci], 'COORDS')
-    const neighbors = neighborcoords.map(coords => $.access(grid, coords))
-    const intersection = neighbors.every(neighbor => neighbor === '#')
+      if (intersection) calibration += ri * ci
 
-    if (intersection) calibration += ri * ci
-  })
-
-  return calibration
-}
+      return calibration
+    },
+    0
+  )
 
 export const scaffold = (input: string): number => {
   const computer = new Intcode(input).updateMemory(0, 2)
