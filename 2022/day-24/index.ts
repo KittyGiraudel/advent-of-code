@@ -80,38 +80,24 @@ const cross = (
   startCoords: Coords,
   endCoords: Coords,
   time = 0
-): number => {
-  const start = { coords: startCoords, time }
-  const frontier = new $.PriorityQueue<Node>([start, 0])
-  const visited: Set<string> = new Set()
+): number =>
+  $.pathfinding.gbfs({
+    start: { coords: startCoords, time },
+    isGoal: curr => $.toPoint(curr.coords) === $.toPoint(endCoords),
+    toKey: curr => $.toPoint(curr.coords) + ((curr.time + 1) % grids.size),
+    heuristic: curr => $.manhattan(curr.coords, endCoords) + curr.time + 1,
+    getNextNodes: curr => {
+      const index = (curr.time + 1) % grids.size
+      // Retrieve the state of the maze based on the current time.
+      const grid = grids.get(index)
 
-  while (frontier.length) {
-    const [curr] = frontier.pop()
-    const index = (curr.time + 1) % grids.size
-    // Retrieve the state of the maze based on the current time.
-    const grid = grids.get(index)
-
-    if ($.toPoint(curr.coords) === $.toPoint(endCoords)) return curr.time
-
-    const candidates = getMoves(curr).filter(
-      next =>
-        // The grid only arrays, so a given array has no item, it means it’s
-        // a free cell (no wall and no blizzard).
-        $.access(grid, next.coords)?.length === 0 &&
-        // This is pretty much the part that I failed to figure out on my own:
-        // I knew a cell *can* be walked several time, which is why the
-        // visited check should consider the current time to avoid loops.
-        !visited.has($.toPoint(next.coords) + index)
-    )
-
-    candidates.forEach(next => {
-      const priority = $.manhattan(curr.coords, endCoords) + curr.time + 1
-
-      frontier.push([next, priority])
-      visited.add($.toPoint(next.coords) + index)
-    })
-  }
-}
+      // The grid only arrays, so a given array has no item, it means it’s
+      // a free cell (no wall and no blizzard).
+      return getMoves(curr).filter(
+        next => $.access(grid, next.coords)?.length === 0
+      )
+    },
+  }).end.time
 
 // Unfortunately I could not solve part 1 of this puzzle without help. I did
 // manage to cross the maze successfully (which is something!) but I couldn’t

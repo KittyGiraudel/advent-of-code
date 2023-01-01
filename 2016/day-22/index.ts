@@ -51,7 +51,7 @@ export const getData = (dump: string[]): number => {
   let curr: Coords = emptyNode.coords
   let total: number = 0
 
-  const getNeighbors = (curr: Coords) =>
+  const getNextNodes = (curr: Coords) =>
     $.bordering(curr, 'COORDS').filter((coords: Coords) => {
       const point = $.toPoint(coords)
       return availableDisks.includes(point) && point !== $.toPoint(data)
@@ -62,10 +62,10 @@ export const getData = (dump: string[]): number => {
   while (data[0] || data[1]) {
     // Find the path from the empty disk to the left of the data disk.
     const end: Coords = [data[0], data[1] - 1]
-    const graph = $.pathfinding.search({
+    const graph = $.pathfinding.bfs({
       start: curr,
-      isDone: (curr: Coords) => curr[0] === end[0] && curr[1] === end[1],
-      getNeighbors,
+      isGoal: curr => curr[0] === end[0] && curr[1] === end[1],
+      getNextNodes,
     })
 
     // Increment the total amount of moves by the length of this path.

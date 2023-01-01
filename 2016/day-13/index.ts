@@ -18,13 +18,11 @@ export const run = (
   n: number,
   reach: number = 50
 ): [number, number] => {
-  const neighbors = (curr: Coords) =>
-    $.bordering(curr, 'COORDS').filter(isOpenSpace(n))
   const start: Coords = [1, 1]
-  const { from: graph } = $.pathfinding.search({
+  const { from: graph } = $.pathfinding.bfs({
     start,
-    getNeighbors: neighbors,
-    isDone: ([ri, ci]) => ri === end[0] && ci === end[1],
+    getNextNodes: curr => $.bordering(curr, 'COORDS').filter(isOpenSpace(n)),
+    isGoal: ([ri, ci]) => ri === end[0] && ci === end[1],
   })
 
   const getDistanceFromStart = from =>

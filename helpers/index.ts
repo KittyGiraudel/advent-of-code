@@ -31,7 +31,6 @@ import memo from './memo'
 import { bordering, surrounding } from './neighbors'
 import pathfinding from './pathfinding'
 import permutations from './permutations'
-import PriorityQueue from './PriorityQueue'
 import product from './product'
 import range from './range'
 import readInput from './readInput'
@@ -84,7 +83,6 @@ export default {
   memo,
   pathfinding,
   permutations,
-  PriorityQueue,
   product,
   range,
   readInput,

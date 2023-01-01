@@ -18,14 +18,14 @@ const getLowestCost = (grid: Grid<number>, mapSize = 1): number => {
 
   const withinBounds = ([ri, ci]) =>
     $.isClamped(ri, 0, height) && $.isClamped(ci, 0, width)
-  const getNeighbors = (coords: Coords): Coords[] =>
+  const getNextNodes = (coords: Coords): Coords[] =>
     $.bordering(coords, 'COORDS').filter(withinBounds)
 
-  const { costs } = $.pathfinding.search<Coords>({
+  const { costs } = $.pathfinding.aStar({
     start,
-    getNeighbors,
+    getNextNodes,
     getCost: (_, to) => getCost(grid, to),
-    isDone: curr => curr[0] === end[0] && curr[1] === end[1],
+    isGoal: curr => curr[0] === end[0] && curr[1] === end[1],
     heuristic: next => $.manhattan(next, end),
   })
 

@@ -1,10 +1,12 @@
+import $ from '../../helpers'
+
 type QueueNode = {
   name: string
   time: number
   steps: string[]
   pressure: number
-  finished: boolean
   remaining: string[]
+  finished?: boolean
 }
 
 type Node = {
@@ -51,7 +53,6 @@ export const releasePressure = (input: string[]): number => {
       time: 30,
       steps: [],
       pressure: 0,
-      finished: false,
     },
   ]
 

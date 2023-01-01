@@ -1,4 +1,4 @@
-export { SearchCosts, SearchGraph, SearchResult } from '../helpers/pathfinding'
+export { SearchCosts, SearchGraph, SearchOutput } from '../helpers/pathfinding'
 export { Grid } from '../helpers/grid'
 
 export type Coords = [number, number, number?, number?]

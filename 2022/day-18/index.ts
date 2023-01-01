@@ -38,9 +38,9 @@ export const getSurfaceArea = (
   // of the bounding box on purpose, and flood the gaps (which are positions
   // that are not listed as part of our input).
   const start = [minX - 1, minY - 1, minZ - 1]
-  const { from: flooded } = $.pathfinding.search({
+  const { from: flooded } = $.pathfinding.bfs({
     start,
-    getNeighbors: (coords: Coords) =>
+    getNextNodes: (coords: Coords) =>
       getSides(coords)
         .filter(coords => !points.includes($.toPoint(coords)))
         .filter(isWithinBounds),

@@ -21,25 +21,18 @@ const discover = (
   input: string
 ): { from: SearchGraph; start: Node; end: Node } => {
   const start: Node = { position: [0, 0], program: new Intcode(input) }
-  let end = null
-  const getNeighbors = (curr: Node): Node[] =>
+  const getNextNodes = (curr: Node): Node[] =>
     $.bordering(curr.position, 'COORDS')
       .map((coords: Coords) => ({ position: coords }))
       .map(addProgramCopy(curr))
       .filter((next: Node) => next.program.outputs[0])
 
-  const { from } = $.pathfinding.search({
+  const { from, end } = $.pathfinding.bfs({
     start,
-    getNeighbors,
-    toKey: (curr: Node): Point => $.toPoint(curr.position),
-    isDone: (curr: Node): boolean => {
-      // A little odd here, but essentially we a) do not know where the end is
-      // until we find it and b) want to map out the entire place before
-      // exiting, so instead of cutting the walk as soon as we find the end,
-      // we just store it.
-      if (curr.program.getOutput() === 2) end = curr
-      return false
-    },
+    emptyAfterGoal: true,
+    getNextNodes,
+    toKey: curr => $.toPoint(curr.position),
+    isGoal: curr => curr.program.getOutput() === 2,
   })
 
   return { from, start, end }
@@ -75,10 +68,10 @@ export const getOxygenDuration = (input: string): number => {
   const { from, end } = discover(input)
   let maxMinutes = 0
 
-  $.pathfinding.search<Node>({
+  $.pathfinding.bfs({
     start: { position: end.position, minutes: 0 },
     toKey: curr => $.toPoint(curr.position),
-    getNeighbors: curr => {
+    getNextNodes: curr => {
       // If the position does not appear in the graph, it means it’s a wall and
       // should therefore not continue any further.
       if (!($.toPoint(curr.position) in from)) return []

@@ -32,10 +32,10 @@ export const getPaths = (
 
 export const countOrbits = (graph: Graph, to: string = 'COM'): number => {
   return Array.from(graph.keys()).reduce((orbits, key) => {
-    const { from } = $.pathfinding.search({
+    const { from } = $.pathfinding.bfs({
       start: key,
-      isDone: curr => curr === to,
-      getNeighbors: curr => Array.from(graph.get(curr)),
+      isGoal: curr => curr === to,
+      getNextNodes: curr => Array.from(graph.get(curr)),
     })
 
     return orbits + $.pathfinding.path(from, key, to).length
@@ -56,10 +56,10 @@ export const countTransfers = (
   start: string = 'YOU',
   end: string = 'SAN'
 ): number => {
-  const { from } = $.pathfinding.search({
+  const { from } = $.pathfinding.bfs({
     start,
-    isDone: curr => curr === end,
-    getNeighbors: curr => Array.from(graph.get(curr)),
+    isGoal: curr => curr === end,
+    getNextNodes: curr => Array.from(graph.get(curr)),
   })
   const path = $.pathfinding.path(from, start, end)
 

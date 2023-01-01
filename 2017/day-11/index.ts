@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Point, SearchGraph } from '../../types'
+import { Coords, Point } from '../../types'
 
 const VECTORS: Record<string, Coords> = {
   n: [0, -2],
@@ -18,19 +18,15 @@ const distance = $.memo(([xA, yA]: Coords, [xB, yB]: Coords) => {
   return dX + Math.max(0, (dY - dX) / 2)
 })
 
-const getNeighbors = (curr: Coords) =>
+const getNextNodes = (curr: Coords) =>
   Object.values(VECTORS).map(vector => $.applyVector(curr, vector))
 
-const createGraph = (start: Coords, end: Coords): SearchGraph =>
-  $.pathfinding.search({
+const createGraph = (start: Coords, end: Coords) =>
+  $.pathfinding.gbfs({
     start,
-    getNeighbors,
-    // Because we need to be able to visit the same points several times, the
-    // cost needs to be lower than 1 — otherwise it means we cannot visit the
-    // same cell twice.
-    getCost: () => 0,
-    isDone: (curr: Coords) => curr[0] === end[0] && curr[1] === end[1],
-    heuristic: (next: Coords) => distance(next, end),
+    getNextNodes,
+    isGoal: curr => curr[0] === end[0] && curr[1] === end[1],
+    heuristic: next => distance(next, end),
   }).from
 
 const walk = (steps: string[]): { position: Coords; visited: Set<Point> } =>

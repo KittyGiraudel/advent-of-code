@@ -77,13 +77,13 @@ class Unit {
     const alive = units.filter(unit => unit.alive)
     const enemies = alive.filter(unit => unit.isEnemy(this.type))
 
-    const graph = $.pathfinding.search({
+    const graph = $.pathfinding.bfs({
       start: this.coords,
-      getNeighbors: (curr: Coords) =>
+      getNextNodes: curr =>
         getBorderingSpace(grid, curr).filter(
           neighbor => !alive.find(unit => unit.isAt(neighbor))
         ),
-      isDone: (curr: Coords) =>
+      isGoal: curr =>
         getBorderingSpace(grid, curr).some(neighbor =>
           enemies.find(unit => unit.isAt(neighbor))
         ),

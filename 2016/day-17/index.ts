@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Point, Coords } from '../../types'
+import { Coords } from '../../types'
 
 const DIRECTIONS: [
   [Coords, string],
@@ -14,51 +14,29 @@ const DIRECTIONS: [
 ]
 
 type Node = {
-  point: Point
   coords: Coords
   path: string
 }
 
-export const run = (input: string, longest: boolean = false): string => {
-  const frontier: Node[] = [{ point: '0,0', coords: [0, 0], path: input }]
-  let path = null
+export const run = (input: string, longest: boolean = false): string =>
+  $.pathfinding
+    .bfs<Node>({
+      start: { coords: [0, 0], path: input },
+      emptyAfterGoal: longest,
+      isGoal: curr => curr.coords.every(axis => axis === 3),
+      toKey: curr => curr.coords.join(',') + ':' + curr.path,
+      // Iterate over all 4 bordering directions. If the door is closed, move to
+      // the next direction. Otherwise, check whether the coordinates remain
+      // within boundaries. If they do, add the new cell to the frontier.
+      getNextNodes: curr => {
+        const hash = $.md5(curr.path)
 
-  while (frontier.length) {
-    const curr = frontier.pop()
-
-    // If we have reached the end cell, we should stop there if we are looking
-    // for the shortest path, or look for other paths if we are looking for the
-    // longest path.
-    if (curr.point === '3,3') {
-      path = curr.path.replace(input, '')
-      if (longest) continue
-      else break
-    }
-
-    const hash = $.md5(curr.path)
-
-    // Iterate over all 4 bordering directions. If the door is closed, move to
-    // the next direction. Otherwise, check whether the coordinates remain
-    // within boundaries. If they do, add the new cell to the frontier.
-    for (let i = 0; i < DIRECTIONS.length; i++) {
-      if (!/[bcdef]/.test(hash[i])) {
-        continue
-      }
-
-      const [vector, direction] = DIRECTIONS[i]
-      const next = $.applyVector(curr.coords, vector)
-
-      if (!next.every(n => $.isClamped(n, 0, 3))) {
-        continue
-      }
-
-      frontier.unshift({
-        point: $.toPoint(next),
-        coords: next,
-        path: curr.path + direction,
-      })
-    }
-  }
-
-  return path
-}
+        return DIRECTIONS.filter((_, index) => /[bcdef]/.test(hash[index]))
+          .map(([vector, direction]) => ({
+            coords: $.applyVector(curr.coords, vector),
+            path: curr.path + direction,
+          }))
+          .filter(next => next.coords.every(n => $.isClamped(n, 0, 3)))
+      },
+    })
+    .end.path.replace(input, '')

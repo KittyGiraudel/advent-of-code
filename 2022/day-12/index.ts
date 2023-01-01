@@ -34,7 +34,7 @@ const isWithinBounds =
     $.isClamped(ri, 0, grid.length - 1) &&
     $.isClamped(ci, 0, grid[0].length - 1)
 
-const getNeighbors =
+const getNextNodes =
   (grid: Grid<number>) =>
   ({ position, elevation }: Node) =>
     $.bordering(position, 'COORDS')
@@ -43,11 +43,11 @@ const getNeighbors =
       .filter(next => next.elevation - elevation <= 1)
 
 const getPathLength = (grid: Grid<number>, start: Node, end: Node): number => {
-  const { from: graph } = $.pathfinding.search({
+  const { from: graph } = $.pathfinding.bfs({
     start,
-    getNeighbors: getNeighbors(grid),
+    getNextNodes: getNextNodes(grid),
     toKey: curr => $.toPoint(curr.position),
-    isDone: curr =>
+    isGoal: curr =>
       curr.position[0] === end.position[0] &&
       curr.position[1] === end.position[1],
   })
