@@ -236,7 +236,7 @@
   <img src="Media/2020/25.png" alt="Day 25 2020: Complete" width="161px">
 </a>
 <h1 align="center">
-  2019 - 43 ⭐
+  2019 - 44 ⭐
 </h1>
 <a href="2019/day-01/index.ts">
   <img src="Media/2019/01.png" alt="Day 1 2019: Complete" width="161px">
@@ -296,7 +296,7 @@
   <img src="Media/2019/19.png" alt="Day 19 2019: Complete" width="161px">
 </a>
 <a href="2019/day-20/index.ts">
-  <img src="Media/2019/20.png" alt="Day 20 2019: Partially complete" width="161px">
+  <img src="Media/2019/20.png" alt="Day 20 2019: Complete" width="161px">
 </a>
 <a href="2019/day-21/index.ts">
   <img src="Media/2019/21.png" alt="Day 21 2019: Partially complete" width="161px">
