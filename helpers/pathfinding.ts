@@ -27,7 +27,7 @@ const isEmpty = <T>(frontier: Frontier<T>): boolean =>
 const pop = <T>(frontier: Frontier<T>) =>
   frontier instanceof PriorityQueue ? frontier.pop()[0] : frontier.pop()
 
-const core = <T>(
+const _core = <T>(
   handler: (curr: T) => (next: T) => void,
   frontier: Frontier<T>,
   getNextNodes: SearchOptions<T>['getNextNodes'],
@@ -51,6 +51,20 @@ const core = <T>(
   return end
 }
 
+/**
+ * Breadth First Search (BFS for short) explores equally in all directions. It
+ * is suited when all moves cost the same (i.e. “unweighted edges”) — otherwise
+ * prefer Dijkstra. If there is only one source and one destination, prefer GBFS
+ * if all moves cost the same, or A* otherwise.
+ *
+ * Potential cases for BFS:
+ * - Mark all reachable nodes in a graph.
+ * - Find paths from one node to all other nodes, or from all nodes to one node.
+ * - Measure distances from one node to all other nodes.
+ *
+ * Ref: https://www.redblobgames.com/pathfinding/a-star/introduction.html#breadth-first-search
+ * Ref: https://www.redblobgames.com/pathfinding/tower-defense/
+ */
 export const bfs = <T>({
   start,
   getNextNodes,
@@ -68,11 +82,19 @@ export const bfs = <T>({
     }
   }
 
-  const end: T = core(handler, frontier, getNextNodes, isGoal, emptyAfterGoal)
+  const end: T = _core(handler, frontier, getNextNodes, isGoal, emptyAfterGoal)
 
   return { end, from }
 }
 
+/**
+ * Greedy Breadth First Search (GBFS for short) is good when there is *one*
+ * source and *one* destination. This is why it can make use of a “heuristic”.
+ * If the destination is unknown, prefer BFS. Note that GBFS does not guarantee
+ * the shortest path: it’s a performance improvement, not an accuracy one.
+ *
+ * Ref: https://www.redblobgames.com/pathfinding/a-star/introduction.html#greedy-best-first
+ */
 export const gbfs = <T>({
   start,
   getNextNodes,
@@ -92,11 +114,20 @@ export const gbfs = <T>({
     }
   }
 
-  const end: T = core(handler, frontier, getNextNodes, isGoal, emptyAfterGoal)
+  const end: T = _core(handler, frontier, getNextNodes, isGoal, emptyAfterGoal)
 
   return { from, end }
 }
 
+/**
+ * Dijkstra is a variant of BFS that prioritizes paths to explore. Instead of
+ * exploring all possible paths equally, it favors lower cost paths. When
+ * movement costs vary, we use this instead of BFS. It makes use of a cost
+ * function to determine the frontier priority. If it needs to support negative
+ * weights, prefer Bellman-Ford (not implemented here).
+ *
+ * Ref: https://www.redblobgames.com/pathfinding/a-star/introduction.html#dijkstra
+ */
 export const dijkstra = <T>({
   start,
   getNextNodes,
@@ -123,11 +154,20 @@ export const dijkstra = <T>({
     }
   }
 
-  const end: T = core(handler, frontier, getNextNodes, isGoal)
+  const end: T = _core(handler, frontier, getNextNodes, isGoal)
 
   return { from, costs, end }
 }
 
+/**
+ * A* is a variant of Dijkstra that is optimized for a single destination.
+ * Dijkstra can find paths to all locations; A* finds paths to one location, or
+ * the closest of several locations. It prioritizes paths that seem to be
+ * leading closer to a goal. In a way, it’s a combination of Dijkstra (costs)
+ * and GBFS (heuristic).
+ *
+ * Ref: https://www.redblobgames.com/pathfinding/a-star/introduction.html#astar
+ */
 export const aStar = <T>({
   start,
   getNextNodes,
@@ -156,7 +196,7 @@ export const aStar = <T>({
     }
   }
 
-  const end: T = core(handler, frontier, getNextNodes, isGoal)
+  const end: T = _core(handler, frontier, getNextNodes, isGoal)
 
   return { from, costs, end }
 }
