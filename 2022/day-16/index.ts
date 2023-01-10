@@ -1,14 +1,5 @@
 import $ from '../../helpers'
 
-type QueueNode = {
-  name: string
-  time: number
-  steps: string[]
-  pressure: number
-  remaining: string[]
-  finished?: boolean
-}
-
 type Node = {
   name: string
   flow: number
@@ -44,52 +35,33 @@ export const releasePressure = (input: string[]): number => {
     {}
   )
 
-  const frontier: QueueNode[] = [
-    {
+  const { from } = $.pathfinding.dijkstra({
+    start: {
       name: 'AA',
+      time: 30,
+      pressure: 0,
       remaining: Object.values(map)
         .filter(node => node.flow > 0)
         .map(node => node.name),
-      time: 30,
-      steps: [],
-      pressure: 0,
     },
-  ]
+    toKey: curr => String(curr.pressure),
+    isGoal: curr => curr.time <= 0,
+    getCost: (curr, next) => distanceMap[curr.name][next.name],
+    getNextNodes: curr =>
+      curr.remaining
+        .filter(next => next !== curr.name)
+        .filter(next => curr.time - distanceMap[curr.name][next] > 1)
+        .map(next => {
+          const time = curr.time - distanceMap[curr.name][next] - 1
 
-  let max = 0
+          return {
+            name: next,
+            time,
+            remaining: curr.remaining.filter(node => node !== next),
+            pressure: curr.pressure + time * map[next].flow,
+          }
+        }),
+  })
 
-  while (frontier.length) {
-    const curr = frontier.pop()
-
-    if (curr.time <= 0) curr.finished = true
-    if (curr.finished) continue
-
-    let moved = false
-    let distances = distanceMap[curr.name]
-
-    curr.remaining
-      .filter(
-        name =>
-          name !== curr.name && // Not self
-          curr.time - distances[name] > 1 // Within time
-      )
-      .forEach(name => {
-        moved = true
-        let time = curr.time - distances[name] - 1
-
-        frontier.unshift({
-          name,
-          time,
-          finished: false,
-          remaining: curr.remaining.filter(node => node !== name),
-          steps: [...curr.steps, name],
-          pressure: curr.pressure + time * map[name].flow,
-        })
-      })
-
-    if (!moved) curr.finished = true
-    if (curr.finished && curr.pressure > max) max = curr.pressure
-  }
-
-  return max
+  return Math.max(...Object.keys(from).map(Number))
 }
