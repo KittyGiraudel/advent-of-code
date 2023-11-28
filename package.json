@@ -1,7 +1,7 @@
 {
   "type": "module",
   "scripts": {
-    "test": "ava --verbose --timeout=30s",
+    "test": "NODE_OPTIONS='--loader=ts-node/esm' ava --verbose --timeout=30s",
     "tiles": "rm -rf AoCTiles/.aoc_tiles_cache && python3 AoCTiles/create_aoc_tiles.py",
     "check": "tsc --outDir dist --noEmit",
     "exec": "node --loader ts-node/esm --experimental-specifier-resolution=node --no-warnings"
@@ -18,7 +18,6 @@
     ],
     "nodeArguments": [
       "--experimental-specifier-resolution=node",
-      "--loader=ts-node/esm",
       "--no-warnings"
     ],
     "extensions": {
@@ -31,6 +30,6 @@
     "js-levenshtein": "^1.1.6"
   },
   "engines": {
-    "node": "18"
+    "node": "20"
   }
 }
