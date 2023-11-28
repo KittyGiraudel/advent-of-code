@@ -1,5 +1,8 @@
 import * as util from 'node:util'
 
+/**
+ * Inspect the given value.
+ */
 const inspect = (
   value: any,
   showHidden: boolean = true,

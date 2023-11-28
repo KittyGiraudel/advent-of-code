@@ -1,4 +1,6 @@
-// Count the number of occurrences of the given needle in the given haystack.
+/**
+ * Count the number of occurrences of the given needle in the given haystack.
+ */
 const countInString = (
   haystack: string,
   needle: string,

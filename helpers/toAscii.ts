@@ -1,5 +1,7 @@
-// Transform the given string into an array of ASCII codes, with an additional
-// line break character at the end.
+/**
+ * Transform the given string into an array of ASCII codes, with an additional
+ * line break character at the end.
+ */
 const toAscii = (string: string, withLineBreak: boolean = true): number[] =>
   Array.from(string + (withLineBreak ? '\n' : '')).map(c => c.charCodeAt(0))
 

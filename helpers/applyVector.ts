@@ -1,6 +1,8 @@
 import { Coords } from '../types'
 
-// Apply the given vector to the given X,Y(,Z) coords.
+/**
+ * Apply the given vector to the given X,Y(,Z) coords.
+ */
 const applyVector = (coords: Coords, vector: Coords): Coords =>
   [
     coords[0] + vector[0],

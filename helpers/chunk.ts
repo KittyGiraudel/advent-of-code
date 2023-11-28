@@ -10,11 +10,15 @@ const _chunk = <T>(
   return result
 }
 
-// Split the given array into chunks of the given size.
+/**
+ * Split the given array into chunks of the given size.
+ */
 const chunk = <T>(array: T[], size: number): T[][] =>
   _chunk(array, size) as T[][]
 
-// Split the given string into chunks of the given size.
+/**
+ * Split the given string into chunks of the given size.
+ */
 chunk.string = (string: string, size: number): string[] =>
   _chunk(string, size) as string[]
 

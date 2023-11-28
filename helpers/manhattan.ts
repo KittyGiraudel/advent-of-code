@@ -1,10 +1,12 @@
 import { Coords, CoordsObj } from '../types'
 
-// Return the manhattan distance between two coordinates, expressed either as
-// objects with x, y (and possibly z and even t) or arrays of numbers.
-// @param a - First point
-// @param a - Second point
-// @return {Number}
+/**
+ * Return the manhattan distance between two sets of coordinates, expressed
+ * either as objects with x, y (and possibly z and even t) or arrays of numbers.
+ * @param a - First set of coords
+ * @param a - Second set of coords
+ * @return {Number}
+ */
 const manhattan = (
   a: Coords | CoordsObj,
   b: Coords | CoordsObj = [0, 0, 0, 0]

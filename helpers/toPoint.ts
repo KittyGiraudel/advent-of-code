@@ -1,7 +1,11 @@
 import { Coords, Point } from '../types'
 
-// Join a coordinate expressed as an array into a string separated by comma,
-// typically to use it as a key for a map or a set.
+/**
+ * Join a coordinate expressed as an array into a string separated by comma,
+ * typically to use it as a key for a map or a set.
+ * @example toPoint([0, 1]) === '0,1'
+ * @example toPoint([0, 1, 2]) === '0,1,2'
+ */
 const toPoint = (coords: Coords): Point => coords.join(',') as Point
 
 export default toPoint

@@ -4,8 +4,10 @@ type Options = {
   deindent?: boolean
 }
 
-// Read the input file of the given directory, and split its (optionally
-// trimmed) content on the given delimiter.
+/**
+ * Read the input file of the given directory, and split its (optionally
+ * trimmed) content on the given delimiter.
+ */
 const sample = (
   string: string,
   { delimiter = '\n', trim = true, deindent = true }: Options = {}

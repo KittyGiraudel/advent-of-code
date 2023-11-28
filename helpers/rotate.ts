@@ -1,4 +1,6 @@
-// Rotate the given array to the right `n` times.
+/**
+ * Rotate the given array to the right `n` times.
+ */
 const rotate = <T>(array: T[], n: number = 1): T[] => {
   if (n > 0) {
     while (n--) array.unshift(array.pop())

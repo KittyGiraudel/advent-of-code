@@ -5,13 +5,15 @@ type Strategy = 'COORDS' | 'POINTS' | 'BOTH'
 
 const cache: Map<string, Coords[] | Point[] | CoordsAndPoint[]> = new Map()
 
-// Return the coordinates of the cells around (4 or 8, depending on whether
-// diagonals are considered) the cells at `ri` (row index) and `ci` (column
-// index) as [Y, X] tuples (Y first because rows are read before columns in a
-// bi-dimensional array, e.g. `grid[row][column]`).
-// @param withDiagonals - Whether to return NE, SE, SW and NW coords
-// @param coords - Row index (Y) + Column index (X)
-// @param strategy - COORDS, POINTS or BOTH
+/**
+ * Return the coordinates of the cells around (4 or 8, depending on whether
+ * diagonals are considered) the cells at `ri` (row index) and `ci` (column
+ * index) as [Y, X] tuples (Y first because rows are read before columns in a
+ * bi-dimensional array, e.g. `grid[row][column]`).
+ * @param withDiagonals - Whether to return NE, SE, SW and NW coords
+ * @param coords - Row index (Y) + Column index (X)
+ * @param strategy - COORDS, POINTS or BOTH
+ */
 const getCoords = (withDiagonals: boolean) => {
   return ([ri, ci]: Coords, strategy: Strategy = 'BOTH') => {
     const key = ri + ',' + ci + '-' + withDiagonals + '-' + strategy

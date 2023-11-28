@@ -13,9 +13,11 @@ const getKey = (...args) =>
       : JSON.stringify(args)
   }
 
-// Memoize a function’s results using the JSON serialization of its arguments
-// as a key
-// @param fn - Function to memoize
+/**
+ * Memoize a function’s results using the JSON serialization of its arguments
+ * as a key
+ * @param fn - Function to memoize
+ */
 const memo = (fn: Function): Function => {
   const cache = new Map()
 

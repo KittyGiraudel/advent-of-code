@@ -1,4 +1,6 @@
-// Return all possible unique combinations of size `n` from given `array`.
+/**
+ * Return all possible unique combinations of size `n` from given `array`.
+ */
 const combinations = <T>(array: T[], n: number, start = [], tmp = []): T[][] =>
   array.reduce((acc, item, index, array) => {
     if (n > 1) {

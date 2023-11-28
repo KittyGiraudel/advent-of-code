@@ -1,4 +1,6 @@
-// Return all possible permutations of the array.
+/**
+ * Return all possible permutations of the array.
+ */
 const permutations = <T>(array: T[]): T[][] => {
   const results: T[][] = []
 

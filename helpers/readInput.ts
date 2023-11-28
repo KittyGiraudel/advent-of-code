@@ -8,8 +8,10 @@ type Options = {
   name?: string
 }
 
-// Read the input file of the given directory, and optionally split its
-// (optionally trimmed) content on the given delimiter.
+/**
+ * Read the input file of the given directory, and optionally split its
+ * (optionally trimmed) content on the given delimiter.
+ */
 const readInput = (
   meta: ImportMeta,
   { delimiter = '\n', trim = true, name = 'input.txt' }: Options = {}

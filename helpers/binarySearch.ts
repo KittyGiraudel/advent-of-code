@@ -1,12 +1,14 @@
-// Perform a binary search between the lower and upper bounds, using the compare
-// function.
-// @param lower - Initial lower bound
-// @param upper - Initial upper bound
-// @param compare - Comparison function
+/**
+ * Perform a binary search between the lower and upper bounds, using the compare
+ * function.
+ * @param lower - Initial lower bound
+ * @param upper - Initial upper bound
+ * @param compare - Comparison function
+ */
 const binarySearch = (
   lower: number,
   upper: number,
-  compare: Function
+  compare: (n: number) => number
 ): number => {
   while (lower <= upper) {
     const half = Math.round((lower + upper) / 2)
