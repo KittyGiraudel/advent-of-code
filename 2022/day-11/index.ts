@@ -32,7 +32,7 @@ class Player {
     }
   }
 
-  receive(item) {
+  receive(item: number) {
     this.items.push(item)
   }
 }
@@ -41,12 +41,12 @@ class Game {
   players: Player[]
   lcd: number
 
-  constructor(players, lcd = 0) {
+  constructor(players: Player[], lcd = 0) {
     this.players = players
     this.lcd = lcd
   }
 
-  getPlayerById(id) {
+  getPlayerById(id: Player['id']) {
     return this.players.find(player => player.id === id)
   }
 
@@ -59,7 +59,7 @@ class Game {
     })
   }
 
-  rounds(amount) {
+  rounds(amount: number) {
     for (let i = 1; i <= amount; i++) this.round()
   }
 

@@ -1,5 +1,3 @@
-import $ from '../../helpers'
-
 const isRock = (value: string): boolean => value === 'A' || value === 'X'
 const isPaper = (value: string): boolean => value === 'B' || value === 'Y'
 const isScissors = (value: string): boolean => value === 'C' || value === 'Z'

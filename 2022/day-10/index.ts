@@ -48,7 +48,7 @@ export class Computer {
     this.record()
   }
 
-  execute(input) {
+  execute(input: string[]) {
     input.forEach(instruction => {
       this.tick()
 

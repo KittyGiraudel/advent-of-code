@@ -40,7 +40,7 @@ const getNextNodes =
     $.bordering(position, 'COORDS')
       .filter(isWithinBounds(grid))
       .map(position => ({ position, elevation: $.access(grid, position) }))
-      .filter(next => next.elevation - elevation <= 1)
+      .filter((next: Node) => next.elevation - elevation <= 1)
 
 const getPathLength = (grid: Grid<number>, start: Node, end: Node): number => {
   const { from: graph } = $.pathfinding.bfs({

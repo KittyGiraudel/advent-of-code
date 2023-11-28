@@ -32,7 +32,7 @@ class Node {
   // direction (+1 for top and right, -1 for bottom and left). For any node but
   // the first, perform a distance check to catch up with the previous node if
   // necessary. Then, follow the trail by making the next node move.
-  step(axis, direction) {
+  step(axis: number, direction: number) {
     const prev = this.previous?.position
     const curr = this.position
 

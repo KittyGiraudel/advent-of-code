@@ -22,7 +22,7 @@ class Cave {
     // sand by doing math line by line, which is neat. I actually re-implemented
     // it in JS before landing on a Map() so I can confirm it works (and is very
     // fast).
-    // Ref: Ref: https://github.com/PBearson/Advent_Of_Code_2022/blob/main/day_14/infinite_floor_fast.py
+    // Ref: https://github.com/PBearson/Advent_Of_Code_2022/blob/main/day_14/infinite_floor_fast.py
     this.map = new Map()
 
     // Compute the boundaries while considering the position of the source as
@@ -55,7 +55,7 @@ class Cave {
 
   erectWalls(walls) {
     walls.forEach(wall => {
-      wall.forEach(([x, y], index) => {
+      wall.forEach(([x, y], index: number) => {
         // Mark the current cell as a wall brick.
         this.set(x, y, BLOCK)
 

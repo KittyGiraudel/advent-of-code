@@ -1,4 +1,3 @@
-import $ from '../../helpers'
 import Circularray from 'circularray'
 
 // My solution uses my double-ended queue library. That being said, it is not
