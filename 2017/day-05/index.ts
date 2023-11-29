@@ -1,6 +1,4 @@
-import $ from '../../helpers'
-
-export const run = (memory: number[], boundary: number = Infinity): number => {
+export const run = (memory: Array<number>, boundary: number = Infinity) => {
   memory = memory.slice(0)
   let index = 0
   let i = 0

@@ -1,7 +1,7 @@
 type Node = {
   name?: string
   value: number
-  children: string[]
+  children: Array<string>
   weight?: number
 }
 
@@ -24,13 +24,14 @@ const getRootNode = (graph: Graph): string => {
 }
 
 const parseLine = (line: string): Node => {
-  const [, name, value, rest] = line.match(/(\w+) \((\d+)\)(?: -> ([^)]+))?/)
+  const [, name, value, rest] =
+    line.match(/(\w+) \((\d+)\)(?: -> ([^)]+))?/) ?? []
   const children = rest?.split(', ') ?? []
 
   return { name, value: +value, children: children }
 }
 
-export const run = (input: string[]): { root: string; fix: number } => {
+export const run = (input: Array<string>): { root: string; fix: number } => {
   const graph: Graph = {}
 
   input.forEach(line => {

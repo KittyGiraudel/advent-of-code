@@ -18,14 +18,14 @@ test('Day 18 — Sample', t => {
   3,2,5
   2,1,5
   2,3,5
-  `) as Point[]
+  `) as Array<Point>
 
   t.is(getSurfaceArea(sample), 64)
   t.is(getSurfaceArea(sample, true), 58)
 })
 
 test('Day 18 — Solutions', t => {
-  const input = $.readInput(import.meta) as Point[]
+  const input = $.readInput(import.meta) as Array<Point>
 
   t.is(getSurfaceArea(input), 3412)
   t.is(getSurfaceArea(input, true), 2018)

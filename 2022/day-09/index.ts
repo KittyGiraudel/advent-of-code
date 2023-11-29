@@ -9,7 +9,7 @@ import { Coords, Point } from '../../types'
 // last one).
 class Node {
   previous: Node
-  next: Node
+  next: Node | null
   position: Coords
   visited: Set<Point>
 
@@ -20,11 +20,11 @@ class Node {
     this.visited = new Set(['0,0'])
   }
 
-  get head() {
+  get head(): Node {
     return this.previous?.head ?? this
   }
 
-  get tail() {
+  get tail(): Node {
     return this.next?.tail ?? this
   }
 
@@ -68,7 +68,7 @@ const createNodes = (size: number): Node => {
 }
 
 export const countTailPositions = (
-  input: string[],
+  input: Array<string>,
   size: number = 2
 ): number => {
   const head = createNodes(size)

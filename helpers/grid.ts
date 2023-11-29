@@ -1,16 +1,17 @@
 import { Coords } from '../types'
 
-export type Grid<T> = T[][]
-type Mapper<T> = (value: string, ri: number, ci: number) => T
+export type Grid<T> = Array<Array<T>>
+type Mapper<T, U> = (value: T, ri: number, ci: number) => U
 type Handler = 'forEach' | 'map' | 'flatMap' | 'find' | 'every' | 'some'
 
 const loopOnGrid =
   <T, U>(handler: Handler) =>
   (grid: Grid<T>, callback: (item: T, ri: number, ci: number) => U) =>
-    (grid[handler].bind(grid) as CallableFunction)((row: T[], ri: number) =>
-      (row[handler].bind(row) as CallableFunction)((item: T, ci: number) =>
-        callback(item, ri, ci)
-      )
+    (grid[handler].bind(grid) as CallableFunction)(
+      (row: Array<T>, ri: number) =>
+        (row[handler].bind(row) as CallableFunction)((item: T, ci: number) =>
+          callback(item, ri, ci)
+        )
     )
 
 const gridForEach = <T>(
@@ -57,20 +58,24 @@ const gridReduce = <T, U>(
 const gridFindCoords = <T>(
   grid: Grid<T>,
   callback: (item: T, ri: number, ci: number) => boolean
-): Coords =>
+) =>
   gridReduce(
     grid,
-    (acc, item, ri, ci) => acc || (callback(item, ri, ci) ? [ri, ci] : acc),
-    null
+    (acc, item, ri, ci) =>
+      acc || (callback(item, ri, ci) ? ([ri, ci] as Coords) : acc),
+    null as Coords | null
   )
 
-const identity: Mapper<string> = (value: string, ri: number, ci: number) =>
-  value
+const identity: Mapper<string, string> = (
+  value: string,
+  ri: number,
+  ci: number
+) => value
 
 const createGrid = <T>(
   rows: string[],
-  mapper: Mapper<T> = identity as Mapper<T>
-): Grid<T> =>
+  mapper: Mapper<string, T> = identity as Mapper<string, T>
+): Grid<string> =>
   rows.map((row, ri) => row.split('').map((item, ci) => mapper(item, ri, ci)))
 
 const cloneGrid = <T>(grid: Grid<T>): Grid<T> =>
@@ -85,8 +90,8 @@ function isCallable<T>(
 const initGrid = <T>(
   width: number,
   height: number = width,
-  value: T | ((ci: number, ri: number) => T) = null
-): Grid<T> =>
+  value: T | null | ((ci: number, ri: number) => T) = null
+): Grid<T | null> =>
   Array.from({ length: height }, (_, ri) =>
     Array.from({ length: width }, (_, ci) =>
       isCallable(value) ? value(ci, ri) : value
@@ -100,12 +105,12 @@ const renderGrid = <T>(
   grid: Grid<T>,
   separator: string = '',
   mapper = (value: T): string => String(value)
-): string =>
+) =>
   gridMap(grid, mapper)
     .map(row => row.join(separator))
     .join('\n')
 
-const gridVariants = <T>(grid: Grid<T>): Grid<T>[] => {
+const gridVariants = <T>(grid: Grid<T>) => {
   const variants = []
   const clone = cloneGrid(grid)
 

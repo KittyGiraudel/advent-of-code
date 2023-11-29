@@ -3,7 +3,7 @@
  * in the form of an `RegExp.prototype.exec` output.
  * ref: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec
  */
-const matchLast = (string: string, regex: RegExp): string => {
+const matchLast = (string: string, regex: RegExp) => {
   let match = null
 
   while (true) {

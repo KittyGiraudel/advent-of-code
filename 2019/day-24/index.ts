@@ -28,7 +28,7 @@ export const cycle = (curr: string): string => {
   return next
 }
 
-export const findBiodiversity = (input: string[]) => {
+export const findBiodiversity = (input: Array<string>) => {
   const history = []
   let curr = input.join('')
 
@@ -120,7 +120,10 @@ const ERIS_MAP = [
   [[19, CL], [23, CL], [17, OL], [13, OL]], // 24
 ];
 
-export const findRecursiveBiodiversity = (input: string[], count: number) => {
+export const findRecursiveBiodiversity = (
+  input: Array<string>,
+  count: number
+) => {
   let curr = input.join('')
   const width = curr.length
 

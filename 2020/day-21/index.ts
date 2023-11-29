@@ -4,7 +4,7 @@ import $ from '../../helpers'
 // @param food - Raw food
 const parseFood = (
   food: string
-): { ingredients: string[]; allergens: string[] } => {
+): { ingredients: Array<string>; allergens: Array<string> } => {
   // Delimiters          : /                           /
   // Capture group       :  (     )
   // Anything but `(`    :   [^(]+
@@ -20,11 +20,11 @@ const parseFood = (
   }
 }
 
-type Map = Record<string, { foods: string[][]; food: string }>
+type Map = Record<string, { foods: Array<string>[]; food: string }>
 
 // Map food input.
 // @param input - Raw foods
-const mapFood = (input: string[]): Map =>
+const mapFood = (input: Array<string>): Map =>
   mapAllergens(
     input.map(parseFood).reduce(
       (acc, { ingredients, allergens }) =>
@@ -63,12 +63,12 @@ const mapAllergens = (map: Map): Map => {
 
 // Get all ingredients (with duplicates).
 // @param input - Raw foods
-const getAllIngredients = (input: string[]): string[] =>
+const getAllIngredients = (input: Array<string>): Array<string> =>
   input.reduce((acc, food) => acc.concat(parseFood(food).ingredients), [])
 
 // Find the ingredients which are allergen-free.
 // @param input - Raw foods
-const findAllergenFreeIngredients = (input: string[]): string[] => {
+const findAllergenFreeIngredients = (input: Array<string>): Array<string> => {
   const map = mapFood(input)
   const allergenIngredients = Object.values(map).map(({ food }) => food)
   const isAllergenFree = (ingredient: string) =>
@@ -79,7 +79,7 @@ const findAllergenFreeIngredients = (input: string[]): string[] => {
 
 // Count how many times allergen-free ingredients appear in the food input.
 // @param input - Raw foods
-export const countAllergenFreeOccurrences = (input: string[]): number => {
+export const countAllergenFreeOccurrences = (input: Array<string>): number => {
   const count = (acc, ing: string) => ({ ...acc, [ing]: acc[ing] + 1 || 1 })
   const ingredients = findAllergenFreeIngredients(input)
   const allIngredients = getAllIngredients(input)
@@ -92,7 +92,7 @@ export const countAllergenFreeOccurrences = (input: string[]): number => {
 
 // Compute the canonical dangerous list.
 // @param input - Raw foods
-export const getCanonicalDangerousList = (input: string[]): string => {
+export const getCanonicalDangerousList = (input: Array<string>): string => {
   const map = mapFood(input)
 
   return Object.keys(map)

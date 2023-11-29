@@ -1,7 +1,5 @@
-import $ from '../../helpers'
-
 export const find = (
-  input: number[],
+  input: Array<number>,
   value: number = 0,
   cache: Map<number, number> = new Map([[0, 1]])
 ): number => {

@@ -1,12 +1,12 @@
 import $ from '../../helpers'
 
-type Instruction = string | number[]
+type Instruction = string | Array<number>
 type Memory = Record<string, number>
 type Program = [Memory, string]
 
 // Parse the given input into a comprehensible set of instructions.
 // @param input - Input data
-export const parseProgram = (input: string[]): Instruction[] =>
+export const parseProgram = (input: Array<string>): Instruction[] =>
   input.map(line =>
     line.startsWith('mask')
       ? line.replace('mask = ', '')
@@ -42,7 +42,7 @@ export const processLoose = (
 // Resolve wildcard characters (`X`) in given address to expand it into multiple
 // possible addresses.
 // @param value - Masked value
-const resolveAddresses = (value: string[]) =>
+const resolveAddresses = (value: Array<string>) =>
   value.includes('X')
     ? [
         ...resolveAddresses($.updateAtIndex(value, value.indexOf('X'), '0')),
@@ -82,7 +82,7 @@ export const processStrict = (
 // @param input - Raw unparsed program input
 // @param processor - Processor to treat every instruction
 export const executeProgram = (
-  input: string[],
+  input: Array<string>,
   processor: (acc: Program, value: Instruction) => Program
 ): number => {
   const program = parseProgram(input)

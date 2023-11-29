@@ -5,7 +5,7 @@ type Output = { accumulator: number; exit: number }
 // Execute the given array of instructions.
 // @param instructions - List of instructions making the program
 // @return `accumulator` value and 0 or 1 `exit` code
-export const runProgram = (instructions: string[]): Output => {
+export const runProgram = (instructions: Array<string>): Output => {
   const history = []
   let accumulator = 0
   let pointer = 0
@@ -49,7 +49,10 @@ const patchInstruction = (instruction: string): string =>
 // @param instructions - List of instructions making the program
 // @param index - Index of instruction to patch
 // @return `accumulator` value and 0 or 1 `exit` code
-const runPatchedProgram = (instructions: string[], index: number): Output =>
+const runPatchedProgram = (
+  instructions: Array<string>,
+  index: number
+): Output =>
   runProgram(
     $.updateAtIndex(instructions, index, patchInstruction(instructions[index]))
   )
@@ -58,7 +61,7 @@ const runPatchedProgram = (instructions: string[], index: number): Output =>
 // and successfully return.
 // @param instructions - List of instructions making the program
 // @return `accumulator` value and 0 or 1 `exit` code
-export const runMonkeyPatchedProgram = (instructions: string[]): Output =>
+export const runMonkeyPatchedProgram = (instructions: Array<string>): Output =>
   instructions.reduce(
     (output, instruction, index) =>
       instruction.startsWith('acc') || output.exit === 0

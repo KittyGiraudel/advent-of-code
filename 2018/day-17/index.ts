@@ -1,7 +1,7 @@
 import $ from '../../helpers'
-import { Grid, Coords, Point } from '../../types'
+import { Coords, Grid, Point } from '../../types'
 
-const generateMap = (input: string[]): Record<Point, string> =>
+const generateMap = (input: Array<string>): Record<Point, string> =>
   input.reduce((acc: Record<Point, string>, line) => {
     const match = line.match(/([xy])=(\d+), ([xy])=(\d+)..(\d+)/)
 
@@ -71,7 +71,7 @@ const fillFrom = (grid: Grid<string>, [x, y]: Coords, maxY: number) => {
 }
 
 export const scan = (
-  input: string[],
+  input: Array<string>,
   source: Coords = [500, 0]
 ): [number, number] => {
   const map = generateMap(input)

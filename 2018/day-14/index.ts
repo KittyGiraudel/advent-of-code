@@ -1,7 +1,7 @@
 // I also tried a version using a string as the board, but it turns out that
 // manipulating long strings is way slower than manipulating large arrays in V8
 // for some reason.
-const play = (board: number[], players: number[]): void => {
+const play = (board: Array<number>, players: Array<number>): void => {
   const recipes = players.map(index => board[index])
   const sum = recipes[0] + recipes[1]
   // Interesting piece of trivia: this version which I originally started with

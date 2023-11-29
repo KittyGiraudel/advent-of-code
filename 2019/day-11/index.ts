@@ -23,7 +23,7 @@ const next = (computer: Intcode, state: State) => {
   // Second, it will output a value indicating the direction the robot should
   // turn: 0 means it should turn left 90 degrees, and 1 means it should turn
   // right 90 degrees.
-  const [color, rotation] = computer.getOutput() as number[]
+  const [color, rotation] = computer.getOutput() as Array<number>
 
   // Record the new color for the current tile.
   state.record.set(coords, color)

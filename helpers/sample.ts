@@ -11,7 +11,7 @@ type Options = {
 const sample = (
   string: string,
   { delimiter = '\n', trim = true, deindent = true }: Options = {}
-): string[] => {
+) => {
   let content = string
 
   if (deindent) content = content.replace(/^[ \t]{2,}/gm, '')

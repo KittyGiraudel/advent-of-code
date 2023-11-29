@@ -1,17 +1,17 @@
 import $ from '../../helpers'
 
-export const run = (input: string[]): number => {
+export const run = (input: Array<string>) => {
   const state = { bot: [], output: [] }
   const pipelines = []
 
   for (let i = 0; i < input.length; i++) {
     const line = input[i]
     if (line.startsWith('value')) {
-      const [value, id] = line.match(/\d+/g).map(Number)
+      const [value, id] = line.match(/\d+/g)?.map(Number) ?? []
       if (!state.bot[id]) state.bot[id] = []
       state.bot[id].push(value)
     } else {
-      const [sender, low, high] = line.match(/(bot|output) \d+/g)
+      const [sender, low, high] = line.match(/(bot|output) \d+/g) ?? []
       const id = sender.split(' ').pop()
       pipelines[id] = [low.split(' '), high.split(' ')]
     }

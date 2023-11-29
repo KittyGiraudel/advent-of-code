@@ -42,7 +42,7 @@ export const compare = (
   }
 }
 
-export const getScore = (pairs: string[]) =>
+export const getScore = (pairs: Array<string>) =>
   $.sum(
     pairs.map((pair, index) => {
       const [a, b] = pair.split('\n').map(value => JSON.parse(value))
@@ -55,7 +55,7 @@ export const getScore = (pairs: string[]) =>
 // pair of dividers, then join all pairs together, and split it on line breaks
 // to get an array of individual packets; parse them all as JSON. Then sort all
 // packets based, and find the index of the dividers again.
-export const sort = (pairs: string[]): number => {
+export const sort = (pairs: Array<string>): number => {
   const dividers = `[[2]]\n[[6]]`
   const packets = pairs
     .concat(dividers)

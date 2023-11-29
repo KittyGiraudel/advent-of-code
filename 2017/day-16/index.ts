@@ -3,19 +3,23 @@ import $ from '../../helpers'
 type Instruction = { type: string; value: number | Array<string | number> }
 
 export const dance = (
-  input: string[],
+  input: Array<string>,
   size: number = 16,
   iterations: number = 1
-): string => {
+) => {
   const programs = $.range(size, 97).map(a => String.fromCharCode(a))
   const history = []
 
-  const instructions: Instruction[] = input.map(line => {
-    if (line.startsWith('s')) return { type: 'SPIN', value: +line.slice(1) }
+  const instructions = input.map(line => {
+    if (line.startsWith('s'))
+      return { type: 'SPIN', value: +line.slice(1) } as Instruction
     if (line.startsWith('x'))
-      return { type: 'EXCHANGE', value: line.slice(1).split('/').map(Number) }
+      return {
+        type: 'EXCHANGE',
+        value: line.slice(1).split('/').map(Number),
+      } as Instruction
     if (line.startsWith('p')) {
-      return { type: 'PARTNER', value: line.slice(1).split('/') }
+      return { type: 'PARTNER', value: line.slice(1).split('/') } as Instruction
     }
   })
 

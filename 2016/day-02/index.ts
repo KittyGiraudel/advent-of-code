@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Grid, Coords } from '../../types'
+import { Coords, Grid } from '../../types'
 
 const KEYPAD_1: Grid<number> = [
   [1, 2, 3],
@@ -22,10 +22,7 @@ const VECTORS = {
   L: [0, -1],
 }
 
-export const run = (
-  instructions: string[],
-  advanced: boolean = false
-): string => {
+export const run = (instructions: Array<string>, advanced: boolean = false) => {
   const keypad = advanced ? KEYPAD_2 : KEYPAD_1
   let position: Coords = advanced ? [2, 0] : [1, 1]
 

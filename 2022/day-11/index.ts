@@ -2,13 +2,25 @@ import $ from '../../helpers'
 
 class Player {
   id: string
-  items: number[]
+  items: Array<number>
   operation: string
   predicate: number
   next: [string, string]
   inspections: number
 
-  constructor({ id, operation, predicate, next, items }) {
+  constructor({
+    id,
+    operation,
+    predicate,
+    next,
+    items,
+  }: {
+    id: string
+    operation: string
+    predicate: number
+    next: [string, string]
+    items: Array<number>
+  }) {
     this.id = id
     this.items = items
     this.operation = operation
@@ -20,7 +32,7 @@ class Player {
   play(lcd = 0) {
     this.inspections++
 
-    let item = this.items.shift()
+    let item = this.items.shift() as number
     eval(this.operation)
 
     if (lcd) item %= lcd
@@ -54,7 +66,7 @@ class Game {
     this.players.forEach(player => {
       while (player.items.length) {
         const { next, item } = player.play(this.lcd)
-        this.getPlayerById(next).receive(item)
+        this.getPlayerById(next)!.receive(item)
       }
     })
   }
@@ -73,7 +85,10 @@ class Game {
   }
 }
 
-export const play = (input: string[], worried: boolean = false): number => {
+export const play = (
+  input: Array<string>,
+  worried: boolean = false
+): number => {
   const players = input.map(player => {
     // Courtesy of my brother: https://github.com/lgiraudel/advent-of-code/commit/05327d1fdd617003a3ca010d12119751b87c71dd#diff-5d9f4737b2b36f0267499d0e02982aa39794afb4facb7d805983ad3975fd355eR12
     const regex =

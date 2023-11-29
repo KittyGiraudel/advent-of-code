@@ -1,9 +1,9 @@
 import $ from '../../helpers'
 
 type Sample = {
-  operation: number[]
-  before: number[]
-  after: number[]
+  operation: Array<number>
+  before: Array<number>
+  after: Array<number>
 }
 
 const OPCODES = {
@@ -25,13 +25,13 @@ const OPCODES = {
   eqrr: (regs, [A, B, C]) => $.updateAtIndex(regs, C, +(regs[A] === regs[B])),
 }
 
-const parseSample = ([before, op, after]: string[]): Sample => ({
+const parseSample = ([before, op, after]: Array<string>): Sample => ({
   operation: op.split(' ').map(Number),
   before: JSON.parse(before.replace('Before: ', '')),
   after: JSON.parse(after.replace('After: ', '')),
 })
 
-export const debug = (input: string[]) => {
+export const debug = (input: Array<string>) => {
   const capacity = Object.keys(OPCODES).length
   const program = input
     .at(-1)

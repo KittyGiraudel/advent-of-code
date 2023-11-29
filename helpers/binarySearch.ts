@@ -9,7 +9,7 @@ const binarySearch = (
   lower: number,
   upper: number,
   compare: (n: number) => number
-): number => {
+) => {
   while (lower <= upper) {
     const half = Math.round((lower + upper) / 2)
     const comparison = compare(half)

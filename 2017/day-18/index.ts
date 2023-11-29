@@ -1,10 +1,8 @@
-import $ from '../../helpers'
-
 class Network {
-  instructions: string[]
-  nodes: Computer[]
+  instructions: Array<string>
+  nodes: Array<Computer>
 
-  constructor(instructions: string[]) {
+  constructor(instructions: Array<string>) {
     this.nodes = []
     this.instructions = instructions
   }
@@ -38,11 +36,11 @@ class Network {
 class Computer {
   id: number
   registers: { p: number }
-  queue: number[]
+  queue: Array<number>
   pointer: number
   counters: Record<string, number>
   listeners: Record<string, Function[]>
-  instructions: string[]
+  instructions: Array<string>
   waiting: boolean
 
   constructor(id: number) {
@@ -52,6 +50,8 @@ class Computer {
     this.pointer = 0
     this.counters = {}
     this.listeners = {}
+    this.instructions = []
+    this.waiting = false
   }
 
   get halted() {
@@ -65,7 +65,7 @@ class Computer {
     )
   }
 
-  boot(instructions: string[]) {
+  boot(instructions: Array<string>) {
     this.instructions = instructions
     return this
   }
@@ -119,7 +119,7 @@ class Computer {
   }
 }
 
-export const run = (instructions: string[]) => {
+export const run = (instructions: Array<string>) => {
   const network = new Network(instructions)
 
   network.addNode(new Computer(0))

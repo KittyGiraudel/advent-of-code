@@ -3,11 +3,11 @@ import { Point } from '../../types'
 
 type Fold = ['x' | 'y', number]
 
-export const parseInput = ([coords, instructions]: string[]): {
+export const parseInput = ([coords, instructions]: Array<string>): {
   dots: Set<Point>
   folds: Fold[]
 } => {
-  const dots = new Set(coords.split('\n') as Point[])
+  const dots = new Set(coords.split('\n') as Array<Point>)
   const folds = instructions.split('\n').map(instruction => {
     const [, axis, line] = instruction.match(/([xy])=(\d+)$/)
     return [axis, +line] as Fold
@@ -31,7 +31,7 @@ export const foldOnce = (dots: Set<Point>, [axis, line]: Fold) =>
     return acc
   }, new Set(dots))
 
-export const foldAll = (input: string[]): Set<Point> => {
+export const foldAll = (input: Array<string>): Set<Point> => {
   const { dots, folds } = parseInput(input)
 
   return folds.reduce((acc, fold) => foldOnce(acc, fold), new Set(dots))

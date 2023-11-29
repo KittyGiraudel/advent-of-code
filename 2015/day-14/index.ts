@@ -9,7 +9,8 @@ class Deer {
   score: number
 
   constructor(line: string) {
-    const [, name, km, s, rest] = line.match(/(\w+).*?(\d+).*?(\d+).*?(\d+)/)
+    const [, name, km, s, rest] =
+      line.match(/(\w+).*?(\d+).*?(\d+).*?(\d+)/) ?? []
 
     this.name = name
     this.velocity = +km
@@ -22,12 +23,12 @@ class Deer {
     this.score = 0
   }
 
-  switch(state: 'FLYING' | 'RESTING'): void {
+  switch(state: 'FLYING' | 'RESTING') {
     this.state = state
     this.current = 0
   }
 
-  tick(): void {
+  tick() {
     this.current++
 
     if (this.state === 'FLYING') {
@@ -44,10 +45,7 @@ class Deer {
   }
 }
 
-export const run = (
-  input: string[],
-  iterations: number = 1000
-): [number, number] => {
+export const run = (input: Array<string>, iterations: number = 1000) => {
   const deers = input.map(line => new Deer(line))
 
   for (let i = 0; i < iterations; i++) {

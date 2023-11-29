@@ -4,7 +4,7 @@ type Node = {
   children: Node[]
   size: number
   metaSize: number
-  meta: number[]
+  meta: Array<number>
   value: number
 }
 
@@ -17,7 +17,7 @@ const getValue = (node: Node, withRefs: boolean): number =>
     ) ?? []
   )
 
-export const parse = (numbers: number[], withRefs: boolean) => {
+export const parse = (numbers: Array<number>, withRefs: boolean) => {
   const node: Node = {
     children: [],
     size: numbers.shift(),

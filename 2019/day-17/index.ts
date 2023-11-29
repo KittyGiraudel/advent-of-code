@@ -17,7 +17,7 @@ export const getGrid = (input: string): Grid<string> => {
   // join them all together to have a single large string. Then, split the
   // string on line breaks (formerly ASCII code 10), and split each row on
   // individual characters to make grid.
-  return (computer.getOutput() as number[])
+  return (computer.getOutput() as Array<number>)
     .map(code => String.fromCharCode(code))
     .join('')
     .split('\n')
@@ -30,7 +30,7 @@ export const calibrate = (grid: Grid<string>): number =>
     (calibration, value, ri, ci) => {
       if (value !== '#') return calibration
 
-      const neighborcoords: Coords[] = $.bordering([ri, ci], 'COORDS')
+      const neighborcoords: Array<Coords> = $.bordering([ri, ci], 'COORDS')
       const neighbors = neighborcoords.map(coords => $.access(grid, coords))
       const intersection = neighbors.every(neighbor => neighbor === '#')
 

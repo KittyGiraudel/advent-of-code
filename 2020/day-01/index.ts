@@ -5,8 +5,8 @@ import $ from '../../helpers'
 // @param size - Amount of items whose sum is the expectation
 // @param expectation - Number to find
 export const findMatches = (
-  numbers: number[],
+  numbers: Array<number>,
   size: number,
   expectation: number = 2020
-): number[] =>
+): Array<number> =>
   $.combinations(numbers, size).find(set => $.sum(set) === expectation)

@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 
-const next = (prev: string): string => {
+const next = (prev: string) => {
   let curr = '.'
 
   for (let i = 1; i < prev.length - 1; i++) {
@@ -14,7 +14,7 @@ const next = (prev: string): string => {
   return curr + '.'
 }
 
-export const run = (input: string, size: number = 40): number => {
+export const run = (input: string, size: number = 40) => {
   let row = '.' + input + '.'
   let count = $.countInString(row, '\\.') - 2
 

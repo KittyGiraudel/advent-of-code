@@ -3,14 +3,15 @@ import $ from '../../helpers'
 type Node = {
   name: string
   flow: number
-  tunnels: string[]
+  tunnels: Array<string>
 }
 
-export const releasePressure = (input: string[]): number => {
+export const releasePressure = (input: Array<string>) => {
   const map: Record<string, Node> = input.reduce((acc, line) => {
-    const [, name, flow, tunnels] = line.match(
-      /Valve (\w+) has flow rate=(\d+); tunnels? leads? to valves? ([\w,\s]+)/
-    )
+    const [, name, flow, tunnels] =
+      line.match(
+        /Valve (\w+) has flow rate=(\d+); tunnels? leads? to valves? ([\w,\s]+)/
+      ) ?? []
     const valve = { name, flow: +flow, tunnels: tunnels?.split(/,\s/g) }
 
     return { ...acc, [name]: valve }
@@ -34,6 +35,7 @@ export const releasePressure = (input: string[]): number => {
     (acc, name) => ({ ...acc, [name]: getDistances(name) }),
     {}
   )
+  type DistanceKey = keyof typeof distanceMap
 
   const { from } = $.pathfinding.dijkstra({
     start: {
@@ -46,13 +48,16 @@ export const releasePressure = (input: string[]): number => {
     },
     toKey: curr => String(curr.pressure),
     isGoal: curr => curr.time <= 0,
-    getCost: (curr, next) => distanceMap[curr.name][next.name],
+    getCost: (curr, next) => distanceMap[curr.name as DistanceKey][next.name],
     getNextNodes: curr =>
       curr.remaining
         .filter(next => next !== curr.name)
-        .filter(next => curr.time - distanceMap[curr.name][next] > 1)
+        .filter(
+          next => curr.time - distanceMap[curr.name as DistanceKey][next] > 1
+        )
         .map(next => {
-          const time = curr.time - distanceMap[curr.name][next] - 1
+          const time =
+            curr.time - distanceMap[curr.name as DistanceKey][next] - 1
 
           return {
             name: next,

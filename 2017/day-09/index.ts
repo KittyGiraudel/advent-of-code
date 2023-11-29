@@ -1,6 +1,4 @@
-import $ from '../../helpers'
-
-export const run = (string: string): { score: number; chars: number } => {
+export const run = (string: string) => {
   let trash = false
   let depth = 0
   let score = 0

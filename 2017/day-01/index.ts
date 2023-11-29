@@ -1,9 +1,4 @@
-import $ from '../../helpers'
-
-export const captcha = (
-  input: string,
-  inc: number = input.length / 2
-): number => {
+export const captcha = (input: string, inc: number = input.length / 2) => {
   let sum = 0
 
   for (let i = 0; i < input.length; i++) {

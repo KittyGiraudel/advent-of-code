@@ -34,7 +34,7 @@ const sumFactors = (n: number): number => {
   return $.sum(result)
 }
 
-export const run = (input: string[], init: number = 0): number => {
+export const run = (input: Array<string>, init: number = 0): number => {
   const registers = new Int32Array(6)
   registers[0] = init
 

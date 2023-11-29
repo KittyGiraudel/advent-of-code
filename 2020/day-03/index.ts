@@ -6,7 +6,7 @@ import { Coords } from '../../types'
 // @param vector - X,Y vector
 // @param Amount of trees
 export const getTreeCountForSlope = (
-  rows: string[],
+  rows: Array<string>,
   vector: Coords
 ): number => {
   const width = rows[0].length
@@ -27,5 +27,8 @@ export const getTreeCountForSlope = (
 // the given vectors.
 // @param grid - Rows of strings
 // @param vectors - Array of X,Y vectors
-export const getResult = (rows: string[], vectors: Coords[]): number =>
+export const getResult = (
+  rows: Array<string>,
+  vectors: Array<Coords>
+): number =>
   $.product(vectors.map(vector => getTreeCountForSlope(rows, vector)))

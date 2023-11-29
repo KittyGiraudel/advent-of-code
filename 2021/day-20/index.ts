@@ -1,7 +1,7 @@
 import $ from '../../helpers'
 import { Coords } from '../../types'
 
-const getTilingCoords = (ri: number, ci: number): Coords[] => {
+const getTilingCoords = (ri: number, ci: number): Array<Coords> => {
   const [N, NE, E, SE, S, SW, W, NW] = $.surrounding([ri, ci], 'COORDS')
   const C = [ri, ci]
 
@@ -13,7 +13,7 @@ const getTilingCoords = (ri: number, ci: number): Coords[] => {
   ]
 }
 
-const padInput = (input: string, defaultChar: string = '.'): string[] => {
+const padInput = (input: string, defaultChar: string = '.'): Array<string> => {
   const rows = input.split('\n')
   const padding = defaultChar.repeat(rows[0].length)
 

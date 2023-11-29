@@ -1,28 +1,28 @@
 import $ from '../../helpers'
-import { Coords, Point } from '../../types'
+import { Coords, Point, TriPoint } from '../../types'
 
-const VECTORS: Coords[] = [
+const VECTORS: Array<Coords> = [
   '1,0,0',
   '-1,0,0',
   '0,1,0',
   '0,-1,0',
   '0,0,1',
   '0,0,-1',
-].map($.toCoords)
+].map(point => $.toCoords(point as TriPoint))
 
 const getSides = (curr: Coords) =>
   VECTORS.map(vector => $.applyVector(curr, vector))
 
-const getArea = (cubes: Coords[], predicate: Function) =>
+const getArea = (cubes: Array<Coords>, predicate: Function) =>
   cubes
     .flatMap(getSides)
     .map($.toPoint)
     .filter(point => predicate(point)).length
 
 export const getSurfaceArea = (
-  points: Point[],
+  points: Array<Point>,
   advanced: boolean = false
-): number => {
+) => {
   const cubes = points.map($.toCoords)
   const [minX, maxX, minY, maxY, minZ, maxZ] = $.boundaries(cubes)
   const isWithinBounds = ([x, y, z]) =>
@@ -37,7 +37,7 @@ export const getSurfaceArea = (
   // Walk the entire space from a water perspective (flood-fill). Start outside
   // of the bounding box on purpose, and flood the gaps (which are positions
   // that are not listed as part of our input).
-  const start = [minX - 1, minY - 1, minZ - 1]
+  const start = [minX - 1, minY - 1, minZ - 1] as Coords
   const { from: flooded } = $.pathfinding.bfs({
     start,
     getNextNodes: (coords: Coords) =>

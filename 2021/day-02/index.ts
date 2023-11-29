@@ -1,5 +1,5 @@
 export const proceed = (
-  instructions: string[]
+  instructions: Array<string>
 ): { position: number; depth: number } =>
   instructions
     .map(instruction => instruction.split(' '))
@@ -14,7 +14,7 @@ export const proceed = (
     )
 
 export const proceedWithAim = (
-  instructions: string[]
+  instructions: Array<string>
 ): { position: number; depth: number; aim: number } =>
   instructions
     .map(instruction => instruction.split(' '))

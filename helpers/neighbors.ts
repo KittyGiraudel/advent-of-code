@@ -1,9 +1,10 @@
-import { Coords, Point, CoordsAndPoint } from '../types'
+import { Coords, CoordsAndPoint, Point } from '../types'
 import toPoint from './toPoint'
 
 type Strategy = 'COORDS' | 'POINTS' | 'BOTH'
 
-const cache: Map<string, Coords[] | Point[] | CoordsAndPoint[]> = new Map()
+const cache: Map<string, Array<Coords> | Array<Point> | Array<CoordsAndPoint>> =
+  new Map()
 
 /**
  * Return the coordinates of the cells around (4 or 8, depending on whether
@@ -19,10 +20,12 @@ const getCoords = (withDiagonals: boolean) => {
     const key = ri + ',' + ci + '-' + withDiagonals + '-' + strategy
 
     if (cache.has(key)) {
-      return cache.get(key)
+      if (strategy === 'POINTS') return cache.get(key) as Array<Point>
+      if (strategy === 'COORDS') return cache.get(key) as Array<Coords>
+      if (strategy === 'BOTH') return cache.get(key) as Array<CoordsAndPoint>
     }
 
-    const neighbors: Coords[] = [
+    const neighbors: Array<Coords> = [
       /* N  */ [ri - 1, ci],
       withDiagonals && /* NE */ [ri - 1, ci + 1],
       /* E  */ [ri, ci + 1],
@@ -31,19 +34,23 @@ const getCoords = (withDiagonals: boolean) => {
       withDiagonals && /* SW */ [ri + 1, ci - 1],
       /* W  */ [ri, ci - 1],
       withDiagonals && /* NW */ [ri - 1, ci - 1],
-    ].filter(Boolean) as Coords[]
+    ].filter(Boolean) as Array<Coords>
 
     let result
 
     if (strategy === 'POINTS') {
-      result = neighbors.map(toPoint) as Point[]
+      result = neighbors.map(toPoint) as Array<Point>
     } else if (strategy === 'COORDS') {
       result = neighbors
     } else if (strategy === 'BOTH') {
       result = neighbors.map(coords => ({
         coords,
         point: toPoint(coords),
-      })) as CoordsAndPoint[]
+      })) as Array<CoordsAndPoint>
+    }
+
+    if (!result) {
+      throw new Error('Invalid result for neighbors')
     }
 
     cache.set(key, result)

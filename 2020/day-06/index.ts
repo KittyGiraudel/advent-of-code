@@ -7,7 +7,7 @@ const getCountForGroup =
   (predicate: (value: any, index: number, array: any[]) => boolean) =>
   (group: string): number => {
     const persons = group.split('\n')
-    const hasAnsweredYes = (letter: string) => (person: string[]) =>
+    const hasAnsweredYes = (letter: string) => (person: Array<string>) =>
       person.includes(letter)
     const isMatch = (letter: string) =>
       predicate.call(persons, hasAnsweredYes(letter))

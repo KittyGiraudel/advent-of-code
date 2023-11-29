@@ -1,10 +1,10 @@
 import $ from '../../helpers'
-import { Grid, Coords } from '../../types'
+import { Coords, Grid } from '../../types'
 
 const isTree = (n: string): boolean => n === '|'
 const isLumberyard = (n: string): boolean => n === '#'
 
-const getNextValue = (value: string, neighbors: string[]): string => {
+const getNextValue = (value: string, neighbors: Array<string>): string => {
   if (value === '.') return neighbors.filter(isTree).length >= 3 ? '|' : '.'
   if (value === '|')
     return neighbors.filter(isLumberyard).length >= 3 ? '#' : '|'
@@ -18,7 +18,7 @@ const getScore = (grid: Grid<string>): number => {
   return counters['#'] * counters['|']
 }
 
-export const run = (rows: string[], iterations: number = 1): number => {
+export const run = (rows: Array<string>, iterations: number = 1): number => {
   const history = []
   let curr = $.grid.create<string>(rows)
 

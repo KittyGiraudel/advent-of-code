@@ -6,7 +6,9 @@ type DoorsToCoords = Record<string, Coords>
 
 type Node = { coords: Coords; depth: number }
 
-const getDimensions = (input: string[]): { width: number; height: number } => {
+const getDimensions = (
+  input: Array<string>
+): { width: number; height: number } => {
   // The grid is padded by 2 extra rows or columns on each side to make way for
   // the door names, hence the `- 4`. The width is a bit awkward to compute due
   // to the automatic trimming of lines, which is why we pick the max length.
@@ -16,7 +18,7 @@ const getDimensions = (input: string[]): { width: number; height: number } => {
   return { width, height }
 }
 
-const getOutsideCoords = (grid: Grid<string>, input: string[]) => {
+const getOutsideCoords = (grid: Grid<string>, input: Array<string>) => {
   const { width, height } = getDimensions(input)
   const pointsToDoors: PointsToDoors = {}
   const doorsToCoords: DoorsToCoords = {}
@@ -146,7 +148,7 @@ const getNeighborsRecursive =
     return walkable
   }
 
-export const maze = (input: string[], recursive: boolean = false) => {
+export const maze = (input: Array<string>, recursive: boolean = false) => {
   const { width, height } = getDimensions(input)
   // This creates a grid from the givein input except without the outside
   // padding. The middle part still contains the inside door names though.

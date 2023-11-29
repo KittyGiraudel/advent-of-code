@@ -1,7 +1,7 @@
 import $ from '../../helpers'
 
 export const getOverlappingPoints = (
-  lines: string[],
+  lines: Array<string>,
   withDiagonals: boolean = false
 ): number => {
   // Break down every line into a pair of vectors, each vector being a pair of

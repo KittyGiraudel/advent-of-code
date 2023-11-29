@@ -1,11 +1,11 @@
 /**
  * Return all possible permutations of the array.
  */
-const permutations = <T>(array: T[]): T[][] => {
-  const results: T[][] = []
+const permutations = <T>(array: Array<T>) => {
+  const results: Array<Array<T>> = []
 
-  function permute(arr: T[], memo: T[] = []) {
-    let curr: T[]
+  function permute(arr: Array<T>, memo: Array<T> = []) {
+    let curr: Array<T>
 
     for (var i = 0; i < arr.length; i++) {
       curr = arr.splice(i, 1)

@@ -5,6 +5,6 @@
 const stringMap = (
   string: string,
   callback: (value: string, index: number, array: string[]) => string
-): string => Array.from(string).map(callback).join('')
+) => Array.from(string).map(callback).join('')
 
 export default stringMap

@@ -10,7 +10,7 @@ type Node = {
 const isKey = (value: string): boolean => /[a-z]/.test(value)
 const isDoor = (value: string): boolean => /[A-Z]/.test(value)
 
-export const maze = (input: string[]) => {
+export const maze = (input: Array<string>) => {
   const keys: Record<Point, string> = {}
   const startCoords: Coords = [0, 0]
   const grid = $.grid.create<string>(input, (value, ri, ci) => {
@@ -27,7 +27,7 @@ export const maze = (input: string[]) => {
   })
   const keyCount = Object.keys(keys).length
   const start: Node = { coords: startCoords, keys: new Set(), steps: 0 }
-  // const frontier: Node[] = [start]
+  // const frontier: Array<Node> = [start]
 
   console.log(keys, startCoords)
 

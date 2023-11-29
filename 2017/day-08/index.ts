@@ -1,12 +1,8 @@
-import $ from '../../helpers'
-
 // This function takes in an array of raw instructions, executes every
 // instruction to manipulate the value of registers (starting at 0), and return
 // the maximum value reached by a register.
 // Write-up: https://kittygiraudel.com/2022/01/21/exploiting-javascript-quirks-for-fun-and-profit/
-export const run = (
-  lines: string[]
-): { currentMax: number; absoluteMax: number } => {
+export const run = (lines: Array<string>) => {
   let absoluteMax = -Infinity
   const registers: Record<string, number> = {}
 
@@ -25,7 +21,7 @@ export const run = (
     condition = condition.replace(/([a-z]+)/, 'registers.$1')
 
     const code = condition + ' ' + expression
-    code.match(/\w+/g).forEach(variable => {
+    code.match(/\w+/g)?.forEach(variable => {
       registers[variable] = registers[variable] || 0
     })
 

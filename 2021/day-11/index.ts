@@ -3,14 +3,14 @@ import { Coords, Grid } from '../../types'
 
 type Octopus = { value: number; flashed: boolean }
 
-const makeGrid = (rows: string[]): Grid<Octopus> =>
+const makeGrid = (rows: Array<string>): Grid<Octopus> =>
   $.grid.create(rows, optopus => ({ value: +optopus, flashed: false }))
 
 const countNewFlashes = (grid: Grid<Octopus>): number =>
   $.grid.reduce(grid, (acc, octopus) => acc + +octopus.flashed, 0)
 
 const processFlashes = (grid: Grid<Octopus>): void => {
-  const toIncrement: Coords[] = []
+  const toIncrement: Array<Coords> = []
 
   $.grid.forEach(grid, (octopus, ri, ci) => {
     if (!octopus.flashed && octopus.value > 9) {
@@ -46,7 +46,7 @@ const cycle = (grid: Grid<Octopus>): number => {
   return flashes
 }
 
-export const countFlashes = (rows: string[], steps: number): number => {
+export const countFlashes = (rows: Array<string>, steps: number): number => {
   const grid = makeGrid(rows)
   let flashes = 0
 
@@ -58,7 +58,7 @@ export const countFlashes = (rows: string[], steps: number): number => {
 const isSynced = (grid: Grid<Octopus>): boolean =>
   $.grid.every(grid, octopus => octopus.value === 0)
 
-export const findSynchronocity = (rows: string[]): number => {
+export const findSynchronocity = (rows: Array<string>): number => {
   const grid = makeGrid(rows)
   let i = 0
 

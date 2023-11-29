@@ -23,7 +23,7 @@ type Node = {
 // Ultimately, I am defeated and this is a solution inspired by this Reddit
 // comment:
 // https://www.reddit.com/r/adventofcode/comments/a7uk3f/2018_day_20_solutions/ec61727/
-const mapOut = (input: string): number[] => {
+const mapOut = (input: string): Array<number> => {
   let curr: Node = { x: 0, y: 0, distance: 0 }
   const stack: Node[] = [curr]
   const map: Map<Point, Node> = new Map()

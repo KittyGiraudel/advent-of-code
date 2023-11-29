@@ -1,24 +1,20 @@
 import $ from '../../helpers'
 
-const indicesOf = (string: string, from: string): number[] => {
+const indicesOf = (string: string, from: string) => {
   const indices = []
   const regex = new RegExp(from, 'g')
 
-  let result: RegExpExecArray
+  let result: RegExpExecArray | null
   while ((result = regex.exec(string))) indices.push(result.index)
 
   return indices
 }
 
-const replaceAt = (
-  value: string,
-  from: string,
-  index: number,
-  to: string
-): string => value.slice(0, index) + value.slice(index).replace(from, to)
+const replaceAt = (value: string, from: string, index: number, to: string) =>
+  value.slice(0, index) + value.slice(index).replace(from, to)
 
-export const calibrate = (input: string[]): number => {
-  const molecule = input.at(-1)
+export const calibrate = (input: Array<string>) => {
+  const molecule = input.at(-1)!
   const molecules = input.slice(0, -2).flatMap(replacement => {
     const [from, to] = replacement.split(' => ')
     const indices = indicesOf(molecule, from)
@@ -37,8 +33,8 @@ export const calibrate = (input: string[]): number => {
 // should also subtract 1 because we start with `e`.
 // Ref: https://www.reddit.com/r/adventofcode/comments/3xflz8/comment/cy4etju/
 // Ref: https://www.reddit.com/r/adventofcode/comments/3xflz8/comment/cy4h7ji/
-export const recompose = (input: string[]): number => {
-  const molecule = input.at(-1)
+export const recompose = (input: Array<string>) => {
+  const molecule = input.at(-1)!
   const tokens = $.countInString(molecule, '[A-Z]', false)
   const Rn = $.countInString(molecule, 'Rn', false)
   const Ar = $.countInString(molecule, 'Ar', false)

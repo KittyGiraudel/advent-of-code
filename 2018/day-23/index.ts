@@ -15,8 +15,8 @@ const parse = (string: string): Bot => {
   return { x, y, z, r, distance }
 }
 
-export const findStrongestBot = (input: string[]): [number, number] => {
-  const bots: Bot[] = input.map(parse).sort((a, b) => b.r - a.r)
+export const findStrongestBot = (input: Array<string>): [number, number] => {
+  const bots: BoArray<T> = input.map(parse).sort((a, b) => b.r - a.r)
   const inRange = bots.filter(bot => $.manhattan(bot, bots[0]) <= bots[0].r)
 
   // I spent quite a lot of time trying to figure that one out, but to no avail.

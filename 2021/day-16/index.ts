@@ -3,7 +3,7 @@ import $ from '../../helpers'
 type Packt = {
   version: number
   id: number
-  packets: Packt[]
+  packets: PackArray<T>
   rest: string
   value: number
 }
@@ -95,7 +95,7 @@ const sumVersions = ({
   packets,
 }: {
   version: number
-  packets: Packet[]
+  packets: PackeArray<T>
 }): number =>
   packets.reduce((total, packet) => total + sumVersions(packet), version)
 
@@ -149,7 +149,7 @@ class Packet {
   version: number
   id: number
   value: number
-  packets: Packet[]
+  packets: PackeArray<T>
 
   constructor(version: number, id: number, value?: number) {
     this.version = version

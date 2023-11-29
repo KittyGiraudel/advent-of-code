@@ -36,7 +36,7 @@ export const getRisk = (depth: number, target: Coords): number =>
   )
 
 const getNeighbors = $.memo(
-  (x: number, y: number, width: number, height: number): Coords[] =>
+  (x: number, y: number, width: number, height: number): Array<Coords> =>
     $.bordering([x, y], 'COORDS').filter(
       ([x, y]) => x >= 0 && x < width && y >= 0 && y < height
     )
@@ -45,7 +45,7 @@ const getNeighbors = $.memo(
 export const getDuration = (depth: number, target: Coords): number => {
   const height = 5 + (target[1] + 1)
   const width = 50 + (target[0] + 1)
-  const frontier: number[][] = [[0, 0, 0, 1]]
+  const frontier: Array<number>[] = [[0, 0, 0, 1]]
   const timeMap: Map<string, number> = new Map()
 
   while (frontier.length) {

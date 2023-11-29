@@ -2,7 +2,7 @@ import $ from '../../helpers'
 
 type Graph = Map<string, Set<string>>
 
-export const createGraph = (lines: string[]): Graph => {
+export const createGraph = (lines: Array<string>): Graph => {
   const map = new Map()
 
   lines.forEach(line => {
@@ -20,8 +20,8 @@ export const getPaths = (
   graph: Graph,
   curr: string,
   end: string = 'COM',
-  path: string[] = []
-): string[][] => {
+  path: Array<string> = []
+): Array<Array<string>> => {
   if (curr === end) return [path]
   if (path.includes(curr)) return []
   return Array.from(graph.get(curr)).reduce(

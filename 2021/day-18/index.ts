@@ -73,10 +73,10 @@ export const computeMagnitude = ([left, right]: [number?, number?]): number =>
   (typeof left === 'number' ? left : computeMagnitude(left)) * 3 +
   (typeof right === 'number' ? right : computeMagnitude(right)) * 2
 
-export const sumFish = (...fishes: string[]): string =>
+export const sumFish = (...fishes: Array<string>): string =>
   fishes.reduce((acc, fish) => (acc ? reduce(`[${acc},${fish}]`) : fish))
 
-export const findHighestMagnitude = (...fishes: string[]): number =>
+export const findHighestMagnitude = (...fishes: Array<string>): number =>
   Math.max(
     ...$.combinations(fishes, 2)
       .map(pair => sumFish(...pair))

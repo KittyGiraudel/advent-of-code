@@ -1,7 +1,12 @@
 /**
  * Return all possible unique combinations of size `n` from given `array`.
  */
-const combinations = <T>(array: T[], n: number, start = [], tmp = []): T[][] =>
+const combinations = <T>(
+  array: Array<T>,
+  n: number,
+  start: Array<Array<T>> = [],
+  tmp: Array<T> = []
+) =>
   array.reduce((acc, item, index, array) => {
     if (n > 1) {
       tmp.push(item)

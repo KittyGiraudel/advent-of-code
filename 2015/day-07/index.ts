@@ -8,10 +8,11 @@ const OPERATORS = {
   LSHIFT: '<<',
   RSHIFT: '>>',
 }
+type Operator = keyof typeof OPERATORS
 
-const prepare = (string: string): string => {
+const prepare = (string: string) => {
   for (let operator in OPERATORS)
-    string = string.replace(operator, OPERATORS[operator])
+    string = string.replace(operator, OPERATORS[operator as Operator])
 
   // Funnily enough, the `with (registers)` trick outlined in the article below
   // does not work because one of the keys is `do`, which is a reserved word in
@@ -20,7 +21,7 @@ const prepare = (string: string): string => {
   return string.replace(/[a-z]+/g, a => 'registers.' + a)
 }
 
-export const run = (input: string[], registers: Registers = {}): Registers => {
+export const run = (input: Array<string>, registers: Registers = {}) => {
   const graph: Graph = new Map()
 
   input.forEach(line => {

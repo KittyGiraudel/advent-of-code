@@ -33,7 +33,7 @@ const truncate = (value: number): number => +value.toString().slice(-1)
 const reduceFirst = (acc: number, value: number, i: number): number =>
   i % 2 ? acc : acc + value * (i % 4 ? -1 : +1)
 
-const reduceAny = (acc: number, chunk: number[], i: number): number =>
+const reduceAny = (acc: number, chunk: Array<number>, i: number): number =>
   i % 2 ? acc + $.sum(chunk) * (i % 4 === 1 ? +1 : -1) : acc
 
 export const cycle = (input: string, iterations: number = 1): string => {

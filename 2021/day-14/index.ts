@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 
-export const count = (input: string[], iterations: number = 1): number => {
+export const count = (input: Array<string>, iterations: number = 1): number => {
   const string = input[0]
   // Initialize letter counters based on the characters of the initial string.
   const counters = $.count(string.split(''))

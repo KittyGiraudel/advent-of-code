@@ -2,8 +2,8 @@
  * Compose a new function from the given functions.
  */
 const compose =
-  (...functions: Function[]): Function =>
-  args =>
+  (...functions: Function[]) =>
+  (args: unknown[]) =>
     functions.reduceRight((arg, fn) => fn(arg), args)
 
 export default compose

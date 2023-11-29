@@ -1,11 +1,11 @@
-type Deck = number[]
+type Deck = Array<number>
 type Outcome = { index: number; decks: Deck[] }
 
 const isNotEmpty = (deck: Deck): boolean => deck.length > 0
 
-const draw = (decks: Deck[]): number[] => decks.map(deck => deck.shift())
+const draw = (decks: Deck[]): Array<number> => decks.map(deck => deck.shift())
 
-const getWinningIndex = (cards: number[]): number =>
+const getWinningIndex = (cards: Array<number>): number =>
   cards.findIndex(card => card === Math.max(...cards))
 
 const serializeGame = (decks: Deck[]): string =>
@@ -21,7 +21,7 @@ const computeScore = (cards: Deck): number =>
 
 // Parse the given input.
 // @param input - Raw input
-const parseInput = (input: string[]): Deck[] =>
+const parseInput = (input: Array<string>): Deck[] =>
   input.map(stack => stack.split('\n').slice(1).map(Number))
 
 // Perform a regular fight between decks a and b.
@@ -66,7 +66,7 @@ export const fightRecursive = (
 // @param input - Raw input
 // @param resolver - Either `fightRegular` or `fightRecursive`
 export const getGameScore = (
-  input: string[],
+  input: Array<string>,
   resolver: Function = fightRegular
 ): number => {
   const decks = parseInput(input)

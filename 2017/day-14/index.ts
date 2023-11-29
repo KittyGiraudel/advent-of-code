@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Point, Grid } from '../../types'
+import { Coords, CoordsAndPoint, Grid, Point } from '../../types'
 import { Computer } from '../day-10'
 
 export const run = (key: string): [number, number] => {
@@ -18,7 +18,7 @@ export const run = (key: string): [number, number] => {
   // Starting from the cell at the given coordinates, explore the active and not
   // yet explored neighbors, marking them all part of the same group.
   const walk = (coords: Coords, group: Point) =>
-    $.bordering(coords)
+    ($.bordering(coords) as Array<CoordsAndPoint>)
       .filter(({ coords }) => $.access(grid, coords))
       .forEach(({ coords, point }) => {
         if (!(point in visited)) {

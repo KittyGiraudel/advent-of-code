@@ -1,10 +1,10 @@
 import $ from '../../helpers'
-import { Grid, Coords } from '../../types'
+import { Coords, Grid } from '../../types'
 
 type Tile = {
   id: number
   grid: Grid<string>
-  sides: string[]
+  sides: Array<string>
 }
 
 // Terminology for this whole file:
@@ -26,7 +26,7 @@ type Tile = {
 // it doesn’t *have* to be formatted like this, but I feel like it helps
 // visualizing so why not.
 // prettier-ignore
-const MONSTER_PATTERN: Coords[] = [
+const MONSTER_PATTERN: Array<Coords> = [
                                                                  [-1,18],
 [0,0],        [0,5],[0,6],         [0,11],[0,12],          [0,17],[0,18],[0,19],
     [1,1],[1,4],        [1,7],[1,10],          [1,13],[1,16],
@@ -34,7 +34,7 @@ const MONSTER_PATTERN: Coords[] = [
 
 // Get every side of the grid, ordered top -> right -> bottom -> left (which
 // matters later on).
-const getSides = (grid: Grid<string>): string[] =>
+const getSides = (grid: Grid<string>): Array<string> =>
   [
     /* Top    */ grid[0],
     /* Right  */ $.column(grid, grid.length - 1),
@@ -157,7 +157,7 @@ const checksum = (mozaic: Grid<Tile>): number => {
 
 // Given the raw collection of snapshots, find the right layout to reassemble
 // the jigsaw puzzle (mozaic).
-const solve = (snapshots: string[]): Grid<Tile> =>
+const solve = (snapshots: Array<string>): Grid<Tile> =>
   snapshots
     .map(parseSnapshot)
     .flat()
@@ -166,7 +166,7 @@ const solve = (snapshots: string[]): Grid<Tile> =>
       null
     )
 
-export const run = (snapshots: string[]) => {
+export const run = (snapshots: Array<string>) => {
   const mozaic = solve(snapshots)
   const image = assemble(mozaic)
 

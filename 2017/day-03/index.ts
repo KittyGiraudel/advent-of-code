@@ -9,7 +9,7 @@ const NORTH: Coords = [0, -1]
 export const resolve = (bound: number): number => {
   // Given the value increments by 1 for every new cell, use an array where the
   // index serves as the value itself, hence why we skip the first cell (0).
-  const coords: Coords[] = [null, [0, 0]]
+  const coords = [null, [0, 0] as Coords]
   // Taking a step means applying a directional vector to the last recorded
   // set of coordinates.
   const step = (vector: Coords) =>

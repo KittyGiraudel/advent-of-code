@@ -8,16 +8,17 @@ type Disk = {
   available: number
 }
 
-const getDisks = (dump: string[]): Disk[] =>
+const getDisks = (dump: Array<string>) =>
   dump.slice(2).map(line => {
-    const [, x, y, size, used, available] = line
-      .match(/x(\d+)-y(\d+)\s+(\d+)T\s+(\d+)T\s+(\d+)T\s+(\d+)/)
-      .map(Number)
+    const [, x, y, size, used, available] =
+      line
+        .match(/x(\d+)-y(\d+)\s+(\d+)T\s+(\d+)T\s+(\d+)T\s+(\d+)/)
+        ?.map(Number) ?? []
 
-    return { coords: [y, x], size, used, available }
+    return { coords: [y, x], size, used, available } as Disk
   })
 
-export const run = (dump: string[]): number => {
+export const run = (dump: Array<string>) => {
   const disks = getDisks(dump)
 
   return $.combinations(disks, 2).filter(
@@ -37,7 +38,7 @@ export const run = (dump: string[]): number => {
 // 3. It assumes there are no oversized disks on the top row.
 // The idea is to move the empty disk around, to the left of the data disk. Then
 // swap both disks. Repeat until the data is in the goal spot (top-left corner).
-export const getData = (dump: string[]): number => {
+export const getData = (dump: Array<string>) => {
   const disks = getDisks(dump)
   const maxCi = Math.max(...disks.map(disk => disk.coords[1]))
   const emptyNode = disks.find(disk => disk.used === 0)

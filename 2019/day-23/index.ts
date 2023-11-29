@@ -4,13 +4,13 @@ import { Intcode } from '../day-05'
 
 type Node = {
   computer: Intcode
-  queue: Coords[]
+  queue: Array<Coords>
 }
 
 class Network {
-  outputs: number[]
+  outputs: Array<number>
   NAT: Coords
-  nodes: Node[]
+  nodes: Array<Node>
   withLogs: boolean
 
   constructor(input: string, size: number, withLogs: boolean = false) {
@@ -36,7 +36,7 @@ class Network {
   runNode(node: Node) {
     const { computer, queue } = node
     const packet = queue.pop() || -1
-    const output = computer.setInput(packet).run().getOutput() as number[]
+    const output = computer.setInput(packet).run().getOutput() as Array<number>
     const isIdle = packet === -1 && !output.length
 
     if (output.length) {
@@ -88,10 +88,10 @@ class Network {
   }
 }
 
-export const boot = (input: string, size: number = 50): number[] => {
+export const boot = (input: string, size: number = 50): Array<number> => {
   const network = new Network(input, size)
 
   while (!network.isDone()) network.run()
 
-  return network.getOutput() as number[]
+  return network.getOutput() as Array<number>
 }

@@ -1,10 +1,12 @@
-import $ from '../../helpers'
-
 // Get the destination cup number.
 // @param current - Current cup value
 // @param picks - 3 picked cups
 // @param max - Maximum value
-const getDest = (current: number, picks: number[], max: number): number => {
+const getDest = (
+  current: number,
+  picks: Array<number>,
+  max: number
+): number => {
   const destination = current - 1
   if (destination > 0 && !picks.includes(destination)) return destination
   return getDest(destination || max + 1, picks, max)
@@ -13,7 +15,7 @@ const getDest = (current: number, picks: number[], max: number): number => {
 // Pick the 3 cups to the right side of the current one.
 // @param map - Map of links
 // @param current - Current cup value
-const pickCups = (map: Uint32Array, current: number): number[] => {
+const pickCups = (map: Uint32Array, current: number): Array<number> => {
   const picks = []
 
   picks.push(map[current])
@@ -26,7 +28,7 @@ const pickCups = (map: Uint32Array, current: number): number[] => {
 // Generate the initial map of linked values.
 // @param input - Initial numbers
 // @param size - Amount of numbers in the list
-const init = (input: number[], size: number): Uint32Array => {
+const init = (input: Array<number>, size: number): Uint32Array => {
   const map = new Uint32Array(size + 1)
 
   // Fill the array with all the numbers from 1 to size; index 0 is empty.
@@ -53,7 +55,7 @@ const init = (input: number[], size: number): Uint32Array => {
 // @param rounds - Amount of rounds to play
 // @param size - Amount of numbers in the list
 export const play = (
-  input: number[],
+  input: Array<number>,
   rounds: number = 10,
   size: number = input.length
 ): Uint32Array => {

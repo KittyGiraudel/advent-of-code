@@ -1,7 +1,7 @@
 import $ from '../../helpers'
 import { Coords, Point } from '../../types'
 
-type NeighborCache = Map<Point, Point[]>
+type NeighborCache = Map<Point, Array<Point>>
 type Mappy = Map<Point, string>
 
 const W = (coords: Coords): Coords =>
@@ -48,7 +48,7 @@ const getNeighborCoords = (
   coords: Point,
   dimensions: number,
   cache: NeighborCache
-): Point[] => {
+): Array<Point> => {
   if (cache.has(coords)) return cache.get(coords)
 
   const coordinates = $.toCoords(coords)
@@ -118,7 +118,7 @@ const cycle = (origin: Mappy, dimensions: number, cache: NeighborCache) =>
 
 // Initialise the storage map
 // @param rows - Rows
-const init = (rows: string[]): Mappy =>
+const init = (rows: Array<string>): Mappy =>
   rows.reduce(
     (map, row, y) =>
       row
@@ -142,7 +142,7 @@ const count = (map: Mappy): number =>
 // @param dimensions - Amount of dimensions (3 or 4)
 // @param cache - Coordinates cache
 export const gameOfLife = (
-  input: string[],
+  input: Array<string>,
   cycles: number,
   dimensions: number = 3,
   cache: NeighborCache = new Map()

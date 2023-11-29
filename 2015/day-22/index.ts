@@ -9,7 +9,7 @@ const SPELL_COST = {
   R: 229,
 }
 
-const fight = (actions: string[], hard: boolean): number => {
+const fight = (actions: Array<string>, hard: boolean) => {
   let effects = { P: 0, S: 0, R: 0 }
   let player = 50
   let boss = 51
@@ -33,9 +33,11 @@ const fight = (actions: string[], hard: boolean): number => {
 
     if (turn) {
       const spell = actions.shift()
+      type Spell = keyof typeof SPELL_COST
+      type Effect = keyof typeof effects
 
-      mana -= SPELL_COST[spell]
-      total += SPELL_COST[spell]
+      mana -= SPELL_COST[spell as Spell]
+      total += SPELL_COST[spell as Spell]
 
       // If not enough mana to cast the spell, abort
       if (mana < 0) return ILLEGAL_MOVE
@@ -43,8 +45,8 @@ const fight = (actions: string[], hard: boolean): number => {
       if (spell === 'M') boss -= 4
       else if (spell === 'D') (boss -= 2), (player += 2)
       else {
-        if (effects[spell]) return ILLEGAL_MOVE
-        effects[spell] = spell === 'R' ? 5 : 6
+        if (effects[spell as Effect]) return ILLEGAL_MOVE
+        effects[spell as Effect] = spell === 'R' ? 5 : 6
       }
 
       // Check if the spell killed the boss
@@ -61,7 +63,7 @@ const fight = (actions: string[], hard: boolean): number => {
   return OUT_OF_MOVES
 }
 
-const iterate = (actions: string[], position: number = 0): void => {
+const iterate = (actions: Array<string>, position: number = 0) => {
   const index = 'MDSPR'.indexOf(actions[position])
 
   actions[position] = 'DSPRM'[index]
@@ -70,7 +72,7 @@ const iterate = (actions: string[], position: number = 0): void => {
     iterate(actions, position + 1)
 }
 
-export const run = (hard: boolean): number => {
+export const run = (hard: boolean) => {
   // The amount of moves it totally arbitrary here. We estimate that the fight
   // will be over in a maximum of 10 moves. This may vary based on the input.
   const actions = Array.from('M'.repeat(10))

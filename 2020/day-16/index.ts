@@ -1,13 +1,13 @@
 import $ from '../../helpers'
 
 type Rule = [string, [number, number], [number, number]]
-type Ticket = number[]
-type Possibility = string[]
+type Ticket = Array<number>
+type Possibility = Array<string>
 
 type Input = {
   rules: Rule[]
   ticket: Ticket
-  nearbyTickets: Ticket[]
+  nearbyTickets: TickeArray<T>
 }
 
 // Parse the given values
@@ -18,7 +18,7 @@ export const parseInput = ([
   rawRules,
   rawTicket,
   rawNearbyTickets,
-]: string[]): Input => ({
+]: Array<string>): Input => ({
   rules: rawRules
     .split('\n')
     .map(line => line.match(/([\w\s]+): (\d+)-(\d+) or (\d+)-(\d+)/))
@@ -53,13 +53,13 @@ const isTicketValid = (ticket: Ticket, rules: Rule[]): boolean =>
 // @param tickets - Tickets to scan
 // @param rules - Rules to validate the tickets against
 export const getScanningErrorRate = (
-  tickets: Ticket[],
+  tickets: TickeArray<T>,
   rules: Rule[]
 ): number => $.sum(tickets.flat().filter(value => !isValueValid(value, rules)))
 
 // Return whether the given value is an array with a single item.
 // @param entry - Entry to test
-const hasSingleOption = (entry: string | string[]): boolean =>
+const hasSingleOption = (entry: string | Array<string>): boolean =>
   Array.isArray(entry) && entry.length === 1
 
 // Return an array where every position contains all the rule names that can
@@ -67,7 +67,7 @@ const hasSingleOption = (entry: string | string[]): boolean =>
 // @param tickets - Valid nearby tickets
 // @param rules - Rules to validate the tickets against
 const getRulesPossibilities = (
-  tickets: Ticket[],
+  tickets: TickeArray<T>,
   rules: Rule[]
 ): Possibility[] => {
   let possibilities = $.array(rules.length).map(() => [])
@@ -89,8 +89,8 @@ const getRulesPossibilities = (
 // Resolve rules possibitilies to return an order of rules (mutative).
 // @param possibilities - Rules possibilities
 const resolveRulesPossibitilies = (
-  possibilities: (string | string[])[]
-): string[] => {
+  possibilities: (string | Array<string>)[]
+): Array<string> => {
   // Find a position which has a single option
   let index = possibilities.findIndex(hasSingleOption)
 
@@ -113,19 +113,22 @@ const resolveRulesPossibitilies = (
     index = possibilities.findIndex(hasSingleOption)
   }
 
-  return possibilities as string[]
+  return possibilities as Array<string>
 }
 
 // Get the order of rules (names only) given the tickets’ validity.
 // @param tickets - Valid nearby tickets
 // @param rules - Rules to validate the tickets with and determine the order from
 // @return Ordered rule names
-export const getRulesOrder = (tickets: Ticket[], rules: Rule[]): string[] =>
+export const getRulesOrder = (
+  tickets: TickeArray<T>,
+  rules: Rule[]
+): Array<string> =>
   resolveRulesPossibitilies(getRulesPossibilities(tickets, rules))
 
 // Get the ticket value.
 // @param input - Raw puzzle input
-export const getTicketValue = (input: string[]): number => {
+export const getTicketValue = (input: Array<string>): number => {
   const { nearbyTickets, ticket, rules } = parseInput(input)
   const tickets = nearbyTickets.filter(ticket => isTicketValid(ticket, rules))
   const sortedRules = getRulesOrder(tickets, rules)

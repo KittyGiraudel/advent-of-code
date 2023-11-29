@@ -51,7 +51,7 @@ const getVolume = (cuboid: Cube) =>
   (cuboid.yMax + 1 - cuboid.yMin) *
   (cuboid.zMax + 1 - cuboid.zMin)
 
-export const reboot = (input: string[], max: number): number => {
+export const reboot = (input: Array<string>, max: number): number => {
   const area = getArea(max)
   const instructions = input
     .map(parseLine)

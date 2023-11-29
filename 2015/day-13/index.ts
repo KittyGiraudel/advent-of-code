@@ -2,15 +2,14 @@ import $ from '../../helpers'
 
 type Graph = Record<string, Record<string, number>>
 
-const createGraph = (input: string[], withOneself: boolean): Graph => {
+const createGraph = (input: Array<string>, withOneself: boolean) => {
   const graph: Graph = {}
 
   if (withOneself) graph.me = {}
 
   input.forEach(line => {
-    const [, first, verb, value, last] = line.match(
-      /(\w+).*?(gain|lose) (\d+).*?(\w+)\./
-    )
+    const [, first, verb, value, last] =
+      line.match(/(\w+).*?(gain|lose) (\d+).*?(\w+)\./) ?? []
     const direction = verb === 'gain' ? +1 : -1
 
     if (!(first in graph)) graph[first] = {}
@@ -22,16 +21,14 @@ const createGraph = (input: string[], withOneself: boolean): Graph => {
   return graph
 }
 
-const getArrangementScore =
-  (graph: Graph) =>
-  (arrangement: string[]): number =>
-    arrangement.reduce((acc, item, index, array) => {
-      const next = array[index + 1] || array[0]
+const getArrangementScore = (graph: Graph) => (arrangement: Array<string>) =>
+  arrangement.reduce((acc, item, index, array) => {
+    const next = array[index + 1] || array[0]
 
-      return acc + graph[item][next] + graph[next][item]
-    }, 0)
+    return acc + graph[item][next] + graph[next][item]
+  }, 0)
 
-export const run = (input: string[], withOneself: boolean = false): number => {
+export const run = (input: Array<string>, withOneself: boolean = false) => {
   const graph = createGraph(input, withOneself)
   const keys = Object.keys(graph)
   const arrangements = $.permutations(keys)

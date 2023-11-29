@@ -3,7 +3,7 @@ import { Coords } from '../../types'
 
 const isOpenSpace =
   (n: number) =>
-  ([y, x]: Coords): boolean => {
+  ([y, x]: Coords) => {
     if (x < 0 || y < 0) return false
 
     const value = x * x + 3 * x + 2 * x * y + y + y * y + n

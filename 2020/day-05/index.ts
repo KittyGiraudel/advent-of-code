@@ -38,7 +38,7 @@ export const getSeatId = (input: string): number => {
 // Return the ID of the proper seat based on a list of seat encodings.
 // @param input - Seat encodings
 // @return Seat ID
-export const findOwnSeat = (input: string[]): number => {
+export const findOwnSeat = (input: Array<string>): number => {
   const ids = input
     .map(getSeatId)
     .map(Number)

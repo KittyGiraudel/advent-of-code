@@ -1,15 +1,15 @@
 export class Intcode {
   halted: boolean
-  memory: number[]
-  backup: number[]
+  memory: Array<number>
+  backup: Array<number>
   pointer: number
-  inputs: number[]
-  outputs: number[]
+  inputs: Array<number>
+  outputs: Array<number>
   withLogs: boolean
   base: number
   execute?: Function
 
-  constructor(memory: string | number[]) {
+  constructor(memory: string | Array<number>) {
     // Holds whether the program has reached an opcode 99 instruction, causing
     // it to halt permanently.
     this.halted = false
@@ -45,14 +45,14 @@ export class Intcode {
     return this
   }
 
-  setInput(input: number | number[]) {
+  setInput(input: number | Array<number>) {
     this.log('➡️ Recording input', input)
     Array.isArray(input) ? this.inputs.push(...input) : this.inputs.push(input)
 
     return this
   }
 
-  getOutput(): number | number[] {
+  getOutput(): number | Array<number> {
     const output =
       this.outputs.length === 1 ? this.outputs[0] : this.outputs.slice(0)
 
@@ -93,7 +93,7 @@ export class Intcode {
     return this.memory.join(',')
   }
 
-  parseOpcode(opcode: number): { modes: number[]; value: number } {
+  parseOpcode(opcode: number): { modes: Array<number>; value: number } {
     // Instructions have a maximum of 3 arguments, and the opcode value is
     // authored over 2 digits (0 to 99), so the opcode string should be 5 digits
     // long, left-padded with zeroes. Padding is technically not required since

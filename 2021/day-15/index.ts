@@ -18,7 +18,7 @@ const getLowestCost = (grid: Grid<number>, mapSize = 1): number => {
 
   const withinBounds = ([ri, ci]) =>
     $.isClamped(ri, 0, height) && $.isClamped(ci, 0, width)
-  const getNextNodes = (coords: Coords): Coords[] =>
+  const getNextNodes = (coords: Coords): Array<Coords> =>
     $.bordering(coords, 'COORDS').filter(withinBounds)
 
   const { costs } = $.pathfinding.aStar({
@@ -32,5 +32,7 @@ const getLowestCost = (grid: Grid<number>, mapSize = 1): number => {
   return costs[$.toPoint(end)]
 }
 
-export const getLowestRisk = (input: string[], mapSize: number = 1): number =>
-  getLowestCost($.grid.create(input, Number), mapSize)
+export const getLowestRisk = (
+  input: Array<string>,
+  mapSize: number = 1
+): number => getLowestCost($.grid.create(input, Number), mapSize)

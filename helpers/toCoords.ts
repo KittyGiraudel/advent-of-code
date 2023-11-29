@@ -1,4 +1,4 @@
-import { Coords, Point } from '../types'
+import { Coords, Point, TriPoint } from '../types'
 
 /**
  * Split a string into its numeric part (separated by commas), typically
@@ -8,7 +8,7 @@ import { Coords, Point } from '../types'
  * @example toCoords('0,1,2') === [0, 1, 2]
  * @example toCoords('0,  1,  2') === [0, 1, 2]
  */
-const toCoords = (point: Point): Coords =>
+const toCoords = (point: Point | TriPoint) =>
   point.split(/,\s?/g).map(Number) as Coords
 
 export default toCoords

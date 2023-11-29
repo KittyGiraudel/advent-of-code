@@ -8,6 +8,6 @@ const inspect = (
   showHidden: boolean = true,
   depth: number = Infinity,
   color: boolean = true
-): string => util.inspect(value, showHidden, depth, color)
+) => util.inspect(value, showHidden, depth, color)
 
 export default inspect

@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Grid, Point, SearchGraph } from '../../types'
+import { Coords, Grid, SearchGraph } from '../../types'
 import { Intcode } from '../day-05'
 
 const DIRECTIONS = [1, 4, 2, 3]
@@ -21,7 +21,7 @@ const discover = (
   input: string
 ): { from: SearchGraph; start: Node; end: Node } => {
   const start: Node = { position: [0, 0], program: new Intcode(input) }
-  const getNextNodes = (curr: Node): Node[] =>
+  const getNextNodes = (curr: Node): Array<Node> =>
     $.bordering(curr.position, 'COORDS')
       .map((coords: Coords) => ({ position: coords }))
       .map(addProgramCopy(curr))

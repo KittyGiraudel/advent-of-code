@@ -1,13 +1,13 @@
 import $ from '../../helpers/'
 
-const parseInput = (line: string): string[][] =>
+const parseInput = (line: string): Array<string>[] =>
   line
     .split(' | ')
     .map(value =>
       value.split(' ').map(pattern => pattern.split('').sort().join(''))
     )
 
-export const count = (lines: string[]): number =>
+export const count = (lines: Array<string>): number =>
   lines
     .map(parseInput)
     .map(line => line[1])
@@ -99,4 +99,4 @@ export const decode = (line: string): number => {
   )
 }
 
-export const total = (lines: string[]): number => $.sum(lines.map(decode))
+export const total = (lines: Array<string>): number => $.sum(lines.map(decode))

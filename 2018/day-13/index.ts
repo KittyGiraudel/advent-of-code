@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Point, Grid } from '../../types'
+import { Coords, Grid, Point } from '../../types'
 
 type Orientation = '^' | 'v' | '<' | '>'
 type Cart = {
@@ -99,7 +99,10 @@ const tick = (
     })
 }
 
-export const run = (rows: string[], cleanUp: boolean = false): number[] => {
+export const run = (
+  rows: Array<string>,
+  cleanUp: boolean = false
+): Array<number> => {
   const carts: CartMap = {}
 
   // Iterate over the grid to:
@@ -129,8 +132,8 @@ export const run = (rows: string[], cleanUp: boolean = false): number[] => {
 
   // Finally, we can return the crash site, or the last cart standing, without
   // forgetting to flip the coordinates.
-  const points = Object.keys(carts) as Point[]
-  const flip = (point: Point): number[] => $.toCoords(point).reverse()
+  const points = Object.keys(carts) as Array<Point>
+  const flip = (point: Point): Array<number> => $.toCoords(point).reverse()
   const interest = points.find(point => carts[point].crashed) || points[0]
 
   return flip(interest)

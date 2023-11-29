@@ -28,7 +28,7 @@ const draw = (line: [string, number][]): Map<Point, number> => {
 
 const findIntersections = (
   lines: [string, string]
-): { maps: Map<Point, number>[]; intersections: Point[] } => {
+): { maps: Map<Point, number>[]; intersections: Array<Point> } => {
   const maps = lines.map(parseLine).map(draw)
   const sets = maps.map(map => new Set(map.keys()))
   const intersections = Array.from(sets[0]).filter(x => sets[1].has(x))

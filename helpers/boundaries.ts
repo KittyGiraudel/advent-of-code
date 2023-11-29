@@ -6,10 +6,12 @@ import { Coords, CoordsObj } from '../types'
  * for both types of data structures. It returns an array on purposes as the
  * order of channels may vary (sometimes X comes first, sometimes Y does).
  */
-const boundaries = (items: Array<Coords | CoordsObj>): number[] => {
+const boundaries = (items: Array<Coords | CoordsObj>) => {
   const xs = items.map(point => (point as CoordsObj).x ?? (point as Coords)[0])
   const ys = items.map(point => (point as CoordsObj).y ?? (point as Coords)[1])
-  const zs = items.map(point => (point as CoordsObj).z ?? (point as Coords)[2])
+  const zs = items.map(
+    point => (point as CoordsObj).z ?? (point as Coords)[2]
+  ) as Array<number>
 
   return [
     Math.min(...xs),

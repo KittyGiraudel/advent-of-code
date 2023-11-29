@@ -1,22 +1,22 @@
 import $ from '../../helpers'
-import { Coords, CoordsObj, Grid, Point } from '../../types'
+import { Coords, CoordsObj, Point } from '../../types'
 
 type CoordsWithAngle = CoordsObj & { angle?: number }
-type Group = { angle: number; items: CoordsObj[] }
+type Group = { angle: number; items: Array<CoordsObj> }
 
-export const mapOutSpace = (rows: string[]): Map<Point, Point[]> => {
-  const map: Map<Point, Point[]> = $.grid.reduce(
+export const mapOutSpace = (rows: Array<string>): Map<Point, Array<Point>> => {
+  const map: Map<Point, Array<Point>> = $.grid.reduce(
     $.grid.create<string>(rows),
     (acc, v, ri, ci) => (v === '#' ? acc.set(`${ci},${ri}`, []) : acc),
     new Map()
   )
 
-  const keys: Point[] = Array.from(map.keys())
+  const keys: Array<Point> = Array.from(map.keys())
 
   keys.forEach(current => {
     const [xC, yC] = $.toCoords(current)
-    const asteroids: Point[] = keys.filter(key => current !== key)
-    const vectors: Point[] = asteroids.map((asteroid: Point) => {
+    const asteroids: Array<Point> = keys.filter(key => current !== key)
+    const vectors: Array<Point> = asteroids.map((asteroid: Point) => {
       const [xD, yD] = $.toCoords(asteroid)
       const vector: Coords = [xD - xC, yD - yC]
       const gcd = $.gcd(vector[0], vector[1])
@@ -30,7 +30,7 @@ export const mapOutSpace = (rows: string[]): Map<Point, Point[]> => {
   return map
 }
 
-export const findBestSpot = (grid: string[]): [Point, number] => {
+export const findBestSpot = (grid: Array<string>): [Point, number] => {
   const map = mapOutSpace(grid)
 
   return Array.from(map.keys()).reduce((acc: [Point, number], key: Point) => {
@@ -72,7 +72,7 @@ export const vaporize = grid => {
   // Group asteroids per angle, so that we end up with an array of groups in
   // ascending order, each group holding coordinates of all asteroids sitting
   // on the same line to the center (thus same angle).
-  const groups: Group[] = asteroids.reduce((acc, { angle, x, y }) => {
+  const groups: Array<Group> = asteroids.reduce((acc, { angle, x, y }) => {
     const group = acc.find(group => group.angle === angle)
     if (!group) acc.push({ angle, items: [{ x, y }] })
     else group.items.push({ x, y })

@@ -1,4 +1,7 @@
-const discard = (set: string[] | Set<string>, value: string): Set<string> => {
+const discard = (
+  set: Array<string> | Set<string>,
+  value: string
+): Set<string> => {
   const next = new Set(set)
   next.delete(value)
   return next
@@ -38,7 +41,9 @@ const getPaths = (
   }, [])
 }
 
-export const run = (input: string[]): { score: number; length: number }[] =>
+export const run = (
+  input: Array<string>
+): { score: number; length: number }[] =>
   input
     .filter(port => port.startsWith('0/'))
     .map(start => {

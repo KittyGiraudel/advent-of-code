@@ -1,6 +1,6 @@
 import Circularray from 'circularray'
 
-export const run = (offset: number): number => {
+export const run = (offset: number) => {
   const memory = new Circularray([0])
 
   // For part 1, we can use a double-ended queue that we rotate by the offset at
@@ -10,7 +10,7 @@ export const run = (offset: number): number => {
   return memory.shift()
 }
 
-export const run2 = (offset: number): number => {
+export const run2 = (offset: number) => {
   let position = 0
   let next = null
 

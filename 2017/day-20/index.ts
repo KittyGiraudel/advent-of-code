@@ -10,10 +10,10 @@ type Particle = {
 const tick = (particle: Particle): Particle => {
   particle.velocity[0] += particle.acceleration[0]
   particle.velocity[1] += particle.acceleration[1]
-  particle.velocity[2] += particle.acceleration[2]
+  particle.velocity[2]! += particle.acceleration[2]!
   particle.position[0] += particle.velocity[0]
   particle.position[1] += particle.velocity[1]
-  particle.position[2] += particle.velocity[2]
+  particle.position[2]! += particle.velocity[2]!
   return particle
 }
 
@@ -29,7 +29,7 @@ const countCollisions = (particles: Particle[]): number =>
       return acc
     }, new Set()).size
 
-export const run = (input: string[]): [number, number] => {
+export const run = (input: Array<string>): [number, number] => {
   const particles = input.map((line, index) => {
     const [p, v, a] = line.split(', ')
     const position = $.toCoords(p.slice(3, -1) as Point)
@@ -49,5 +49,5 @@ export const run = (input: string[]): [number, number] => {
     count -= countCollisions(particles.map(tick))
   }
 
-  return [particles.sort(sortByDistance).pop().index, count]
+  return [particles.sort(sortByDistance).pop()!.index, count]
 }

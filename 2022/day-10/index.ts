@@ -5,10 +5,10 @@ const CRT_WIDTH = 40
 export class Computer {
   cycle: number
   register: number
-  memory: string[]
-  signals: number[]
+  memory: Array<string>
+  signals: Array<number>
 
-  constructor(input) {
+  constructor(input: Array<string>) {
     this.cycle = 0
     this.register = 1
     this.memory = []
@@ -48,13 +48,13 @@ export class Computer {
     this.record()
   }
 
-  execute(input: string[]) {
+  execute(input: Array<string>) {
     input.forEach(instruction => {
       this.tick()
 
       if (instruction.startsWith('addx')) {
         this.tick()
-        this.register += +instruction.split(' ').pop()
+        this.register += +instruction.split(' ').pop()!
       }
     })
   }

@@ -50,7 +50,7 @@ export const isSuccessfulLaunch = (
   return null
 }
 
-export const findSuccessfulLaunches = (input: string): number[] => {
+export const findSuccessfulLaunches = (input: string): Array<number> => {
   const boundaries = getBoundaries(input)
   const [[, xMax], [, yMax]] = boundaries
   const heights = []

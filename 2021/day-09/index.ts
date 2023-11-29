@@ -4,7 +4,7 @@ import { Coords, CoordsAndPoint, Grid, Point } from '../../types'
 // Find the low points in the grid. To do so, iterate over every row, then every
 // number, and get its 4 neighbors. If all existing neighbors are higher than
 // the current point, it’s a low point.
-const getLowPoints = (grid: Grid<number>): Coords[] =>
+const getLowPoints = (grid: Grid<number>): Array<Coords> =>
   $.grid.reduce(
     grid,
     (acc, point, ri, ci) => {
@@ -26,14 +26,14 @@ const getLowPoints = (grid: Grid<number>): Coords[] =>
 const getBasin = (
   grid: Grid<number>,
   position: Coords,
-  evaluated: Point[] = []
-): CoordsAndPoint[] => {
+  evaluated: Array<Point> = []
+): CoordsAndArray<Point> => {
   // Look for the neighbors of the current point, and preserve only the
   // neighbors that:
   // - Have not been visited yet.
   // - Exist (as in, are within the bounds of the grid).
   // - Are not high points (value of 9).
-  const neighbors: CoordsAndPoint[] = $.bordering(position, 'BOTH').filter(
+  const neighbors: CoordsAndArray<Point> = $.bordering(position, 'BOTH').filter(
     ({ coords, point }) => {
       if (evaluated.includes(point)) return false
       if (typeof $.access(grid, coords) === 'undefined') return false
@@ -45,7 +45,7 @@ const getBasin = (
   // Start from the neighbors of the current point, and recursively find the
   // neighbors of each neighbor that belong to the basin.
   return neighbors.reduce(
-    (coords: CoordsAndPoint[], neighbor: CoordsAndPoint) => {
+    (coords: CoordsAndArray<Point>, neighbor: CoordsAndPoint) => {
       const points = coords.map(({ point }) => point)
       const nCoords = getBasin(grid, neighbor.coords, evaluated.concat(points))
 
@@ -55,7 +55,7 @@ const getBasin = (
   )
 }
 
-export const sumLowPointsRisk = (rows: string[]): number => {
+export const sumLowPointsRisk = (rows: Array<string>): number => {
   const grid = $.grid.create(rows, Number)
   const lowPoints = getLowPoints(grid)
 
@@ -65,7 +65,7 @@ export const sumLowPointsRisk = (rows: string[]): number => {
 }
 
 export const getProductOfBiggestBasins = (
-  rows: string[],
+  rows: Array<string>,
   amount: number = 3
 ): number => {
   const grid = $.grid.create(rows, Number)

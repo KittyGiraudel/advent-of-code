@@ -1,10 +1,6 @@
 import $ from '../../helpers'
 
-const gen = function* (
-  init: number,
-  factor: number,
-  modulo: number = 1
-): Generator {
+const gen = function* (init: number, factor: number, modulo: number = 1) {
   let curr = init
 
   while (true) {
@@ -22,7 +18,7 @@ export const run = (
   iterations: number,
   modA?: number,
   modB?: number
-): number => {
+) => {
   const genA = gen(a, 16807, modA)
   const genB = gen(b, 48271, modB)
 

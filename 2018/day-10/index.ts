@@ -7,14 +7,14 @@ const applyVelocity = ([position, velocity]: [Coords, Coords]): [
 ] => [$.applyVector(position, velocity), velocity]
 
 const parseLine = (line: string): [Coords, Coords] =>
-  $.chunk(line.match(/(-?\d+)/g).map(Number), 2) as [Coords, Coords]
+  $.chunk(line.match(/(-?\d+)/g)?.map(Number) ?? [], 2) as [Coords, Coords]
 
-const getDimensions = ([minX, maxX, minY, maxY]: number[]): [
+const getDimensions = ([minX, maxX, minY, maxY]: Array<number>): [
   number,
   number
 ] => [maxX + 1 - minX, maxY + 1 - minY]
 
-export const plot = (input: string[]): number => {
+export const plot = (input: Array<string>): number => {
   let curr = input.map(parseLine)
   let [width, height] = [Infinity, Infinity]
   let seconds = 0

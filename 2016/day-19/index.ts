@@ -1,7 +1,7 @@
-import $ from '../../helpers'
 import Circularray from 'circularray'
+import $ from '../../helpers'
 
-export const run = (size: number, advanced: boolean = false): number => {
+export const run = (size: number, advanced: boolean = false) => {
   const circle = new Circularray($.range(size, 1))
 
   // Find the node that’s on the opposite site of the circle, and store it as a

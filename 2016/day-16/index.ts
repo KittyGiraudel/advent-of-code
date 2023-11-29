@@ -1,6 +1,4 @@
-import $ from '../../helpers'
-
-const getChecksum = (disk: number[]) => {
+const getChecksum = (disk: Array<number>): Array<number> => {
   const checksum = []
 
   for (let i = 0; i < disk.length; i += 2) {
@@ -10,7 +8,7 @@ const getChecksum = (disk: number[]) => {
   return checksum.length % 2 === 0 ? getChecksum(checksum) : checksum
 }
 
-export const run = (input: string, size: number): string => {
+export const run = (input: string, size: number) => {
   const disk = Array.from(input).map(Number)
 
   while (disk.length < size) {

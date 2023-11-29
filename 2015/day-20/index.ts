@@ -1,8 +1,8 @@
-export const run = (input: number): number[] => {
+export const run = (input: number) => {
   let elf = 0
-  let housesA: number[] = []
-  let housesB: number[] = []
-  let results: number[] = []
+  let housesA: Array<number> = []
+  let housesB: Array<number> = []
+  let results: Array<number> = []
 
   while (++elf) {
     for (let house = elf; house <= input; house += elf) {

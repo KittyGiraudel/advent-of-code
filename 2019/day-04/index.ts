@@ -14,7 +14,7 @@ export const isValidPassword = (
 export const findPasswords = (
   input: string,
   secure: boolean = false
-): string[] => {
+): Array<string> => {
   const [min, max] = input.split('-').map(Number)
   const passwords = []
 

@@ -23,7 +23,7 @@ export const getNextDeparture = ([timestamp, sequence]: [string, string]): [
 
 // Group numbers in sequence with their position in the sequence in tuples.
 // @param sequence - Bus lines
-const makeTuples = (sequence: Sequence): number[][] =>
+const makeTuples = (sequence: Sequence): Array<number>[] =>
   sequence
     .map((value, index) => (value === 'x' ? null : [value, index]))
     .filter(Boolean)
@@ -61,7 +61,7 @@ const findTimestamp = (
 // 7. findTimestamp([7, 13, 'x', 'x', 59, 'x'], 350, 5369) => 70147
 // 7. findTimestamp([7, 13, 'x', 'x', 59, 'x', 31], 350, 5369) => 1068781
 // @param input - Bus lines
-export const getEarliestTimestamp = ([, input]: string[]): number =>
+export const getEarliestTimestamp = ([, input]: Array<string>): number =>
   input
     .split(',')
     .map(value => Number(value) || 'x')

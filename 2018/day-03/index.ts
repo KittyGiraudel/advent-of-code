@@ -8,13 +8,13 @@ type Boundary = {
   yMax: number
 }
 
-const findBoundaries = (claims: Boundary[]): Boundary =>
+const findBoundaries = (claims: Boundary[]) =>
   claims.reduce(
     (acc, claim) => ({
       xMax: Math.max(claim.xMax, acc.xMax),
       yMax: Math.max(claim.yMax, acc.yMax),
     }),
-    { xMax: -Infinity, yMax: -Infinity }
+    { xMax: -Infinity, yMax: -Infinity } as Boundary
   )
 
 // This is a bit of an ugly solution, because it’s incredibly slow. It would
@@ -27,7 +27,7 @@ const findBoundaries = (claims: Boundary[]): Boundary =>
 // intersection), and that’s the result.
 // @param input - Raw unparsed lines
 // @return {Number}
-export const countOverlappingInches = (input: string[]): number => {
+export const countOverlappingInches = (input: Array<string>) => {
   const claims = parseClaims(input)
   const boundaries = findBoundaries(claims)
   const grid = $.grid.init(boundaries.xMax + 1, boundaries.yMax + 1, 0)
@@ -56,9 +56,9 @@ const getIntersection = (a: Boundary, b: Boundary): Boundary => {
   return { xMin, xMax, yMin, yMax }
 }
 
-const parseClaims = (lines: string[]): Boundary[] =>
+const parseClaims = (lines: Array<string>): Array<Boundary> =>
   lines
-    .map(line => line.match(/(\d+)/g).map(Number))
+    .map(line => line.match(/(\d+)/g)?.map(Number) ?? [])
     .map(([id, xMin, yMin, width, height]) => ({
       id,
       xMin,
@@ -72,7 +72,7 @@ const parseClaims = (lines: string[]): Boundary[] =>
 // other claim (besides itself) in the list. The one with no intersection is the
 // final one!
 // @param input - Raw unparsed lines
-export const detect = (input: string[]): number =>
+export const detect = (input: Array<string>): number =>
   parseClaims(input).find(
     (claim, _, array) =>
       array

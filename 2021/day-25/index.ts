@@ -23,10 +23,10 @@ export const step = (grid: Grid<string>): Grid<string> => {
   return vertical
 }
 
-export const steps = (input: string[], count: number): Grid<string> =>
+export const steps = (input: Array<string>, count: number): Grid<string> =>
   $.array(count).reduce(step, $.grid.create(input))
 
-export const run = (input: string[]): number => {
+export const run = (input: Array<string>): number => {
   let curr = $.grid.create<string>(input)
   let next = step(curr)
   let i = 1

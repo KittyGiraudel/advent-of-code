@@ -7,7 +7,7 @@ type Stats = [Cost, Damage, Armor]
 type Gear = [Stats, Stats?, Stats?, Stats?]
 
 /* Cost, Damage, Armor */
-const WEAPONS: Stats[] = [
+const WEAPONS: Array<Stats> = [
   [8, 4, 0],
   [10, 5, 0],
   [25, 6, 0],
@@ -15,7 +15,7 @@ const WEAPONS: Stats[] = [
   [74, 8, 0],
 ]
 
-const ARMORS: Stats[] = [
+const ARMORS: Array<Stats> = [
   [0, 0, 0], // Lack of armor
   [13, 0, 1],
   [31, 0, 2],
@@ -24,7 +24,7 @@ const ARMORS: Stats[] = [
   [102, 0, 5],
 ]
 
-const RINGS: Stats[] = [
+const RINGS: Array<Stats> = [
   [0, 0, 0], // Lack of ring
   [0, 0, 0], // Lack of ring
   [25, 1, 0],
@@ -39,12 +39,9 @@ const RINGS: Stats[] = [
 // - There must be 1 weapon.
 // - There can be 0-1 armor.
 // - There can be 0-2 rings.
-const getCombinations = (): Stats[] => {
-  const gears: Gear[] = []
-  const ringPairs: [Stats, Stats][] = $.combinations(RINGS, 2) as [
-    Stats,
-    Stats
-  ][]
+const getCombinations = () => {
+  const gears: Array<Gear> = []
+  const ringPairs = $.combinations(RINGS, 2) as Array<[Stats, Stats]>
 
   WEAPONS.forEach(weapon => {
     gears.push([weapon])
@@ -104,7 +101,7 @@ class Fight {
   player: Unit
   boss: Unit
 
-  constructor(player: number[], boss: number[]) {
+  constructor(player: Array<number>, boss: Array<number>) {
     // @ts-ignore
     this.player = new Unit(...player)
     // @ts-ignore
@@ -135,7 +132,7 @@ class Fight {
   }
 }
 
-export const run = (boss: number[]): [number, number] => {
+export const run = (boss: Array<number>): [number, number] => {
   const gears = getCombinations()
   const matches = gears.map(gear => new Fight(gear, boss).resolve())
 

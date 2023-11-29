@@ -6,6 +6,6 @@ import { Coords, Point } from '../types'
  * @example toPoint([0, 1]) === '0,1'
  * @example toPoint([0, 1, 2]) === '0,1,2'
  */
-const toPoint = (coords: Coords): Point => coords.join(',') as Point
+const toPoint = (coords: Coords) => coords.join(',') as Point
 
 export default toPoint

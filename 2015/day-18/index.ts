@@ -2,14 +2,14 @@ import $ from '../../helpers'
 import { Coords, Point } from '../../types'
 
 export const run = (
-  input: string[],
+  input: Array<string>,
   iterations: number,
   advanced: boolean = false
-): number => {
+) => {
   let curr = $.grid.create<string>(input)
   const width = curr[0].length
   const height = curr.length
-  const corners: Point[] = [
+  const corners: Array<Point> = [
     `0,0`,
     `0,${width - 1}`,
     `${height - 1},0`,
@@ -24,7 +24,7 @@ export const run = (
 
   while (iterations--) {
     curr = $.grid.map($.grid.clone(curr), (value, ri, ci) => {
-      const neighbors: Coords[] = $.surrounding([ri, ci], 'COORDS')
+      const neighbors = $.surrounding([ri, ci], 'COORDS') as Array<Coords>
       const on = neighbors.filter(coords => $.access(curr, coords) === '#')
 
       if (advanced && corners.includes($.toPoint([ri, ci]))) {

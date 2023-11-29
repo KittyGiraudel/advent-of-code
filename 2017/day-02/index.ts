@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 
-export const checksum = (input: string[], advanced: boolean = false): number =>
+export const checksum = (input: Array<string>, advanced: boolean = false) =>
   $.sum(
     input.map(row => {
       const numbers = row.split(/\s+/g).map(Number)
@@ -14,7 +14,7 @@ export const checksum = (input: string[], advanced: boolean = false): number =>
           [a, b],
           [b, a],
         ])
-        .find(([a, b]) => Number.isInteger(a / b))
+        .find(([a, b]) => Number.isInteger(a / b)) as [number, number]
 
       return pair[0] / pair[1]
     })

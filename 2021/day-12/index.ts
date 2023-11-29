@@ -11,7 +11,7 @@ const createNode = (cave: string): Node => ({
   siblings: new Set(),
 })
 
-const createGraph = (connections: string[]): Graph => {
+const createGraph = (connections: Array<string>): Graph => {
   const map = {}
 
   connections.forEach(connection => {
@@ -31,8 +31,8 @@ const getPaths = (
   graph: Graph,
   cave: string,
   withDuplicate: boolean = false,
-  path: string[] = []
-): string[][] => {
+  path: Array<string> = []
+): Array<string>[] => {
   const { small, siblings } = graph[cave]
 
   // If we have reached the end case, record the current path as a valid one.
@@ -65,6 +65,6 @@ const getPaths = (
 }
 
 export const findPaths = (
-  connections: string[],
+  connections: Array<string>,
   withDuplicate: boolean = false
-): string[][] => getPaths(createGraph(connections), 'start', withDuplicate)
+): Array<string>[] => getPaths(createGraph(connections), 'start', withDuplicate)

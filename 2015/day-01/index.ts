@@ -1,4 +1,4 @@
-export const run = (string: string): [number, number] => {
+export const run = (string: string) => {
   let floor = 0
   let basement = null
 

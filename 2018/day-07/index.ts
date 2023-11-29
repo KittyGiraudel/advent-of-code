@@ -1,9 +1,8 @@
-import $ from '../../helpers'
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 
 type Graph = Map<string, Set<string>>
 
-const getGraph = (input: string[]): Graph => {
+const getGraph = (input: Array<string>): Graph => {
   const pairs = input.map(line => line.slice(1).match(/([A-Z])/g))
   const graph: Graph = new Map()
 
@@ -18,7 +17,7 @@ const getGraph = (input: string[]): Graph => {
   return graph
 }
 
-export const sequential = (input: string[]): string => {
+export const sequential = (input: Array<string>): string => {
   const order = []
   const graph = getGraph(input)
 
@@ -43,7 +42,7 @@ export const sequential = (input: string[]): string => {
 }
 
 export const parallel = (
-  input: string[],
+  input: Array<string>,
   workers: number = 5,
   offset: number = 60
 ): { duration: number; order: string } => {

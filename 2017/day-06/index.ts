@@ -1,8 +1,6 @@
-import $ from '../../helpers'
-
-export const run = (memory: number[]): [number, number] => {
+export const run = (memory: Array<number>): [number, number] => {
   memory = memory.slice(0)
-  const history = []
+  const history: Array<string> = []
   let cycles = 0
 
   while (!history.includes(memory.join(','))) {

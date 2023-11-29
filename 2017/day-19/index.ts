@@ -1,17 +1,17 @@
 import $ from '../../helpers'
-import { Coords, Grid } from '../../types'
+import { Coords, CoordsAndPoint, Point } from '../../types'
 
-const VECTORS: Coords[] = [
+const VECTORS: Array<Coords> = [
   [-1, 0],
   [0, +1],
   [+1, 0],
   [0, -1],
 ]
 
-export const run = (input: string[]): [string, number] => {
+export const run = (input: Array<string>): [string, number] => {
   const grid = $.grid.create<string>(input)
   const read = (coords: Coords) => $.access(grid, coords)?.trim()
-  const visited = []
+  const visited: Array<Point> = []
   let position: Coords = [0, grid[0].findIndex(v => v === '|')]
   let vector: Coords = VECTORS[2]
   let letters = ''
@@ -23,7 +23,7 @@ export const run = (input: string[]): [string, number] => {
     if (/[A-Z]/.test(value)) letters += value
     // … change direction when hitting a corner …
     if (value === '+') {
-      const index = $.bordering(position)
+      const index = ($.bordering(position) as Array<CoordsAndPoint>)
         // … by finding the neighboring track that’s not yet visited …
         .findIndex(
           ({ coords, point }) =>

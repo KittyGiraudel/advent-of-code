@@ -26,7 +26,7 @@ const rotate = (
 // @param orientation - Initial orientation
 // @return Manatthan distance
 export const navigateLoose = (
-  instructions: string[],
+  instructions: Array<string>,
   orientation: string = 'E'
 ): number =>
   $.sum(
@@ -55,7 +55,7 @@ export const navigateLoose = (
 // waypoint.
 // @param instructions - List of instructions
 // @return Manatthan distance
-export const navigateStrict = (instructions: string[]): number =>
+export const navigateStrict = (instructions: Array<string>): number =>
   $.sum(
     instructions.reduce(
       ({ ship, waypoint }, instruction) => {

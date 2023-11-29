@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 
-export const getPaperMeasurements = (lines: string[]): number =>
+export const getPaperMeasurements = (lines: Array<string>) =>
   $.sum(
     lines.map(line => {
       const [l, w, h] = line.split('x').map(Number)
@@ -10,7 +10,7 @@ export const getPaperMeasurements = (lines: string[]): number =>
     })
   )
 
-export const getRibbonMeasurements = (lines: string[]): number =>
+export const getRibbonMeasurements = (lines: Array<string>) =>
   $.sum(
     lines.map(line => {
       const [l, w, h] = line.split('x').map(Number)

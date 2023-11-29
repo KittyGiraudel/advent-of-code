@@ -1,15 +1,15 @@
-import $ from '../../helpers'
 import Circularray from 'circularray'
+import $ from '../../helpers'
 
 export class Computer {
   pointer: number
   skip: number
   memory: Circularray<number>
-  lengths: number[]
+  lengths: Array<number>
 
   SUFFIX = [17, 31, 73, 47, 23]
 
-  constructor(input: string | number[], memory?: number[]) {
+  constructor(input: string | Array<number>, memory?: Array<number>) {
     this.pointer = 0
     this.skip = 0
     this.memory = new Circularray(memory || $.range(256, 0))
@@ -25,7 +25,7 @@ export class Computer {
     return this
   }
 
-  sliceOut(length: number): number[] {
+  sliceOut(length: number): Array<number> {
     const slice = []
 
     for (let i = 0; i < length; i++) slice.unshift(this.memory.shift())
@@ -66,5 +66,5 @@ export class Computer {
 export const getHash = (string: string) =>
   new Computer(string).round(64).getHash()
 
-export const run = (lengths: number[], list?: number[]) =>
+export const run = (lengths: Array<number>, list?: Array<number>) =>
   new Computer(lengths, list).round().check()

@@ -1,10 +1,10 @@
 import $ from '../../helpers'
-import { Coords, Grid } from '../../types'
+import { Coords, Grid, Point } from '../../types'
 
 const ORIENTATIONS = ['>', 'v', '<', '^']
 const WALL = '#'
 const SPACE = '.'
-const VECTORS: Coords[] = [
+const VECTORS: Array<Coords> = [
   [0, +1],
   [+1, 0],
   [0, -1],
@@ -47,7 +47,7 @@ const getSubgrids = (grid: Grid<string>): Subgrid[] =>
     { neighbors: ['4>', '5v', '0>', '2>'], boundaries: [100, 0] },
     { neighbors: ['1<', '5<', '3<', '2^'], boundaries: [100, 50] },
     { neighbors: ['4^', '1v', '0v', '3^'], boundaries: [150, 0] },
-  ].map((face: { neighbors: string[]; boundaries: [number, number] }) => {
+  ].map((face: { neighbors: Array<string>; boundaries: [number, number] }) => {
     const [ri, ci] = face.boundaries
 
     return {
@@ -156,7 +156,13 @@ const getCubicNeighbors = (grid: Grid<string>, ri: number, ci: number) => {
 }
 
 const getNeighbors =
-  (grid: Grid<string>, asCube: boolean) => (acc, _, ri: number, ci: number) => {
+  (grid: Grid<string>, asCube: boolean) =>
+  (
+    acc: Record<Point, typeof getCubicNeighbors | typeof getWrapNeighbors>,
+    _: number,
+    ri: number,
+    ci: number
+  ) => {
     if ($.access(grid, [ri, ci])) {
       acc[$.toPoint([ri, ci])] = asCube
         ? getCubicNeighbors(grid, ri, ci)
@@ -168,10 +174,14 @@ const getNeighbors =
 
 export const maze = (input: string, asCube: boolean = false): number => {
   const [map, last] = input.split('\n\n')
-  const instructions = last.match(/(\d+|L|R)/g).map(v => +v || v)
+  const instructions = last.match(/(\d+|L|R)/g)?.map(v => +v || v) ?? []
   const rows = map.split('\n').filter(Boolean)
   const grid = $.grid.create(rows, v => (v === ' ' ? '' : v))
-  const neighborMap = $.grid.reduce(grid, getNeighbors(grid, asCube), {})
+  const neighborMap = $.grid.reduce(
+    grid,
+    getNeighbors(grid, asCube),
+    {} as Record<Point, typeof getCubicNeighbors | typeof getWrapNeighbors>
+  )
 
   let position: Coords = [
     0,

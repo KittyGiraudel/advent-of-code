@@ -1,11 +1,11 @@
 /**
  * Group an array of objects by a certain key.
  */
-const groupBy = <T>(array: T[], key: string): Record<string, T[]> => {
-  return array.reduce(function (rv, x) {
-    ;(rv[x[key]] = rv[x[key]] || []).push(x)
-    return rv
-  }, {})
+const groupBy = <T>(array: Array<T>, key: string) => {
+  return array.reduce(function (acc, item) {
+    ;(acc[item[key]] = acc[item[key]] || []).push(item)
+    return acc
+  }, {} as Record<string, Array<T>>)
 }
 
 export default groupBy

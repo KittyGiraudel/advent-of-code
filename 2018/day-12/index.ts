@@ -2,7 +2,7 @@ import $ from '../../helpers'
 
 type Patterns = Record<string, string>
 
-const count = (state: string[], offset: number): number =>
+const count = (state: Array<string>, offset: number): number =>
   $.sum(state.map((char, index) => (char === '#' ? index - offset : 0)))
 
 const getInitialState = (input: string) => Array.from(input.split(' ')[2])
@@ -12,7 +12,7 @@ const getPatterns = (input: string): Patterns =>
     .map(line => line.split(' => '))
     .reduce((acc, [pattern, outcome]) => ({ ...acc, [pattern]: outcome }), {})
 
-const padState = (state: string[], offset: number): number => {
+const padState = (state: Array<string>, offset: number): number => {
   if (state[0] === '#') state.unshift('.'), offset++
   if (state[1] === '#') state.unshift('.'), offset++
   if (state[state.length - 1] === '#') state.push('.')
@@ -22,7 +22,7 @@ const padState = (state: string[], offset: number): number => {
 }
 
 // Get the slice of -2 to +2, padded with empty pots if necessary.
-const getSlice = (state: string[], index: number): string => {
+const getSlice = (state: Array<string>, index: number): string => {
   const min = Math.max(index - 2, 0)
   const max = Math.min(index + 3, state.length)
   const slice = state.slice(min, max).join('')
@@ -32,7 +32,7 @@ const getSlice = (state: string[], index: number): string => {
   return slice
 }
 
-const next = (curr: string[], patterns: Patterns) =>
+const next = (curr: Array<string>, patterns: Patterns) =>
   curr
     .map((_, index, array) => getSlice(array, index))
     .map(slice => patterns[slice] || '.')

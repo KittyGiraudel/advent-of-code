@@ -1,6 +1,6 @@
 import $ from '../../helpers/'
 
-export const getFuelConsumption = (numbers: number[]): number => {
+export const getFuelConsumption = (numbers: Array<number>): number => {
   const median = $.median(numbers)
   const getDistFromMedian = (number: number) => Math.abs(number - median)
 
@@ -8,7 +8,7 @@ export const getFuelConsumption = (numbers: number[]): number => {
 }
 
 const getIncFuelConsumption = (
-  numbers: number[],
+  numbers: Array<number>,
   round: (number: number) => number = Math.round
 ): number => {
   const average = round($.average(numbers))
@@ -17,7 +17,7 @@ const getIncFuelConsumption = (
   return $.sum(numbers.map(getDistFromAverage).map($.triangular))
 }
 
-export const getIncrementalFuelConsumption = (numbers: number[]): number =>
+export const getIncrementalFuelConsumption = (numbers: Array<number>): number =>
   Math.min(
     getIncFuelConsumption(numbers, Math.ceil),
     getIncFuelConsumption(numbers, Math.floor)

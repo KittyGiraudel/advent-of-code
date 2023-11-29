@@ -8,14 +8,14 @@ const DEFAULT_OPTIONS = {
 
 type Heuristic<T> = (curr: T) => number
 type GetCost<T> = (curr: T, next: T) => number
-type Frontier<T> = PriorityQueue<[T, number]> | T[]
+type Frontier<T> = PriorityQueue<[T, number]> | Array<T>
 
 export type SearchCosts = Record<string, number>
-export type SearchGraph = Record<string, string>
-export type SearchOutput<T> = { from: SearchGraph; end: T }
+export type SearchGraph = Record<string, string | null>
+export type SearchOutput<T> = { from: SearchGraph; end: T | null | undefined }
 export type SearchOptions<T> = {
   start: T
-  getNextNodes: (curr: T) => T[]
+  getNextNodes: (curr: T) => Array<T>
   toKey?: (curr: T) => string
   isGoal?: (curr: T) => boolean
   emptyAfterGoal?: boolean
@@ -37,7 +37,7 @@ const _core = <T>(
   let end = null
 
   while (!isEmpty(frontier)) {
-    const curr = pop(frontier)
+    const curr = pop(frontier)!
 
     if (isGoal(curr)) {
       end = curr
@@ -72,7 +72,7 @@ export const bfs = <T>({
   toKey = DEFAULT_OPTIONS.toKey,
   emptyAfterGoal = DEFAULT_OPTIONS.emptyAfterGoal,
 }: SearchOptions<T>): SearchOutput<T> => {
-  const frontier: T[] = [start]
+  const frontier: Array<T> = [start]
   const from: SearchOutput<T>['from'] = { [toKey(start)]: null }
 
   const handler = (curr: T) => (next: T) => {
@@ -82,7 +82,7 @@ export const bfs = <T>({
     }
   }
 
-  const end: T = _core(handler, frontier, getNextNodes, isGoal, emptyAfterGoal)
+  const end = _core(handler, frontier, getNextNodes, isGoal, emptyAfterGoal)
 
   return { end, from }
 }
@@ -114,7 +114,7 @@ export const gbfs = <T>({
     }
   }
 
-  const end: T = _core(handler, frontier, getNextNodes, isGoal, emptyAfterGoal)
+  const end = _core(handler, frontier, getNextNodes, isGoal, emptyAfterGoal)
 
   return { from, end }
 }
@@ -154,7 +154,7 @@ export const dijkstra = <T>({
     }
   }
 
-  const end: T = _core(handler, frontier, getNextNodes, isGoal)
+  const end = _core(handler, frontier, getNextNodes, isGoal)
 
   return { from, costs, end }
 }
@@ -196,19 +196,19 @@ export const aStar = <T>({
     }
   }
 
-  const end: T = _core(handler, frontier, getNextNodes, isGoal)
+  const end = _core(handler, frontier, getNextNodes, isGoal)
 
   return { from, costs, end }
 }
 
 const reconstruct = (graph: SearchGraph, start: unknown, end: unknown) => {
   let path = []
-  let current = typeof end === 'string' ? end : String(end)
+  let current: string | null = typeof end === 'string' ? end : String(end)
   start = typeof start === 'string' ? start : String(start)
 
   while (current !== start) {
     path.push(current)
-    current = graph[current]
+    current = current ? graph[current] : current
   }
 
   return path

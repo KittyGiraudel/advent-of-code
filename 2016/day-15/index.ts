@@ -21,7 +21,7 @@ class Disk {
     return this
   }
 
-  turn(times = 1): number {
+  turn(times = 1) {
     for (let i = 0; i < times % this.size; i++) {
       this.position = this.index.next().value
     }
@@ -30,9 +30,9 @@ class Disk {
   }
 }
 
-export const run = (instructions: string[]): number => {
+export const run = (instructions: Array<string>) => {
   const disks = instructions.map(instruction => {
-    const [id, size, , initial] = instruction.match(/\d+/g).map(Number)
+    const [id, size, , initial] = instruction.match(/\d+/g)?.map(Number) ?? []
 
     return new Disk(id, size, initial)
   })

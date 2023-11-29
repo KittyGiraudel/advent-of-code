@@ -1,18 +1,19 @@
 import $ from '../../helpers'
 
 export const run = (
-  lines: string[],
+  lines: Array<string>,
   dimensions: [number, number] = [50, 6]
-): number => {
+) => {
   const grid = $.grid.init<string>(dimensions[0], dimensions[1])
 
   lines.forEach(line => {
     if (line.startsWith('rect')) {
-      const [width, height] = line.match(/\d+/g).map(Number)
+      const [width, height] = line.match(/\d+/g)?.map(Number) ?? []
       for (let ri = 0; ri < height; ri++)
         for (let ci = 0; ci < width; ci++) grid[ri][ci] = '#'
     } else {
-      const [, type, index, iterations] = line.match(/(x|y)=(\w+) by (\w+)/)
+      const [, type, index, iterations] =
+        line.match(/(x|y)=(\w+) by (\w+)/) ?? []
 
       if (type === 'y') {
         $.rotate(grid[index], +iterations)

@@ -1,7 +1,7 @@
 import $ from '../../helpers'
-import { Grid, Coords, Point } from '../../types'
+import { Coords, Grid, Point } from '../../types'
 
-const getBorderingSpace = (grid: Grid<string>, curr: Coords): Coords[] => {
+const getBorderingSpace = (grid: Grid<string>, curr: Coords): Array<Coords> => {
   const [N, E, S, W] = $.bordering(curr, 'COORDS')
   return [N, W, E, S].filter(neighbor => $.access(grid, neighbor) === '.')
 }
@@ -59,7 +59,7 @@ class Unit {
     this.health -= damage
   }
 
-  attack(units: Unit[]) {
+  attack(units: UniArray<T>) {
     const getAliveEnemyAt = (position: Point | Coords) =>
       units.find(
         unit => unit.alive && unit.isEnemy(this.type) && unit.isAt(position)
@@ -73,7 +73,7 @@ class Unit {
       ?.hurt(this.power)
   }
 
-  move(grid: Grid<string>, units: Unit[]) {
+  move(grid: Grid<string>, units: UniArray<T>) {
     const alive = units.filter(unit => unit.alive)
     const enemies = alive.filter(unit => unit.isEnemy(this.type))
 
@@ -99,11 +99,11 @@ class Unit {
     }
   }
 
-  findEnemy(units: Unit[]) {
+  findEnemy(units: UniArray<T>) {
     return units.find(unit => unit.isEnemy(this.type) && unit.alive)
   }
 
-  takeTurn(grid: Grid<string>, units: Unit[]) {
+  takeTurn(grid: Grid<string>, units: UniArray<T>) {
     if (!this.alive) return true
     if (!this.findEnemy(units)) return false
     this.move(grid, units)
@@ -114,10 +114,10 @@ class Unit {
 
 class Game {
   turns: number
-  units: Unit[]
+  units: UniArray<T>
   grid: Grid<string>
 
-  constructor(rows: string[], elvishPower: number = 3) {
+  constructor(rows: Array<string>, elvishPower: number = 3) {
     this.turns = 0
     this.units = []
     this.grid = $.grid.create(rows, (value, ri, ci) => {
@@ -179,13 +179,13 @@ class Game {
   }
 }
 
-export const battle = (rows: string[]): number => {
+export const battle = (rows: Array<string>): number => {
   const game = new Game(rows)
   while (!game.done) game.round()
   return game.score
 }
 
-export const cheat = (rows: string[]): number => {
+export const cheat = (rows: Array<string>): number => {
   let elvishPower = 3
 
   while (true) {

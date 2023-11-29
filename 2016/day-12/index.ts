@@ -1,11 +1,9 @@
-import $ from '../../helpers'
-
-export const run = (input: string[], c: number = 0): number => {
+export const run = (input: Array<string>, c: number = 0) => {
   const registers = { a: 0, b: 0, c, d: 0 }
   const read = (key: string | number) => registers[key] || +key
 
   // Speed boost by doing the split only once.
-  const instructions: string[][] = input.map(instruction =>
+  const instructions: Array<Array<string>> = input.map(instruction =>
     instruction.split(' ')
   )
 

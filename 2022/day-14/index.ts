@@ -121,7 +121,7 @@ class Cave {
 }
 
 export const countSandUnits = (
-  input: string[],
+  input: Array<string>,
   withFloor: boolean = false
 ): number => {
   const walls = input.map(wall => wall.split(' -> ').map($.toCoords))

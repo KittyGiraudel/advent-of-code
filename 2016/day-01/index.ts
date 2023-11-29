@@ -1,11 +1,11 @@
 import $ from '../../helpers'
 import { Coords, Point } from '../../types'
 
-export const run = (steps: string[]): [number, number?] => {
+export const run = (steps: Array<string>): [number, number | undefined] => {
   let map: Set<Point> = new Set()
   let position: Coords = [0, 0]
   let direction: Coords = $.turn.DIRECTIONS[0]
-  let location = null
+  let location: Coords | null = null
 
   steps.forEach(step => {
     const turn = step.slice(0, 1)
@@ -23,5 +23,5 @@ export const run = (steps: string[]): [number, number?] => {
     }
   })
 
-  return [$.manhattan(position), location && $.manhattan(location)]
+  return [$.manhattan(position), location ? $.manhattan(location) : undefined]
 }

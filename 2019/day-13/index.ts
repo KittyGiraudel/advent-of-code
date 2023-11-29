@@ -1,6 +1,6 @@
-import { Intcode } from '../day-05'
 import $ from '../../helpers'
 import { CoordsObj, Point } from '../../types'
+import { Intcode } from '../day-05'
 
 const SYMBOLS = [' ', 'x', '▫️', '_', 'o']
 
@@ -33,7 +33,7 @@ export const render = (board: Board): string => {
 }
 
 const tick = (state: State, computer: Intcode): State => {
-  const output = computer.run().getOutput() as number[]
+  const output = computer.run().getOutput() as Array<number>
   const tiles = $.chunk(output, 3)
 
   tiles.forEach(([x, y, t]) => {

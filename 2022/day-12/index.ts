@@ -1,13 +1,13 @@
 import $ from '../../helpers'
-import { Grid, Coords } from '../../types'
+import { Coords, Grid } from '../../types'
 
 type Node = {
-  position: Coords
+  position: Coords | null
   elevation: number
 }
 
 const parse = (
-  input: string[]
+  input: Array<string>
 ): { grid: Grid<number>; start: Node; end: Node } => {
   const start: Node = { position: null, elevation: 0 }
   const end: Node = { position: null, elevation: 0 }
@@ -57,13 +57,13 @@ const getPathLength = (grid: Grid<number>, start: Node, end: Node): number => {
     : Infinity
 }
 
-export const findPath = (input: string[]): number => {
+export const findPath = (input: Array<string>): number => {
   const { grid, start, end } = parse(input)
 
   return getPathLength(grid, start, end)
 }
 
-export const findShortestPath = (input: string[]): number => {
+export const findShortestPath = (input: Array<string>): number => {
   const { grid, end } = parse(input)
 
   return $.grid.reduce(

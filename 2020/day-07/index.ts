@@ -21,7 +21,7 @@ export const parseRestriction = (
 // possible sub-types.
 // @param restrictions - Array of unparsed restrictions
 // @return Map of restrictions
-export const mapRestrictions = (restrictions: string[]): Map =>
+export const mapRestrictions = (restrictions: Array<string>): Map =>
   restrictions
     .filter(Boolean)
     .map(parseRestriction)

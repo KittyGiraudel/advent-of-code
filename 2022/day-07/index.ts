@@ -5,15 +5,15 @@ const isDir = item => item instanceof Dir
 class Dir {
   name: string
   content: Array<Dir | File>
-  parent: Dir
+  parent: Dir | null
 
-  constructor(name, parent) {
+  constructor(name: string, parent: Dir | null) {
     this.name = name
     this.content = []
     this.parent = parent
   }
 
-  add(item) {
+  add(item: Dir | File) {
     this.content.push(item)
   }
 }
@@ -22,15 +22,15 @@ class File {
   name: string
   size: number
 
-  constructor(name, size) {
+  constructor(name: string, size: number) {
     this.name = name
     this.size = Number(size)
   }
 }
 
-export const parseOutput = (lines: string[]): Dir => {
+export const parseOutput = (lines: Array<string>): Dir => {
   const drive = new Dir('/', null)
-  let cwd = null
+  let cwd: Dir | null = null
 
   lines.forEach(line => {
     // If the line is a dir change, we have 3 possible cases: it sets the cwd to
@@ -40,8 +40,8 @@ export const parseOutput = (lines: string[]): Dir => {
     if (line.startsWith('$ cd')) {
       const name = line.split(' ').pop()
       if (name === '/') cwd = drive
-      else if (name === '..') cwd = cwd.parent
-      else cwd = cwd.content.filter(isDir).find(item => item.name === name)
+      else if (name === '..') cwd = cwd!.parent
+      else cwd = cwd!.content.filter(isDir).find(item => item.name === name)
     }
 
     // If the line is a list command, there is nothing to do. The listed items
@@ -54,10 +54,10 @@ export const parseOutput = (lines: string[]): Dir => {
     // save a reference to the current working directory on their instance
     // so we can easily handle `$ cd ..` without having to maintain a stack.
     else if (line.startsWith('dir')) {
-      cwd.add(new Dir(line.split(' ').pop(), cwd))
+      cwd.add(new Dir(line.split(' ').pop()!, cwd))
     } else {
       const [size, name] = line.split(' ')
-      cwd.add(new File(name, size))
+      cwd.add(new File(name, +size))
     }
   })
 

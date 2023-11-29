@@ -94,8 +94,8 @@ class Group {
   damage: number
   type: string
   initiative: number
-  immunity: string[]
-  weakness: string[]
+  immunity: Array<string>
+  weakness: Array<string>
   target: Group
   attacker: Group
 
@@ -183,8 +183,8 @@ type GroupData = {
   damage: number
   type: string
   initiative: number
-  immunity: string[]
-  weakness: string[]
+  immunity: Array<string>
+  weakness: Array<string>
 }
 
 const parseGroup = (raw: string, index: number): GroupData => {
@@ -200,9 +200,9 @@ const parseGroup = (raw: string, index: number): GroupData => {
 const parseArmyGroups = (army: string) =>
   army.split('\n').slice(1).map(parseGroup)
 
-const parseArmies = $.memo((data: string[]) => data.map(parseArmyGroups))
+const parseArmies = $.memo((data: Array<string>) => data.map(parseArmyGroups))
 
-const getArmies = (data: string[]) =>
+const getArmies = (data: Array<string>) =>
   parseArmies(data).map((groups: GroupData[], index: number) => {
     const name = ARMY_NAMES[index]
     const army = new Army(name)
@@ -212,7 +212,7 @@ const getArmies = (data: string[]) =>
     return army
   })
 
-export const battle = (data: string[]): number => {
+export const battle = (data: Array<string>): number => {
   const armies = getArmies(data)
   const game = new Game(armies)
 
@@ -221,7 +221,7 @@ export const battle = (data: string[]): number => {
   return game.score
 }
 
-export const cheat = (data: string[]): number => {
+export const cheat = (data: Array<string>): number => {
   let boost = 0
 
   while (true) {

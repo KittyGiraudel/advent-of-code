@@ -2,7 +2,7 @@ import $ from '../../helpers'
 import { Coords, Point } from '../../types'
 
 type Mappy = Map<Point, string>
-type Cache = Map<string, Point[]>
+type Cache = Map<string, Array<Point>>
 
 const VECTORS: Record<string, Coords> = {
   e: [+2, 0],
@@ -15,7 +15,7 @@ const VECTORS: Record<string, Coords> = {
 
 // Parse a given line into a series of directions.
 // @param line - Raw series of steps
-const parseLine = (line: string): Coords[] => {
+const parseLine = (line: string): Array<Coords> => {
   const directions = []
   let pointer = 0
 
@@ -34,7 +34,7 @@ const parseLine = (line: string): Coords[] => {
 
 // Process given lines and store their outcome into a map.
 // @param lines - Raw series of steps
-const processLines = (lines: string[]): Mappy =>
+const processLines = (lines: Array<string>): Mappy =>
   lines
     .map(parseLine)
     .map(vectors => vectors.reduce($.applyVector, [0, 0]))
@@ -48,7 +48,7 @@ const processLines = (lines: string[]): Mappy =>
 // @param key - Stringified coordinates
 // @param cache - Coordinates cache
 // @return Stringified coordinates of all 6 neighbours
-const getNeighborCoords = (key: Point, cache: Cache): Point[] => {
+const getNeighborCoords = (key: Point, cache: Cache): Array<Point> => {
   const coords = $.toCoords(key)
 
   if (cache.has(key)) return cache.get(key)
@@ -111,7 +111,7 @@ const countBlackTiles = (map: Mappy): number =>
 // @param cycles - Amount of cycles
 // @param cache - Coordinates cache
 export const gameOfLife = (
-  lines: string[],
+  lines: Array<string>,
   cycles: number = 1,
   cache: Cache = new Map()
 ): number =>

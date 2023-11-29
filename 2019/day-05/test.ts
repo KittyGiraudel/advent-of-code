@@ -19,7 +19,7 @@ test('Day 05 — Solutions', t => {
   const [numbers] = $.readInput(import.meta)
 
   t.is(
-    (new Intcode(numbers).setInput(1).run().getOutput() as number[]).pop(),
+    (new Intcode(numbers).setInput(1).run().getOutput() as Array<number>).pop(),
     13933662
   )
   t.is(new Intcode(numbers).setInput(5).run().getOutput(), 2369720)

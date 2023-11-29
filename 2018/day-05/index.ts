@@ -1,8 +1,6 @@
-import $ from '../../helpers'
-
 const ALPHABET = 'abcdefghijklmnopqrstuvwxyz'.split('')
 
-const makeRegExp = (pairs: string[]): RegExp =>
+const makeRegExp = (pairs: Array<string>): RegExp =>
   new RegExp('(' + pairs.join('|') + ')')
 
 const GLOBAL_RE = makeRegExp(
@@ -33,10 +31,13 @@ export const reduce = (input: string): string => {
   // https://www.reddit.com/r/adventofcode/comments/a3912m/2018_day_5_solutions/
   return Array.from(input)
     .reduce((acc, char) => {
-      if (!acc.length || (acc.at(-1).charCodeAt() ^ char.charCodeAt(0)) !== 32)
+      if (
+        !acc.length ||
+        (acc.at(-1)!.charCodeAt(0) ^ char.charCodeAt(0)) !== 32
+      )
         acc.push(char)
       else acc.pop()
       return acc
-    }, [])
+    }, [] as Array<string>)
     .join('')
 }

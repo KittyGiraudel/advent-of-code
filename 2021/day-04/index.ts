@@ -21,7 +21,7 @@ const roll = (grids: Grid<BingoCell>[], number: number): void => {
 const computeGridScore = (grid: Grid<BingoCell>): number =>
   $.grid.reduce(grid, (acc, item) => acc + (item.marked ? 0 : item.value), 0)
 
-export const getBingos = (input: string): number[] => {
+export const getBingos = (input: string): Array<number> => {
   const [numbers, ...grids] = parseInput(input)
   const bingos = []
 
@@ -48,7 +48,7 @@ const formatGrid = (grid: string): Grid<BingoCell> =>
       .map((value: number) => ({ value, marked: false }))
   )
 
-const parseInput = (input: string): [number[], ...Grid<BingoCell>[]] => {
+const parseInput = (input: string): [Array<number>, ...Grid<BingoCell>[]] => {
   const [numbers, ...grids] = input.split('\n\n')
 
   return [numbers.split(',').map(Number), ...grids.map(formatGrid)]

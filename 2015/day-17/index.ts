@@ -1,10 +1,10 @@
 import $ from '../../helpers'
 
 const getArrangements = (
-  numbers: number[],
+  numbers: Array<number>,
   target: number,
-  curr: number[] = []
-): number[][] => {
+  curr: Array<number> = []
+): Array<Array<number>> => {
   if ($.sum(curr) === target) return [curr]
   if ($.sum(curr) > target) return []
 
@@ -13,10 +13,10 @@ const getArrangements = (
     const set = getArrangements(nextNumbers, target, [...curr, n])
 
     return acc.concat(set)
-  }, [])
+  }, [] as Array<Array<number>>)
 }
 
-export const run = (input: number[], target: number): [number, number] => {
+export const run = (input: Array<number>, target: number): [number, number] => {
   const arrangements = getArrangements(input, target)
   const min = Math.min(...arrangements.map(a => a.length))
 

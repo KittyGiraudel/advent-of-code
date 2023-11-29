@@ -1,10 +1,10 @@
 class Computer {
   pointer: number
-  instructions: string[]
+  instructions: Array<string>
   registers: Record<string, number>
   counters: { set: number; sub: number; mul: number; jnz: number }
 
-  constructor(input: string[]) {
+  constructor(input: Array<string>) {
     this.pointer = 0
     this.instructions = input
     this.registers = { a: 0, b: 0, c: 0, d: 0, e: 0, f: 0, g: 0, h: 0 }
@@ -12,10 +12,11 @@ class Computer {
   }
 
   next() {
+    type Counter = keyof typeof this.counters
     const instruction = this.instructions[this.pointer]
     const [op, X, Y] = instruction.split(' ')
 
-    this.counters[op]++
+    this.counters[op as Counter]++
 
     switch (op) {
       case 'set': {
@@ -45,7 +46,7 @@ class Computer {
   }
 }
 
-export const run = (input: string[]): number => {
+export const run = (input: Array<string>): number => {
   const computer = new Computer(input)
   computer.run()
   return computer.counters.mul
