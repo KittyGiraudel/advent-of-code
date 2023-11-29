@@ -4,11 +4,11 @@ import { Coords, CoordsObj, Grid, Point } from '../../types'
 type CoordsWithAngle = CoordsObj & { angle?: number }
 type Group = { angle: number; items: CoordsObj[] }
 
-export const mapOutSpace = (rows: string[]): Map<Point, Point[]> => {
+export const mapOutSpace = (rows: string[]) => {
   const map: Map<Point, Point[]> = $.grid.reduce(
     $.grid.create<string>(rows),
     (acc, v, ri, ci) => (v === '#' ? acc.set(`${ci},${ri}`, []) : acc),
-    new Map()
+    new Map() as Map<Point, Point[]>
   )
 
   const keys: Point[] = Array.from(map.keys())
@@ -33,22 +33,20 @@ export const mapOutSpace = (rows: string[]): Map<Point, Point[]> => {
 export const findBestSpot = (grid: string[]): [Point, number] => {
   const map = mapOutSpace(grid)
 
-  return Array.from(map.keys()).reduce((acc: [Point, number], key: Point) => {
+  return Array.from(map.keys()).reduce((acc, key: Point) => {
     const value = new Set(map.get(key)).size
     return !acc || acc[1] < value ? [key, value] : acc
-  }, null) as [Point, number]
+  }, null as [Point, number] | null)
 }
 
-const toObj = (point: Point): CoordsWithAngle => {
+const toObj = (point: Point) => {
   const points = $.toCoords(point)
 
-  return { x: points[0], y: points[1] }
+  return { x: points[0], y: points[1] } as CoordsWithAngle
 }
 
-const getAngleFromPoint =
-  (pointA: CoordsObj) =>
-  (pointB: CoordsObj): number =>
-    90 + (Math.atan2(pointB.y - pointA.y, pointB.x - pointA.x) * 180) / Math.PI
+const getAngleFromPoint = (pointA: CoordsObj) => (pointB: CoordsObj) =>
+  90 + (Math.atan2(pointB.y - pointA.y, pointB.x - pointA.x) * 180) / Math.PI
 
 export const vaporize = grid => {
   const map = mapOutSpace(grid)

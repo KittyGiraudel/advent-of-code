@@ -34,7 +34,7 @@ const MONSTER_PATTERN: Coords[] = [
 
 // Get every side of the grid, ordered top -> right -> bottom -> left (which
 // matters later on).
-const getSides = (grid: Grid<string>): string[] =>
+const getSides = (grid: Grid<string>) =>
   [
     /* Top    */ grid[0],
     /* Right  */ $.column(grid, grid.length - 1),
@@ -44,7 +44,7 @@ const getSides = (grid: Grid<string>): string[] =>
 
 // Parse the snapshot into a collection of 8 variants (all rotations + flips
 // possibilities).
-const parseSnapshot = (snapshot: string): Tile[] => {
+const parseSnapshot = (snapshot: string) => {
   const [header, ...lines] = snapshot.split('\n')
   const [id] = header.match(/\d+/g)
   const grid = $.grid.create<string>(lines)
@@ -53,13 +53,13 @@ const parseSnapshot = (snapshot: string): Tile[] => {
     sides: getSides(grid),
     grid,
     id: +id,
-  }))
+  })) as Tile[]
 }
 
 // Brute-force the jigsaw in reading order (left-to-right and top-to-bottom)
 // until completion or dead-end starting with the given tile in the top-left
 // corner.
-const jigsaw = (tiles: Tile[], start: Tile): Grid<Tile> => {
+const jigsaw = (tiles: Tile[], start: Tile) => {
   // The mozaic is guaranteed to be a square, and its length is the square root
   // of the amount of tiles divided by 8 (since there are 8 variants per
   // snapshot). For instance, if there are 72 tiles, it means 9 snapshots, so a
@@ -99,8 +99,8 @@ const jigsaw = (tiles: Tile[], start: Tile): Grid<Tile> => {
   return mozaic
 }
 
-const assemble = (mozaic: Grid<Tile>): Grid<string> => {
-  const grid = []
+const assemble = (mozaic: Grid<Tile>) => {
+  const grid: Grid<string> = []
 
   // For every row of 3 tiles …
   for (let ri = 0; ri < mozaic.length; ri++) {
@@ -115,14 +115,14 @@ const assemble = (mozaic: Grid<Tile>): Grid<string> => {
   return grid
 }
 
-const isMonsterTail = (image: Grid<string>, ri: number, ci: number): boolean =>
+const isMonsterTail = (image: Grid<string>, ri: number, ci: number) =>
   MONSTER_PATTERN.every(vector => {
     const coords = $.applyVector([ri, ci], vector)
     return $.access(image, coords) === '#'
   })
 
 // Count the amount of sea monsters in the given image.
-const countMonsters = (image: Grid<string>): number =>
+const countMonsters = (image: Grid<string>) =>
   $.grid.reduce(
     image,
     (acc, _, ri, ci) => acc + +isMonsterTail(image, ri, ci),
@@ -132,7 +132,7 @@ const countMonsters = (image: Grid<string>): number =>
 // Iterate over all 8 variants of the given image (rotated and flipped) to find
 // the maximum number of sea monsters that can be spotted. Then, computed how
 // many `#` do not belong to a sea monster pattern.
-const inspectWaters = (image: Grid<string>): number => {
+const inspectWaters = (image: Grid<string>) => {
   const variants = $.grid.variants(image)
   const monsters = Math.max(...variants.map(countMonsters))
   const sharps = $.countInString(image.flat().join(''), '#')
@@ -141,7 +141,7 @@ const inspectWaters = (image: Grid<string>): number => {
 }
 
 // Compute the mozaic checksum by multiplying the ID of the 4 corner tiles.
-const checksum = (mozaic: Grid<Tile>): number => {
+const checksum = (mozaic: Grid<Tile>) => {
   const length = mozaic.length
   const corners = [
     /* Top left     */ [0, 0],
@@ -157,13 +157,13 @@ const checksum = (mozaic: Grid<Tile>): number => {
 
 // Given the raw collection of snapshots, find the right layout to reassemble
 // the jigsaw puzzle (mozaic).
-const solve = (snapshots: string[]): Grid<Tile> =>
+const solve = (snapshots: string[]) =>
   snapshots
     .map(parseSnapshot)
     .flat()
     .reduce(
-      (acc: Grid<Tile>, tile, _, tiles) => acc || jigsaw(tiles, tile),
-      null
+      (acc, tile, _, tiles) => acc || jigsaw(tiles, tile),
+      null as Grid<Tile> | null
     )
 
 export const run = (snapshots: string[]) => {

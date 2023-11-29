@@ -25,7 +25,7 @@ const OPCODES = {
 // Python code to get the result. It goes above my head to be honest.
 // https://nbviewer.org/github/mjpieters/adventofcode/blob/master/2018/Day%2019.ipynb
 // console.log(sumFactors(10551387))
-const sumFactors = (n: number): number => {
+const sumFactors = (n: number) => {
   const result = []
 
   for (let i = 1; i < n ** 0.5 + 1; i++)
@@ -34,7 +34,7 @@ const sumFactors = (n: number): number => {
   return $.sum(result)
 }
 
-export const run = (input: string[], init: number = 0): number => {
+export const run = (input: string[], init: number = 0) => {
   const registers = new Int32Array(6)
   registers[0] = init
 

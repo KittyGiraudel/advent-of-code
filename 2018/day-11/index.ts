@@ -3,7 +3,7 @@ import { Grid } from '../../types'
 
 const SIZE = 300
 
-const computeCellPower = (serial: number, x: number, y: number): number => {
+const computeCellPower = (serial: number, x: number, y: number) => {
   const rackID = x + 10
   const power = (rackID * y + serial) * rackID
   const hundreds = Math.floor(power / 100) % 10
@@ -11,14 +11,14 @@ const computeCellPower = (serial: number, x: number, y: number): number => {
   return hundreds - 5
 }
 
-const getGrid = (serial: number): Grid<number> =>
+const getGrid = (serial: number) =>
   $.grid.init(SIZE, SIZE, (ri, ci) => computeCellPower(serial, ci + 1, ri + 1))
 
 export const getFuelStrict = (serial: number) => {
   const max = { value: -Infinity, coords: [] }
   const grid = getGrid(serial)
 
-  const square = (x: number, y: number, size: number = 3): number =>
+  const square = (x: number, y: number, size: number = 3) =>
     $.sum(grid.slice(y, y + size).flatMap(row => row.slice(x, x + size)))
 
   for (let y = 0; y < SIZE; y++) {

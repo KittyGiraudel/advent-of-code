@@ -6,9 +6,7 @@ type Node = {
   elevation: number
 }
 
-const parse = (
-  input: string[]
-): { grid: Grid<number>; start: Node; end: Node } => {
+const parse = (input: string[]) => {
   const start: Node = { position: null, elevation: 0 }
   const end: Node = { position: null, elevation: 0 }
   const grid = $.grid.create(input, (value, ri, ci) => {
@@ -42,7 +40,7 @@ const getNextNodes =
       .map(position => ({ position, elevation: $.access(grid, position) }))
       .filter((next: Node) => next.elevation - elevation <= 1)
 
-const getPathLength = (grid: Grid<number>, start: Node, end: Node): number => {
+const getPathLength = (grid: Grid<number>, start: Node, end: Node) => {
   const { from: graph } = $.pathfinding.bfs({
     start,
     getNextNodes: getNextNodes(grid),
@@ -57,13 +55,13 @@ const getPathLength = (grid: Grid<number>, start: Node, end: Node): number => {
     : Infinity
 }
 
-export const findPath = (input: string[]): number => {
+export const findPath = (input: string[]) => {
   const { grid, start, end } = parse(input)
 
   return getPathLength(grid, start, end)
 }
 
-export const findShortestPath = (input: string[]): number => {
+export const findShortestPath = (input: string[]) => {
   const { grid, end } = parse(input)
 
   return $.grid.reduce(

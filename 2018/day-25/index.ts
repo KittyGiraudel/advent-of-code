@@ -4,7 +4,7 @@ import { Coords, Point } from '../../types'
 // Interestingly enough, this is almost the exact same algorithm as outlined by
 // this Reddit post (who scored #10/#58), so I’m pretty happy:
 // https://www.reddit.com/r/adventofcode/comments/a9c61w/comment/eci5rgz/?utm_source=reddit&utm_medium=web2x&context=3
-export const observe = (input: string[]): number => {
+export const observe = (input: string[]) => {
   const lines = input.map($.toCoords)
   const constellations = []
   const isInConstellation = (constellation, coords) =>

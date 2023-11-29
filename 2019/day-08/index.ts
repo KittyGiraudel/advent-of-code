@@ -1,10 +1,7 @@
 import $ from '../../helpers'
 import { Grid } from '../../types'
 
-const parse = (
-  input: string,
-  size: { width: number; height: number }
-): Grid<number> =>
+const parse = (input: string, size: { width: number; height: number }) =>
   $.chunk(
     Array.from(input).map(Number),
     size.width * size.height
@@ -13,7 +10,7 @@ const parse = (
 export const validate = (
   input: string,
   size: { width: number; height: number }
-): number => {
+) => {
   const { count } = parse(input, size)
     .map(layer => ({ layer, count: $.count(layer) }))
     .sort((a, b) => b.count['0'] - a.count['0'])
@@ -25,7 +22,7 @@ export const validate = (
 export const recompose = (
   input: string,
   size: { width: number; height: number }
-): Grid<number> => {
+) => {
   const layers = parse(input, size)
   const image = $.grid.init<number>(size.width, size.height)
 
@@ -43,5 +40,5 @@ export const recompose = (
   return image
 }
 
-export const render = (grid: Grid<number>): string =>
+export const render = (grid: Grid<number>) =>
   $.grid.render(grid, ' ', v => String(v) || ' ')

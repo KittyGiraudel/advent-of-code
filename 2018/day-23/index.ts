@@ -8,11 +8,11 @@ type Bot = {
   distance: number
 }
 
-const parse = (string: string): Bot => {
+const parse = (string: string) => {
   const [x, y, z, r] = string.match(/(-?\d+)/g).map(Number)
   const distance = $.manhattan([x, y, z], [0, 0, 0])
 
-  return { x, y, z, r, distance }
+  return { x, y, z, r, distance } as Bot
 }
 
 export const findStrongestBot = (input: string[]): [number, number] => {

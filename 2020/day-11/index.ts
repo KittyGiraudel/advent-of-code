@@ -15,7 +15,7 @@ const DIRECTIONAL_VECTORS: Coords[] = [
 // Read the position at the given X,Y coords in the layout.
 // @param layout - Seating layout
 // @param coords - Set of X,Y coords
-const read = (layout: string[], coords: Coords): string =>
+const read = (layout: string[], coords: Coords) =>
   layout?.[coords[1]]?.[coords[0]]
 
 // Get the first seat in layout in the direction given by vector from the given
@@ -23,11 +23,7 @@ const read = (layout: string[], coords: Coords): string =>
 // @param layout - Seating layout
 // @param coords - Set of X,Y coords
 // @param vector - Vector to walk
-const getFirstSeat = (
-  layout: string[],
-  coords: Coords,
-  vector: Coords
-): string => {
+const getFirstSeat = (layout: string[], coords: Coords, vector: Coords) => {
   let position = $.applyVector(coords, vector)
   while (read(layout, position) === '.')
     position = $.applyVector(position, vector)
@@ -37,7 +33,7 @@ const getFirstSeat = (
 // Get the 8 seats around the one at given position.
 // @param layout - Seating layout
 // @param coords - Set of X,Y coords
-const getSurroundingSeats = (layout: string[], coords: Coords): string[] =>
+const getSurroundingSeats = (layout: string[], coords: Coords) =>
   $.surrounding(coords, 'COORDS').map((neighbor: Coords) =>
     read(layout, neighbor)
   )
@@ -45,7 +41,7 @@ const getSurroundingSeats = (layout: string[], coords: Coords): string[] =>
 // Get the 8 visible seats around the one at given position.
 // @param layout - Seating layout
 // @param coords - Set of X,Y coords
-export const getVisibleSeats = (layout: string[], coords: Coords): string[] =>
+export const getVisibleSeats = (layout: string[], coords: Coords) =>
   DIRECTIONAL_VECTORS.map(vector => getFirstSeat(layout, coords, vector))
 
 // Process the given seat to know whether it will become occupied, empty, or
@@ -58,7 +54,7 @@ export const getVisibleSeats = (layout: string[], coords: Coords): string[] =>
 const processSeat =
   (mapper: Function, threshold: number) =>
   (layout: string[], y: number) =>
-  (seat: string, x: number): string => {
+  (seat: string, x: number) => {
     const count = countOccupiedSeats(mapper(layout, [x, y]))
     if (seat === 'L' && count === 0) return '#'
     if (seat === '#' && count >= threshold) return 'L'
@@ -71,12 +67,12 @@ export const processSeatStrict = processSeat(getVisibleSeats, 5)
 // Process the entire seating layout.
 // @param layout - Seating layout
 // @param mapper - Mapper function to process every individual seat
-export const processLayout = (layout: string[], mapper: Function): string[] =>
+export const processLayout = (layout: string[], mapper: Function) =>
   layout.map((row, y) => row.split('').map(mapper(layout, y)).join(''))
 
 // Count the amount of occupied seats in the given set.
 // @param seats - Set of seats
-const countOccupiedSeats = (seats: string[]): number =>
+const countOccupiedSeats = (seats: string[]) =>
   seats.join('').match(/#/g)?.length ?? 0
 
 // Wait until the layout no longer changes, and count occupied seats.
@@ -85,7 +81,7 @@ const countOccupiedSeats = (seats: string[]): number =>
 export const waitAndCountOccupiedSeats = (
   layout: string[],
   mapper: Function
-): number => {
+) => {
   let curr = layout
   let next = processLayout(layout, mapper)
 

@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 
-const isValid = ([a, b, c]: [number, number, number]): boolean =>
+const isValid = ([a, b, c]: [number, number, number]) =>
   a + b > c && a + c > b && b + c > a
 
 export const run = (input: string[]): [number, number] => {

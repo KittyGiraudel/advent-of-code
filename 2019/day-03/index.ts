@@ -1,11 +1,11 @@
 import $ from '../../helpers'
 import { Coords, Point } from '../../types'
 
-const parseLine = (line: string): [string, number][] =>
+const parseLine = (line: string) =>
   line.split(',').map(i => [i[0], +i.slice(1)]) as [string, number][]
 
-const draw = (line: [string, number][]): Map<Point, number> => {
-  const visited = new Map()
+const draw = (line: [string, number][]) => {
+  const visited: Map<Point, number> = new Map()
   let curr: Coords = [0, 0]
   let steps = 0
 
@@ -26,9 +26,7 @@ const draw = (line: [string, number][]): Map<Point, number> => {
   return visited
 }
 
-const findIntersections = (
-  lines: [string, string]
-): { maps: Map<Point, number>[]; intersections: Point[] } => {
+const findIntersections = (lines: [string, string]) => {
   const maps = lines.map(parseLine).map(draw)
   const sets = maps.map(map => new Set(map.keys()))
   const intersections = Array.from(sets[0]).filter(x => sets[1].has(x))
@@ -36,7 +34,7 @@ const findIntersections = (
   return { maps, intersections }
 }
 
-export const findClosestIntersection = (lines: [string, string]): number => {
+export const findClosestIntersection = (lines: [string, string]) => {
   const { intersections } = findIntersections(lines)
   const distances = intersections.map(coords =>
     $.sum(coords.split(',').map(value => Math.abs(+value)))
@@ -45,7 +43,7 @@ export const findClosestIntersection = (lines: [string, string]): number => {
   return Math.min(...distances)
 }
 
-export const findFastestIntersection = (lines: [string, string]): number => {
+export const findFastestIntersection = (lines: [string, string]) => {
   const { maps, intersections } = findIntersections(lines)
   const steps = intersections.map(coords =>
     $.sum(maps.map(map => map.get(coords)))

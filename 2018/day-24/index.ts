@@ -187,14 +187,23 @@ type GroupData = {
   weakness: string[]
 }
 
-const parseGroup = (raw: string, index: number): GroupData => {
+const parseGroup = (raw: string, index: number) => {
   const [units, health, damage, initiative] = raw.match(/(\d+)/g).map(Number)
   const weakness = raw.match(/weak to ([^;)]+)/)?.[1].split(/, ?/g) ?? []
   const immunity = raw.match(/immune to ([^;)]+)/)?.[1].split(/, ?/g) ?? []
   const type = raw.match(/(\w+) damage/)[1]
   const id = index + 1
 
-  return { id, units, health, damage, type, initiative, immunity, weakness }
+  return {
+    id,
+    units,
+    health,
+    damage,
+    type,
+    initiative,
+    immunity,
+    weakness,
+  } as GroupData
 }
 
 const parseArmyGroups = (army: string) =>
@@ -212,7 +221,7 @@ const getArmies = (data: string[]) =>
     return army
   })
 
-export const battle = (data: string[]): number => {
+export const battle = (data: string[]) => {
   const armies = getArmies(data)
   const game = new Game(armies)
 
@@ -221,7 +230,7 @@ export const battle = (data: string[]): number => {
   return game.score
 }
 
-export const cheat = (data: string[]): number => {
+export const cheat = (data: string[]) => {
   let boost = 0
 
   while (true) {

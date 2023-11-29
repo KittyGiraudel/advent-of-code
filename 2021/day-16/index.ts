@@ -10,7 +10,7 @@ type Packt = {
 
 const parseHex = hex => Array.from(hex, $.hexToBin).join('')
 
-const decode = (string: string): Packt => {
+const decode = (string: string) => {
   // For a given packet, the version is expressed over the first 3 bits, and the
   // ID over the 3 next ones. Anything after that is unclear, and will depend on
   // whether or not the packet is a value (ID=4) or an operator.
@@ -96,10 +96,9 @@ const sumVersions = ({
 }: {
   version: number
   packets: Packet[]
-}): number =>
-  packets.reduce((total, packet) => total + sumVersions(packet), version)
+}) => packets.reduce((total, packet) => total + sumVersions(packet), version)
 
-const getPacketValue = (packet: Packet): number => {
+const getPacketValue = (packet: Packet) => {
   const { id, packets, value } = packet
 
   switch (id) {
@@ -122,7 +121,7 @@ const getPacketValue = (packet: Packet): number => {
   }
 }
 
-const render = (packet: Packet, depth: number = 1): string => {
+const render = (packet: Packet, depth: number = 1) => {
   const SYMBOLS = ['+', '*', '↓', '↑', ' ', '>', '<', '=']
   const symbol = SYMBOLS[packet.id]
   const value = getPacketValue(packet)
@@ -158,7 +157,7 @@ class Packet {
     this.packets = []
   }
 
-  sumVersions(): number {
+  sumVersions() {
     return this.packets.reduce(
       (total, packet) => total + packet.sumVersions(),
       this.version

@@ -3,7 +3,7 @@ import Circularray from 'circularray'
 
 // Usage of a double-ended queue inspired by this comment on Reddit.
 // https://www.reddit.com/r/adventofcode/comments/a4i97s/2018_day_9_solutions/
-export const play = (players: number, max: number): number => {
+export const play = (players: number, max: number) => {
   const scores = $.array(players).map(() => 0)
   const circle = new Circularray([0])
 

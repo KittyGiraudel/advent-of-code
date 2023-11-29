@@ -18,14 +18,14 @@ export class Computer {
       : $.toAscii(input, false).concat(this.SUFFIX)
   }
 
-  round(iterations: number = 1): this {
+  round(iterations: number = 1) {
     while (iterations--)
       this.lengths.forEach(length => this.processLength(length))
 
     return this
   }
 
-  sliceOut(length: number): number[] {
+  sliceOut(length: number) {
     const slice = []
 
     for (let i = 0; i < length; i++) slice.unshift(this.memory.shift())
@@ -33,7 +33,7 @@ export class Computer {
     return slice
   }
 
-  rebuild(length: number): Circularray<number> {
+  rebuild(length: number) {
     const slice = this.sliceOut(length)
     const rest = this.memory.toArray().filter((a: number) => a !== null)
     const next = new Circularray(slice)
@@ -51,14 +51,14 @@ export class Computer {
     this.skip++
   }
 
-  getHash(): string {
+  getHash() {
     return $.chunk(this.memory.toArray(), 16)
       .map(chunk => chunk.reduce((a, b) => a ^ b, 0))
       .map(n => n.toString(16).padStart(2, '0'))
       .join('')
   }
 
-  check(): number {
+  check() {
     return $.product(this.memory.toArray().slice(0, 2))
   }
 }

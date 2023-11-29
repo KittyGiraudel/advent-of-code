@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 
-export const run = (input: string[]): number => {
+export const run = (input: string[]) => {
   const state = { bot: [], output: [] }
   const pipelines = []
 

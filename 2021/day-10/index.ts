@@ -4,7 +4,7 @@ const COMPLETION_SCORE_MAP = { '(': 1, '[': 2, '{': 3, '<': 4 }
 
 type Line = { type: string; character?: string; opened?: string[] }
 
-export const processLine = (line: string): Line => {
+export const processLine = (line: string) => {
   const opened = []
   const characters = line.split('')
 
@@ -17,28 +17,28 @@ export const processLine = (line: string): Line => {
       const lastOpened = opened.pop()
 
       if (lastOpened !== OPENERS_FROM_CLOSERS[character]) {
-        return { type: 'CORRUPTED', character }
+        return { type: 'CORRUPTED', character } as Line
       }
     }
   }
 
   if (opened.length > 0) {
-    return { type: 'INCOMPLETE', opened }
+    return { type: 'INCOMPLETE', opened } as Line
   }
 
-  return { type: 'VALID' }
+  return { type: 'VALID' } as Line
 }
 
-const getLinesFromType = (lines: string[], type: string): Line[] =>
+const getLinesFromType = (lines: string[], type: string) =>
   lines.map(processLine).filter(line => line.type === type)
 
-export const getCorruptionScore = (lines: string[]): number =>
+export const getCorruptionScore = (lines: string[]) =>
   getLinesFromType(lines, 'CORRUPTED').reduce(
     (score, { character }) => score + CORRUPTION_SCORE_MAP[character],
     0
   )
 
-export const getCompletionScore = (lines: string[]): number => {
+export const getCompletionScore = (lines: string[]) => {
   const scores = getLinesFromType(lines, 'INCOMPLETE')
     .map(line =>
       line.opened.reduceRight(

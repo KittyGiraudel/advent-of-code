@@ -1,12 +1,11 @@
 import $ from '../../helpers'
 import { ValueOrArray } from '../../types'
 
-const toArray = (value: any | any[]): any[] =>
-  Array.isArray(value) ? value : [value]
+const toArray = (value: any | any[]) => (Array.isArray(value) ? value : [value])
 
-const isDefined = (value: any): boolean => typeof value !== 'undefined'
+const isDefined = (value: any) => typeof value !== 'undefined'
 
-const isNumber = (value: any): boolean => typeof value === 'number'
+const isNumber = (value: any) => typeof value === 'number'
 
 // Compare two values and return `true`, `false` or `undefined` whether they are
 // respectively ordered properly, ordered wrongly, or cannot be compared. The
@@ -23,10 +22,7 @@ const isNumber = (value: any): boolean => typeof value === 'number'
 //    - If the comparison is undetermined, skip to next set of values.
 // @param a - First value
 // @param b - Second value
-export const compare = (
-  a: ValueOrArray<number>,
-  b: ValueOrArray<number>
-): boolean => {
+export const compare = (a: ValueOrArray<number>, b: ValueOrArray<number>) => {
   if (!isDefined(b)) return false
   if (!isDefined(a)) return true
 
@@ -55,7 +51,7 @@ export const getScore = (pairs: string[]) =>
 // pair of dividers, then join all pairs together, and split it on line breaks
 // to get an array of individual packets; parse them all as JSON. Then sort all
 // packets based, and find the index of the dividers again.
-export const sort = (pairs: string[]): number => {
+export const sort = (pairs: string[]) => {
   const dividers = `[[2]]\n[[6]]`
   const packets = pairs
     .concat(dividers)

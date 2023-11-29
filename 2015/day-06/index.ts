@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 
-export const run = (input: string[], advanced: boolean = false): number => {
+export const run = (input: string[], advanced: boolean = false) => {
   const grid = $.grid.init(1000, 1000, 0)
 
   input.forEach(line => {

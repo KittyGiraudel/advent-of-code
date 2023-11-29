@@ -6,7 +6,7 @@ type DoorsToCoords = Record<string, Coords>
 
 type Node = { coords: Coords; depth: number }
 
-const getDimensions = (input: string[]): { width: number; height: number } => {
+const getDimensions = (input: string[]) => {
   // The grid is padded by 2 extra rows or columns on each side to make way for
   // the door names, hence the `- 4`. The width is a bit awkward to compute due
   // to the automatic trimming of lines, which is why we pick the max length.

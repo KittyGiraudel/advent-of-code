@@ -1,11 +1,11 @@
-const isValidLoose = (line: string): boolean => {
+const isValidLoose = (line: string) => {
   if (['ab', 'cd', 'pq', 'xy'].some(s => line.includes(s))) return false
   if ((line.match(/[aeiou]/g)?.length ?? 0) < 3) return false
   if (!line.match(/(\w)\1/)) return false
   return true
 }
 
-const isValidStrict = (line: string): boolean => {
+const isValidStrict = (line: string) => {
   if (!line.match(/(\w)\w\1/)) return false
 
   const pairs: Record<number, number[]> = {}
@@ -19,5 +19,5 @@ const isValidStrict = (line: string): boolean => {
   return Object.values(pairs).some(pair => pair.length > 1)
 }
 
-export const run = (input: string[], advanced: boolean = false): number =>
+export const run = (input: string[], advanced: boolean = false) =>
   input.filter(advanced ? isValidStrict : isValidLoose).length

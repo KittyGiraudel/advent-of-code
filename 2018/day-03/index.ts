@@ -8,13 +8,13 @@ type Boundary = {
   yMax: number
 }
 
-const findBoundaries = (claims: Boundary[]): Boundary =>
+const findBoundaries = (claims: Boundary[]) =>
   claims.reduce(
     (acc, claim) => ({
       xMax: Math.max(claim.xMax, acc.xMax),
       yMax: Math.max(claim.yMax, acc.yMax),
     }),
-    { xMax: -Infinity, yMax: -Infinity }
+    { xMax: -Infinity, yMax: -Infinity } as Boundary
   )
 
 // This is a bit of an ugly solution, because it’s incredibly slow. It would
@@ -27,7 +27,7 @@ const findBoundaries = (claims: Boundary[]): Boundary =>
 // intersection), and that’s the result.
 // @param input - Raw unparsed lines
 // @return {Number}
-export const countOverlappingInches = (input: string[]): number => {
+export const countOverlappingInches = (input: string[]) => {
   const claims = parseClaims(input)
   const boundaries = findBoundaries(claims)
   const grid = $.grid.init(boundaries.xMax + 1, boundaries.yMax + 1, 0)
@@ -45,7 +45,7 @@ export const countOverlappingInches = (input: string[]): number => {
   return $.sum(Object.values(counts))
 }
 
-const getIntersection = (a: Boundary, b: Boundary): Boundary => {
+const getIntersection = (a: Boundary, b: Boundary) => {
   const xMin = Math.max(a.xMin, b.xMin)
   const xMax = Math.min(a.xMax, b.xMax)
   const yMin = Math.max(a.yMin, b.yMin)
@@ -53,26 +53,29 @@ const getIntersection = (a: Boundary, b: Boundary): Boundary => {
 
   if (xMin > xMax || yMin > yMax) return null
 
-  return { xMin, xMax, yMin, yMax }
+  return { xMin, xMax, yMin, yMax } as Boundary
 }
 
-const parseClaims = (lines: string[]): Boundary[] =>
+const parseClaims = (lines: string[]) =>
   lines
     .map(line => line.match(/(\d+)/g).map(Number))
-    .map(([id, xMin, yMin, width, height]) => ({
-      id,
-      xMin,
-      xMax: xMin + width - 1,
-      yMin,
-      yMax: yMin + height - 1,
-    }))
+    .map(
+      ([id, xMin, yMin, width, height]) =>
+        ({
+          id,
+          xMin,
+          xMax: xMin + width - 1,
+          yMin,
+          yMax: yMin + height - 1,
+        } as Boundary)
+    )
 
 // Find the one claim that does not overlap with any other. To do so, iterate
 // over every claim, and for each claim, compute the intersection with every
 // other claim (besides itself) in the list. The one with no intersection is the
 // final one!
 // @param input - Raw unparsed lines
-export const detect = (input: string[]): number =>
+export const detect = (input: string[]) =>
   parseClaims(input).find(
     (claim, _, array) =>
       array

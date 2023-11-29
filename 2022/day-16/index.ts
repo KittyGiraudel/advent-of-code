@@ -6,7 +6,7 @@ type Node = {
   tunnels: string[]
 }
 
-export const releasePressure = (input: string[]): number => {
+export const releasePressure = (input: string[]) => {
   const map: Record<string, Node> = input.reduce((acc, line) => {
     const [, name, flow, tunnels] = line.match(
       /Valve (\w+) has flow rate=(\d+); tunnels? leads? to valves? ([\w,\s]+)/

@@ -52,7 +52,7 @@ export class Intcode {
     return this
   }
 
-  getOutput(): number | number[] {
+  getOutput() {
     const output =
       this.outputs.length === 1 ? this.outputs[0] : this.outputs.slice(0)
 
@@ -93,7 +93,7 @@ export class Intcode {
     return this.memory.join(',')
   }
 
-  parseOpcode(opcode: number): { modes: number[]; value: number } {
+  parseOpcode(opcode: number) {
     // Instructions have a maximum of 3 arguments, and the opcode value is
     // authored over 2 digits (0 to 99), so the opcode string should be 5 digits
     // long, left-padded with zeroes. Padding is technically not required since
@@ -107,7 +107,7 @@ export class Intcode {
     return { modes, value }
   }
 
-  at(index: number): number {
+  at(index: number) {
     return this.memory[index] || 0
   }
 
@@ -123,7 +123,7 @@ export class Intcode {
   // - If the mode is 1, the argument is in “immediate mode”, and the returned
   //   value is the argument itself.
   // - Any other mode would cause a runtime error.
-  read(pointer: number, mode?: number): number {
+  read(pointer: number, mode?: number) {
     const argument = this.at(pointer)
     if (!mode) return this.at(argument)
     if (mode === 2) return this.at(this.base + argument)
@@ -141,7 +141,7 @@ export class Intcode {
   //   be written at the index given by adding the argument + the current
   //   relative base from the computer.
   // - Any other mode (including 1) would cause a runtime error.
-  getWriteIndex(pointer: number, mode?: number): number {
+  getWriteIndex(pointer: number, mode?: number) {
     const argument = this.at(pointer)
     if (!mode) return argument
     if (mode === 2) return this.base + argument

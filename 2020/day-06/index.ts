@@ -5,7 +5,7 @@ const LETTERS = 'abcdefghijklmnopqrstuvwxyz'.split('')
 // @param group - Raw group
 const getCountForGroup =
   (predicate: (value: any, index: number, array: any[]) => boolean) =>
-  (group: string): number => {
+  (group: string) => {
     const persons = group.split('\n')
     const hasAnsweredYes = (letter: string) => (person: string[]) =>
       person.includes(letter)

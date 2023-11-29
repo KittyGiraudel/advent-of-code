@@ -28,7 +28,7 @@ class File {
   }
 }
 
-export const parseOutput = (lines: string[]): Dir => {
+export const parseOutput = (lines: string[]) => {
   const drive = new Dir('/', null)
   let cwd = null
 
@@ -67,22 +67,22 @@ export const parseOutput = (lines: string[]): Dir => {
 // Return the size of an item by checking its `size` property for files, or by
 // recursively going through its content and computing the size of its
 // sub-directories.
-const getSize = (item: Dir | File): number =>
+const getSize = (item: Dir | File) =>
   (item as File).size ||
   (item as Dir).content.reduce((acc, item) => acc + getSize(item), 0)
 
 // Return all the directories from the drive as a flat array (no longer nested).
-const getDirs = (drive: Dir): Dir[] =>
+const getDirs = (drive: Dir) =>
   drive.content.reduce(function collectDirs(acc, item) {
     return isDir(item)
       ? (item as Dir).content.reduce(collectDirs, [...acc, item])
       : acc
-  }, [])
+  }, [] as Dir[])
 
 // This is part 1: it computes the total size of all directories which have a
 // size below 100,000. To do so, it lists all directories from the drive
 // (recursively), get their size, and filter out the ones that are too big.
-export const getSmallDirsSize = (drive: Dir): number =>
+export const getSmallDirsSize = (drive: Dir) =>
   $.sum(
     getDirs(drive)
       .map(getSize)
@@ -97,7 +97,7 @@ export const findFreeableSpace = (
   drive: Dir,
   capacity: number = 70_000_000,
   needed: number = 30_000_000
-): number => {
+) => {
   const unused = capacity - getSize(drive)
 
   return Math.min(

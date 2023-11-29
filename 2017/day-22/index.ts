@@ -15,7 +15,7 @@ export const run = (
   rows: string[],
   iterations: number,
   advanced: boolean = false
-): number => {
+) => {
   const nodes: Map<Point, string> = $.grid.reduce(
     $.grid.create(rows),
     (nodes, value, ri, ci) => nodes.set(ci + ',' + ri, value),

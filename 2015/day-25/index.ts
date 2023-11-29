@@ -1,6 +1,6 @@
 import { Coords } from '../../types'
 
-export const run = ([row, col]: Coords): number => {
+export const run = ([row, col]: Coords) => {
   let curr = 20151125
   let diagonal = 1
 

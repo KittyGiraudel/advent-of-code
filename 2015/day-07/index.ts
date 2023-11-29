@@ -9,7 +9,7 @@ const OPERATORS = {
   RSHIFT: '>>',
 }
 
-const prepare = (string: string): string => {
+const prepare = (string: string) => {
   for (let operator in OPERATORS)
     string = string.replace(operator, OPERATORS[operator])
 
@@ -20,7 +20,7 @@ const prepare = (string: string): string => {
   return string.replace(/[a-z]+/g, a => 'registers.' + a)
 }
 
-export const run = (input: string[], registers: Registers = {}): Registers => {
+export const run = (input: string[], registers: Registers = {}) => {
   const graph: Graph = new Map()
 
   input.forEach(line => {

@@ -1,4 +1,4 @@
-const size = (string: string): number => {
+const size = (string: string) => {
   const closing = string.indexOf(')')
 
   // If the given string doesn’t have any sub-marker, its length can be returned
@@ -24,7 +24,7 @@ const size = (string: string): number => {
   return count * size(reach) + size(rest)
 }
 
-export const run = (input: string): number => {
+export const run = (input: string) => {
   let marker = ''
 
   for (let i = 0; i < input.length; i++) {

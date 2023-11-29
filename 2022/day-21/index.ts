@@ -3,18 +3,18 @@ type Map = {
   root?: number | string
 }
 
-const parseInput = (input: string[]): Map =>
+const parseInput = (input: string[]) =>
   input.reduce((acc, line) => {
     const [name, value] = line.split(': ')
     acc[name] = +value || value
     return acc
-  }, {})
+  }, {} as Map)
 
 // The `getRootNumber` solves part 1. It creates a map from the input, and then
 // it reduces it until we have found the number for the `root` key. The array
 // check was for part 2, because the brute-force version I initially wrote
 // relied on that function, but passed it a parsed map already.
-export const getRootNumber = (input: Map | string[]): number => {
+export const getRootNumber = (input: Map | string[]) => {
   const map = Array.isArray(input) ? parseInput(input) : input
 
   while (typeof map.root !== 'number') reduceNext(map)
@@ -23,7 +23,7 @@ export const getRootNumber = (input: Map | string[]): number => {
 }
 
 // Find the next map entry whose value is a number.
-const getNextNumber = (map: Map): [string, number] =>
+const getNextNumber = (map: Map) =>
   Object.entries(map).find(([, value]) => typeof value === 'number') as [
     string,
     number

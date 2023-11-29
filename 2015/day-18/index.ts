@@ -5,7 +5,7 @@ export const run = (
   input: string[],
   iterations: number,
   advanced: boolean = false
-): number => {
+) => {
   let curr = $.grid.create<string>(input)
   const width = curr[0].length
   const height = curr.length

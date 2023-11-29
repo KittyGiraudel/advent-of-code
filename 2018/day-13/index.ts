@@ -33,14 +33,10 @@ const VECTORS: { [K in Orientation]: Coords } = {
   v: [+1, 0],
 }
 
-const rotate = (cart: Cart): Orientation =>
-  ROTATIONS[cart.orientation][cart.index.next().value]
+const rotate = (cart: Cart) =>
+  ROTATIONS[cart.orientation][cart.index.next().value] as Orientation
 
-const move = (
-  grid: Grid<string>,
-  point: Point,
-  cart: Cart
-): { point: Point; orientation: Orientation } => {
+const move = (grid: Grid<string>, point: Point, cart: Cart) => {
   const coords = $.toCoords(point)
   // Compute the new orientation for the cart. If it’s sitting on an
   // intersection, its internal counter determines the new orientation,
@@ -60,17 +56,13 @@ const move = (
   return { point: $.toPoint(nextCoords), orientation }
 }
 
-const gridOrder = (a: Point, b: Point): number => {
+const gridOrder = (a: Point, b: Point) => {
   const [aRi, aCi] = $.toCoords(a)
   const [bRi, bCi] = $.toCoords(b)
   return aRi - bRi || aCi - bCi
 }
 
-const tick = (
-  grid: Grid<string>,
-  carts: CartMap,
-  cleanUp: boolean = false
-): void => {
+const tick = (grid: Grid<string>, carts: CartMap, cleanUp: boolean = false) => {
   Object.keys(carts)
     .sort(gridOrder)
     .forEach((point: Point) => {
@@ -99,7 +91,7 @@ const tick = (
     })
 }
 
-export const run = (rows: string[], cleanUp: boolean = false): number[] => {
+export const run = (rows: string[], cleanUp: boolean = false) => {
   const carts: CartMap = {}
 
   // Iterate over the grid to:
@@ -130,7 +122,7 @@ export const run = (rows: string[], cleanUp: boolean = false): number[] => {
   // Finally, we can return the crash site, or the last cart standing, without
   // forgetting to flip the coordinates.
   const points = Object.keys(carts) as Point[]
-  const flip = (point: Point): number[] => $.toCoords(point).reverse()
+  const flip = (point: Point) => $.toCoords(point).reverse()
   const interest = points.find(point => carts[point].crashed) || points[0]
 
   return flip(interest)

@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 
-export const run = (steps: string[], init: string): string =>
+export const run = (steps: string[], init: string) =>
   steps
     .reduce((acc, step) => {
       if (step.startsWith('reverse')) {
@@ -43,7 +43,7 @@ export const run = (steps: string[], init: string): string =>
     }, Array.from(init))
     .join('')
 
-export const run2 = (steps: string[]): string =>
+export const run2 = (steps: string[]) =>
   $.permutations(Array.from('abcdefgh'))
     .find(base => run(steps, base.join('')) === 'fbgdceah')
     .join('')

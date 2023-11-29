@@ -13,20 +13,20 @@ type Event = {
 // before (but the first char which is an open bracket) is the raw date, and
 // anything after is the rest of the event.
 // e.g. [1518-09-08 00:45] wakes up
-const parseLog = (line: string): Event => {
+const parseLog = (line: string) => {
   const [rawDate, rest] = line.split(']')
   const date = new Date(rawDate.slice(1) + 'Z')
   const id = +rest.match(/\d+/)?.[0]
   const type = rest.split(' ').slice(-2).join(' ')
 
-  return { date, id, type }
+  return { date, id, type } as Event
 }
 
 // If the event does not have an ID (which is the case for all events but the
 // shift starts), read it from the previous entry in the event log. This way,
 // a “falls asleep” event will read it from the previous “begins shift” event,
 // and a “wakes up” event will read it from the previous “falls asleep” event.
-const recordGuardId = (event: Event, index: number, log: Event[]): Event => {
+const recordGuardId = (event: Event, index: number, log: Event[]) => {
   if (!event.id) {
     event.id = log[index - 1].id
   }
@@ -39,7 +39,7 @@ const recordGuardId = (event: Event, index: number, log: Event[]): Event => {
 // “wakes up”), so the sleep duration can be computed. If the event is “wakes
 // up”, record the current minute as the end of the sleep cycle, and record all
 // the minutes that the guard spent asleep.
-const processEvent = (event: Event, index: number, log: Event[]): Event => {
+const processEvent = (event: Event, index: number, log: Event[]) => {
   if (event.type === 'falls asleep') {
     ;(log[index + 1] as Event).start = event.date.getUTCMinutes()
   }
@@ -55,10 +55,7 @@ const processEvent = (event: Event, index: number, log: Event[]): Event => {
 // Aggregate individual events into two data structures:
 // - A dictionary of guards mapping their ID to the amount of time they slept.
 // - An array of minutes that were collectively spent asleep.
-const aggregateEvents = (
-  acc: Record<string, number[]>,
-  event: Event
-): Record<string, number[]> => {
+const aggregateEvents = (acc: Record<string, number[]>, event: Event) => {
   if (!(event.id in acc)) {
     acc[event.id] = []
   }
@@ -70,11 +67,7 @@ const aggregateEvents = (
   return acc
 }
 
-const formatData = ([guardId, minutes]: [string, number[]]): {
-  id: number
-  duration: number
-  counters: { minute: number; occurrences: number }[]
-} => ({
+const formatData = ([guardId, minutes]: [string, number[]]) => ({
   id: +guardId,
   duration: minutes.length,
   counters: Object.entries($.count(minutes))

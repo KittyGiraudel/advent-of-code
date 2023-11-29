@@ -1,10 +1,7 @@
 import $ from '../../helpers'
 import { Coords } from '../../types'
 
-export const discover = (
-  input: string[],
-  roundTrip: boolean = false
-): number => {
+export const discover = (input: string[], roundTrip: boolean = false) => {
   let start
   const locations = []
   const grid = $.grid.create(input, (cell, ...coords) => {

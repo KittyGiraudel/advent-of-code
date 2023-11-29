@@ -86,7 +86,7 @@ class Computer {
     return this
   }
 
-  get(key: string | number): number {
+  get(key: string | number) {
     return this.registers[key] ?? +key
   }
 

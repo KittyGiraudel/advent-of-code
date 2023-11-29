@@ -9,7 +9,7 @@ export const playDeterministically = (
   p1p: number,
   p2p: number,
   max: number = 1000
-): { winner: number; value: number } => {
+) => {
   const players: [Player, Player] = [
     { position: p1p, score: 0 },
     { position: p2p, score: 0 },
@@ -38,16 +38,12 @@ export const playDeterministically = (
 // Solution shamelessly taken from this implementation found on Reddit because
 // I couldn’t figure out how to solve it:
 // https://seigler.github.io/marklink/#AYhWEMDdwZwYwE4EsAOAXAUHA9gOxmgAQrgIwCmAkrigK5EC8hAFAuAO7V1oCUhDAPkJtONegDoAtuDRwAFswD0zAPwAeBgC5CPADoATANSKA5jyngUzAB6DD1nhix4CxUmgCM-FiK70+goQA3hiEhDj4RADa4ADKaO4ANIQARvHuALreJGRUYmisHH68oYQANuRE4N5xCQhoySneaXUNhHE4COTeAAyNsZ3dTH2ESDAAggAqtAi43mgItOSlFUT6SEOEI7i0kgBK2GVlML2lAGa0uHBoSHjCh2XMfCFhYTv7DzCGhqVhXWgzObMdabEGEACkhA8PR6hEMUMcYQAvqV2HIkBUWB1sF1CGooTDYQAyImpAY47r46Ew56-cIuIgIT7eKJMo5PRJsx48TkPJ4ZOlIM4sMZTQG016vaqGJhcmBRHpZeFyqIeJX3I7ygBMAslYWqTGY1QAtAiIQS4VC6frybiZe06UjCORjt0XnqmvaVYrLSq1b7PlEddbUt5mE1TR4+JDoZaPCG0oM4UwUo7BRNprNvABCUWZ3ClFF-SqAwgAWRkcikSFwRtt5H6gz4ACpCO8DpqMCjnJFCGcugBHJZXDYnJhRAVnHEsVajbweADcc40hAAzEukN9EX3p8xZ6B50uDyv14RQFu6VOEDPKoQANaH+94pinu9b4Ih-vkIfkEfkeVIJaB7wneWSGl+P5-gBQGWqBhAqCoWx8PC8aSt2ESuDkaBamGvj5AEQjuhh0S1EkZKtGBbi5MUhSiNw27EYQkjkJI2Asrq9K9uwNaTHIXQwHIhz6N4WqoX2lzXLccw4JcaAAOo1jAdaDI2FLJOAAAK2AwI0Wk6aMGbih+kqzuQ1hjDcuAmN4zGsVEMT1qpXTqXpunackeaAhkHFhEKLBmRZNbWdmDBMJc+jkGcNbkPofD-KWAUEEFgrCspFKEAITDcbgvH8YJZSxcZeq2dg9nYs5ZIqe0rmpDVnmzN5LIeMkiohvFWaqi1PmEEWrx+eG9YZVlPF8f++WFe6kolWVjmVWp1XubVi31bgjXjiMaptSWHUbd1vVhLOaDYAkZQKfgLIjK1kpXjeaxIHA5CxLs3inusD1PZIz6EAAnEub2Pbs76Ta8h3ojAZ0hv1K0SnqYSMbgZloOMelhpp2mEJGlr-R90YWihIZhGgYNnd4Mm4PJilpXabaI8ji2JvNCPWEjNUpDVuaGbM25oc6rpFbD8OIwAQijhps+jmPwtjuy47G+Ow4TxM1qT2CyWdSnlQ2c3U0zaAi4taP6br+v6RzYpcyG+2vEdJ3qyyNvgKdikKuqEHDnAo5RNLkhZK2RNjGdLvJA7Tv4KqruDu7nve77hD++DNbh3tdLTQ5VUMxVhtufpK1rXHx2O+rdLtXMIdF8ipQl+WlYWNYzDiA3ZMU-gzCXep6T1P0rTB4s5A8I4KIgMAQA
-export const playQuantum = (p1p: number, p2p: number): number => {
+export const playQuantum = (p1p: number, p2p: number) => {
   const cache: Map<string, [number, number]> = new Map()
   const frequencies = getSumFrequencies()
   const sums = Array.from(frequencies.keys())
 
-  const countWins = (
-    p1: Player,
-    p2: Player,
-    playerIndex: number
-  ): [number, number] => {
+  const countWins = (p1: Player, p2: Player, playerIndex: number) => {
     const key = [
       p1.score,
       p1.position,
@@ -99,8 +95,8 @@ export const playQuantum = (p1p: number, p2p: number): number => {
   )
 }
 
-const getSumFrequencies = (): Map<number, number> => {
-  const frequencies = new Map()
+const getSumFrequencies = () => {
+  const frequencies: Map<number, number> = new Map()
 
   for (let i = 1; i <= 3; i++)
     for (let j = 1; j <= 3; j++)

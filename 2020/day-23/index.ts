@@ -4,7 +4,7 @@ import $ from '../../helpers'
 // @param current - Current cup value
 // @param picks - 3 picked cups
 // @param max - Maximum value
-const getDest = (current: number, picks: number[], max: number): number => {
+const getDest = (current: number, picks: number[], max: number) => {
   const destination = current - 1
   if (destination > 0 && !picks.includes(destination)) return destination
   return getDest(destination || max + 1, picks, max)
@@ -13,7 +13,7 @@ const getDest = (current: number, picks: number[], max: number): number => {
 // Pick the 3 cups to the right side of the current one.
 // @param map - Map of links
 // @param current - Current cup value
-const pickCups = (map: Uint32Array, current: number): number[] => {
+const pickCups = (map: Uint32Array, current: number) => {
   const picks = []
 
   picks.push(map[current])
@@ -26,7 +26,7 @@ const pickCups = (map: Uint32Array, current: number): number[] => {
 // Generate the initial map of linked values.
 // @param input - Initial numbers
 // @param size - Amount of numbers in the list
-const init = (input: number[], size: number): Uint32Array => {
+const init = (input: number[], size: number) => {
   const map = new Uint32Array(size + 1)
 
   // Fill the array with all the numbers from 1 to size; index 0 is empty.
@@ -56,7 +56,7 @@ export const play = (
   input: number[],
   rounds: number = 10,
   size: number = input.length
-): Uint32Array => {
+) => {
   const map = init(input, size)
   let curr = input[0]
 
@@ -76,7 +76,7 @@ export const play = (
 
 // Serialise the chain from the number 1 onwards, omitting it.
 // @param map - Map of links
-export const serializeChain = (map: Uint32Array): number => {
+export const serializeChain = (map: Uint32Array) => {
   let output = ''
   let current = map[1]
 
@@ -90,4 +90,4 @@ export const serializeChain = (map: Uint32Array): number => {
 
 // Get the product of the 2 cups at right of the one labeled 1.
 // @param map - Map of links
-export const getChainValue = (map: Uint32Array): number => map[1] * map[map[1]]
+export const getChainValue = (map: Uint32Array) => map[1] * map[map[1]]

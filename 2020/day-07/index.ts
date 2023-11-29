@@ -4,9 +4,7 @@ type Map = Record<string, Item[]>
 // Parse a restriction line into a type and an array of possible sub-types.
 // @param restriction - Unparsed restriction
 // @return Type and capacity
-export const parseRestriction = (
-  restriction: string
-): { type: string; contains: Item[] } => {
+export const parseRestriction = (restriction: string) => {
   const [type, leftover] = restriction.trim().split(' bags contain ')
   const contains = leftover
     .split(',')
@@ -21,11 +19,14 @@ export const parseRestriction = (
 // possible sub-types.
 // @param restrictions - Array of unparsed restrictions
 // @return Map of restrictions
-export const mapRestrictions = (restrictions: string[]): Map =>
+export const mapRestrictions = (restrictions: string[]) =>
   restrictions
     .filter(Boolean)
     .map(parseRestriction)
-    .reduce((map, { type, contains }) => ({ ...map, [type]: contains }), {})
+    .reduce(
+      (map, { type, contains }) => ({ ...map, [type]: contains }),
+      {} as Map
+    )
 
 // Determine whether `entry` type can contain `expected` type, no matter the
 // depth.
@@ -33,11 +34,7 @@ export const mapRestrictions = (restrictions: string[]): Map =>
 // @param entry - Entry point type in the map
 // @param expected - Expected type to find
 // @return Whether `entry` type can contain `expected` type (deep)
-export const canContain = (
-  map: Map,
-  entry: string,
-  expected: string
-): boolean =>
+export const canContain = (map: Map, entry: string, expected: string) =>
   entry === expected ||
   map[entry].some(item => canContain(map, item.type, expected))
 
@@ -45,7 +42,7 @@ export const canContain = (
 // @param map - Map of restrictions
 // @param expected - Expected type to find
 // @return Amount of containers for `expected` type
-export const countContainers = (map: Map, expected: string): number =>
+export const countContainers = (map: Map, expected: string) =>
   Object.keys(map)
     .filter(type => type !== expected)
     .filter(type => canContain(map, type, expected)).length
@@ -54,7 +51,7 @@ export const countContainers = (map: Map, expected: string): number =>
 // @param map - Map of restrictions
 // @param entry - Entry point type in the map
 // @return Amount of bags within given `entry` type
-export const countBagsWithin = (map: Map, entry: string): number =>
+export const countBagsWithin = (map: Map, entry: string) =>
   map[entry].reduce(
     (acc, { count, type }) => acc + count * (1 + countBagsWithin(map, type)),
     0

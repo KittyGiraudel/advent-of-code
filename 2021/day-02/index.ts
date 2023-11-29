@@ -1,6 +1,4 @@
-export const proceed = (
-  instructions: string[]
-): { position: number; depth: number } =>
+export const proceed = (instructions: string[]) =>
   instructions
     .map(instruction => instruction.split(' '))
     .reduce(
@@ -13,9 +11,7 @@ export const proceed = (
       { position: 0, depth: 0 }
     )
 
-export const proceedWithAim = (
-  instructions: string[]
-): { position: number; depth: number; aim: number } =>
+export const proceedWithAim = (instructions: string[]) =>
   instructions
     .map(instruction => instruction.split(' '))
     .reduce(

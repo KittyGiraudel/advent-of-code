@@ -4,7 +4,7 @@ export const run = (
   lists: string[],
   MAX: number,
   advanced: boolean = false
-): number => {
+) => {
   let blacklists = lists
     .map(a => a.split('-').map(Number))
     .sort((a, b) => a[0] - b[0] || a[1] - b[1])

@@ -15,7 +15,7 @@ type Options = {
 const readInput = (
   meta: ImportMeta,
   { delimiter = '\n', trim = true, name = 'input.txt' }: Options = {}
-): string[] => {
+) => {
   const directory = path.dirname(fileURLToPath(meta.url))
   const filePath = path.join(directory, name)
 

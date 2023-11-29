@@ -10,10 +10,10 @@ const getArrangements = (
 
   return numbers.reduce((acc, n, index) => {
     const nextNumbers = numbers.slice(index + 1)
-    const set = getArrangements(nextNumbers, target, [...curr, n])
+    const set = getArrangements(nextNumbers, target, [...curr, n]) as number[][]
 
     return acc.concat(set)
-  }, [])
+  }, [] as number[][])
 }
 
 export const run = (input: number[], target: number): [number, number] => {

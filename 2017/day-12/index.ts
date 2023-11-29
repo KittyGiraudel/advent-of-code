@@ -16,8 +16,8 @@ export const run = (input: string[]): [number, number] => {
     })
   })
 
-  const walk = (node: number, visited: number[] = []): number[] => {
-    if (visited.includes(node)) return
+  const walk = (node: number, visited: number[] = []) => {
+    if (visited.includes(node)) return []
     visited.push(node)
     graph.get(node).forEach((connection: number) => walk(connection, visited))
     return visited

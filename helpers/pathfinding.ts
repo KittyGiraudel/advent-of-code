@@ -21,7 +21,7 @@ export type SearchOptions<T> = {
   emptyAfterGoal?: boolean
 }
 
-const isEmpty = <T>(frontier: Frontier<T>): boolean =>
+const isEmpty = <T>(frontier: Frontier<T>) =>
   frontier instanceof PriorityQueue ? frontier.isEmpty() : frontier.length === 0
 
 const pop = <T>(frontier: Frontier<T>) =>
@@ -71,7 +71,7 @@ export const bfs = <T>({
   isGoal,
   toKey = DEFAULT_OPTIONS.toKey,
   emptyAfterGoal = DEFAULT_OPTIONS.emptyAfterGoal,
-}: SearchOptions<T>): SearchOutput<T> => {
+}: SearchOptions<T>) => {
   const frontier: T[] = [start]
   const from: SearchOutput<T>['from'] = { [toKey(start)]: null }
 
@@ -84,7 +84,7 @@ export const bfs = <T>({
 
   const end: T = _core(handler, frontier, getNextNodes, isGoal, emptyAfterGoal)
 
-  return { end, from }
+  return { end, from } as SearchOutput<T>
 }
 
 /**
@@ -102,7 +102,7 @@ export const gbfs = <T>({
   isGoal,
   toKey = DEFAULT_OPTIONS.toKey,
   emptyAfterGoal = DEFAULT_OPTIONS.emptyAfterGoal,
-}: SearchOptions<T> & { heuristic: Heuristic<T> }): SearchOutput<T> => {
+}: SearchOptions<T> & { heuristic: Heuristic<T> }) => {
   const frontier = new PriorityQueue<[T, number]>((a, b) => a[1] - b[1])
   frontier.push([start, 0])
   const from: SearchGraph = { [toKey(start)]: null }
@@ -116,7 +116,7 @@ export const gbfs = <T>({
 
   const end: T = _core(handler, frontier, getNextNodes, isGoal, emptyAfterGoal)
 
-  return { from, end }
+  return { from, end } as SearchOutput<T>
 }
 
 /**
@@ -134,9 +134,7 @@ export const dijkstra = <T>({
   getCost,
   isGoal = DEFAULT_OPTIONS.isGoal,
   toKey = DEFAULT_OPTIONS.toKey,
-}: SearchOptions<T> & { getCost: GetCost<T> }): SearchOutput<T> & {
-  costs: SearchCosts
-} => {
+}: SearchOptions<T> & { getCost: GetCost<T> }) => {
   const frontier = new PriorityQueue<[T, number]>((a, b) => a[1] - b[1])
   frontier.push([start, 0])
   const from: SearchGraph = { [toKey(start)]: null }
@@ -156,7 +154,7 @@ export const dijkstra = <T>({
 
   const end: T = _core(handler, frontier, getNextNodes, isGoal)
 
-  return { from, costs, end }
+  return { from, costs, end } as SearchOutput<T> & { costs: SearchCosts }
 }
 
 /**
@@ -178,7 +176,7 @@ export const aStar = <T>({
 }: SearchOptions<T> & {
   getCost: GetCost<T>
   heuristic: Heuristic<T>
-}): SearchOutput<T> & { costs: SearchCosts } => {
+}) => {
   const frontier = new PriorityQueue<[T, number]>((a, b) => a[1] - b[1])
   frontier.push([start, 0])
   const from: SearchGraph = { [toKey(start)]: null }
@@ -198,7 +196,7 @@ export const aStar = <T>({
 
   const end: T = _core(handler, frontier, getNextNodes, isGoal)
 
-  return { from, costs, end }
+  return { from, costs, end } as SearchOutput<T> & { costs: SearchCosts }
 }
 
 const reconstruct = (graph: SearchGraph, start: unknown, end: unknown) => {

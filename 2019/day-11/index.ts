@@ -36,12 +36,12 @@ const next = (computer: Intcode, state: State) => {
   return state
 }
 
-export const paint = (input: string, start: number = 0): Map<Point, number> => {
+export const paint = (input: string, start: number = 0) => {
   const computer = new Intcode(input)
   const state: State = {
     direction: $.turn.DIRECTIONS[0],
     position: [0, 0],
-    record: new Map([['0,0', start]]),
+    record: new Map([['0,0', start]]) as Map<Point, number>,
   }
 
   while (!computer.hasHalted()) next(computer, state)
@@ -49,7 +49,7 @@ export const paint = (input: string, start: number = 0): Map<Point, number> => {
   return state.record
 }
 
-export const render = (record: Map<Point, number>): string => {
+export const render = (record: Map<Point, number>) => {
   const coords = Array.from(record.keys()).map($.toCoords)
   const [minX, maxX, minY, maxY] = $.boundaries(coords)
 

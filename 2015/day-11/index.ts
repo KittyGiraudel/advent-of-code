@@ -8,12 +8,12 @@ const SEQUENCES_RE = new RegExp('(' + SEQUENCES.join('|') + ')')
 const IOL_RE = /[iol]/
 const PAIRS_RE = /(\w)\1/g
 
-export const isValid = (curr: string): boolean =>
+export const isValid = (curr: string) =>
   !IOL_RE.test(curr) &&
   SEQUENCES_RE.test(curr) &&
   (curr.match(PAIRS_RE) ?? []).length >= 2
 
-const next = (curr: string): string => {
+const next = (curr: string) => {
   const array = Array.from(curr)
   const last = array.pop()
 
@@ -24,7 +24,7 @@ const next = (curr: string): string => {
     : array.join('') + String.fromCharCode(last.charCodeAt(0) + 1)
 }
 
-export const run = (curr: string): string => {
+export const run = (curr: string) => {
   do {
     curr = next(curr)
   } while (!isValid(curr))

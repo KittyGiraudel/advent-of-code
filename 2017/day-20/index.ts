@@ -7,7 +7,7 @@ type Particle = {
   acceleration: Coords
 }
 
-const tick = (particle: Particle): Particle => {
+const tick = (particle: Particle) => {
   particle.velocity[0] += particle.acceleration[0]
   particle.velocity[1] += particle.acceleration[1]
   particle.velocity[2] += particle.acceleration[2]
@@ -17,10 +17,10 @@ const tick = (particle: Particle): Particle => {
   return particle
 }
 
-const sortByDistance = (a: Particle, b: Particle): number =>
+const sortByDistance = (a: Particle, b: Particle) =>
   $.manhattan(b.position) - $.manhattan(a.position)
 
-const countCollisions = (particles: Particle[]): number =>
+const countCollisions = (particles: Particle[]) =>
   particles
     .map(particle => $.toPoint(particle.position))
     .reduce((acc, position, index, array) => {

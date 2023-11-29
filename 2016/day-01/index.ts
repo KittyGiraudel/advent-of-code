@@ -23,5 +23,5 @@ export const run = (steps: string[]): [number, number?] => {
     }
   })
 
-  return [$.manhattan(position), location && $.manhattan(location)]
+  return [$.manhattan(position), location ? $.manhattan(location) : undefined]
 }

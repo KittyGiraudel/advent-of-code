@@ -1,7 +1,7 @@
 import $ from '../../helpers'
 import levenshtein from 'js-levenshtein'
 
-const findSimilarIds = (ids: string[]): string[] => {
+const findSimilarIds = (ids: string[]) => {
   const candidates = []
 
   for (let i = 0; i < ids.length; i++) {
@@ -13,12 +13,12 @@ const findSimilarIds = (ids: string[]): string[] => {
   return candidates
 }
 
-const findCommonalities = (a: string, b: string): string =>
+const findCommonalities = (a: string, b: string) =>
   Array.from(a)
     .filter((char, i) => b[i] === char)
     .join('')
 
-export const checksum = (input: string[]): number => {
+export const checksum = (input: string[]) => {
   const lines = input.map(line => $.count(Array.from(line)))
   const twos = lines.filter(counts => Object.values(counts).includes(2))
   const threes = lines.filter(counts => Object.values(counts).includes(3))

@@ -11,12 +11,15 @@ const SAMPLE = {
   perfumes: 1,
 }
 
-const parseProperties = (properties: string[]): Record<string, number> =>
+const parseProperties = (properties: string[]) =>
   properties
     .map(prop => prop.split(': '))
-    .reduce((acc, [name, count]) => ({ ...acc, [name]: +count }), {})
+    .reduce(
+      (acc, [name, count]) => ({ ...acc, [name]: +count }),
+      {} as Record<string, number>
+    )
 
-export const run = (input: string[], advanced: boolean = false): number => {
+export const run = (input: string[], advanced: boolean = false) => {
   const aunts = input.map((line, index) => ({
     id: index + 1,
     properties: parseProperties(line.match(/\w+: \d+/g)),

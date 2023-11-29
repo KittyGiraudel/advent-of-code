@@ -6,14 +6,15 @@ type Moon = {
   velocity: Coords
 }
 
-const prepareMoon = (line: string): Moon => ({
-  position: line.match(/(-?\d+)/g).map(Number) as Coords,
-  velocity: [0, 0, 0],
-})
+const prepareMoon = (line: string) =>
+  ({
+    position: line.match(/(-?\d+)/g).map(Number) as Coords,
+    velocity: [0, 0, 0],
+  } as Moon)
 
-const prepare = (moons: string[]): Moon[] => moons.map(prepareMoon)
+const prepare = (moons: string[]) => moons.map(prepareMoon)
 
-const applyPartialGravity = (axis: number, a: Moon, b: Moon): void => {
+const applyPartialGravity = (axis: number, a: Moon, b: Moon) => {
   if (a.position[axis] > b.position[axis]) {
     a.velocity[axis]--
     b.velocity[axis]++
@@ -23,34 +24,34 @@ const applyPartialGravity = (axis: number, a: Moon, b: Moon): void => {
   }
 }
 
-const applyGravity = ([a, b]: [Moon, Moon]): void => {
+const applyGravity = ([a, b]: [Moon, Moon]) => {
   applyPartialGravity(0, a, b)
   applyPartialGravity(1, a, b)
   applyPartialGravity(2, a, b)
 }
 
-const applyVelocity = (moon: Moon): void => {
+const applyVelocity = (moon: Moon) => {
   moon.position = $.applyVector(moon.position, moon.velocity)
 }
 
 const makePairs = array => $.combinations(array, 2)
 
-const step = (moons: Moon[]): Moon[] => {
+const step = (moons: Moon[]) => {
   makePairs(moons).forEach(applyGravity)
   moons.forEach(applyVelocity)
   return moons
 }
 
-const calculateMoonEnergy = ({ position, velocity }: Moon): number =>
+const calculateMoonEnergy = ({ position, velocity }: Moon) =>
   $.sum(position.map(Math.abs)) * $.sum(velocity.map(Math.abs))
 
-export const steps = (input: string[], amount: number = 1): number =>
+export const steps = (input: string[], amount: number = 1) =>
   $.sum($.array(amount).reduce(step, prepare(input)).map(calculateMoonEnergy))
 
-const serialize = (moons: Moon[], axis: number): string =>
+const serialize = (moons: Moon[], axis: number) =>
   moons.map(moon => moon.position[axis] + ';' + moon.velocity[axis]).join(',')
 
-const findRepeatAxis = (axis: number, input: string[]): number => {
+const findRepeatAxis = (axis: number, input: string[]) => {
   // Compute the initial state and snapshot it. It’s the state we try to get
   // back to.
   let moons = prepare(input)
@@ -70,7 +71,7 @@ const findRepeatAxis = (axis: number, input: string[]): number => {
   return i
 }
 
-export const findRepeat = (input: string[]): number =>
+export const findRepeat = (input: string[]) =>
   [0, 1, 2]
     .map(axis => findRepeatAxis(axis, input))
     .reduce((acc, value) => $.lcm(acc, value), 1)

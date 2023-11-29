@@ -6,7 +6,7 @@ export const dance = (
   input: string[],
   size: number = 16,
   iterations: number = 1
-): string => {
+) => {
   const programs = $.range(size, 97).map(a => String.fromCharCode(a))
   const history = []
 

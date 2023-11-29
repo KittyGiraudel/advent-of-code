@@ -11,11 +11,7 @@ const DIRECTIONS = {
 // @param orientation - Current ship orientation
 // @param direction - Whether to rotate left or right
 // @param degrees - By how many degrees to rotate
-const rotate = (
-  orientation: string,
-  direction: string,
-  degrees: number
-): string => {
+const rotate = (orientation: string, direction: string, degrees: number) => {
   for (let i = 0; i < degrees / 90; i++)
     orientation = DIRECTIONS[orientation][direction]
   return orientation
@@ -28,7 +24,7 @@ const rotate = (
 export const navigateLoose = (
   instructions: string[],
   orientation: string = 'E'
-): number =>
+) =>
   $.sum(
     instructions.reduce(
       (coords, instruction) => {
@@ -55,7 +51,7 @@ export const navigateLoose = (
 // waypoint.
 // @param instructions - List of instructions
 // @return Manatthan distance
-export const navigateStrict = (instructions: string[]): number =>
+export const navigateStrict = (instructions: string[]) =>
   $.sum(
     instructions.reduce(
       ({ ship, waypoint }, instruction) => {

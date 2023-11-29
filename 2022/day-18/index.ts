@@ -19,10 +19,7 @@ const getArea = (cubes: Coords[], predicate: Function) =>
     .map($.toPoint)
     .filter(point => predicate(point)).length
 
-export const getSurfaceArea = (
-  points: Point[],
-  advanced: boolean = false
-): number => {
+export const getSurfaceArea = (points: Point[], advanced: boolean = false) => {
   const cubes = points.map($.toCoords)
   const [minX, maxX, minY, maxY, minZ, maxZ] = $.boundaries(cubes)
   const isWithinBounds = ([x, y, z]) =>

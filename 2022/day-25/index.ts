@@ -3,7 +3,7 @@ import $ from '../../helpers'
 const DIGITS = ['2', '1', '0', '-', '=']
 const VALUES = [2, 1, 0, -1, -2]
 
-export const unsnafu = (input: string): number => {
+export const unsnafu = (input: string) => {
   let result = 0
 
   for (let i = 0; i < input.length; i++) {
@@ -20,7 +20,7 @@ export const unsnafu = (input: string): number => {
 // Honestly wasn’t sure how to do that part, so I had to look up some help on
 // Reddit.
 // Ref: https://www.reddit.com/r/adventofcode/comments/zur1an/comment/j1lcn13/
-export const snafu = (input: number): string => {
+export const snafu = (input: number) => {
   let result = ''
 
   while (input > 0) {

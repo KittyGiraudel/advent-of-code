@@ -1,9 +1,9 @@
 import $ from '../../helpers'
 
-const split = (value: string): string =>
+const split = (value: string) =>
   `[${Math.floor(+value / 2)},${Math.ceil(+value / 2)}]`
 
-const handleExplosions = (string: string): string => {
+const handleExplosions = (string: string) => {
   const openings = []
   let left = null
   let right = null
@@ -48,7 +48,7 @@ const handleExplosions = (string: string): string => {
   return string
 }
 
-const handleLeftMostSplit = (string: string): string =>
+const handleLeftMostSplit = (string: string) =>
   string.replace(/(\d{2,})/, split)
 
 const reduceFish = $.compose(handleLeftMostSplit, handleExplosions)
@@ -57,7 +57,7 @@ const reduceFish = $.compose(handleLeftMostSplit, handleExplosions)
 // 1. First do all explosions that can be done.
 // 2. Once no more explosions can be done, perform the left-most split.
 // 3. Repeat step 1 and 2 until the string no longer changes.
-export const reduce = (string: string): string => {
+export const reduce = (string: string) => {
   let curr = string
   let next = reduceFish(curr)
 
@@ -69,14 +69,14 @@ export const reduce = (string: string): string => {
   return next
 }
 
-export const computeMagnitude = ([left, right]: [number?, number?]): number =>
+export const computeMagnitude = ([left, right]: [number?, number?]) =>
   (typeof left === 'number' ? left : computeMagnitude(left)) * 3 +
   (typeof right === 'number' ? right : computeMagnitude(right)) * 2
 
-export const sumFish = (...fishes: string[]): string =>
+export const sumFish = (...fishes: string[]) =>
   fishes.reduce((acc, fish) => (acc ? reduce(`[${acc},${fish}]`) : fish))
 
-export const findHighestMagnitude = (...fishes: string[]): number =>
+export const findHighestMagnitude = (...fishes: string[]) =>
   Math.max(
     ...$.combinations(fishes, 2)
       .map(pair => sumFish(...pair))

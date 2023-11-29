@@ -15,7 +15,7 @@ const VECTORS: Record<string, Coords> = {
 
 // Parse a given line into a series of directions.
 // @param line - Raw series of steps
-const parseLine = (line: string): Coords[] => {
+const parseLine = (line: string) => {
   const directions = []
   let pointer = 0
 
@@ -29,26 +29,26 @@ const parseLine = (line: string): Coords[] => {
     }
   }
 
-  return directions.map(direction => VECTORS[direction])
+  return directions.map(direction => VECTORS[direction]) as Coords[]
 }
 
 // Process given lines and store their outcome into a map.
 // @param lines - Raw series of steps
-const processLines = (lines: string[]): Mappy =>
+const processLines = (lines: string[]) =>
   lines
     .map(parseLine)
     .map(vectors => vectors.reduce($.applyVector, [0, 0]))
     .map($.toPoint)
     .reduce(
       (acc, key) => acc.set(key, acc.get(key) === 'B' ? 'W' : 'B'),
-      new Map()
+      new Map() as Mappy
     )
 
 // Get the coordinates of all 6 neighbours of the tile at the given coordinates.
 // @param key - Stringified coordinates
 // @param cache - Coordinates cache
 // @return Stringified coordinates of all 6 neighbours
-const getNeighborCoords = (key: Point, cache: Cache): Point[] => {
+const getNeighborCoords = (key: Point, cache: Cache) => {
   const coords = $.toCoords(key)
 
   if (cache.has(key)) return cache.get(key)
@@ -66,7 +66,7 @@ const getNeighborCoords = (key: Point, cache: Cache): Point[] => {
 // has around it.
 // @param color - Tile color
 // @param count - Amount of black tiles around it
-const flip = (color: string, count: number): string =>
+const flip = (color: string, count: number) =>
   color === 'B' && (count === 0 || count > 2)
     ? 'W'
     : color === 'W' && count === 2
@@ -78,7 +78,7 @@ const flip = (color: string, count: number): string =>
 // @param coords - Stringified coordinates
 // @param origin - Origin map prior to cycling
 // @param cache - Coordinates cache
-const transition = (coords: Point, origin: Mappy, cache: Cache): string => {
+const transition = (coords: Point, origin: Mappy, cache: Cache) => {
   const cell = origin.get(coords)
   const neighborCoords = getNeighborCoords(coords, cache)
   const neighbours = neighborCoords.map(coords => origin.get(coords))
@@ -90,7 +90,7 @@ const transition = (coords: Point, origin: Mappy, cache: Cache): string => {
 // Perform a cycle.
 // @param origin - Storage map
 // @param cache - Coordinates cache
-const cycle = (origin: Mappy, cache: Cache): Mappy =>
+const cycle = (origin: Mappy, cache: Cache) =>
   Array.from(origin.keys()).reduce((acc, key) => {
     getNeighborCoords(key, cache).forEach(coords => {
       if (acc.has(coords)) return
@@ -98,11 +98,11 @@ const cycle = (origin: Mappy, cache: Cache): Mappy =>
     })
 
     return acc.set(key, transition(key, origin, cache))
-  }, new Map(origin))
+  }, new Map(origin) as Mappy)
 
 // Count the amount of black tiles on the floor.
 // @param map - Storage map
-const countBlackTiles = (map: Mappy): number =>
+const countBlackTiles = (map: Mappy) =>
   Array.from(map.values()).filter(a => a === 'B').length
 
 // Run the game of life on the given initial input for a certain amount of
@@ -114,7 +114,7 @@ export const gameOfLife = (
   lines: string[],
   cycles: number = 1,
   cache: Cache = new Map()
-): number =>
+) =>
   countBlackTiles(
     $.array(cycles).reduce(map => cycle(map, cache), processLines(lines))
   )

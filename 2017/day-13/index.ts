@@ -70,16 +70,16 @@ const cross = input => {
 }
 */
 
-const getGraph = (lines: string[]): Graph =>
+const getGraph = (lines: string[]) =>
   lines.reduce((acc, line) => {
     const [depth, range] = line.split(':')
     acc[depth] = +range
     return acc
-  }, {})
+  }, {} as Graph)
 
-const pass = (length: number, time: number): number => time % ((length - 1) * 2)
+const pass = (length: number, time: number) => time % ((length - 1) * 2)
 
-export const run = (input: string[]): number => {
+export const run = (input: string[]) => {
   const graph = getGraph(input)
 
   return Array.from(Object.keys(graph))
@@ -91,7 +91,7 @@ export const run = (input: string[]): number => {
 // but could not figure out how to solve part 2 without brute-force, so I
 // resorted in implementing that Python solution:
 // https://www.reddit.com/r/adventofcode/comments/7jgyrt/2017_day_13_solutions/dr6bxce/
-export const cross = (input: string[]): number => {
+export const cross = (input: string[]) => {
   const graph = getGraph(input)
   const layers = Object.keys(graph)
   let delay = 0

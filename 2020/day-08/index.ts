@@ -5,7 +5,7 @@ type Output = { accumulator: number; exit: number }
 // Execute the given array of instructions.
 // @param instructions - List of instructions making the program
 // @return `accumulator` value and 0 or 1 `exit` code
-export const runProgram = (instructions: string[]): Output => {
+export const runProgram = (instructions: string[]) => {
   const history = []
   let accumulator = 0
   let pointer = 0
@@ -32,14 +32,14 @@ export const runProgram = (instructions: string[]): Output => {
     }
   }
 
-  return { accumulator, exit: Number(pointer < instructions.length) }
+  return { accumulator, exit: Number(pointer < instructions.length) } as Output
 }
 
 // Patch given instruction by making it `jmp` instruction if it’s a `nop` one or
 // `nop` instruction if it’s a `jmp` one.
 // @param line - Line to patch
 // @return Patched line
-const patchInstruction = (instruction: string): string =>
+const patchInstruction = (instruction: string) =>
   instruction.startsWith('nop')
     ? instruction.replace('nop', 'jmp')
     : instruction.replace('jmp', 'nop')
@@ -49,7 +49,7 @@ const patchInstruction = (instruction: string): string =>
 // @param instructions - List of instructions making the program
 // @param index - Index of instruction to patch
 // @return `accumulator` value and 0 or 1 `exit` code
-const runPatchedProgram = (instructions: string[], index: number): Output =>
+const runPatchedProgram = (instructions: string[], index: number) =>
   runProgram(
     $.updateAtIndex(instructions, index, patchInstruction(instructions[index]))
   )
@@ -58,11 +58,11 @@ const runPatchedProgram = (instructions: string[], index: number): Output =>
 // and successfully return.
 // @param instructions - List of instructions making the program
 // @return `accumulator` value and 0 or 1 `exit` code
-export const runMonkeyPatchedProgram = (instructions: string[]): Output =>
+export const runMonkeyPatchedProgram = (instructions: string[]) =>
   instructions.reduce(
     (output, instruction, index) =>
       instruction.startsWith('acc') || output.exit === 0
         ? output
         : runPatchedProgram(instructions, index),
-    { accumulator: null, exit: null }
+    { accumulator: null, exit: null } as Output
   )

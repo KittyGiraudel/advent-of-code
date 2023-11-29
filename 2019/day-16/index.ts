@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 
-export const cycle2 = (input: string, iterations: number = 1): string => {
+export const cycle2 = (input: string, iterations: number = 1) => {
   const offset = +input.slice(0, 7)
   const code = input.split('').map(Number).slice(offset)
   const curr = code.slice()
@@ -28,15 +28,15 @@ export const cycle2 = (input: string, iterations: number = 1): string => {
   return curr.slice(0, 8).join('')
 }
 
-const truncate = (value: number): number => +value.toString().slice(-1)
+const truncate = (value: number) => +value.toString().slice(-1)
 
-const reduceFirst = (acc: number, value: number, i: number): number =>
+const reduceFirst = (acc: number, value: number, i: number) =>
   i % 2 ? acc : acc + value * (i % 4 ? -1 : +1)
 
-const reduceAny = (acc: number, chunk: number[], i: number): number =>
+const reduceAny = (acc: number, chunk: number[], i: number) =>
   i % 2 ? acc + $.sum(chunk) * (i % 4 === 1 ? +1 : -1) : acc
 
-export const cycle = (input: string, iterations: number = 1): string => {
+export const cycle = (input: string, iterations: number = 1) => {
   let curr = input.split('').map(Number)
   let next = []
 

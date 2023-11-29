@@ -9,7 +9,7 @@ const SPELL_COST = {
   R: 229,
 }
 
-const fight = (actions: string[], hard: boolean): number => {
+const fight = (actions: string[], hard: boolean) => {
   let effects = { P: 0, S: 0, R: 0 }
   let player = 50
   let boss = 51
@@ -61,7 +61,7 @@ const fight = (actions: string[], hard: boolean): number => {
   return OUT_OF_MOVES
 }
 
-const iterate = (actions: string[], position: number = 0): void => {
+const iterate = (actions: string[], position: number = 0) => {
   const index = 'MDSPR'.indexOf(actions[position])
 
   actions[position] = 'DSPRM'[index]
@@ -70,7 +70,7 @@ const iterate = (actions: string[], position: number = 0): void => {
     iterate(actions, position + 1)
 }
 
-export const run = (hard: boolean): number => {
+export const run = (hard: boolean) => {
   // The amount of moves it totally arbitrary here. We estimate that the fight
   // will be over in a maximum of 10 moves. This may vary based on the input.
   const actions = Array.from('M'.repeat(10))

@@ -1,9 +1,11 @@
 import $ from '../../helpers'
 import { Grid, Coords, Point } from '../../types'
 
-const getBorderingSpace = (grid: Grid<string>, curr: Coords): Coords[] => {
+const getBorderingSpace = (grid: Grid<string>, curr: Coords) => {
   const [N, E, S, W] = $.bordering(curr, 'COORDS')
-  return [N, W, E, S].filter(neighbor => $.access(grid, neighbor) === '.')
+  return [N, W, E, S].filter(
+    neighbor => $.access(grid, neighbor) === '.'
+  ) as Coords[]
 }
 
 class Unit {
@@ -179,13 +181,13 @@ class Game {
   }
 }
 
-export const battle = (rows: string[]): number => {
+export const battle = (rows: string[]) => {
   const game = new Game(rows)
   while (!game.done) game.round()
   return game.score
 }
 
-export const cheat = (rows: string[]): number => {
+export const cheat = (rows: string[]) => {
   let elvishPower = 3
 
   while (true) {

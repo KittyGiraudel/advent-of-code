@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 
-export const countVisibleTrees = (rows: string[]): number => {
+export const countVisibleTrees = (rows: string[]) => {
   const grid = $.grid.create(rows)
   const height = grid.length
   const width = grid[0].length
@@ -26,7 +26,7 @@ export const countVisibleTrees = (rows: string[]): number => {
     .filter(Boolean).length
 }
 
-export const getHighestScenicScore = (rows: string[]): number => {
+export const getHighestScenicScore = (rows: string[]) => {
   const grid = $.grid.create(rows)
   const height = grid.length
   const width = grid[0].length

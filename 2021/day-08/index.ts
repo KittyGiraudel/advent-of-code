@@ -1,13 +1,13 @@
 import $ from '../../helpers/'
 
-const parseInput = (line: string): string[][] =>
+const parseInput = (line: string) =>
   line
     .split(' | ')
     .map(value =>
       value.split(' ').map(pattern => pattern.split('').sort().join(''))
     )
 
-export const count = (lines: string[]): number =>
+export const count = (lines: string[]) =>
   lines
     .map(parseInput)
     .map(line => line[1])
@@ -19,10 +19,9 @@ export const count = (lines: string[]): number =>
       0
     )
 
-const lettersFrom = (value: string): RegExp =>
-  new RegExp('[' + value + ']', 'g')
+const lettersFrom = (value: string) => new RegExp('[' + value + ']', 'g')
 
-export const decode = (line: string): number => {
+export const decode = (line: string) => {
   let [patterns, encodedDigits] = parseInput(line)
 
   // Store the 10 patterns in the right order in this array.
@@ -99,4 +98,4 @@ export const decode = (line: string): number => {
   )
 }
 
-export const total = (lines: string[]): number => $.sum(lines.map(decode))
+export const total = (lines: string[]) => $.sum(lines.map(decode))

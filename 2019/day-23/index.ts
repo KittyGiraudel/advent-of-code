@@ -24,13 +24,13 @@ class Network {
     if (this.withLogs) console.log(...args)
   }
 
-  createNode(index: number, input: string): Node {
+  createNode(index: number, input: string) {
     this.log('Booting up computer', index)
 
     return {
       computer: new Intcode(input).setInput(index),
       queue: [],
-    }
+    } as Node
   }
 
   runNode(node: Node) {
@@ -88,7 +88,7 @@ class Network {
   }
 }
 
-export const boot = (input: string, size: number = 50): number[] => {
+export const boot = (input: string, size: number = 50) => {
   const network = new Network(input, size)
 
   while (!network.isDone()) network.run()

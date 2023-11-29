@@ -2,7 +2,7 @@ import $ from '../../helpers'
 
 type Output = { gamma: string; epsilon: string }
 
-export const getEpsilonAndGamma = (items: string[]): Output =>
+export const getEpsilonAndGamma = (items: string[]) =>
   $.array(items[0].length).reduce(
     (acc, _, i) => {
       const column = $.column(items, i).join('')
@@ -13,12 +13,11 @@ export const getEpsilonAndGamma = (items: string[]): Output =>
 
       return acc
     },
-    { gamma: '', epsilon: '' }
+    { gamma: '', epsilon: '' } as Output
   )
 
 const getGasValue =
-  (predicate: (hasMore1: boolean) => number) =>
-  (items: string[]): string =>
+  (predicate: (hasMore1: boolean) => number) => (items: string[]) =>
     $.array(items[0].length).reduce((acc, _, i) => {
       const column = $.column(acc, i).join('')
       const hasMore1 = $.countInString(column, '1') >= acc.length / 2

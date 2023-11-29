@@ -39,7 +39,7 @@ type Subgrid = {
 //   5) and the new orientation when entering that face (>, v, <, or ^).
 // - Its top-left corner position ([ri, ci]).
 // - Its subgrid with coords spreading from 0, 0 to 49, 49.
-const getSubgrids = (grid: Grid<string>): Subgrid[] =>
+const getSubgrids = (grid: Grid<string>) =>
   [
     { neighbors: ['1>', '2v', '3>', '5>'], boundaries: [0, 50] },
     { neighbors: ['4<', '2<', '0<', '5^'], boundaries: [0, 100] },
@@ -61,10 +61,10 @@ const getSubgrids = (grid: Grid<string>): Subgrid[] =>
       grid: grid
         .slice(ri, ri + 50)
         .map(row => row.slice(ci, ci + 50)) as Grid<string>,
-    }
+    } as Subgrid
   })
 
-export const rotate = (orientation: string, instruction: string): string => {
+export const rotate = (orientation: string, instruction: string) => {
   const direction = instruction === 'L' ? -1 : +1
   const currIndex = ORIENTATIONS.indexOf(orientation)
   const nextIndex = (currIndex + direction) % ORIENTATIONS.length
@@ -74,7 +74,7 @@ export const rotate = (orientation: string, instruction: string): string => {
 
 const getWrapNeighbors = (grid: Grid<string>, ri: number, ci: number) => {
   const findFirstIndex = Boolean
-  const findLastIndex = (acc: number, item: string, index: number): number =>
+  const findLastIndex = (acc: number, item: string, index: number) =>
     item ? index : acc
   const row = grid[ri]
   const column = $.column(grid, ci)
@@ -166,7 +166,7 @@ const getNeighbors =
     return acc
   }
 
-export const maze = (input: string, asCube: boolean = false): number => {
+export const maze = (input: string, asCube: boolean = false) => {
   const [map, last] = input.split('\n\n')
   const instructions = last.match(/(\d+|L|R)/g).map(v => +v || v)
   const rows = map.split('\n').filter(Boolean)

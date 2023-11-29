@@ -1,9 +1,12 @@
 import $ from '../../helpers'
 import { Coords } from '../../types'
 
-const getTilingCoords = (ri: number, ci: number): Coords[] => {
-  const [N, NE, E, SE, S, SW, W, NW] = $.surrounding([ri, ci], 'COORDS')
-  const C = [ri, ci]
+const getTilingCoords = (ri: number, ci: number) => {
+  const [N, NE, E, SE, S, SW, W, NW] = $.surrounding(
+    [ri, ci],
+    'COORDS'
+  ) as Coords[]
+  const C = [ri, ci] as Coords
 
   // prettier-ignore
   return [
@@ -13,18 +16,14 @@ const getTilingCoords = (ri: number, ci: number): Coords[] => {
   ]
 }
 
-const padInput = (input: string, defaultChar: string = '.'): string[] => {
+const padInput = (input: string, defaultChar: string = '.') => {
   const rows = input.split('\n')
   const padding = defaultChar.repeat(rows[0].length)
 
   return [padding, ...rows, padding].map(row => defaultChar + row + defaultChar)
 }
 
-const step = (
-  algorithm: string,
-  input: string,
-  defaultChar: string = '.'
-): string => {
+const step = (algorithm: string, input: string, defaultChar: string = '.') => {
   const rows = padInput(input, defaultChar)
   const curr = $.grid.create<string>(rows)
   const next = $.grid.map(curr, (_, ri, ci) => {
@@ -45,7 +44,7 @@ export const processImage = (
   algorithm: string,
   image: string,
   iterations: number = 1
-): string =>
+) =>
   $.array(iterations).reduce(
     acc => {
       const image = step(algorithm, acc.image, acc.char)

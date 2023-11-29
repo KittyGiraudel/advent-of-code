@@ -1,19 +1,19 @@
 type Deck = number[]
 type Outcome = { index: number; decks: Deck[] }
 
-const isNotEmpty = (deck: Deck): boolean => deck.length > 0
+const isNotEmpty = (deck: Deck) => deck.length > 0
 
-const draw = (decks: Deck[]): number[] => decks.map(deck => deck.shift())
+const draw = (decks: Deck[]) => decks.map(deck => deck.shift())
 
-const getWinningIndex = (cards: number[]): number =>
+const getWinningIndex = (cards: number[]) =>
   cards.findIndex(card => card === Math.max(...cards))
 
-const serializeGame = (decks: Deck[]): string =>
+const serializeGame = (decks: Deck[]) =>
   decks.map(deck => deck.join(',')).join(';')
 
 // Compute the score of a given deck.
 // @param cards - Cards from the deck
-const computeScore = (cards: Deck): number =>
+const computeScore = (cards: Deck) =>
   cards.reduceRight(
     (total, card, index, array) => total + card * (array.length - index),
     0
@@ -21,20 +21,20 @@ const computeScore = (cards: Deck): number =>
 
 // Parse the given input.
 // @param input - Raw input
-const parseInput = (input: string[]): Deck[] =>
-  input.map(stack => stack.split('\n').slice(1).map(Number))
+const parseInput = (input: string[]) =>
+  input.map(stack => stack.split('\n').slice(1).map(Number)) as Deck[]
 
 // Perform a regular fight between decks a and b.
 // @param decks - Decks of cards
 // @return Outcome with `index` (0 or 1) and `decks` (final decks)
-export const fightRegular = (decks: Deck[]): Outcome => {
+export const fightRegular = (decks: Deck[]) => {
   while (decks.every(isNotEmpty)) {
     const cards = draw(decks)
     const index = getWinningIndex(cards)
     decks[index].push(cards[index], cards[+!index])
   }
 
-  return { index: decks.findIndex(isNotEmpty), decks }
+  return { index: decks.findIndex(isNotEmpty), decks } as Outcome
 }
 
 // Perform a recursive fight between deck a and b.
@@ -43,7 +43,7 @@ export const fightRegular = (decks: Deck[]): Outcome => {
 export const fightRecursive = (
   decks: Deck[],
   cache: Set<string> = new Set()
-): Outcome => {
+) => {
   while (decks.every(isNotEmpty)) {
     const key = serializeGame(decks)
 
@@ -59,7 +59,7 @@ export const fightRecursive = (
     decks[index].push(cards[index], cards[+!index])
   }
 
-  return { index: decks.findIndex(isNotEmpty), decks }
+  return { index: decks.findIndex(isNotEmpty), decks } as Outcome
 }
 
 // Return the game score by computing the score of the winning deck.
@@ -68,7 +68,7 @@ export const fightRecursive = (
 export const getGameScore = (
   input: string[],
   resolver: Function = fightRegular
-): number => {
+) => {
   const decks = parseInput(input)
   const outcome = resolver(decks)
 

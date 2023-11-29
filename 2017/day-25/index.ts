@@ -14,13 +14,7 @@ type States = Record<string, State>
 //  E: [ [1, +1, "C"], [1, -1, "F"] ],
 //  F: [ [1, -1, "E"], [1, +1, "A"] ]
 // }
-const parse = (
-  blocks: string[]
-): {
-  initial: string
-  iterations: number
-  states: States
-} => {
+const parse = (blocks: string[]) => {
   const [header, ...rest] = blocks.map(block => block.split('\n'))
   const initial = header[0].slice(-2, -1)
   const iterations = +header[1].match(/(\d+)/)[1]
@@ -44,7 +38,7 @@ const parse = (
   return { initial, iterations, states }
 }
 
-export const run = (input: string[]): number => {
+export const run = (input: string[]) => {
   const data = parse(input)
   const tape: Map<number, number> = new Map()
   let state = data.initial

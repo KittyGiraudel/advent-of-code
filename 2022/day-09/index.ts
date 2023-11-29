@@ -52,12 +52,12 @@ class Node {
     this.next?.step(axis, direction)
   }
 
-  steps(amount: number, axis: number, direction: number): void {
+  steps(amount: number, axis: number, direction: number) {
     for (let i = 0; i < amount; i++) this.step(axis, direction)
   }
 }
 
-const createNodes = (size: number): Node => {
+const createNodes = (size: number) => {
   let curr = null
 
   for (let i = 0; i < size; i++) {
@@ -67,10 +67,7 @@ const createNodes = (size: number): Node => {
   return curr.head
 }
 
-export const countTailPositions = (
-  input: string[],
-  size: number = 2
-): number => {
+export const countTailPositions = (input: string[], size: number = 2) => {
   const head = createNodes(size)
 
   input.forEach(line => {

@@ -5,7 +5,7 @@ import $ from '../../helpers'
 // 3. If the value is an object (and not null) and doesn’t contain `red` as a
 //    value, recursively walk it.
 // 4. Otherwise return 0.
-const getSum = (item: any): number => {
+const getSum = (item: any) => {
   if (typeof item === 'number') return item
   if (Array.isArray(item)) return $.sum(item.map(getSum))
   if (item && typeof item === 'object' && !Object.values(item).includes('red'))
@@ -13,7 +13,7 @@ const getSum = (item: any): number => {
   return 0
 }
 
-export const run = (input: string, advanced: boolean = false): number =>
+export const run = (input: string, advanced: boolean = false) =>
   advanced
     ? getSum(JSON.parse(input))
     : $.sum(input.match(/-?\d+/g).map(Number))

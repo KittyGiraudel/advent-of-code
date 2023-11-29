@@ -84,7 +84,7 @@ class Cave {
     return this
   }
 
-  get(x: number, y: number): string {
+  get(x: number, y: number) {
     const point = $.toPoint([x, y])
     return this.map.get(point)
   }
@@ -115,15 +115,12 @@ class Cave {
     else return this.set(x, y, SAND)
   }
 
-  count(): number {
+  count() {
     return Array.from(this.map.values()).filter(v => v === SAND).length
   }
 }
 
-export const countSandUnits = (
-  input: string[],
-  withFloor: boolean = false
-): number => {
+export const countSandUnits = (input: string[], withFloor: boolean = false) => {
   const walls = input.map(wall => wall.split(' -> ').map($.toCoords))
   const cave = new Cave(walls, withFloor)
 

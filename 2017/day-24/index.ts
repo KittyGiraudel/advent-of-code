@@ -1,4 +1,4 @@
-const discard = (set: string[] | Set<string>, value: string): Set<string> => {
+const discard = (set: string[] | Set<string>, value: string) => {
   const next = new Set(set)
   next.delete(value)
   return next
@@ -6,7 +6,7 @@ const discard = (set: string[] | Set<string>, value: string): Set<string> => {
 
 // This is faster than `Array.prototype.split` + `Array.prototype.includes`,
 // or `String.prototype.search`.
-const matches = (port: string, edge: string | number): boolean =>
+const matches = (port: string, edge: string | number) =>
   port.startsWith(edge + '/') || port.endsWith('/' + edge)
 
 const getPaths = (
@@ -14,7 +14,7 @@ const getPaths = (
   edge: number,
   score: number = 0,
   length: number = 1
-): { score: number; length: number }[] => {
+) => {
   // Find the available ports which have an edge matching the current one.
   const options = Array.from(ports).filter(port => matches(port, edge))
 
@@ -38,7 +38,7 @@ const getPaths = (
   }, [])
 }
 
-export const run = (input: string[]): { score: number; length: number }[] =>
+export const run = (input: string[]) =>
   input
     .filter(port => port.startsWith('0/'))
     .map(start => {

@@ -1,4 +1,4 @@
-const lookAndSay = (input: string): string => {
+const lookAndSay = (input: string) => {
   let output = ''
   let count = 1
 
@@ -13,7 +13,7 @@ const lookAndSay = (input: string): string => {
   return output
 }
 
-export const run = (input: string, n: number = 1): number => {
+export const run = (input: string, n: number = 1) => {
   while (n--) {
     // The loop version is unsurprisingly faster than the regular expression
     // version.

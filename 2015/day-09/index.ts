@@ -8,7 +8,7 @@ const getPaths = (
   curr: string,
   path: string[] = [],
   score: number = 0
-): number[] => {
+) => {
   const cities = Object.keys(graph[curr]).filter(key => !path.includes(key))
 
   if (!cities.length) {
@@ -24,7 +24,7 @@ const getPaths = (
   }, [])
 }
 
-const createGraph = (input: string[]): Graph => {
+const createGraph = (input: string[]) => {
   const graph: Graph = {}
 
   input.forEach(line => {
@@ -38,7 +38,7 @@ const createGraph = (input: string[]): Graph => {
   return graph
 }
 
-export const run = (input: string[]): number[] => {
+export const run = (input: string[]) => {
   const graph = createGraph(input)
 
   return Object.keys(graph)

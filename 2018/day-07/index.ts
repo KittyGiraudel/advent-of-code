@@ -3,7 +3,7 @@ const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 
 type Graph = Map<string, Set<string>>
 
-const getGraph = (input: string[]): Graph => {
+const getGraph = (input: string[]) => {
   const pairs = input.map(line => line.slice(1).match(/([A-Z])/g))
   const graph: Graph = new Map()
 
@@ -18,7 +18,7 @@ const getGraph = (input: string[]): Graph => {
   return graph
 }
 
-export const sequential = (input: string[]): string => {
+export const sequential = (input: string[]) => {
   const order = []
   const graph = getGraph(input)
 
@@ -46,7 +46,7 @@ export const parallel = (
   input: string[],
   workers: number = 5,
   offset: number = 60
-): { duration: number; order: string } => {
+) => {
   const graph = getGraph(input)
   // Contains the letter in order of resolution, just like in the sequential
   // function.

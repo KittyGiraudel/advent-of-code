@@ -10,7 +10,7 @@ const DIRECTIONS: [Coords, Coords, Coords, Coords] = [
 const turnLeft = (
   direction: Coords,
   directions: [Coords, Coords, Coords, Coords] = DIRECTIONS
-): Coords => {
+) => {
   const index = directions.indexOf(direction)
 
   return index === 0 ? directions.at(-1) : directions[index - 1]
@@ -19,7 +19,7 @@ const turnLeft = (
 const turnRight = (
   direction: Coords,
   directions: [Coords, Coords, Coords, Coords] = DIRECTIONS
-): Coords => {
+) => {
   const index = directions.indexOf(direction)
 
   return index === directions.length - 1 ? directions[0] : directions[index + 1]

@@ -2,8 +2,8 @@ import $ from '../../helpers'
 
 type Graph = Map<string, Set<string>>
 
-export const createGraph = (lines: string[]): Graph => {
-  const map = new Map()
+export const createGraph = (lines: string[]) => {
+  const map: Graph = new Map()
 
   lines.forEach(line => {
     const [orbited, orbiting] = line.split(')')
@@ -21,7 +21,7 @@ export const getPaths = (
   curr: string,
   end: string = 'COM',
   path: string[] = []
-): string[][] => {
+) => {
   if (curr === end) return [path]
   if (path.includes(curr)) return []
   return Array.from(graph.get(curr)).reduce(
@@ -30,7 +30,7 @@ export const getPaths = (
   )
 }
 
-export const countOrbits = (graph: Graph, to: string = 'COM'): number => {
+export const countOrbits = (graph: Graph, to: string = 'COM') => {
   return Array.from(graph.keys()).reduce((orbits, key) => {
     const { from } = $.pathfinding.bfs({
       start: key,
@@ -55,7 +55,7 @@ export const countTransfers = (
   graph: Graph,
   start: string = 'YOU',
   end: string = 'SAN'
-): number => {
+) => {
   const { from } = $.pathfinding.bfs({
     start,
     isGoal: curr => curr === end,

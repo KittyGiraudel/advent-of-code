@@ -4,9 +4,7 @@ import $ from '../../helpers'
 // instruction to manipulate the value of registers (starting at 0), and return
 // the maximum value reached by a register.
 // Write-up: https://kittygiraudel.com/2022/01/21/exploiting-javascript-quirks-for-fun-and-profit/
-export const run = (
-  lines: string[]
-): { currentMax: number; absoluteMax: number } => {
+export const run = (lines: string[]) => {
   let absoluteMax = -Infinity
   const registers: Record<string, number> = {}
 

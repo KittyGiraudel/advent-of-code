@@ -6,7 +6,7 @@ const WEST: Coords = [-1, 0]
 const SOUTH: Coords = [0, +1]
 const NORTH: Coords = [0, -1]
 
-export const resolve = (bound: number): number => {
+export const resolve = (bound: number) => {
   // Given the value increments by 1 for every new cell, use an array where the
   // index serves as the value itself, hence why we skip the first cell (0).
   const coords: Coords[] = [null, [0, 0]]
@@ -31,7 +31,7 @@ export const resolve = (bound: number): number => {
   return $.manhattan(coords[bound], [0, 0])
 }
 
-export const resolve2 = (bound: number): number => {
+export const resolve2 = (bound: number) => {
   let steps = 0
   let position: Coords = [0, 0]
   const map: Map<Point, number> = new Map([['0,0', 1]])

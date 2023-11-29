@@ -1,10 +1,7 @@
 import $ from '../../helpers'
 import { Coords, Point } from '../../types'
 
-export const run = (
-  instructions: string,
-  advanced: boolean = false
-): number => {
+export const run = (instructions: string, advanced: boolean = false) => {
   const map: Record<Point, number> = { '0,0': advanced ? 2 : 1 }
   const position: [Coords, Coords] = [
     [0, 0],

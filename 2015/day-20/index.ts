@@ -1,4 +1,4 @@
-export const run = (input: number): number[] => {
+export const run = (input: number) => {
   let elf = 0
   let housesA: number[] = []
   let housesB: number[] = []

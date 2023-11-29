@@ -2,17 +2,20 @@ import $ from '../../helpers'
 
 type Patterns = Record<string, string>
 
-const count = (state: string[], offset: number): number =>
+const count = (state: string[], offset: number) =>
   $.sum(state.map((char, index) => (char === '#' ? index - offset : 0)))
 
 const getInitialState = (input: string) => Array.from(input.split(' ')[2])
-const getPatterns = (input: string): Patterns =>
+const getPatterns = (input: string) =>
   input
     .split('\n')
     .map(line => line.split(' => '))
-    .reduce((acc, [pattern, outcome]) => ({ ...acc, [pattern]: outcome }), {})
+    .reduce(
+      (acc, [pattern, outcome]) => ({ ...acc, [pattern]: outcome }),
+      {} as Patterns
+    )
 
-const padState = (state: string[], offset: number): number => {
+const padState = (state: string[], offset: number) => {
   if (state[0] === '#') state.unshift('.'), offset++
   if (state[1] === '#') state.unshift('.'), offset++
   if (state[state.length - 1] === '#') state.push('.')
@@ -22,7 +25,7 @@ const padState = (state: string[], offset: number): number => {
 }
 
 // Get the slice of -2 to +2, padded with empty pots if necessary.
-const getSlice = (state: string[], index: number): string => {
+const getSlice = (state: string[], index: number) => {
   const min = Math.max(index - 2, 0)
   const max = Math.min(index + 3, state.length)
   const slice = state.slice(min, max).join('')
@@ -37,7 +40,7 @@ const next = (curr: string[], patterns: Patterns) =>
     .map((_, index, array) => getSlice(array, index))
     .map(slice => patterns[slice] || '.')
 
-export const cycle = (input: [string, string], cycles: number = 1): number => {
+export const cycle = (input: [string, string], cycles: number = 1) => {
   const [initial, instructions] = input
   const patterns = getPatterns(instructions)
   let curr = getInitialState(initial)

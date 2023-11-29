@@ -6,7 +6,7 @@ const getGeologicIndex = (
   y: number,
   target: Coords,
   depth: number
-): number => {
+) => {
   if ((x === 0 && y === 0) || (x === target[0] && y === target[1])) return 0
   if (y === 0) return x * 16807
   if (x === 0) return y * 48271
@@ -17,18 +17,14 @@ const getGeologicIndex = (
 }
 
 const getErosionLevel = $.memo(
-  (x: number, y: number, target: Coords, depth: number): number =>
+  (x: number, y: number, target: Coords, depth: number) =>
     (getGeologicIndex(x, y, target, depth) + depth) % 20183
 )
 
-const getRiskLevel = (
-  x: number,
-  y: number,
-  target: Coords,
-  depth: number
-): number => getErosionLevel(x, y, target, depth) % 3
+const getRiskLevel = (x: number, y: number, target: Coords, depth: number) =>
+  getErosionLevel(x, y, target, depth) % 3
 
-export const getRisk = (depth: number, target: Coords): number =>
+export const getRisk = (depth: number, target: Coords) =>
   $.grid.reduce(
     $.grid.init(target[0] + 1, target[1] + 1),
     (acc, value, ri, ci) => acc + getRiskLevel(ci, ri, target, depth),
@@ -36,13 +32,13 @@ export const getRisk = (depth: number, target: Coords): number =>
   )
 
 const getNeighbors = $.memo(
-  (x: number, y: number, width: number, height: number): Coords[] =>
-    $.bordering([x, y], 'COORDS').filter(
+  (x: number, y: number, width: number, height: number) =>
+    ($.bordering([x, y], 'COORDS') as Coords[]).filter(
       ([x, y]) => x >= 0 && x < width && y >= 0 && y < height
     )
 )
 
-export const getDuration = (depth: number, target: Coords): number => {
+export const getDuration = (depth: number, target: Coords) => {
   const height = 5 + (target[1] + 1)
   const width = 50 + (target[0] + 1)
   const frontier: number[][] = [[0, 0, 0, 1]]

@@ -9,7 +9,7 @@ function countPathsToEnd(
   adapters: number[],
   current: number = adapters[0],
   cache: Map<number, number> = new Map()
-): number {
+) {
   // If we have already computed whether the current value leads to the device,
   // return the value from the cache.
   if (cache.has(current)) return cache.get(current)
@@ -38,13 +38,13 @@ function countPathsToEnd(
 // Add charging outlet (entry point at 0) and device built-in adapter (highest
 // adapter + 3), and sort all adapters.
 // @param adapters - Array of adapters
-const sortAdapters = (adapters: number[]): number[] =>
+const sortAdapters = (adapters: number[]) =>
   [0, Math.max(...adapters) + 3].concat(adapters).sort((a, b) => a - b)
 
 // Get the amount of 1 jolt difference times the amount of 3 jolts difference in
 // the series of adapters.
 // @param adapters - Array of adapters
-export const getDifferenceProduct = (adapters: number[]): number => {
+export const getDifferenceProduct = (adapters: number[]) => {
   const numbers = sortAdapters(adapters)
   const diffs = [0, 0, 0]
 
@@ -58,5 +58,5 @@ export const getDifferenceProduct = (adapters: number[]): number => {
 // Count the amount of possible arrangements of adapters to go from the charging
 // outlet (0) to the device (highest adapter joltage + 3).
 // @param adapters - Array of adapters
-export const countArrangements = (input: number[]): number =>
+export const countArrangements = (input: number[]) =>
   countPathsToEnd(sortAdapters(input))

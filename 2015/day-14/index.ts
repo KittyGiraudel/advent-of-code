@@ -22,12 +22,12 @@ class Deer {
     this.score = 0
   }
 
-  switch(state: 'FLYING' | 'RESTING'): void {
+  switch(state: 'FLYING' | 'RESTING') {
     this.state = state
     this.current = 0
   }
 
-  tick(): void {
+  tick() {
     this.current++
 
     if (this.state === 'FLYING') {

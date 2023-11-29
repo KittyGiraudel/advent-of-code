@@ -9,13 +9,13 @@ type State = {
   supplies: Record<string, number>
 }
 
-const parseIngredient = (string: string): Ingredient => {
+const parseIngredient = (string: string) => {
   const [amount, type] = string.split(' ')
 
-  return { ingredient: type, amount: +amount }
+  return { ingredient: type, amount: +amount } as Ingredient
 }
 
-const parseRecipes = (input: string[]): Recipes =>
+const parseRecipes = (input: string[]) =>
   input.reduce((acc, line) => {
     const [from, to] = line.split(' => ')
     const ingredients = from.split(', ').map(parseIngredient)
@@ -24,12 +24,9 @@ const parseRecipes = (input: string[]): Recipes =>
     acc[output.ingredient] = { servings: output.amount, ingredients }
 
     return acc
-  }, {})
+  }, {} as Recipes)
 
-const getOreCost = (
-  state: State,
-  { ingredient, amount }: Ingredient
-): State => {
+const getOreCost = (state: State, { ingredient, amount }: Ingredient) => {
   const supply = state.supplies[ingredient] ?? 0
 
   // If the ingredient we are trying to produce is ORE, this means we are
@@ -87,7 +84,7 @@ const getOreCost = (
 // Python on Reddit which I could follow and reimplement with a coding style
 // closer to what I originally wrote (a recursive approach).
 // Ref: https://github.com/jeffjeffjeffrey/advent-of-code/blob/master/2019/day_14.ipynb
-export const getFuelCost = (input: string[], amount: number = 1): number =>
+export const getFuelCost = (input: string[], amount: number = 1) =>
   getOreCost(
     { recipes: parseRecipes(input), supplies: {}, ore: 0 },
     { ingredient: 'FUEL', amount }
@@ -96,5 +93,4 @@ export const getFuelCost = (input: string[], amount: number = 1): number =>
 export const getFuelAmount = (
   input: string[],
   supply: number = 1_000_000_000_000
-): number =>
-  $.binarySearch(1, supply, (i: number) => supply - getFuelCost(input, i))
+) => $.binarySearch(1, supply, (i: number) => supply - getFuelCost(input, i))

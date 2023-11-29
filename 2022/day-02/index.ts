@@ -1,6 +1,6 @@
-const isRock = (value: string): boolean => value === 'A' || value === 'X'
-const isPaper = (value: string): boolean => value === 'B' || value === 'Y'
-const isScissors = (value: string): boolean => value === 'C' || value === 'Z'
+const isRock = (value: string) => value === 'A' || value === 'X'
+const isPaper = (value: string) => value === 'B' || value === 'Y'
+const isScissors = (value: string) => value === 'C' || value === 'Z'
 
 const DRAW = 3
 const WIN = 6
@@ -10,7 +10,7 @@ const ROCK = 1
 const PAPER = 2
 const SCISSORS = 3
 
-export const battleA = (instructions: string[]): number => {
+export const battleA = (instructions: string[]) => {
   return instructions.reduce((acc, instruction) => {
     const [opponent, self] = instruction.split(' ')
 
@@ -30,7 +30,7 @@ export const battleA = (instructions: string[]): number => {
   }, 0)
 }
 
-export const battleB = (instructions: string[]): number => {
+export const battleB = (instructions: string[]) => {
   return instructions.reduce((acc, instruction) => {
     const [opponent, expectation] = instruction.split(' ')
 

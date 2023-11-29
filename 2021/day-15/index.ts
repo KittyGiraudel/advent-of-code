@@ -10,16 +10,16 @@ const getCost = (grid: Grid<number>, [ri, ci]: Coords) => {
   return ((grid[ri % height][ci % width] + riInc + ciInc - 1) % 9) + 1
 }
 
-const getLowestCost = (grid: Grid<number>, mapSize = 1): number => {
+const getLowestCost = (grid: Grid<number>, mapSize = 1) => {
   const width = grid[0].length * mapSize - 1
   const height = grid.length * mapSize - 1
   const start: Coords = [0, 0]
   const end: Coords = [height, width]
 
-  const withinBounds = ([ri, ci]) =>
+  const withinBounds = ([ri, ci]: Coords) =>
     $.isClamped(ri, 0, height) && $.isClamped(ci, 0, width)
-  const getNextNodes = (coords: Coords): Coords[] =>
-    $.bordering(coords, 'COORDS').filter(withinBounds)
+  const getNextNodes = (coords: Coords) =>
+    ($.bordering(coords, 'COORDS') as Coords[]).filter(withinBounds)
 
   const { costs } = $.pathfinding.aStar({
     start,
@@ -32,5 +32,5 @@ const getLowestCost = (grid: Grid<number>, mapSize = 1): number => {
   return costs[$.toPoint(end)]
 }
 
-export const getLowestRisk = (input: string[], mapSize: number = 1): number =>
+export const getLowestRisk = (input: string[], mapSize: number = 1) =>
   getLowestCost($.grid.create(input, Number), mapSize)

@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 
-const parseInstruction = (line: string): { type: string; value?: number } => {
+const parseInstruction = (line: string) => {
   if (line.startsWith('cut'))
     return { type: 'CUT', value: +line.match(/(-?\d+)/)[1] }
   if (line === 'deal into new stack') return { type: 'NEW' }
@@ -9,7 +9,7 @@ const parseInstruction = (line: string): { type: string; value?: number } => {
   throw new Error('Unknown line ' + line)
 }
 
-export const shuffle = (lines: string[], size: number = 10007): number[] =>
+export const shuffle = (lines: string[], size: number = 10007) =>
   lines.reduce((acc, line) => {
     const { type, value } = parseInstruction(line)
     if (type === 'NEW') return acc.reverse()

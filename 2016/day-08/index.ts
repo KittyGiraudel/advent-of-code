@@ -3,7 +3,7 @@ import $ from '../../helpers'
 export const run = (
   lines: string[],
   dimensions: [number, number] = [50, 6]
-): number => {
+) => {
   const grid = $.grid.init<string>(dimensions[0], dimensions[1])
 
   lines.forEach(line => {

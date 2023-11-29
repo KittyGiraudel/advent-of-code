@@ -6,13 +6,14 @@ type Node = {
 }
 type Graph = Record<string, Node>
 
-const createNode = (cave: string): Node => ({
-  small: cave === cave.toLowerCase(),
-  siblings: new Set(),
-})
+const createNode = (cave: string) =>
+  ({
+    small: cave === cave.toLowerCase(),
+    siblings: new Set(),
+  } as Node)
 
-const createGraph = (connections: string[]): Graph => {
-  const map = {}
+const createGraph = (connections: string[]) => {
+  const map: Graph = {}
 
   connections.forEach(connection => {
     const [a, b] = connection.split('-')
@@ -60,11 +61,11 @@ const getPaths = (
   return Array.from(siblings).reduce(
     (acc, sibling) =>
       acc.concat(getPaths(graph, sibling, withDuplicate, [...path, cave])),
-    []
+    [] as string[][]
   )
 }
 
 export const findPaths = (
   connections: string[],
   withDuplicate: boolean = false
-): string[][] => getPaths(createGraph(connections), 'start', withDuplicate)
+) => getPaths(createGraph(connections), 'start', withDuplicate)

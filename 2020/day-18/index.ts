@@ -6,7 +6,7 @@ const MULTIPLY_RE = /(\d+) \* (\d+)/
 // most to the outermost), and then operations from left to right, regardless of
 // expected precedence level.
 // @param input - Stringified operation
-export const computeLoose = (input: string): number => {
+export const computeLoose = (input: string) => {
   let match = input.match(PARENS_RE)
 
   // First recursively resolve the content of parens (from innermost to

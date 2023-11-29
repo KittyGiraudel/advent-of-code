@@ -6,7 +6,7 @@ type Program = [Memory, string]
 
 // Parse the given input into a comprehensible set of instructions.
 // @param input - Input data
-export const parseProgram = (input: string[]): Instruction[] =>
+export const parseProgram = (input: string[]) =>
   input.map(line =>
     line.startsWith('mask')
       ? line.replace('mask = ', '')
@@ -14,12 +14,12 @@ export const parseProgram = (input: string[]): Instruction[] =>
           .match(/mem\[(\d+)\] = (\d+)/)
           .slice(1)
           .map(Number)
-  )
+  ) as Instruction[]
 
 // Apply given mask to given value.
 // @param value - Value as a base-10 integers
 // @param mask - Bitmask
-const applyMask = (value: number, mask: string): number =>
+const applyMask = (value: number, mask: string) =>
   $.toDec(
     $.stringMap($.toBin(value), (char, i) => (mask[i] === 'X' ? char : mask[i]))
   )
@@ -33,10 +33,10 @@ const applyMask = (value: number, mask: string): number =>
 export const processLoose = (
   [memory, mask]: Program,
   instruction: Instruction
-): Program => {
+) => {
   if (typeof instruction === 'string') return [memory, instruction]
   memory[String(instruction[0])] = applyMask(instruction[1], mask)
-  return [memory, mask]
+  return [memory, mask] as Program
 }
 
 // Resolve wildcard characters (`X`) in given address to expand it into multiple
@@ -70,12 +70,12 @@ const getAddresses = (value: string | number, mask: string) =>
 export const processStrict = (
   [memory, mask]: Program,
   instruction: Instruction
-): Program => {
+) => {
   if (typeof instruction === 'string') return [memory, instruction]
   getAddresses(instruction[0], mask).forEach(
     address => (memory[address] = instruction[1])
   )
-  return [memory, mask]
+  return [memory, mask] as Program
 }
 
 // Execute the given program with the given processor.
@@ -84,7 +84,7 @@ export const processStrict = (
 export const executeProgram = (
   input: string[],
   processor: (acc: Program, value: Instruction) => Program
-): number => {
+) => {
   const program = parseProgram(input)
   const [memory] = program.reduce(processor, [{}, null])
 

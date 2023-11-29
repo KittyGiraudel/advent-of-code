@@ -1,7 +1,7 @@
 /**
  * Return the median value for the given numbers.
  */
-const median = (values: number[]): number => {
+const median = (values: number[]) => {
   values = values.slice(0).sort((a, b) => a - b)
 
   const half = Math.floor(values.length / 2)

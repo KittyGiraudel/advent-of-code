@@ -1,8 +1,8 @@
 import $ from '../../helpers'
 import { Grid, Coords, Point } from '../../types'
 
-const generateMap = (input: string[]): Record<Point, string> =>
-  input.reduce((acc: Record<Point, string>, line) => {
+const generateMap = (input: string[]) =>
+  input.reduce((acc, line) => {
     const match = line.match(/([xy])=(\d+), ([xy])=(\d+)..(\d+)/)
 
     for (let i = +match[4]; i <= +match[5]; i++) {
@@ -12,7 +12,7 @@ const generateMap = (input: string[]): Record<Point, string> =>
     }
 
     return acc
-  }, {})
+  }, {} as Record<Point, string>)
 
 const fillLevel = (grid: Grid<string>, position: Coords) => {
   fillSide(grid, position, +1)

@@ -13,7 +13,7 @@ export const mix = (
   numbers: number[],
   count: number = 1,
   multiplier: number = 1
-): number => {
+) => {
   const circle = new Circularray(
     numbers.map((n, index) => ({ number: n * multiplier, index }))
   )

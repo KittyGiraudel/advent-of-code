@@ -25,11 +25,12 @@ const OPCODES = {
   eqrr: (regs, [A, B, C]) => $.updateAtIndex(regs, C, +(regs[A] === regs[B])),
 }
 
-const parseSample = ([before, op, after]: string[]): Sample => ({
-  operation: op.split(' ').map(Number),
-  before: JSON.parse(before.replace('Before: ', '')),
-  after: JSON.parse(after.replace('After: ', '')),
-})
+const parseSample = ([before, op, after]: string[]) =>
+  ({
+    operation: op.split(' ').map(Number),
+    before: JSON.parse(before.replace('Before: ', '')),
+    after: JSON.parse(after.replace('After: ', '')),
+  } as Sample)
 
 export const debug = (input: string[]) => {
   const capacity = Object.keys(OPCODES).length

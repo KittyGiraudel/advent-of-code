@@ -1,7 +1,7 @@
 /**
  * Return all possible permutations of the array.
  */
-const permutations = <T>(array: T[]): T[][] => {
+const permutations = <T>(array: T[]) => {
   const results: T[][] = []
 
   function permute(arr: T[], memo: T[] = []) {

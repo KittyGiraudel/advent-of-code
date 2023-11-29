@@ -2,8 +2,7 @@ import $ from '../../helpers'
 
 const ALPHABET = 'abcdefghijklmnopqrstuvwxyz'.split('')
 
-const makeRegExp = (pairs: string[]): RegExp =>
-  new RegExp('(' + pairs.join('|') + ')')
+const makeRegExp = (pairs: string[]) => new RegExp('(' + pairs.join('|') + ')')
 
 const GLOBAL_RE = makeRegExp(
   ALPHABET.flatMap(letter => [
@@ -12,7 +11,7 @@ const GLOBAL_RE = makeRegExp(
   ])
 )
 
-export const findShortestPolymer = (input: string): number =>
+export const findShortestPolymer = (input: string) =>
   Math.min(
     ...ALPHABET.map(letter => new RegExp(letter, 'ig'))
       .map(re => input.replace(re, ''))
@@ -20,7 +19,7 @@ export const findShortestPolymer = (input: string): number =>
       .map(polymer => polymer.length)
   )
 
-export const reduce = (input: string): string => {
+export const reduce = (input: string) => {
   // This is my initial version, which works fine but is super slow because it
   // uses a big regular expression on a big string I guess.
   /*

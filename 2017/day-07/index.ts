@@ -14,7 +14,7 @@ type Fix = {
 
 type Graph = Record<string, Node>
 
-const getRootNode = (graph: Graph): string => {
+const getRootNode = (graph: Graph) => {
   const values = Object.values(graph).reduce(
     (acc, arr) => acc.concat(arr.children),
     []
@@ -23,14 +23,14 @@ const getRootNode = (graph: Graph): string => {
   return Object.keys(graph).find(key => !values.includes(key))
 }
 
-const parseLine = (line: string): Node => {
+const parseLine = (line: string) => {
   const [, name, value, rest] = line.match(/(\w+) \((\d+)\)(?: -> ([^)]+))?/)
   const children = rest?.split(', ') ?? []
 
-  return { name, value: +value, children: children }
+  return { name, value: +value, children: children } as Node
 }
 
-export const run = (input: string[]): { root: string; fix: number } => {
+export const run = (input: string[]) => {
   const graph: Graph = {}
 
   input.forEach(line => {

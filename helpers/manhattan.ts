@@ -10,7 +10,7 @@ import { Coords, CoordsObj } from '../types'
 const manhattan = (
   a: Coords | CoordsObj,
   b: Coords | CoordsObj = [0, 0, 0, 0]
-): number => {
+) => {
   const aX = Array.isArray(a) ? a[0] : a.x
   const aY = Array.isArray(a) ? a[1] : a.y
   const aZ = (Array.isArray(a) ? a[2] : a.z) || 0

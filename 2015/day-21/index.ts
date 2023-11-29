@@ -39,7 +39,7 @@ const RINGS: Stats[] = [
 // - There must be 1 weapon.
 // - There can be 0-1 armor.
 // - There can be 0-2 rings.
-const getCombinations = (): Stats[] => {
+const getCombinations = () => {
   const gears: Gear[] = []
   const ringPairs: [Stats, Stats][] = $.combinations(RINGS, 2) as [
     Stats,

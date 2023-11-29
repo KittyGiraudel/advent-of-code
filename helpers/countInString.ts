@@ -5,7 +5,7 @@ const countInString = (
   haystack: string,
   needle: string,
   insensitive: Boolean = true
-): number => {
+) => {
   const flags = ['g', insensitive ? 'i' : ''].join('')
   const regex = new RegExp(`(?=(${needle}))`, flags)
   const matches = haystack.matchAll(regex)

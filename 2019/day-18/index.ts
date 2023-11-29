@@ -7,8 +7,8 @@ type Node = {
   steps: number
 }
 
-const isKey = (value: string): boolean => /[a-z]/.test(value)
-const isDoor = (value: string): boolean => /[A-Z]/.test(value)
+const isKey = (value: string) => /[a-z]/.test(value)
+const isDoor = (value: string) => /[A-Z]/.test(value)
 
 export const maze = (input: string[]) => {
   const keys: Record<Point, string> = {}

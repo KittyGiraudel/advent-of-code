@@ -8,7 +8,7 @@ type Grids = Map<number, Grid<string[]>>
 // are arrays: `[]` for empty positions, `['#']` for walls, and `['<', '>']` for
 // blizzards (with the direction of each blizzard within that cell).
 // Ref: https://gist.github.com/p-a/47d58303ec3acf881f26bca1e889f7c8
-const getGrids = (input: string[]): Grids => {
+const getGrids = (input: string[]) => {
   const grid = $.grid.create<string[]>(input, value =>
     value === '.' ? [] : [value]
   )
@@ -20,14 +20,10 @@ const getGrids = (input: string[]): Grids => {
 
   // This is called `isWallOrDoor` and not `isWall` on purpose because the
   // starting point and the ending point both return `true` for that function.
-  const isWallOrDoor = (
-    grid: Grid<string[]>,
-    ri: number,
-    ci: number
-  ): boolean =>
+  const isWallOrDoor = (grid: Grid<string[]>, ri: number, ci: number) =>
     ri === 0 || ri === grid.length - 1 || ci === 0 || ci === grid[0].length - 1
 
-  return $.array(height * width - 1).reduce((acc, _, index) => {
+  return $.array(height * width - 1).reduce((acc: Grids, _, index) => {
     const curr = acc.get(index)
 
     // Start the new maze from an empty grid: only the borders are marked as
@@ -59,28 +55,27 @@ const getGrids = (input: string[]): Grids => {
     })
 
     return acc.set(index + 1, next)
-  }, new Map([[0, grid]]))
+  }, new Map([[0, grid]]) as Grids)
 }
 
-const findDoor = (row: string): number =>
-  row.split('').findIndex(col => col === '.')
+const findDoor = (row: string) => row.split('').findIndex(col => col === '.')
 
 type Node = {
   coords: Coords
   time: number
 }
 
-const getMoves = (curr: Node): Node[] =>
-  $.bordering(curr.coords, 'COORDS')
+const getMoves = (curr: Node) =>
+  ($.bordering(curr.coords, 'COORDS') as Coords[])
     .concat([curr.coords])
-    .map((coords: Coords) => ({ coords, time: curr.time + 1 }))
+    .map((coords: Coords) => ({ coords, time: curr.time + 1 } as Node))
 
 const cross = (
   grids: Grids,
   startCoords: Coords,
   endCoords: Coords,
   time = 0
-): number =>
+) =>
   $.pathfinding.gbfs({
     start: { coords: startCoords, time },
     isGoal: curr => $.toPoint(curr.coords) === $.toPoint(endCoords),
@@ -102,7 +97,7 @@ const cross = (
 // Unfortunately I could not solve part 1 of this puzzle without help. I did
 // manage to cross the maze successfully (which is something!) but I couldn’t
 // find the shortest path (347 instead of 247).
-export const maze = (input: string[], withSnacks: boolean = false): number => {
+export const maze = (input: string[], withSnacks: boolean = false) => {
   const startCoords: Coords = [0, findDoor(input[0])]
   const endCoords: Coords = [input.length - 1, findDoor(input.at(-1))]
   const grids = getGrids(input)

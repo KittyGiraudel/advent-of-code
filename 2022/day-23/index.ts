@@ -8,19 +8,19 @@ const SIDES = {
   E: ([N, NE, E, SE, S, SW, W, NW]) => [E, NE, SE],
 }
 
-const getNeighbors = $.memo((point: Point): Point[] =>
-  $.surrounding($.toCoords(point), 'POINTS')
+const getNeighbors = $.memo(
+  (point: Point) => $.surrounding($.toCoords(point), 'POINTS') as Point[]
 )
 
-const mapPositions = (input: string[]): Set<Point> =>
+const mapPositions = (input: string[]) =>
   $.grid.reduce(
     $.grid.create(input),
     (acc, value, ri, ci) =>
       value === '#' ? acc.add((ri + ',' + ci) as Point) : acc,
-    new Set()
+    new Set() as Set<Point>
   )
 
-export const run = (input: string[], rounds: number = 10): number => {
+export const run = (input: string[], rounds: number = 10) => {
   const positions = mapPositions(input)
   const directions = ['N', 'S', 'W', 'E']
   const isOccupied = (point: Point) => positions.has(point)

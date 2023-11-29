@@ -3,7 +3,7 @@ import $ from '../../helpers'
 const BUG = '#'
 const EMPTY = '.'
 
-const getNext = (curr: string, count: number): string => {
+const getNext = (curr: string, count: number) => {
   if (curr === BUG) {
     return count === 1 ? BUG : EMPTY
   } else {
@@ -11,7 +11,7 @@ const getNext = (curr: string, count: number): string => {
   }
 }
 
-export const cycle = (curr: string): string => {
+export const cycle = (curr: string) => {
   let next = ''
   let width = Math.sqrt(curr.length)
 

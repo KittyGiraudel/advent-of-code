@@ -1,10 +1,7 @@
 import $ from '../../helpers'
 import { Coords, Point } from '../../types'
 
-export const mapOut = (
-  lines: string[],
-  limit?: number
-): { safeRegionSize: number; largestRegionSize: number } => {
+export const mapOut = (lines: string[], limit?: number) => {
   const points: Point[] = lines.map(line => line.replace(' ', '')) as Point[]
   const counters: Map<number, number> = new Map()
   const edges: Set<number> = new Set()

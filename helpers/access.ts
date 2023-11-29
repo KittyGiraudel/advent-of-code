@@ -5,7 +5,7 @@ import { Grid, Coords } from '../types'
  * @param grid - Grid to read value from
  * @param coords - Y,X set of coordinates
  */
-const access = <T>(grid: Grid<T>, coords: Coords): T =>
+const access = <T>(grid: Grid<T>, coords: Coords) =>
   grid?.[coords[0]]?.[coords[1]]
 
 export default access

@@ -45,7 +45,7 @@ class Computer {
   }
 }
 
-export const run = (input: string[]): number => {
+export const run = (input: string[]) => {
   const computer = new Computer(input)
   computer.run()
   return computer.counters.mul

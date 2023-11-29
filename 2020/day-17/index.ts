@@ -4,21 +4,21 @@ import { Coords, Point } from '../../types'
 type NeighborCache = Map<Point, Point[]>
 type Mappy = Map<Point, string>
 
-const W = (coords: Coords): Coords =>
+const W = (coords: Coords) =>
   $.updateAtIndex(coords, 0, coords[0] - 1) as Coords
-const E = (coords: Coords): Coords =>
+const E = (coords: Coords) =>
   $.updateAtIndex(coords, 0, coords[0] + 1) as Coords
-const N = (coords: Coords): Coords =>
+const N = (coords: Coords) =>
   $.updateAtIndex(coords, 1, coords[1] - 1) as Coords
-const S = (coords: Coords): Coords =>
+const S = (coords: Coords) =>
   $.updateAtIndex(coords, 1, coords[1] + 1) as Coords
-const B = (coords: Coords): Coords =>
+const B = (coords: Coords) =>
   $.updateAtIndex(coords, 2, coords[2] - 1) as Coords
-const F = (coords: Coords): Coords =>
+const F = (coords: Coords) =>
   $.updateAtIndex(coords, 2, coords[2] + 1) as Coords
-const H = (coords: Coords): Coords =>
+const H = (coords: Coords) =>
   $.updateAtIndex(coords, 3, coords[3] - 1) as Coords
-const C = (coords: Coords): Coords =>
+const C = (coords: Coords) =>
   $.updateAtIndex(coords, 3, coords[3] + 1) as Coords
 const NE = $.compose(N, E)
 const SE = $.compose(S, E)
@@ -48,7 +48,7 @@ const getNeighborCoords = (
   coords: Point,
   dimensions: number,
   cache: NeighborCache
-): Point[] => {
+) => {
   if (cache.has(coords)) return cache.get(coords)
 
   const coordinates = $.toCoords(coords)
@@ -64,12 +64,12 @@ const getNeighborCoords = (
 
 // Determine whether a cell is alive.
 // @param cell - Cell value
-const isAlive = (cell: string): boolean => cell === '#'
+const isAlive = (cell: string) => cell === '#'
 
 // Return the new value for the cell given its amount of alive neighbours.
 // @param cell - Cell value
 // @param count - Amount of alive neighbours
-const mutate = (cell: string, count: number): string =>
+const mutate = (cell: string, count: number) =>
   cell === '#'
     ? count === 2 || count === 3
       ? '#'
@@ -89,7 +89,7 @@ const transition = (
   origin: Mappy,
   dimensions: number,
   cache: NeighborCache
-): string => {
+) => {
   const cell = origin.get(coords)
   const neighbourCoords = getNeighborCoords(coords, dimensions, cache)
   const neighbours = neighbourCoords.map(coords => origin.get(coords))
@@ -118,7 +118,7 @@ const cycle = (origin: Mappy, dimensions: number, cache: NeighborCache) =>
 
 // Initialise the storage map
 // @param rows - Rows
-const init = (rows: string[]): Mappy =>
+const init = (rows: string[]) =>
   rows.reduce(
     (map, row, y) =>
       row
@@ -127,13 +127,12 @@ const init = (rows: string[]): Mappy =>
           (map, value, x) => map.set($.toPoint([x, y, 0, 0]), value),
           map
         ),
-    new Map()
+    new Map() as Mappy
   )
 
 // Count the amount of alive cells in the map.
 // @param map - Storage map
-const count = (map: Mappy): number =>
-  Array.from(map.values()).filter(isAlive).length
+const count = (map: Mappy) => Array.from(map.values()).filter(isAlive).length
 
 // Run the game of life on the given initial input for a certain amount of
 // cycles on a given amount of dimensions.
@@ -146,7 +145,7 @@ export const gameOfLife = (
   cycles: number,
   dimensions: number = 3,
   cache: NeighborCache = new Map()
-): number =>
+) =>
   count(
     $.array(cycles).reduce(map => cycle(map, dimensions, cache), init(input))
   )

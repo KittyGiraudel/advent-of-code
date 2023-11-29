@@ -3,7 +3,7 @@ import $ from '../../helpers'
 export const getOverlappingPoints = (
   lines: string[],
   withDiagonals: boolean = false
-): number => {
+) => {
   // Break down every line into a pair of vectors, each vector being a pair of
   // number (x,y coordinates).
   const vectors = lines.map(line => line.split(' -> ').map($.toCoords))

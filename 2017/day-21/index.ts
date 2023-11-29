@@ -4,13 +4,12 @@ import { Grid } from '../../types'
 type Patterns = Record<string, string[]>
 type Cache = Record<string, string[]>
 
-const asGrid = (string: string): Grid<string> =>
-  string.split('/').map(row => Array.from(row))
+const asGrid = (string: string) =>
+  string.split('/').map(row => Array.from(row)) as Grid<string>
 
-const asString = (grid: Grid<string>): string =>
-  grid.map(row => row.join('')).join('/')
+const asString = (grid: Grid<string>) => grid.map(row => row.join('')).join('/')
 
-const getPatterns = (lines: string[]): Patterns => {
+const getPatterns = (lines: string[]) => {
   const patterns: Patterns = {}
 
   lines.forEach(line => {
@@ -26,7 +25,7 @@ const getPatterns = (lines: string[]): Patterns => {
   return patterns
 }
 
-const enhance = (curr: string[], patterns: Patterns, cache: {}): string[] => {
+const enhance = (curr: string[], patterns: Patterns, cache: {}) => {
   let currStr = curr.join('/')
 
   if (currStr in cache) return cache[currStr]
@@ -39,7 +38,7 @@ const enhance = (curr: string[], patterns: Patterns, cache: {}): string[] => {
 
 // Disassemble a grid expressed as a string into several subgrids (expressed as
 // strings as well).
-const disassemble = (curr: string[]): Grid<string> => {
+const disassemble = (curr: string[]) => {
   // If the grid is as small as it can get (2 or 3 cells wide), it cannot be
   // broken down into subgrids.
   if (curr.length <= 3) return [curr]
@@ -53,10 +52,10 @@ const disassemble = (curr: string[]): Grid<string> => {
   // items. For instance `[[0, 1], [2, 3]]` becomes `[[0, 2], [1, 3]]`.
   return $.chunk(rows, size)
     .map(group => $.zip(...group))
-    .flat() as string[][]
+    .flat() as Grid<string>
 }
 
-const reassemble = (grids: Grid<string>): string[] => {
+const reassemble = (grids: Grid<string>) => {
   // If there is only one subgrid, return it as there is nothing to reassemble.
   if (grids.length === 1) return grids[0]
 
@@ -67,12 +66,12 @@ const reassemble = (grids: Grid<string>): string[] => {
     .flat()
 }
 
-const cycle = (curr: string[], patterns: Patterns, cache: Cache): string[] => {
+const cycle = (curr: string[], patterns: Patterns, cache: Cache) => {
   let next = disassemble(curr).map(sub => enhance(sub, patterns, cache))
   return reassemble(next)
 }
 
-export const run = (input: string[], iterations: number = 1): number => {
+export const run = (input: string[], iterations: number = 1) => {
   const patterns = getPatterns(input)
   const cache: Cache = {}
   let curr = ['.#.', '..#', '###']

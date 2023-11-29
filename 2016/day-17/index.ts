@@ -18,7 +18,7 @@ type Node = {
   path: string
 }
 
-export const run = (input: string, longest: boolean = false): string =>
+export const run = (input: string, longest: boolean = false) =>
   $.pathfinding
     .bfs<Node>({
       start: { coords: [0, 0], path: input },

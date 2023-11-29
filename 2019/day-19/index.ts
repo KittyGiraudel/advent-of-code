@@ -6,7 +6,7 @@ export const run = (
   input: string,
   xAxis: Coords = [0, 50],
   yAxis: Coords = xAxis
-): Grid<number> => {
+) => {
   const computer = new Intcode(input).run()
   const grid = $.grid.init<number>(xAxis[1] - xAxis[0], yAxis[1] - yAxis[0])
 
@@ -23,9 +23,9 @@ export const run = (
   return grid
 }
 
-const test = (input: string): { valid: boolean; value: number } => {
+const test = (input: string) => {
   const computer = new Intcode(input).run()
-  const ping = (x: number, y: number): number =>
+  const ping = (x: number, y: number) =>
     computer.reset().setInput([x, y]).run().getOutput() as number
   const xOffset = 700
   const yOffset = 1134

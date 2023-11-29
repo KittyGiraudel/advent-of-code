@@ -55,7 +55,7 @@ export class Intcode {
   }
 }
 
-export const findInitParams = (input: string | number[]): number => {
+export const findInitParams = (input: string | number[]) => {
   const computer = new Intcode(input)
 
   for (let n = 0; n < 100; n++) {

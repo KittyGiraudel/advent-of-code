@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 
-export const run = (input: string, n: number = 5): number => {
+export const run = (input: string, n: number = 5) => {
   const expected = '0'.repeat(n)
   let i = 0
 

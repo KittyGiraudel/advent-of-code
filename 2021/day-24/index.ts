@@ -1,14 +1,6 @@
 import $ from '../../helpers'
 
-export const run = (
-  instructions: string[],
-  inputs: number[]
-): {
-  w: number
-  x: number
-  y: number
-  z: number
-} => {
+export const run = (instructions: string[], inputs: number[]) => {
   const data = { w: 0, x: 0, y: 0, z: 0 }
 
   instructions.forEach(line => {
@@ -63,7 +55,7 @@ export const run = (
   return data
 }
 
-export const resolve = (lines: string[], max: number): number =>
+export const resolve = (lines: string[], max: number) =>
   // Split the instructions into chunks of 18 lines, called “blocks”, starting
   // with an input instruction.
   +$.chunk(lines, 18)

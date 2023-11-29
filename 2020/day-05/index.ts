@@ -3,7 +3,7 @@ import { Coords } from '../../types'
 // Return the coords for the given seat encoding.
 // @param input - Seat encoding
 // @return Set of X,Y coords
-export const getSeatCoords = (input: string): Coords => {
+export const getSeatCoords = (input: string) => {
   const x: Coords = [0, 127]
   const y: Coords = [0, 7]
 
@@ -30,7 +30,7 @@ export const getSeatCoords = (input: string): Coords => {
 // Return the ID of a given seat encoding.
 // @param input - Seat encoding
 // @return  Seat ID
-export const getSeatId = (input: string): number => {
+export const getSeatId = (input: string) => {
   const [row, col] = getSeatCoords(input)
   return row * 8 + col
 }
@@ -38,7 +38,7 @@ export const getSeatId = (input: string): number => {
 // Return the ID of the proper seat based on a list of seat encodings.
 // @param input - Seat encodings
 // @return Seat ID
-export const findOwnSeat = (input: string[]): number => {
+export const findOwnSeat = (input: string[]) => {
   const ids = input
     .map(getSeatId)
     .map(Number)

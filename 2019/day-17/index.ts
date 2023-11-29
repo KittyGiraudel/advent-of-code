@@ -2,7 +2,7 @@ import $ from '../../helpers'
 import { Coords, Grid } from '../../types'
 import { Intcode } from '../day-05'
 
-export const getGrid = (input: string): Grid<string> => {
+export const getGrid = (input: string) => {
   const computer = new Intcode(input)
 
   // A little puzzled why the computer is marked “halted” before the end though.
@@ -21,10 +21,10 @@ export const getGrid = (input: string): Grid<string> => {
     .map(code => String.fromCharCode(code))
     .join('')
     .split('\n')
-    .map(row => row.split(''))
+    .map(row => row.split('')) as Grid<string>
 }
 
-export const calibrate = (grid: Grid<string>): number =>
+export const calibrate = (grid: Grid<string>) =>
   $.grid.reduce(
     grid,
     (calibration, value, ri, ci) => {
@@ -41,11 +41,11 @@ export const calibrate = (grid: Grid<string>): number =>
     0
   )
 
-export const scaffold = (input: string): number => {
+export const scaffold = (input: string) => {
   const computer = new Intcode(input).updateMemory(0, 2)
 
   // Helper function to minimize repeatition; totally sugar.
-  computer.execute = function (input: string): Intcode {
+  computer.execute = function (input: string) {
     return this.setInput($.toAscii(input)).run()
   }
 

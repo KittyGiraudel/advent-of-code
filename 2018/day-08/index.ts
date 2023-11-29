@@ -8,7 +8,7 @@ type Node = {
   value: number
 }
 
-const getValue = (node: Node, withRefs: boolean): number =>
+const getValue = (node: Node, withRefs: boolean) =>
   $.sum(
     node?.meta.map(value =>
       withRefs && node.children.length
@@ -35,7 +35,7 @@ export const parse = (numbers: number[], withRefs: boolean) => {
   return node
 }
 
-export const score = ({ children, value }: Node, withRefs: boolean): number =>
+export const score = ({ children, value }: Node, withRefs: boolean) =>
   children.reduce(
     (acc: number, child: Node) => acc + score(child, withRefs),
     value

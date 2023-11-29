@@ -3,7 +3,7 @@ import $ from '../../helpers'
 // Pad the row with an extra space, then slice it into chunks of 4 characters
 // which follow this struct: `[A] ` or `    ` (for empty cells). Then trim and
 // get the letter which is at position 1 (or empty string if nothing).
-const parseRow = (row: string): string[] =>
+const parseRow = (row: string) =>
   $.chunk.string(row + ' ', 4).map(item => item.trim()[1])
 
 // This function transforms a graphic “map” as given into an array of columns
@@ -15,21 +15,18 @@ const parseRow = (row: string): string[] =>
 //  1   2   3
 // Output:
 // [ ['N', 'Z'], ['D', 'C', 'M'], ['P'] ]
-const parseMap = (map: string): string[][] =>
+const parseMap = (map: string) =>
   $.grid
     .rotate(map.split('\n').filter(Boolean).slice(0, -1).map(parseRow))
     .map(column => column.filter(Boolean).reverse())
 
-const parseInstructions = (instructions: string): number[][] =>
+const parseInstructions = (instructions: string) =>
   instructions
     .split('\n')
     .filter(Boolean)
     .map(instruction => instruction.match(/\d+/g).map(v => +v))
 
-export const process = (
-  input: [string, string],
-  batch: boolean = false
-): string => {
+export const process = (input: [string, string], batch: boolean = false) => {
   const map = parseMap(input[0])
   const instructions = parseInstructions(input[1])
 
