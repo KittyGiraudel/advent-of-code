@@ -1,7 +1,4 @@
-const _chunk = <T>(
-  sliceable: string | T[],
-  size: number
-): Array<string | T[]> => {
+const _chunk = <T>(sliceable: string | T[], size: number): (string | T[])[] => {
   const result = []
 
   for (let i = 0; i < sliceable.length; i += size)

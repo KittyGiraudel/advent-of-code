@@ -1,4 +1,4 @@
-type Sequence = Array<number | 'x'>
+type Sequence = (number | 'x')[]
 
 // Return the next bus departing line and the amount of minutes to wait before
 // departure.

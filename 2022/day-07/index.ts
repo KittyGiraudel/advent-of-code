@@ -4,7 +4,7 @@ const isDir = item => item instanceof Dir
 
 class Dir {
   name: string
-  content: Array<Dir | File>
+  content: (Dir | File)[]
   parent: Dir
 
   constructor(name, parent) {

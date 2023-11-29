@@ -7,4 +7,4 @@ export type CoordsObj = { x: number; y: number; z?: number; t?: number }
 export type CoordsAndPoint = { coords: Coords; point: Point }
 export type Point = `${number},${number}`
 export type TriPoint = `${number},${number},${number}`
-export type ValueOrArray<T> = T | Array<ValueOrArray<T>>
+export type ValueOrArray<T> = T | ValueOrArray<T>[]

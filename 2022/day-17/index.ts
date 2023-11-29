@@ -6,7 +6,7 @@ type Rock = string[]
 
 let DEBUG = false
 const WIDTH = 7
-const ROCKS: Array<string[]> = [
+const ROCKS: string[][] = [
   '####'.split('\n'),
   '.#.\n###\n.#.'.split('\n'),
   '..#\n..#\n###'.split('\n'),

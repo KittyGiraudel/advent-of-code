@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 
-type Instruction = { type: string; value: number | Array<string | number> }
+type Instruction = { type: string; value: number | (string | number)[] }
 
 export const dance = (
   input: string[],
