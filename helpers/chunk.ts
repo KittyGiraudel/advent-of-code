@@ -1,21 +1,18 @@
-const _chunk = <T>(sliceable: string | T[], size: number) => {
-  const result = []
-
-  for (let i = 0; i < sliceable.length; i += size)
-    result.push(sliceable.slice(i, i + size))
-
-  return result
-}
-
 /**
  * Split the given array into chunks of the given size.
  */
-const chunk = <T>(array: T[], size: number) => _chunk(array, size) as T[][]
+function chunk(input: string, size: number): string[]
+function chunk<T>(input: T[], size: number): T[][]
+function chunk<T>(input: string | T[], size: number): string[] | T[][] {
+  const result: T[][] = []
+  const strings: string[] = []
 
-/**
- * Split the given string into chunks of the given size.
- */
-chunk.string = (string: string, size: number) =>
-  _chunk<string>(string, size) as string[]
+  for (let i = 0; i < input.length; i += size)
+    typeof input === 'string'
+      ? strings.push(input.slice(i, i + size) as string)
+      : result.push(input.slice(i, i + size) as T[])
+
+  return typeof input === 'string' ? strings : result
+}
 
 export default chunk

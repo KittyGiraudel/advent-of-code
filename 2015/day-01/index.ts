@@ -1,4 +1,4 @@
-export const run = (string: string): [number, number | null] => {
+export const run = (string: string) => {
   let floor = 0
   let basement = null
 
@@ -8,5 +8,5 @@ export const run = (string: string): [number, number | null] => {
     if (!basement && floor === -1) basement = i + 1
   }
 
-  return [floor, basement]
+  return [floor, basement] as [number, number | null]
 }

@@ -4,7 +4,7 @@ import $ from '../../helpers'
 // which follow this struct: `[A] ` or `    ` (for empty cells). Then trim and
 // get the letter which is at position 1 (or empty string if nothing).
 const parseRow = (row: string) =>
-  $.chunk.string(row + ' ', 4).map(item => item.trim()[1])
+  $.chunk(row + ' ', 4).map(item => item.trim()[1])
 
 // This function transforms a graphic “map” as given into an array of columns
 // where the top entry is at index 0.

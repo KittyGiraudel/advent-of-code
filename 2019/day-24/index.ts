@@ -127,7 +127,7 @@ export const findRecursiveBiodiversity = (input: string[], count: number) => {
   while (count--) {
     const layers = [
       EMPTY.repeat(width),
-      ...$.chunk.string(curr, width),
+      ...$.chunk(curr, width),
       EMPTY.repeat(width),
     ]
     curr = ''

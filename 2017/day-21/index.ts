@@ -52,13 +52,13 @@ const disassemble = (curr: string[]) => {
   // First, break every row into chunks of the expected size. For instance,
   // `.##.` becomes `['.#', '#.']`.
   const size = curr.length % 2 === 0 ? 2 : 3
-  const rows = curr.map(row => $.chunk.string(row, size))
+  const rows = curr.map(row => $.chunk(row, size))
 
   // Then, group rows into groups of the expected size, and zip their respective
   // items. For instance `[[0, 1], [2, 3]]` becomes `[[0, 2], [1, 3]]`.
   return $.chunk(rows, size)
     .map(group => $.zip(...group))
-    .flat() as Grid<string>
+    .flat()
 }
 
 const reassemble = (grids: Grid<string>) => {

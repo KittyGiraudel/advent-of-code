@@ -2,10 +2,7 @@ import $ from '../../helpers'
 import { Grid } from '../../types'
 
 const parse = (input: string, size: { width: number; height: number }) =>
-  $.chunk(
-    Array.from(input).map(Number),
-    size.width * size.height
-  ) as Grid<number>
+  $.chunk(Array.from(input).map(Number), size.width * size.height)
 
 export const validate = (
   input: string,
@@ -28,7 +25,7 @@ export const recompose = (
 
   for (let i = 0; i < layers.length; i++) {
     const layer = layers[i]
-    const grid = $.chunk(layer, size.width) as Grid<number>
+    const grid = $.chunk(layer, size.width)
 
     $.grid.forEach(grid, (pixel, ri, ci) => {
       if ([null, 2].includes($.access(image, [ri, ci]))) {

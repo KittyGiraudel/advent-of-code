@@ -206,7 +206,7 @@ const reconstruct = (graph: SearchGraph, start: unknown, end: unknown) => {
 
   while (current !== start) {
     path.push(current)
-    current = current ? graph[current] : current
+    current = current ? graph[current] : null
   }
 
   return path

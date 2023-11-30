@@ -14,19 +14,14 @@ import {
  * for both types of data structures. It returns an array on purposes as the
  * order of channels may vary (sometimes X comes first, sometimes Y does).
  */
-function boundaries(items: Coords[]): [number, number, number, number]
-function boundaries(items: CoordsObj[]): [number, number, number, number]
 function boundaries(
-  items: TriCoords[]
+  items: Coords[] | CoordsObj[]
+): [number, number, number, number]
+function boundaries(
+  items: TriCoords[] | TriCoordsObj[]
 ): [number, number, number, number, number, number]
 function boundaries(
-  items: TriCoordsObj[]
-): [number, number, number, number, number, number]
-function boundaries(
-  items: QuadriCoords[]
-): [number, number, number, number, number, number, number, number]
-function boundaries(
-  items: QuadriCoordsObj[]
+  items: QuadriCoords[] | QuadriCoordsObj[]
 ): [number, number, number, number, number, number, number, number]
 function boundaries(items: any[]) {
   if (!items.length) return []
