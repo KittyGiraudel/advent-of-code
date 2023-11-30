@@ -1,5 +1,5 @@
 import test from 'ava'
-import { parse, findOverlaps } from './'
+import { parse } from './'
 import $ from '../../helpers'
 
 const sample = `--- scanner 0 ---
@@ -141,7 +141,6 @@ const sample = `--- scanner 0 ---
 
 test.skip('Day 19 — Sample', t => {
   const scanners = parse(sample)
-  const overlaps = findOverlaps(scanners[0], scanners[1])
 })
 
 test.skip('Day 19 — Solutions', t => {

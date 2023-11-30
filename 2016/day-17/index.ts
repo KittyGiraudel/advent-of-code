@@ -37,9 +37,7 @@ export const run = (input: string, longest: boolean = false) =>
             coords: $.applyVector(curr.coords, vector),
             path: curr.path + direction,
           }))
-          .filter(next =>
-            next.coords.every(n => (n ? $.isClamped(n, 0, 3) : false))
-          )
+          .filter(next => next.coords.every(n => $.isClamped(n, 0, 3)))
       },
     })
     .end.path.replace(input, '')
