@@ -8,9 +8,9 @@ const OPERATORS = {
   LSHIFT: '<<',
   RSHIFT: '>>',
 }
+type Operator = keyof typeof OPERATORS
 
 const prepare = (string: string) => {
-  type Operator = keyof typeof OPERATORS
   for (let operator in OPERATORS)
     string = string.replace(operator, OPERATORS[operator as Operator])
 

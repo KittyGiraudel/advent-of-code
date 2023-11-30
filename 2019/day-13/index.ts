@@ -4,6 +4,7 @@ import { CoordsObj, Point } from '../../types'
 
 const SYMBOLS = [' ', 'x', '▫️', '_', 'o']
 
+type Symbol = keyof typeof SYMBOLS
 type Board = Map<Point, number>
 type State = {
   score: number
@@ -26,7 +27,7 @@ export const render = (board: Board) => {
   const grid = $.grid.init(
     maxX + 1,
     maxY + 1,
-    (x, y) => SYMBOLS[board.get(`${x},${y}`) as keyof typeof SYMBOLS]
+    (x, y) => SYMBOLS[board.get(`${x},${y}`) as Symbol]
   )
 
   return $.grid.render(grid, ' ')

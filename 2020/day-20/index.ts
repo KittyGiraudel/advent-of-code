@@ -141,16 +141,18 @@ const inspectWaters = (image: Grid<string>) => {
 // Compute the mozaic checksum by multiplying the ID of the 4 corner tiles.
 const checksum = (mozaic: Grid<Tile>) => {
   const length = mozaic.length
-  const corners = [
-    /* Top left     */ [0, 0] as Coords,
-    /* Top right    */ [0, length - 1] as Coords,
-    /* Bottom left  */ [length - 1, 0] as Coords,
-    /* Bottom right */ [length - 1, length - 1] as Coords,
+  const corners: Coords[] = [
+    /* Top left     */ [0, 0],
+    /* Top right    */ [0, length - 1],
+    /* Bottom left  */ [length - 1, 0],
+    /* Bottom right */ [length - 1, length - 1],
   ]
+
+  const ids = corners
     .map(coords => $.access(mozaic, coords))
     .map(tile => tile.id)
 
-  return $.product(corners)
+  return $.product(ids)
 }
 
 // Given the raw collection of snapshots, find the right layout to reassemble
@@ -159,9 +161,9 @@ const solve = (snapshots: string[]) =>
   snapshots
     .map(parseSnapshot)
     .flat()
-    .reduce(
+    .reduce<Grid<Tile> | null>(
       (acc, tile, _, tiles) => acc ?? jigsaw(tiles, tile) ?? null,
-      null as Grid<Tile> | null
+      null
     )
 
 export const run = (snapshots: string[]) => {

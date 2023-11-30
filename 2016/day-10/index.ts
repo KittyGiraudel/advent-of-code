@@ -4,7 +4,7 @@ type State = { bot: number[][]; output: number[][] }
 
 export const run = (input: string[]) => {
   const state: State = { bot: [], output: [] }
-  const pipelines: [string[], string[]][] = []
+  const pipelines: [[KeyType, number], [KeyType, number]][] = []
   type KeyType = keyof typeof state
 
   for (let i = 0; i < input.length; i++) {
@@ -16,7 +16,10 @@ export const run = (input: string[]) => {
     } else {
       const [sender, low, high] = line.match(/(bot|output) \d+/g) ?? []
       const id = sender!.split(' ').pop()!
-      pipelines[+id] = [low.split(' '), high.split(' ')]
+      pipelines[+id] = [
+        low.split(' ') as [KeyType, number],
+        high.split(' ') as [KeyType, number],
+      ]
     }
   }
 
@@ -28,17 +31,17 @@ export const run = (input: string[]) => {
 
     if (!next) break
 
-    next.sort((a: number, b: number) => a - b)
+    next.sort((a, b) => a - b)
     const max = next.pop()!
     const min = next.pop()!
 
     const [low, high] = pipelines[index]
-    const [lowType, lowId] = low as [KeyType, number]
+    const [lowType, lowId] = low
     state[lowType][lowId] = (state[lowType][lowId] || []).concat(min)
 
-    const [highType, highId] = high as [KeyType, number]
+    const [highType, highId] = high
     state[highType][highId] = (state[highType][highId] || []).concat(max)
   } while (index > -1)
 
-  return $.product(state.output.slice(0, 3) as unknown as number[])
+  return $.product(state.output.slice(0, 3).flat())
 }

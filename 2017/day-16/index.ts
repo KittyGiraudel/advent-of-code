@@ -29,7 +29,7 @@ export const dance = (
   for (let i = 0; i < iterations; i++) {
     instructions.forEach(({ type, value }) => {
       if (type === 'SPIN') {
-        let x = value as number
+        let x = value
         while (x--) programs.unshift(programs.pop()!)
       }
       if (type === 'EXCHANGE') {

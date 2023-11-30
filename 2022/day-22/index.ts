@@ -217,10 +217,10 @@ export const maze = (input: string, asCube: boolean = false) => {
   const instructions = last.match(/(\d+|L|R)/g)?.map(v => +v || v) ?? []
   const rows = map.split('\n').filter(Boolean)
   const grid = $.grid.create(rows, v => (v === ' ' ? '' : v))
-  const neighborMap = $.grid.reduce(
+  const neighborMap = $.grid.reduce<string, CacheMap>(
     grid,
     getNeighbors(grid, asCube),
-    {} as CacheMap
+    {}
   )
 
   let position: Coords = [

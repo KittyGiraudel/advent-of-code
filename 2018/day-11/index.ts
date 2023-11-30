@@ -69,7 +69,7 @@ export const getFuelLoose = (serial: number) => {
 
         if (power > max.value) {
           max.value = power
-          max.coords = [yMin + 1, xMin + 1, i] as TriCoords
+          max.coords = [yMin + 1, xMin + 1, i]
         }
       })
     })

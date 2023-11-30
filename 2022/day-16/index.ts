@@ -25,13 +25,13 @@ export const releasePressure = (input: string[]) => {
       if (name in acc && acc[name] <= steps) return acc
       acc[name] = steps
 
-      return map[name].tunnels.reduce(
+      return map[name].tunnels.reduce<Record<string, number>>(
         (acc, name) => walk(acc, { name, steps: steps + 1 }),
         acc
       )
     }
 
-    return walk({} as Record<string, number>, { name: startName, steps: 0 })
+    return walk({}, { name: startName, steps: 0 })
   }
 
   const distanceMap = Object.keys(map).reduce(

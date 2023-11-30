@@ -24,7 +24,7 @@ const getOutsideCoords = (grid: Grid<string>, input: string[]) => {
   // Top row
   grid[0].forEach((value, ci) => {
     if (value !== '.') return
-    const coords = [0, ci] as Coords
+    const coords: Coords = [0, ci]
     const door = input[0][ci + 2] + input[1][ci + 2]
     pointsToDoors[$.toPoint(coords)] = door
     doorsToCoords[door] = coords
@@ -33,7 +33,7 @@ const getOutsideCoords = (grid: Grid<string>, input: string[]) => {
   // Bottom row
   grid.at(-1)!.forEach((value, ci) => {
     if (value !== '.') return
-    const coords = [height - 1, ci] as Coords
+    const coords: Coords = [height - 1, ci]
     const door = input.at(-2)![ci + 2] + input.at(-1)![ci + 2]
     pointsToDoors[$.toPoint(coords)] = door
     doorsToCoords[door] = coords
@@ -42,7 +42,7 @@ const getOutsideCoords = (grid: Grid<string>, input: string[]) => {
   // Left column
   $.column(grid, 0).forEach((value, ri) => {
     if (value !== '.') return
-    const coords = [ri, 0] as Coords
+    const coords: Coords = [ri, 0]
     const door = input[ri + 2][0] + input[ri + 2][1]
     pointsToDoors[$.toPoint(coords)] = door
     doorsToCoords[door] = coords
@@ -51,7 +51,7 @@ const getOutsideCoords = (grid: Grid<string>, input: string[]) => {
   // Right column
   $.column(grid, width - 1).forEach((value, ri) => {
     if (value !== '.') return
-    const coords = [ri, width - 1] as Coords
+    const coords: Coords = [ri, width - 1]
     const door = input[ri + 2].at(-2)! + input[ri + 2].at(-1)
     pointsToDoors[$.toPoint(coords)] = door
     doorsToCoords[door] = coords
@@ -70,7 +70,7 @@ const getInsideCoords = (grid: Grid<string>) => {
 
     if (/[A-Z]/.test(bottom)) {
       const top = $.access(grid, [ri - 1, ci]).trim()
-      const coords = (top ? [ri - 1, ci] : [ri + 2, ci]) as Coords
+      const coords: Coords = top ? [ri - 1, ci] : [ri + 2, ci]
       const door = value + bottom
       pointsToDoors[$.toPoint(coords)] = door
       doorsToCoords[door] = coords
@@ -80,7 +80,7 @@ const getInsideCoords = (grid: Grid<string>) => {
 
     if (/[A-Z]/.test(right)) {
       const left = $.access(grid, [ri, ci - 1]).trim()
-      const coords = (left ? [ri, ci - 1] : [ri, ci + 2]) as Coords
+      const coords: Coords = left ? [ri, ci - 1] : [ri, ci + 2]
       const door = value + right
       pointsToDoors[$.toPoint(coords)] = door
       doorsToCoords[door] = coords

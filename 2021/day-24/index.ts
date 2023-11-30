@@ -69,7 +69,7 @@ export const resolve = (lines: string[], max: number) =>
     // d[prev_i] = 9 - (prev_c + c) for maximum,
     //             1 - (prev_c + c) for minimum; cap at max 9, resp min 1
     // d[i] = d[prev_i] + (prev_c + c)
-    .reduce(
+    .reduce<{ digits: number[]; stack: [number, number][] }>(
       (acc, [zDiv, xInc, yInc], index) => {
         if (zDiv === 1) {
           acc.stack.push([yInc, index])
@@ -84,6 +84,6 @@ export const resolve = (lines: string[], max: number) =>
 
         return acc
       },
-      { digits: Array(14).fill(0), stack: [] as [number, number][] }
+      { digits: Array(14).fill(0), stack: [] }
     )
     .digits.join('')
