@@ -7,10 +7,9 @@ function combinations<T>(
   start: T[][] = [],
   tmp: T[] = []
 ): T[][] {
-  return array.reduce((acc, item, index, array) => {
+  return array.reduce<T[][]>((acc, item, index, array) => {
     if (n > 1) {
       tmp.push(item)
-      // @ts-ignore
       combinations(array.slice(index + 1), n - 1, acc, tmp)
     } else {
       acc.push((tmp.push(item), tmp).slice(0))
