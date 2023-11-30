@@ -4,7 +4,7 @@ type Graph = Record<string, number>
 class Firewall {
   constructor(input) {
     this.layers = this.init(input)
-    this.cache = $.clone(this.layers)
+    this.cache = structuredClone(this.layers)
     this.risk = 0
   }
 
@@ -21,7 +21,7 @@ class Firewall {
   }
 
   reset() {
-    this.layers = $.clone(this.cache)
+    this.layers = structuredClone(this.cache)
     this.risk = 0
     return this
   }

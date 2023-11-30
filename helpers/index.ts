@@ -5,7 +5,6 @@ import average from './average'
 import binarySearch from './binarySearch'
 import boundaries from './boundaries'
 import chunk from './chunk'
-import clone from './clone'
 import column from './column'
 import combinations from './combinations'
 import compose from './compose'
@@ -59,7 +58,6 @@ export default {
   boundaries,
   bordering,
   chunk,
-  clone,
   column,
   combinations,
   compose,

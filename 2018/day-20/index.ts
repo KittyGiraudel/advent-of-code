@@ -135,7 +135,7 @@ const drawMap = (map, state, item) => {
   }
 
   if (item.type === 'OR') {
-    const clone = $.clone(state)
+    const clone = structuredClone(state)
 
     return item.children.forEach(child => {
       drawMap(map, state, child)
