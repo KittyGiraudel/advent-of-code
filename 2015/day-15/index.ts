@@ -35,7 +35,7 @@ const getPropertyScore =
   }
 
 const parseIngredient = (line: string) =>
-  line.match(/-?\d+/g)?.map(Number) ?? []
+  $.safeMatch(line, /-?\d+/g).map(Number)
 
 export const run = (input: string[], calories?: number) => {
   // I couldn’t find a solution that works for a dynamic amount of ingredients

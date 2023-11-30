@@ -4,7 +4,7 @@ export const run = (input: string[], advanced: boolean = false) => {
   const grid = $.grid.init(1000, 1000, 0)
 
   input.forEach(line => {
-    const [xMin, yMin, xMax, yMax] = line.match(/\d+/g)?.map(Number) ?? []
+    const [xMin, yMin, xMax, yMax] = $.safeMatch(line, /\d+/g).map(Number)
 
     for (let ri = yMin; ri <= yMax; ri++) {
       for (let ci = xMin; ci <= xMax; ci++) {

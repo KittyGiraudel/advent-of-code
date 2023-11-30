@@ -4,7 +4,7 @@ export const run = (input: string[]): [number, number] => {
   const graph = new Map()
 
   input.forEach(line => {
-    const [leftNode, ...rightNodes] = line.match(/\d+/g)?.map(Number) ?? []
+    const [leftNode, ...rightNodes] = $.safeMatch(line, /\d+/g).map(Number)
     const gLeft = graph.get(leftNode) || new Set()
 
     rightNodes.forEach(rightNode => {

@@ -1,3 +1,5 @@
+import $ from '../../helpers'
+
 const size = (string: string): number => {
   const closing = string.indexOf(')')
 
@@ -17,7 +19,7 @@ const size = (string: string): number => {
   // E.g: (25x3)(3x3)ABC(2x3)XY(5x2)PQRSTX
   const marker = string.slice(0, closing + 1)
   const after = string.slice(closing + 1)
-  const [length, count] = marker.match(/\d+/g)?.map(Number) ?? []
+  const [length, count] = $.safeMatch(marker, /\d+/g).map(Number)
   const reach = after.slice(0, length)
   const rest = after.slice(length + 1)
 
@@ -31,7 +33,7 @@ export const run = (input: string) => {
     const char = input[i]
 
     if (char === ')') {
-      const [length, count] = marker.match(/\d+/g)?.map(Number) ?? []
+      const [length, count] = $.safeMatch(marker, /\d+/g).map(Number)
       // Replace the input by taking everything until the beginning of the
       // marker (before the open parens), then insert the replacement string,
       // then the remaining of the string starting *after* the reach.
@@ -59,7 +61,7 @@ export const run2 = (input: string) => {
     // walking it for sub-markers. Once done, move the cursor beyond its reach
     // and look for the next marker.
     if (char === ')') {
-      const [length] = marker.match(/\d+/g)?.map(Number) ?? []
+      const [length] = $.safeMatch(marker, /\d+/g).map(Number)
       // The “reach” is the slice of the string that begins with a marker and
       // ends at the end of its length. For instance, `(3x1)ABC`.
       const reach = marker + char + input.slice(i + 1, i + 1 + length)

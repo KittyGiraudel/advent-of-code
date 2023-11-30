@@ -13,8 +13,10 @@ const sortCounters = (
 ) => countB - countA || letterA.charCodeAt(0) - letterB.charCodeAt(0)
 
 const parseRoom = (line: string) => {
-  const [, hash, id, checksum] =
-    line.match(/([a-z-]+)-(\d+)\[([^\]]+)\]$/) ?? []
+  const [, hash, id, checksum] = $.safeMatch(
+    line,
+    /([a-z-]+)-(\d+)\[([^\]]+)\]$/
+  )
   const letters = Array.from(hash.replace(/-/g, ''))
   const counters = Object.entries($.count(letters))
     .sort(sortCounters)

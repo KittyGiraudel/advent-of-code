@@ -1,3 +1,5 @@
+import $ from '../../helpers'
+
 type Graph = Record<string, Record<string, number>>
 
 // This is your typical traversal function. Get the neighbors of the current
@@ -28,7 +30,7 @@ const createGraph = (input: string[]) => {
   const graph: Graph = {}
 
   input.forEach(line => {
-    const [, a, b, distance] = line.match(/(\w+) to (\w+) = (\d+)/) ?? []
+    const [, a, b, distance] = $.safeMatch(line, /(\w+) to (\w+) = (\d+)/)
     if (!(a in graph)) graph[a] = {}
     if (!(b in graph)) graph[b] = {}
     graph[a][b] = +distance

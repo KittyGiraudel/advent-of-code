@@ -1,3 +1,5 @@
+import $ from '../../helpers'
+
 class Deer {
   name: string
   velocity: number
@@ -9,8 +11,10 @@ class Deer {
   score: number
 
   constructor(line: string) {
-    const [, name, km, s, rest] =
-      line.match(/(\w+).*?(\d+).*?(\d+).*?(\d+)/) ?? []
+    const [, name, km, s, rest] = $.safeMatch(
+      line,
+      /(\w+).*?(\d+).*?(\d+).*?(\d+)/
+    )
 
     this.name = name
     this.velocity = +km

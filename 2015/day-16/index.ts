@@ -1,3 +1,5 @@
+import $ from '../../helpers'
+
 const SAMPLE = {
   children: 3,
   cats: 7,
@@ -23,7 +25,7 @@ const parseProperties = (properties: string[]) =>
 export const run = (input: string[], advanced: boolean = false) => {
   const aunts = input.map((line, index) => ({
     id: index + 1,
-    properties: parseProperties(line.match(/\w+: \d+/g) ?? []),
+    properties: parseProperties($.safeMatch(line, /\w+: \d+/g)),
   }))
 
   return aunts

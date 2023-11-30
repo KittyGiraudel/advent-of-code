@@ -214,7 +214,7 @@ const getNeighbors =
 
 export const maze = (input: string, asCube: boolean = false) => {
   const [map, last] = input.split('\n\n')
-  const instructions = last.match(/(\d+|L|R)/g)?.map(v => +v || v) ?? []
+  const instructions = $.safeMatch(last, /(\d+|L|R)/g).map(v => +v || v)
   const rows = map.split('\n').filter(Boolean)
   const grid = $.grid.create(rows, v => (v === ' ' ? '' : v))
   const neighborMap = $.grid.reduce<string, CacheMap>(

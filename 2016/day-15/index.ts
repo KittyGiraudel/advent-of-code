@@ -32,7 +32,7 @@ class Disk {
 
 export const run = (instructions: string[]) => {
   const disks = instructions.map(instruction => {
-    const [id, size, , initial] = instruction.match(/\d+/g)?.map(Number) ?? []
+    const [id, size, , initial] = $.safeMatch(instruction, /\d+/g).map(Number)
 
     return new Disk(id, size, initial)
   })

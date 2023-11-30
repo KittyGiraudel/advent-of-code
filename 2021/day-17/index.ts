@@ -10,7 +10,7 @@ type State = {
 // *lowest* Y value will be the first one of the pair, and not the second one,
 // since the area stands below 0. For instance, `y=-10,-5`, and not.
 export const getBoundaries = (input: string) => {
-  const [xMin, xMax, yMax, yMin] = input.match(/(-?\d+)/g)?.map(Number) ?? []
+  const [xMin, xMax, yMax, yMin] = $.safeMatch(input, /(-?\d+)/g).map(Number)
 
   return [
     [xMin, xMax],

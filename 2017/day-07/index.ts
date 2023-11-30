@@ -1,3 +1,5 @@
+import $ from '../../helpers'
+
 type Node = {
   name?: string
   value: number
@@ -24,8 +26,10 @@ const getRootNode = (graph: Graph) => {
 }
 
 const parseLine = (line: string) => {
-  const [, name, value, rest] =
-    line.match(/(\w+) \((\d+)\)(?: -> ([^)]+))?/) ?? []
+  const [, name, value, rest] = $.safeMatch(
+    line,
+    /(\w+) \((\d+)\)(?: -> ([^)]+))?/
+  )
   const children = rest?.split(', ') ?? []
 
   return { name, value: +value, children: children } as Node

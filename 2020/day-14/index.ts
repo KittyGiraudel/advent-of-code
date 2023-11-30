@@ -10,10 +10,9 @@ export const parseProgram = (input: string[]) =>
   input.map(line =>
     line.startsWith('mask')
       ? line.replace('mask = ', '')
-      : line
-          .match(/mem\[(\d+)\] = (\d+)/)
-          ?.slice(1)
-          .map(Number) ?? []
+      : $.safeMatch(line, /mem\[(\d+)\] = (\d+)/)
+          .slice(1)
+          .map(Number)
   ) as Instruction[]
 
 // Apply given mask to given value.

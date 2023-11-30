@@ -1,7 +1,7 @@
 import { Coords, QuadriCoords, TriCoords } from '../types'
 
 /**
- * Apply the given vector to the given X,Y(,Z) coords.
+ * Apply the given vector to the given X,Y(,Z,T) coords.
  */
 function applyVector(coords: Coords, vector: Coords): Coords
 function applyVector(coords: TriCoords, vector: TriCoords): TriCoords

@@ -35,6 +35,7 @@ import range from './range'
 import readInput from './readInput'
 import rotate from './rotate'
 import sample from './sample'
+import safeMatch from './safeMatch'
 import stringMap from './stringMap'
 import sum from './sum'
 import swap from './swap'
@@ -86,6 +87,7 @@ export default {
   range,
   readInput,
   rotate,
+  safeMatch,
   sample,
   stringMap,
   sum,

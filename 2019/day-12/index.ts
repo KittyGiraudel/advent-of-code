@@ -8,7 +8,7 @@ type Moon = {
 
 const prepareMoon = (line: string) =>
   ({
-    position: line.match(/(-?\d+)/g)?.map(Number) ?? [],
+    position: $.safeMatch(line, /(-?\d+)/g).map(Number),
     velocity: [0, 0, 0],
   } as Moon)
 

@@ -10,10 +10,10 @@ type Disk = {
 
 const getDisks = (dump: string[]) =>
   dump.slice(2).map(line => {
-    const [, x, y, size, used, available] =
-      line
-        .match(/x(\d+)-y(\d+)\s+(\d+)T\s+(\d+)T\s+(\d+)T\s+(\d+)/)
-        ?.map(Number) ?? []
+    const [, x, y, size, used, available] = $.safeMatch(
+      line,
+      /x(\d+)-y(\d+)\s+(\d+)T\s+(\d+)T\s+(\d+)T\s+(\d+)/
+    ).map(Number)
 
     return { coords: [y, x], size, used, available } as Disk
   })

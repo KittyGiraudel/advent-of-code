@@ -11,7 +11,7 @@ const PAIRS_RE = /(\w)\1/g
 export const isValid = (curr: string) =>
   !IOL_RE.test(curr) &&
   SEQUENCES_RE.test(curr) &&
-  (curr.match(PAIRS_RE) ?? []).length >= 2
+  $.safeMatch(curr, PAIRS_RE).length >= 2
 
 const next = (curr: string): string => {
   const array = Array.from(curr)
