@@ -10,7 +10,8 @@ const parseFood = (food: string) => {
   // Capture group       :                    (     )
   // Anything but `)`    :                     [^)]+
   // Literal `)`         :                           \)
-  const match = food.match(/([^(]+)\(contains ([^)]+)\)/).map(v => v.trim())
+  const match =
+    food.match(/([^(]+)\(contains ([^)]+)\)/)?.map(v => v.trim()) ?? []
 
   return {
     ingredients: match[1].split(' '),
@@ -26,9 +27,10 @@ const mapFood = (input: string[]) =>
   mapAllergens(
     input.map(parseFood).reduce(
       (acc, { ingredients, allergens }) =>
-        allergens.reduce((acc, allergen) => {
-          acc[allergen] = acc[allergen] || { foods: [] }
-          acc[allergen].foods.push(ingredients)
+        allergens.reduce<Map>((acc, allergen) => {
+          type Allergen = keyof typeof acc
+          acc[allergen as Allergen] = acc[allergen as Allergen] || { foods: [] }
+          acc[allergen as Allergen].foods.push(ingredients)
           return acc
         }, acc),
       {}
@@ -62,7 +64,10 @@ const mapAllergens = (map: Map) => {
 // Get all ingredients (with duplicates).
 // @param input - Raw foods
 const getAllIngredients = (input: string[]) =>
-  input.reduce((acc, food) => acc.concat(parseFood(food).ingredients), [])
+  input.reduce<string[]>(
+    (acc, food) => acc.concat(parseFood(food).ingredients),
+    []
+  )
 
 // Find the ingredients which are allergen-free.
 // @param input - Raw foods
@@ -78,7 +83,10 @@ const findAllergenFreeIngredients = (input: string[]) => {
 // Count how many times allergen-free ingredients appear in the food input.
 // @param input - Raw foods
 export const countAllergenFreeOccurrences = (input: string[]) => {
-  const count = (acc, ing: string) => ({ ...acc, [ing]: acc[ing] + 1 || 1 })
+  const count = (acc: Record<string, number>, ing: string) => ({
+    ...acc,
+    [ing]: acc[ing] + 1 || 1,
+  })
   const ingredients = findAllergenFreeIngredients(input)
   const allIngredients = getAllIngredients(input)
   const occurrences = allIngredients

@@ -1,7 +1,8 @@
 import $ from '../../helpers'
 
+type Operation = (regs: Int32Array, [A, B, C]: number[]) => void
 // Mutative version of day 16’s opcodes for efficiency.
-const OPCODES = {
+const OPCODES: Record<string, Operation> = {
   addr: (regs, [A, B, C]) => (regs[C] = regs[A] + regs[B]),
   addi: (regs, [A, B, C]) => (regs[C] = regs[A] + B),
   mulr: (regs, [A, B, C]) => (regs[C] = regs[A] * regs[B]),
@@ -19,6 +20,7 @@ const OPCODES = {
   eqri: (regs, [A, B, C]) => (regs[C] = +(regs[A] === B)),
   eqrr: (regs, [A, B, C]) => (regs[C] = +(regs[A] === regs[B])),
 }
+type Opcode = keyof typeof OPCODES
 
 // I unfortunately couldn’t reverse-engineer the VM code to find out the
 // solution. Ultimately, I followed this explanation and adapted the final
@@ -49,7 +51,7 @@ export const run = (input: string[], init: number = 0) => {
   while (ip < bound) {
     const [opcode, ...args] = instructions[ip]
     registers[ipr] = ip
-    OPCODES[opcode](registers, args)
+    OPCODES[opcode](registers, args as number[])
     ip = registers[ipr] + 1
   }
 

@@ -1,14 +1,26 @@
 import $ from '../../helpers'
 
 class Player {
-  id: string
+  id: number
   items: number[]
   operation: string
   predicate: number
-  next: [string, string]
+  next: [number, number]
   inspections: number
 
-  constructor({ id, operation, predicate, next, items }) {
+  constructor({
+    id,
+    operation,
+    predicate,
+    next,
+    items,
+  }: {
+    id: Player['id']
+    operation: Player['operation']
+    predicate: Player['predicate']
+    next: Player['next']
+    items: Player['items']
+  }) {
     this.id = id
     this.items = items
     this.operation = operation
@@ -20,7 +32,7 @@ class Player {
   play(lcd = 0) {
     this.inspections++
 
-    let item = this.items.shift()
+    let item = this.items.shift()!
     eval(this.operation)
 
     if (lcd) item %= lcd
@@ -54,7 +66,7 @@ class Game {
     this.players.forEach(player => {
       while (player.items.length) {
         const { next, item } = player.play(this.lcd)
-        this.getPlayerById(next).receive(item)
+        this.getPlayerById(next)!.receive(item)
       }
     })
   }
@@ -74,20 +86,24 @@ class Game {
 }
 
 export const play = (input: string[], worried: boolean = false) => {
-  const players = input.map(player => {
-    // Courtesy of my brother: https://github.com/lgiraudel/advent-of-code/commit/05327d1fdd617003a3ca010d12119751b87c71dd#diff-5d9f4737b2b36f0267499d0e02982aa39794afb4facb7d805983ad3975fd355eR12
-    const regex =
-      /Monkey (?<id>\d):\n\s*Starting items: (?<items>\d+(?:, \d+)*)\n\s*Operation: (?<operation>.*)\n\s*Test: divisible by (?<predicate>\d+)\n\s*If true: throw to monkey (?<true>\d)\n\s*If false: throw to monkey (?<false>\d)/gm
-    const { groups } = regex.exec(player)
+  const players = input
+    .map(player => {
+      // Courtesy of my brother: https://github.com/lgiraudel/advent-of-code/commit/05327d1fdd617003a3ca010d12119751b87c71dd#diff-5d9f4737b2b36f0267499d0e02982aa39794afb4facb7d805983ad3975fd355eR12
+      const regex =
+        /Monkey (?<id>\d):\n\s*Starting items: (?<items>\d+(?:, \d+)*)\n\s*Operation: (?<operation>.*)\n\s*Test: divisible by (?<predicate>\d+)\n\s*If true: throw to monkey (?<true>\d)\n\s*If false: throw to monkey (?<false>\d)/gm
+      const { groups } = regex.exec(player)!
 
-    return new Player({
-      id: +groups.id,
-      next: [+groups.true, +groups.false],
-      predicate: +groups.predicate,
-      items: groups.items.split(', ').map(Number),
-      operation: groups.operation.replace(/(new|old)/g, 'item'),
+      if (!groups) return null
+
+      return new Player({
+        id: +groups.id,
+        next: [+groups.true, +groups.false],
+        predicate: +groups.predicate,
+        items: groups.items.split(', ').map(Number),
+        operation: groups.operation.replace(/(new|old)/g, 'item'),
+      })
     })
-  })
+    .filter(Boolean) as Player[]
 
   // Truth be told I had to read Reddit to figure out that part. I went pretty
   // far with a BigInt implementation but I got slightly off results so I had to

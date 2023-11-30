@@ -30,7 +30,7 @@ const next = (computer: Intcode, state: State) => {
 
   // Reorientate the robot. After the robot turns, it should always move forward
   // exactly one panel.
-  state.direction = (rotation ? $.turn.right : $.turn.left)(state.direction)
+  state.direction = (rotation ? $.turn.right : $.turn.left)(state.direction)!
   state.position = $.applyVector(state.position, state.direction)
 
   return state
@@ -41,7 +41,7 @@ export const paint = (input: string, start: number = 0) => {
   const state: State = {
     direction: $.turn.DIRECTIONS[0],
     position: [0, 0],
-    record: new Map([['0,0', start]]) as Map<Point, number>,
+    record: new Map<Point, number>([['0,0', start]]),
   }
 
   while (!computer.hasHalted()) next(computer, state)
@@ -50,7 +50,7 @@ export const paint = (input: string, start: number = 0) => {
 }
 
 export const render = (record: Map<Point, number>) => {
-  const coords = Array.from(record.keys()).map($.toCoords)
+  const coords = Array.from(record.keys()).map(point => $.toCoords(point))
   const [minX, maxX, minY, maxY] = $.boundaries(coords)
 
   return $.grid.render(

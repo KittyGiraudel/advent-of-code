@@ -6,7 +6,7 @@ const getGeologicIndex = (
   y: number,
   target: Coords,
   depth: number
-) => {
+): number => {
   if ((x === 0 && y === 0) || (x === target[0] && y === target[1])) return 0
   if (y === 0) return x * 16807
   if (x === 0) return y * 48271
@@ -16,7 +16,7 @@ const getGeologicIndex = (
   )
 }
 
-const getErosionLevel = $.memo(
+const getErosionLevel = $.memo<number>(
   (x: number, y: number, target: Coords, depth: number) =>
     (getGeologicIndex(x, y, target, depth) + depth) % 20183
 )
@@ -31,9 +31,9 @@ export const getRisk = (depth: number, target: Coords) =>
     0
   )
 
-const getNeighbors = $.memo(
+const getNeighbors = $.memo<Coords[]>(
   (x: number, y: number, width: number, height: number) =>
-    ($.bordering([x, y], 'COORDS') as Coords[]).filter(
+    $.bordering([x, y], 'COORDS').filter(
       ([x, y]) => x >= 0 && x < width && y >= 0 && y < height
     )
 )
@@ -45,7 +45,7 @@ export const getDuration = (depth: number, target: Coords) => {
   const timeMap: Map<string, number> = new Map()
 
   while (frontier.length) {
-    const [min, x, y, tool] = frontier.shift()
+    const [min, x, y, tool] = frontier.shift()!
     const key = $.toPoint([x, y, tool])
     const bestTime = timeMap.get(key) || Infinity
 

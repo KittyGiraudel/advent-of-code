@@ -7,7 +7,7 @@ type Cube = {
   yMax: number
   zMin: number
   zMax: number
-  sign?: number
+  sign: number
 }
 
 // Return the boundaries of a cubic area of the given width.
@@ -24,9 +24,8 @@ const getArea = (width: number = Infinity) =>
 // Parse a given instruction into a set of boundaries and a sign.
 const parseLine = (line: string) => {
   const [state, rest] = line.split(' ')
-  const [xMin, xMax, yMin, yMax, zMin, zMax] = rest
-    .match(/(-?\d+)/g)
-    .map(Number)
+  const [xMin, xMax, yMin, yMax, zMin, zMax] =
+    rest.match(/(-?\d+)/g)?.map(Number) ?? []
   const sign = state === 'on' ? 1 : -1
 
   return { sign, xMin, xMax, yMin, yMax, zMin, zMax } as Cube
@@ -58,12 +57,12 @@ export const reboot = (input: string[], max: number) => {
     .map(parseLine)
     .filter(cuboid => !max || getIntersection(area, cuboid))
 
-  const cuboids = instructions.reduce((acc, instruction) => {
+  const cuboids = instructions.reduce<Cube[]>((acc, instruction) => {
     const intersections = acc
       .map(cuboid => getIntersection(cuboid, instruction))
       .filter(Boolean)
     if (instruction.sign === 1) intersections.push(instruction)
-    return acc.concat(intersections)
+    return acc.concat(intersections as Cube[])
   }, [])
 
   return $.sum(cuboids.map(cuboid => getVolume(cuboid) * cuboid.sign))

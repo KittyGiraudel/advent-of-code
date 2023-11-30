@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Grid } from '../../types'
+import { Coords, CoordsAndPoint, Grid, Point } from '../../types'
 
 const VECTORS: Coords[] = [
   [-1, 0],
@@ -11,7 +11,7 @@ const VECTORS: Coords[] = [
 export const run = (input: string[]): [string, number] => {
   const grid = $.grid.create<string>(input)
   const read = (coords: Coords) => $.access(grid, coords)?.trim()
-  const visited = []
+  const visited: Point[] = []
   let position: Coords = [0, grid[0].findIndex(v => v === '|')]
   let vector: Coords = VECTORS[2]
   let letters = ''
@@ -23,7 +23,7 @@ export const run = (input: string[]): [string, number] => {
     if (/[A-Z]/.test(value)) letters += value
     // … change direction when hitting a corner …
     if (value === '+') {
-      const index = $.bordering(position)
+      const index = $.bordering(position, 'BOTH')
         // … by finding the neighboring track that’s not yet visited …
         .findIndex(
           ({ coords, point }) =>

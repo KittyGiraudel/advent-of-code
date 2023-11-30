@@ -10,9 +10,10 @@ type Disk = {
 
 const getDisks = (dump: string[]) =>
   dump.slice(2).map(line => {
-    const [, x, y, size, used, available] = line
-      .match(/x(\d+)-y(\d+)\s+(\d+)T\s+(\d+)T\s+(\d+)T\s+(\d+)/)
-      .map(Number)
+    const [, x, y, size, used, available] =
+      line
+        .match(/x(\d+)-y(\d+)\s+(\d+)T\s+(\d+)T\s+(\d+)T\s+(\d+)/)
+        ?.map(Number) ?? []
 
     return { coords: [y, x], size, used, available } as Disk
   })
@@ -40,19 +41,19 @@ export const run = (dump: string[]) => {
 export const getData = (dump: string[]) => {
   const disks = getDisks(dump)
   const maxCi = Math.max(...disks.map(disk => disk.coords[1]))
-  const emptyNode = disks.find(disk => disk.used === 0)
+  const emptyNode = disks.find(disk => disk.used === 0)!
   const oversizedDisks = disks.filter(disk => disk.used > emptyNode.size)
   const availableDisks = disks
     .filter(disk => disk.used <= emptyNode.size)
     .map(disk => disk.coords)
-    .map($.toPoint)
+    .map(coords => $.toPoint(coords))
 
   let data: Coords = [0, maxCi]
   let curr: Coords = emptyNode.coords
   let total: number = 0
 
   const getNextNodes = (curr: Coords) =>
-    $.bordering(curr, 'COORDS').filter((coords: Coords) => {
+    $.bordering(curr, 'COORDS').filter(coords => {
       const point = $.toPoint(coords)
       return availableDisks.includes(point) && point !== $.toPoint(data)
     })

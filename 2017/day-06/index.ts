@@ -2,7 +2,7 @@ import $ from '../../helpers'
 
 export const run = (memory: number[]): [number, number] => {
   memory = memory.slice(0)
-  const history = []
+  const history: string[] = []
   let cycles = 0
 
   while (!history.includes(memory.join(','))) {

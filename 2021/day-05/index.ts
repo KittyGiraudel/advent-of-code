@@ -1,4 +1,5 @@
 import $ from '../../helpers'
+import { Point } from '../../types'
 
 export const getOverlappingPoints = (
   lines: string[],
@@ -6,7 +7,9 @@ export const getOverlappingPoints = (
 ) => {
   // Break down every line into a pair of vectors, each vector being a pair of
   // number (x,y coordinates).
-  const vectors = lines.map(line => line.split(' -> ').map($.toCoords))
+  const vectors = lines.map(line =>
+    line.split(' -> ').map(point => $.toCoords(point as Point))
+  )
 
   const map = vectors.reduce((acc, vector) => {
     const [start, end] = vector

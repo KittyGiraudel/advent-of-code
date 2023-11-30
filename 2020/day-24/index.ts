@@ -38,10 +38,10 @@ const processLines = (lines: string[]) =>
   lines
     .map(parseLine)
     .map(vectors => vectors.reduce($.applyVector, [0, 0]))
-    .map($.toPoint)
-    .reduce(
+    .map(coords => $.toPoint(coords))
+    .reduce<Mappy>(
       (acc, key) => acc.set(key, acc.get(key) === 'B' ? 'W' : 'B'),
-      new Map() as Mappy
+      new Map()
     )
 
 // Get the coordinates of all 6 neighbours of the tile at the given coordinates.
@@ -51,11 +51,11 @@ const processLines = (lines: string[]) =>
 const getNeighborCoords = (key: Point, cache: Cache) => {
   const coords = $.toCoords(key)
 
-  if (cache.has(key)) return cache.get(key)
+  if (cache.has(key)) return cache.get(key) as Point[]
 
   const neighborCoords = Object.values(VECTORS)
     .map(vector => $.applyVector(coords, vector))
-    .map($.toPoint)
+    .map(coords => $.toPoint(coords))
 
   cache.set(key, neighborCoords)
 
@@ -91,14 +91,14 @@ const transition = (coords: Point, origin: Mappy, cache: Cache) => {
 // @param origin - Storage map
 // @param cache - Coordinates cache
 const cycle = (origin: Mappy, cache: Cache) =>
-  Array.from(origin.keys()).reduce((acc, key) => {
+  Array.from(origin.keys()).reduce<Mappy>((acc, key) => {
     getNeighborCoords(key, cache).forEach(coords => {
       if (acc.has(coords)) return
       acc.set(coords, transition(coords, origin, cache))
     })
 
     return acc.set(key, transition(key, origin, cache))
-  }, new Map(origin) as Mappy)
+  }, new Map(origin))
 
 // Count the amount of black tiles on the floor.
 // @param map - Storage map

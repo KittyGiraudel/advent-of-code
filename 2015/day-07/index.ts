@@ -1,4 +1,4 @@
-type Graph = Map<string, { deps: RegExpMatchArray; raw: string }>
+type Graph = Map<string, { deps: RegExpMatchArray | null; raw: string }>
 type Registers = Record<string, number>
 
 const OPERATORS = {
@@ -10,8 +10,9 @@ const OPERATORS = {
 }
 
 const prepare = (string: string) => {
+  type Operator = keyof typeof OPERATORS
   for (let operator in OPERATORS)
-    string = string.replace(operator, OPERATORS[operator])
+    string = string.replace(operator, OPERATORS[operator as Operator])
 
   // Funnily enough, the `with (registers)` trick outlined in the article below
   // does not work because one of the keys is `do`, which is a reserved word in
@@ -36,11 +37,11 @@ export const run = (input: string[], registers: Registers = {}) => {
   while (graph.size) {
     const keys = Array.from(graph.keys())
     const next = keys.find(key =>
-      graph.get(key).deps.every(dep => dep in registers)
-    )
+      graph.get(key)!.deps!.every(dep => dep in registers)
+    )!
 
     // This is how to keep bitwise NOT within the 0–65535 range.
-    registers[next] = eval(prepare(graph.get(next).raw)) & 65535
+    registers[next] = eval(prepare(graph.get(next)!.raw)) & 65535
     graph.delete(next)
   }
 

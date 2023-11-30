@@ -43,7 +43,11 @@ export const playQuantum = (p1p: number, p2p: number) => {
   const frequencies = getSumFrequencies()
   const sums = Array.from(frequencies.keys())
 
-  const countWins = (p1: Player, p2: Player, playerIndex: number) => {
+  const countWins = (
+    p1: Player,
+    p2: Player,
+    playerIndex: number
+  ): [number, number] => {
     const key = [
       p1.score,
       p1.position,
@@ -55,7 +59,7 @@ export const playQuantum = (p1p: number, p2p: number) => {
     if (p1.score >= 21) cache.set(key, [1, 0])
     if (p2.score >= 21) cache.set(key, [0, 1])
 
-    if (cache.has(key)) return cache.get(key)
+    if (cache.has(key)) return cache.get(key) as [number, number]
 
     const wins: [number, number] = [0, 0]
 
@@ -66,22 +70,23 @@ export const playQuantum = (p1p: number, p2p: number) => {
     // only be made by rolling 1-1-1, but 4 can be achieved by rolling 1-2-1,
     // 1-1-2 or 2-1-1.
     for (let i = Math.min(...sums); i <= Math.max(...sums); i++) {
+      const frequency = frequencies.get(i)!
       if (playerIndex === 0) {
         const nextP1 = { ...p1 }
         nextP1.position = ((p1.position - 1 + i) % 10) + 1
         nextP1.score += nextP1.position
 
         const curr = countWins(nextP1, p2, 1)
-        wins[0] += frequencies.get(i) * curr[0]
-        wins[1] += frequencies.get(i) * curr[1]
+        wins[0] += frequency * curr[0]
+        wins[1] += frequency * curr[1]
       } else {
         const nextP2 = { ...p2 }
         nextP2.position = ((p2.position - 1 + i) % 10) + 1
         nextP2.score += nextP2.position
 
         const curr = countWins(p1, nextP2, 0)
-        wins[0] += frequencies.get(i) * curr[0]
-        wins[1] += frequencies.get(i) * curr[1]
+        wins[0] += frequency * curr[0]
+        wins[1] += frequency * curr[1]
       }
     }
 

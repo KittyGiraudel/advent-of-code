@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Point } from '../../types'
+import { Coords, Point } from '../../types'
 
 const BLOCK = '#'
 const SAND = 'o'
@@ -11,7 +11,7 @@ class Cave {
   minX: number
   maxX: number
 
-  constructor(walls, withFloor = false) {
+  constructor(walls: Coords[][], withFloor = false) {
     // My first version was using a 2D grid to store the data, which was pretty
     // convenient to debug the code since I could print it to visualize the
     // cave. However, it turned out to be unsurprisingly super slow so I
@@ -53,7 +53,7 @@ class Cave {
     this.erectWalls(walls)
   }
 
-  erectWalls(walls) {
+  erectWalls(walls: Coords[][]) {
     walls.forEach(wall => {
       wall.forEach(([x, y], index: number) => {
         // Mark the current cell as a wall brick.
@@ -102,7 +102,7 @@ class Cave {
     return this
   }
 
-  fillAt(x: number, y: number) {
+  fillAt(x: number, y: number): this | null {
     // Respectively part 1 and part 2 loop breakers: whether we have reached the
     // abyss (out of bounds), or whether we’ve completed the mountain (source).
     if (y >= this.maxY || this.get(x, y) === 'o') return null
@@ -121,7 +121,9 @@ class Cave {
 }
 
 export const countSandUnits = (input: string[], withFloor: boolean = false) => {
-  const walls = input.map(wall => wall.split(' -> ').map($.toCoords))
+  const walls = input.map(wall =>
+    wall.split(' -> ').map(string => $.toCoords(string as Point))
+  )
   const cave = new Cave(walls, withFloor)
 
   return cave.fill([500, 0]).count()

@@ -7,8 +7,8 @@ type Node = {
 }
 
 const parse = (input: string[]) => {
-  const start: Node = { position: null, elevation: 0 }
-  const end: Node = { position: null, elevation: 0 }
+  const start: Node = { position: [0, 0], elevation: 0 }
+  const end: Node = { position: [0, 0], elevation: 0 }
   const grid = $.grid.create(input, (value, ri, ci) => {
     if (value === 'S') {
       start.position = [ri, ci]

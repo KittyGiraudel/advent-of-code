@@ -19,7 +19,11 @@ export const parseInput = ([rawRules, rawTicket, rawNearbyTickets]: string[]) =>
     rules: rawRules
       .split('\n')
       .map(line => line.match(/([\w\s]+): (\d+)-(\d+) or (\d+)-(\d+)/))
-      .map(match => [match[1], [+match[2], +match[3]], [+match[4], +match[5]]]),
+      .map(match => [
+        match![1],
+        [+match![2], +match![3]],
+        [+match![4], +match![5]],
+      ]),
     ticket: rawTicket.split('\n')[1].split(',').map(Number),
     nearbyTickets: rawNearbyTickets
       .split('\n')

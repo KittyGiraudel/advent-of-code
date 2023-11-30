@@ -58,10 +58,10 @@ const getPaths = (
   }
 
   // Otherwise, iterate over siblings, and recursively pursue the paths.
-  return Array.from(siblings).reduce(
+  return Array.from(siblings).reduce<string[][]>(
     (acc, sibling) =>
       acc.concat(getPaths(graph, sibling, withDuplicate, [...path, cave])),
-    [] as string[][]
+    []
   )
 }
 

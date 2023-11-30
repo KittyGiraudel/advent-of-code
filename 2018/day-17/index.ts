@@ -2,17 +2,17 @@ import $ from '../../helpers'
 import { Grid, Coords, Point } from '../../types'
 
 const generateMap = (input: string[]) =>
-  input.reduce((acc, line) => {
-    const match = line.match(/([xy])=(\d+), ([xy])=(\d+)..(\d+)/)
+  input.reduce<Record<Point, string>>((acc, line) => {
+    const match = line.match(/([xy])=(\d+), ([xy])=(\d+)..(\d+)/)!
 
     for (let i = +match[4]; i <= +match[5]; i++) {
       const y = match[1] === 'y' ? +match[2] : i
       const x = match[1] === 'x' ? +match[2] : i
-      acc[x + ',' + y] = '#'
+      acc[$.toPoint([x, y])] = '#'
     }
 
     return acc
-  }, {} as Record<Point, string>)
+  }, {})
 
 const fillLevel = (grid: Grid<string>, position: Coords) => {
   fillSide(grid, position, +1)
@@ -75,11 +75,13 @@ export const scan = (
   source: Coords = [500, 0]
 ): [number, number] => {
   const map = generateMap(input)
-  const [, maxX, minY, maxY] = $.boundaries(Object.keys(map).map($.toCoords))
+  const [, maxX, minY, maxY] = $.boundaries(
+    Object.keys(map).map(point => $.toCoords(point as Point))
+  )
   const grid = $.grid.init(
     maxX + 1,
     maxY + 1,
-    (x, y) => map[x + ',' + y] || '.'
+    (x, y) => map[$.toPoint([x, y])] || '.'
   )
 
   // Honestly I couldn’t figure out to solve this problem so I took over a

@@ -4,7 +4,7 @@ import $ from '../../helpers'
 // @param current - Current cup value
 // @param picks - 3 picked cups
 // @param max - Maximum value
-const getDest = (current: number, picks: number[], max: number) => {
+const getDest = (current: number, picks: number[], max: number): number => {
   const destination = current - 1
   if (destination > 0 && !picks.includes(destination)) return destination
   return getDest(destination || max + 1, picks, max)
@@ -41,7 +41,7 @@ const init = (input: number[], size: number) => {
   // map to the first provided number.
   if (size > input.length) {
     map[size] = input[0]
-    map[input.at(-1)] = input.length + 1
+    map[input.at(-1)!] = input.length + 1
   }
 
   return map

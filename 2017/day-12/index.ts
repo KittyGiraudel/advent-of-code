@@ -4,7 +4,7 @@ export const run = (input: string[]): [number, number] => {
   const graph = new Map()
 
   input.forEach(line => {
-    const [leftNode, ...rightNodes] = line.match(/\d+/g).map(Number)
+    const [leftNode, ...rightNodes] = line.match(/\d+/g)?.map(Number) ?? []
     const gLeft = graph.get(leftNode) || new Set()
 
     rightNodes.forEach(rightNode => {
@@ -24,7 +24,7 @@ export const run = (input: string[]): [number, number] => {
   }
 
   const groups = []
-  const visited = []
+  const visited: number[] = []
 
   Array.from(graph.keys()).forEach(key => {
     if (visited.includes(key)) return

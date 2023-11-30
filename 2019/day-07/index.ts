@@ -2,9 +2,9 @@ import $ from '../../helpers'
 import { Intcode } from '../day-05'
 
 export const amplify = (numbers: string, sequence: number[]) =>
-  sequence.reduce(
+  sequence.reduce<number>(
     (acc, digit) =>
-      new Intcode(numbers).setInput([digit, acc]).run().getOutput() as number,
+      +new Intcode(numbers).setInput([digit, acc]).run().getOutput(),
     0
   )
 

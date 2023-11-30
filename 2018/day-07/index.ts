@@ -4,7 +4,7 @@ const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 type Graph = Map<string, Set<string>>
 
 const getGraph = (input: string[]) => {
-  const pairs = input.map(line => line.slice(1).match(/([A-Z])/g))
+  const pairs = input.map(line => line.slice(1).match(/([A-Z])/g) as string[])
   const graph: Graph = new Map()
 
   pairs.forEach(([a, b]) => {
@@ -33,9 +33,9 @@ export const sequential = (input: string[]) => {
   while (graph.size) {
     const next = Array.from(graph.keys())
       .sort()
-      .find(key => !graph.get(key).size)
+      .find(key => !graph.get(key)!.size)!
     graph.delete(next)
-    for (let [key] of graph) graph.get(key).delete(next)
+    for (let [key] of graph) graph.get(key)!.delete(next)
     order.push(next)
   }
 
@@ -50,11 +50,11 @@ export const parallel = (
   const graph = getGraph(input)
   // Contains the letter in order of resolution, just like in the sequential
   // function.
-  const order = []
+  const order: string[] = []
   // Contains the parallel jobs as dealt by the workers.
-  const jobs = []
+  const jobs: { time: number; letter: string }[] = []
   // Contains the next item to be fully resolved as it got processed by a job.
-  let next = null
+  let next: string | null = null
   // Contains the duration it takes to fulfill the whole queue.
   let duration = 0
 
@@ -66,7 +66,7 @@ export const parallel = (
     const ready = Array.from(graph.keys())
       .sort()
       .filter(letter => {
-        const isReady = graph.get(letter).size === 0
+        const isReady = graph.get(letter)!.size === 0
         const isProcessed = jobs.map(job => job.letter).includes(letter)
         const isNext = letter === next
 
@@ -85,14 +85,14 @@ export const parallel = (
     // incrementing of the counter, and no ticking down running jobs.
     if (next) {
       graph.delete(next)
-      for (let [key] of graph) graph.get(key).delete(next)
+      for (let [key] of graph) graph.get(key)!.delete(next)
       order.push(next)
       next = null
     } else {
       duration++
       jobs.forEach(job => job.time--)
       jobs.forEach((job, i, array) => {
-        if (!job.time) next = array.splice(i, 1).pop().letter
+        if (!job.time) next = array.splice(i, 1).pop()!.letter
       })
     }
   }

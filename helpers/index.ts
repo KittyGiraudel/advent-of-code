@@ -42,6 +42,7 @@ import swap from './swap'
 import toAscii from './toAscii'
 import toBin from './toBin'
 import toCoords from './toCoords'
+import toCoordsObj from './toCoordsObj'
 import toDec from './toDec'
 import toPoint from './toPoint'
 import triangular from './triangular'
@@ -95,6 +96,7 @@ export default {
   toAscii,
   toBin,
   toCoords,
+  toCoordsObj,
   toDec,
   toPoint,
   triangular,

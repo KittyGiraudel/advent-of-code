@@ -51,7 +51,8 @@ const move = (grid: Grid<string>, point: Point, cart: Cart) => {
   const nextCell = $.access(grid, nextCoords)
   // If the destination cell is indeed a corner, the cart orientation needs
   // to be adjusted based on the corner tile.
-  if (nextCell in CORNERS) orientation = CORNERS[nextCell][orientation]
+  if (nextCell in CORNERS)
+    orientation = CORNERS[nextCell as keyof typeof CORNERS][orientation]
 
   return { point: $.toPoint(nextCoords), orientation }
 }
@@ -63,32 +64,30 @@ const gridOrder = (a: Point, b: Point) => {
 }
 
 const tick = (grid: Grid<string>, carts: CartMap, cleanUp: boolean = false) => {
-  Object.keys(carts)
-    .sort(gridOrder)
-    .forEach((point: Point) => {
-      const cart = carts[point]
+  ;(Object.keys(carts) as Point[]).sort(gridOrder).forEach(point => {
+    const cart = carts[point]
 
-      // This cannot be done with a `.filter` because that would be resolved
-      // before iterating, while the object of carts gets updated within every
-      // loop iteration.
-      if (!cart || cart.crashed) return
+    // This cannot be done with a `.filter` because that would be resolved
+    // before iterating, while the object of carts gets updated within every
+    // loop iteration.
+    if (!cart || cart.crashed) return
 
-      // Get the coordinates of the destination cell, as well as the orientation
-      // for the cart once moved.
-      const next = move(grid, point, cart)
+    // Get the coordinates of the destination cell, as well as the orientation
+    // for the cart once moved.
+    const next = move(grid, point, cart)
 
-      // If there is already a cart in the destination cell, mark the existing
-      // cart as crashed (or delete it altogether if running in cleanup mode).
-      if (next.point in carts) {
-        if (cleanUp) delete carts[next.point]
-        else carts[next.point].crashed = true
-      } else {
-        carts[next.point] = { ...cart, orientation: next.orientation }
-      }
+    // If there is already a cart in the destination cell, mark the existing
+    // cart as crashed (or delete it altogether if running in cleanup mode).
+    if (next.point in carts) {
+      if (cleanUp) delete carts[next.point]
+      else carts[next.point].crashed = true
+    } else {
+      carts[next.point] = { ...cart, orientation: next.orientation }
+    }
 
-      // The cart has either moved or crashed, so it should always be deleted.
-      delete carts[point]
-    })
+    // The cart has either moved or crashed, so it should always be deleted.
+    delete carts[point]
+  })
 }
 
 export const run = (rows: string[], cleanUp: boolean = false) => {
@@ -100,7 +99,7 @@ export const run = (rows: string[], cleanUp: boolean = false) => {
   // From there onwards, the grid is never modified again, and is only read.
   const grid = $.grid.create(rows, (value, ri, ci) => {
     if (/[<>v^]/.test(value))
-      carts[ri + ',' + ci] = {
+      carts[$.toPoint([ri, ci])] = {
         orientation: value as Orientation,
         index: $.loopIndex(0, 2),
       }

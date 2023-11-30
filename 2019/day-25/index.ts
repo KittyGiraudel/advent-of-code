@@ -42,5 +42,5 @@ export const inspect = (input: string) => {
     .map(code => computer.setInput(code).run().getOutput() as number[])
     .map(output => $.fromAscii(output))
 
-  return +moves.pop().match(/\d+/)[0]
+  return +moves.pop()!.match(/\d+/)![0]
 }

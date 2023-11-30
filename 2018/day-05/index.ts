@@ -31,8 +31,11 @@ export const reduce = (input: string) => {
   // considering it relies on the fact that XOR of A and a, B and b, etc is 32.
   // https://www.reddit.com/r/adventofcode/comments/a3912m/2018_day_5_solutions/
   return Array.from(input)
-    .reduce((acc, char) => {
-      if (!acc.length || (acc.at(-1).charCodeAt() ^ char.charCodeAt(0)) !== 32)
+    .reduce<string[]>((acc, char) => {
+      if (
+        !acc.length ||
+        (acc.at(-1)!.charCodeAt(0) ^ char.charCodeAt(0)) !== 32
+      )
         acc.push(char)
       else acc.pop()
       return acc

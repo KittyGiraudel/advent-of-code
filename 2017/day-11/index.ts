@@ -30,13 +30,13 @@ const createGraph = (start: Coords, end: Coords) =>
   }).from
 
 const walk = (steps: string[]) =>
-  steps.reduce(
+  steps.reduce<{ position: Coords; visited: Set<Point> }>(
     (acc, step) => {
       acc.position = $.applyVector(acc.position, VECTORS[step])
       acc.visited.add($.toPoint(acc.position))
       return acc
     },
-    { position: [0, 0] as Coords, visited: new Set(['0,0']) as Set<Point> }
+    { position: [0, 0], visited: new Set(['0,0']) }
   )
 
 const getPathLength = (start: Coords, end: Coords) =>
@@ -46,9 +46,9 @@ export const run = (instructions: string[]): [number, number] => {
   const { position: end, visited } = walk(instructions)
   const start: Coords = [0, 0]
   const furthest = Array.from(visited)
-    .map($.toCoords)
+    .map(point => $.toCoords(point))
     .sort((a, b) => distance(a, start) - distance(b, start))
-    .pop()
+    .pop()!
 
   return [
     // Find the minimum amount of steps to reach the destination.

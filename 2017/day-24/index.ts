@@ -14,7 +14,7 @@ const getPaths = (
   edge: number,
   score: number = 0,
   length: number = 1
-) => {
+): { score: number; length: number }[] => {
   // Find the available ports which have an edge matching the current one.
   const options = Array.from(ports).filter(port => matches(port, edge))
 
@@ -25,7 +25,7 @@ const getPaths = (
 
   // For each matching port, fork the set of available ports without it, and
   // recursive look for new nodes.
-  return options.reduce((acc, port) => {
+  return options.reduce<{ score: number; length: number }[]>((acc, port) => {
     // I ttried a few alternatives here, between splitting and searching, or
     // slicing before/after the slash, and it’s all pretty much the same.
     const sides = port.split('/')
@@ -33,7 +33,7 @@ const getPaths = (
     const newPorts = discard(ports, port)
 
     return acc.concat(
-      getPaths(newPorts, +newEdge, score + edge * 2, length + 1)
+      getPaths(newPorts, +(newEdge || 0), score + edge * 2, length + 1)
     )
   }, [])
 }
@@ -43,7 +43,7 @@ export const run = (input: string[]) =>
     .filter(port => port.startsWith('0/'))
     .map(start => {
       const ports = discard(input, start)
-      const edge = +start.split('/').pop()
+      const edge = +(start.split('/').pop() || 0)
 
       return getPaths(ports, edge)
     })

@@ -1,19 +1,19 @@
 import $ from '../../helpers'
 
-const isDir = item => item instanceof Dir
+const isDir = (item: unknown) => item instanceof Dir
 
 class Dir {
   name: string
   content: (Dir | File)[]
-  parent: Dir
+  parent: Dir | null
 
-  constructor(name, parent) {
+  constructor(name: Dir['name'], parent: Dir['parent']) {
     this.name = name
     this.content = []
     this.parent = parent
   }
 
-  add(item) {
+  add(item: Dir['content'][number]) {
     this.content.push(item)
   }
 }
@@ -22,7 +22,7 @@ class File {
   name: string
   size: number
 
-  constructor(name, size) {
+  constructor(name: File['name'], size: File['size']) {
     this.name = name
     this.size = Number(size)
   }
@@ -30,7 +30,7 @@ class File {
 
 export const parseOutput = (lines: string[]) => {
   const drive = new Dir('/', null)
-  let cwd = null
+  let cwd: Dir | null = null
 
   lines.forEach(line => {
     // If the line is a dir change, we have 3 possible cases: it sets the cwd to
@@ -40,8 +40,11 @@ export const parseOutput = (lines: string[]) => {
     if (line.startsWith('$ cd')) {
       const name = line.split(' ').pop()
       if (name === '/') cwd = drive
-      else if (name === '..') cwd = cwd.parent
-      else cwd = cwd.content.filter(isDir).find(item => item.name === name)
+      else if (name === '..') cwd = cwd!.parent
+      else
+        cwd = cwd!.content
+          .filter(isDir)
+          .find(item => item.name === name) as Dir | null
     }
 
     // If the line is a list command, there is nothing to do. The listed items
@@ -54,10 +57,10 @@ export const parseOutput = (lines: string[]) => {
     // save a reference to the current working directory on their instance
     // so we can easily handle `$ cd ..` without having to maintain a stack.
     else if (line.startsWith('dir')) {
-      cwd.add(new Dir(line.split(' ').pop(), cwd))
+      ;(cwd as Dir).add(new Dir(line.split(' ').pop()!, cwd as Dir))
     } else {
       const [size, name] = line.split(' ')
-      cwd.add(new File(name, size))
+      ;(cwd as Dir).add(new File(name, +size))
     }
   })
 
@@ -67,17 +70,21 @@ export const parseOutput = (lines: string[]) => {
 // Return the size of an item by checking its `size` property for files, or by
 // recursively going through its content and computing the size of its
 // sub-directories.
-const getSize = (item: Dir | File) =>
+const getSize = (item: Dir | File): number =>
   (item as File).size ||
   (item as Dir).content.reduce((acc, item) => acc + getSize(item), 0)
 
 // Return all the directories from the drive as a flat array (no longer nested).
 const getDirs = (drive: Dir) =>
-  drive.content.reduce(function collectDirs(acc, item) {
+  drive.content.reduce<(File | Dir)[]>(function collectDirs(
+    acc,
+    item
+  ): (File | Dir)[] {
     return isDir(item)
       ? (item as Dir).content.reduce(collectDirs, [...acc, item])
       : acc
-  }, [] as Dir[])
+  },
+  [])
 
 // This is part 1: it computes the total size of all directories which have a
 // size below 100,000. To do so, it lists all directories from the drive

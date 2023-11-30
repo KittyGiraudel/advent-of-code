@@ -27,6 +27,7 @@ export const battleA = (instructions: string[]) => {
       if (isPaper(self)) return acc + PAPER + LOSS
       if (isScissors(self)) return acc + SCISSORS + DRAW
     }
+    return acc
   }, 0)
 }
 
@@ -47,5 +48,6 @@ export const battleB = (instructions: string[]) => {
       if (isPaper(opponent)) return acc + SCISSORS + WIN
       if (isScissors(opponent)) return acc + ROCK + WIN
     }
+    return acc
   }, 0)
 }

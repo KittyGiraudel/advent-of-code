@@ -3,9 +3,9 @@
  */
 const rotate = <T>(array: T[], n: number = 1) => {
   if (n > 0) {
-    while (n--) array.unshift(array.pop())
+    while (n--) array.unshift(array.pop()!)
   } else if (n < 0) {
-    while (n++) array.push(array.shift())
+    while (n++) array.push(array.shift()!)
   }
   return array
 }

@@ -6,7 +6,7 @@ const DIRECTIONS = [1, 4, 2, 3]
 
 type Node = {
   position: Coords
-  program?: Intcode
+  program: Intcode
   minutes?: number
 }
 
@@ -19,8 +19,8 @@ const addProgramCopy = (curr: Node) => (next: Node, index: number) =>
 const discover = (input: string) => {
   const start: Node = { position: [0, 0], program: new Intcode(input) }
   const getNextNodes = (curr: Node) =>
-    ($.bordering(curr.position, 'COORDS') as Coords[])
-      .map(coords => ({ position: coords }))
+    $.bordering(curr.position, 'COORDS')
+      .map(coords => ({ position: coords, program: new Intcode('') }))
       .map(addProgramCopy(curr))
       .filter((next: Node) => next.program.outputs[0])
 
@@ -48,8 +48,14 @@ const padGrid = (grid: Grid<string>, width: number) =>
     Array.from('#'.repeat(width + 2)),
   ] as Grid<string>
 
-const render = ({ from, end }) => {
-  const cells = Object.keys(from).map($.toCoords)
+const render = ({
+  from,
+  end,
+}: {
+  from: SearchGraph
+  end: { coords: Coords }
+}) => {
+  const cells = Object.keys(from).map(point => $.toCoords(point as Point))
   const [minY, maxY, minX, maxX] = $.boundaries(cells)
   const width = maxX + 1 - minX
   const height = maxY + 1 - minY
@@ -76,7 +82,7 @@ export const getOxygenDuration = (input: string) => {
 
       maxMinutes = Math.max(curr.minutes, maxMinutes)
 
-      return $.bordering(curr.position, 'COORDS').map((position: Coords) => ({
+      return $.bordering(curr.position, 'COORDS').map(position => ({
         position,
         minutes: curr.minutes + 1,
       }))

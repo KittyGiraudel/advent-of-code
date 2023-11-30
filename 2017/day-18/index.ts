@@ -52,6 +52,8 @@ class Computer {
     this.pointer = 0
     this.counters = {}
     this.listeners = {}
+    this.instructions = []
+    this.waiting = false
   }
 
   get halted() {
@@ -87,12 +89,14 @@ class Computer {
   }
 
   get(key: string | number) {
-    return this.registers[key] ?? +key
+    type Key = keyof typeof this.registers
+    return this.registers[key as Key] ?? +key
   }
 
   set(key: string, value: number) {
-    if (!(key in this.registers)) this.registers[key] = 0
-    this.registers[key] = value
+    type Key = keyof typeof this.registers
+    if (!(key in this.registers)) this.registers[key as Key] = 0
+    this.registers[key as Key] = value
   }
 
   next() {
@@ -106,7 +110,7 @@ class Computer {
     else if (op === 'jgz') this.pointer += this.get(a) > 0 ? this.get(b) - 1 : 0
     else if (op === 'snd') this.fire('send', this.get(a))
     else if (op === 'rcv') {
-      if (this.queue.length) this.set(a, this.queue.pop())
+      if (this.queue.length) this.set(a, this.queue.pop()!)
       else return
     }
 
@@ -127,5 +131,5 @@ export const run = (instructions: string[]) => {
 
   while (!network.halted) network.run()
 
-  return network.nodes.at(-1).counters.send
+  return network.nodes.at(-1)!.counters.send
 }

@@ -6,7 +6,7 @@ type Fold = ['x' | 'y', number]
 export const parseInput = ([coords, instructions]: string[]) => {
   const dots = new Set(coords.split('\n') as Point[])
   const folds = instructions.split('\n').map(instruction => {
-    const [, axis, line] = instruction.match(/([xy])=(\d+)$/)
+    const [, axis, line] = instruction.match(/([xy])=(\d+)$/) ?? []
     return [axis, +line] as Fold
   })
 
@@ -31,15 +31,12 @@ export const foldOnce = (dots: Set<Point>, [axis, line]: Fold) =>
 export const foldAll = (input: string[]) => {
   const { dots, folds } = parseInput(input)
 
-  return folds.reduce(
-    (acc, fold) => foldOnce(acc, fold),
-    new Set(dots) as Set<Point>
-  )
+  return folds.reduce((acc, fold) => foldOnce(acc, fold), new Set<Point>(dots))
 }
 
 export const render = (dots: Set<Point>) => {
   const isDot = (x: number, y: number) => dots.has($.toPoint([x, y]))
-  const coords = Array.from(dots, $.toCoords)
+  const coords = Array.from(dots).map(point => $.toCoords(point))
   const [, xMax, , yMax] = $.boundaries(coords)
   const grid = $.grid.init(xMax + 1, yMax + 1, (x, y) =>
     isDot(x, y) ? '#' : ' '

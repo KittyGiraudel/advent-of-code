@@ -8,7 +8,7 @@ const isValidLoose = (line: string) => {
 const isValidStrict = (line: string) => {
   if (!line.match(/(\w)\w\1/)) return false
 
-  const pairs: Record<number, number[]> = {}
+  const pairs: Record<string, number[]> = {}
 
   for (let i = 1; i < line.length; i++) {
     const pair = line[i - 1] + line[i]

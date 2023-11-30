@@ -21,7 +21,7 @@ export const cycle = (curr: string) => {
       i % width === width - 1 ? null : i + 1,
       i + width,
       i % width === 0 ? null : i - 1,
-    ].filter(i => curr?.[i] === BUG)
+    ].filter(i => curr?.[i as number] === BUG)
     next += getNext(curr[i], bugs.length)
   }
 
@@ -29,7 +29,7 @@ export const cycle = (curr: string) => {
 }
 
 export const findBiodiversity = (input: string[]) => {
-  const history = []
+  const history: string[] = []
   let curr = input.join('')
 
   while (!history.includes(curr)) {
@@ -42,7 +42,7 @@ export const findBiodiversity = (input: string[]) => {
       .split('')
       .map((v, i) => (v === BUG ? i : null))
       .filter(value => typeof value === 'number')
-      .map(i => Math.pow(2, i))
+      .map(i => Math.pow(2, i as number))
   )
 }
 

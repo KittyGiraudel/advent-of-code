@@ -2,10 +2,7 @@ import $ from '../../helpers'
 import { Coords } from '../../types'
 
 const getTilingCoords = (ri: number, ci: number) => {
-  const [N, NE, E, SE, S, SW, W, NW] = $.surrounding(
-    [ri, ci],
-    'COORDS'
-  ) as Coords[]
+  const [N, NE, E, SE, S, SW, W, NW] = $.surrounding([ri, ci], 'COORDS')
   const C = [ri, ci] as Coords
 
   // prettier-ignore

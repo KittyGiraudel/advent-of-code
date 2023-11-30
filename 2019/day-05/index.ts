@@ -39,7 +39,7 @@ export class Intcode {
     return this
   }
 
-  log(...args) {
+  log(...args: unknown[]) {
     if (this.withLogs) console.log(...args)
 
     return this
@@ -187,7 +187,7 @@ export class Intcode {
 
           const index = this.getWriteIndex(p + 1, modes[0])
           this.log('3️⃣ Setting', this.inputs[0], 'at index', index)
-          this.memory[index] = this.inputs.shift()
+          this.memory[index] = this.inputs.shift()!
           this.pointer += 2
           break
         }

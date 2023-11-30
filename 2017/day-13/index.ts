@@ -71,11 +71,11 @@ const cross = input => {
 */
 
 const getGraph = (lines: string[]) =>
-  lines.reduce((acc, line) => {
+  lines.reduce<Graph>((acc, line) => {
     const [depth, range] = line.split(':')
     acc[depth] = +range
     return acc
-  }, {} as Graph)
+  }, {})
 
 const pass = (length: number, time: number) => time % ((length - 1) * 2)
 

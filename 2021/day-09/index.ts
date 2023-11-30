@@ -5,7 +5,7 @@ import { Coords, CoordsAndPoint, Grid, Point } from '../../types'
 // number, and get its 4 neighbors. If all existing neighbors are higher than
 // the current point, it’s a low point.
 const getLowPoints = (grid: Grid<number>) =>
-  $.grid.reduce(
+  $.grid.reduce<number, Coords[]>(
     grid,
     (acc, point, ri, ci) => {
       const coords: Coords = [ri, ci]
@@ -15,25 +15,25 @@ const getLowPoints = (grid: Grid<number>) =>
           .map((coords: Coords) => $.access(grid, coords) ?? Infinity)
           .every((n: number) => n > point)
       ) {
-        acc.push(coords as Coords)
+        acc.push(coords)
       }
 
       return acc
     },
-    [] as Coords[]
+    []
   )
 
 const getBasin = (
   grid: Grid<number>,
   position: Coords,
   evaluated: Point[] = []
-) => {
+): CoordsAndPoint[] => {
   // Look for the neighbors of the current point, and preserve only the
   // neighbors that:
   // - Have not been visited yet.
   // - Exist (as in, are within the bounds of the grid).
   // - Are not high points (value of 9).
-  const neighbors: CoordsAndPoint[] = $.bordering(position, 'BOTH').filter(
+  const neighbors = $.bordering(position, 'BOTH').filter(
     ({ coords, point }) => {
       if (evaluated.includes(point)) return false
       if (typeof $.access(grid, coords) === 'undefined') return false

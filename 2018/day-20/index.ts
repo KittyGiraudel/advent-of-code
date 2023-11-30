@@ -43,8 +43,8 @@ const mapOut = (input: string) => {
     if (char === 'E') step([+1, 0])
     if (char === 'W') step([-1, 0])
     if (char === '(') stack.push(curr)
-    if (char === ')') curr = stack.pop()
-    if (char === '|') curr = stack.at(-1)
+    if (char === ')') curr = stack.pop()!
+    if (char === '|') curr = stack.at(-1)!
   })
 
   return Array.from(map.values()).map(room => room.distance)

@@ -1,8 +1,18 @@
 import $ from '../../helpers'
-import { Coords, Point } from '../../types'
+import {
+  Coords,
+  Point,
+  QuadriCoords,
+  QuadriPoint,
+  TriCoords,
+  TriPoint,
+} from '../../types'
 
-type NeighborCache = Map<Point, Point[]>
-type Mappy = Map<Point, string>
+type NeighborCache = Map<
+  Point | TriPoint | QuadriPoint,
+  (Point | TriPoint | QuadriPoint)[]
+>
+type Mappy = Map<Point | TriPoint | QuadriPoint, string>
 
 const W = (coords: Coords) =>
   $.updateAtIndex(coords, 0, coords[0] - 1) as Coords
@@ -12,31 +22,45 @@ const N = (coords: Coords) =>
   $.updateAtIndex(coords, 1, coords[1] - 1) as Coords
 const S = (coords: Coords) =>
   $.updateAtIndex(coords, 1, coords[1] + 1) as Coords
-const B = (coords: Coords) =>
-  $.updateAtIndex(coords, 2, coords[2] - 1) as Coords
-const F = (coords: Coords) =>
-  $.updateAtIndex(coords, 2, coords[2] + 1) as Coords
-const H = (coords: Coords) =>
-  $.updateAtIndex(coords, 3, coords[3] - 1) as Coords
-const C = (coords: Coords) =>
-  $.updateAtIndex(coords, 3, coords[3] + 1) as Coords
+const B = (coords: TriCoords) =>
+  $.updateAtIndex(coords, 2, coords[2] - 1) as TriCoords
+const F = (coords: TriCoords) =>
+  $.updateAtIndex(coords, 2, coords[2] + 1) as TriCoords
+const H = (coords: QuadriCoords) =>
+  $.updateAtIndex(coords, 3, coords[3] - 1) as QuadriCoords
+const C = (coords: QuadriCoords) =>
+  $.updateAtIndex(coords, 3, coords[3] + 1) as QuadriCoords
 const NE = $.compose(N, E)
 const SE = $.compose(S, E)
 const SW = $.compose(S, W)
 const NW = $.compose(N, W)
 
-const FNS = {}
-FNS['2'] = [N, NE, E, SE, S, SW, W, NW]
-FNS['3'] = [
-  ...FNS['2'],
-  ...FNS['2'].map((fn: Function) => $.compose(fn, B)).concat(B),
-  ...FNS['2'].map((fn: Function) => $.compose(fn, F)).concat(F),
+type Directions =
+  | typeof N
+  | typeof NE
+  | typeof E
+  | typeof SE
+  | typeof S
+  | typeof SW
+  | typeof W
+  | typeof NW
+
+const Dim2Handlers = [N, NE, E, SE, S, SW, W, NW]
+const Dim3Handlers = [
+  ...Dim2Handlers,
+  ...Dim2Handlers.map((fn: Function) => $.compose(fn, B)).concat(B),
+  ...Dim2Handlers.map((fn: Function) => $.compose(fn, F)).concat(F),
 ]
-FNS['4'] = [
-  ...FNS['3'],
-  ...FNS['3'].map((fn: Function) => $.compose(fn, H)).concat(H),
-  ...FNS['3'].map((fn: Function) => $.compose(fn, C)).concat(C),
+const Dim4Handlers = [
+  ...Dim3Handlers,
+  ...Dim3Handlers.map((fn: Function) => $.compose(fn, H)).concat(H),
+  ...Dim3Handlers.map((fn: Function) => $.compose(fn, C)).concat(C),
 ]
+const FNS = {
+  '2': Dim2Handlers,
+  '3': Dim3Handlers,
+  '4': Dim4Handlers,
+}
 
 // Return the coordinates of all the neighbourds of the cell at the given coord-
 // inates, on the given number of dimensions (3 or 4).
@@ -45,17 +69,15 @@ FNS['4'] = [
 // @param cache - Coordinates cache
 // @return Stringified coordinates of all neighbours (26 or 80)
 const getNeighborCoords = (
-  coords: Point,
+  coords: Point | TriPoint | QuadriPoint,
   dimensions: number,
   cache: NeighborCache
 ) => {
-  if (cache.has(coords)) return cache.get(coords)
+  if (cache.has(coords)) return cache.get(coords) as (typeof coords)[]
 
-  const coordinates = $.toCoords(coords)
-  const functions = FNS[String(dimensions)]
-  const neighbourCoords = functions.map((fn: Function) =>
-    $.toPoint(fn(coordinates))
-  )
+  const coordinates = $.toCoords(coords as Point)
+  const functions = FNS[String(dimensions) as keyof typeof FNS]
+  const neighbourCoords = functions.map(fn => $.toPoint(fn(coordinates)))
 
   cache.set(coords, neighbourCoords)
 
@@ -85,14 +107,14 @@ const mutate = (cell: string, count: number) =>
 // @param dimensions - Either 3 or 4 dimensions
 // @param cache - Coordinates cache
 const transition = (
-  coords: Point,
+  coords: Point | TriPoint | QuadriPoint,
   origin: Mappy,
   dimensions: number,
   cache: NeighborCache
 ) => {
-  const cell = origin.get(coords)
+  const cell = origin.get(coords) as string
   const neighbourCoords = getNeighborCoords(coords, dimensions, cache)
-  const neighbours = neighbourCoords.map(coords => origin.get(coords))
+  const neighbours = neighbourCoords.map(coords => origin.get(coords)!)
   const count = neighbours.filter(isAlive).length
 
   return mutate(cell, count)
@@ -119,7 +141,7 @@ const cycle = (origin: Mappy, dimensions: number, cache: NeighborCache) =>
 // Initialise the storage map
 // @param rows - Rows
 const init = (rows: string[]) =>
-  rows.reduce(
+  rows.reduce<Mappy>(
     (map, row, y) =>
       row
         .split('')
@@ -127,7 +149,7 @@ const init = (rows: string[]) =>
           (map, value, x) => map.set($.toPoint([x, y, 0, 0]), value),
           map
         ),
-    new Map() as Mappy
+    new Map()
   )
 
 // Count the amount of alive cells in the map.

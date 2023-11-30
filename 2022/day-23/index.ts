@@ -2,22 +2,23 @@ import $ from '../../helpers'
 import { Point } from '../../types'
 
 const SIDES = {
-  N: ([N, NE, E, SE, S, SW, W, NW]) => [N, NW, NE],
-  S: ([N, NE, E, SE, S, SW, W, NW]) => [S, SW, SE],
-  W: ([N, NE, E, SE, S, SW, W, NW]) => [W, NW, SW],
-  E: ([N, NE, E, SE, S, SW, W, NW]) => [E, NE, SE],
+  N: ([N, NE, , , , , , NW]: Point[]) => [N, NW, NE],
+  S: ([, , , SE, S, SW, ,]: Point[]) => [S, SW, SE],
+  W: ([, , , , , SW, W, NW]: Point[]) => [W, NW, SW],
+  E: ([, NE, E, SE, , , ,]: Point[]) => [E, NE, SE],
 }
+type Side = keyof typeof SIDES
 
-const getNeighbors = $.memo(
-  (point: Point) => $.surrounding($.toCoords(point), 'POINTS') as Point[]
+const getNeighbors = $.memo((point: Point) =>
+  $.surrounding($.toCoords(point), 'POINTS')
 )
 
 const mapPositions = (input: string[]) =>
-  $.grid.reduce(
+  $.grid.reduce<string, Set<Point>>(
     $.grid.create(input),
     (acc, value, ri, ci) =>
       value === '#' ? acc.add((ri + ',' + ci) as Point) : acc,
-    new Set() as Set<Point>
+    new Set()
   )
 
 export const run = (input: string[], rounds: number = 10) => {
@@ -33,7 +34,7 @@ export const run = (input: string[], rounds: number = 10) => {
 
         if (neighbors.some(isOccupied)) {
           const next = directions
-            .map(direction => SIDES[direction](neighbors))
+            .map(direction => SIDES[direction as Side](neighbors))
             .find(neighbors => !neighbors.some(isOccupied))
 
           if (next) return { curr: point, next: next[0] }
@@ -46,8 +47,9 @@ export const run = (input: string[], rounds: number = 10) => {
 
     // Stage 2: every elf in the map moves provided they are the only one that
     // was supposed to move to that direction
-    moving.forEach(({ curr, next }, _, array) => {
-      if (!array.find(item => item.curr !== curr && item.next === next)) {
+    moving.forEach((moving, _, array) => {
+      const { curr, next } = moving!
+      if (!array.find(item => item!.curr !== curr && item!.next === next)) {
         positions.add(next)
         positions.delete(curr)
       }
@@ -57,7 +59,7 @@ export const run = (input: string[], rounds: number = 10) => {
   }
 
   const [minX, maxX, minY, maxY] = $.boundaries(
-    Array.from(positions).map($.toCoords)
+    Array.from(positions).map(point => $.toCoords(point as Point))
   )
 
   return (maxX + 1 - minX) * (maxY + 1 - minY) - positions.size

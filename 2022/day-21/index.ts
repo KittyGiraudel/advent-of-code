@@ -1,14 +1,14 @@
 type Map = {
-  [key: string]: number | string
-  root?: number | string
+  [key: string]: number | string | undefined
+  root?: number | string | undefined
 }
 
 const parseInput = (input: string[]) =>
-  input.reduce((acc, line) => {
+  input.reduce<Map>((acc, line) => {
     const [name, value] = line.split(': ')
     acc[name] = +value || value
     return acc
-  }, {} as Map)
+  }, {})
 
 // The `getRootNumber` solves part 1. It creates a map from the input, and then
 // it reduces it until we have found the number for the `root` key. The array
@@ -69,7 +69,7 @@ const reduceNext = (map: Map) => {
 // to solve them in order. Basically trying to get the first 2, then a 3, then a
 // 6, and so on and so forth until I was close enough that I could brute-force
 // the actual number within a few seconds.
-export const getHumnNumberByBruteForce = input => {
+export const getHumnNumberByBruteForce = (input: string[]) => {
   let { humn, ...map } = parseInput(input)
 
   // By replacing the `+` sign with a `-` sign, we should be getting a `0` for
@@ -109,13 +109,13 @@ export const getHumnNumberByBruteForce = input => {
 // Then, they used a binary search to find the right value for `humn` in that
 // expression. This is a cool approach, and significantly more performant than
 // what I’ve done.
-export const getHumnNumber = input => {
+export const getHumnNumber = (input: string[]) => {
   const { humn, ...map } = parseInput(input)
 
   while (getNextNumber(map)) reduceNext(map)
 
-  let value = +String(map.root).match(/(\d+)/)[1]
-  let [, curr] = String(map.root).match(/([a-z]+)/)
+  let value = +String(map.root).match(/(\d+)/)![1]
+  let [, curr] = String(map.root)?.match(/([a-z]+)/) ?? []
 
   // We walk up the operation chain until we reach the `humn` key. The idea is
   // that we reverse the current operation to find the previous number. For

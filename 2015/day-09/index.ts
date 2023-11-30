@@ -8,19 +8,19 @@ const getPaths = (
   curr: string,
   path: string[] = [],
   score: number = 0
-) => {
+): number[] => {
   const cities = Object.keys(graph[curr]).filter(key => !path.includes(key))
 
   if (!cities.length) {
     return [score]
   }
 
-  return cities.reduce((acc, city) => {
+  return cities.reduce<number[]>((acc, city) => {
     const nextScore = score + graph[curr][city]
     const nextPath = [...path, curr]
     const paths = getPaths(graph, city, nextPath, nextScore)
 
-    return [...acc, paths]
+    return [...acc, paths] as number[]
   }, [])
 }
 
@@ -28,7 +28,7 @@ const createGraph = (input: string[]) => {
   const graph: Graph = {}
 
   input.forEach(line => {
-    const [, a, b, distance] = line.match(/(\w+) to (\w+) = (\d+)/)
+    const [, a, b, distance] = line.match(/(\w+) to (\w+) = (\d+)/) ?? []
     if (!(a in graph)) graph[a] = {}
     if (!(b in graph)) graph[b] = {}
     graph[a][b] = +distance

@@ -8,12 +8,12 @@ const getArrangements = (
   if ($.sum(curr) === target) return [curr]
   if ($.sum(curr) > target) return []
 
-  return numbers.reduce((acc, n, index) => {
+  return numbers.reduce<number[][]>((acc, n, index) => {
     const nextNumbers = numbers.slice(index + 1)
-    const set = getArrangements(nextNumbers, target, [...curr, n]) as number[][]
+    const set = getArrangements(nextNumbers, target, [...curr, n])
 
     return acc.concat(set)
-  }, [] as number[][])
+  }, [])
 }
 
 export const run = (input: number[], target: number): [number, number] => {

@@ -14,19 +14,19 @@ type State = {
 
 const INITIAL_STATE: State = {
   score: 0,
-  ball: { x: null, y: null },
-  paddle: { x: null, y: null },
+  ball: { x: 0, y: 0 },
+  paddle: { x: 0, y: 0 },
   board: new Map(),
 }
 
 export const render = (board: Board) => {
   const keys = Array.from(board.keys())
-  const coords = keys.map($.toCoords)
+  const coords = keys.map(key => $.toCoords(key))
   const [, maxX, , maxY] = $.boundaries(coords)
   const grid = $.grid.init(
     maxX + 1,
     maxY + 1,
-    (x, y) => SYMBOLS[board.get(`${x},${y}`)]
+    (x, y) => SYMBOLS[board.get(`${x},${y}`) as keyof typeof SYMBOLS]
   )
 
   return $.grid.render(grid, ' ')

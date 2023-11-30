@@ -44,5 +44,5 @@ export const findOwnSeat = (input: string[]) => {
     .map(Number)
     .sort((a, b) => a - b)
 
-  return ids.find((id, index) => id !== index + Math.min(...ids)) - 1
+  return ids.find((id, index) => id !== index + Math.min(...ids))! - 1
 }

@@ -10,25 +10,26 @@ const SAMPLE = {
   cars: 2,
   perfumes: 1,
 }
+type Sample = keyof typeof SAMPLE
 
 const parseProperties = (properties: string[]) =>
   properties
     .map(prop => prop.split(': '))
-    .reduce(
+    .reduce<Record<string, number>>(
       (acc, [name, count]) => ({ ...acc, [name]: +count }),
-      {} as Record<string, number>
+      {}
     )
 
 export const run = (input: string[], advanced: boolean = false) => {
   const aunts = input.map((line, index) => ({
     id: index + 1,
-    properties: parseProperties(line.match(/\w+: \d+/g)),
+    properties: parseProperties(line.match(/\w+: \d+/g) ?? []),
   }))
 
   return aunts
     .filter(aunt =>
       Object.entries(aunt.properties).every(([property, actual]) => {
-        const expected = SAMPLE[property]
+        const expected = SAMPLE[property as Sample]
 
         if (advanced && ['cats', 'trees'].includes(property))
           return actual > expected
@@ -39,5 +40,5 @@ export const run = (input: string[], advanced: boolean = false) => {
         return actual === expected
       })
     )
-    .pop().id
+    .pop()?.id
 }

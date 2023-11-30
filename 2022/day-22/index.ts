@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Grid } from '../../types'
+import { Coords, Grid, Point } from '../../types'
 
 const ORIENTATIONS = ['>', 'v', '<', '^']
 const WALL = '#'
@@ -39,19 +39,38 @@ type Subgrid = {
 //   5) and the new orientation when entering that face (>, v, <, or ^).
 // - Its top-left corner position ([ri, ci]).
 // - Its subgrid with coords spreading from 0, 0 to 49, 49.
+type Shorthand = [string, string, string, string]
 const getSubgrids = (grid: Grid<string>) =>
   [
-    { neighbors: ['1>', '2v', '3>', '5>'], boundaries: [0, 50] },
-    { neighbors: ['4<', '2<', '0<', '5^'], boundaries: [0, 100] },
-    { neighbors: ['1^', '4v', '3v', '0^'], boundaries: [50, 50] },
-    { neighbors: ['4>', '5v', '0>', '2>'], boundaries: [100, 0] },
-    { neighbors: ['1<', '5<', '3<', '2^'], boundaries: [100, 50] },
-    { neighbors: ['4^', '1v', '0v', '3^'], boundaries: [150, 0] },
-  ].map((face: { neighbors: string[]; boundaries: [number, number] }) => {
+    {
+      neighbors: ['1>', '2v', '3>', '5>'] as Shorthand,
+      boundaries: [0, 50] as Coords,
+    },
+    {
+      neighbors: ['4<', '2<', '0<', '5^'] as Shorthand,
+      boundaries: [0, 100] as Coords,
+    },
+    {
+      neighbors: ['1^', '4v', '3v', '0^'] as Shorthand,
+      boundaries: [50, 50] as Coords,
+    },
+    {
+      neighbors: ['4>', '5v', '0>', '2>'] as Shorthand,
+      boundaries: [100, 0] as Coords,
+    },
+    {
+      neighbors: ['1<', '5<', '3<', '2^'] as Shorthand,
+      boundaries: [100, 50] as Coords,
+    },
+    {
+      neighbors: ['4^', '1v', '0v', '3^'] as Shorthand,
+      boundaries: [150, 0] as Coords,
+    },
+  ].map(face => {
     const [ri, ci] = face.boundaries
 
     return {
-      boundaries: face.boundaries,
+      boundaries: face.boundaries as Coords,
       neighbors: face.neighbors
         .map(neighbor => Array.from(neighbor).map(value => +value || value))
         .map(([index, orientation]) => ({
@@ -69,10 +88,15 @@ export const rotate = (orientation: string, instruction: string) => {
   const currIndex = ORIENTATIONS.indexOf(orientation)
   const nextIndex = (currIndex + direction) % ORIENTATIONS.length
 
-  return ORIENTATIONS.at(nextIndex)
+  return ORIENTATIONS.at(nextIndex)!
 }
 
-const getWrapNeighbors = (grid: Grid<string>, ri: number, ci: number) => {
+type WrapNeighbor = Coords | null
+const getWrapNeighbors = (
+  grid: Grid<string>,
+  ri: number,
+  ci: number
+): WrapNeighbor[] => {
   const findFirstIndex = Boolean
   const findLastIndex = (acc: number, item: string, index: number) =>
     item ? index : acc
@@ -80,11 +104,23 @@ const getWrapNeighbors = (grid: Grid<string>, ri: number, ci: number) => {
   const column = $.column(grid, ci)
 
   return [
-    { adjacent: [ri, ci + 1], wrap: [ri, row.findIndex(findFirstIndex)] },
-    { adjacent: [ri + 1, ci], wrap: [column.findIndex(findFirstIndex), ci] },
-    { adjacent: [ri, ci - 1], wrap: [ri, row.reduce(findLastIndex, 0)] },
-    { adjacent: [ri - 1, ci], wrap: [column.reduce(findLastIndex, 0), ci] },
-  ].map(({ adjacent, wrap }: { adjacent: Coords; wrap: Coords }) => {
+    {
+      adjacent: [ri, ci + 1] as Coords,
+      wrap: [ri, row.findIndex(findFirstIndex)] as Coords,
+    },
+    {
+      adjacent: [ri + 1, ci] as Coords,
+      wrap: [column.findIndex(findFirstIndex), ci] as Coords,
+    },
+    {
+      adjacent: [ri, ci - 1] as Coords,
+      wrap: [ri, row.reduce(findLastIndex, 0)] as Coords,
+    },
+    {
+      adjacent: [ri - 1, ci] as Coords,
+      wrap: [column.reduce(findLastIndex, 0), ci] as Coords,
+    },
+  ].map(({ adjacent, wrap }) => {
     if ($.access(grid, adjacent) === '.') return adjacent
     if ($.access(grid, adjacent) === '#') return null
     if ($.access(grid, wrap) === '.') return wrap
@@ -92,7 +128,13 @@ const getWrapNeighbors = (grid: Grid<string>, ri: number, ci: number) => {
   })
 }
 
-const getCubicNeighbors = (grid: Grid<string>, ri: number, ci: number) => {
+type CubicNeighbor = { position: Coords; orientation?: string } | null
+
+const getCubicNeighbors = (
+  grid: Grid<string>,
+  ri: number,
+  ci: number
+): CubicNeighbor[] => {
   return VECTORS.map((vector, i) => {
     const nextPos = $.applyVector([ri, ci], vector)
     const nextValue = $.access(grid, nextPos)
@@ -115,7 +157,7 @@ const getCubicNeighbors = (grid: Grid<string>, ri: number, ci: number) => {
 
       // Which grid we land on depends on both which subgrid we are currently
       // on, and which orientation we’re facing.
-      const next = currSubgrid.neighbors[i]
+      const next = currSubgrid!.neighbors[i]
       const { grid: nextSubgrid, boundaries } = subgrids[next.index]
       // Since we’re dealing with a cube, faces are squares so we don’t have to
       // check width and height separately.
@@ -152,11 +194,15 @@ const getCubicNeighbors = (grid: Grid<string>, ri: number, ci: number) => {
       if (cell === SPACE) return { position, orientation: next.orientation }
       if (cell === WALL) return null
     }
+    return null
   })
 }
 
+type CacheMap = Record<Point, CubicNeighbor[] | WrapNeighbor[]>
+
 const getNeighbors =
-  (grid: Grid<string>, asCube: boolean) => (acc, _, ri: number, ci: number) => {
+  (grid: Grid<string>, asCube: boolean) =>
+  (acc: CacheMap, _: string, ri: number, ci: number) => {
     if ($.access(grid, [ri, ci])) {
       acc[$.toPoint([ri, ci])] = asCube
         ? getCubicNeighbors(grid, ri, ci)
@@ -168,10 +214,14 @@ const getNeighbors =
 
 export const maze = (input: string, asCube: boolean = false) => {
   const [map, last] = input.split('\n\n')
-  const instructions = last.match(/(\d+|L|R)/g).map(v => +v || v)
+  const instructions = last.match(/(\d+|L|R)/g)?.map(v => +v || v) ?? []
   const rows = map.split('\n').filter(Boolean)
   const grid = $.grid.create(rows, v => (v === ' ' ? '' : v))
-  const neighborMap = $.grid.reduce(grid, getNeighbors(grid, asCube), {})
+  const neighborMap = $.grid.reduce(
+    grid,
+    getNeighbors(grid, asCube),
+    {} as CacheMap
+  )
 
   let position: Coords = [
     0,

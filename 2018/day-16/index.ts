@@ -6,7 +6,8 @@ type Sample = {
   after: number[]
 }
 
-const OPCODES = {
+type Operation = (regs: number[], [A, B, C]: number[]) => number[]
+const OPCODES: Record<string, Operation> = {
   addr: (regs, [A, B, C]) => $.updateAtIndex(regs, C, regs[A] + regs[B]),
   addi: (regs, [A, B, C]) => $.updateAtIndex(regs, C, regs[A] + B),
   mulr: (regs, [A, B, C]) => $.updateAtIndex(regs, C, regs[A] * regs[B]),
@@ -24,6 +25,7 @@ const OPCODES = {
   eqri: (regs, [A, B, C]) => $.updateAtIndex(regs, C, +(regs[A] === B)),
   eqrr: (regs, [A, B, C]) => $.updateAtIndex(regs, C, +(regs[A] === regs[B])),
 }
+type Opcode = keyof typeof OPCODES
 
 const parseSample = ([before, op, after]: string[]) =>
   ({
@@ -35,7 +37,7 @@ const parseSample = ([before, op, after]: string[]) =>
 export const debug = (input: string[]) => {
   const capacity = Object.keys(OPCODES).length
   const program = input
-    .at(-1)
+    .at(-1)!
     .split('\n')
     .map(line => line.split(' ').map(Number))
   const registry: (string | Set<string>)[] = input
@@ -49,7 +51,8 @@ export const debug = (input: string[]) => {
         Object.keys(OPCODES)
           .filter(
             opcode =>
-              OPCODES[opcode](before, args).join(',') === after.join(',')
+              OPCODES[opcode as Opcode](before, args).join(',') ===
+              after.join(',')
           )
           .forEach(option => registry[opIndex].add(option))
 
@@ -65,11 +68,15 @@ export const debug = (input: string[]) => {
   //    their set.
   // 4. Repeat until every index has been associated to a value.
   while (registry.some(item => typeof item !== 'string')) {
-    const opIndex = registry.findIndex((item: Set<string>) => item.size === 1)
-    registry[opIndex] = Array.from(registry[opIndex]).pop()
+    const opIndex = registry.findIndex(
+      item => item instanceof Set && item.size === 1
+    )
+    registry[opIndex] = Array.from(registry[opIndex]).pop()!
     registry
       .filter(item => typeof item !== 'string')
-      .forEach((item: Set<string>) => item.delete(registry[opIndex] as string))
+      .forEach(item =>
+        (item as Set<string>).delete(registry[opIndex] as string)
+      )
   }
 
   return program.reduce(

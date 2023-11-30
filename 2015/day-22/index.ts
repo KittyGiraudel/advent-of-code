@@ -33,9 +33,11 @@ const fight = (actions: string[], hard: boolean) => {
 
     if (turn) {
       const spell = actions.shift()
+      type Spell = keyof typeof SPELL_COST
+      type Effect = keyof typeof effects
 
-      mana -= SPELL_COST[spell]
-      total += SPELL_COST[spell]
+      mana -= SPELL_COST[spell as Spell]
+      total += SPELL_COST[spell as Spell]
 
       // If not enough mana to cast the spell, abort
       if (mana < 0) return ILLEGAL_MOVE
@@ -43,8 +45,8 @@ const fight = (actions: string[], hard: boolean) => {
       if (spell === 'M') boss -= 4
       else if (spell === 'D') (boss -= 2), (player += 2)
       else {
-        if (effects[spell]) return ILLEGAL_MOVE
-        effects[spell] = spell === 'R' ? 5 : 6
+        if (effects[spell as Effect]) return ILLEGAL_MOVE
+        effects[spell as Effect] = spell === 'R' ? 5 : 6
       }
 
       // Check if the spell killed the boss

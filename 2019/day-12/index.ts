@@ -1,14 +1,14 @@
 import $ from '../../helpers'
-import { Coords } from '../../types'
+import { TriCoords } from '../../types'
 
 type Moon = {
-  position: Coords
-  velocity: Coords
+  position: TriCoords
+  velocity: TriCoords
 }
 
 const prepareMoon = (line: string) =>
   ({
-    position: line.match(/(-?\d+)/g).map(Number) as Coords,
+    position: (line.match(/(-?\d+)/g)?.map(Number) ?? []) as TriCoords,
     velocity: [0, 0, 0],
   } as Moon)
 
@@ -34,10 +34,10 @@ const applyVelocity = (moon: Moon) => {
   moon.position = $.applyVector(moon.position, moon.velocity)
 }
 
-const makePairs = array => $.combinations(array, 2)
+const makePairs = (array: Moon[]) => $.combinations(array, 2) as [Moon, Moon][]
 
 const step = (moons: Moon[]) => {
-  makePairs(moons).forEach(applyGravity)
+  makePairs(moons).forEach(moonPair => applyGravity(moonPair))
   moons.forEach(applyVelocity)
   return moons
 }

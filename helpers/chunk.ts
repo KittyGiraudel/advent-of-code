@@ -16,6 +16,6 @@ const chunk = <T>(array: T[], size: number) => _chunk(array, size) as T[][]
  * Split the given string into chunks of the given size.
  */
 chunk.string = (string: string, size: number) =>
-  _chunk(string, size) as string[]
+  _chunk<string>(string, size) as string[]
 
 export default chunk

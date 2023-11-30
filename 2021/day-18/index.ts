@@ -1,12 +1,14 @@
 import $ from '../../helpers'
 
+type Fish = [number?, number?]
+
 const split = (value: string) =>
   `[${Math.floor(+value / 2)},${Math.ceil(+value / 2)}]`
 
-const handleExplosions = (string: string) => {
+const handleExplosions = (string: string): string => {
   const openings = []
-  let left = null
-  let right = null
+  let left: number | null = null
+  let right: number | null = null
   let current = ''
 
   for (let i = 0; i < string.length; i++) {
@@ -32,9 +34,11 @@ const handleExplosions = (string: string) => {
         return handleExplosions(
           string
             .slice(0, openingIndex)
-            .replace(/(\d+)([^\d]*)$/, (_, n, rest) => +n + left + rest) +
+            .replace(/(\d+)([^\d]*)$/, (_, n, rest) =>
+              String(+n + left! + rest)
+            ) +
             '0' +
-            string.slice(i + 1).replace(/\d+/, n => +n + right)
+            string.slice(i + 1).replace(/\d+/, n => String(+n + right!))
         )
       }
     } else if (string[i] === ',') {
@@ -51,7 +55,10 @@ const handleExplosions = (string: string) => {
 const handleLeftMostSplit = (string: string) =>
   string.replace(/(\d{2,})/, split)
 
-const reduceFish = $.compose(handleLeftMostSplit, handleExplosions)
+const reduceFish = $.compose<(string: string) => string>(
+  handleLeftMostSplit,
+  handleExplosions
+)
 
 // The reducing logic is as follow:
 // 1. First do all explosions that can be done.
@@ -69,9 +76,15 @@ export const reduce = (string: string) => {
   return next
 }
 
-export const computeMagnitude = ([left, right]: [number?, number?]) =>
-  (typeof left === 'number' ? left : computeMagnitude(left)) * 3 +
-  (typeof right === 'number' ? right : computeMagnitude(right)) * 2
+export const computeMagnitude = ([left, right]: Fish): number =>
+  (typeof left === 'number'
+    ? left
+    : computeMagnitude(left as unknown as Fish)) *
+    3 +
+  (typeof right === 'number'
+    ? right
+    : computeMagnitude(right as unknown as Fish)) *
+    2
 
 export const sumFish = (...fishes: string[]) =>
   fishes.reduce((acc, fish) => (acc ? reduce(`[${acc},${fish}]`) : fish))

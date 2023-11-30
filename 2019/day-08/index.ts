@@ -14,7 +14,7 @@ export const validate = (
   const { count } = parse(input, size)
     .map(layer => ({ layer, count: $.count(layer) }))
     .sort((a, b) => b.count['0'] - a.count['0'])
-    .pop()
+    .pop()!
 
   return count['1'] * count['2']
 }

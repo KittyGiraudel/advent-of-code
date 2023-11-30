@@ -1,4 +1,4 @@
-const getKey = (...args) =>
+const getKey = (...args: unknown[]) =>
   // If there is only one argument and it’s a safe key, or if the second
   // argument is a number (index when used with Array.prototype.map), bypass the
   // JSON serialization as it can be quite costly which would negate the memo
@@ -18,10 +18,10 @@ const getKey = (...args) =>
  * as a key
  * @param fn - Function to memoize
  */
-const memo = (fn: Function) => {
+const memo = <T>(fn: (...args: any[]) => T) => {
   const cache = new Map()
 
-  return (...args) => {
+  return (...args: any[]): ReturnType<typeof fn> => {
     const key = getKey(...args)
     if (cache.has(key)) return cache.get(key)
     const result = fn(...args)

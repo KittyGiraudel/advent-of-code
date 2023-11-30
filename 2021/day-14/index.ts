@@ -12,11 +12,11 @@ export const count = (input: string[], iterations: number = 1) => {
   // Initialize the first map by counting the occurrences of every replacement
   // pair in the original string. Every iteration then will based its counting
   // map on the previous one.
-  let curr = instructions.reduce((acc, [needle]) => {
+  let curr = instructions.reduce<Record<string, number>>((acc, [needle]) => {
     acc[needle] = $.countInString(string, needle)
     return acc
   }, {})
-  let next = {}
+  let next: typeof curr = {}
 
   for (let i = 0; i < iterations; i++) {
     next = {}

@@ -6,14 +6,20 @@ const DIRECTIONS = {
   S: { R: 'W', L: 'E' },
   W: { R: 'N', L: 'S' },
 }
+type Direction = keyof typeof DIRECTIONS
+type Orientation = 'R' | 'L'
 
 // rotate the ship based on the current orientation and the given operation.
 // @param orientation - Current ship orientation
 // @param direction - Whether to rotate left or right
 // @param degrees - By how many degrees to rotate
-const rotate = (orientation: string, direction: string, degrees: number) => {
+const rotate = (
+  orientation: Direction,
+  direction: Orientation,
+  degrees: number
+) => {
   for (let i = 0; i < degrees / 90; i++)
-    orientation = DIRECTIONS[orientation][direction]
+    orientation = DIRECTIONS[orientation][direction] as Direction
   return orientation
 }
 
@@ -23,7 +29,7 @@ const rotate = (orientation: string, direction: string, degrees: number) => {
 // @return Manatthan distance
 export const navigateLoose = (
   instructions: string[],
-  orientation: string = 'E'
+  orientation: Direction = 'E'
 ) =>
   $.sum(
     instructions.reduce(

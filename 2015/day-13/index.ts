@@ -8,9 +8,8 @@ const createGraph = (input: string[], withOneself: boolean) => {
   if (withOneself) graph.me = {}
 
   input.forEach(line => {
-    const [, first, verb, value, last] = line.match(
-      /(\w+).*?(gain|lose) (\d+).*?(\w+)\./
-    )
+    const [, first, verb, value, last] =
+      line.match(/(\w+).*?(gain|lose) (\d+).*?(\w+)\./) ?? []
     const direction = verb === 'gain' ? +1 : -1
 
     if (!(first in graph)) graph[first] = {}

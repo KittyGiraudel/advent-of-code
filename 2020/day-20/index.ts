@@ -40,20 +40,18 @@ const getSides = (grid: Grid<string>) =>
     /* Right  */ $.column(grid, grid.length - 1),
     /* Bottom */ grid.at(-1),
     /* Left   */ $.column(grid, 0),
-  ].map(line => line.join(''))
+  ].map(line => line!.join(''))
 
 // Parse the snapshot into a collection of 8 variants (all rotations + flips
 // possibilities).
 const parseSnapshot = (snapshot: string) => {
   const [header, ...lines] = snapshot.split('\n')
-  const [id] = header.match(/\d+/g)
+  const [id] = header.match(/\d+/g)!
   const grid = $.grid.create<string>(lines)
 
-  return $.grid.variants(grid).map(grid => ({
-    sides: getSides(grid),
-    grid,
-    id: +id,
-  })) as Tile[]
+  return $.grid
+    .variants(grid)
+    .map(grid => ({ sides: getSides(grid), grid, id: +id } as Tile))
 }
 
 // Brute-force the jigsaw in reading order (left-to-right and top-to-bottom)
@@ -144,12 +142,12 @@ const inspectWaters = (image: Grid<string>) => {
 const checksum = (mozaic: Grid<Tile>) => {
   const length = mozaic.length
   const corners = [
-    /* Top left     */ [0, 0],
-    /* Top right    */ [0, length - 1],
-    /* Bottom left  */ [length - 1, 0],
-    /* Bottom right */ [length - 1, length - 1],
+    /* Top left     */ [0, 0] as Coords,
+    /* Top right    */ [0, length - 1] as Coords,
+    /* Bottom left  */ [length - 1, 0] as Coords,
+    /* Bottom right */ [length - 1, length - 1] as Coords,
   ]
-    .map(coords => $.access(mozaic, coords as Coords))
+    .map(coords => $.access(mozaic, coords))
     .map(tile => tile.id)
 
   return $.product(corners)
@@ -162,12 +160,12 @@ const solve = (snapshots: string[]) =>
     .map(parseSnapshot)
     .flat()
     .reduce(
-      (acc, tile, _, tiles) => acc || jigsaw(tiles, tile),
+      (acc, tile, _, tiles) => acc ?? jigsaw(tiles, tile) ?? null,
       null as Grid<Tile> | null
     )
 
 export const run = (snapshots: string[]) => {
-  const mozaic = solve(snapshots)
+  const mozaic = solve(snapshots)!
   const image = assemble(mozaic)
 
   return [checksum(mozaic), inspectWaters(image)]

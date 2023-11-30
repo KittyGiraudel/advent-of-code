@@ -13,7 +13,7 @@ export const countIncreases = (input: number[]) =>
 // @param input - Array of numbers
 export const countWindowIncreases = (input: number[]) =>
   countIncreases(
-    input.reduce(
+    input.reduce<number[]>(
       (acc, number, index, array) =>
         index < 2
           ? acc

@@ -9,7 +9,7 @@ export const run = (salt: string, iterations: number = 1) => {
     return value
   })
 
-  const cache: Map<string, number> = new Map()
+  const cache: Map<string, string> = new Map()
   const keys: Set<number> = new Set()
   const re5 = /(\w)\1{4}/
   const re3 = /(\w)\1{2}/
@@ -21,12 +21,12 @@ export const run = (salt: string, iterations: number = 1) => {
     const match5 = curr.match(re5)
     const match3 = curr.match(re3)?.[1][0]
 
-    cache.set(currSalt, match3)
+    cache.set(currSalt, match3!)
 
     if (!match5) continue
 
     for (let i = Math.max(0, index - 1000); i < index; i++) {
-      let match3 = cache.get(salt + i)
+      let match3 = cache.get(salt + i)!
       if (keys.has(i) || !match3 || match3 !== match5[1][0]) continue
       keys.add(i)
     }

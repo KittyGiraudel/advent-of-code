@@ -8,16 +8,20 @@ type Node = {
 
 export const releasePressure = (input: string[]) => {
   const map: Record<string, Node> = input.reduce((acc, line) => {
-    const [, name, flow, tunnels] = line.match(
-      /Valve (\w+) has flow rate=(\d+); tunnels? leads? to valves? ([\w,\s]+)/
-    )
+    const [, name, flow, tunnels] =
+      line.match(
+        /Valve (\w+) has flow rate=(\d+); tunnels? leads? to valves? ([\w,\s]+)/
+      ) ?? []
     const valve = { name, flow: +flow, tunnels: tunnels?.split(/,\s/g) }
 
     return { ...acc, [name]: valve }
   }, {})
 
-  const getDistances = startName => {
-    const walk = (acc, { name, steps }) => {
+  const getDistances = (startName: string) => {
+    const walk = (
+      acc: Record<string, number>,
+      { name, steps }: { name: string; steps: number }
+    ): Record<string, number> => {
       if (name in acc && acc[name] <= steps) return acc
       acc[name] = steps
 
@@ -27,13 +31,14 @@ export const releasePressure = (input: string[]) => {
       )
     }
 
-    return walk({}, { name: startName, steps: 0 })
+    return walk({} as Record<string, number>, { name: startName, steps: 0 })
   }
 
   const distanceMap = Object.keys(map).reduce(
     (acc, name) => ({ ...acc, [name]: getDistances(name) }),
     {}
   )
+  type DistanceKey = keyof typeof distanceMap
 
   const { from } = $.pathfinding.dijkstra({
     start: {
@@ -46,13 +51,16 @@ export const releasePressure = (input: string[]) => {
     },
     toKey: curr => String(curr.pressure),
     isGoal: curr => curr.time <= 0,
-    getCost: (curr, next) => distanceMap[curr.name][next.name],
+    getCost: (curr, next) => distanceMap[curr.name as DistanceKey][next.name],
     getNextNodes: curr =>
       curr.remaining
         .filter(next => next !== curr.name)
-        .filter(next => curr.time - distanceMap[curr.name][next] > 1)
+        .filter(
+          next => curr.time - distanceMap[curr.name as DistanceKey][next] > 1
+        )
         .map(next => {
-          const time = curr.time - distanceMap[curr.name][next] - 1
+          const time =
+            curr.time - distanceMap[curr.name as DistanceKey][next] - 1
 
           return {
             name: next,

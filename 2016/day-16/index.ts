@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 
-const getChecksum = (disk: number[]) => {
+const getChecksum = (disk: number[]): number[] => {
   const checksum = []
 
   for (let i = 0; i < disk.length; i += 2) {

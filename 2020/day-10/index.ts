@@ -9,10 +9,10 @@ function countPathsToEnd(
   adapters: number[],
   current: number = adapters[0],
   cache: Map<number, number> = new Map()
-) {
+): number {
   // If we have already computed whether the current value leads to the device,
   // return the value from the cache.
-  if (cache.has(current)) return cache.get(current)
+  if (cache.has(current)) return cache.get(current) as number
 
   // If we’ve reached the device, count this path as a successful one, and cache
   // the result for faster computation.

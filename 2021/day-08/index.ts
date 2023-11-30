@@ -25,14 +25,14 @@ export const decode = (line: string) => {
   let [patterns, encodedDigits] = parseInput(line)
 
   // Store the 10 patterns in the right order in this array.
-  const values = []
+  const values: string[] = []
 
   // Start by storing patterns that can be deduced because they have a unique
   // number of segments.
-  values[1] = patterns.find(pattern => pattern.length === 2)
-  values[4] = patterns.find(pattern => pattern.length === 4)
-  values[7] = patterns.find(pattern => pattern.length === 3)
-  values[8] = patterns.find(pattern => pattern.length === 7)
+  values[1] = patterns.find(pattern => pattern.length === 2)!
+  values[4] = patterns.find(pattern => pattern.length === 4)!
+  values[7] = patterns.find(pattern => pattern.length === 3)!
+  values[8] = patterns.find(pattern => pattern.length === 7)!
 
   // The remaining 6 patterns are divided into 2 groups:
   // - Those with 5 segments (2, 3 and 5)
@@ -52,7 +52,7 @@ export const decode = (line: string) => {
   // figured out.
   values[3] = with5Segments.find(pattern =>
     rightSideSegments.every(segment => pattern.includes(segment))
-  )
+  )!
   with5Segments = with5Segments.filter(pattern => pattern !== values[3])
 
   // There are 2 remaining patterns with 5 segments (2 and 5). To figure out
@@ -62,7 +62,7 @@ export const decode = (line: string) => {
   // can determine which are patterns 2 and 5.
   const lettersFrom4 = lettersFrom(values[4])
   with5Segments.sort(
-    (a, b) => a.match(lettersFrom4).length - b.match(lettersFrom4).length
+    (a, b) => a.match(lettersFrom4)!.length - b.match(lettersFrom4)!.length
   )
   values[2] = with5Segments[0]
   values[5] = with5Segments[1]
@@ -73,8 +73,8 @@ export const decode = (line: string) => {
   // We then remove it from the array as it has been figured out.
   const lettersFrom5 = lettersFrom(values[5])
   values[0] = with6Segments.find(
-    pattern => pattern.match(lettersFrom5).length === 4
-  )
+    pattern => pattern.match(lettersFrom5)!.length === 4
+  )!
   with6Segments = with6Segments.filter(pattern => pattern !== values[0])
 
   // There are 2 remaining patterns with 6 segments (6 and 9). To figure out
@@ -84,7 +84,7 @@ export const decode = (line: string) => {
   // can determine which are patterns 6 and 9.
   const lettersFrom3 = lettersFrom(values[3])
   with6Segments.sort(
-    (a, b) => a.match(lettersFrom3).length - b.match(lettersFrom3).length
+    (a, b) => a.match(lettersFrom3)!.length - b.match(lettersFrom3)!.length
   )
   values[6] = with6Segments[0]
   values[9] = with6Segments[1]

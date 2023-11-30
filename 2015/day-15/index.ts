@@ -1,15 +1,18 @@
 import $ from '../../helpers'
 
-type Permutation = [number, number, number, number]
+type Permutation2 = [number, number]
+type Permutation4 = [number, number, number, number]
+type Permutation = Permutation2 | Permutation4
 
-const getPermutationsBy2 = () => $.range(101).map(i => [i, 100 - i])
+const getPermutationsBy2 = () =>
+  $.range(101).map(i => [i, 100 - i] as Permutation2)
 const getPermutationsBy4 = () => {
   const permutations = []
 
   for (let i = 0; i <= 100; i++) {
     for (let j = 0; j <= 100 - i; j++) {
       for (let k = 0; k <= 100 - i - j; k++) {
-        permutations.push([i, j, k, 100 - i - j - k] as Permutation)
+        permutations.push([i, j, k, 100 - i - j - k] as Permutation4)
       }
     }
   }
@@ -31,14 +34,15 @@ const getPropertyScore =
     return Math.max($.sum(propertyScores), 0)
   }
 
-const parseIngredient = (line: string) => line.match(/-?\d+/g).map(Number)
+const parseIngredient = (line: string) =>
+  line.match(/-?\d+/g)?.map(Number) ?? []
 
 export const run = (input: string[], calories?: number) => {
   // I couldn’t find a solution that works for a dynamic amount of ingredients
   // since I compute the permutations beforehand.
-  const permutations = PERMUTATIONS[input.length]
+  const permutations = PERMUTATIONS[input.length as keyof typeof PERMUTATIONS]
   const ingredients = input.map(parseIngredient)
-  const scores = permutations.map((ratios: Permutation) => {
+  const scores = permutations.map(ratios => {
     const getScore = getPropertyScore(ratios, ingredients)
     const propertiesScores = PROPERTIES.map(getScore)
     const score = $.product(propertiesScores)
@@ -48,5 +52,5 @@ export const run = (input: string[], calories?: number) => {
       : 0
   })
 
-  return $.max([...scores, calories])
+  return $.max([...scores, calories ?? -Infinity])
 }

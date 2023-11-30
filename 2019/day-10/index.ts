@@ -1,14 +1,14 @@
 import $ from '../../helpers'
 import { Coords, CoordsObj, Grid, Point } from '../../types'
 
-type CoordsWithAngle = CoordsObj & { angle?: number }
+type CoordsObjWithAngle = CoordsObj & { angle: number }
 type Group = { angle: number; items: CoordsObj[] }
 
 export const mapOutSpace = (rows: string[]) => {
-  const map: Map<Point, Point[]> = $.grid.reduce(
-    $.grid.create<string>(rows),
+  const map: Map<Point, Point[]> = $.grid.reduce<string, Map<Point, Point[]>>(
+    $.grid.create(rows),
     (acc, v, ri, ci) => (v === '#' ? acc.set(`${ci},${ri}`, []) : acc),
-    new Map() as Map<Point, Point[]>
+    new Map()
   )
 
   const keys: Point[] = Array.from(map.keys())
@@ -30,25 +30,28 @@ export const mapOutSpace = (rows: string[]) => {
   return map
 }
 
-export const findBestSpot = (grid: string[]): [Point, number] => {
+export const findBestSpot = (grid: string[]) => {
   const map = mapOutSpace(grid)
 
-  return Array.from(map.keys()).reduce((acc, key: Point) => {
-    const value = new Set(map.get(key)).size
-    return !acc || acc[1] < value ? [key, value] : acc
-  }, null as [Point, number] | null)
+  return Array.from(map.keys()).reduce<[Point, number]>(
+    (acc, key: Point, index) => {
+      const value = new Set(map.get(key)).size
+      return index === 0 || acc[1] < value ? [key, value] : acc
+    },
+    ['0,0', 0]
+  )
 }
 
 const toObj = (point: Point) => {
   const points = $.toCoords(point)
 
-  return { x: points[0], y: points[1] } as CoordsWithAngle
+  return { x: points[0], y: points[1] } as CoordsObjWithAngle
 }
 
 const getAngleFromPoint = (pointA: CoordsObj) => (pointB: CoordsObj) =>
   90 + (Math.atan2(pointB.y - pointA.y, pointB.x - pointA.x) * 180) / Math.PI
 
-export const vaporize = grid => {
+export const vaporize = (grid: string[]) => {
   const map = mapOutSpace(grid)
   const [spot] = findBestSpot(grid)
   const center = toObj(spot)
@@ -70,7 +73,7 @@ export const vaporize = grid => {
   // Group asteroids per angle, so that we end up with an array of groups in
   // ascending order, each group holding coordinates of all asteroids sitting
   // on the same line to the center (thus same angle).
-  const groups: Group[] = asteroids.reduce((acc, { angle, x, y }) => {
+  const groups = asteroids.reduce<Group[]>((acc, { angle, x, y }) => {
     const group = acc.find(group => group.angle === angle)
     if (!group) acc.push({ angle, items: [{ x, y }] })
     else group.items.push({ x, y })
@@ -84,10 +87,10 @@ export const vaporize = grid => {
   // At each iteration, take the first item of each group (if there is any item
   // left in groups), and push it onto the final order. This corresponds to the
   // canon rotations.
-  return $.array(max).reduce(order => {
+  return $.array(max).reduce<Group['items'][number][]>(order => {
     groups
       .filter(group => group.items.length)
-      .forEach(group => order.push(group.items.shift()))
+      .forEach(group => order.push(group.items.shift()!))
 
     return order
   }, [])

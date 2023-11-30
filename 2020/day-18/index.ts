@@ -23,11 +23,11 @@ export const computeLoose = (input: string) => {
   const [total] = input
     .split(' ')
     .map(value => +value || value)
-    .reduce(
+    .reduce<[number, string | null]>(
       ([total, operator], value) =>
         typeof value === 'string'
           ? [total, value]
-          : [eval(total + operator + value), null],
+          : [eval(total + (operator as string) + value), null],
       [0, null]
     )
 
@@ -43,7 +43,7 @@ const replace = (
   input: string,
   expression: RegExp,
   replacer: (substring: string, ...args: any[]) => string
-) =>
+): string =>
   expression.test(input)
     ? replace(input.replace(expression, replacer), expression, replacer)
     : input

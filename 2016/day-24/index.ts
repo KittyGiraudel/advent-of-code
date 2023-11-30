@@ -2,8 +2,8 @@ import $ from '../../helpers'
 import { Coords } from '../../types'
 
 export const discover = (input: string[], roundTrip: boolean = false) => {
-  let start
-  const locations = []
+  let start: Coords
+  const locations: Coords[] = []
   const grid = $.grid.create(input, (cell, ...coords) => {
     if (cell === '0') start = coords
     else if (cell !== '#' && cell !== '.') locations.push(coords)
@@ -14,9 +14,7 @@ export const discover = (input: string[], roundTrip: boolean = false) => {
   // negligible. What really makes a difference is not doing pathfinding on
   // paths we have alreadu done (hence this memoization).
   const getNextNodes = (curr: Coords) =>
-    $.bordering(curr, 'COORDS').filter(
-      (coords: Coords) => $.access(grid, coords) !== '#'
-    )
+    $.bordering(curr, 'COORDS').filter(coords => $.access(grid, coords) !== '#')
 
   // Memoize the pathfinding between two points to avoid computing it again and
   // again for every possible order.
@@ -61,7 +59,7 @@ export const discover = (input: string[], roundTrip: boolean = false) => {
   // (and then back to the start for part 2).
   return $.permutations(locations).reduce((min, order) => {
     let count = 0
-    let curr = start
+    let curr: Coords | undefined = start
 
     if (roundTrip) order.push(curr)
 

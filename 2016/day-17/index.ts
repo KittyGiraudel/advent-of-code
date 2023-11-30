@@ -1,11 +1,12 @@
 import $ from '../../helpers'
 import { Coords } from '../../types'
 
+type Direction = 'U' | 'D' | 'L' | 'R'
 const DIRECTIONS: [
-  [Coords, string],
-  [Coords, string],
-  [Coords, string],
-  [Coords, string]
+  [Coords, Direction],
+  [Coords, Direction],
+  [Coords, Direction],
+  [Coords, Direction]
 ] = [
   [[0, -1], 'U'],
   [[0, +1], 'D'],
@@ -36,7 +37,9 @@ export const run = (input: string, longest: boolean = false) =>
             coords: $.applyVector(curr.coords, vector),
             path: curr.path + direction,
           }))
-          .filter(next => next.coords.every(n => $.isClamped(n, 0, 3)))
+          .filter(next =>
+            next.coords.every(n => (n ? $.isClamped(n, 0, 3) : false))
+          )
       },
     })
     .end.path.replace(input, '')

@@ -15,7 +15,7 @@ class Computer {
     const instruction = this.instructions[this.pointer]
     const [op, X, Y] = instruction.split(' ')
 
-    this.counters[op]++
+    this.counters[op as keyof typeof this.counters]++
 
     switch (op) {
       case 'set': {

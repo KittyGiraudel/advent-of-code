@@ -1,10 +1,11 @@
 import $ from '../../helpers'
-import { Coords, Point } from '../../types'
+import { Coords, Point, TriCoords, TriPoint } from '../../types'
 
 type Particle = {
-  position: Coords
-  velocity: Coords
-  acceleration: Coords
+  index: number
+  position: TriCoords
+  velocity: TriCoords
+  acceleration: TriCoords
 }
 
 const tick = (particle: Particle) => {
@@ -32,9 +33,9 @@ const countCollisions = (particles: Particle[]) =>
 export const run = (input: string[]): [number, number] => {
   const particles = input.map((line, index) => {
     const [p, v, a] = line.split(', ')
-    const position = $.toCoords(p.slice(3, -1) as Point)
-    const velocity = $.toCoords(v.slice(3, -1) as Point)
-    const acceleration = $.toCoords(a.slice(3, -1) as Point)
+    const position = $.toCoords(p.slice(3, -1) as TriPoint)
+    const velocity = $.toCoords(v.slice(3, -1) as TriPoint)
+    const acceleration = $.toCoords(a.slice(3, -1) as TriPoint)
 
     return { index, position, velocity, acceleration }
   })
@@ -49,5 +50,5 @@ export const run = (input: string[]): [number, number] => {
     count -= countCollisions(particles.map(tick))
   }
 
-  return [particles.sort(sortByDistance).pop().index, count]
+  return [particles.sort(sortByDistance).pop()!.index, count]
 }

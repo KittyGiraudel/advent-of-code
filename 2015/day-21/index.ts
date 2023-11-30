@@ -59,6 +59,7 @@ const getCombinations = () => {
   // Aggregate the stats of all the items in the gear (cost, damage, armor).
   return gears.map(items =>
     items.reduce(
+      // @ts-ignore
       ([cost, damage, armor], [iCost, iDamage, iArmor]) => [
         cost + iCost,
         damage + iDamage,
@@ -136,7 +137,7 @@ class Fight {
 }
 
 export const run = (boss: number[]): [number, number] => {
-  const gears = getCombinations()
+  const gears = getCombinations() as Stats[]
   const matches = gears.map(gear => new Fight(gear, boss).resolve())
 
   return [

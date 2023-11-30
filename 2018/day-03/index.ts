@@ -9,12 +9,12 @@ type Boundary = {
 }
 
 const findBoundaries = (claims: Boundary[]) =>
-  claims.reduce(
+  claims.reduce<Boundary>(
     (acc, claim) => ({
       xMax: Math.max(claim.xMax, acc.xMax),
       yMax: Math.max(claim.yMax, acc.yMax),
     }),
-    { xMax: -Infinity, yMax: -Infinity } as Boundary
+    { xMax: -Infinity, yMax: -Infinity }
   )
 
 // This is a bit of an ugly solution, because it’s incredibly slow. It would
@@ -33,8 +33,8 @@ export const countOverlappingInches = (input: string[]) => {
   const grid = $.grid.init(boundaries.xMax + 1, boundaries.yMax + 1, 0)
 
   claims.forEach(({ xMin, xMax, yMin, yMax }) => {
-    for (let x = xMin; x <= xMax; x++)
-      for (let y = yMin; y <= yMax; y++) grid[y][x]++
+    for (let x = xMin as number; x <= xMax; x++)
+      for (let y = yMin as number; y <= yMax; y++) grid[y][x]++
   })
 
   const counts = $.count(grid.flat())
@@ -46,9 +46,9 @@ export const countOverlappingInches = (input: string[]) => {
 }
 
 const getIntersection = (a: Boundary, b: Boundary) => {
-  const xMin = Math.max(a.xMin, b.xMin)
+  const xMin = Math.max(a.xMin as number, b.xMin as number)
   const xMax = Math.min(a.xMax, b.xMax)
-  const yMin = Math.max(a.yMin, b.yMin)
+  const yMin = Math.max(a.yMin as number, b.yMin as number)
   const yMax = Math.min(a.yMax, b.yMax)
 
   if (xMin > xMax || yMin > yMax) return null
@@ -58,7 +58,7 @@ const getIntersection = (a: Boundary, b: Boundary) => {
 
 const parseClaims = (lines: string[]) =>
   lines
-    .map(line => line.match(/(\d+)/g).map(Number))
+    .map(line => line.match(/(\d+)/g)?.map(Number) ?? [])
     .map(
       ([id, xMin, yMin, width, height]) =>
         ({
@@ -81,4 +81,4 @@ export const detect = (input: string[]) =>
       array
         .filter(c => c.id !== claim.id)
         .filter(b => getIntersection(claim, b)).length === 0
-  ).id
+  )!.id

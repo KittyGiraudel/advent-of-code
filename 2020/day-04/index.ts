@@ -12,6 +12,7 @@ export const VALIDATORS = {
     'amb,blu,brn,gry,grn,hzl,oth'.split(',').includes(input),
   pid: (input: string) => /^\d{9}$/.test(input),
 }
+type Validator = keyof typeof VALIDATORS
 
 // Return the value for a given key/value colon-separated pair.
 // @param input - Input to parse
@@ -33,5 +34,8 @@ export const isValidStrict = (input: string) =>
   Object.keys(VALIDATORS).every(key =>
     input
       .split(/\s+/g)
-      .find(value => value.startsWith(key) && VALIDATORS[key](parse(value)))
+      .find(
+        value =>
+          value.startsWith(key) && VALIDATORS[key as Validator](parse(value))
+      )
   )

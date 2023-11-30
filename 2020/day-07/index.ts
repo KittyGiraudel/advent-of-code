@@ -6,11 +6,12 @@ type Map = Record<string, Item[]>
 // @return Type and capacity
 export const parseRestriction = (restriction: string) => {
   const [type, leftover] = restriction.trim().split(' bags contain ')
-  const contains = leftover
-    .split(',')
-    .map(part => part.trim().match(/(\d+) ([\w\s]+) bags?/))
-    .filter(Boolean)
-    .map(([, count, type]) => ({ type, count: +count }))
+  const contains = (
+    leftover
+      .split(',')
+      .map(part => part.trim().match(/(\d+) ([\w\s]+) bags?/) ?? null)
+      .filter(Boolean) as RegExpMatchArray[]
+  ).map(([, count, type]) => ({ type, count: +count }))
 
   return { type, contains }
 }
@@ -23,9 +24,9 @@ export const mapRestrictions = (restrictions: string[]) =>
   restrictions
     .filter(Boolean)
     .map(parseRestriction)
-    .reduce(
+    .reduce<Map>(
       (map, { type, contains }) => ({ ...map, [type]: contains }),
-      {} as Map
+      {}
     )
 
 // Determine whether `entry` type can contain `expected` type, no matter the
@@ -34,7 +35,11 @@ export const mapRestrictions = (restrictions: string[]) =>
 // @param entry - Entry point type in the map
 // @param expected - Expected type to find
 // @return Whether `entry` type can contain `expected` type (deep)
-export const canContain = (map: Map, entry: string, expected: string) =>
+export const canContain = (
+  map: Map,
+  entry: string,
+  expected: string
+): boolean =>
   entry === expected ||
   map[entry].some(item => canContain(map, item.type, expected))
 
@@ -51,7 +56,7 @@ export const countContainers = (map: Map, expected: string) =>
 // @param map - Map of restrictions
 // @param entry - Entry point type in the map
 // @return Amount of bags within given `entry` type
-export const countBagsWithin = (map: Map, entry: string) =>
+export const countBagsWithin = (map: Map, entry: string): number =>
   map[entry].reduce(
     (acc, { count, type }) => acc + count * (1 + countBagsWithin(map, type)),
     0

@@ -15,12 +15,12 @@ class Network {
 
   constructor(input: string, size: number, withLogs: boolean = false) {
     this.outputs = []
-    this.NAT = null
+    this.NAT = [0, 0]
     this.nodes = $.array(size).map((_, i) => this.createNode(i, input))
     this.withLogs = withLogs
   }
 
-  log(...args) {
+  log(...args: unknown[]) {
     if (this.withLogs) console.log(...args)
   }
 

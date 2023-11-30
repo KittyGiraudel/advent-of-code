@@ -4,7 +4,7 @@ const indicesOf = (string: string, from: string) => {
   const indices = []
   const regex = new RegExp(from, 'g')
 
-  let result: RegExpExecArray
+  let result
   while ((result = regex.exec(string))) indices.push(result.index)
 
   return indices
@@ -14,7 +14,7 @@ const replaceAt = (value: string, from: string, index: number, to: string) =>
   value.slice(0, index) + value.slice(index).replace(from, to)
 
 export const calibrate = (input: string[]) => {
-  const molecule = input.at(-1)
+  const molecule = input.at(-1)!
   const molecules = input.slice(0, -2).flatMap(replacement => {
     const [from, to] = replacement.split(' => ')
     const indices = indicesOf(molecule, from)
@@ -34,7 +34,7 @@ export const calibrate = (input: string[]) => {
 // Ref: https://www.reddit.com/r/adventofcode/comments/3xflz8/comment/cy4etju/
 // Ref: https://www.reddit.com/r/adventofcode/comments/3xflz8/comment/cy4h7ji/
 export const recompose = (input: string[]) => {
-  const molecule = input.at(-1)
+  const molecule = input.at(-1)!
   const tokens = $.countInString(molecule, '[A-Z]', false)
   const Rn = $.countInString(molecule, 'Rn', false)
   const Ar = $.countInString(molecule, 'Ar', false)

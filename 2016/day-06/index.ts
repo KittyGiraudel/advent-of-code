@@ -8,6 +8,6 @@ export const run = (lines: string[]): [string, string] => {
 
   return [
     counters.map(counter => counter[0][0]).join(''),
-    counters.map(counter => counter.at(-1)[0]).join(''),
+    counters.map(counter => counter.at(-1)![0]).join(''),
   ]
 }

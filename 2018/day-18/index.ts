@@ -10,6 +10,7 @@ const getNextValue = (value: string, neighbors: string[]) => {
     return neighbors.filter(isLumberyard).length >= 3 ? '#' : '|'
   if (value === '#')
     return neighbors.find(isTree) && neighbors.find(isLumberyard) ? '#' : '.'
+  return value
 }
 
 const getScore = (grid: Grid<string>) => {

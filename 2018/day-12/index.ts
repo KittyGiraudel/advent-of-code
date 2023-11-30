@@ -10,9 +10,9 @@ const getPatterns = (input: string) =>
   input
     .split('\n')
     .map(line => line.split(' => '))
-    .reduce(
+    .reduce<Patterns>(
       (acc, [pattern, outcome]) => ({ ...acc, [pattern]: outcome }),
-      {} as Patterns
+      {}
     )
 
 const padState = (state: string[], offset: number) => {

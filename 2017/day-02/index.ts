@@ -14,7 +14,7 @@ export const checksum = (input: string[], advanced: boolean = false) =>
           [a, b],
           [b, a],
         ])
-        .find(([a, b]) => Number.isInteger(a / b))
+        .find(([a, b]) => Number.isInteger(a / b)) as [number, number]
 
       return pair[0] / pair[1]
     })

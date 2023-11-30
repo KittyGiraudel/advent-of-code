@@ -11,6 +11,7 @@ class Game {
 
   constructor(armies: Army[] = []) {
     this.armies = armies
+    this._allGroups = []
   }
 
   get stale() {
@@ -34,7 +35,7 @@ class Game {
 
     // Cache the result since this never changes (as initiative never changes).
     this._allGroups = this.armies
-      .reduce((groups, army) => groups.concat(army.groups), [])
+      .reduce<Group[]>((groups, army) => groups.concat(army.groups), [])
       .sort((a, b) => b.initiative - a.initiative)
 
     return this._allGroups
@@ -42,7 +43,7 @@ class Game {
 
   fight() {
     this.armies.forEach(army => {
-      const opponent = this.armies.find(a => a.name !== army.name)
+      const opponent = this.armies.find(a => a.name !== army.name)!
       army.pickTargets(opponent)
     })
     this.groups.forEach(group => group.attack())
@@ -96,8 +97,8 @@ class Group {
   initiative: number
   immunity: string[]
   weakness: string[]
-  target: Group
-  attacker: Group
+  target: Group | null
+  attacker: Group | null
 
   constructor(data: GroupData, army: ArmyName) {
     this.id = data.id
@@ -141,7 +142,7 @@ class Group {
     const target = groups
       .filter(group => !group.attacker)
       .sort((a, b) => this.sortTargets(a, b))
-      .pop()
+      .pop()!
 
     if (target.expect(this.power, this.type) > 0) {
       this.target = target.targeted(this)
@@ -188,10 +189,11 @@ type GroupData = {
 }
 
 const parseGroup = (raw: string, index: number) => {
-  const [units, health, damage, initiative] = raw.match(/(\d+)/g).map(Number)
+  const [units, health, damage, initiative] =
+    raw.match(/(\d+)/g)?.map(Number) ?? []
   const weakness = raw.match(/weak to ([^;)]+)/)?.[1].split(/, ?/g) ?? []
   const immunity = raw.match(/immune to ([^;)]+)/)?.[1].split(/, ?/g) ?? []
-  const type = raw.match(/(\w+) damage/)[1]
+  const type = raw.match(/(\w+) damage/)![1]
   const id = index + 1
 
   return {
@@ -236,7 +238,7 @@ export const cheat = (data: string[]) => {
   while (true) {
     const armies = getArmies(data)
 
-    armies.find(army => army.name === IMMUNE_SYSTEM).boost(++boost)
+    armies.find(army => army.name === IMMUNE_SYSTEM)!.boost(++boost)
 
     const game = new Game(armies)
 

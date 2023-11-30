@@ -13,9 +13,11 @@ const wrap = (rule: string) => (rule.includes('|') ? '(?:' + rule + ')' : rule)
 // @param rule - Rule to resolve
 // @param map - Storage map
 // @param depth - Internal depth parameter; do not fill
-const resolveRule = (rule: string, map: Cache, depth: number = 0) =>
+const resolveRule = (rule: string, map: Cache, depth: number = 0): string =>
   rule.replace(/\d+/g, match =>
-    depth > 4 ? match : wrap(resolveRule(map.get(match), map, depth + 1))
+    depth > 4
+      ? match
+      : wrap(resolveRule(map.get(match) as string, map, depth + 1))
   )
 
 // Get the resolved regular expression for the rules, applying fixes beforehand
@@ -28,7 +30,7 @@ const getRegularExpression = (input: string, fixes: Fixes) => {
     .split('\n')
     .map(line => (line in fixes ? fixes[line] : line))
     .map(line => line.match(/^(\d+): (.+)$/))
-    .reduce((acc, match) => acc.set(match[1], match[2]), new Map())
+    .reduce((acc, match) => acc.set(match![1], match![2]), new Map())
 
   for (let [key, value] of map.entries()) {
     map.set(key, resolveRule(value, map))

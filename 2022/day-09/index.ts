@@ -8,23 +8,23 @@ import { Coords, Point } from '../../types'
 // visited coordinates in a set (although it’s technically only needed for the
 // last one).
 class Node {
-  previous: Node
-  next: Node
+  previous: Node | null
+  next: Node | null
   position: Coords
   visited: Set<Point>
 
-  constructor(previous) {
+  constructor(previous: Node | null) {
     this.previous = previous
     this.next = null
     this.position = [0, 0]
     this.visited = new Set(['0,0'])
   }
 
-  get head() {
+  get head(): Node {
     return this.previous?.head ?? this
   }
 
-  get tail() {
+  get tail(): Node {
     return this.next?.tail ?? this
   }
 
@@ -58,17 +58,20 @@ class Node {
 }
 
 const createNodes = (size: number) => {
-  let curr = null
+  let curr: Node | null = null
 
   for (let i = 0; i < size; i++) {
-    curr = curr ? (curr.next = new Node(curr)) : new Node(null)
+    if (curr) {
+      curr.next = new Node(curr)
+      curr = curr.next
+    } else curr = new Node(null)
   }
 
-  return curr.head
+  return curr?.head ?? null
 }
 
 export const countTailPositions = (input: string[], size: number = 2) => {
-  const head = createNodes(size)
+  const head = createNodes(size)!
 
   input.forEach(line => {
     const [direction, amount] = line.split(' ')

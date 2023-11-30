@@ -46,7 +46,7 @@ export const findClosestIntersection = (lines: [string, string]) => {
 export const findFastestIntersection = (lines: [string, string]) => {
   const { maps, intersections } = findIntersections(lines)
   const steps = intersections.map(coords =>
-    $.sum(maps.map(map => map.get(coords)))
+    $.sum(maps.map(map => map.get(coords) as number))
   )
 
   return Math.min(...steps)

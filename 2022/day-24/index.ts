@@ -23,8 +23,8 @@ const getGrids = (input: string[]) => {
   const isWallOrDoor = (grid: Grid<string[]>, ri: number, ci: number) =>
     ri === 0 || ri === grid.length - 1 || ci === 0 || ci === grid[0].length - 1
 
-  return $.array(height * width - 1).reduce((acc: Grids, _, index) => {
-    const curr = acc.get(index)
+  return $.array(height * width - 1).reduce<Grids>((acc, _, index) => {
+    const curr = acc.get(index)!
 
     // Start the new maze from an empty grid: only the borders are marked as
     // taken, everything else is considered empty. Note that we preserve the
@@ -55,7 +55,7 @@ const getGrids = (input: string[]) => {
     })
 
     return acc.set(index + 1, next)
-  }, new Map([[0, grid]]) as Grids)
+  }, new Map([[0, grid]]))
 }
 
 const findDoor = (row: string) => row.split('').findIndex(col => col === '.')
@@ -66,7 +66,7 @@ type Node = {
 }
 
 const getMoves = (curr: Node) =>
-  ($.bordering(curr.coords, 'COORDS') as Coords[])
+  $.bordering(curr.coords, 'COORDS')
     .concat([curr.coords])
     .map((coords: Coords) => ({ coords, time: curr.time + 1 } as Node))
 
@@ -84,7 +84,7 @@ const cross = (
     getNextNodes: curr => {
       const index = (curr.time + 1) % grids.size
       // Retrieve the state of the maze based on the current time.
-      const grid = grids.get(index)
+      const grid = grids.get(index)!
 
       // The grid only arrays, so a given array has no item, it means it’s
       // a free cell (no wall and no blizzard).
@@ -99,7 +99,7 @@ const cross = (
 // find the shortest path (347 instead of 247).
 export const maze = (input: string[], withSnacks: boolean = false) => {
   const startCoords: Coords = [0, findDoor(input[0])]
-  const endCoords: Coords = [input.length - 1, findDoor(input.at(-1))]
+  const endCoords: Coords = [input.length - 1, findDoor(input.at(-1)!)]
   const grids = getGrids(input)
   const time = cross(grids, startCoords, endCoords)
 

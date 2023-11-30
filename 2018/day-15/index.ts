@@ -1,20 +1,20 @@
 import $ from '../../helpers'
 import { Grid, Coords, Point } from '../../types'
 
+type UnitType = 'G' | 'E'
+
 const getBorderingSpace = (grid: Grid<string>, curr: Coords) => {
   const [N, E, S, W] = $.bordering(curr, 'COORDS')
-  return [N, W, E, S].filter(
-    neighbor => $.access(grid, neighbor) === '.'
-  ) as Coords[]
+  return [N, W, E, S].filter(neighbor => $.access(grid, neighbor) === '.')
 }
 
 class Unit {
-  type: string
+  type: UnitType
   power: number
   coords: Coords
   health: number
 
-  constructor(type: string, coords: Coords, power: number = 3) {
+  constructor(type: UnitType, coords: Coords, power: number = 3) {
     this.type = type
     this.power = power
     this.coords = coords
@@ -46,7 +46,7 @@ class Unit {
     return this.health > 0
   }
 
-  isEnemy(type) {
+  isEnemy(type: UnitType) {
     return type !== this.type
   }
 
@@ -70,7 +70,7 @@ class Unit {
     this.neighbors
       .map(getAliveEnemyAt)
       .filter(Boolean)
-      .sort((a, b) => a.health - b.health)
+      .sort((a, b) => a!.health - b!.health)
       .shift()
       ?.hurt(this.power)
   }
@@ -95,7 +95,7 @@ class Unit {
     // range of it, move one step towards that target.
     if (graph.end) {
       const path = $.pathfinding.path(graph.from, this.coords, graph.end)
-      const point = path.pop()
+      const point = path.pop() as Point
 
       if (point) this.coords = $.toCoords(point)
     }
@@ -164,7 +164,7 @@ class Game {
       this.turns++
   }
 
-  getUnitsFromType(type) {
+  getUnitsFromType(type: string) {
     return this.units.filter(unit => unit.type === type)
   }
 

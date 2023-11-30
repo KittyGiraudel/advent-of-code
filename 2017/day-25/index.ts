@@ -17,8 +17,8 @@ type States = Record<string, State>
 const parse = (blocks: string[]) => {
   const [header, ...rest] = blocks.map(block => block.split('\n'))
   const initial = header[0].slice(-2, -1)
-  const iterations = +header[1].match(/(\d+)/)[1]
-  const states = rest.reduce((acc, block) => {
+  const iterations = +header[1].match(/(\d+)/)![1]
+  const states = rest.reduce<States>((acc, block) => {
     const name = block[0].slice(-2, -1)
     const if0 = block.slice(2, 5)
     const if1 = block.slice(6)
@@ -26,14 +26,14 @@ const parse = (blocks: string[]) => {
     acc[name] = [if0, if1].map(
       ([write, move, then]) =>
         [
-          +write.match(/(\d+)/)[1],
+          +write.match(/(\d+)/)![1],
           move.includes('left') ? -1 : +1,
           then.slice(-2, -1),
         ] as Instruction
     )
 
     return acc
-  }, {} as States)
+  }, {})
 
   return { initial, iterations, states }
 }

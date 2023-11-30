@@ -8,7 +8,7 @@ export class Computer {
   memory: string[]
   signals: number[]
 
-  constructor(input) {
+  constructor(input: string[]) {
     this.cycle = 0
     this.register = 1
     this.memory = []
@@ -54,7 +54,7 @@ export class Computer {
 
       if (instruction.startsWith('addx')) {
         this.tick()
-        this.register += +instruction.split(' ').pop()
+        this.register += +instruction.split(' ').pop()!
       }
     })
   }

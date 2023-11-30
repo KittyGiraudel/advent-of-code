@@ -18,13 +18,13 @@ export const run = (
 
   if (advanced) {
     corners
-      .map($.toCoords)
+      .map(corner => $.toCoords(corner))
       .forEach(coords => (curr[coords[0]][coords[1]] = '#'))
   }
 
   while (iterations--) {
     curr = $.grid.map($.grid.clone(curr), (value, ri, ci) => {
-      const neighbors: Coords[] = $.surrounding([ri, ci], 'COORDS')
+      const neighbors = $.surrounding([ri, ci], 'COORDS')
       const on = neighbors.filter(coords => $.access(curr, coords) === '#')
 
       if (advanced && corners.includes($.toPoint([ri, ci]))) {

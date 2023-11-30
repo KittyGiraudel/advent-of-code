@@ -15,7 +15,7 @@ const ROCKS: string[][] = [
 ]
 const EMPTY_ROW = '.'.repeat(WIDTH)
 
-const log = (...args) => DEBUG && console.log(...args)
+const log = (...args: unknown[]) => DEBUG && console.log(...args)
 const isRowEmpty = (row: string[]) => row && row.join('') === EMPTY_ROW
 
 // This could be a bit more elegant (as in performant). Right now it drops every

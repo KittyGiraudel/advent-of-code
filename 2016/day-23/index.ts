@@ -2,16 +2,17 @@ import $ from '../../helpers'
 
 export const run = (input: string[], a: number = 0) => {
   const registers = { a, b: 0, c: 0, d: 0 }
-  const read = (key: string | number) => registers[key] || +key
+  type Key = keyof typeof registers
+  const read = (key: string | number) => registers[key as Key] || +key
 
   // Speed boost by doing the split only once.
   const instructions = input.map(instruction => instruction.split(' '))
 
   for (let i = 0; i < instructions.length; i++) {
     const [code, x, y] = instructions[i]
-    if (code === 'cpy' && y in registers) registers[y] = read(x)
-    else if (code === 'inc' && x in registers) registers[x]++
-    else if (code === 'dec' && x in registers) registers[x]--
+    if (code === 'cpy' && y in registers) registers[y as Key] = read(x)
+    else if (code === 'inc' && x in registers) registers[x as Key]++
+    else if (code === 'dec' && x in registers) registers[x as Key]--
     else if (code === 'jnz' && read(x)) i += read(y) - 1
     else if (code === 'tgl') {
       const j = i + read(x)

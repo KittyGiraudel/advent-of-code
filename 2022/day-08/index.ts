@@ -1,13 +1,13 @@
 import $ from '../../helpers'
 
 export const countVisibleTrees = (rows: string[]) => {
-  const grid = $.grid.create(rows)
+  const grid = $.grid.create<string>(rows)
   const height = grid.length
   const width = grid[0].length
 
   return $.grid
     .flatMap(grid, (tree, ri, ci) => {
-      const isSmaller = t => t < tree
+      const isSmaller = (t: string) => +t < +tree
 
       // Edge check
       if (ri === 0 || ci === 0) return true
@@ -27,7 +27,7 @@ export const countVisibleTrees = (rows: string[]) => {
 }
 
 export const getHighestScenicScore = (rows: string[]) => {
-  const grid = $.grid.create(rows)
+  const grid = $.grid.create<string>(rows)
   const height = grid.length
   const width = grid[0].length
 

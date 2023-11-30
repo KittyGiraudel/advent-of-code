@@ -1,6 +1,9 @@
 import $ from '../../helpers'
 
-type Instruction = { type: string; value: number | (string | number)[] }
+type Spin = { type: 'SPIN'; value: number }
+type Exchange = { type: 'EXCHANGE'; value: number[] }
+type Partner = { type: 'PARTNER'; value: string[] }
+type Instruction = Spin | Exchange | Partner
 
 export const dance = (
   input: string[],
@@ -10,20 +13,24 @@ export const dance = (
   const programs = $.range(size, 97).map(a => String.fromCharCode(a))
   const history = []
 
-  const instructions: Instruction[] = input.map(line => {
-    if (line.startsWith('s')) return { type: 'SPIN', value: +line.slice(1) }
+  const instructions = input.map(line => {
+    if (line.startsWith('s'))
+      return { type: 'SPIN', value: +line.slice(1) } as Spin
     if (line.startsWith('x'))
-      return { type: 'EXCHANGE', value: line.slice(1).split('/').map(Number) }
+      return {
+        type: 'EXCHANGE',
+        value: line.slice(1).split('/').map(Number),
+      } as Exchange
     if (line.startsWith('p')) {
-      return { type: 'PARTNER', value: line.slice(1).split('/') }
+      return { type: 'PARTNER', value: line.slice(1).split('/') } as Partner
     }
-  })
+  }) as Instruction[]
 
   for (let i = 0; i < iterations; i++) {
     instructions.forEach(({ type, value }) => {
       if (type === 'SPIN') {
-        let x: number = value as number
-        while (x--) programs.unshift(programs.pop())
+        let x = value as number
+        while (x--) programs.unshift(programs.pop()!)
       }
       if (type === 'EXCHANGE') {
         ;[programs[value[0]], programs[value[1]]] = [

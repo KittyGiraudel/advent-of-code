@@ -88,7 +88,7 @@ function isCallable<T>(
 const initGrid = <T>(
   width: number,
   height: number = width,
-  value: T | ((ci: number, ri: number) => T) = null
+  value: T | null | ((ci: number, ri: number) => T) = null
 ) =>
   Array.from({ length: height }, (_, ri) =>
     Array.from({ length: width }, (_, ci) =>

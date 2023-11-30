@@ -1,13 +1,15 @@
 import $ from '../../helpers'
 import { Coords, Point } from '../../types'
 
+type Constellation = Set<Coords>
+
 // Interestingly enough, this is almost the exact same algorithm as outlined by
 // this Reddit post (who scored #10/#58), so I’m pretty happy:
 // https://www.reddit.com/r/adventofcode/comments/a9c61w/comment/eci5rgz/?utm_source=reddit&utm_medium=web2x&context=3
 export const observe = (input: string[]) => {
-  const lines = input.map($.toCoords)
-  const constellations = []
-  const isInConstellation = (constellation, coords) =>
+  const lines = input.map(string => $.toCoords(string as Point))
+  const constellations: Constellation[] = []
+  const isInConstellation = (constellation: Constellation, coords: Coords) =>
     Array.from(constellation).some(
       (point: Coords) => $.manhattan(point, coords) <= 3
     )
@@ -19,7 +21,7 @@ export const observe = (input: string[]) => {
       .map((constellation, index) =>
         isInConstellation(constellation, coords) ? index : null
       )
-      .filter(index => index !== null)
+      .filter(index => index !== null) as number[]
 
     // If the point doesn’t belong to any constellation, it should start one of
     // its own.
@@ -32,7 +34,7 @@ export const observe = (input: string[]) => {
     // 2. All the other hosts should be merged into the first and deleted, since
     //    that point served as a bridge to bring and merge these constellations.
     else {
-      const first = hosts.shift()
+      const first = hosts.shift()!
 
       constellations[first].add(coords)
 

@@ -2,7 +2,7 @@ import $ from '../../helpers'
 
 type Instruction = string | number[]
 type Memory = Record<string, number>
-type Program = [Memory, string]
+type Program = [Memory, string | null]
 
 // Parse the given input into a comprehensible set of instructions.
 // @param input - Input data
@@ -12,8 +12,8 @@ export const parseProgram = (input: string[]) =>
       ? line.replace('mask = ', '')
       : line
           .match(/mem\[(\d+)\] = (\d+)/)
-          .slice(1)
-          .map(Number)
+          ?.slice(1)
+          .map(Number) ?? []
   ) as Instruction[]
 
 // Apply given mask to given value.
@@ -35,14 +35,14 @@ export const processLoose = (
   instruction: Instruction
 ) => {
   if (typeof instruction === 'string') return [memory, instruction]
-  memory[String(instruction[0])] = applyMask(instruction[1], mask)
+  memory[String(instruction[0])] = applyMask(instruction[1], mask!)
   return [memory, mask] as Program
 }
 
 // Resolve wildcard characters (`X`) in given address to expand it into multiple
 // possible addresses.
 // @param value - Masked value
-const resolveAddresses = (value: string[]) =>
+const resolveAddresses = (value: string[]): string[][] =>
   value.includes('X')
     ? [
         ...resolveAddresses($.updateAtIndex(value, value.indexOf('X'), '0')),
@@ -72,7 +72,8 @@ export const processStrict = (
   instruction: Instruction
 ) => {
   if (typeof instruction === 'string') return [memory, instruction]
-  getAddresses(instruction[0], mask).forEach(
+  getAddresses(instruction[0], mask!).forEach(
+    // @ts-ignore
     address => (memory[address] = instruction[1])
   )
   return [memory, mask] as Program

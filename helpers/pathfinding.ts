@@ -11,7 +11,7 @@ type GetCost<T> = (curr: T, next: T) => number
 type Frontier<T> = PriorityQueue<[T, number]> | T[]
 
 export type SearchCosts = Record<string, number>
-export type SearchGraph = Record<string, string>
+export type SearchGraph = Record<string, string | null>
 export type SearchOutput<T> = { from: SearchGraph; end: T }
 export type SearchOptions<T> = {
   start: T
@@ -37,7 +37,7 @@ const _core = <T>(
   let end = null
 
   while (!isEmpty(frontier)) {
-    const curr = pop(frontier)
+    const curr = pop(frontier)!
 
     if (isGoal(curr)) {
       end = curr
@@ -82,7 +82,7 @@ export const bfs = <T>({
     }
   }
 
-  const end: T = _core(handler, frontier, getNextNodes, isGoal, emptyAfterGoal)
+  const end = _core(handler, frontier, getNextNodes, isGoal, emptyAfterGoal)
 
   return { end, from } as SearchOutput<T>
 }
@@ -114,7 +114,7 @@ export const gbfs = <T>({
     }
   }
 
-  const end: T = _core(handler, frontier, getNextNodes, isGoal, emptyAfterGoal)
+  const end = _core(handler, frontier, getNextNodes, isGoal, emptyAfterGoal)
 
   return { from, end } as SearchOutput<T>
 }
@@ -152,7 +152,7 @@ export const dijkstra = <T>({
     }
   }
 
-  const end: T = _core(handler, frontier, getNextNodes, isGoal)
+  const end = _core(handler, frontier, getNextNodes, isGoal)
 
   return { from, costs, end } as SearchOutput<T> & { costs: SearchCosts }
 }
@@ -194,19 +194,19 @@ export const aStar = <T>({
     }
   }
 
-  const end: T = _core(handler, frontier, getNextNodes, isGoal)
+  const end = _core(handler, frontier, getNextNodes, isGoal)
 
   return { from, costs, end } as SearchOutput<T> & { costs: SearchCosts }
 }
 
 const reconstruct = (graph: SearchGraph, start: unknown, end: unknown) => {
   let path = []
-  let current = typeof end === 'string' ? end : String(end)
+  let current: string | null = typeof end === 'string' ? end : String(end)
   start = typeof start === 'string' ? start : String(start)
 
   while (current !== start) {
     path.push(current)
-    current = graph[current]
+    current = current ? graph[current] : current
   }
 
   return path

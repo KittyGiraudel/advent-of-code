@@ -25,15 +25,21 @@ const getPatterns = (lines: string[]) => {
   return patterns
 }
 
-const enhance = (curr: string[], patterns: Patterns, cache: {}) => {
+const enhance = (
+  curr: string[],
+  patterns: Patterns,
+  cache: Record<string, string[]> = {}
+) => {
   let currStr = curr.join('/')
+  type CacheKey = keyof typeof cache
+  type PatternKey = keyof typeof patterns
 
-  if (currStr in cache) return cache[currStr]
+  if (currStr in cache) return cache[currStr as CacheKey]
 
   const pattern = Object.keys(patterns).find(pattern => currStr === pattern)
-  cache[currStr] = patterns[pattern]
+  cache[currStr as CacheKey] = patterns[pattern as PatternKey]
 
-  return cache[currStr]
+  return cache[currStr as CacheKey]
 }
 
 // Disassemble a grid expressed as a string into several subgrids (expressed as

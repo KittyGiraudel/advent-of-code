@@ -9,11 +9,11 @@ const NORTH: Coords = [0, -1]
 export const resolve = (bound: number) => {
   // Given the value increments by 1 for every new cell, use an array where the
   // index serves as the value itself, hence why we skip the first cell (0).
-  const coords: Coords[] = [null, [0, 0]]
+  const coords: (Coords | null)[] = [null, [0, 0]]
   // Taking a step means applying a directional vector to the last recorded
   // set of coordinates.
   const step = (vector: Coords) =>
-    coords.push($.applyVector(coords.at(-1), vector))
+    coords.push($.applyVector(coords.at(-1)!, vector))
 
   let steps = 0
   // Populating the grid goes like this: go east, then north, then west, then
@@ -28,7 +28,7 @@ export const resolve = (bound: number) => {
     for (let i = 0; i < steps; i++) step(SOUTH)
   }
 
-  return $.manhattan(coords[bound], [0, 0])
+  return $.manhattan(coords[bound]!, [0, 0])
 }
 
 export const resolve2 = (bound: number) => {
@@ -39,7 +39,7 @@ export const resolve2 = (bound: number) => {
   // Taking a step still means applying a directional vector to the last
   // recorded set of coordinates. But the stored value depends on the sum of the
   // value of the recorded neighbors.
-  const step = vector => {
+  const step = (vector: Coords) => {
     position = $.applyVector(position, vector)
 
     const sum = $.sum(

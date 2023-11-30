@@ -5,10 +5,10 @@ type Packt = {
   id: number
   packets: Packt[]
   rest: string
-  value: number
+  value: number | null
 }
 
-const parseHex = hex => Array.from(hex, $.hexToBin).join('')
+const parseHex = (hex: string) => Array.from(hex, $.hexToBin).join('')
 
 const decode = (string: string) => {
   // For a given packet, the version is expressed over the first 3 bits, and the
@@ -96,9 +96,10 @@ const sumVersions = ({
 }: {
   version: number
   packets: Packet[]
-}) => packets.reduce((total, packet) => total + sumVersions(packet), version)
+}): number =>
+  packets.reduce((total, packet) => total + sumVersions(packet), version)
 
-const getPacketValue = (packet: Packet) => {
+const getPacketValue = (packet: Packet): number => {
   const { id, packets, value } = packet
 
   switch (id) {
@@ -117,11 +118,11 @@ const getPacketValue = (packet: Packet) => {
     case 7:
       return +(getPacketValue(packets[0]) === getPacketValue(packets[1]))
     default:
-      return value
+      return value as number
   }
 }
 
-const render = (packet: Packet, depth: number = 1) => {
+const render = (packet: Packet, depth: number = 1): string => {
   const SYMBOLS = ['+', '*', '↓', '↑', ' ', '>', '<', '=']
   const symbol = SYMBOLS[packet.id]
   const value = getPacketValue(packet)
@@ -138,8 +139,11 @@ const render = (packet: Packet, depth: number = 1) => {
   )
 }
 
+// @ts-ignore
 export const getVersionSums = $.compose(sumVersions, decode, parseHex)
+// @ts-ignore
 export const evaluate = $.compose(getPacketValue, decode, parseHex)
+// @ts-ignore
 export const visualize = $.compose(render, decode, parseHex)
 
 // Class-oriented approach authored once finished based on that elegant version
@@ -147,7 +151,7 @@ export const visualize = $.compose(render, decode, parseHex)
 class Packet {
   version: number
   id: number
-  value: number
+  value: number | undefined
   packets: Packet[]
 
   constructor(version: number, id: number, value?: number) {
@@ -157,7 +161,7 @@ class Packet {
     this.packets = []
   }
 
-  sumVersions() {
+  sumVersions(): number {
     return this.packets.reduce(
       (total, packet) => total + packet.sumVersions(),
       this.version
@@ -192,7 +196,7 @@ export class Decoder {
   bits: string
   packet: Packet
 
-  constructor(hex) {
+  constructor(hex: string) {
     this.bits = parseHex(hex)
     this.packet = this.decode()
   }
@@ -220,13 +224,13 @@ export class Decoder {
     return packet
   }
 
-  consume(length) {
+  consume(length: number) {
     const string = this.bits.slice(0, length)
     this.bits = this.bits.slice(length)
     return string
   }
 
-  consumeNum(length) {
+  consumeNum(length: number) {
     return parseInt(this.consume(length), 2)
   }
 

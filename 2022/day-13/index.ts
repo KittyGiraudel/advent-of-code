@@ -22,7 +22,10 @@ const isNumber = (value: any) => typeof value === 'number'
 //    - If the comparison is undetermined, skip to next set of values.
 // @param a - First value
 // @param b - Second value
-export const compare = (a: ValueOrArray<number>, b: ValueOrArray<number>) => {
+export const compare = (
+  a: ValueOrArray<number>,
+  b: ValueOrArray<number>
+): boolean | undefined => {
   if (!isDefined(b)) return false
   if (!isDefined(a)) return true
 

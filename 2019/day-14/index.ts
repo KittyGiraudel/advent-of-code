@@ -16,7 +16,7 @@ const parseIngredient = (string: string) => {
 }
 
 const parseRecipes = (input: string[]) =>
-  input.reduce((acc, line) => {
+  input.reduce<Recipes>((acc, line) => {
     const [from, to] = line.split(' => ')
     const ingredients = from.split(', ').map(parseIngredient)
     const output = parseIngredient(to)
@@ -24,9 +24,12 @@ const parseRecipes = (input: string[]) =>
     acc[output.ingredient] = { servings: output.amount, ingredients }
 
     return acc
-  }, {} as Recipes)
+  }, {})
 
-const getOreCost = (state: State, { ingredient, amount }: Ingredient) => {
+const getOreCost = (
+  state: State,
+  { ingredient, amount }: Ingredient
+): State => {
   const supply = state.supplies[ingredient] ?? 0
 
   // If the ingredient we are trying to produce is ORE, this means we are

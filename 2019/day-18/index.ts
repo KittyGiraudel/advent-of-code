@@ -38,13 +38,13 @@ export const maze = (input: string[]) => {
     getCost: curr => curr.steps + 1,
     getNextNodes: curr =>
       $.bordering(curr.coords, 'BOTH')
-        .filter((next: CoordsAndPoint) => {
+        .filter(next => {
           const value = $.access(grid, next.coords)
           const isOpenDoor = isDoor(value) && curr.keys.has(value.toLowerCase())
 
           return value === '.' || isOpenDoor
         })
-        .map((next: CoordsAndPoint) => {
+        .map(next => {
           const nextKeys =
             next.point in keys
               ? new Set(curr.keys).add(keys[next.point])

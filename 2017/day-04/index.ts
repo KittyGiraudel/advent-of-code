@@ -13,4 +13,4 @@ export const validateStrict = (passphrase: string) =>
   $.combinations(
     passphrase.split(' ').map(word => Array.from(word).sort().join('')),
     2
-  ).every(pair => levenshtein(...pair))
+  ).every(pair => levenshtein(pair[0], pair[1]))

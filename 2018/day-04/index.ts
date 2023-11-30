@@ -16,7 +16,7 @@ type Event = {
 const parseLog = (line: string) => {
   const [rawDate, rest] = line.split(']')
   const date = new Date(rawDate.slice(1) + 'Z')
-  const id = +rest.match(/\d+/)?.[0]
+  const id = +(rest.match(/\d+/)?.[0] ?? 0)
   const type = rest.split(' ').slice(-2).join(' ')
 
   return { date, id, type } as Event
@@ -46,7 +46,7 @@ const processEvent = (event: Event, index: number, log: Event[]) => {
 
   if (event.type === 'wakes up') {
     event.end = event.date.getUTCMinutes()
-    event.minutes = $.range(event.end - event.start, event.start)
+    event.minutes = $.range(event.end - event.start!, event.start)
   }
 
   return event
@@ -61,7 +61,7 @@ const aggregateEvents = (acc: Record<string, number[]>, event: Event) => {
   }
 
   if (event.type === 'wakes up') {
-    acc[event.id].push(...event.minutes)
+    acc[event.id].push(...event.minutes!)
   }
 
   return acc
@@ -89,11 +89,11 @@ export const find = (input: string[]): [number, number] => {
   const sleepiestGuard = data
     .slice(0)
     .sort((a, b) => a.duration - b.duration)
-    .pop()
+    .pop()!
   const sleepiestMinute = data
     .slice(0)
     .sort((a, b) => a.counters[0].occurrences - b.counters[0].occurrences)
-    .pop()
+    .pop()!
 
   return [
     sleepiestGuard.id * sleepiestGuard.counters[0].minute,

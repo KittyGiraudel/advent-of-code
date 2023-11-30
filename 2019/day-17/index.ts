@@ -30,7 +30,7 @@ export const calibrate = (grid: Grid<string>) =>
     (calibration, value, ri, ci) => {
       if (value !== '#') return calibration
 
-      const neighborcoords: Coords[] = $.bordering([ri, ci], 'COORDS')
+      const neighborcoords = $.bordering([ri, ci], 'COORDS')
       const neighbors = neighborcoords.map(coords => $.access(grid, coords))
       const intersection = neighbors.every(neighbor => neighbor === '#')
 
@@ -49,11 +49,12 @@ export const scaffold = (input: string) => {
     return this.setInput($.toAscii(input)).run()
   }
 
+  computer.run()
+
   // The inputs were manually resolved by printing the map and listing out all
   // the instructions one by one to go from start to finish to begin with. Then
   // by figuring out 3 repeated patterns that are no longer than 20 characters.
   return computer
-    .run()
     .execute('A,B,A,C,B,A,C,B,A,C')
     .execute('L,6,L,4,R,6,6')
     .execute('L,6,R,6,6,R,6,6,L,8')

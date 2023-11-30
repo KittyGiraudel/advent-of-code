@@ -24,7 +24,7 @@ const parseInstructions = (instructions: string) =>
   instructions
     .split('\n')
     .filter(Boolean)
-    .map(instruction => instruction.match(/\d+/g).map(v => +v))
+    .map(instruction => instruction.match(/\d+/g)?.map(v => +v) ?? [])
 
 export const process = (input: [string, string], batch: boolean = false) => {
   const map = parseMap(input[0])
@@ -35,7 +35,7 @@ export const process = (input: [string, string], batch: boolean = false) => {
       map[to - 1].unshift(...map[from - 1].splice(0, amount))
     } else
       for (let i = 0; i < amount; i++)
-        map[to - 1].unshift(map[from - 1].shift())
+        map[to - 1].unshift(map[from - 1].shift()!)
   })
 
   return $.column(map, 0).join('')

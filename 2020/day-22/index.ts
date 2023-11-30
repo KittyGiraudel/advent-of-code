@@ -3,7 +3,7 @@ type Outcome = { index: number; decks: Deck[] }
 
 const isNotEmpty = (deck: Deck) => deck.length > 0
 
-const draw = (decks: Deck[]) => decks.map(deck => deck.shift())
+const draw = (decks: Deck[]) => decks.map(deck => deck.shift()!)
 
 const getWinningIndex = (cards: number[]) =>
   cards.findIndex(card => card === Math.max(...cards))

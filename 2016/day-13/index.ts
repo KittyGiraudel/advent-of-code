@@ -25,7 +25,7 @@ export const run = (
     isGoal: ([ri, ci]) => ri === end[0] && ci === end[1],
   })
 
-  const getDistanceFromStart = from =>
+  const getDistanceFromStart = (from: string | Coords) =>
     $.pathfinding.path(graph, start, from).length
 
   return [

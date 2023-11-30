@@ -13,9 +13,9 @@ export const isValid = (curr: string) =>
   SEQUENCES_RE.test(curr) &&
   (curr.match(PAIRS_RE) ?? []).length >= 2
 
-const next = (curr: string) => {
+const next = (curr: string): string => {
   const array = Array.from(curr)
-  const last = array.pop()
+  const last = array.pop()!
 
   // If the last letter is a ‘z’, move to the previous character and reset the
   // last one to a ‘a’. Otherwise, increment the last character.

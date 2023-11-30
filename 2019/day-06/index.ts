@@ -9,8 +9,8 @@ export const createGraph = (lines: string[]) => {
     const [orbited, orbiting] = line.split(')')
     if (!map.has(orbiting)) map.set(orbiting, new Set())
     if (!map.has(orbited)) map.set(orbited, new Set())
-    map.set(orbited, map.get(orbited).add(orbiting))
-    map.set(orbiting, map.get(orbiting).add(orbited))
+    map.set(orbited, map.get(orbited)!.add(orbiting))
+    map.set(orbiting, map.get(orbiting)!.add(orbited))
   })
 
   return map
@@ -21,10 +21,10 @@ export const getPaths = (
   curr: string,
   end: string = 'COM',
   path: string[] = []
-) => {
+): string[][] => {
   if (curr === end) return [path]
   if (path.includes(curr)) return []
-  return Array.from(graph.get(curr)).reduce(
+  return Array.from(graph.get(curr)!).reduce<string[][]>(
     (acc, next) => acc.concat(getPaths(graph, next, end, [...path, curr])),
     []
   )
@@ -35,7 +35,7 @@ export const countOrbits = (graph: Graph, to: string = 'COM') => {
     const { from } = $.pathfinding.bfs({
       start: key,
       isGoal: curr => curr === to,
-      getNextNodes: curr => Array.from(graph.get(curr)),
+      getNextNodes: curr => Array.from(graph.get(curr)!),
     })
 
     return orbits + $.pathfinding.path(from, key, to).length
@@ -59,7 +59,7 @@ export const countTransfers = (
   const { from } = $.pathfinding.bfs({
     start,
     isGoal: curr => curr === end,
-    getNextNodes: curr => Array.from(graph.get(curr)),
+    getNextNodes: curr => Array.from(graph.get(curr)!),
   })
   const path = $.pathfinding.path(from, start, end)
 

@@ -1,12 +1,12 @@
 import $ from '../../helpers'
 
-type Output = { accumulator: number; exit: number }
+type Output = { accumulator: number | null; exit: number | null }
 
 // Execute the given array of instructions.
 // @param instructions - List of instructions making the program
 // @return `accumulator` value and 0 or 1 `exit` code
 export const runProgram = (instructions: string[]) => {
-  const history = []
+  const history: number[] = []
   let accumulator = 0
   let pointer = 0
 
@@ -59,10 +59,10 @@ const runPatchedProgram = (instructions: string[], index: number) =>
 // @param instructions - List of instructions making the program
 // @return `accumulator` value and 0 or 1 `exit` code
 export const runMonkeyPatchedProgram = (instructions: string[]) =>
-  instructions.reduce(
+  instructions.reduce<Output>(
     (output, instruction, index) =>
       instruction.startsWith('acc') || output.exit === 0
         ? output
         : runPatchedProgram(instructions, index),
-    { accumulator: null, exit: null } as Output
+    { accumulator: null, exit: null }
   )

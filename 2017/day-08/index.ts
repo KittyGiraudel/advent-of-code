@@ -23,7 +23,7 @@ export const run = (lines: string[]) => {
     condition = condition.replace(/([a-z]+)/, 'registers.$1')
 
     const code = condition + ' ' + expression
-    code.match(/\w+/g).forEach(variable => {
+    code.match(/\w+/g)?.forEach(variable => {
       registers[variable] = registers[variable] || 0
     })
 
