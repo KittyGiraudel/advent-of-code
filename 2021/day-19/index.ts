@@ -8,7 +8,7 @@ class Scanner {
   constructor(raw: string) {
     const lines = raw.split('\n')
     this.points = lines.slice(1) as Point[]
-    this.coords = this.points.map(point => $.toCoords(point))
+    this.coords = this.points.map($.toCoords)
   }
 
   scan() {}

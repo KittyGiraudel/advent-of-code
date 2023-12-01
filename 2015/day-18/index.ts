@@ -18,7 +18,7 @@ export const run = (
 
   if (advanced) {
     corners
-      .map(corner => $.toCoords(corner))
+      .map($.toCoords)
       .forEach(coords => (curr[coords[0]][coords[1]] = '#'))
   }
 

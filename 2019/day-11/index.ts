@@ -50,7 +50,7 @@ export const paint = (input: string, start: number = 0) => {
 }
 
 export const render = (record: Map<Point, number>) => {
-  const coords = Array.from(record.keys()).map(point => $.toCoords(point))
+  const coords = Array.from(record.keys()).map($.toCoords)
   const [minX, maxX, minY, maxY] = $.boundaries(coords)
 
   return $.grid.render(

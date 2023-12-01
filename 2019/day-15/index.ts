@@ -55,7 +55,7 @@ const render = ({
   from: SearchGraph
   end: { coords: Coords }
 }) => {
-  const cells = (Object.keys(from) as Point[]).map(point => $.toCoords(point))
+  const cells = (Object.keys(from) as Point[]).map($.toCoords)
   const [minY, maxY, minX, maxX] = $.boundaries(cells)
   const width = maxX + 1 - minX
   const height = maxY + 1 - minY

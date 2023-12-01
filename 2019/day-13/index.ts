@@ -22,7 +22,7 @@ const INITIAL_STATE: State = {
 
 export const render = (board: Board) => {
   const keys = Array.from(board.keys())
-  const coords = keys.map(key => $.toCoords(key))
+  const coords = keys.map($.toCoords)
   const [, maxX, , maxY] = $.boundaries(coords)
   const grid = $.grid.init(
     maxX + 1,

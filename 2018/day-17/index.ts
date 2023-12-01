@@ -76,7 +76,7 @@ export const scan = (
 ): [number, number] => {
   const map = generateMap(input)
   const [, maxX, minY, maxY] = $.boundaries(
-    (Object.keys(map) as Point[]).map(point => $.toCoords(point))
+    (Object.keys(map) as Point[]).map($.toCoords)
   )
   const grid = $.grid.init(
     maxX + 1,

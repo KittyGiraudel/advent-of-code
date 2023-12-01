@@ -8,7 +8,7 @@ export const getOverlappingPoints = (
   // Break down every line into a pair of vectors, each vector being a pair of
   // number (x,y coordinates).
   const vectors = lines.map(line =>
-    line.split(' -> ').map(point => $.toCoords(point as Point))
+    (line.split(' -> ') as Point[]).map($.toCoords)
   )
 
   const map = vectors.reduce((acc, vector) => {

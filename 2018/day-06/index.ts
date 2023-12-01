@@ -5,9 +5,7 @@ export const mapOut = (lines: string[], limit?: number) => {
   const points = lines.map(line => line.replace(' ', '')) as Point[]
   const counters: Map<number, number> = new Map()
   const edges: Set<number> = new Set()
-  const [minX, maxX, minY, maxY] = $.boundaries(
-    points.map(point => $.toCoords(point))
-  )
+  const [minX, maxX, minY, maxY] = $.boundaries(points.map($.toCoords))
   let regionSize = 0
 
   // Iterate between the X position of the leftmost point and the X poxition

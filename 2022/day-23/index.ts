@@ -59,7 +59,7 @@ export const run = (input: string[], rounds: number = 10) => {
   }
 
   const [minX, maxX, minY, maxY] = $.boundaries(
-    Array.from(positions).map(point => $.toCoords(point as Point))
+    (Array.from(positions) as Point[]).map($.toCoords)
   )
 
   return (maxX + 1 - minX) * (maxY + 1 - minY) - positions.size

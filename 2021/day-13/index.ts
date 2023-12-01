@@ -36,7 +36,7 @@ export const foldAll = (input: string[]) => {
 
 export const render = (dots: Set<Point>) => {
   const isDot = (x: number, y: number) => dots.has($.toPoint([x, y]))
-  const coords = Array.from(dots).map(point => $.toCoords(point))
+  const coords = Array.from(dots).map($.toCoords)
   const [, xMax, , yMax] = $.boundaries(coords)
   const grid = $.grid.init(xMax + 1, yMax + 1, (x, y) =>
     isDot(x, y) ? '#' : ' '

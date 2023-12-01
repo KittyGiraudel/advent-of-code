@@ -46,7 +46,7 @@ export const run = (instructions: string[]): [number, number] => {
   const { position: end, visited } = walk(instructions)
   const start: Coords = [0, 0]
   const furthest = Array.from(visited)
-    .map(point => $.toCoords(point))
+    .map($.toCoords)
     .sort((a, b) => distance(a, start) - distance(b, start))
     .pop()!
 
