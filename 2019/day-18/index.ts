@@ -39,7 +39,7 @@ export const maze = (input: string[]) => {
     getNextNodes: curr =>
       $.bordering(curr.coords, 'BOTH')
         .filter(next => {
-          const value = $.access(grid, next.coords)
+          const value = $.grid.at(grid, next.coords)
           const isOpenDoor = isDoor(value) && curr.keys.has(value.toLowerCase())
 
           return value === '.' || isOpenDoor
@@ -68,7 +68,7 @@ export const maze = (input: string[]) => {
 
     const neighbors = $.bordering(curr.coords, 'BOTH')
     const available = neighbors.filter((next: CoordsAndPoint) => {
-      const value = $.access(grid, next.coords)
+      const value = $.grid.at(grid, next.coords)
 
       return (
         value === '.' || (isDoor(value) && curr.keys.has(value.toLowerCase()))

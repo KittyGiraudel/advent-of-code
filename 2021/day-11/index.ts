@@ -23,7 +23,7 @@ const processFlashes = (grid: Grid<Octopus>) => {
   })
 
   toIncrement.forEach(coords => {
-    const octopus = $.access(grid, coords)
+    const octopus = $.grid.at(grid, coords)
     if (octopus) octopus.value++
   })
 

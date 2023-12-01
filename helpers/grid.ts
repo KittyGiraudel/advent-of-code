@@ -128,6 +128,9 @@ const gridVariants = <T>(grid: Grid<T>) => {
   return variants
 }
 
+const gridAt = <T>(grid: Grid<T>, coords: Coords) =>
+  grid?.[coords[0]]?.[coords[1]]
+
 export default {
   forEach: gridForEach,
   map: gridMap,
@@ -143,4 +146,5 @@ export default {
   init: initGrid,
   render: renderGrid,
   variants: gridVariants,
+  at: gridAt,
 }

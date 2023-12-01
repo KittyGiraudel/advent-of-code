@@ -5,7 +5,7 @@ type UnitType = 'G' | 'E'
 
 const getBorderingSpace = (grid: Grid<string>, curr: Coords) => {
   const [N, E, S, W] = $.bordering(curr, 'COORDS')
-  return [N, W, E, S].filter(neighbor => $.access(grid, neighbor) === '.')
+  return [N, W, E, S].filter(neighbor => $.grid.at(grid, neighbor) === '.')
 }
 
 class Unit {

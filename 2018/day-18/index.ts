@@ -26,7 +26,7 @@ export const run = (rows: string[], iterations: number = 1) => {
   for (let i = 0; i < iterations; i++) {
     curr = $.grid.map(curr, (value, ri, ci) => {
       const neighbors = $.surrounding([ri, ci], 'COORDS').map(
-        (coords: Coords) => $.access(curr, coords)
+        (coords: Coords) => $.grid.at(curr, coords)
       )
 
       return getNextValue(value, neighbors)

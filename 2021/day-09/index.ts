@@ -12,7 +12,7 @@ const getLowPoints = (grid: Grid<number>) =>
 
       if (
         $.bordering(coords, 'COORDS')
-          .map((coords: Coords) => $.access(grid, coords) ?? Infinity)
+          .map((coords: Coords) => $.grid.at(grid, coords) ?? Infinity)
           .every((n: number) => n > point)
       ) {
         acc.push(coords)
@@ -36,8 +36,8 @@ const getBasin = (
   const neighbors = $.bordering(position, 'BOTH').filter(
     ({ coords, point }) => {
       if (evaluated.includes(point)) return false
-      if (typeof $.access(grid, coords) === 'undefined') return false
-      if ($.access(grid, coords) === 9) return false
+      if (typeof $.grid.at(grid, coords) === 'undefined') return false
+      if ($.grid.at(grid, coords) === 9) return false
       return true
     }
   )
@@ -60,7 +60,7 @@ export const sumLowPointsRisk = (rows: string[]) => {
   const lowPoints = getLowPoints(grid)
 
   return $.sum(
-    lowPoints.map((coords: Coords) => $.access(grid, coords)).map(p => p + 1)
+    lowPoints.map((coords: Coords) => $.grid.at(grid, coords)).map(p => p + 1)
   )
 }
 

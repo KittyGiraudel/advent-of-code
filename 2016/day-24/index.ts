@@ -14,7 +14,9 @@ export const discover = (input: string[], roundTrip: boolean = false) => {
   // negligible. What really makes a difference is not doing pathfinding on
   // paths we have alreadu done (hence this memoization).
   const getNextNodes = (curr: Coords) =>
-    $.bordering(curr, 'COORDS').filter(coords => $.access(grid, coords) !== '#')
+    $.bordering(curr, 'COORDS').filter(
+      coords => $.grid.at(grid, coords) !== '#'
+    )
 
   // Memoize the pathfinding between two points to avoid computing it again and
   // again for every possible order.

@@ -33,10 +33,10 @@ export const run = (instructions: string[], advanced: boolean = false) => {
 
       characters.forEach(char => {
         const next = $.applyVector(position, VECTORS[char as Vector])
-        if ($.access(keypad, next)) position = next
+        if ($.grid.at(keypad, next)) position = next
       })
 
-      return $.access(keypad, position)
+      return $.grid.at(keypad, position)
     })
     .join('')
 }

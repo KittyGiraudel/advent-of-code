@@ -43,7 +43,7 @@ const getBlocks = (rock: Rock) =>
 const move = (grid: Grid<string>, blocks: Blocks, vector: Coords) => {
   const nextBlocks = blocks
     .map(block => $.applyVector(block, vector))
-    .filter(nextCoords => $.access(grid, nextCoords) === '.')
+    .filter(nextCoords => $.grid.at(grid, nextCoords) === '.')
 
   return blocks.length === nextBlocks.length ? nextBlocks : null
 }

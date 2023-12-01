@@ -19,7 +19,7 @@ export const run = (key: string): [number, number] => {
   // yet explored neighbors, marking them all part of the same group.
   const walk = (coords: Coords, group: Point) =>
     $.bordering(coords, 'BOTH')
-      .filter(({ coords }) => $.access(grid, coords))
+      .filter(({ coords }) => $.grid.at(grid, coords))
       .forEach(({ coords, point }) => {
         if (!(point in visited)) {
           visited[point] = group

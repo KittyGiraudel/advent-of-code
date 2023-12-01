@@ -25,7 +25,7 @@ export const run = (
   while (iterations--) {
     curr = $.grid.map($.grid.clone(curr), (value, ri, ci) => {
       const neighbors = $.surrounding([ri, ci], 'COORDS')
-      const on = neighbors.filter(coords => $.access(curr, coords) === '#')
+      const on = neighbors.filter(coords => $.grid.at(curr, coords) === '#')
 
       if (advanced && corners.includes($.toPoint([ri, ci]))) {
         return '#'

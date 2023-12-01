@@ -66,20 +66,20 @@ const getInsideCoords = (grid: Grid<string>) => {
 
   $.grid.forEach(grid, (value, ri, ci) => {
     if (!/[A-Z]/.test(value)) return
-    const bottom = $.access(grid, [ri + 1, ci]).trim()
+    const bottom = $.grid.at(grid, [ri + 1, ci]).trim()
 
     if (/[A-Z]/.test(bottom)) {
-      const top = $.access(grid, [ri - 1, ci]).trim()
+      const top = $.grid.at(grid, [ri - 1, ci]).trim()
       const coords: Coords = top ? [ri - 1, ci] : [ri + 2, ci]
       const door = value + bottom
       pointsToDoors[$.toPoint(coords)] = door
       doorsToCoords[door] = coords
     }
 
-    const right = $.access(grid, [ri, ci + 1]).trim()
+    const right = $.grid.at(grid, [ri, ci + 1]).trim()
 
     if (/[A-Z]/.test(right)) {
-      const left = $.access(grid, [ri, ci - 1]).trim()
+      const left = $.grid.at(grid, [ri, ci - 1]).trim()
       const coords: Coords = left ? [ri, ci - 1] : [ri, ci + 2]
       const door = value + right
       pointsToDoors[$.toPoint(coords)] = door
@@ -99,7 +99,7 @@ const getNeighborsFlat =
   (curr: Node) => {
     const point = $.toPoint(curr.coords)
     return $.bordering(curr.coords, 'COORDS')
-      .filter((coords: Coords) => $.access(grid, coords) === '.')
+      .filter((coords: Coords) => $.grid.at(grid, coords) === '.')
       .concat([
         outside.doorsToCoords[inside.pointsToDoors[point]],
         inside.doorsToCoords[outside.pointsToDoors[point]],
@@ -118,7 +118,7 @@ const getNeighborsRecursive =
     const point = $.toPoint(curr.coords)
     const neighbors = $.bordering(curr.coords, 'COORDS')
     const walkable = neighbors
-      .filter(coords => $.access(grid, coords) === '.')
+      .filter(coords => $.grid.at(grid, coords) === '.')
       .map(coords => ({ coords, depth: curr.depth }))
 
     const insideDoor = inside.pointsToDoors[point]

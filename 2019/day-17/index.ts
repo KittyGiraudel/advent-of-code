@@ -31,7 +31,7 @@ export const calibrate = (grid: Grid<string>) =>
       if (value !== '#') return calibration
 
       const neighborcoords = $.bordering([ri, ci], 'COORDS')
-      const neighbors = neighborcoords.map(coords => $.access(grid, coords))
+      const neighbors = neighborcoords.map(coords => $.grid.at(grid, coords))
       const intersection = neighbors.every(neighbor => neighbor === '#')
 
       if (intersection) calibration += ri * ci

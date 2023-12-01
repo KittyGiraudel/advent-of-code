@@ -89,7 +89,7 @@ const cross = (
       // The grid only arrays, so a given array has no item, it means it’s
       // a free cell (no wall and no blizzard).
       return getMoves(curr).filter(
-        next => $.access(grid, next.coords)?.length === 0
+        next => $.grid.at(grid, next.coords)?.length === 0
       )
     },
   }).end.time

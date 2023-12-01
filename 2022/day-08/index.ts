@@ -46,28 +46,28 @@ export const getHighestScenicScore = (rows: string[]) => {
       // tree which is as tall or taller than the current tree.
       for (let row = ri - 1; row >= 0; row--) {
         top++
-        if ($.access(grid, [row, ci]) >= tree) break
+        if ($.grid.at(grid, [row, ci]) >= tree) break
       }
 
       // Start from the next column and move right until the edge or finding a
       // tree which is as tall or taller than the current tree.
       for (let col = ci + 1; col < width; col++) {
         right++
-        if ($.access(grid, [ri, col]) >= tree) break
+        if ($.grid.at(grid, [ri, col]) >= tree) break
       }
 
       // Start from the next row and move down until the edge or finding a tree
       // which is as tall or taller than the current tree.
       for (let row = ri + 1; row < height; row++) {
         bottom++
-        if ($.access(grid, [row, ci]) >= tree) break
+        if ($.grid.at(grid, [row, ci]) >= tree) break
       }
 
       // Start from the previous column and move left until the edge or finding
       // a tree which is as tall or taller than the current tree.
       for (let col = ci - 1; col >= 0; col--) {
         left++
-        if ($.access(grid, [ri, col]) >= tree) break
+        if ($.grid.at(grid, [ri, col]) >= tree) break
       }
 
       return top * right * bottom * left

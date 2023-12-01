@@ -73,8 +73,8 @@ const jigsaw = (tiles: Tile[], start: Tile) => {
     for (let ci = 0; ci < mozaic[0].length; ci++) {
       if (ri === 0 && ci === 0) continue
 
-      const left = $.access(mozaic, [ri, ci - 1])
-      const top = $.access(mozaic, [ri - 1, ci])
+      const left = $.grid.at(mozaic, [ri, ci - 1])
+      const top = $.grid.at(mozaic, [ri - 1, ci])
 
       // Look amongst the tiles that are not used yet for one that matches the
       // top and left tiles (if any).
@@ -116,7 +116,7 @@ const assemble = (mozaic: Grid<Tile>) => {
 const isMonsterTail = (image: Grid<string>, ri: number, ci: number) =>
   MONSTER_PATTERN.every(vector => {
     const coords = $.applyVector([ri, ci], vector)
-    return $.access(image, coords) === '#'
+    return $.grid.at(image, coords) === '#'
   })
 
 // Count the amount of sea monsters in the given image.
@@ -149,7 +149,7 @@ const checksum = (mozaic: Grid<Tile>) => {
   ]
 
   const ids = corners
-    .map(coords => $.access(mozaic, coords))
+    .map(coords => $.grid.at(mozaic, coords))
     .map(tile => tile.id)
 
   return $.product(ids)

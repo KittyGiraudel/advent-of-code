@@ -1,4 +1,3 @@
-import access from './access'
 import applyVector from './applyVector'
 import array from './array'
 import average from './average'
@@ -51,7 +50,6 @@ import updateAtIndex from './updateAtIndex'
 import zip from './zip'
 
 export default {
-  access,
   applyVector,
   array,
   average,

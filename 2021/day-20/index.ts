@@ -26,7 +26,7 @@ const step = (algorithm: string, input: string, defaultChar: string = '.') => {
   const next = $.grid.map(curr, (_, ri, ci) => {
     const value = $.toDec(
       getTilingCoords(ri, ci)
-        .map(coords => $.access(curr, coords) ?? defaultChar)
+        .map(coords => $.grid.at(curr, coords) ?? defaultChar)
         .map(value => +(value === '#'))
         .join('')
     )

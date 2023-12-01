@@ -121,9 +121,9 @@ const getWrapNeighbors = (
       wrap: [column.reduce(findLastIndex, 0), ci] as Coords,
     },
   ].map(({ adjacent, wrap }) => {
-    if ($.access(grid, adjacent) === '.') return adjacent
-    if ($.access(grid, adjacent) === '#') return null
-    if ($.access(grid, wrap) === '.') return wrap
+    if ($.grid.at(grid, adjacent) === '.') return adjacent
+    if ($.grid.at(grid, adjacent) === '#') return null
+    if ($.grid.at(grid, wrap) === '.') return wrap
     return null
   })
 }
@@ -137,7 +137,7 @@ const getCubicNeighbors = (
 ): CubicNeighbor[] => {
   return VECTORS.map((vector, i) => {
     const nextPos = $.applyVector([ri, ci], vector)
-    const nextValue = $.access(grid, nextPos)
+    const nextValue = $.grid.at(grid, nextPos)
 
     // If the next position is available, this is easy: return the next
     // position (current position + vector).
@@ -189,7 +189,7 @@ const getCubicNeighbors = (
       // the position is an empty space, we can return it (along with the new
       // orientation).
       const position = $.applyVector(boundaries, nextCoords)
-      const cell = $.access(grid, position)
+      const cell = $.grid.at(grid, position)
 
       if (cell === SPACE) return { position, orientation: next.orientation }
       if (cell === WALL) return null
@@ -203,7 +203,7 @@ type CacheMap = Record<Point, CubicNeighbor[] | WrapNeighbor[]>
 const getNeighbors =
   (grid: Grid<string>, asCube: boolean) =>
   (acc: CacheMap, _: string, ri: number, ci: number) => {
-    if ($.access(grid, [ri, ci])) {
+    if ($.grid.at(grid, [ri, ci])) {
       acc[$.toPoint([ri, ci])] = asCube
         ? getCubicNeighbors(grid, ri, ci)
         : getWrapNeighbors(grid, ri, ci)
