@@ -1,8 +1,6 @@
 export { SearchCosts, SearchGraph, SearchOutput } from '../helpers/pathfinding'
 export { Grid } from '../helpers/grid'
 
-export type Range = [number, number]
-
 export type Coords = [number, number]
 export type CoordsObj = { x: number; y: number }
 export type Point = `${number},${number}`

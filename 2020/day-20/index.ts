@@ -47,7 +47,7 @@ const getSides = (grid: Grid<string>) =>
 const parseSnapshot = (snapshot: string) => {
   const [header, ...lines] = snapshot.split('\n')
   const [id] = header.match(/\d+/g)!
-  const grid = $.grid.create<string>(lines)
+  const grid = $.grid.from<string>(lines)
 
   return $.grid
     .variants(grid)

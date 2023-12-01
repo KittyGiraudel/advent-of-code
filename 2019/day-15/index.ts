@@ -59,8 +59,8 @@ const render = ({
   const [minY, maxY, minX, maxX] = $.boundaries(cells)
   const width = maxX + 1 - minX
   const height = maxY + 1 - minY
-  const handler = (x: number, y: number) =>
-    Object.keys(from).includes(y + minY + ',' + (x + minX)) ? '.' : '#'
+  const handler = (ci: number, ri: number) =>
+    Object.keys(from).includes(ri + minY + ',' + (ci + minX)) ? '.' : '#'
   const grid = $.grid.init(width, height, handler)
 
   grid[end.coords[1]][end.coords[0]] = 'O'

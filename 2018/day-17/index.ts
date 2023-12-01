@@ -81,7 +81,7 @@ export const scan = (
   const grid = $.grid.init(
     maxX + 1,
     maxY + 1,
-    (x, y) => map[$.toPoint([x, y])] || '.'
+    (ri, ci) => map[$.toPoint([ci, ri])] || '.'
   )
 
   // Honestly I couldn’t figure out to solve this problem so I took over a

@@ -24,7 +24,7 @@ const parseInstructions = (instructions: string) =>
   instructions
     .split('\n')
     .filter(Boolean)
-    .map(instruction => $.safeMatch(instruction, /\d+/g).map(v => +v))
+    .map(instruction => $.safeMatch(instruction, /\d+/g).map(Number))
 
 export const process = (input: [string, string], batch: boolean = false) => {
   const map = parseMap(input[0])

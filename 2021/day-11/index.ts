@@ -4,10 +4,7 @@ import { Coords, Grid } from '../../types'
 type Octopus = { value: number; flashed: boolean }
 
 const makeGrid = (rows: string[]) =>
-  $.grid.create(
-    rows,
-    optopus => ({ value: +optopus, flashed: false } as Octopus)
-  )
+  $.grid.from<Octopus>(rows, optopus => ({ value: +optopus, flashed: false }))
 
 const countNewFlashes = (grid: Grid<Octopus>) =>
   $.grid.reduce(grid, (acc, octopus) => acc + +octopus.flashed, 0)

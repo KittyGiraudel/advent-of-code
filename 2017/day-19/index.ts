@@ -9,7 +9,7 @@ const VECTORS: Coords[] = [
 ]
 
 export const run = (input: string[]): [string, number] => {
-  const grid = $.grid.create<string>(input)
+  const grid = $.grid.from<string>(input)
   const read = (coords: Coords) => $.grid.at(grid, coords)?.trim()
   const visited: Point[] = []
   let position: Coords = [0, grid[0].findIndex(v => v === '|')]

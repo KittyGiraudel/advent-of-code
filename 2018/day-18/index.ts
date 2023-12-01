@@ -21,7 +21,7 @@ const getScore = (grid: Grid<string>) => {
 
 export const run = (rows: string[], iterations: number = 1) => {
   const history = []
-  let curr = $.grid.create<string>(rows)
+  let curr = $.grid.from<string>(rows)
 
   for (let i = 0; i < iterations; i++) {
     curr = $.grid.map(curr, (value, ri, ci) => {

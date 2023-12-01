@@ -4,7 +4,7 @@ import { Coords } from '../../types'
 export const discover = (input: string[], roundTrip: boolean = false) => {
   let start: Coords
   const locations: Coords[] = []
-  const grid = $.grid.create(input, (cell, ...coords) => {
+  const grid = $.grid.from(input, (cell, ...coords) => {
     if (cell === '0') start = coords
     else if (cell !== '#' && cell !== '.') locations.push(coords)
     return cell

@@ -6,7 +6,7 @@ export const run = (
   iterations: number,
   advanced: boolean = false
 ) => {
-  let curr = $.grid.create<string>(input)
+  let curr = $.grid.from<string>(input)
   const width = curr[0].length
   const height = curr.length
   const corners: Point[] = [

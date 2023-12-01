@@ -1,4 +1,4 @@
-import { Range } from '../../types'
+type Range = [number, number]
 
 const parseRange = (range: string) => range.split('-').map(Number) as Range
 

@@ -56,7 +56,7 @@ const getBasin = (
 }
 
 export const sumLowPointsRisk = (rows: string[]) => {
-  const grid = $.grid.create(rows, Number)
+  const grid = $.grid.from(rows, Number)
   const lowPoints = getLowPoints(grid)
 
   return $.sum(
@@ -68,7 +68,7 @@ export const getProductOfBiggestBasins = (
   rows: string[],
   amount: number = 3
 ) => {
-  const grid = $.grid.create(rows, Number)
+  const grid = $.grid.from(rows, Number)
   const lowPoints = getLowPoints(grid)
 
   return $.product(

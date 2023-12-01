@@ -16,9 +16,9 @@ export const run = (
   iterations: number,
   advanced: boolean = false
 ) => {
-  const nodes: Map<Point, string> = $.grid.reduce(
-    $.grid.create(rows),
-    (nodes, value, ri, ci) => nodes.set(ci + ',' + ri, value),
+  const nodes = $.grid.reduce<string, Map<Point, string>>(
+    $.grid.from(rows),
+    (nodes, value, ri, ci) => nodes.set($.toPoint([ci, ri]), value),
     new Map()
   )
   const state: State = {

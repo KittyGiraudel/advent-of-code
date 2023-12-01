@@ -148,9 +148,9 @@ const getNeighborsRecursive =
 
 export const maze = (input: string[], recursive: boolean = false) => {
   const { width, height } = getDimensions(input)
-  // This creates a grid from the givein input except without the outside
+  // This creates a grid from the given input except without the outside
   // padding. The middle part still contains the inside door names though.
-  const grid = $.grid.init(width, height, (ci, ri) => input[ri + 2][ci + 2])
+  const grid = $.grid.init(width, height, (ri, ci) => input[ri + 2][ci + 2])
   const outside = getOutsideCoords(grid, input)
   const inside = getInsideCoords(grid)
   const start: Node = { coords: outside.doorsToCoords.AA, depth: 0 }

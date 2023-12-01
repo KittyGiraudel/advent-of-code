@@ -9,7 +9,7 @@ type Grids = Map<number, Grid<string[]>>
 // blizzards (with the direction of each blizzard within that cell).
 // Ref: https://gist.github.com/p-a/47d58303ec3acf881f26bca1e889f7c8
 const getGrids = (input: string[]) => {
-  const grid = $.grid.create<string[]>(input, value =>
+  const grid = $.grid.from<string[]>(input, value =>
     value === '.' ? [] : [value]
   )
 

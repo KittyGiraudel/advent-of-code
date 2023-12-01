@@ -33,4 +33,4 @@ const getLowestCost = (grid: Grid<number>, mapSize = 1) => {
 }
 
 export const getLowestRisk = (input: string[], mapSize: number = 1) =>
-  getLowestCost($.grid.create(input, Number), mapSize)
+  getLowestCost($.grid.from(input, Number), mapSize)

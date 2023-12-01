@@ -13,7 +13,7 @@ const isDoor = (value: string) => /[A-Z]/.test(value)
 export const maze = (input: string[]) => {
   const keys: Record<Point, string> = {}
   const startCoords: Coords = [0, 0]
-  const grid = $.grid.create<string>(input, (value, ri, ci) => {
+  const grid = $.grid.from<string>(input, (value, ri, ci) => {
     if (value === '@') {
       startCoords[0] = ri
       startCoords[1] = ci

@@ -1,7 +1,7 @@
 import { Coords } from '../types'
 
 export type Grid<T> = T[][]
-type Mapper<T> = (value: string, ri: number, ci: number) => T
+type Mapper<I, O> = (value: I, ri: number, ci: number) => O
 type Handler = 'forEach' | 'map' | 'flatMap' | 'find' | 'every' | 'some'
 
 const loopOnGrid =
@@ -58,48 +58,32 @@ const gridFindCoords = <T>(
   grid: Grid<T>,
   callback: (item: T, ri: number, ci: number) => boolean
 ) =>
-  gridReduce(
+  gridReduce<T, Coords | null>(
     grid,
-    (acc, item, ri, ci) =>
-      acc || (callback(item, ri, ci) ? ([ri, ci] as Coords) : acc),
-    null as Coords | null
+    (acc, item, ri, ci) => acc || (callback(item, ri, ci) ? [ri, ci] : acc),
+    null
   )
 
-const identity = ((value: string, ri: number, ci: number) =>
-  value) as Mapper<string>
-
-const createGrid = <T>(
+const identity = <T>(value: string, ri: number, ci: number) => value as T
+const gridFrom = <T>(
   rows: string[],
-  mapper: Mapper<T> = identity as Mapper<T>
-) =>
-  rows.map((row, ri) =>
-    row.split('').map((item, ci) => mapper(item, ri, ci))
-  ) as Grid<T>
+  mapper: Mapper<string, T> = identity
+): Grid<T> =>
+  rows.map((row, ri) => Array.from(row).map((item, ci) => mapper(item, ri, ci)))
 
-const cloneGrid = <T>(grid: Grid<T>) =>
-  grid.slice(0).map(row => row.slice(0)) as Grid<T>
-
-function isCallable<T>(
-  maybeFunc: T | ((ri: number, ci: number) => T)
-): maybeFunc is (ri: number, ci: number) => T {
-  return typeof maybeFunc === 'function'
-}
+const cloneGrid = <T>(grid: Grid<T>): Grid<T> =>
+  grid.slice(0).map(row => row.slice(0))
 
 const initGrid = <T>(
   width: number,
   height: number = width,
   value: T | null | ((ci: number, ri: number) => T) = null
-) =>
+): Grid<T> =>
   Array.from({ length: height }, (_, ri) =>
     Array.from({ length: width }, (_, ci) =>
-      isCallable(value) ? value(ci, ri) : value
+      typeof value === 'function' ? (value as CallableFunction)(ri, ci) : value
     )
-  ) as Grid<T>
-
-const gridRotate = <T>(grid: Grid<T>) =>
-  Array.from(grid[0]).map((_, index) =>
-    grid.map(row => row[index]).reverse()
-  ) as Grid<T>
+  )
 
 const renderGrid = <T>(
   grid: Grid<T>,
@@ -110,8 +94,11 @@ const renderGrid = <T>(
     .map(row => row.join(separator))
     .join('\n')
 
+const gridRotate = <T>(grid: Grid<T>): Grid<T> =>
+  Array.from(grid[0]).map((_, ci) => grid.map(row => row[ci]).reverse())
+
 const gridVariants = <T>(grid: Grid<T>) => {
-  const variants = []
+  const variants: Grid<T>[] = []
   const clone = cloneGrid(grid)
 
   const rotate = (grid: Grid<T>, rotations: number = 0) => {
@@ -120,9 +107,10 @@ const gridVariants = <T>(grid: Grid<T>) => {
   }
 
   for (let i = 0; i <= 3; i++) {
-    const matrix = rotate(clone, i)
-    variants.push(matrix)
-    variants.push(matrix.slice(0).reverse())
+    const rotated = rotate(clone, i)
+    const flipped = rotated.slice(0).reverse()
+    variants.push(rotated)
+    variants.push(flipped)
   }
 
   return variants
@@ -141,7 +129,7 @@ export default {
   some: gridSome,
   rotate: gridRotate,
   reduce: gridReduce,
-  create: createGrid,
+  from: gridFrom,
   clone: cloneGrid,
   init: initGrid,
   render: renderGrid,

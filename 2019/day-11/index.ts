@@ -54,8 +54,8 @@ export const render = (record: Map<Point, number>) => {
   const [minX, maxX, minY, maxY] = $.boundaries(coords)
 
   return $.grid.render(
-    $.grid.init(maxX + 1 - minX, maxY + 1 - minY, (x, y) =>
-      record.get(`${x + minX},${y + minY}`) ? '#' : ' '
+    $.grid.init(maxX + 1 - minX, maxY + 1 - minY, (ri, ci) =>
+      record.get(`${ci + minX},${ri + minY}`) ? '#' : ' '
     ),
     ' '
   )

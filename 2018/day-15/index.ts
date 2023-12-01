@@ -122,7 +122,7 @@ class Game {
   constructor(rows: string[], elvishPower: number = 3) {
     this.turns = 0
     this.units = []
-    this.grid = $.grid.create(rows, (value, ri, ci) => {
+    this.grid = $.grid.from(rows, (value, ri, ci) => {
       if (value === 'G' || value === 'E') {
         const power = value === 'E' ? elvishPower : 3
         const unit = new Unit(value, [ri, ci], power)

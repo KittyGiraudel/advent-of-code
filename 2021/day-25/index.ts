@@ -24,10 +24,10 @@ export const step = (grid: Grid<string>) => {
 }
 
 export const steps = (input: string[], count: number) =>
-  $.array(count).reduce(step, $.grid.create(input))
+  $.array(count).reduce(step, $.grid.from(input))
 
 export const run = (input: string[]) => {
-  let curr = $.grid.create<string>(input)
+  let curr = $.grid.from<string>(input)
   let next = step(curr)
   let i = 1
 

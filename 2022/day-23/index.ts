@@ -15,7 +15,7 @@ const getNeighbors = $.memo((point: Point) =>
 
 const mapPositions = (input: string[]) =>
   $.grid.reduce<string, Set<Point>>(
-    $.grid.create(input),
+    $.grid.from(input),
     (acc, value, ri, ci) =>
       value === '#' ? acc.add((ri + ',' + ci) as Point) : acc,
     new Set()
