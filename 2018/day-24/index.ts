@@ -192,7 +192,9 @@ const parseGroup = (raw: string, index: number) => {
   const [units, health, damage, initiative] = $.safeMatch(raw, /(\d+)/g).map(
     Number
   )
+  console.log(raw, { units, health, damage, initiative })
   const weakness = raw.match(/weak to ([^;)]+)/)?.[1].split(/, ?/g) ?? []
+  console.log(weakness)
   const immunity = raw.match(/immune to ([^;)]+)/)?.[1].split(/, ?/g) ?? []
   const type = $.safeMatch(raw, /(\w+) damage/)[1]
   const id = index + 1
