@@ -33,9 +33,8 @@ const fight = (actions: string[], hard: boolean) => {
 
     if (turn) {
       const spell = actions.shift()
-      type Spell = keyof typeof SPELL_COST
-      type Effect = keyof typeof effects
 
+      type Spell = keyof typeof SPELL_COST
       mana -= SPELL_COST[spell as Spell]
       total += SPELL_COST[spell as Spell]
 
@@ -45,6 +44,7 @@ const fight = (actions: string[], hard: boolean) => {
       if (spell === 'M') boss -= 4
       else if (spell === 'D') (boss -= 2), (player += 2)
       else {
+        type Effect = keyof typeof effects
         if (effects[spell as Effect]) return ILLEGAL_MOVE
         effects[spell as Effect] = spell === 'R' ? 5 : 6
       }
@@ -73,7 +73,7 @@ const iterate = (actions: string[], position: number = 0) => {
 }
 
 export const run = (hard: boolean) => {
-  // The amount of moves it totally arbitrary here. We estimate that the fight
+  // The amount of moves is totally arbitrary here. We estimate that the fight
   // will be over in a maximum of 10 moves. This may vary based on the input.
   const actions = Array.from('M'.repeat(10))
 

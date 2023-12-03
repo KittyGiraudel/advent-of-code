@@ -1,5 +1,3 @@
-import $ from '../../helpers'
-
 export const captcha = (input: string, inc: number = input.length / 2) => {
   let sum = 0
 

@@ -1,5 +1,3 @@
-import $ from '../../helpers'
-
 export const run = (memory: number[]): [number, number] => {
   memory = memory.slice(0)
   const history: string[] = []

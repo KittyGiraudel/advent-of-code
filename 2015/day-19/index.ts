@@ -15,6 +15,11 @@ const replaceAt = (value: string, from: string, index: number, to: string) =>
 
 export const calibrate = (input: string[]) => {
   const molecule = input.at(-1)!
+
+  if (!molecule) {
+    throw new Error('Cannot get molecule for calibration')
+  }
+
   const molecules = input.slice(0, -2).flatMap(replacement => {
     const [from, to] = replacement.split(' => ')
     const indices = indicesOf(molecule, from)

@@ -1,5 +1,3 @@
-import $ from '../../helpers'
-
 export const run = (memory: number[], boundary: number = Infinity) => {
   memory = memory.slice(0)
   let index = 0

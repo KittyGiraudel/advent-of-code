@@ -10,11 +10,11 @@ export const run = (input: string[]) => {
   for (let i = 0; i < input.length; i++) {
     const line = input[i]
     if (line.startsWith('value')) {
-      const [value, id] = $.safeMatch(line, /\d+/g).map(Number)
+      const [value, id] = $.numbers(line)
       if (!state.bot[id]) state.bot[id] = []
       state.bot[id].push(value)
     } else {
-      const [sender, low, high] = $.safeMatch(line, /(bot|output) \d+/g)
+      const [sender, low, high] = $.match(line, /(bot|output) \d+/g)
       const id = sender!.split(' ').pop()!
       pipelines[+id] = [
         low.split(' ') as [KeyType, number],

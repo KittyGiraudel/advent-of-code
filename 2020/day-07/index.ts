@@ -1,3 +1,5 @@
+import $ from '../../helpers'
+
 type Item = { type: string; count: number }
 type Map = Record<string, Item[]>
 
@@ -6,12 +8,11 @@ type Map = Record<string, Item[]>
 // @return Type and capacity
 export const parseRestriction = (restriction: string) => {
   const [type, leftover] = restriction.trim().split(' bags contain ')
-  const contains = (
-    leftover
-      .split(',')
-      .map(part => part.trim().match(/(\d+) ([\w\s]+) bags?/) ?? null)
-      .filter(Boolean) as RegExpMatchArray[]
-  ).map(([, count, type]) => ({ type, count: +count }))
+  const contains = leftover
+    .split(', ')
+    .map(part => $.match(part, /(\d+) ([\w\s]+) bags?/))
+    .filter(match => match.length)
+    .map(([, count, type]) => ({ type, count: +count }))
 
   return { type, contains }
 }

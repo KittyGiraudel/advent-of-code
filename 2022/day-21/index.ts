@@ -116,8 +116,8 @@ export const getHumnNumber = (input: string[]) => {
 
   while (getNextNumber(map)) reduceNext(map)
 
-  let value = +$.safeMatch(String(map.root), /(\d+)/)[1]
-  let [, curr] = $.safeMatch(String(map.root), /([a-z]+)/)
+  let value = +$.match(String(map.root), /(\d+)/)[1]
+  let [, curr] = $.match(String(map.root), /([a-z]+)/)
 
   // We walk up the operation chain until we reach the `humn` key. The idea is
   // that we reverse the current operation to find the previous number. For

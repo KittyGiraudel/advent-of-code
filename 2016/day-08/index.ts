@@ -4,18 +4,15 @@ export const run = (
   lines: string[],
   dimensions: [number, number] = [50, 6]
 ) => {
-  const grid = $.grid.init<string>(dimensions[0], dimensions[1])
+  const grid = $.grid.init<string>(...dimensions)
 
   lines.forEach(line => {
     if (line.startsWith('rect')) {
-      const [width, height] = $.safeMatch(line, /\d+/g).map(Number)
+      const [width, height] = $.numbers(line)
       for (let ri = 0; ri < height; ri++)
         for (let ci = 0; ci < width; ci++) grid[ri][ci] = '#'
     } else {
-      const [, type, index, iterations] = $.safeMatch(
-        line,
-        /(x|y)=(\w+) by (\w+)/
-      )
+      const [, type, index, iterations] = $.match(line, /(x|y)=(\w+) by (\w+)/)
 
       if (type === 'y') {
         $.rotate(grid[+index], +iterations)

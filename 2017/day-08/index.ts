@@ -1,5 +1,3 @@
-import $ from '../../helpers'
-
 // This function takes in an array of raw instructions, executes every
 // instruction to manipulate the value of registers (starting at 0), and return
 // the maximum value reached by a register.

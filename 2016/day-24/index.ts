@@ -10,14 +10,14 @@ export const discover = (input: string[], roundTrip: boolean = false) => {
     return cell
   })
 
-  // I originally cached the neighbors in a map to speed things up but it’s
-  // negligible. What really makes a difference is not doing pathfinding on
-  // paths we have alreadu done (hence this memoization).
   const getNextNodes = (curr: Coords) =>
     $.bordering(curr, 'COORDS').filter(
       coords => $.grid.at(grid, coords) !== '#'
     )
 
+  // I originally cached the neighbors in a map to speed things up but it’s
+  // negligible. What really makes a difference is not doing pathfinding on
+  // paths we have alreadu done (hence this memoization).
   // Memoize the pathfinding between two points to avoid computing it again and
   // again for every possible order.
   const search = $.memo((from: Coords, to: Coords) =>

@@ -15,7 +15,7 @@ export const step = (grid: Grid<string>) => {
 
   $.grid.forEach(grid, (v, ri, ci) => {
     if (v !== 'v') return
-    const bottom = ri === grid.length - 1 ? 0 : ri + 1
+    const bottom = ri === $.grid.height(grid) - 1 ? 0 : ri + 1
     const canMove = grid[bottom][ci] !== 'v' && horizontal[bottom][ci] === '.'
     vertical[canMove ? bottom : ri][ci] = 'v'
   })

@@ -16,4 +16,4 @@ const getSum = (item: any): number => {
 export const run = (input: string, advanced: boolean = false) =>
   advanced
     ? getSum(JSON.parse(input))
-    : $.sum($.safeMatch(input, /-?\d+/g).map(Number))
+    : $.sum($.match(input, /-?\d+/g).map(Number))

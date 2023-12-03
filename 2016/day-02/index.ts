@@ -7,12 +7,13 @@ const KEYPAD_1: Grid<number> = [
   [7, 8, 9],
 ]
 
+// prettier-ignore
 const KEYPAD_2: Grid<number | string | undefined> = [
-  [, , 1, ,],
-  [, 2, 3, 4],
-  [5, 6, 7, 8, 9],
-  [, 'A', 'B', 'C'],
-  [, , 'D', ,],
+  [   ,    ,  1 ,    ,   ],
+  [   ,  2 ,  3 ,  4 ,   ],
+  [ 5 ,  6 ,  7 ,  8 , 9 ],
+  [   , 'A', 'B', 'C',   ],
+  [   ,    , 'D',    ,   ],
 ]
 
 const VECTORS: Record<string, Coords> = {
@@ -29,9 +30,7 @@ export const run = (instructions: string[], advanced: boolean = false) => {
 
   return instructions
     .map(instruction => {
-      const characters = Array.from(instruction)
-
-      characters.forEach(char => {
+      Array.from(instruction).forEach(char => {
         const next = $.applyVector(position, VECTORS[char as Vector])
         if ($.grid.at(keypad, next)) position = next
       })

@@ -12,7 +12,6 @@ class Disk {
     this.size = size
     this.position = this.initial = initial
     this.index = $.loopIndex(0, this.size - 1)
-    this.reset()
   }
 
   reset() {
@@ -32,7 +31,7 @@ class Disk {
 
 export const run = (instructions: string[]) => {
   const disks = instructions.map(instruction => {
-    const [id, size, , initial] = $.safeMatch(instruction, /\d+/g).map(Number)
+    const [id, size, , initial] = $.numbers(instruction)
 
     return new Disk(id, size, initial)
   })

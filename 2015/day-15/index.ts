@@ -34,8 +34,7 @@ const getPropertyScore =
     return Math.max($.sum(propertyScores), 0)
   }
 
-const parseIngredient = (line: string) =>
-  $.safeMatch(line, /-?\d+/g).map(Number)
+const parseIngredient = (line: string) => $.match(line, /-?\d+/g).map(Number)
 
 export const run = (input: string[], calories?: number) => {
   // I couldn’t find a solution that works for a dynamic amount of ingredients

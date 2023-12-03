@@ -10,9 +10,7 @@ const parseFood = (food: string) => {
   // Capture group       :                    (     )
   // Anything but `)`    :                     [^)]+
   // Literal `)`         :                           \)
-  const match = $.safeMatch(food, /([^(]+)\(contains ([^)]+)\)/).map(v =>
-    v.trim()
-  )
+  const match = $.match(food, /([^(]+)\(contains ([^)]+)\)/).map(v => v.trim())
 
   return {
     ingredients: match[1].split(' '),

@@ -21,11 +21,13 @@ import isClamped from './isClamped'
 import lcm from './lcm'
 import loopIndex from './loopIndex'
 import manhattan from './manhattan'
+import match from './match'
 import matchLast from './matchLast'
 import max from './max'
 import md5 from './md5'
 import median from './median'
 import memo from './memo'
+import numbers from './numbers'
 import { bordering, surrounding } from './neighbors'
 import pathfinding from './pathfinding'
 import permutations from './permutations'
@@ -34,7 +36,6 @@ import range from './range'
 import readInput from './readInput'
 import rotate from './rotate'
 import sample from './sample'
-import safeMatch from './safeMatch'
 import stringMap from './stringMap'
 import sum from './sum'
 import swap from './swap'
@@ -79,13 +80,14 @@ export default {
   md5,
   median,
   memo,
+  numbers,
   pathfinding,
   permutations,
   product,
   range,
   readInput,
   rotate,
-  safeMatch,
+  match,
   sample,
   stringMap,
   sum,

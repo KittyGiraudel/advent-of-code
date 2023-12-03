@@ -37,7 +37,7 @@ const MONSTER_PATTERN: Coords[] = [
 const getSides = (grid: Grid<string>) =>
   [
     /* Top    */ grid[0],
-    /* Right  */ $.column(grid, grid.length - 1),
+    /* Right  */ $.column(grid, $.grid.width(grid) - 1),
     /* Bottom */ grid.at(-1),
     /* Left   */ $.column(grid, 0),
   ].map(line => line!.join(''))
@@ -46,12 +46,12 @@ const getSides = (grid: Grid<string>) =>
 // possibilities).
 const parseSnapshot = (snapshot: string) => {
   const [header, ...lines] = snapshot.split('\n')
-  const [id] = header.match(/\d+/g)!
+  const [id] = $.numbers(header)
   const grid = $.grid.from<string>(lines)
 
   return $.grid
     .variants(grid)
-    .map(grid => ({ sides: getSides(grid), grid, id: +id } as Tile))
+    .map(grid => ({ sides: getSides(grid), grid, id } as Tile))
 }
 
 // Brute-force the jigsaw in reading order (left-to-right and top-to-bottom)

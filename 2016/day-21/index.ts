@@ -4,7 +4,7 @@ export const run = (steps: string[], init: string) =>
   steps
     .reduce((acc, step) => {
       if (step.startsWith('reverse')) {
-        let [x, y] = $.safeMatch(step, /\d+/g).map(Number)
+        let [x, y] = $.numbers(step)
         while (x < y) $.swap(acc, x++, y--)
         return acc
       }
@@ -16,17 +16,17 @@ export const run = (steps: string[], init: string) =>
       }
 
       if (step.startsWith('rotate')) {
-        const [x] = $.safeMatch(step, /\d+/g).map(Number)
+        const [x] = $.numbers(step)
         return $.rotate(acc, x * (step.includes('left') ? -1 : +1))
       }
 
       if (step.startsWith('swap position')) {
-        const [a, b] = $.safeMatch(step, /\d+/g).map(Number)
+        const [a, b] = $.numbers(step)
         return $.swap(acc, a, b)
       }
 
       if (step.startsWith('swap letter')) {
-        const [la, lb] = $.safeMatch(step, /letter (\w)/g).map(a =>
+        const [la, lb] = $.match(step, /letter (\w)/g).map(a =>
           a.replace('letter ', '')
         )
         const a = acc.findIndex(l => la === l)
@@ -35,7 +35,7 @@ export const run = (steps: string[], init: string) =>
       }
 
       if (step.startsWith('move')) {
-        const [a, b] = $.safeMatch(step, /\d+/g).map(Number)
+        const [a, b] = $.numbers(step)
         const letter = acc.splice(a, 1).pop()!
         acc.splice(b, 0, letter)
         return acc

@@ -15,13 +15,16 @@ const getGrids = (input: string[]) => {
 
   // These are the *inner* dimensions, taking the walls into consideration. So
   // for a 10x10 maze, these would be 8x8.
-  const width = grid[0].length - 2
-  const height = grid.length - 2
+  const width = $.grid.width(grid) - 2
+  const height = $.grid.height(grid) - 2
 
   // This is called `isWallOrDoor` and not `isWall` on purpose because the
   // starting point and the ending point both return `true` for that function.
   const isWallOrDoor = (grid: Grid<string[]>, ri: number, ci: number) =>
-    ri === 0 || ri === grid.length - 1 || ci === 0 || ci === grid[0].length - 1
+    ri === 0 ||
+    ri === $.grid.height(grid) - 1 ||
+    ci === 0 ||
+    ci === $.grid.width(grid) - 1
 
   return $.array(height * width - 1).reduce<Grids>((acc, _, index) => {
     const curr = acc.get(index)!

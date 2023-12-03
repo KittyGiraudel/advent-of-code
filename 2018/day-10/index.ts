@@ -5,7 +5,7 @@ const applyVelocity = ([position, velocity]: [Coords, Coords]) =>
   [$.applyVector(position, velocity), velocity] as [Coords, Coords]
 
 const parseLine = (line: string) =>
-  $.chunk($.safeMatch(line, /(-?\d+)/g).map(Number), 2) as [Coords, Coords]
+  $.chunk($.match(line, /(-?\d+)/g).map(Number), 2) as [Coords, Coords]
 
 const getDimensions = ([minX, maxX, minY, maxY]: number[]) => [
   maxX + 1 - minX,

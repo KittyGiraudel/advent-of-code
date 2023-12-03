@@ -14,13 +14,7 @@ class Player {
     predicate,
     next,
     items,
-  }: {
-    id: Player['id']
-    operation: Player['operation']
-    predicate: Player['predicate']
-    next: Player['next']
-    items: Player['items']
-  }) {
+  }: Pick<Player, 'id' | 'operation' | 'predicate' | 'next' | 'items'>) {
     this.id = id
     this.items = items
     this.operation = operation

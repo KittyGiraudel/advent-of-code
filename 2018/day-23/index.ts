@@ -9,7 +9,7 @@ type Bot = {
 }
 
 const parse = (string: string) => {
-  const [x, y, z, r] = $.safeMatch(string, /(-?\d+)/g).map(Number)
+  const [x, y, z, r] = $.match(string, /(-?\d+)/g).map(Number)
   const distance = $.manhattan([x, y, z], [0, 0, 0])
 
   return { x, y, z, r, distance } as Bot

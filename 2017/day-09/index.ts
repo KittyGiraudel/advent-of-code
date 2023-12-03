@@ -1,5 +1,3 @@
-import $ from '../../helpers'
-
 export const run = (string: string) => {
   let trash = false
   let depth = 0
@@ -17,9 +15,9 @@ export const run = (string: string) => {
       else if (char === '>') trash = false
       else chars++
     } else {
-      // If not in the middle of a piece of trash and reaching `<`, turn on trash
-      // mode. When reaching `{`, increase the depth. When reaching `}`, decrease
-      // the depth and increase the score.
+      // If not in the middle of a piece of trash and reaching `<`, turn on
+      // trash mode. When reaching `{`, increase the depth. When reaching `}`,
+      // decrease the depth and increase the score.
       if (char === '<') trash = true
       if (char === '{') depth++
       if (char === '}') score += depth--

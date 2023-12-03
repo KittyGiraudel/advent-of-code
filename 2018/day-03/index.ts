@@ -58,7 +58,7 @@ const getIntersection = (a: Boundary, b: Boundary) => {
 
 const parseClaims = (lines: string[]) =>
   lines
-    .map(line => $.safeMatch(line, /(\d+)/g).map(Number))
+    .map(line => $.match(line, /(\d+)/g).map(Number))
     .map(
       ([id, xMin, yMin, width, height]) =>
         ({

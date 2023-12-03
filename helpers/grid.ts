@@ -119,6 +119,13 @@ const gridVariants = <T>(grid: Grid<T>) => {
 const gridAt = <T>(grid: Grid<T>, coords: Coords) =>
   grid?.[coords[0]]?.[coords[1]]
 
+const gridWidth = (grid: Grid<any>) => grid[0].length
+const gridHeight = (grid: Grid<any>) => grid.length
+const gridDimensions = (grid: Grid<any>) => ({
+  width: gridWidth(grid),
+  height: gridHeight(grid),
+})
+
 export default {
   forEach: gridForEach,
   map: gridMap,
@@ -135,4 +142,7 @@ export default {
   render: renderGrid,
   variants: gridVariants,
   at: gridAt,
+  width: gridWidth,
+  height: gridHeight,
+  dimensions: gridDimensions,
 }

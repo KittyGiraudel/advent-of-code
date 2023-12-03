@@ -26,10 +26,7 @@ const getRootNode = (graph: Graph) => {
 }
 
 const parseLine = (line: string) => {
-  const [, name, value, rest] = $.safeMatch(
-    line,
-    /(\w+) \((\d+)\)(?: -> ([^)]+))?/
-  )
+  const [, name, value, rest] = $.match(line, /(\w+) \((\d+)\)(?: -> ([^)]+))?/)
   const children = rest?.split(', ') ?? []
 
   return { name, value: +value, children: children } as Node

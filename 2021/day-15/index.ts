@@ -2,8 +2,7 @@ import $ from '../../helpers'
 import { Coords, Grid } from '../../types'
 
 const getCost = (grid: Grid<number>, [ri, ci]: Coords) => {
-  const width = grid[0].length
-  const height = grid.length
+  const { width, height } = $.grid.dimensions(grid)
   const riInc = Math.floor(ri / height)
   const ciInc = Math.floor(ci / width)
 
@@ -11,8 +10,8 @@ const getCost = (grid: Grid<number>, [ri, ci]: Coords) => {
 }
 
 const getLowestCost = (grid: Grid<number>, mapSize = 1) => {
-  const width = grid[0].length * mapSize - 1
-  const height = grid.length * mapSize - 1
+  const width = $.grid.width(grid) * mapSize - 1
+  const height = $.grid.height(grid) * mapSize - 1
   const start: Coords = [0, 0]
   const end: Coords = [height, width]
 

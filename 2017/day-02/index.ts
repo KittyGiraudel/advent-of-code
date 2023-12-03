@@ -3,7 +3,7 @@ import $ from '../../helpers'
 export const checksum = (input: string[], advanced: boolean = false) =>
   $.sum(
     input.map(row => {
-      const numbers = row.split(/\s+/g).map(Number)
+      const numbers = $.numbers(row)
 
       if (!advanced) {
         return Math.max(...numbers) - Math.min(...numbers)

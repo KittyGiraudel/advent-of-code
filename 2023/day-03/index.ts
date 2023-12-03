@@ -3,26 +3,28 @@ import { Coords, Grid } from '../../types'
 
 const isNumber = (input: string) => /\d/.test(input)
 const isEmpty = (input: string) => input === '.'
+const isSymbol = (input: string) => input && !isNumber(input) && !isEmpty(input)
+const isGear = (input: string) => input === '*'
 
 export const run = (input: string[]) => {
   const grid = $.grid.from<string>(input)
-  const { numbers } = $.grid.reduce<
-    string,
-    { current: string; symbol: boolean; numbers: number[] }
-  >(
+  const getValue = (coords: Coords) => $.grid.at(grid, coords)
+  type State = { current: number; total: number; symbol: boolean }
+
+  return $.grid.reduce<string, State>(
     grid,
-    (acc, item, ri, ci) => {
-      if (isNumber(item)) {
-        acc.current += item
-        // If the current value is a number, all we want to know is whether it
-        // has a symbol surrounding it. To do so, get the neighbors of the
-        // current cell and retrieve their value. Then, preserve only the
-        // symbols (not a number and not empty). Finally, record that we found a
-        // symbol (doesn’t matter which).
+    (acc, value, ...coords) => {
+      if (isNumber(value)) {
+        // Because we iterate left-to-right, and because numbers are always
+        // contained within a single row, we can safely compose our number
+        // during iteration. This is the same as doing a string concatenation.
+        acc.current = acc.current * 10 + Number(value)
+        // If the current value is a number, we want to know whether it has a
+        // symbol surrounding it. To do so, get the neighbors of the current
+        // cell and retrieve their value. Then, preserve only the symbols (not a
+        // number and not empty). Finally, record that we found a symbol.
         acc.symbol ||=
-          $.surrounding([ri, ci], 'COORDS')
-            .map(coords => $.grid.at(grid, coords))
-            .filter(value => value && !isNumber(value) && !isEmpty(value))
+          $.surrounding(coords, 'COORDS').map(getValue).filter(isSymbol)
             .length > 0
       }
 
@@ -30,17 +32,16 @@ export const run = (input: string[]) => {
       // to record the current number (if any, otherwise +'' is 0), and reset
       // the current number and symbol to start again.
       else {
-        if (!isEmpty(item) || acc.symbol) acc.numbers.push(+acc.current)
-        acc.current = ''
+        if (isSymbol(value)) acc.symbol = true
+        if (acc.symbol && acc.current) acc.total += acc.current
+        acc.current = 0
         acc.symbol = false
       }
 
       return acc
     },
-    { current: '', symbol: false, numbers: [] }
-  )
-
-  return $.sum(numbers)
+    { current: 0, symbol: false, total: 0 }
+  ).total
 }
 
 const getSurroundingNumber = (grid: Grid<string>) => (coords: Coords) => {
@@ -77,7 +78,7 @@ export const getGearRatio = (input: string[]) => {
     grid,
     (acc, item, ri, ci) => {
       // Only consider gears, and ignore anything else.
-      if (item !== '*') return acc
+      if (!isGear(item)) return acc
 
       // Retrieve the surrounding numbers from the gear. Beware: numbers can be
       // returned twice. For instance in the following case, 35 will be returned

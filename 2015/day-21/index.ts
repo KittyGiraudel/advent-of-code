@@ -4,9 +4,12 @@ type Cost = number
 type Damage = number
 type Armor = number
 type Stats = [Cost, Damage, Armor]
-type Gear = [Stats, Stats?, Stats?, Stats?]
+type Gear =
+  | [Stats]
+  | [Stats, Stats]
+  | [Stats, Stats, Stats]
+  | [Stats, Stats, Stats, Stats]
 
-/* Cost, Damage, Armor */
 const WEAPONS: Stats[] = [
   [8, 4, 0],
   [10, 5, 0],
@@ -56,7 +59,6 @@ const getCombinations = () => {
   // Aggregate the stats of all the items in the gear (cost, damage, armor).
   return gears.map(items =>
     items.reduce(
-      // @ts-ignore
       ([cost, damage, armor], [iCost, iDamage, iArmor]) => [
         cost + iCost,
         damage + iDamage,

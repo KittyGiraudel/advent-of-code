@@ -30,7 +30,7 @@ const createGraph = (input: string[]) => {
   const graph: Graph = {}
 
   input.forEach(line => {
-    const [, a, b, distance] = $.safeMatch(line, /(\w+) to (\w+) = (\d+)/)
+    const [, a, b, distance] = $.match(line, /(\w+) to (\w+) = (\d+)/)
     if (!(a in graph)) graph[a] = {}
     if (!(b in graph)) graph[b] = {}
     graph[a][b] = +distance

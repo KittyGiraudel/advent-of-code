@@ -11,10 +11,7 @@ class Deer {
   score: number
 
   constructor(line: string) {
-    const [, name, km, s, rest] = $.safeMatch(
-      line,
-      /(\w+).*?(\d+).*?(\d+).*?(\d+)/
-    )
+    const [, name, km, s, rest] = $.match(line, /(\w+).*?(\d+).*?(\d+).*?(\d+)/)
 
     this.name = name
     this.velocity = +km

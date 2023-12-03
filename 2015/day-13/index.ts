@@ -8,7 +8,7 @@ const createGraph = (input: string[], withOneself: boolean) => {
   if (withOneself) graph.me = {}
 
   input.forEach(line => {
-    const [, first, verb, value, last] = $.safeMatch(
+    const [, first, verb, value, last] = $.match(
       line,
       /(\w+).*?(gain|lose) (\d+).*?(\w+)\./
     )

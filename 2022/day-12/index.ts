@@ -29,8 +29,8 @@ const parse = (input: string[]) => {
 const isWithinBounds =
   (grid: Grid<number>) =>
   ([ri, ci]: Coords) =>
-    $.isClamped(ri, 0, grid.length - 1) &&
-    $.isClamped(ci, 0, grid[0].length - 1)
+    $.isClamped(ri, 0, $.grid.height(grid) - 1) &&
+    $.isClamped(ci, 0, $.grid.width(grid) - 1)
 
 const getNextNodes =
   (grid: Grid<number>) =>

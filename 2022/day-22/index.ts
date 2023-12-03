@@ -151,8 +151,12 @@ const getCubicNeighbors = (
       const subgrids = getSubgrids(grid)
       const currSubgrid = subgrids.find(
         ({ boundaries, grid }) =>
-          $.isClamped(ri, boundaries[0], boundaries[0] + grid.length - 1) &&
-          $.isClamped(ci, boundaries[1], boundaries[1] + grid.length - 1)
+          $.isClamped(
+            ri,
+            boundaries[0],
+            boundaries[0] + $.grid.height(grid) - 1
+          ) &&
+          $.isClamped(ci, boundaries[1], boundaries[1] + $.grid.width(grid) - 1)
       )
 
       // Which grid we land on depends on both which subgrid we are currently
@@ -214,7 +218,7 @@ const getNeighbors =
 
 export const maze = (input: string, asCube: boolean = false) => {
   const [map, last] = input.split('\n\n')
-  const instructions = $.safeMatch(last, /(\d+|L|R)/g).map(v => +v || v)
+  const instructions = $.match(last, /(\d+|L|R)/g).map(v => +v || v)
   const rows = map.split('\n').filter(Boolean)
   const grid = $.grid.from(rows, v => (v === ' ' ? '' : v))
   const neighborMap = $.grid.reduce<string, CacheMap>(

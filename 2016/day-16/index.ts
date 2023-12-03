@@ -1,5 +1,3 @@
-import $ from '../../helpers'
-
 const getChecksum = (disk: number[]): number[] => {
   const checksum = []
 
