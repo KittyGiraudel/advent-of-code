@@ -1,0 +1,102 @@
+import $ from '../../helpers'
+import { Coords, Grid } from '../../types'
+
+const isNumber = (input: string) => /\d/.test(input)
+const isEmpty = (input: string) => input === '.'
+
+export const run = (input: string[]) => {
+  const grid = $.grid.from<string>(input)
+  const { numbers } = $.grid.reduce<
+    string,
+    { current: string; symbol: boolean; numbers: number[] }
+  >(
+    grid,
+    (acc, item, ri, ci) => {
+      if (isNumber(item)) {
+        acc.current += item
+        // If the current value is a number, all we want to know is whether it
+        // has a symbol surrounding it. To do so, get the neighbors of the
+        // current cell and retrieve their value. Then, preserve only the
+        // symbols (not a number and not empty). Finally, record that we found a
+        // symbol (doesn’t matter which).
+        acc.symbol ||=
+          $.surrounding([ri, ci], 'COORDS')
+            .map(coords => $.grid.at(grid, coords))
+            .filter(value => value && !isNumber(value) && !isEmpty(value))
+            .length > 0
+      }
+
+      // When we reach a non-number (either a symbol or an empty space), we need
+      // to record the current number (if any, otherwise +'' is 0), and reset
+      // the current number and symbol to start again.
+      else {
+        if (!isEmpty(item) || acc.symbol) acc.numbers.push(+acc.current)
+        acc.current = ''
+        acc.symbol = false
+      }
+
+      return acc
+    },
+    { current: '', symbol: false, numbers: [] }
+  )
+
+  return $.sum(numbers)
+}
+
+const getSurroundingNumber = (grid: Grid<string>) => (coords: Coords) => {
+  let value = $.grid.at(grid, coords)
+  const x = coords[1]
+
+  if (!isNumber(value)) {
+    return 0
+  }
+
+  // Start to the right of the current value, and add a digit to the
+  // current number for as long as we find a digit
+  coords[1] = x + 1
+  while (isNumber($.grid.at(grid, coords))) {
+    value = value + $.grid.at(grid, coords)
+    coords[1]++
+  }
+
+  // Start to the left of the current value, and prepend a digit to the
+  // current number for as long as we find a digit
+  coords[1] = x - 1
+  while (isNumber($.grid.at(grid, coords))) {
+    value = $.grid.at(grid, coords) + value
+    coords[1]--
+  }
+
+  return value.length ? +value : 0
+}
+
+export const getGearRatio = (input: string[]) => {
+  const grid = $.grid.from<string>(input)
+
+  return $.grid.reduce<string, number>(
+    grid,
+    (acc, item, ri, ci) => {
+      // Only consider gears, and ignore anything else.
+      if (item !== '*') return acc
+
+      // Retrieve the surrounding numbers from the gear. Beware: numbers can be
+      // returned twice. For instance in the following case, 35 will be returned
+      // twice because it will be retrieve from the 3 and retrieved from the 5
+      // individually.
+      // . . * .
+      // . 3 5 .
+      const neighbors = $.surrounding([ri, ci], 'COORDS')
+      const numbers = neighbors.map(getSurroundingNumber(grid))
+
+      // Because of the way I retrieve surrounding numbers, I had to assume that
+      // gears were *not* surrounded by twice the same number, which turned out
+      // fine for my input, but may not be a correct for all inputs.
+      const uniqueNumbers = Array.from(new Set(numbers))
+      const nonZeroNumbers = uniqueNumbers.filter(value => value !== 0)
+      const product = $.product(nonZeroNumbers)
+
+      return acc + (nonZeroNumbers.length === 2 ? product : 0)
+    },
+    0
+  )
+}
