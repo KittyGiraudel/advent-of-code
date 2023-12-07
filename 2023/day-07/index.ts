@@ -1,90 +1,53 @@
 import $ from '../../helpers'
 
-type Cards = `${string},${string},${string},${string},${string}`
-type Hand = { cards: Cards; bet: number; type: string }
+const TYPES = ['5', '41', '32', '311', '221', '2111', '11111'] as const
 
-const isPattern = (pattern: string) => (cards: Cards) =>
+type HandType = (typeof TYPES)[number]
+type Cards = `${string},${string},${string},${string},${string}`
+type Hand = { cards: Cards; bet: number; type: HandType }
+
+const isType = (type: HandType, cards: Cards) =>
   Object.values($.frequency(cards))
     .sort((a, b) => b - a)
-    .join('') === pattern
+    .join('') === type
 
-const TYPES = [
-  { name: 'FIVE_OF_A_KIND', check: isPattern('5') },
-  { name: 'FOUR_OF_A_KIND', check: isPattern('41') },
-  { name: 'FULL_HOUSE', check: isPattern('32') },
-  { name: 'THREE_OF_A_KIND', check: isPattern('311') },
-  { name: 'TWO_PAIRS', check: isPattern('221') },
-  { name: 'ONE_PAIR', check: isPattern('2111') },
-  { name: 'HIGH_CARD', check: isPattern('11111') },
-]
+const sortHands = (order: string) => (a: Hand, b: Hand) => {
+  const typeCheck = TYPES.indexOf(a.type) - TYPES.indexOf(b.type)
 
-const getCardOrder = (advanced: boolean) =>
-  advanced ? 'AKQT98765432J' : 'AKQJT98765432'
+  if (typeCheck) return typeCheck
 
-const getHandType = (cards: Cards) =>
-  TYPES.find(type => type.check(cards))!.name
-
-const resolveJokers = (cards: Cards) => {
-  if (!cards.includes('J')) return cards
-
-  const counters = $.frequency(cards)
-  const otherCards = Object.keys(counters).filter(key => key !== 'J')
-  const [highest] = otherCards.sort(compareCards(getCardOrder(true)))
-  const [most] = otherCards.sort((a, b) => counters[b] - counters[a])
-
-  switch (getHandType(cards)) {
-    case 'FIVE_OF_A_KIND':
-      return 'AAAAA' as Cards
-    case 'FOUR_OF_A_KIND':
-    case 'FULL_HOUSE':
-      return highest.repeat(5) as Cards
-    case 'THREE_OF_A_KIND':
-    case 'ONE_PAIR':
-      return cards.replace(/J/g, counters.J === 1 ? most : highest) as Cards
-    default:
-      return cards.replace(/J/g, counters.J === 1 ? highest : most) as Cards
+  for (let i = 0; i < a.cards.length; i++) {
+    const strengthCheck = order.indexOf(a.cards[i]) - order.indexOf(b.cards[i])
+    if (strengthCheck) return strengthCheck
   }
-}
 
-const compareCards = (order: string) => (cardA: string, cardB: string) =>
-  order.indexOf(cardA) - order.indexOf(cardB)
-
-const compareSimilarHands = (a: Cards, b: Cards, advanced: boolean) => {
-  for (let i = 0; i < a.length; i++) {
-    const order = getCardOrder(advanced)
-    const comparison = compareCards(order)(a[i], b[i])
-    if (comparison) return comparison
-  }
   return 0
 }
 
-const sortHands = (advanced: boolean) => (a: Hand, b: Hand) => {
-  const TYPE_NAMES = TYPES.map(type => type.name)
+const resolveJokers = (cards: Cards) => {
+  const frequency = $.frequency(cards)
+  const others = Object.keys(frequency).filter(key => key !== 'J')
+  const [mostFrequent] = others.sort((a, b) => frequency[b] - frequency[a])
 
-  return (
-    TYPE_NAMES.indexOf(a.type) - TYPE_NAMES.indexOf(b.type) ||
-    compareSimilarHands(a.cards, b.cards, advanced)
-  )
+  // My first implementation was much *much* longer than this. I checked every
+  // hand type individually, and then refactored and refactored and refactored
+  // until I read up that the best use of a joker is to replace it by the most
+  // frequent (non-joker) card in the hand.
+  return cards.replace(/J/g, mostFrequent ?? 'A') as Cards
 }
 
-const createHand =
-  (advanced: boolean) =>
-  ([cards, bet]: [Cards, number]) =>
-    ({
-      cards,
-      bet,
-      type: getHandType(advanced ? resolveJokers(cards) : cards),
-    } as Hand)
+const getType = (cards: Cards, advanced: boolean) =>
+  TYPES.find(type => isType(type, advanced ? resolveJokers(cards) : cards))
 
-export const run = (input: string[], advanced: boolean = false) => {
-  // Break down the lines into a hand of cards and their bet, then resolve the
-  // type of each hand (considering jokers for part 2), sort them, and resolve
-  // their score based on the final order.
-  const scores = input
+// Break down the lines into a hand of cards and their bet, then resolve the
+// type of each hand (considering jokers for part 2), sort them, and resolve
+// their score based on the final order.
+export const run = (input: string[], advanced: boolean = false) =>
+  input
     .map(line => line.split(' ') as [Cards, number])
-    .map(createHand(advanced))
-    .sort(sortHands(advanced))
+    .map(
+      ([cards, bet]) => ({ cards, bet, type: getType(cards, advanced) } as Hand)
+    )
+    .sort(sortHands(advanced ? 'AKQT98765432J' : 'AKQJT98765432'))
     .map((game, index, array) => game.bet * (array.length - index))
-
-  return $.sum(scores)
-}
+    .reduce((a, b) => a + b, 0)
