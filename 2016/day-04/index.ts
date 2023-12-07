@@ -21,7 +21,7 @@ const sortCounters = (
 const parseRoom = (line: string) => {
   const [, hash, id, checksum] = $.match(line, /([a-z-]+)-(\d+)\[([^\]]+)\]$/)
   const letters = Array.from(hash.replace(/-/g, ''))
-  const counters = Object.entries($.count(letters))
+  const counters = Object.entries($.frequency(letters))
     .sort(sortCounters)
     .slice(0, 5)
   const valid = counters.map(([letter]) => letter).join('') === checksum
