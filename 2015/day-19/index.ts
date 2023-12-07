@@ -1,15 +1,5 @@
 import $ from '../../helpers'
 
-const indicesOf = (string: string, from: string) => {
-  const indices = []
-  const regex = new RegExp(from, 'g')
-
-  let result
-  while ((result = regex.exec(string))) indices.push(result.index)
-
-  return indices
-}
-
 const replaceAt = (value: string, from: string, index: number, to: string) =>
   value.slice(0, index) + value.slice(index).replace(from, to)
 
@@ -22,7 +12,7 @@ export const calibrate = (input: string[]) => {
 
   const molecules = input.slice(0, -2).flatMap(replacement => {
     const [from, to] = replacement.split(' => ')
-    const indices = indicesOf(molecule, from)
+    const indices = $.indices(molecule, from)
 
     return indices.map(index => replaceAt(molecule, from, index, to))
   })
