@@ -1,9 +1,11 @@
+import $ from '../../helpers'
+
 export const findMarker = (input: string, length: number = 4) => {
   for (let i = length; i < input.length; i++) {
     const slice = input.slice(i - length, i)
-    const uniq = new Set(Array.from(slice))
+    const unique = $.unique(Array.from(slice))
 
-    if (uniq.size === length) return i
+    if (unique.length === length) return i
   }
 
   return null

@@ -49,6 +49,7 @@ import toDec from './toDec'
 import toPoint from './toPoint'
 import triangular from './triangular'
 import turn from './turn'
+import unique from './unique'
 import updateAtIndex from './updateAtIndex'
 import zip from './zip'
 
@@ -105,6 +106,7 @@ export default {
   toPoint,
   triangular,
   turn,
+  unique,
   updateAtIndex,
   zip,
 }

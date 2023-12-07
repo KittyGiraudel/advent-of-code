@@ -92,7 +92,7 @@ export const getGearRatio = (input: string[]) => {
       // Because of the way I retrieve surrounding numbers, I had to assume that
       // gears were *not* surrounded by twice the same number, which turned out
       // fine for my input, but may not be a correct for all inputs.
-      const uniqueNumbers = Array.from(new Set(numbers))
+      const uniqueNumbers = $.unique(numbers)
       const nonZeroNumbers = uniqueNumbers.filter(value => value !== 0)
       const product = $.product(nonZeroNumbers)
 
