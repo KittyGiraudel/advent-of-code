@@ -48,7 +48,7 @@ const getPaths = (
     // - *and* there was already a small cave visited twice somewhere in the
     // path (and therefore cannot be another one).
     else if (withDuplicate) {
-      const occurrences = $.count(path)
+      const occurrences = $.frequency(path)
       const hasDuplicate = path
         .filter(cave => graph[cave].small)
         .some(cave => occurrences[cave] > 1)

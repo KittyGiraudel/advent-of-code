@@ -4,7 +4,7 @@ type Cards = `${string},${string},${string},${string},${string}`
 type Hand = { cards: Cards; bet: number; type: string }
 
 const isPattern = (pattern: string) => (cards: Cards) =>
-  Object.values($.count(Array.from(cards)))
+  Object.values($.frequency(Array.from(cards)))
     .sort((a, b) => b - a)
     .join('') === pattern
 
@@ -27,7 +27,7 @@ const getHandType = (cards: Cards) =>
 const resolveJokers = (cards: Cards) => {
   if (!cards.includes('J')) return cards
 
-  const counters = $.count(Array.from(cards))
+  const counters = $.frequency(Array.from(cards))
   const otherCards = Object.keys(counters).filter(key => key !== 'J')
   const [highest] = otherCards.sort(compareCards(getCardOrder(true)))
   const [most] = otherCards.sort((a, b) => counters[b] - counters[a])

@@ -9,7 +9,7 @@ export const validate = (
   size: { width: number; height: number }
 ) => {
   const { count } = parse(input, size)
-    .map(layer => ({ layer, count: $.count(layer) }))
+    .map(layer => ({ layer, count: $.frequency(layer) }))
     .sort((a, b) => b.count['0'] - a.count['0'])
     .pop()!
 

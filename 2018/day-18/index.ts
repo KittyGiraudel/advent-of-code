@@ -14,7 +14,7 @@ const getNextValue = (value: string, neighbors: string[]) => {
 }
 
 const getScore = (grid: Grid<string>) => {
-  const counters = $.count(grid.flat())
+  const counters = $.frequency(grid.flat())
 
   return counters['#'] * counters['|']
 }

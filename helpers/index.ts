@@ -7,9 +7,9 @@ import chunk from './chunk'
 import column from './column'
 import combinations from './combinations'
 import compose from './compose'
-import count from './count'
 import countInString from './countInString'
 import dump from './dump'
+import frequency from './frequency'
 import fromAscii from './fromAscii'
 import gcd from './gcd'
 import grid from './grid'
@@ -64,9 +64,9 @@ export default {
   column,
   combinations,
   compose,
-  count,
   countInString,
   dump,
+  frequency,
   fromAscii,
   gcd,
   grid,

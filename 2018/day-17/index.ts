@@ -92,7 +92,7 @@ export const scan = (
   // https://github.com/andrewgreenh/advent-of-code/pull/19
   fillFrom(grid, source, maxY)
 
-  const counters = $.count(grid.slice(minY, maxY + 1).flat())
+  const counters = $.frequency(grid.slice(minY, maxY + 1).flat())
 
   return [counters['~'], counters['|']]
 }

@@ -37,7 +37,7 @@ export const countOverlappingInches = (input: string[]) => {
       for (let y = yMin as number; y <= yMax; y++) grid[y][x]++
   })
 
-  const counts = $.count(grid.flat())
+  const counts = $.frequency(grid.flat())
 
   delete counts['0']
   delete counts['1']

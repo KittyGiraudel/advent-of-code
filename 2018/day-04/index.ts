@@ -70,7 +70,7 @@ const aggregateEvents = (acc: Record<string, number[]>, event: Event) => {
 const formatData = ([guardId, minutes]: [string, number[]]) => ({
   id: +guardId,
   duration: minutes.length,
-  counters: Object.entries($.count(minutes))
+  counters: Object.entries($.frequency(minutes))
     .map(([minute, occurrences]) => ({ minute: +minute, occurrences }))
     .sort((a, b) => b.occurrences - a.occurrences),
 })

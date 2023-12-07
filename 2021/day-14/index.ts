@@ -3,7 +3,7 @@ import $ from '../../helpers'
 export const count = (input: string[], iterations: number = 1) => {
   const string = input[0]
   // Initialize letter counters based on the characters of the initial string.
-  const counters = $.count(string.split(''))
+  const counters = $.frequency(string.split(''))
   // Parse the instructions.
   const instructions = input[1]
     .split('\n')

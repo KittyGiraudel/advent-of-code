@@ -19,7 +19,7 @@ const findCommonalities = (a: string, b: string) =>
     .join('')
 
 export const checksum = (input: string[]) => {
-  const lines = input.map(line => $.count(Array.from(line)))
+  const lines = input.map(line => $.frequency(Array.from(line)))
   const twos = lines.filter(counts => Object.values(counts).includes(2))
   const threes = lines.filter(counts => Object.values(counts).includes(3))
 
