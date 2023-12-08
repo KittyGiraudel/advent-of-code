@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { getDeckScore, parseCard } from './'
+import { run } from './'
 
 test('Day 04 — Sample', t => {
   const sample = $.sample(`
@@ -12,12 +12,12 @@ test('Day 04 — Sample', t => {
   Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11
   `)
 
-  t.is(getDeckScore(sample), 13)
-  t.is(getDeckScore(sample, true), 30)
+  t.is(run(sample), 13)
+  t.is(run(sample, true), 30)
 })
 
 test('Day 04 — Solutions', t => {
   const input = $.readInput(import.meta)
-  t.is(getDeckScore(input), 25183)
-  t.is(getDeckScore(input, true), 5667240)
+  t.is(run(input), 25183)
+  t.is(run(input, true), 5667240)
 })

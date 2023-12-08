@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { checksum } from './'
+import { run } from './'
 
 test('Day 02 — Sample', t => {
   const sample = $.sample(`
@@ -11,12 +11,12 @@ test('Day 02 — Sample', t => {
   Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green
   `)
 
-  t.is(checksum(sample), 8)
-  t.is(checksum(sample, true), 2286)
+  t.is(run(sample), 8)
+  t.is(run(sample, true), 2286)
 })
 
 test('Day 02 — Solutions', t => {
   const input = $.readInput(import.meta)
-  t.is(checksum(input), 3099)
-  t.is(checksum(input, true), 72970)
+  t.is(run(input), 3099)
+  t.is(run(input, true), 72970)
 })

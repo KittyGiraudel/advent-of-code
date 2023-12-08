@@ -6,10 +6,14 @@ const isEmpty = (input: string) => input === '.'
 const isSymbol = (input: string) => input && !isNumber(input) && !isEmpty(input)
 const isGear = (input: string) => input === '*'
 
-export const run = (input: string[]) => {
+export const run = (input: string[], advanced?: boolean) => {
   const grid = $.grid.from<string>(input)
   const getValue = (coords: Coords) => $.grid.at(grid, coords)
   type State = { current: number; total: number; symbol: boolean }
+
+  if (advanced) {
+    return getGearRatio(input)
+  }
 
   return $.grid.reduce<string, State>(
     grid,

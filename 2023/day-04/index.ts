@@ -1,13 +1,13 @@
 import $ from '../../helpers'
 
-export const parseCard = (line: string) => {
+const parseCard = (line: string) => {
   const sets = line.split(':')[1].split('|').map($.numbers)
   const score = $.intersection(...sets).length
 
   return { score, count: 1 }
 }
 
-export const getDeckScore = (input: string[], advanced?: boolean) => {
+export const run = (input: string[], advanced?: boolean) => {
   const cards = input.map(parseCard)
 
   if (advanced) {

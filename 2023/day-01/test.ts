@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { calibrate } from './'
+import { run } from './'
 
 test('Day 01 — Sample', t => {
   const sample = $.sample(`
@@ -20,13 +20,12 @@ test('Day 01 — Sample', t => {
   7pqrstsixteen
   `)
 
-  t.is(calibrate(sample), 142)
-  t.is(calibrate(sample2, true), 281)
+  t.is(run(sample), 142)
+  t.is(run(sample2, true), 281)
 })
 
 test('Day 01 — Solutions', t => {
   const input = $.readInput(import.meta)
-  t.is(calibrate(input), 54644)
-  t.not(calibrate(input, true), 53355)
-  t.is(calibrate(input, true), 53348)
+  t.is(run(input), 54644)
+  t.is(run(input, true), 53348)
 })

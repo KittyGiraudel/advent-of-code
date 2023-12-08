@@ -28,7 +28,7 @@ const aggregateMaxSet = (set: Set, item: Set) => ({
   blue: Math.max(set.blue, item.blue),
 })
 
-export const checksum = (input: string[], advanced?: boolean) => {
+export const run = (input: string[], advanced?: boolean) => {
   const games = input.map(parseGame)
 
   // For part 1, find every game with *every* one of its draws being valid (as
