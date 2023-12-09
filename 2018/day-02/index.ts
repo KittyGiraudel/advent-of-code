@@ -1,12 +1,11 @@
 import $ from '../../helpers'
-import levenshtein from 'js-levenshtein'
 
 const findSimilarIds = (ids: string[]) => {
   const candidates = []
 
   for (let i = 0; i < ids.length; i++) {
     for (let j = 0; j < i; j++) {
-      if (levenshtein(ids[i], ids[j]) === 1) candidates.push(ids[i], ids[j])
+      if ($.levenshtein(ids[i], ids[j]) === 1) candidates.push(ids[i], ids[j])
     }
   }
 

@@ -20,6 +20,7 @@ import inspect from './inspect'
 import intersection from './intersection'
 import isClamped from './isClamped'
 import lcm from './lcm'
+import levenshtein from './levenshtein'
 import loopIndex from './loopIndex'
 import manhattan from './manhattan'
 import match from './match'
@@ -77,6 +78,7 @@ export default {
   intersection,
   isClamped,
   lcm,
+  levenshtein,
   loopIndex,
   manhattan,
   matchLast,

@@ -1,5 +1,4 @@
 import $ from '../../helpers'
-import levenshtein from 'js-levenshtein'
 
 export const validate = (passphrase: string) =>
   passphrase
@@ -13,4 +12,4 @@ export const validateStrict = (passphrase: string) =>
   $.combinations(
     passphrase.split(' ').map(word => Array.from(word).sort().join('')),
     2
-  ).every(pair => levenshtein(pair[0], pair[1]))
+  ).every(pair => $.levenshtein(pair[0], pair[1]))
