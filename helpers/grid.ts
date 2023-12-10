@@ -2,7 +2,14 @@ import { Coords } from '../types'
 
 export type Grid<T> = T[][]
 type Mapper<I, O> = (value: I, ri: number, ci: number) => O
-type Handler = 'forEach' | 'map' | 'flatMap' | 'find' | 'every' | 'some'
+type Handler =
+  | 'forEach'
+  | 'filter'
+  | 'map'
+  | 'flatMap'
+  | 'find'
+  | 'every'
+  | 'some'
 
 const loopOnGrid =
   <T, U>(handler: Handler) =>
@@ -22,6 +29,11 @@ const gridMap = <T, U>(
   grid: Grid<T>,
   callback: (item: T, ri: number, ci: number) => U
 ): Grid<U> => loopOnGrid<T, U>('map')(grid, callback)
+
+const gridFilter = <T>(
+  grid: Grid<T>,
+  callback: (item: T, ri: number, ci: number) => boolean
+) => gridFlatMap(grid, callback).filter(Boolean)
 
 const gridFlatMap = <T, U>(
   grid: Grid<T>,
@@ -119,6 +131,10 @@ const gridVariants = <T>(grid: Grid<T>) => {
 const gridAt = <T>(grid: Grid<T>, coords: Coords) =>
   grid?.[coords[0]]?.[coords[1]]
 
+const gridSet = <T>(grid: Grid<T>, coords: Coords, value: T) => {
+  grid[coords[0]][coords[1]] = value
+}
+
 const gridWidth = (grid: Grid<any>) => grid[0].length
 const gridHeight = (grid: Grid<any>) => grid.length
 const gridDimensions = (grid: Grid<any>) => ({
@@ -130,6 +146,7 @@ export default {
   forEach: gridForEach,
   map: gridMap,
   flatMap: gridFlatMap,
+  filter: gridFilter,
   find: gridFind,
   findCoords: gridFindCoords,
   every: gridEvery,
@@ -142,6 +159,7 @@ export default {
   render: renderGrid,
   variants: gridVariants,
   at: gridAt,
+  set: gridSet,
   width: gridWidth,
   height: gridHeight,
   dimensions: gridDimensions,
