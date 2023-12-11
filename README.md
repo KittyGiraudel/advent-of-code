@@ -2,7 +2,7 @@
 
 <!-- AOC TILES BEGIN -->
 <h1 align="center">
-  2023 - 20 ⭐
+  2023 - 22 ⭐
 </h1>
 <a href="2023/day-01/index.ts">
   <img src="Media/2023/01.png" alt="Day 1 2023: Complete" width="161px">
@@ -33,6 +33,9 @@
 </a>
 <a href="2023/day-10/index.ts">
   <img src="Media/2023/10.png" alt="Day 10 2023: Complete" width="161px">
+</a>
+<a href="2023/day-11/index.ts">
+  <img src="Media/2023/11.png" alt="Day 11 2023: Complete" width="161px">
 </a>
 <h1 align="center">
   2022 - 46 ⭐
