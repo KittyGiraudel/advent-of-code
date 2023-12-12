@@ -16,7 +16,7 @@ const getGeologicIndex = (
   )
 }
 
-const getErosionLevel = $.memo<number>(
+const getErosionLevel = $.memo(
   (x: number, y: number, target: Coords, depth: number) =>
     (getGeologicIndex(x, y, target, depth) + depth) % 20183
 )
@@ -31,7 +31,7 @@ export const getRisk = (depth: number, target: Coords) =>
     0
   )
 
-const getNeighbors = $.memo<Coords[]>(
+const getNeighbors = $.memo(
   (x: number, y: number, width: number, height: number) =>
     $.bordering([x, y], 'COORDS').filter(
       ([x, y]) => x >= 0 && x < width && y >= 0 && y < height
