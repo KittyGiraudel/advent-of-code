@@ -133,6 +133,7 @@ const gridAt = <T>(grid: Grid<T>, coords: Coords) =>
 
 const gridSet = <T>(grid: Grid<T>, coords: Coords, value: T) => {
   grid[coords[0]][coords[1]] = value
+  return grid
 }
 
 const gridWidth = (grid: Grid<any>) => grid[0].length
