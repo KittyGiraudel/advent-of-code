@@ -19,7 +19,7 @@ const tick = (particle: Particle) => {
 }
 
 const sortByDistance = (a: Particle, b: Particle) =>
-  $.manhattan(b.position) - $.manhattan(a.position)
+  $.manhattan(b.position, [0, 0, 0]) - $.manhattan(a.position, [0, 0, 0])
 
 const countCollisions = (particles: Particle[]) =>
   particles

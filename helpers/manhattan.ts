@@ -7,10 +7,10 @@ import { Coords, QuadriCoords, TriCoords } from '../types'
  * @param b - Second set of coords
  * @return {Number}
  */
-function manhattan(a: Coords, b?: Coords): number
-function manhattan(a: TriCoords, b?: TriCoords): number
-function manhattan(a: QuadriCoords, b?: QuadriCoords): number
-function manhattan(a: number[], b?: number[]): number {
+function manhattan(a: Coords, b: Coords): number
+function manhattan(a: TriCoords, b: TriCoords): number
+function manhattan(a: QuadriCoords, b: QuadriCoords): number
+function manhattan(a: number[], b: number[]): number {
   if (a.length === 4) {
     b = b ?? [0, 0, 0, 0]
     return (
