@@ -153,7 +153,7 @@ test('Day 10 — Sample', t => {
   `)
   const program = new Computer(sample)
 
-  t.is(program.strength, 13140)
+  t.is(program.strength, 13_140)
   t.is(
     program.print(),
     $.sample(
@@ -173,7 +173,7 @@ test('Day 10 — Solutions', t => {
   const input = $.readInput(import.meta)
   const program = new Computer(input)
 
-  t.is(program.strength, 15880)
+  t.is(program.strength, 15_880)
   t.is(
     program.print(),
     $.sample(

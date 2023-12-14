@@ -35,5 +35,5 @@ test('Day 12 — Solutions', t => {
   ]
 
   t.is(cycle(input, 20), 3217)
-  t.is(cycle(input, 50000000000), 4000000000866)
+  t.is(cycle(input, 50_000_000_000), 4_000_000_000_866)
 })

@@ -32,5 +32,5 @@ test('Day 23 — Solutions', t => {
   const input = $.readInput(import.meta)
 
   t.is(findStrongestBot(input)[0], 602)
-  t.is(findStrongestBot(input)[1], 110620102)
+  t.is(findStrongestBot(input)[1], 110_620_102)
 })

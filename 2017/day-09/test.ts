@@ -23,6 +23,6 @@ test('Day 09 — Sample', t => {
 test('Day 09 — Solutions', t => {
   const [input] = $.readInput(import.meta)
 
-  t.is(run(input).score, 12803)
+  t.is(run(input).score, 12_803)
   t.is(run(input).chars, 6425)
 })

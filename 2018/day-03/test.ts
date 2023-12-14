@@ -15,6 +15,6 @@ test('Day 03 — Sample', t => {
 test('Day 03 — Solutions', t => {
   const input = $.readInput(import.meta)
 
-  t.is(countOverlappingInches(input), 114946)
+  t.is(countOverlappingInches(input), 114_946)
   t.is(detect(input), 877)
 })

@@ -48,6 +48,6 @@ test('Day 05 — Sample', t => {
 
 test('Day 05 — Solutions', t => {
   const input = $.readInput(import.meta, { delimiter: '\n\n' })
-  t.is(run(input), 806029445)
-  t.is(run(input, true), 59370572)
+  t.is(run(input), 806_029_445)
+  t.is(run(input, true), 59_370_572)
 })

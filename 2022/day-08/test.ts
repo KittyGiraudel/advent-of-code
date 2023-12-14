@@ -19,5 +19,5 @@ test('Day 08 — Solutions', t => {
   const input = $.readInput(import.meta)
 
   t.is(countVisibleTrees(input), 1827)
-  t.is(getHighestScenicScore(input), 335580)
+  t.is(getHighestScenicScore(input), 335_580)
 })

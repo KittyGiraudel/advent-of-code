@@ -24,5 +24,5 @@ test('Day 05 — Solutions', t => {
   const input = $.readInput(import.meta)
 
   t.is(getOverlappingPoints(input), 7269)
-  t.is(getOverlappingPoints(input, true), 21140)
+  t.is(getOverlappingPoints(input, true), 21_140)
 })

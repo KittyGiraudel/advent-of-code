@@ -15,6 +15,6 @@ test('Day 09 — Sample', t => {
 test('Day 09 — Solutions', t => {
   const input = $.readInput(import.meta).map(Number)
 
-  t.is(findWeakness(input, 25), 41682220)
-  t.is(breakWeakness(input, 25), 5388976)
+  t.is(findWeakness(input, 25), 41_682_220)
+  t.is(breakWeakness(input, 25), 5_388_976)
 })

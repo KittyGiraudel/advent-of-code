@@ -10,6 +10,6 @@ test('Day 05 — Sample', t => {
 test('Day 05 — Solutions', t => {
   const [input] = $.readInput(import.meta)
 
-  t.is(reduce(input).length, 11364)
+  t.is(reduce(input).length, 11_364)
   t.is(findShortestPolymer(input), 4212)
 })

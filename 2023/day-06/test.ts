@@ -9,11 +9,11 @@ test('Day 06 — Sample', t => {
   `)
 
   t.is(run(sample), 288)
-  t.is(run(sample, true), 71503)
+  t.is(run(sample, true), 71_503)
 })
 
 test('Day 06 — Solutions', t => {
   const input = $.readInput(import.meta)
-  t.is(run(input), 449820)
-  t.is(run(input, true), 42250895)
+  t.is(run(input), 449_820)
+  t.is(run(input, true), 42_250_895)
 })

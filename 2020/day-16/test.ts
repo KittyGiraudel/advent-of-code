@@ -37,6 +37,6 @@ test('Day 16 — Solutions', t => {
   const input = $.readInput(import.meta, { delimiter: '\n\n' })
   const data = parseInput(input)
 
-  t.is(getScanningErrorRate(data.nearbyTickets, data.rules), 25788)
-  t.is(getTicketValue(input), 3902565915559)
+  t.is(getScanningErrorRate(data.nearbyTickets, data.rules), 25_788)
+  t.is(getTicketValue(input), 3_902_565_915_559)
 })

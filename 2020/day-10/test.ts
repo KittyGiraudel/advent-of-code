@@ -12,12 +12,12 @@ test('Day 10 — Sample', t => {
   t.is(getDifferenceProduct(a), 35)
   t.is(getDifferenceProduct(b), 220)
   t.is(countArrangements(a), 8)
-  t.is(countArrangements(b), 19208)
+  t.is(countArrangements(b), 19_208)
 })
 
 test('Day 10 — Solutions', t => {
   const input = $.readInput(import.meta).map(Number)
 
   t.is(getDifferenceProduct(input), 3034)
-  t.is(countArrangements(input), 259172170858496)
+  t.is(countArrangements(input), 259_172_170_858_496)
 })

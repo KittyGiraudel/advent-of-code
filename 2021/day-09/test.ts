@@ -19,5 +19,5 @@ test('Day 09 — Solutions', t => {
   const input = $.readInput(import.meta)
 
   t.is(sumLowPointsRisk(input), 500)
-  t.is(getProductOfBiggestBasins(input), 970200)
+  t.is(getProductOfBiggestBasins(input), 970_200)
 })

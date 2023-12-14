@@ -21,12 +21,12 @@ test('Day 15 — Sample', t => {
   `)
 
   t.is(detect(sample, 10), 26)
-  t.is(detect(sample, null, 20), 56000011)
+  t.is(detect(sample, null, 20), 56_000_011)
 })
 
 test('Day 15 — Solutions', t => {
   const input = $.readInput(import.meta)
 
-  t.is(detect(input, 2_000_000), 5127797)
-  t.is(detect(input, null, 4_000_000), 12518502636475)
+  t.is(detect(input, 2_000_000), 5_127_797)
+  t.is(detect(input, null, 4_000_000), 12_518_502_636_475)
 })

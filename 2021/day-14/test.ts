@@ -28,12 +28,12 @@ test('Day 14 — Sample', t => {
   )
 
   t.is(count(sample, 10), 1588)
-  t.is(count(sample, 40), 2188189693529)
+  t.is(count(sample, 40), 2_188_189_693_529)
 })
 
 test('Day 14 — Solutions', t => {
   const input = $.readInput(import.meta, { delimiter: '\n\n' })
 
   t.is(count(input, 10), 2321)
-  t.is(count(input, 40), 2399822193707)
+  t.is(count(input, 40), 2_399_822_193_707)
 })

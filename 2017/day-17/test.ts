@@ -7,5 +7,5 @@ test('Day 17 — Sample', t => {
 
 test('Day 17 — Solutions', t => {
   t.is(run(394), 926)
-  t.is(run2(394), 10150888)
+  t.is(run2(394), 10_150_888)
 })

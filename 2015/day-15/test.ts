@@ -8,13 +8,13 @@ test('Day 15 — Sample', t => {
   Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3
   `)
 
-  t.is(run(sample), 62842880)
-  t.is(run(sample, 500), 57600000)
+  t.is(run(sample), 62_842_880)
+  t.is(run(sample, 500), 57_600_000)
 })
 
 test('Day 15 — Solutions', t => {
   const input = $.readInput(import.meta)
 
-  t.is(run(input), 21367368)
-  t.is(run(input, 500), 1766400)
+  t.is(run(input), 21_367_368)
+  t.is(run(input, 500), 1_766_400)
 })

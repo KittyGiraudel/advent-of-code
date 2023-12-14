@@ -13,7 +13,7 @@ test('Day 09 — Sample', t => {
   )
   t.is(
     new Intcode('104,1125899906842624,99').run().getOutput(),
-    1125899906842624
+    1_125_899_906_842_624
   )
 })
 
@@ -31,6 +31,6 @@ test('Day 09 — Solutions', t => {
     new Intcode('109,1,203,2,204,2,99').setInput(1337).run().getOutput(),
     1337
   )
-  t.is(new Intcode(input).setInput(1).run().getOutput(), 2171728567)
-  t.is(new Intcode(input).setInput(2).run().getOutput(), 49815)
+  t.is(new Intcode(input).setInput(1).run().getOutput(), 2_171_728_567)
+  t.is(new Intcode(input).setInput(2).run().getOutput(), 49_815)
 })

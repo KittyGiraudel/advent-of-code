@@ -12,5 +12,5 @@ test('Day 06 — Sample', t => {
 test('Day 06 — Solutions', t => {
   const input = $.readInput(import.meta).map(Number)
 
-  t.deepEqual(run(input), [14029, 2765])
+  t.deepEqual(run(input), [14_029, 2765])
 })

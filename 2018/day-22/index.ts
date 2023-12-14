@@ -8,8 +8,8 @@ const getGeologicIndex = (
   depth: number
 ): number => {
   if ((x === 0 && y === 0) || (x === target[0] && y === target[1])) return 0
-  if (y === 0) return x * 16807
-  if (x === 0) return y * 48271
+  if (y === 0) return x * 16_807
+  if (x === 0) return y * 48_271
   return (
     getErosionLevel(x - 1, y, target, depth) *
     getErosionLevel(x, y - 1, target, depth)
@@ -18,7 +18,7 @@ const getGeologicIndex = (
 
 const getErosionLevel = $.memo(
   (x: number, y: number, target: Coords, depth: number) =>
-    (getGeologicIndex(x, y, target, depth) + depth) % 20183
+    (getGeologicIndex(x, y, target, depth) + depth) % 20_183
 )
 
 const getRiskLevel = (x: number, y: number, target: Coords, depth: number) =>

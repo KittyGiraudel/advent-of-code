@@ -30,6 +30,6 @@ test('Day 17 — Sample', t => {
 test('Day 17 — Solutions', t => {
   const [input] = $.readInput(import.meta)
 
-  t.is(findMaxHeight(input), 13203)
+  t.is(findMaxHeight(input), 13_203)
   t.is(findSuccessfulLaunches(input).length, 5644)
 })

@@ -7,6 +7,6 @@ test('Day 03 — Sample', t => {
 })
 
 test('Day 03 — Solutions', t => {
-  t.is(resolve(361527), 326)
-  t.is(resolve2(361527), 363010)
+  t.is(resolve(361_527), 326)
+  t.is(resolve2(361_527), 363_010)
 })

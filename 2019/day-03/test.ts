@@ -25,5 +25,5 @@ test('Day 03 — Solutions', t => {
   const lines = $.readInput(import.meta) as [string, string]
 
   t.is(findClosestIntersection(lines), 806)
-  t.is(findFastestIntersection(lines), 66076)
+  t.is(findFastestIntersection(lines), 66_076)
 })

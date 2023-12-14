@@ -36,13 +36,13 @@ test('Day 11 — Sample', t => {
     { delimiter: '\n\n' }
   )
 
-  t.is(play(sample), 10605)
-  t.is(play(sample, true), 2713310158)
+  t.is(play(sample), 106_05)
+  t.is(play(sample, true), 2_713_310_158)
 })
 
 test('Day 11 — Solutions', t => {
   const input = $.readInput(import.meta, { delimiter: '\n\n' })
 
-  t.is(play(input), 58056)
-  t.is(play(input, true), 15048718170)
+  t.is(play(input), 58_056)
+  t.is(play(input, true), 15_048_718_170)
 })

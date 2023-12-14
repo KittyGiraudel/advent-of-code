@@ -20,7 +20,7 @@ test('Day 05 — Solutions', t => {
 
   t.is(
     (new Intcode(numbers).setInput(1).run().getOutput() as number[]).pop(),
-    13933662
+    13_933_662
   )
-  t.is(new Intcode(numbers).setInput(5).run().getOutput(), 2369720)
+  t.is(new Intcode(numbers).setInput(5).run().getOutput(), 2_369_720)
 })

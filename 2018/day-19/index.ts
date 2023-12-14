@@ -26,7 +26,7 @@ type Opcode = keyof typeof OPCODES
 // solution. Ultimately, I followed this explanation and adapted the final
 // Python code to get the result. It goes above my head to be honest.
 // https://nbviewer.org/github/mjpieters/adventofcode/blob/master/2018/Day%2019.ipynb
-// console.log(sumFactors(10551387))
+// console.log(sumFactors(10_551_387))
 const sumFactors = (n: number) => {
   const result = []
 

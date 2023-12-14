@@ -20,13 +20,13 @@ test('Day 07 — Sample', t => {
   t.is(run(sample).g, 114)
   t.is(run(sample).x, 123)
   t.is(run(sample).y, 456)
-  t.is(run(sample).h, 65412)
-  t.is(run(sample).i, 65079)
+  t.is(run(sample).h, 65_412)
+  t.is(run(sample).i, 65_079)
 })
 
 test('Day 07 — Solutions', t => {
   const input = $.readInput(import.meta)
 
-  t.is(run(input).a, 16076)
-  t.is(run(input, { b: 16076 }).a, 2797)
+  t.is(run(input).a, 16_076)
+  t.is(run(input, { b: 16_076 }).a, 2797)
 })

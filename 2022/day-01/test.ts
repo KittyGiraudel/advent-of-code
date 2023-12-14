@@ -23,13 +23,13 @@ test('Day 01 — Sample', t => {
     { delimiter: '\n\n' }
   )
 
-  t.is(findHighestGroup(sample), 24000)
-  t.is(findHighestGroups(sample, 3), 45000)
+  t.is(findHighestGroup(sample), 24_000)
+  t.is(findHighestGroups(sample, 3), 45_000)
 })
 
 test('Day 01 — Solutions', t => {
   const input = $.readInput(import.meta, { delimiter: '\n\n' })
 
-  t.is(findHighestGroup(input), 70369)
-  t.is(findHighestGroups(input, 3), 203002)
+  t.is(findHighestGroup(input), 70_369)
+  t.is(findHighestGroups(input, 3), 203_002)
 })

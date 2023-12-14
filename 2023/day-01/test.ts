@@ -26,6 +26,6 @@ test('Day 01 — Sample', t => {
 
 test('Day 01 — Solutions', t => {
   const input = $.readInput(import.meta)
-  t.is(run(input), 54644)
-  t.is(run(input, true), 53348)
+  t.is(run(input), 54_644)
+  t.is(run(input, true), 53_348)
 })

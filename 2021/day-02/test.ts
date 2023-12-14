@@ -23,8 +23,8 @@ test('Day 02 — Solutions', t => {
   const input = $.readInput(import.meta)
 
   const data = proceed(input)
-  t.is(data.depth * data.position, 1488669)
+  t.is(data.depth * data.position, 1_488_669)
 
   const dataWithAim = proceedWithAim(input)
-  t.is(dataWithAim.depth * dataWithAim.position, 1176514794)
+  t.is(dataWithAim.depth * dataWithAim.position, 1_176_514_794)
 })

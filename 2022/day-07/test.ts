@@ -30,14 +30,14 @@ test('Day 07 — Sample', t => {
   `)
   const sampleDrive = parseOutput(sample)
 
-  t.is(getSmallDirsSize(sampleDrive), 95437)
-  t.is(findFreeableSpace(sampleDrive), 24933642)
+  t.is(getSmallDirsSize(sampleDrive), 95_437)
+  t.is(findFreeableSpace(sampleDrive), 24_933_642)
 })
 
 test('Day 07 — Solutions', t => {
   const input = $.readInput(import.meta)
   const drive = parseOutput(input)
 
-  t.is(getSmallDirsSize(drive), 1513699)
-  t.is(findFreeableSpace(drive), 7991939)
+  t.is(getSmallDirsSize(drive), 1_513_699)
+  t.is(findFreeableSpace(drive), 7_991_939)
 })

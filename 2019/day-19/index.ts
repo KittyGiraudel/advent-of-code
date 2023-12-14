@@ -41,5 +41,5 @@ const test = (input: string) => {
     }
   }
 
-  return { valid, value: xOffset * 10000 + yOffset }
+  return { valid, value: xOffset * 10_000 + yOffset }
 }

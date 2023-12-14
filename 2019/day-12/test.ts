@@ -19,12 +19,12 @@ test('Day 12 — Sample', t => {
 
   t.is(steps(sampleA, 100), 1940)
   t.is(findRepeat(sampleB), 2772)
-  t.is(findRepeat(sampleA), 4686774924)
+  t.is(findRepeat(sampleA), 4_686_774_924)
 })
 
 test('Day 12 — Solutions', t => {
   const input = $.readInput(import.meta)
 
   t.is(steps(input, 1000), 6849)
-  t.is(findRepeat(input), 356658899375688)
+  t.is(findRepeat(input), 356_658_899_375_688)
 })

@@ -65,13 +65,13 @@ test('Day 15 — Sample', t => {
   #######
   `)
 
-  t.is(battle(sampleA), 27730)
-  t.is(battle(sampleD), 28944)
-  t.is(battle(sampleE), 18740)
-  t.is(battle(sampleB), 36334)
-  t.is(battle(sampleC), 39514)
+  t.is(battle(sampleA), 27_730)
+  t.is(battle(sampleD), 28_944)
+  t.is(battle(sampleE), 18_740)
+  t.is(battle(sampleB), 36_334)
+  t.is(battle(sampleC), 39_514)
   t.is(cheat(sampleA), 4988)
-  t.is(cheat(sampleC), 31284)
+  t.is(cheat(sampleC), 31_284)
   t.is(cheat(sampleF), 3478)
   t.is(cheat(sampleD), 6474)
   t.is(cheat(sampleE), 1140)
@@ -80,6 +80,6 @@ test('Day 15 — Sample', t => {
 test('Day 15 — Solutions', t => {
   const input = $.readInput(import.meta)
 
-  t.is(battle(input), 181522)
-  t.is(cheat(input), 68324)
+  t.is(battle(input), 181_522)
+  t.is(cheat(input), 68_324)
 })

@@ -83,12 +83,12 @@ test('Day 08 — Sample', t => {
     ),
     4315
   )
-  t.is(total(sample), 61229)
+  t.is(total(sample), 61_229)
 })
 
 test('Day 08 — Solutions', t => {
   const input = $.readInput(import.meta)
 
   t.is(count(input), 554)
-  t.is(total(input), 990964)
+  t.is(total(input), 990_964)
 })

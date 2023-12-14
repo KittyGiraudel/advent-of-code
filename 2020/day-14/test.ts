@@ -28,6 +28,6 @@ test('Day 14 — Sample', t => {
 test('Day 14 — Solutions', t => {
   const input = $.readInput(import.meta)
 
-  t.is(executeProgram(input, processLoose), 15172047086292)
-  t.is(executeProgram(input, processStrict), 4197941339968)
+  t.is(executeProgram(input, processLoose), 15_172_047_086_292)
+  t.is(executeProgram(input, processStrict), 4_197_941_339_968)
 })

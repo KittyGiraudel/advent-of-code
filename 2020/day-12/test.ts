@@ -11,5 +11,5 @@ test('Day 12 — Solutions', t => {
   const input = $.readInput(import.meta)
 
   t.is(navigateLoose(input), 1631)
-  t.is(navigateStrict(input), 58606)
+  t.is(navigateStrict(input), 58_606)
 })

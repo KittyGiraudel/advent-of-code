@@ -9,5 +9,5 @@ test('Day 13 — Solutions', t => {
   const { score, board } = draw(input)
 
   t.is(tiles.filter(t => t === 2).length, 280)
-  t.is(score, 13298)
+  t.is(score, 13_298)
 })

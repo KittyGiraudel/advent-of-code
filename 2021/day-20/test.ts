@@ -26,5 +26,5 @@ test('Day 20 — Solutions', t => {
   const image50 = processImage(input[0], input[1], 50)
 
   t.is($.countInString(image2, '#'), 5301)
-  t.is($.countInString(image50, '#'), 19492)
+  t.is($.countInString(image50, '#'), 19_492)
 })

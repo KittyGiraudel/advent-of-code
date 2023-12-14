@@ -116,11 +116,11 @@ test('Day 20 — Sample', t => {
     { delimiter: '\n\n' }
   )
 
-  t.deepEqual(run(example), [20899048083289, 273])
+  t.deepEqual(run(example), [20_899_048_083_289, 273])
 })
 
 test('Day 20 — Solutions', t => {
   const input = $.readInput(import.meta, { delimiter: '\n\n' })
 
-  t.deepEqual(run(input), [8272903687921, 2304])
+  t.deepEqual(run(input), [8_272_903_687_921, 2304])
 })

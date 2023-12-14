@@ -5,5 +5,5 @@ import { inspect } from './'
 test('Day 25 — Solutions', t => {
   const [input] = $.readInput(import.meta)
 
-  t.is(inspect(input), 84410376)
+  t.is(inspect(input), 84_410_376)
 })

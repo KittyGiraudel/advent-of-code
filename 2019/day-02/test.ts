@@ -14,7 +14,7 @@ test('Day 02 — Solutions', t => {
 
   t.is(
     new Intcode(numbers).updateMemory(1, 12).updateMemory(2, 2).run(),
-    3790689
+    3_790_689
   )
   t.is(findInitParams(numbers), 6533)
 })

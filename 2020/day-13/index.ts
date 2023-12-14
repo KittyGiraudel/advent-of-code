@@ -54,9 +54,9 @@ const findTimestamp = (
 // 3. findTimestamp([7, 13, 'x'], 77, 91) => 77
 // 4. findTimestamp([7, 13, 'x', 'x'], 77, 91) => 77
 // 5. findTimestamp([7, 13, 'x', 'x', 59], 77, 91) => 350
-// 6. findTimestamp([7, 13, 'x', 'x', 59], 350, 5369) => 70147
-// 7. findTimestamp([7, 13, 'x', 'x', 59, 'x'], 350, 5369) => 70147
-// 7. findTimestamp([7, 13, 'x', 'x', 59, 'x', 31], 350, 5369) => 1068781
+// 6. findTimestamp([7, 13, 'x', 'x', 59], 350, 5369) => 70_147
+// 7. findTimestamp([7, 13, 'x', 'x', 59, 'x'], 350, 5369) => 70_147
+// 7. findTimestamp([7, 13, 'x', 'x', 59, 'x', 31], 350, 5369) => 1_068_781
 // @param input - Bus lines
 export const getEarliestTimestamp = ([, input]: string[]) =>
   input

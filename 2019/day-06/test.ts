@@ -40,6 +40,6 @@ test('Day 06 — Sample', t => {
 test('Day 06 — Solutions', t => {
   const input = $.readInput(import.meta)
 
-  t.is(countOrbits(createGraph(input)), 292387)
+  t.is(countOrbits(createGraph(input)), 292_387)
   t.is(countTransfers(createGraph(input)), 433)
 })

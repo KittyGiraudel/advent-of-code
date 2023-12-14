@@ -19,6 +19,6 @@ test('Day 23 — Sample', t => {
 test('Day 23 — Solutions', t => {
   const input = $.readInput(import.meta)
 
-  t.is(run(input, 7), 11739)
-  // t.is(run(input, 12), 479008299) // Takes several minutes…
+  t.is(run(input, 7), 11_739)
+  // t.is(run(input, 12), 479_008_299) // Takes several minutes…
 })

@@ -13,5 +13,5 @@ test('Day 16 — Solutions', t => {
   const [input] = $.readInput(import.meta)
 
   t.is(cycle(input, 100).slice(0, 8), '29956495')
-  t.is(cycle2(input.repeat(10000), 100), '73556504')
+  t.is(cycle2(input.repeat(10_000), 100), '73556504')
 })

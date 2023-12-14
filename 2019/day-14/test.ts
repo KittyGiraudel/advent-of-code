@@ -51,15 +51,15 @@ test('Day 14 — Sample', t => {
 
   t.is(getFuelCost(sampleA), 31)
   t.is(getFuelCost(sampleB), 165)
-  t.is(getFuelCost(sampleC), 13312)
-  t.is(getFuelCost(sampleD), 180697)
-  t.is(getFuelAmount(sampleC), 82892753)
-  t.is(getFuelAmount(sampleD), 5586022)
+  t.is(getFuelCost(sampleC), 13_312)
+  t.is(getFuelCost(sampleD), 180_697)
+  t.is(getFuelAmount(sampleC), 82_892_753)
+  t.is(getFuelAmount(sampleD), 5_586_022)
 })
 
 test('Day 14 — Solutions', t => {
   const input = $.readInput(import.meta)
 
-  t.is(getFuelCost(input), 1920219)
-  t.is(getFuelAmount(input), 1330066)
+  t.is(getFuelCost(input), 1_920_219)
+  t.is(getFuelAmount(input), 1_330_066)
 })

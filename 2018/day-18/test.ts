@@ -21,7 +21,7 @@ test('Day 18 — Sample', t => {
 test('Day 18 — Solutions', t => {
   const input = $.readInput(import.meta)
 
-  t.is(run(input, 10), 394420)
+  t.is(run(input, 10), 394_420)
 
   // Part 2 — which requires iterating 1 billion times — was initially solved
   // manually, then reverse-engineered to come up with the automated solution.
@@ -44,5 +44,5 @@ test('Day 18 — Solutions', t => {
   // It turns out that a) the sequence doesn’t start on line 522 but 518 and b)
   // the sequence is not 27 items long but 28, so it’s kind of a miracle I found
   // the solution manually. ^^'
-  t.is(run(input, 1_000_000_000), 174420)
+  t.is(run(input, 1_000_000_000), 174_420)
 })

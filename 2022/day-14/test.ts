@@ -16,5 +16,5 @@ test('Day 14 — Solutions', t => {
   const input = $.readInput(import.meta)
 
   t.is(countSandUnits(input), 655)
-  t.is(countSandUnits(input, true), 26484)
+  t.is(countSandUnits(input, true), 26_484)
 })

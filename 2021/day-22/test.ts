@@ -99,13 +99,13 @@ test('Day 22 — Sample', t => {
   `)
 
   t.is(reboot(sampleA, 50), 39)
-  t.is(reboot(sampleB, 50), 590784)
-  t.is(reboot(sampleC, Infinity), 2758514936282235)
+  t.is(reboot(sampleB, 50), 590_784)
+  t.is(reboot(sampleC, Infinity), 2_758_514_936_282_235)
 })
 
 test('Day 22 — Solutions', t => {
   const input = $.readInput(import.meta)
 
-  t.is(reboot(input, 50), 606484)
-  t.is(reboot(input, Infinity), 1162571910364852)
+  t.is(reboot(input, 50), 606_484)
+  t.is(reboot(input, Infinity), 1_162_571_910_364_852)
 })

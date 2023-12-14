@@ -40,6 +40,6 @@ test('Day 22 — Solutions', t => {
     trim: false,
   })
 
-  t.is(maze(input), 191010)
-  t.is(maze(input, true), 55364)
+  t.is(maze(input), 191_010)
+  t.is(maze(input, true), 55_364)
 })

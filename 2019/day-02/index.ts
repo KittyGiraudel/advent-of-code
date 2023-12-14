@@ -62,7 +62,7 @@ export const findInitParams = (input: string | number[]) => {
     for (let v = 0; v < n; v++) {
       if (
         computer.reset().updateMemory(1, n).updateMemory(2, v).run() ===
-        19690720
+        19_690_720
       )
         return n * 100 + v
     }

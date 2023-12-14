@@ -7,6 +7,6 @@ test('Day 22 — Sample', t => {
 })
 
 test('Day 22 — Solutions', t => {
-  t.is(getRisk(10647, [7, 770]), 6208)
-  t.is(getDuration(10647, [7, 770]), 1039)
+  t.is(getRisk(10_647, [7, 770]), 6208)
+  t.is(getDuration(10_647, [7, 770]), 1039)
 })

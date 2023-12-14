@@ -6,5 +6,5 @@ test('Day 20 — Sample', t => {
 })
 
 test('Day 20 — Solutions', t => {
-  t.deepEqual(run(29_000_000), [665280, 705600])
+  t.deepEqual(run(29_000_000), [665_280, 705_600])
 })

@@ -41,7 +41,7 @@ export const run = (input: string[], registers: Registers = {}) => {
     )!
 
     // This is how to keep bitwise NOT within the 0–65535 range.
-    registers[next] = eval(prepare(graph.get(next)!.raw)) & 65535
+    registers[next] = eval(prepare(graph.get(next)!.raw)) & 65_535
     graph.delete(next)
   }
 

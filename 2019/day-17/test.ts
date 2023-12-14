@@ -22,5 +22,5 @@ test('Day 17 — Solutions', t => {
   const [input] = $.readInput(import.meta)
 
   t.is(calibrate(getGrid(input)), 4864)
-  t.is(scaffold(input), 840248)
+  t.is(scaffold(input), 840_248)
 })

@@ -36,6 +36,6 @@ test('Day 04 — Solutions', t => {
   const [input] = $.readInput(import.meta, { delimiter: '' })
   const bingos = getBingos(input)
 
-  t.is(bingos[0], 45031)
+  t.is(bingos[0], 45_031)
   t.is(bingos.at(-1), 2568)
 })

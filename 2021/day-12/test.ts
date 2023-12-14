@@ -58,5 +58,5 @@ test('Day 12 — Solutions', t => {
   const input = $.readInput(import.meta)
 
   t.is(findPaths(input).length, 4775)
-  t.is(findPaths(input, true).length, 152480)
+  t.is(findPaths(input, true).length, 152_480)
 })

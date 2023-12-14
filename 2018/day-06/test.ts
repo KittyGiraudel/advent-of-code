@@ -19,8 +19,8 @@ test('Day 06 — Sample', t => {
 test('Day 06 — Solutions', t => {
   const input = $.readInput(import.meta)
 
-  t.deepEqual(mapOut(input, 10000), {
+  t.deepEqual(mapOut(input, 10_000), {
     largestRegionSize: 5941,
-    safeRegionSize: 40244,
+    safeRegionSize: 40_244,
   })
 })

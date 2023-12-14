@@ -5,7 +5,7 @@ const gen = function* (init: number, factor: number, modulo: number = 1) {
 
   while (true) {
     curr *= factor
-    curr %= 2147483647
+    curr %= 2_147_483_647
     if (curr % modulo === 0) yield curr
   }
 }
@@ -19,8 +19,8 @@ export const run = (
   modA?: number,
   modB?: number
 ) => {
-  const genA = gen(a, 16807, modA)
-  const genB = gen(b, 48271, modB)
+  const genA = gen(a, 16_807, modA)
+  const genB = gen(b, 48_271, modB)
 
   let count = 0
 

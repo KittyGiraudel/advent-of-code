@@ -10,6 +10,6 @@ test('Day 01 — Sample', t => {
 test('Day 01 — Solutions', t => {
   const numbers = $.readInput(import.meta).map(Number)
 
-  t.is($.product(findMatches(numbers, 2)), 866436)
-  t.is($.product(findMatches(numbers, 3)), 276650720)
+  t.is($.product(findMatches(numbers, 2)), 866_436)
+  t.is($.product(findMatches(numbers, 3)), 276_650_720)
 })

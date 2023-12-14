@@ -15,6 +15,6 @@ test('Day 15 — Solutions', t => {
   const input = $.readInput(import.meta)
   const extraDisk = 'Disc #7 has 11 positions; at time=0, it is at position 0.'
 
-  t.is(run(input), 121834)
-  t.is(run(input.concat(extraDisk)), 3208099)
+  t.is(run(input), 121_834)
+  t.is(run(input.concat(extraDisk)), 3_208_099)
 })

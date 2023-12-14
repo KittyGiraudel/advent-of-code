@@ -5,5 +5,5 @@ import { find } from './'
 test('Day 04 — Solutions', t => {
   const input = $.readInput(import.meta)
 
-  t.deepEqual(find(input), [4716, 117061])
+  t.deepEqual(find(input), [4716, 117_061])
 })

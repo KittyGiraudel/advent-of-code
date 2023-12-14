@@ -16,5 +16,5 @@ test('Day 04 — Sample', t => {
 test('Day 04 — Solutions', t => {
   const input = $.readInput(import.meta)
 
-  t.deepEqual(run(input), [409147, 991])
+  t.deepEqual(run(input), [409_147, 991])
 })

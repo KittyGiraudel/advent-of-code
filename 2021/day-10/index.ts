@@ -1,5 +1,5 @@
 const OPENERS_FROM_CLOSERS = { ')': '(', ']': '[', '}': '{', '>': '<' }
-const CORRUPTION_SCORE_MAP = { ')': 3, ']': 57, '}': 1197, '>': 25137 }
+const CORRUPTION_SCORE_MAP = { ')': 3, ']': 57, '}': 1197, '>': 25_137 }
 const COMPLETION_SCORE_MAP = { '(': 1, '[': 2, '{': 3, '<': 4 }
 
 type OpenersKey = keyof typeof OPENERS_FROM_CLOSERS

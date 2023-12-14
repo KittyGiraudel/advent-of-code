@@ -39,10 +39,10 @@ test('Day 03 — Solutions', t => {
 
   const { gamma, epsilon } = getEpsilonAndGamma(input)
   const power = parseInt(gamma, 2) * parseInt(epsilon, 2)
-  t.is(power, 4103154)
+  t.is(power, 4_103_154)
 
   const oxygen = getOxygen(input)
   const CO2 = getCO2(input)
   const life = parseInt(oxygen, 2) * parseInt(CO2, 2)
-  t.is(life, 4245351)
+  t.is(life, 4_245_351)
 })

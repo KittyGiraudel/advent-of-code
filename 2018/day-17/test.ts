@@ -23,6 +23,6 @@ test('Day 16 — Solutions', t => {
   const input = $.readInput(import.meta)
   const counts = scan(input)
 
-  t.is(counts[0] + counts[1], 41027)
-  t.is(counts[0], 34214)
+  t.is(counts[0] + counts[1], 41_027)
+  t.is(counts[0], 34_214)
 })
