@@ -13,12 +13,13 @@ test('Day 12 — Sample', t => {
   6 <-> 4, 5
   `)
 
-  t.is(run(sample)[0], 6)
-  t.is(run(sample)[1], 2)
+  t.is(run(sample), 6)
+  t.is(run(sample, true), 2)
 })
 
 test('Day 12 — Solutions', t => {
   const input = $.readInput(import.meta)
 
-  t.deepEqual(run(input), [141, 171])
+  t.is(run(input), 141)
+  t.is(run(input, true), 171)
 })

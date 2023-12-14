@@ -56,10 +56,8 @@ export const run = (
     deers.forEach(deer => deer.tick())
     deers.sort((a, b) => b.distance - a.distance)
 
-    let max = deers[0].distance
-
     for (let i = 0; i < deers.length; i++) {
-      if (deers[i].distance < max) break
+      if (deers[i].distance < deers[0].distance) break
       else deers[i].score++
     }
   }

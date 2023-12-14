@@ -201,7 +201,7 @@ const countWays = $.memo((line: string, groups: number[]): number => {
   )
 })
 
-export const run = (input: string[], advanced?: boolean) => {
+export const run = (input: string[], advanced: boolean = false) => {
   return $.sum(
     input.map(line => {
       let [input, pattern] = line.split(' ')

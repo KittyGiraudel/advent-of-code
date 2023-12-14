@@ -1,8 +1,8 @@
 import $ from '../../helpers'
-import { Coords, Point, Grid, CoordsAndPoint } from '../../types'
+import { Coords, Point, Grid } from '../../types'
 import { Computer } from '../day-10'
 
-export const run = (key: string): [number, number] => {
+export const run = (key: string, advanced: boolean = false) => {
   let grid: Grid<number> = []
 
   for (let i = 0; i < 128; i++) {
@@ -38,9 +38,7 @@ export const run = (key: string): [number, number] => {
     }
   })
 
-  const chars = grid.flat().join('')
-  const active = $.countInString(chars, '1')
-  const groups = new Set(Object.values(visited))
-
-  return [active, groups.size]
+  return advanced
+    ? new Set(Object.values(visited)).size
+    : $.countInString(grid.join(''), '1')
 }

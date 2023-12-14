@@ -24,7 +24,10 @@ const process = (
   return count
 }
 
-export const run = ([directions, , ...lines]: string[], advanced?: boolean) => {
+export const run = (
+  [directions, , ...lines]: string[],
+  advanced: boolean = false
+) => {
   const map = createMap(lines)
 
   if (!advanced) {

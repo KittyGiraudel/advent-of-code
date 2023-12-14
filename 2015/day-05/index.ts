@@ -1,6 +1,8 @@
+import $ from '../../helpers'
+
 const isValidLoose = (line: string) => {
   if (['ab', 'cd', 'pq', 'xy'].some(s => line.includes(s))) return false
-  if ((line.match(/[aeiou]/g)?.length ?? 0) < 3) return false
+  if ($.match(line, /[aeiou]/g).length < 3) return false
   if (!line.match(/(\w)\1/)) return false
   return true
 }

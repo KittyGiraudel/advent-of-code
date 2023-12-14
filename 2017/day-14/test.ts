@@ -2,9 +2,11 @@ import test from 'ava'
 import { run } from './'
 
 test('Day 14 — Sample', t => {
-  t.deepEqual(run('flqrgnkx'), [8108, 1242])
+  t.is(run('flqrgnkx'), 8108)
+  t.is(run('flqrgnkx', true), 1242)
 })
 
 test('Day 14 — Solutions', t => {
-  t.deepEqual(run('vbqugkhl'), [8148, 1180])
+  t.is(run('vbqugkhl'), 8148)
+  t.is(run('vbqugkhl', true), 1180)
 })

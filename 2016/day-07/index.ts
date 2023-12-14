@@ -1,14 +1,16 @@
-import $ from '../../helpers'
+const BRACKETS_RE = /\[([^\]]+)\]/g
+const ABBA_RE = /(\w)(?!\1)(\w)\2\1/g
+const ABA_RE = /(\w)(?!\1)(\w)\1/g
 
 const getBracketContent = (line: string) =>
-  line.match(/\[([^\]]+)\]/g)?.join(' ') ?? ''
+  line.match(BRACKETS_RE)?.join(' ') ?? ''
 
-const getBaseContent = (line: string) => line.replace(/\[[^\]]+\]/g, ' ')
+const getBaseContent = (line: string) => line.replace(BRACKETS_RE, ' ')
 
-const getABBA = (line: string) => line.match(/(\w)(?!\1)(\w)\2\1/g)
+const getABBA = (line: string) => line.match(ABBA_RE)
 
 const getABA = (string: string) => {
-  const ABA = /(\w)(?!\1)(\w)\1/g
+  const ABA = new RegExp(ABA_RE)
   const result: string[] = []
   let match = null
 

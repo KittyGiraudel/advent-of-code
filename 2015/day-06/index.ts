@@ -1,4 +1,5 @@
 import $ from '../../helpers'
+import { Coords } from '../../types'
 
 export const run = (input: string[], advanced: boolean = false) => {
   const grid = $.grid.init(1000, 1000, 0)
@@ -8,12 +9,14 @@ export const run = (input: string[], advanced: boolean = false) => {
 
     for (let ri = yMin; ri <= yMax; ri++) {
       for (let ci = xMin; ci <= xMax; ci++) {
+        const coords: Coords = [ri, ci]
+        const value = $.grid.at(grid, coords)
         if (line.startsWith('toggle'))
-          grid[ri][ci] = advanced ? grid[ri][ci] + 2 : +!grid[ri][ci]
+          $.grid.set(grid, coords, advanced ? value + 2 : +!value)
         if (line.startsWith('turn on'))
-          grid[ri][ci] = advanced ? grid[ri][ci] + 1 : 1
+          $.grid.set(grid, coords, advanced ? value + 1 : 1)
         if (line.startsWith('turn off'))
-          grid[ri][ci] = advanced ? Math.max(grid[ri][ci] - 1, 0) : 0
+          $.grid.set(grid, coords, advanced ? Math.max(value - 1, 0) : 0)
       }
     }
   })

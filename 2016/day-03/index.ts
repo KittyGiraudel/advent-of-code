@@ -1,17 +1,10 @@
 import $ from '../../helpers'
+import { TriCoords } from '../../types'
 
-type Triplet = [number, number, number]
+const isValid = ([a, b, c]: number[]) => a + b > c && a + c > b && b + c > a
 
-const isValid = ([a, b, c]: Triplet) => a + b > c && a + c > b && b + c > a
-
-export const run = (input: string[]): [number, number] => {
-  const lines = input.map(line => $.numbers(line) as Triplet)
-  const part1 = lines.filter(isValid).length
-  const part2 = (
-    $.chunk(lines, 3)
-      .map(chunk => $.zip(...chunk))
-      .flat() as Triplet[]
+export const run = (input: string[], advanced: boolean = false) =>
+  (advanced
+    ? $.chunk(input.map($.numbers), 3).flatMap($.zip)
+    : input.map($.numbers)
   ).filter(isValid).length
-
-  return [part1, part2]
-}

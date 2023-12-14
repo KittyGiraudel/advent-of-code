@@ -43,10 +43,7 @@ const getPaths = (
 export const run = (input: string[]) =>
   input
     .filter(port => port.startsWith('0/'))
-    .map(start => {
-      const ports = discard(input, start)
-      const edge = +(start.split('/').pop() || 0)
-
-      return getPaths(ports, edge)
-    })
+    .map(start =>
+      getPaths(discard(input, start), +(start.split('/').pop() || 0))
+    )
     .flat()

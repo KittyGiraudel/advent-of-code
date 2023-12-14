@@ -1,6 +1,7 @@
 type Graph = Map<string, { deps: RegExpMatchArray | null; raw: string }>
 type Registers = Record<string, number>
 
+const STR_RE = /[a-z]+/g
 const OPERATORS = {
   AND: '&',
   OR: '|',
@@ -18,7 +19,7 @@ const prepare = (string: string) => {
   // does not work because one of the keys is `do`, which is a reserved word in
   // JavaScript.
   // https://kittygiraudel.com/2022/01/21/exploiting-javascript-quirks-for-fun-and-profit/
-  return string.replace(/[a-z]+/g, a => 'registers.' + a)
+  return string.replace(STR_RE, a => 'registers.' + a)
 }
 
 export const run = (input: string[], registers: Registers = {}) => {
@@ -28,7 +29,7 @@ export const run = (input: string[], registers: Registers = {}) => {
     const [left, right] = line.split(' -> ')
 
     if (isNaN(+left)) {
-      graph.set(right, { deps: left.match(/[a-z]+/g), raw: left })
+      graph.set(right, { deps: left.match(STR_RE), raw: left })
     } else if (!(right in registers)) {
       registers[right] = +left
     }

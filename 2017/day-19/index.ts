@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, CoordsAndPoint, Grid, Point } from '../../types'
+import { Coords, Point } from '../../types'
 
 const VECTORS: Coords[] = [
   [-1, 0],
@@ -26,8 +26,7 @@ export const run = (input: string[]): [string, number] => {
       const index = $.bordering(position, 'BOTH')
         // … by finding the neighboring track that’s not yet visited …
         .findIndex(
-          ({ coords, point }) =>
-            !visited.includes(point) && Boolean(read(coords))
+          ({ coords, point }) => !visited.includes(point) && read(coords)
         )
       vector = VECTORS[index]
     }

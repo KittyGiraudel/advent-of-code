@@ -1,14 +1,14 @@
 import $ from '../../helpers'
 import { Coords, Point } from '../../types'
 
-export const run = (steps: string[]): [number, number?] => {
+export const run = (steps: string[], advanced: boolean = false) => {
   let map: Set<Point> = new Set()
   let position: Coords = [0, 0]
   let direction: Coords | undefined = $.turn.DIRECTIONS[0]
   let location: Coords | null = null
 
   steps.forEach(step => {
-    const turn = step.slice(0, 1)
+    const [turn] = step
     let length = +step.slice(1)
     if (turn === 'L') direction = direction ? $.turn.left(direction) : undefined
     if (turn === 'R')
@@ -24,8 +24,6 @@ export const run = (steps: string[]): [number, number?] => {
     }
   })
 
-  return [
-    $.manhattan(position, [0, 0]),
-    location ? $.manhattan(location, [0, 0]) : undefined,
-  ]
+  if (advanced) return $.manhattan(location!, [0, 0])
+  return $.manhattan(position, [0, 0])
 }

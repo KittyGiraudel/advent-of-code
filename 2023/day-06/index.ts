@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 
-export const run = (input: string[], advanced?: boolean) => {
+export const run = (input: string[], advanced: boolean = false) => {
   if (advanced) {
     const time = +$.numbers(input[0]).join('')
     const distance = +$.numbers(input[1]).join('')
@@ -42,13 +42,11 @@ export const run = (input: string[], advanced?: boolean) => {
     */
   }
 
-  const possibilities = $.zip(...input.map($.numbers)).map(
-    ([time, distance]) => {
-      let count = 0
-      for (let i = 0; i < time; i++) if ((time - i) * i > distance) count++
-      return count
-    }
-  )
+  const possibilities = $.zip(input.map($.numbers)).map(([time, distance]) => {
+    let count = 0
+    for (let i = 0; i < time; i++) if ((time - i) * i > distance) count++
+    return count
+  })
 
   return $.product(possibilities)
 }

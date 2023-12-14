@@ -1,7 +1,7 @@
 import $ from '../../helpers'
 
 const SEQUENCES = $.array(24).map((_, i) =>
-  [i + 97, i + 98, i + 99].map(c => String.fromCharCode(c)).join('')
+  [i + 97, i + 98, i + 99].map(char => String.fromCharCode(char)).join('')
 )
 
 const SEQUENCES_RE = new RegExp('(' + SEQUENCES.join('|') + ')')
@@ -15,11 +15,7 @@ export const isValid = (curr: string) =>
 
 const next = (curr: string): string => {
   const array = Array.from(curr)
-  const last = array.pop()
-
-  if (!last) {
-    throw new Error('Cannot find last item in array')
-  }
+  const last = array.pop()!
 
   // If the last letter is a ‘z’, move to the previous character and reset the
   // last one to a ‘a’. Otherwise, increment the last character.

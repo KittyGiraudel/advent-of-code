@@ -25,7 +25,7 @@ const matchAll = (input: string) =>
       DIGITS.includes(value) ? String(DIGITS.indexOf(value) + 1) : value
     )
 
-export const run = (input: string[], advanced?: boolean) =>
+export const run = (input: string[], advanced: boolean = false) =>
   $.sum(
     input
       .map(line => (advanced ? matchAll(line) : $.match(line, /(\d)/g)))

@@ -27,16 +27,6 @@ const SE = $.compose(S, E)
 const SW = $.compose(S, W)
 const NW = $.compose(N, W)
 
-type Directions =
-  | typeof N
-  | typeof NE
-  | typeof E
-  | typeof SE
-  | typeof S
-  | typeof SW
-  | typeof W
-  | typeof NW
-
 const Dim2Handlers = [N, NE, E, SE, S, SW, W, NW]
 const Dim3Handlers = [
   ...Dim2Handlers,

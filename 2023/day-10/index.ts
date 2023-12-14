@@ -94,7 +94,7 @@ const floodGrid = (grid: Grid<string>, start: Coords = [0, 0]) =>
 const scaleUp = (coords: Coords) =>
   [coords[0] * 3 + 1, coords[1] * 3 + 1] as Coords
 
-export const run = (input: string[], advanced?: boolean) => {
+export const run = (input: string[], advanced: boolean = false) => {
   const grid = $.grid.from<string>(input)
   const pipe = mapOutLoopingPipe(grid)
   const pipeLength = Object.keys(pipe).length

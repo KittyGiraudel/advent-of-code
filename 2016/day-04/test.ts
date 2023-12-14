@@ -10,11 +10,12 @@ test('Day 04 — Sample', t => {
   totally-real-room-200[decoy]
   `)
 
-  t.is(run(sample)[0], 1514)
+  t.is(run(sample), 1514)
 })
 
 test('Day 04 — Solutions', t => {
   const input = $.readInput(import.meta)
 
-  t.deepEqual(run(input), [409_147, 991])
+  t.is(run(input), 409_147)
+  t.is(run(input, true), 991)
 })

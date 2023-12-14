@@ -42,7 +42,7 @@ const walk = (steps: string[]) =>
 const getPathLength = (start: Coords, end: Coords) =>
   $.pathfinding.path(createGraph(start, end), start, end).length
 
-export const run = (instructions: string[]): [number, number] => {
+export const run = (instructions: string[], advanced: boolean = false) => {
   const { position: end, visited } = walk(instructions)
   const start: Coords = [0, 0]
   const furthest = Array.from(visited)
@@ -50,10 +50,5 @@ export const run = (instructions: string[]): [number, number] => {
     .sort((a, b) => distance(a, start) - distance(b, start))
     .pop()!
 
-  return [
-    // Find the minimum amount of steps to reach the destination.
-    getPathLength(start, end),
-    // Find the maximum amount of steps ever reached.
-    getPathLength(start, furthest),
-  ]
+  return advanced ? getPathLength(start, furthest) : getPathLength(start, end)
 }

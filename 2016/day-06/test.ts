@@ -22,11 +22,13 @@ test('Day 06 — Sample', t => {
   enarar
   `)
 
-  t.deepEqual(run(sample), ['advent', 'easter'])
+  t.is(run(sample), 'advent')
+  t.is(run(sample, true), 'easter')
 })
 
 test('Day 06 — Solutions', t => {
   const input = $.readInput(import.meta)
 
-  t.deepEqual(run(input), ['myregdnr', 'tzstqsua'])
+  t.is(run(input), 'myregdnr')
+  t.is(run(input, true), 'tzstqsua')
 })

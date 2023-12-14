@@ -56,26 +56,24 @@ const disassemble = (curr: string[]) => {
 
   // Then, group rows into groups of the expected size, and zip their respective
   // items. For instance `[[0, 1], [2, 3]]` becomes `[[0, 2], [1, 3]]`.
-  return $.chunk(rows, size)
-    .map(group => $.zip(...group))
-    .flat()
+  return $.chunk(rows, size).flatMap($.zip)
 }
 
 const reassemble = (grids: Grid<string>) => {
   // If there is only one subgrid, return it as there is nothing to reassemble.
   if (grids.length === 1) return grids[0]
 
+  const size = Math.sqrt(grids.length)
+
   // Group grids into groups of the expected size, and zip their respective
   // items before flattening the whole thing.
-  return $.chunk(grids, Math.sqrt(grids.length))
-    .map(group => $.zip(...group).map(grid => grid.join('')))
-    .flat()
+  return $.chunk(grids, size)
+    .map($.zip)
+    .flatMap(group => group.map(grid => grid.join('')))
 }
 
-const cycle = (curr: string[], patterns: Patterns, cache: Cache) => {
-  let next = disassemble(curr).map(sub => enhance(sub, patterns, cache))
-  return reassemble(next)
-}
+const cycle = (curr: string[], patterns: Patterns, cache: Cache) =>
+  reassemble(disassemble(curr).map(sub => enhance(sub, patterns, cache)))
 
 export const run = (input: string[], iterations: number = 1) => {
   const patterns = getPatterns(input)

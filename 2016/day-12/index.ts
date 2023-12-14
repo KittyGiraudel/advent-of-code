@@ -1,5 +1,3 @@
-import $ from '../../helpers'
-
 export const run = (input: string[], c: number = 0) => {
   const registers = { a: 0, b: 0, c, d: 0 }
   type Key = keyof typeof registers

@@ -13,11 +13,7 @@ const isOpenSpace =
     return ones % 2 === 0
   }
 
-export const run = (
-  end: Coords,
-  n: number,
-  reach: number = 50
-): [number, number] => {
+export const run = (end: Coords, n: number, advanced: boolean = false) => {
   const start: Coords = [1, 1]
   const { from: graph } = $.pathfinding.bfs({
     start,
@@ -28,13 +24,9 @@ export const run = (
   const getDistanceFromStart = (from: string | Coords) =>
     $.pathfinding.path(graph, start, from).length
 
-  return [
-    // Part 1
-    getDistanceFromStart(end),
-
-    // Part 2
-    Object.keys(graph)
-      .map(getDistanceFromStart)
-      .filter(distance => distance <= reach).length,
-  ]
+  return advanced
+    ? Object.keys(graph)
+        .map(getDistanceFromStart)
+        .filter(distance => distance <= 50).length
+    : getDistanceFromStart(end)
 }

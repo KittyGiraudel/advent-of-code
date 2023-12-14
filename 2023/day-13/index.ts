@@ -64,7 +64,7 @@ const summarizeVariant =
   (mirror: Mirror) => (acc: number, variant: Grid<string>) =>
     acc || summarize(findMirror(variant, mirror))
 
-export const run = (blocks: string[], advanced?: boolean) =>
+export const run = (blocks: string[], advanced: boolean = false) =>
   $.sum(
     blocks
       .map(block => $.grid.from<string>(block.split('\n')))

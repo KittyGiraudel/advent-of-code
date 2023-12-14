@@ -7,8 +7,7 @@ export const run = (
   advanced: boolean = false
 ) => {
   let curr = $.grid.from<string>(input)
-  const width = curr[0].length
-  const height = curr.length
+  const { width, height } = $.grid.dimensions(curr)
   const corners: Point[] = [
     `0,0`,
     `0,${width - 1}`,
@@ -17,17 +16,15 @@ export const run = (
   ]
 
   if (advanced) {
-    corners
-      .map($.toCoords)
-      .forEach(coords => (curr[coords[0]][coords[1]] = '#'))
+    corners.forEach(point => $.grid.set(curr, $.toCoords(point), '#'))
   }
 
   while (iterations--) {
-    curr = $.grid.map($.grid.clone(curr), (value, ri, ci) => {
-      const neighbors = $.surrounding([ri, ci], 'COORDS')
+    curr = $.grid.map(curr, (value, ...coords) => {
+      const neighbors = $.surrounding(coords, 'COORDS')
       const on = neighbors.filter(coords => $.grid.at(curr, coords) === '#')
 
-      if (advanced && corners.includes($.toPoint([ri, ci]))) {
+      if (advanced && corners.includes($.toPoint(coords))) {
         return '#'
       }
 
@@ -39,5 +36,5 @@ export const run = (
     })
   }
 
-  return $.countInString(curr.flat().join(''), '#')
+  return $.countInString(curr.join(''), '#')
 }

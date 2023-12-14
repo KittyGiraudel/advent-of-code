@@ -1,5 +1,3 @@
-import $ from '../../helpers'
-
 class Network {
   instructions: string[]
   nodes: Computer[]

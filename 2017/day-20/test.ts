@@ -8,11 +8,12 @@ test('Day 20 — Sample', t => {
   p=<4,0,0>, v=<0,0,0>, a=<-2,0,0>
   `)
 
-  t.is(run(sample)[0], 0)
+  t.is(run(sample), 0)
 })
 
 test('Day 20 — Solutions', t => {
   const input = $.readInput(import.meta)
 
-  t.deepEqual(run(input), [364, 420])
+  t.is(run(input), 364)
+  t.is(run(input, true), 420)
 })
