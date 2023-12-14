@@ -1,8 +1,8 @@
 import $ from '../../helpers'
-import { Coords, CoordsObj, Grid, Point } from '../../types'
+import { Coords, Point } from '../../types'
 
-type CoordsObjWithAngle = CoordsObj & { angle: number }
-type Group = { angle: number; items: CoordsObj[] }
+type CoordsWithAngle = { coords: Coords; angle: number }
+type Group = { items: Coords[]; angle: number }
 
 export const mapOutSpace = (rows: string[]) => {
   const map = $.grid.reduce<string, Map<Point, Point[]>>(
@@ -42,41 +42,42 @@ export const findBestSpot = (grid: string[]) => {
   )
 }
 
-const toObj = (point: Point) => {
-  const points = $.toCoords(point)
+const toCoordsWithAngle = (point: Point): CoordsWithAngle => ({
+  coords: $.toCoords(point),
+  angle: Infinity,
+})
 
-  return { x: points[0], y: points[1] } as CoordsObjWithAngle
-}
-
-const getAngleFromPoint = (pointA: CoordsObj) => (pointB: CoordsObj) =>
-  90 + (Math.atan2(pointB.y - pointA.y, pointB.x - pointA.x) * 180) / Math.PI
+const getAngleFromCoords = (coordsA: Coords) => (coordsB: Coords) =>
+  90 +
+  (Math.atan2(coordsB[1] - coordsA[1], coordsB[0] - coordsA[0]) * 180) / Math.PI
 
 export const vaporize = (grid: string[]) => {
   const map = mapOutSpace(grid)
   const [spot] = findBestSpot(grid)
-  const center = toObj(spot)
-  const getAngleFromCenter = getAngleFromPoint(center)
+  const center = toCoordsWithAngle(spot)
+  const getAngleFromCenter = getAngleFromCoords(center.coords)
   const asteroids = Array.from(map.keys())
     .filter(asteroid => asteroid !== spot)
     .map(coords => {
-      const point = toObj(coords)
-      const angle = getAngleFromCenter(point)
-      point.angle = angle < 0 ? angle + 360 : angle
-      return point
+      const coordsWithAngle = toCoordsWithAngle(coords)
+      const angle = getAngleFromCenter(coordsWithAngle.coords)
+      coordsWithAngle.angle = angle < 0 ? angle + 360 : angle
+      return coordsWithAngle
     })
     .sort((a, b) =>
       a.angle !== b.angle
         ? a.angle - b.angle
-        : $.manhattan(center, a) - $.manhattan(center, b)
+        : $.manhattan(center.coords, a.coords) -
+          $.manhattan(center.coords, b.coords)
     )
 
   // Group asteroids per angle, so that we end up with an array of groups in
   // ascending order, each group holding coordinates of all asteroids sitting
   // on the same line to the center (thus same angle).
-  const groups = asteroids.reduce<Group[]>((acc, { angle, x, y }) => {
+  const groups = asteroids.reduce<Group[]>((acc, { angle, coords }) => {
     const group = acc.find(group => group.angle === angle)
-    if (!group) acc.push({ angle, items: [{ x, y }] })
-    else group.items.push({ x, y })
+    if (!group) acc.push({ angle, items: [coords] })
+    else group.items.push(coords)
     return acc
   }, [])
 
@@ -87,7 +88,7 @@ export const vaporize = (grid: string[]) => {
   // At each iteration, take the first item of each group (if there is any item
   // left in groups), and push it onto the final order. This corresponds to the
   // canon rotations.
-  return $.array(max).reduce<Group['items'][number][]>(order => {
+  return $.array(max).reduce<Coords[]>(order => {
     groups
       .filter(group => group.items.length)
       .forEach(group => order.push(group.items.shift()!))

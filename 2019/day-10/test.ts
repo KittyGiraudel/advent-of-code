@@ -88,13 +88,13 @@ test('Day 10 — Sample', t => {
   t.is(findBestSpot(sampleE)[0], '11,13')
 
   const orderE = vaporize(sampleE)
-  t.is(orderE[0].x + ',' + orderE[0].y, '11,12')
-  t.is(orderE[1].x + ',' + orderE[1].y, '12,1')
-  t.is(orderE[2].x + ',' + orderE[2].y, '12,2')
+  t.is(orderE[0][0] + ',' + orderE[0][1], '11,12')
+  t.is(orderE[1][0] + ',' + orderE[1][1], '12,1')
+  t.is(orderE[2][0] + ',' + orderE[2][1], '12,2')
 
   const orderF = vaporize(sampleF)
   t.is(
-    orderF.map(o => o.x + ',' + o.y).join(';'),
+    orderF.map(o => o[0] + ',' + o[1]).join(';'),
     '8,1;9,0;9,1;10,0;9,2;11,1;12,1;11,2;15,1;12,2;13,2;14,2;15,2;12,3;16,4;15,4;10,4;4,4;2,4;2,3;0,2;1,2;0,1;1,1;5,2;1,0;5,1;6,1;6,0;7,0;8,0;10,1;14,0;16,1;13,3;14,3'
   )
 })
@@ -104,5 +104,5 @@ test('Day 10 — Solutions', t => {
   const order = vaporize(input)
 
   t.is(findBestSpot(input)[1], 288)
-  t.is(order[199].x * 100 + order[199].y, 616)
+  t.is(order[199][0] * 100 + order[199][1], 616)
 })

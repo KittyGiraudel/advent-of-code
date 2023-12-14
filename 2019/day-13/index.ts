@@ -1,6 +1,6 @@
 import { Intcode } from '../day-05'
 import $ from '../../helpers'
-import { CoordsObj, Point } from '../../types'
+import { Coords, Point } from '../../types'
 
 const SYMBOLS = [' ', 'x', '▫️', '_', 'o']
 
@@ -8,15 +8,15 @@ type Symbol = keyof typeof SYMBOLS
 type Board = Map<Point, number>
 type State = {
   score: number
-  ball: CoordsObj
-  paddle: CoordsObj
+  ball: Coords
+  paddle: Coords
   board: Board
 }
 
 const INITIAL_STATE: State = {
   score: 0,
-  ball: { x: 0, y: 0 },
-  paddle: { x: 0, y: 0 },
+  ball: [0, 0],
+  paddle: [0, 0],
   board: new Map(),
 }
 
@@ -27,7 +27,7 @@ export const render = (board: Board) => {
   const grid = $.grid.init(
     maxX + 1,
     maxY + 1,
-    (ri, ci) => SYMBOLS[board.get(`${ci},${ri}`) as Symbol]
+    (y, x) => SYMBOLS[board.get(`${x},${y}`) as Symbol]
   )
 
   return $.grid.render(grid, ' ')
@@ -40,8 +40,8 @@ const tick = (state: State, computer: Intcode) => {
   tiles.forEach(([x, y, t]) => {
     if (x === -1 && y === 0) state.score = t
     else {
-      if (t === 3) state.paddle = { x, y }
-      if (t === 4) state.ball = { x, y }
+      if (t === 3) state.paddle = [y, x]
+      if (t === 4) state.ball = [y, x]
       state.board.set(`${x},${y}`, t)
     }
   })
@@ -50,8 +50,8 @@ const tick = (state: State, computer: Intcode) => {
 }
 
 const getInput = ({ ball, paddle }: State) => {
-  if (paddle.x < ball.x) return +1
-  else if (paddle.x > ball.x) return -1
+  if (paddle[1] < ball[1]) return +1
+  else if (paddle[1] > ball[1]) return -1
   return 0
 }
 

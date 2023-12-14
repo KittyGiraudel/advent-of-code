@@ -1,12 +1,4 @@
-import toCoordsObj from './toCoordsObj'
-import {
-  Coords,
-  CoordsObj,
-  QuadriCoords,
-  QuadriCoordsObj,
-  TriCoords,
-  TriCoordsObj,
-} from '../types'
+import { Coords, QuadriCoords, TriCoords } from '../types'
 
 /**
  * Retrieve the minimum and maximum values of a set of coordinates, reading
@@ -14,30 +6,21 @@ import {
  * for both types of data structures. It returns an array on purposes as the
  * order of channels may vary (sometimes X comes first, sometimes Y does).
  */
+function boundaries(items: Coords[]): [number, number, number, number]
 function boundaries(
-  items: Coords[] | CoordsObj[]
-): [number, number, number, number]
-function boundaries(
-  items: TriCoords[] | TriCoordsObj[]
+  items: TriCoords[]
 ): [number, number, number, number, number, number]
 function boundaries(
-  items: QuadriCoords[] | QuadriCoordsObj[]
+  items: QuadriCoords[]
 ): [number, number, number, number, number, number, number, number]
 function boundaries(items: any[]) {
   if (!items.length) return []
 
-  items = items.map(item => {
-    if (!Array.isArray(item)) return item
-    if (item.length === 4) return toCoordsObj(item as QuadriCoords)
-    if (item.length === 3) return toCoordsObj(item as TriCoords)
-    return toCoordsObj(item as Coords)
-  })
-
-  if ('t' in items[0]) {
-    const xs = items.map(coords => (coords as QuadriCoordsObj).x)
-    const ys = items.map(coords => (coords as QuadriCoordsObj).y)
-    const zs = items.map(coords => (coords as QuadriCoordsObj).z)
-    const ts = items.map(coords => (coords as QuadriCoordsObj).t)
+  if (items[0].length === 4) {
+    const xs = (items as QuadriCoords[]).map(coords => coords[0])
+    const ys = (items as QuadriCoords[]).map(coords => coords[1])
+    const zs = (items as QuadriCoords[]).map(coords => coords[2])
+    const ts = (items as QuadriCoords[]).map(coords => coords[3])
 
     return [
       Math.min(...xs),
@@ -51,10 +34,10 @@ function boundaries(items: any[]) {
     ]
   }
 
-  if ('z' in items[0]) {
-    const xs = items.map(coords => (coords as TriCoordsObj).x)
-    const ys = items.map(coords => (coords as TriCoordsObj).y)
-    const zs = items.map(coords => (coords as TriCoordsObj).z)
+  if (items[0].length === 3) {
+    const xs = (items as TriCoords[]).map(coords => coords[0])
+    const ys = (items as TriCoords[]).map(coords => coords[1])
+    const zs = (items as TriCoords[]).map(coords => coords[2])
 
     return [
       Math.min(...xs),
@@ -66,8 +49,8 @@ function boundaries(items: any[]) {
     ]
   }
 
-  const xs = items.map(coords => (coords as CoordsObj).x)
-  const ys = items.map(coords => (coords as CoordsObj).y)
+  const xs = (items as Coords[]).map(coords => coords[0])
+  const ys = (items as Coords[]).map(coords => coords[1])
 
   return [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)]
 }
