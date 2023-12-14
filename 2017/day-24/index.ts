@@ -1,3 +1,5 @@
+export type Path = { score: number; length: number }
+
 const discard = (set: string[] | Set<string>, value: string) => {
   const next = new Set(set)
   next.delete(value)
@@ -14,7 +16,7 @@ const getPaths = (
   edge: number,
   score: number = 0,
   length: number = 1
-): { score: number; length: number }[] => {
+): Path[] => {
   // Find the available ports which have an edge matching the current one.
   const options = Array.from(ports).filter(port => matches(port, edge))
 
@@ -25,7 +27,7 @@ const getPaths = (
 
   // For each matching port, fork the set of available ports without it, and
   // recursive look for new nodes.
-  return options.reduce<{ score: number; length: number }[]>((acc, port) => {
+  return options.reduce<Path[]>((acc, port) => {
     // I ttried a few alternatives here, between splitting and searching, or
     // slicing before/after the slash, and it’s all pretty much the same.
     const sides = port.split('/')

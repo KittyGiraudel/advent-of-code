@@ -8,7 +8,7 @@ export const amplify = (numbers: string, sequence: number[]) =>
     0
   )
 
-export const loop = (input: number[], sequence: number[]) => {
+export const loop = (input: string, sequence: number[]) => {
   const index = $.loopIndex(0, sequence.length - 1)
   const computers = sequence.map(number => new Intcode(input).setInput(number))
   let signal = 0
@@ -23,7 +23,7 @@ export const loop = (input: number[], sequence: number[]) => {
   return signal
 }
 
-export const findHighestSignal = (numbers: number[]) =>
+export const findHighestSignal = (numbers: string) =>
   Math.max(
     ...$.permutations([9, 8, 7, 6, 5]).map(sequence => loop(numbers, sequence))
   )

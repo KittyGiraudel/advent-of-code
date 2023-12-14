@@ -1,10 +1,11 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { run } from './'
+import { Path, run } from './'
 
-const sortByScore = (a, b) => b.score - a.score
-const sortByLength = (a, b) => b.length - a.length || sortByScore(a, b)
-const getBest = bridges => bridges[0].score
+const sortByScore = (a: Path, b: Path) => b.score - a.score
+const sortByLength = (a: Path, b: Path) =>
+  b.length - a.length || sortByScore(a, b)
+const getBest = (bridges: Path[]) => bridges[0].score
 
 test('Day 24 — Sample', t => {
   const sampleA = $.sample(`

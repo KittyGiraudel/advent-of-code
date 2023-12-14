@@ -33,7 +33,7 @@ export const processLoose = (
   [memory, mask]: Program,
   instruction: Instruction
 ) => {
-  if (typeof instruction === 'string') return [memory, instruction]
+  if (typeof instruction === 'string') return [memory, instruction] as Program
   memory[String(instruction[0])] = applyMask(instruction[1], mask!)
   return [memory, mask] as Program
 }
@@ -70,7 +70,7 @@ export const processStrict = (
   [memory, mask]: Program,
   instruction: Instruction
 ) => {
-  if (typeof instruction === 'string') return [memory, instruction]
+  if (typeof instruction === 'string') return [memory, instruction] as Program
   getAddresses(instruction[0], mask!).forEach(
     // @ts-ignore
     address => (memory[address] = instruction[1])

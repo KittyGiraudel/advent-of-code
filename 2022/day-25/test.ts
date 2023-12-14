@@ -49,11 +49,11 @@ test('Day 25 — Sample', t => {
   }
 
   for (let test in TESTS) {
-    t.is(unsnafu(String(test)), TESTS[test])
+    t.is(unsnafu(String(test)), TESTS[test as keyof typeof TESTS])
   }
 
   for (let test in TESTS) {
-    t.is(snafu(TESTS[test]), String(test))
+    t.is(snafu(TESTS[test as keyof typeof TESTS]), String(test))
   }
 
   t.is(

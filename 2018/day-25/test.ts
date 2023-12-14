@@ -1,6 +1,7 @@
 import test from 'ava'
 import $ from '../../helpers'
 import { observe } from './'
+import { QuadriPoint } from '../../types'
 
 test('Day 25 — Sample', t => {
   const sampleA = $.sample(`
@@ -53,14 +54,14 @@ test('Day 25 — Sample', t => {
   -1,-2,0,-2
   `)
 
-  t.is(observe(sampleA), 2)
-  t.is(observe(sampleB), 4)
-  t.is(observe(sampleC), 3)
-  t.is(observe(sampleD), 8)
+  t.is(observe(sampleA as QuadriPoint[]), 2)
+  t.is(observe(sampleB as QuadriPoint[]), 4)
+  t.is(observe(sampleC as QuadriPoint[]), 3)
+  t.is(observe(sampleD as QuadriPoint[]), 8)
 })
 
 test('Day 25 — Solutions', t => {
   const input = $.readInput(import.meta)
 
-  t.is(observe(input), 375)
+  t.is(observe(input as QuadriPoint[]), 375)
 })

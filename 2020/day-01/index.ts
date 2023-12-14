@@ -8,4 +8,4 @@ export const findMatches = (
   numbers: number[],
   size: number,
   expectation: number = 2020
-) => $.combinations(numbers, size).find(set => $.sum(set) === expectation)
+) => $.combinations(numbers, size).find(set => $.sum(set) === expectation)!

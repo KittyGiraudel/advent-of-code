@@ -56,7 +56,7 @@ export const run = (instructions: string[], inputs: number[]) => {
   return data
 }
 
-export const resolve = (lines: string[], max: number) =>
+export const resolve = (lines: string[], max: boolean) =>
   +(
     // Split the instructions into chunks of 18 lines, called “blocks”, starting
     // with an input instruction.
