@@ -25,8 +25,6 @@ import loopIndex from './loopIndex'
 import manhattan from './manhattan'
 import match from './match'
 import matchLast from './matchLast'
-import max from './max'
-import min from './min'
 import md5 from './md5'
 import median from './median'
 import memo from './memo'
@@ -81,8 +79,6 @@ export default {
   loopIndex,
   manhattan,
   matchLast,
-  max,
-  min,
   md5,
   median,
   memo,
