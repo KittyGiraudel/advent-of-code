@@ -521,7 +521,7 @@
   <img src="Media/2017/25.png" alt="Day 25 2017: Complete" width="161px">
 </a>
 <h1 align="center">
-  2016 - 47 ⭐
+  2016 - 49 ⭐
 </h1>
 <a href="2016/day-01/index.ts">
   <img src="Media/2016/01.png" alt="Day 1 2016: Complete" width="161px">
@@ -554,7 +554,7 @@
   <img src="Media/2016/10.png" alt="Day 10 2016: Complete" width="161px">
 </a>
 <a href="2016/day-11/index.ts">
-  <img src="Media/2016/11.png" alt="Day 11 2016: Incomplete" width="161px">
+  <img src="Media/2016/11.png" alt="Day 11 2016: Complete" width="161px">
 </a>
 <a href="2016/day-12/index.ts">
   <img src="Media/2016/12.png" alt="Day 12 2016: Complete" width="161px">
