@@ -3,13 +3,6 @@ import { Coords, Point } from '../../types'
 
 type State = { position: Coords; orientation: Coords; streak: number }
 
-const DIRECTIONS: [Coords, Coords, Coords, Coords] = [
-  /* N */ [-1, 0],
-  /* E */ [0, +1],
-  /* S */ [+1, 0],
-  /* W */ [0, -1],
-]
-
 const toKey = (curr: State) =>
   $.toPoint(curr.position) +
   ' ' +
@@ -56,7 +49,7 @@ export const run = (input: string[], advanced: boolean = false) => {
   const start: State = {
     position: startCoords,
     streak: 0,
-    orientation: DIRECTIONS[2],
+    orientation: $.turn.DIRECTIONS[2],
   }
   const { from, end } = $.pathfinding.dijkstra<State>({
     start,
@@ -65,8 +58,8 @@ export const run = (input: string[], advanced: boolean = false) => {
     getCost: (_, next) => $.grid.at(grid, next.position),
     getNextNodes: curr => {
       const states: State[] = []
-      const left = $.turn.left(curr.orientation, DIRECTIONS)
-      const right = $.turn.right(curr.orientation, DIRECTIONS)
+      const left = $.turn.left(curr.orientation)
+      const right = $.turn.right(curr.orientation)
       const maxStraight = advanced ? 10 : 3
       const leftMove = {
         position: $.applyVector(curr.position, left),

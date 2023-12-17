@@ -16,13 +16,15 @@ export const run = (
   iterations: number,
   advanced: boolean = false
 ) => {
+  const grid = $.grid.from<string>(rows)
+  const { width, height } = $.grid.dimensions(grid)
   const nodes = $.grid.reduce<string, Map<Point, string>>(
-    $.grid.from(rows),
-    (nodes, value, ri, ci) => nodes.set($.toPoint([ci, ri]), value),
+    grid,
+    (nodes, value, ...coords) => nodes.set($.toPoint(coords), value),
     new Map()
   )
   const state: State = {
-    position: [Math.floor(rows[0].length / 2), Math.floor(rows.length / 2)],
+    position: [Math.floor(height / 2), Math.floor(width / 2)],
     direction: $.turn.DIRECTIONS[0],
   }
   let infections = 0

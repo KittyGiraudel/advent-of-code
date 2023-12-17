@@ -1,10 +1,10 @@
 import { Coords } from '../types'
 
 const DIRECTIONS: [Coords, Coords, Coords, Coords] = [
-  /* N */ [0, -1],
-  /* E */ [+1, 0],
-  /* S */ [0, +1],
-  /* W */ [-1, 0],
+  /* N */ [-1, 0],
+  /* E */ [0, +1],
+  /* S */ [+1, 0],
+  /* W */ [0, -1],
 ]
 
 const turnLeft = (
