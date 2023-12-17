@@ -51,9 +51,10 @@ export const run = (input: string[], advanced: boolean = false) => {
     streak: 0,
     orientation: $.turn.DIRECTIONS[2],
   }
-  const { from, end } = $.pathfinding.dijkstra<State>({
+  const { from, end } = $.pathfinding.aStar<State>({
     start,
     toKey,
+    heuristic: curr => $.manhattan(curr.position, endCoords),
     isGoal: curr => is(curr.position, endCoords),
     getCost: (_, next) => $.grid.at(grid, next.position),
     getNextNodes: curr => {
