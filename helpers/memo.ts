@@ -18,11 +18,14 @@ const getKey = (...args: unknown[]) =>
  * as a key
  * @param fn - Function to memoize
  */
-const memo = <Args extends unknown[], T>(fn: (...args: Args) => T) => {
+const memo = <Args extends unknown[], T>(
+  fn: (...args: Args) => T,
+  toKey = getKey
+) => {
   const cache = new Map()
 
   return (...args: Args): ReturnType<typeof fn> => {
-    const key = getKey(...args)
+    const key = toKey(...args)
     if (cache.has(key)) return cache.get(key)
     const result = fn(...args)
     cache.set(key, result)
