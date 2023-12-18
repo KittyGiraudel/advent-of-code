@@ -37,6 +37,7 @@ import range from './range'
 import readInput from './readInput'
 import rotate from './rotate'
 import sample from './sample'
+import shoelace from './shoelace'
 import stringMap from './stringMap'
 import sum from './sum'
 import swap from './swap'
@@ -91,6 +92,7 @@ export default {
   rotate,
   match,
   sample,
+  shoelace,
   stringMap,
   sum,
   swap,
