@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Point } from '../../types'
+import { Coords, Grid, Point } from '../../types'
 
 const VECTORS: Coords[] = [
   [-1, 0],
@@ -7,6 +7,18 @@ const VECTORS: Coords[] = [
   [+1, 0],
   [0, -1],
 ]
+
+const getNextNodes = (
+  grid: Grid<string>,
+  curr: { position: Coords; vector: Coords }
+) => {
+  const read = (coords: Coords) => $.grid.at(grid, coords)?.trim()
+  if (read(curr.position) === '+')
+    return $.bordering(curr.position, 'COORDS')
+      .map((position, index) => ({ position, vector: VECTORS[index] }))
+      .filter(({ position }) => read(position))
+  else return [{ ...curr, position: $.applyVector(curr.position, curr.vector) }]
+}
 
 export const run = (input: string[]): [string, number] => {
   const grid = $.grid.from<string>(input)
