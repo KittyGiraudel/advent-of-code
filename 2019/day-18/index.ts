@@ -1,104 +1,125 @@
 import $ from '../../helpers'
-import { Coords, CoordsAndPoint, Point } from '../../types'
+import { Coords, Point } from '../../types'
 
-type Node = {
-  coords: Coords
-  keys: Set<string>
-  steps: number
-}
+type State = { keys: string; positions: string; steps: number }
+type Distance = { distance: number; locks: string[] }
+type Distances = Record<string, Record<string, Distance>>
 
-const isKey = (value: string) => /[a-z]/.test(value)
-const isDoor = (value: string) => /[A-Z]/.test(value)
+const KEY_RE = /[a-z]/
+const DOOR_RE = /[A-Z]/
 
-export const maze = (input: string[]) => {
+const toKey = (curr: State) => curr.positions + ':' + curr.keys
+
+export const run = (input: string[], advanced: boolean = false) => {
+  const startPositions: Point[] = []
+  const start: State = {
+    keys: '',
+    positions: advanced ? '0123' : '0',
+    steps: 0,
+  }
   const keys: Record<Point, string> = {}
-  const startCoords: Coords = [0, 0]
-  const grid = $.grid.from<string>(input, (value, ri, ci) => {
-    if (value === '@') {
-      startCoords[0] = ri
-      startCoords[1] = ci
-      return '.'
-    }
-    if (isKey(value)) {
-      keys[$.toPoint([ri, ci])] = value
-      return '.'
-    }
-    return value
-  })
-  const keyCount = Object.keys(keys).length
-  const start: Node = { coords: startCoords, keys: new Set(), steps: 0 }
-  // const frontier: Node[] = [start]
+  const doors: Record<Point, string> = {}
+  const lookup = new Set<Point>()
+  const grid = $.grid.from<string>(input)
 
-  console.log(keys, startCoords)
-
-  const { from, end } = $.pathfinding.dijkstra({
-    start,
-    isGoal: curr => curr.keys.size === keyCount,
-    toKey: curr => $.toPoint(curr.coords),
-    getCost: curr => curr.steps + 1,
-    getNextNodes: curr =>
-      $.bordering(curr.coords, 'BOTH')
-        .filter(next => {
-          const value = $.grid.at(grid, next.coords)
-          const isOpenDoor = isDoor(value) && curr.keys.has(value.toLowerCase())
-
-          return value === '.' || isOpenDoor
-        })
-        .map(next => {
-          const nextKeys =
-            next.point in keys
-              ? new Set(curr.keys).add(keys[next.point])
-              : curr.keys
-
-          return { coords: next.coords, keys: nextKeys, steps: curr.steps + 1 }
-        }),
+  $.grid.forEach<string>(grid, (value, ...coords) => {
+    const point = $.toPoint(coords)
+    if (value === '@') startPositions.push(point)
+    if (KEY_RE.test(value)) keys[point] = value
+    if (DOOR_RE.test(value)) doors[point] = value
+    if (value !== '#') lookup.add(point)
+    return value === '#' ? value : '.'
   })
 
-  console.log(from, end)
-  /*
-  while (frontier.length) {
-    const curr = frontier.pop()
+  if (advanced) {
+    const start = startPositions.pop()!
+    const [sRi, sCi] = $.toCoords(start)
+    lookup.delete(start)
+    lookup.delete($.toPoint([sRi, sCi + 1] as Coords))
+    lookup.delete($.toPoint([sRi, sCi - 1] as Coords))
+    lookup.delete($.toPoint([sRi + 1, sCi] as Coords))
+    lookup.delete($.toPoint([sRi - 1, sCi] as Coords))
+    startPositions.push($.toPoint([sRi - 1, sCi - 1] as Coords))
+    startPositions.push($.toPoint([sRi - 1, sCi + 1] as Coords))
+    startPositions.push($.toPoint([sRi + 1, sCi + 1] as Coords))
+    startPositions.push($.toPoint([sRi + 1, sCi - 1] as Coords))
+  }
 
-    if (curr.keys.size === keyCount) {
-      end = curr
-      break
-    }
+  const distances: Distances = {}
+  const keyPoints = Object.keys(keys) as Point[]
+  const keyCount = keyPoints.length
+  const combinations = $.combinations([...keyPoints, ...startPositions], 2)
 
-    console.log(curr)
+  combinations.forEach(([a, b]) => {
+    const { from, end } = $.pathfinding.gbfs<Point>({
+      start: a,
+      heuristic: curr => $.manhattan($.toCoords(curr), $.toCoords(b)),
+      isGoal: curr => curr === b,
+      getNextNodes: curr =>
+        $.bordering($.toCoords(curr), 'POINTS').filter(point =>
+          lookup.has(point)
+        ),
+    })
+    if (!end) return
+    const path = $.pathfinding.path(from, a, b) as Point[]
+    const locks = path.filter(p => p in doors).map(p => doors[p].toLowerCase())
+    const keyA = keys[a] ?? String(startPositions.indexOf(a))
+    const keyB = keys[b] ?? String(startPositions.indexOf(b))
+    if (!(keyA in distances)) distances[keyA] = {}
+    if (!(keyB in distances)) distances[keyB] = {}
+    distances[keyA][keyB] = { distance: path.length, locks }
+    distances[keyB][keyA] = { distance: path.length, locks }
+  })
 
-    const neighbors = $.bordering(curr.coords, 'BOTH')
-    const available = neighbors.filter((next: CoordsAndPoint) => {
-      const value = $.grid.at(grid, next.coords)
+  const getNextNodes = (curr: State) => {
+    const nodes: State[] = []
 
-      return (
-        value === '.' || (isDoor(value) && curr.keys.has(value.toLowerCase()))
+    for (let i = 0; i < curr.positions.length; i++) {
+      const position = curr.positions[i]
+      const dict = distances[position]
+      const nextKeys = Object.keys(dict).filter(
+        nextKey =>
+          !/\d/.test(nextKey) &&
+          !curr.keys.includes(nextKey) &&
+          dict[nextKey].locks.every(lock => curr.keys.includes(lock))
       )
-    })
 
-    available.forEach((next: CoordsAndPoint) => {
-      const nextKeys =
-        next.point in keys
-          ? new Set(curr.keys).add(keys[next.point])
-          : curr.keys
+      nodes.push(
+        ...nextKeys.map(nextKey => ({
+          positions: $.updateAtIndex(curr.positions, i, nextKey),
+          keys: curr.keys + nextKey,
+          steps: curr.steps + dict[nextKey].distance,
+        }))
+      )
+    }
 
-      frontier.unshift({
-        coords: next.coords,
-        keys: nextKeys,
-        steps: curr.steps + 1,
-      })
-    })
+    return nodes
+  }
+
+  const { end } = $.pathfinding.dijkstra<State>({
+    start,
+    toKey,
+    isGoal: curr => curr.keys.length === keyCount,
+    getCost: (curr, next) => {
+      let index = 0
+      for (let i = 0; i < curr.positions.length; i++) {
+        if (next.positions[i] !== curr.positions[i]) {
+          index = i
+          break
+        }
+      }
+
+      return distances[curr.positions[index]][next.positions[index]].distance
+    },
+    getNextNodes,
+  })
+
+  if (!end) {
+    throw new Error('Could not pick up all keys')
   }
 
   return end.steps
-  */
 }
 
-maze(
-  $.sample(`
-########################
-#f.D.E.e.C.b.A.@.a.B.c.#
-######################.#
-#d.....................#
-########################
-`)
-)
+const input = $.readInput(import.meta)
+console.log(run(input, true))
