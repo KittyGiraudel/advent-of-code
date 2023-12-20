@@ -1,16 +1,16 @@
 import $ from '../../helpers'
-import { Coords, Point, Grid } from '../../types'
+import { Coords, Grid, Point } from '../../types'
 import { Computer } from '../day-10'
 
 export const run = (key: string, advanced: boolean = false) => {
-  let grid: Grid<number> = []
+  let grid: Grid<number> = new $.Grid(0)
 
   for (let i = 0; i < 128; i++) {
     const hash = new Computer(key + '-' + i).round(64).getHash()
     const bin = Array.from(Array.from(hash).map($.hexToBin).join('')).map(
       Number
     )
-    grid.push(bin)
+    grid.rows.push(bin)
   }
 
   const visited: Record<Point, Point> = {}
@@ -19,7 +19,7 @@ export const run = (key: string, advanced: boolean = false) => {
   // yet explored neighbors, marking them all part of the same group.
   const walk = (coords: Coords, group: Point) =>
     $.bordering(coords, 'BOTH')
-      .filter(({ coords }) => $.grid.at(grid, coords))
+      .filter(({ coords }) => grid.get(coords))
       .forEach(({ coords, point }) => {
         if (!(point in visited)) {
           visited[point] = group
@@ -27,7 +27,7 @@ export const run = (key: string, advanced: boolean = false) => {
         }
       })
 
-  $.grid.forEach(grid, (active, ri, ci) => {
+  grid.forEach((active, ri, ci) => {
     if (!active) return
 
     const point = $.toPoint([ri, ci])
@@ -40,5 +40,5 @@ export const run = (key: string, advanced: boolean = false) => {
 
   return advanced
     ? new Set(Object.values(visited)).size
-    : $.countInString(grid.join(''), '1')
+    : $.countInString(grid.stringify(), '1')
 }

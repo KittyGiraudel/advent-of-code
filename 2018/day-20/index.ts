@@ -158,17 +158,17 @@ const createGrid = map => {
   // Initialize grid.
   const width = maxX + 1 - minX
   const height = maxY + 1 - minY
-  const grid = $.grid.init(width, height, '#')
+  const grid = new Grid(width, height, '#')
 
   // Draw all rooms.
   coords.forEach(([ri, ci]) => {
-    grid[ri - minY][ci - minX] = map.get(`${ri},${ci}`).value
+    grid.set([ri - minY, ci - minX], map.get(`${ri},${ci}`).value)
   })
 
   // Add outer walls.
-  grid.unshift('#'.repeat(width).split(''))
-  grid.push('#'.repeat(width).split(''))
-  grid.forEach(row => [row.unshift('#'), row.push('#')])
+  grid.rows.unshift('#'.repeat(width).split(''))
+  grid.rows.push('#'.repeat(width).split(''))
+  grid.rows.forEach(row => [row.unshift('#'), row.push('#')])
 
   return grid
 }
@@ -185,8 +185,6 @@ const mapOut = input => {
 
   map.set($.toPoint(state.position), { value: '@', steps: state.steps })
   drawMap(map, state, data)
-
-  //fs.writeFileSync('./dump.1.txt', $.grid.render(createGrid(map)))
 
   return getRoomDistances(map)
 }

@@ -9,22 +9,17 @@ type Grids = Map<number, Grid<string[]>>
 // blizzards (with the direction of each blizzard within that cell).
 // Ref: https://gist.github.com/p-a/47d58303ec3acf881f26bca1e889f7c8
 const getGrids = (input: string[]) => {
-  const grid = $.grid.from<string[]>(input, value =>
-    value === '.' ? [] : [value]
-  )
+  const grid = $.Grid.fromRows(input, value => (value === '.' ? [] : [value]))
 
   // These are the *inner* dimensions, taking the walls into consideration. So
   // for a 10x10 maze, these would be 8x8.
-  const width = $.grid.width(grid) - 2
-  const height = $.grid.height(grid) - 2
+  const width = grid.width - 2
+  const height = grid.height - 2
 
   // This is called `isWallOrDoor` and not `isWall` on purpose because the
   // starting point and the ending point both return `true` for that function.
   const isWallOrDoor = (grid: Grid<string[]>, ri: number, ci: number) =>
-    ri === 0 ||
-    ri === $.grid.height(grid) - 1 ||
-    ci === 0 ||
-    ci === $.grid.width(grid) - 1
+    ri === 0 || ri === grid.height - 1 || ci === 0 || ci === grid.width - 1
 
   return $.array(height * width - 1).reduce<Grids>((acc, _, index) => {
     const curr = acc.get(index)!
@@ -33,7 +28,7 @@ const getGrids = (input: string[]) => {
     // taken, everything else is considered empty. Note that we preserve the
     // border value because while it’s often `['#']`, it is in fact `[]` for
     // doors.
-    const next = $.grid.map(grid, (value, ri, ci) =>
+    const next = grid.map((value, ri, ci) =>
       isWallOrDoor(grid, ri, ci) ? value : []
     )
 
@@ -41,7 +36,7 @@ const getGrids = (input: string[]) => {
     // the borders (they are essentially immutable as blizzards cannot reach the
     // doords), and for each cell, iterate over its hypothetical blizzards and
     // move them.
-    $.grid.forEach(curr, (value, ri, ci) => {
+    curr.forEach((value, ri, ci) => {
       if (isWallOrDoor(curr, ri, ci)) return
 
       value.forEach(direction => {
@@ -53,7 +48,7 @@ const getGrids = (input: string[]) => {
         if (direction === 'v' && ++nRi === height + 1) nRi = 1
         if (direction === '^' && --nRi === 0) nRi = height
 
-        next[nRi][nCi].push(direction)
+        next.rows[nRi][nCi].push(direction)
       })
     })
 
@@ -91,9 +86,7 @@ const cross = (
 
       // The grid only arrays, so a given array has no item, it means it’s
       // a free cell (no wall and no blizzard).
-      return getMoves(curr).filter(
-        next => $.grid.at(grid, next.coords)?.length === 0
-      )
+      return getMoves(curr).filter(next => grid.get(next.coords)?.length === 0)
     },
   }).end.time
 

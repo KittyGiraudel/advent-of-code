@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Grid, Coords } from '../../types'
+import { Coords, Grid } from '../../types'
 
 type Blocks = Coords[]
 type Rock = string[]
@@ -22,8 +22,9 @@ const isRowEmpty = (row: string[]) => row && row.join('') === EMPTY_ROW
 // empty line at the top of the grid only to add back the right amount. It could
 // figure out how many to add/remove instead but heh.
 const adjustHeight = (grid: Grid<string>, rock: Rock) => {
-  while (isRowEmpty(grid[0])) grid.shift()
-  for (let i = 0; i < 3 + rock.length; i++) grid.unshift(EMPTY_ROW.split(''))
+  while (isRowEmpty(grid.rows[0])) grid.rows.shift()
+  for (let i = 0; i < 3 + rock.length; i++)
+    grid.rows.unshift(EMPTY_ROW.split(''))
 
   return grid
 }
@@ -43,7 +44,7 @@ const getBlocks = (rock: Rock) =>
 const move = (grid: Grid<string>, blocks: Blocks, vector: Coords) => {
   const nextBlocks = blocks
     .map(block => $.applyVector(block, vector))
-    .filter(nextCoords => $.grid.at(grid, nextCoords) === '.')
+    .filter(nextCoords => grid.get(nextCoords) === '.')
 
   return blocks.length === nextBlocks.length ? nextBlocks : null
 }
@@ -55,17 +56,17 @@ const moveDownwards = (grid: Grid<string>, blocks: Blocks) =>
   move(grid, blocks, [+1, 0])
 
 const halt = (grid: Grid<string>, blocks: Blocks) => {
-  blocks.forEach(coords => (grid[coords[0]][coords[1]] = '#'))
+  blocks.forEach(coords => grid.set([coords[0], coords[1]], '#'))
   return grid
 }
 
 const getHeight = (grid: Grid<string>) =>
-  grid.filter(row => row.join('') !== EMPTY_ROW).length
+  grid.rows.filter(row => row.join('') !== EMPTY_ROW).length
 
-const render = (grid: Grid<string>) => [log($.grid.render(grid)), log('')]
+const render = (grid: Grid<string>) => [log(grid.render()), log('')]
 
 export const tetris = (input: string, count: number = 2022) => {
-  const grid: Grid<string> = []
+  const grid = new $.Grid<string>(0)
   const sideIndex = $.loopIndex(0, input.length - 1)
 
   for (let i = 0; i < count; i++) {

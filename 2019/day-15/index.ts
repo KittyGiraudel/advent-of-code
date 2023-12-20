@@ -42,11 +42,11 @@ export const getDistanceToOxygen = (input: string) => {
 }
 
 const padGrid = (grid: Grid<string>, width: number) =>
-  [
-    Array.from('#'.repeat(width + 2)),
-    ...grid.map(row => ['#', ...row, '#']),
-    Array.from('#'.repeat(width + 2)),
-  ] as Grid<string>
+  $.Grid.fromRows<string>([
+    '#'.repeat(width + 2),
+    ...grid.rows.map(row => ['#', ...row, '#'].join('')),
+    '#'.repeat(width + 2),
+  ])
 
 const render = ({
   from,
@@ -61,11 +61,11 @@ const render = ({
   const height = maxY + 1 - minY
   const handler = (ci: number, ri: number) =>
     Object.keys(from).includes(ri + minY + ',' + (ci + minX)) ? '.' : '#'
-  const grid = $.grid.init(width, height, handler)
+  const grid = new $.Grid(width, height, handler)
 
-  grid[end.coords[1]][end.coords[0]] = 'O'
+  grid.set([end.coords[1], end.coords[0]], 'O')
 
-  return $.grid.render(padGrid(grid, width))
+  return padGrid(grid, width).render()
 }
 
 export const getOxygenDuration = (input: string) => {

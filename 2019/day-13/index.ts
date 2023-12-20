@@ -24,13 +24,13 @@ export const render = (board: Board) => {
   const keys = Array.from(board.keys())
   const coords = keys.map($.toCoords)
   const [, maxX, , maxY] = $.boundaries(coords)
-  const grid = $.grid.init(
+  const grid = new $.Grid(
     maxX + 1,
     maxY + 1,
     (y, x) => SYMBOLS[board.get(`${x},${y}`) as Symbol]
   )
 
-  return $.grid.render(grid, ' ')
+  return grid.render(' ')
 }
 
 const tick = (state: State, computer: Intcode) => {

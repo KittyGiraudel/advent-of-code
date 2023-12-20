@@ -4,16 +4,14 @@ import { Coords } from '../../types'
 export const discover = (input: string[], roundTrip: boolean = false) => {
   let start: Coords
   const locations: Coords[] = []
-  const grid = $.grid.from(input, (cell, ...coords) => {
+  const grid = $.Grid.fromRows<string>(input, (cell, ...coords) => {
     if (cell === '0') start = coords
     else if (cell !== '#' && cell !== '.') locations.push(coords)
     return cell
   })
 
   const getNextNodes = (curr: Coords) =>
-    $.bordering(curr, 'COORDS').filter(
-      coords => $.grid.at(grid, coords) !== '#'
-    )
+    $.bordering(curr, 'COORDS').filter(coords => grid.get(coords) !== '#')
 
   // I originally cached the neighbors in a map to speed things up but it’s
   // negligible. What really makes a difference is not doing pathfinding on

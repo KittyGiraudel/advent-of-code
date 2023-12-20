@@ -12,7 +12,7 @@ const getNextNodes = (
   grid: Grid<string>,
   curr: { position: Coords; vector: Coords }
 ) => {
-  const read = (coords: Coords) => $.grid.at(grid, coords)?.trim()
+  const read = (coords: Coords) => grid.get(coords)?.trim()
   if (read(curr.position) === '+')
     return $.bordering(curr.position, 'COORDS')
       .map((position, index) => ({ position, vector: VECTORS[index] }))
@@ -21,10 +21,10 @@ const getNextNodes = (
 }
 
 export const run = (input: string[]): [string, number] => {
-  const grid = $.grid.from<string>(input)
-  const read = (coords: Coords) => $.grid.at(grid, coords)?.trim()
+  const grid = $.Grid.fromRows<string>(input)
+  const read = (coords: Coords) => grid.get(coords)?.trim()
   const visited: Point[] = []
-  let position: Coords = [0, grid[0].findIndex(v => v === '|')]
+  let position: Coords = [0, grid.row(0).findIndex(v => v === '|')]
   let vector: Coords = VECTORS[2]
   let letters = ''
   let value = null

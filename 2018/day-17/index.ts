@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Grid, Coords, Point } from '../../types'
+import { Coords, Grid, Point } from '../../types'
 
 const generateMap = (input: string[]) =>
   input.reduce<Record<Point, string>>((acc, line) => {
@@ -22,8 +22,8 @@ const fillLevel = (grid: Grid<string>, position: Coords) => {
 const fillSide = (grid: Grid<string>, [x, y]: Coords, xOffset: number) => {
   let currentX = x
   while (true) {
-    if (grid[y][currentX] === '#') return
-    grid[y][currentX] = grid[y + 1][currentX] === '|' ? '|' : '~'
+    if (grid.get([y, currentX]) === '#') return
+    grid.set([y, currentX], grid.get([y + 1, currentX]) === '|' ? '|' : '~')
     currentX += xOffset
   }
 }
@@ -31,9 +31,9 @@ const fillSide = (grid: Grid<string>, [x, y]: Coords, xOffset: number) => {
 const hasWall = (grid: Grid<string>, [x, y]: Coords, xOffset: number) => {
   let currentX = x
   while (true) {
-    if (grid[y][currentX] === '.') return false
-    if (grid[y][currentX] === '#') return true
-    if (!grid[y][currentX]) return false
+    if (grid.get([y, currentX]) === '.') return false
+    if (grid.get([y, currentX]) === '#') return true
+    if (!grid.get([y, currentX])) return false
     currentX += xOffset
   }
 }
@@ -46,20 +46,26 @@ const fillFrom = (grid: Grid<string>, [x, y]: Coords, maxY: number) => {
   if (y >= maxY) return
 
   // If the south cell is free, fill it.
-  if (grid[y + 1][x] === '.') {
-    grid[y + 1][x] = '|'
+  if (grid.get([y + 1, x]) === '.') {
+    grid.set([y + 1, x], '|')
     fillFrom(grid, [x, y + 1], maxY)
   }
 
   // If the south cell is filled and the east cell is free, fill it.
-  if (['#', '~'].includes(grid[y + 1][x]) && grid[y][x + 1] === '.') {
-    grid[y][x + 1] = '|'
+  if (
+    ['#', '~'].includes(grid.get([y + 1, x])) &&
+    grid.get([y, x + 1]) === '.'
+  ) {
+    grid.set([y, x + 1], '|')
     fillFrom(grid, [x + 1, y], maxY)
   }
 
   // If the south cell is filled and the west cell is free, fill it.
-  if (['#', '~'].includes(grid[y + 1][x]) && grid[y][x - 1] === '.') {
-    grid[y][x - 1] = '|'
+  if (
+    ['#', '~'].includes(grid.get([y + 1, x])) &&
+    grid.get([y, x - 1]) === '.'
+  ) {
+    grid.set([y, x - 1], '|')
     fillFrom(grid, [x - 1, y], maxY)
   }
 
@@ -78,7 +84,7 @@ export const scan = (
   const [, maxX, minY, maxY] = $.boundaries(
     (Object.keys(map) as Point[]).map($.toCoords)
   )
-  const grid = $.grid.init(
+  const grid = new $.Grid(
     maxX + 1,
     maxY + 1,
     (ri, ci) => map[$.toPoint([ci, ri])] || '.'
@@ -92,7 +98,7 @@ export const scan = (
   // https://github.com/andrewgreenh/advent-of-code/pull/19
   fillFrom(grid, source, maxY)
 
-  const counters = $.frequency(grid.slice(minY, maxY + 1).flat())
+  const counters = $.frequency(grid.rows.slice(minY, maxY + 1).flat())
 
   return [counters['~'], counters['|']]
 }

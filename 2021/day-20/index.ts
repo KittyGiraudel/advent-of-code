@@ -22,11 +22,11 @@ const padInput = (input: string, defaultChar: string = '.') => {
 
 const step = (algorithm: string, input: string, defaultChar: string = '.') => {
   const rows = padInput(input, defaultChar)
-  const curr = $.grid.from<string>(rows)
-  const next = $.grid.map(curr, (_, ri, ci) => {
+  const curr = $.Grid.fromRows<string>(rows)
+  const next = curr.map((_, ri, ci) => {
     const value = $.toDec(
       getTilingCoords(ri, ci)
-        .map(coords => $.grid.at(curr, coords) ?? defaultChar)
+        .map(coords => curr.get(coords) ?? defaultChar)
         .map(value => +(value === '#'))
         .join('')
     )
@@ -34,7 +34,7 @@ const step = (algorithm: string, input: string, defaultChar: string = '.') => {
     return algorithm[value]
   })
 
-  return $.grid.render(next)
+  return next.render()
 }
 
 export const processImage = (

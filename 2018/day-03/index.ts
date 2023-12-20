@@ -30,11 +30,12 @@ const findBoundaries = (claims: Boundary[]) =>
 export const countOverlappingInches = (input: string[]) => {
   const claims = parseClaims(input)
   const boundaries = findBoundaries(claims)
-  const grid = $.grid.init(boundaries.xMax + 1, boundaries.yMax + 1, 0)
+  const grid = new $.Grid(boundaries.xMax + 1, boundaries.yMax + 1, 0)
 
   claims.forEach(({ xMin, xMax, yMin, yMax }) => {
     for (let x = xMin as number; x <= xMax; x++)
-      for (let y = yMin as number; y <= yMax; y++) grid[y][x]++
+      for (let y = yMin as number; y <= yMax; y++)
+        grid.set([y, x], grid.get([y, x]) + 1)
   })
 
   const counts = $.frequency(grid.flat())

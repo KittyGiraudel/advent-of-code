@@ -5,7 +5,7 @@ import { validate, recompose } from './'
 test('Day 08 — Sample', t => {
   const sample = '0222112222120000'
 
-  t.deepEqual(recompose(sample, { width: 2, height: 2 }), [
+  t.deepEqual(recompose(sample, { width: 2, height: 2 }).rows, [
     [0, 1],
     [1, 0],
   ])

@@ -5,8 +5,8 @@ type CoordsWithAngle = { coords: Coords; angle: number }
 type Group = { items: Coords[]; angle: number }
 
 export const mapOutSpace = (rows: string[]) => {
-  const map = $.grid.reduce<string, Map<Point, Point[]>>(
-    $.grid.from(rows),
+  const grid = $.Grid.fromRows<string>(rows)
+  const map = grid.reduce<Map<Point, Point[]>>(
     (acc, v, ri, ci) => (v === '#' ? acc.set(`${ci},${ri}`, []) : acc),
     new Map()
   )

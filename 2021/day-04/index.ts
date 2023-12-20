@@ -4,22 +4,22 @@ import { Grid } from '../../types'
 type BingoCell = { marked: boolean; value: number }
 
 const isGridComplete = (grid: Grid<BingoCell>) => {
-  const hasFullRow = grid.some(row => row.every(item => item.marked))
-  const hasFullCol = grid[0].some((_, i) => grid.every(row => row[i].marked))
+  const hasFullRow = grid.rows.some(row => row.every(item => item.marked))
+  const hasFullCol = grid.columns.some(col => col.every(item => item.marked))
 
   return hasFullRow || hasFullCol
 }
 
 const roll = (grids: Grid<BingoCell>[], number: number) => {
   grids.forEach(grid => {
-    $.grid.forEach(grid, item => {
+    grid.forEach(item => {
       if (item.value === number) item.marked = true
     })
   })
 }
 
 const computeGridScore = (grid: Grid<BingoCell>) =>
-  $.grid.reduce(grid, (acc, item) => acc + (item.marked ? 0 : item.value), 0)
+  grid.reduce((acc, item) => acc + (item.marked ? 0 : item.value), 0)
 
 export const getBingos = (input: string) => {
   const [numbers, ...grids] = parseInput(input)
@@ -40,13 +40,15 @@ export const getBingos = (input: string) => {
 }
 
 const formatGrid = (grid: string) =>
-  grid.split('\n').map((row: string) =>
-    row
-      .split(/\s+/g)
-      .filter(Boolean)
-      .map(Number)
-      .map((value: number) => ({ value, marked: false }))
-  ) as Grid<BingoCell>
+  $.Grid.from<BingoCell, BingoCell>(
+    grid.split('\n').map((row: string) =>
+      row
+        .split(/\s+/g)
+        .filter(Boolean)
+        .map(Number)
+        .map((value: number) => ({ value, marked: false }))
+    )
+  )
 
 const parseInput = (input: string): [number[], ...Grid<BingoCell>[]] => {
   const [numbers, ...grids] = input.split('\n\n')

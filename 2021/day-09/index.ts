@@ -5,23 +5,19 @@ import { Coords, CoordsAndPoint, Grid, Point } from '../../types'
 // number, and get its 4 neighbors. If all existing neighbors are higher than
 // the current point, it’s a low point.
 const getLowPoints = (grid: Grid<number>) =>
-  $.grid.reduce<number, Coords[]>(
-    grid,
-    (acc, point, ri, ci) => {
-      const coords: Coords = [ri, ci]
+  grid.reduce<Coords[]>((acc, point, ri, ci) => {
+    const coords: Coords = [ri, ci]
 
-      if (
-        $.bordering(coords, 'COORDS')
-          .map((coords: Coords) => $.grid.at(grid, coords) ?? Infinity)
-          .every((n: number) => n > point)
-      ) {
-        acc.push(coords)
-      }
+    if (
+      $.bordering(coords, 'COORDS')
+        .map((coords: Coords) => grid.get(coords) ?? Infinity)
+        .every((n: number) => n > point)
+    ) {
+      acc.push(coords)
+    }
 
-      return acc
-    },
-    []
-  )
+    return acc
+  }, [])
 
 const getBasin = (
   grid: Grid<number>,
@@ -36,8 +32,8 @@ const getBasin = (
   const neighbors = $.bordering(position, 'BOTH').filter(
     ({ coords, point }) => {
       if (evaluated.includes(point)) return false
-      if (typeof $.grid.at(grid, coords) === 'undefined') return false
-      if ($.grid.at(grid, coords) === 9) return false
+      if (typeof grid.get(coords) === 'undefined') return false
+      if (grid.get(coords) === 9) return false
       return true
     }
   )
@@ -56,11 +52,11 @@ const getBasin = (
 }
 
 export const sumLowPointsRisk = (rows: string[]) => {
-  const grid = $.grid.from(rows, Number)
+  const grid = $.Grid.fromRows(rows, Number)
   const lowPoints = getLowPoints(grid)
 
   return $.sum(
-    lowPoints.map((coords: Coords) => $.grid.at(grid, coords)).map(p => p + 1)
+    lowPoints.map((coords: Coords) => grid.get(coords)).map(p => p + 1)
   )
 }
 
@@ -68,7 +64,7 @@ export const getProductOfBiggestBasins = (
   rows: string[],
   amount: number = 3
 ) => {
-  const grid = $.grid.from(rows, Number)
+  const grid = $.Grid.fromRows(rows, Number)
   const lowPoints = getLowPoints(grid)
 
   return $.product(

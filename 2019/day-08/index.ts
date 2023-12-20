@@ -21,15 +21,15 @@ export const recompose = (
   size: { width: number; height: number }
 ) => {
   const layers = parse(input, size)
-  const image = $.grid.init<number>(size.width, size.height)
+  const image = new $.Grid<number>(size.width, size.height)
 
   for (let i = 0; i < layers.length; i++) {
     const layer = layers[i]
-    const grid = $.chunk(layer, size.width)
+    const grid = $.Grid.from<number, number>($.chunk<number>(layer, size.width))
 
-    $.grid.forEach(grid, (pixel, ri, ci) => {
-      if ([null, 2].includes($.grid.at(image, [ri, ci]))) {
-        image[ri][ci] = pixel
+    grid.forEach((pixel, ri, ci) => {
+      if ([null, 2].includes(image.get([ri, ci]))) {
+        image.set([ri, ci], pixel)
       }
     })
   }
@@ -38,4 +38,4 @@ export const recompose = (
 }
 
 export const render = (grid: Grid<number>) =>
-  $.grid.render(grid, ' ', v => String(v) || ' ')
+  grid.render(' ', v => String(v) || ' ')

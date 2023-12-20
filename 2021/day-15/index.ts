@@ -2,16 +2,18 @@ import $ from '../../helpers'
 import { Coords, Grid } from '../../types'
 
 const getCost = (grid: Grid<number>, [ri, ci]: Coords) => {
-  const { width, height } = $.grid.dimensions(grid)
-  const riInc = Math.floor(ri / height)
-  const ciInc = Math.floor(ci / width)
+  const riInc = Math.floor(ri / grid.height)
+  const ciInc = Math.floor(ci / grid.width)
 
-  return ((grid[ri % height][ci % width] + riInc + ciInc - 1) % 9) + 1
+  return (
+    ((grid.get([ri % grid.height, ci % grid.width]) + riInc + ciInc - 1) % 9) +
+    1
+  )
 }
 
 const getLowestCost = (grid: Grid<number>, mapSize = 1) => {
-  const width = $.grid.width(grid) * mapSize - 1
-  const height = $.grid.height(grid) * mapSize - 1
+  const width = grid.width * mapSize - 1
+  const height = grid.height * mapSize - 1
   const start: Coords = [0, 0]
   const end: Coords = [height, width]
 
@@ -32,4 +34,4 @@ const getLowestCost = (grid: Grid<number>, mapSize = 1) => {
 }
 
 export const getLowestRisk = (input: string[], mapSize: number = 1) =>
-  getLowestCost($.grid.from(input, Number), mapSize)
+  getLowestCost($.Grid.fromRows(input, Number), mapSize)

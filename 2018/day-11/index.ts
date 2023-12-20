@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Grid, TriCoords } from '../../types'
+import { Coords, TriCoords } from '../../types'
 
 const SIZE = 300
 
@@ -12,14 +12,14 @@ const computeCellPower = (serial: number, x: number, y: number) => {
 }
 
 const getGrid = (serial: number) =>
-  $.grid.init(SIZE, SIZE, (ri, ci) => computeCellPower(serial, ri + 1, ci + 1))
+  new $.Grid(SIZE, SIZE, (ri, ci) => computeCellPower(serial, ri + 1, ci + 1))
 
 export const getFuelStrict = (serial: number) => {
   const max = { value: -Infinity, coords: [0, 0] as Coords }
   const grid = getGrid(serial)
 
   const square = (x: number, y: number, size: number = 3) =>
-    $.sum(grid.slice(y, y + size).flatMap(row => row.slice(x, x + size)))
+    $.sum(grid.rows.slice(y, y + size).flatMap(row => row.slice(x, x + size)))
 
   for (let y = 0; y < SIZE; y++) {
     for (let x = 0; x < SIZE; x++) {
@@ -38,7 +38,7 @@ export const getFuelStrict = (serial: number) => {
 export const getFuelLoose = (serial: number) => {
   const max = { value: -Infinity, coords: [0, 0, 0] as TriCoords }
   const grid = getGrid(serial)
-  const summed = $.grid.clone(grid)
+  const summed = grid.clone()
 
   // To be able to find the highest square of any size without having to iterate
   // 300 ^ 3 times on the grid (width * height * size — which would be O(n³)
@@ -47,10 +47,13 @@ export const getFuelLoose = (serial: number) => {
   // reports the sum of all points above and to the left of (y, x).
   // The following algorithm is inspired from this Ruby version:
   // https://www.reddit.com/r/adventofcode/comments/a53r6i/comment/ebjsc3u/?utm_source=reddit&utm_medium=web2x&context=3
-  $.grid.forEach(summed, (v, ri, ci) => {
-    const get = (ri: number, ci: number) => $.grid.at(summed, [ri, ci]) ?? 0
+  summed.forEach((v, ri, ci) => {
+    const get = (ri: number, ci: number) => summed.get([ri, ci]) ?? 0
 
-    summed[ri][ci] = v + get(ri - 1, ci) + get(ri, ci - 1) - get(ri - 1, ci - 1)
+    summed.set(
+      [ri, ci],
+      v + get(ri - 1, ci) + get(ri, ci - 1) - get(ri - 1, ci - 1)
+    )
   })
 
   for (let i = 1; i <= SIZE; i++) {
@@ -58,8 +61,8 @@ export const getFuelLoose = (serial: number) => {
 
     // Iterate over the Y axis.
     ranges.forEach(yMin => {
-      const yMins = summed[yMin - 1]
-      const yMaxes = summed[yMin - 1 + i]
+      const yMins = summed.rows[yMin - 1]
+      const yMaxes = summed.rows[yMin - 1 + i]
 
       // Iterate over the X axis.
       ranges.forEach(xMin => {

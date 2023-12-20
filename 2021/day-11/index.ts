@@ -4,15 +4,18 @@ import { Coords, Grid } from '../../types'
 type Octopus = { value: number; flashed: boolean }
 
 const makeGrid = (rows: string[]) =>
-  $.grid.from<Octopus>(rows, optopus => ({ value: +optopus, flashed: false }))
+  $.Grid.fromRows<Octopus>(rows, optopus => ({
+    value: +optopus,
+    flashed: false,
+  }))
 
 const countNewFlashes = (grid: Grid<Octopus>) =>
-  $.grid.reduce(grid, (acc, octopus) => acc + +octopus.flashed, 0)
+  grid.reduce((acc, octopus) => acc + +octopus.flashed, 0)
 
 const processFlashes = (grid: Grid<Octopus>) => {
   const toIncrement: Coords[] = []
 
-  $.grid.forEach(grid, (octopus, ri, ci) => {
+  grid.forEach((octopus, ri, ci) => {
     if (!octopus.flashed && octopus.value > 9) {
       octopus.flashed = true
       toIncrement.push(...$.surrounding([ri, ci], 'COORDS'))
@@ -20,7 +23,7 @@ const processFlashes = (grid: Grid<Octopus>) => {
   })
 
   toIncrement.forEach(coords => {
-    const octopus = $.grid.at(grid, coords)
+    const octopus = grid.get(coords)
     if (octopus) octopus.value++
   })
 
@@ -29,7 +32,7 @@ const processFlashes = (grid: Grid<Octopus>) => {
 
 const cycle = (grid: Grid<Octopus>) => {
   // 1. Increment
-  $.grid.forEach(grid, octopus => octopus.value++)
+  grid.forEach(octopus => octopus.value++)
 
   // 2. Flashes
   processFlashes(grid)
@@ -38,7 +41,7 @@ const cycle = (grid: Grid<Octopus>) => {
   const flashes = countNewFlashes(grid)
 
   // 3. Reset
-  $.grid.forEach(grid, octopus => {
+  grid.forEach(octopus => {
     octopus.flashed = false
     if (octopus.value > 9) octopus.value = 0
   })
@@ -56,7 +59,7 @@ export const countFlashes = (rows: string[], steps: number) => {
 }
 
 const isSynced = (grid: Grid<Octopus>) =>
-  $.grid.every(grid, octopus => octopus.value === 0)
+  grid.every(octopus => octopus.value === 0)
 
 export const findSynchronocity = (rows: string[]) => {
   const grid = makeGrid(rows)

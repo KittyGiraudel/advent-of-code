@@ -20,7 +20,7 @@ type PipeMap = ReturnType<typeof mapOutLoopingPipe>
 
 const resolveStart = (grid: Grid<string>, startCoords: Coords) => {
   const [N, E, S, W] = $.bordering(startCoords, 'COORDS')
-    .map(coords => $.grid.at(grid, coords))
+    .map(coords => grid.get(coords))
     .map((value, index) => DIRECTIONS[index].includes(value))
 
   if (N && E) return 'L'
@@ -33,19 +33,19 @@ const resolveStart = (grid: Grid<string>, startCoords: Coords) => {
 
 const getNextPipeNodes = (grid: Grid<string>) => (coords: Coords) =>
   $.bordering(coords, 'COORDS').filter((neighbor, index) => {
-    const currValue = $.grid.at(grid, coords) as PipePiece
-    const nextValue = $.grid.at(grid, neighbor)
+    const currValue = grid.get(coords) as PipePiece
+    const nextValue = grid.get(neighbor)
 
     return CHAR_VALIDITY_MAP[currValue][index].includes(nextValue)
   })
 
 const mapOutLoopingPipe = (grid: Grid<string>) => {
-  const start = $.grid.findCoords(grid, v => v === 'S') as Coords
+  const start = grid.findCoords(v => v === 'S') as Coords
   const getNextNodes = getNextPipeNodes(grid)
 
   // To avoid having to deal with the cell “S” within BFS, start by replacing
   // the starting point with the relevant tile.
-  $.grid.set(grid, start, resolveStart(grid, start))
+  grid.set(start, resolveStart(grid, start) ?? '')
 
   // Mapping out the looping pipe means running BFS from the start until we
   // cannot find a new node which means we’re back at the start.
@@ -53,9 +53,9 @@ const mapOutLoopingPipe = (grid: Grid<string>) => {
 }
 
 const scaleUpGrid = (grid: Grid<string>, from: PipeMap) => {
-  const scaledUpGrid = $.grid.init(grid[0].length * 3, grid.length * 3, '.')
+  const scaledUpGrid = new $.Grid(grid.width * 3, grid.height * 3, '.')
 
-  $.grid.forEach(grid, (value, ri, ci) => {
+  grid.forEach((value, ri, ci) => {
     if (!($.toPoint([ri, ci]) in from)) return '.'
 
     const coords: Coords = scaleUp([ri, ci])
@@ -68,11 +68,11 @@ const scaleUpGrid = (grid: Grid<string>, from: PipeMap) => {
     //  .|.
     //  .L-
     //  ...
-    $.grid.set(scaledUpGrid, coords, value)
-    if (BOTTOM.includes(value)) $.grid.set(scaledUpGrid, N, '|')
-    if (LEFT.includes(value)) $.grid.set(scaledUpGrid, E, '-')
-    if (TOP.includes(value)) $.grid.set(scaledUpGrid, S, '|')
-    if (RIGHT.includes(value)) $.grid.set(scaledUpGrid, W, '-')
+    scaledUpGrid.set(coords, value)
+    if (BOTTOM.includes(value)) scaledUpGrid.set(N, '|')
+    if (LEFT.includes(value)) scaledUpGrid.set(E, '-')
+    if (TOP.includes(value)) scaledUpGrid.set(S, '|')
+    if (RIGHT.includes(value)) scaledUpGrid.set(W, '-')
   })
 
   return scaledUpGrid
@@ -86,16 +86,14 @@ const floodGrid = (grid: Grid<string>, start: Coords = [0, 0]) =>
   $.pathfinding.bfs({
     start,
     getNextNodes: curr =>
-      $.bordering(curr, 'COORDS').filter(
-        coords => $.grid.at(grid, coords) === '.'
-      ),
+      $.bordering(curr, 'COORDS').filter(coords => grid.get(coords) === '.'),
   })
 
 const scaleUp = (coords: Coords) =>
   [coords[0] * 3 + 1, coords[1] * 3 + 1] as Coords
 
 export const run = (input: string[], advanced: boolean = false) => {
-  const grid = $.grid.from<string>(input)
+  const grid = $.Grid.fromRows<string>(input)
   const pipe = mapOutLoopingPipe(grid)
   const pipeLength = Object.keys(pipe).length
 
@@ -112,12 +110,10 @@ export const run = (input: string[], advanced: boolean = false) => {
   // from their top-left corner. Then for every empty cell within the normal-
   // size grid which was *not* flooded (potential enclave), we check whether it
   // was flooded in the big grid; if it was, it’s an enclave.
-  const { width, height } = $.grid.dimensions(grid)
   const { from: flooded } = floodGrid(grid)
   const { from: scaledFlooded } = floodGrid(scaleUpGrid(grid, pipe))
   const floodedSize = Object.keys(flooded).length
-  const enclavesCount = $.grid.filter(
-    grid,
+  const enclavesCount = grid.filter(
     (_, ...coords) =>
       // If the cell does *not* belong to the pipe, and does *not* belong to
       // the outside, but was flooded when scaling up, it is an enclave.
@@ -129,5 +125,5 @@ export const run = (input: string[], advanced: boolean = false) => {
   // The amount of cells belonging to the loop is the total area of the grid
   // minus the length of the pipe + all flooded cells from the outside + all the
   // enclaves.
-  return width * height - (pipeLength + floodedSize + enclavesCount)
+  return grid.width * grid.height - (pipeLength + floodedSize + enclavesCount)
 }

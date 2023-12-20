@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Point, Grid } from '../../types'
+import { Coords, Grid, Point } from '../../types'
 
 type Orientation = '^' | 'v' | '<' | '>'
 type Cart = {
@@ -41,14 +41,13 @@ const move = (grid: Grid<string>, point: Point, cart: Cart) => {
   // Compute the new orientation for the cart. If it’s sitting on an
   // intersection, its internal counter determines the new orientation,
   // otherwise it just goes straight (orientation does not change).
-  let orientation =
-    $.grid.at(grid, coords) === '+' ? rotate(cart) : cart.orientation
+  let orientation = grid.get(coords) === '+' ? rotate(cart) : cart.orientation
   // Determine the coordinates of the destination cell by applying a vector
   // defined by the orientation.
   const nextCoords = $.applyVector(coords, VECTORS[orientation])
   // Check the orientation of the track on the destination cell. Namely, we‘re
   // looking for corners, as they cause the cart to rotate some more.
-  const nextCell = $.grid.at(grid, nextCoords)
+  const nextCell = grid.get(nextCoords)
   // If the destination cell is indeed a corner, the cart orientation needs
   // to be adjusted based on the corner tile.
   if (nextCell in CORNERS)
@@ -97,7 +96,7 @@ export const run = (rows: string[], cleanUp: boolean = false) => {
   // 1. Collect the coordinates and orientation of every cart.
   // 2. Restore the proper track value underneath the grid.
   // From there onwards, the grid is never modified again, and is only read.
-  const grid = $.grid.from(rows, (value, ri, ci) => {
+  const grid = $.Grid.fromRows<string>(rows, (value, ri, ci) => {
     if (/[<>v^]/.test(value))
       carts[$.toPoint([ri, ci])] = {
         orientation: value as Orientation,

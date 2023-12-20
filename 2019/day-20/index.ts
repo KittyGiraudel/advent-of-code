@@ -22,7 +22,7 @@ const getOutsideCoords = (grid: Grid<string>, input: string[]) => {
   const doorsToCoords: DoorsToCoords = {}
 
   // Top row
-  grid[0].forEach((value, ci) => {
+  grid.row(0).forEach((value, ci) => {
     if (value !== '.') return
     const coords: Coords = [0, ci]
     const door = input[0][ci + 2] + input[1][ci + 2]
@@ -31,7 +31,7 @@ const getOutsideCoords = (grid: Grid<string>, input: string[]) => {
   })
 
   // Bottom row
-  grid.at(-1)!.forEach((value, ci) => {
+  grid.row(-1).forEach((value, ci) => {
     if (value !== '.') return
     const coords: Coords = [height - 1, ci]
     const door = input.at(-2)![ci + 2] + input.at(-1)![ci + 2]
@@ -40,7 +40,7 @@ const getOutsideCoords = (grid: Grid<string>, input: string[]) => {
   })
 
   // Left column
-  $.column(grid, 0).forEach((value, ri) => {
+  grid.column(0).forEach((value, ri) => {
     if (value !== '.') return
     const coords: Coords = [ri, 0]
     const door = input[ri + 2][0] + input[ri + 2][1]
@@ -49,7 +49,7 @@ const getOutsideCoords = (grid: Grid<string>, input: string[]) => {
   })
 
   // Right column
-  $.column(grid, width - 1).forEach((value, ri) => {
+  grid.column(-1).forEach((value, ri) => {
     if (value !== '.') return
     const coords: Coords = [ri, width - 1]
     const door = input[ri + 2].at(-2)! + input[ri + 2].at(-1)
@@ -64,22 +64,22 @@ const getInsideCoords = (grid: Grid<string>) => {
   const pointsToDoors: PointsToDoors = {}
   const doorsToCoords: DoorsToCoords = {}
 
-  $.grid.forEach(grid, (value, ri, ci) => {
+  grid.forEach((value, ri, ci) => {
     if (!/[A-Z]/.test(value)) return
-    const bottom = $.grid.at(grid, [ri + 1, ci]).trim()
+    const bottom = grid.get([ri + 1, ci]).trim()
 
     if (/[A-Z]/.test(bottom)) {
-      const top = $.grid.at(grid, [ri - 1, ci]).trim()
+      const top = grid.get([ri - 1, ci]).trim()
       const coords: Coords = top ? [ri - 1, ci] : [ri + 2, ci]
       const door = value + bottom
       pointsToDoors[$.toPoint(coords)] = door
       doorsToCoords[door] = coords
     }
 
-    const right = $.grid.at(grid, [ri, ci + 1]).trim()
+    const right = grid.get([ri, ci + 1]).trim()
 
     if (/[A-Z]/.test(right)) {
-      const left = $.grid.at(grid, [ri, ci - 1]).trim()
+      const left = grid.get([ri, ci - 1]).trim()
       const coords: Coords = left ? [ri, ci - 1] : [ri, ci + 2]
       const door = value + right
       pointsToDoors[$.toPoint(coords)] = door
@@ -99,7 +99,7 @@ const getNeighborsFlat =
   (curr: Node) => {
     const point = $.toPoint(curr.coords)
     return $.bordering(curr.coords, 'COORDS')
-      .filter((coords: Coords) => $.grid.at(grid, coords) === '.')
+      .filter((coords: Coords) => grid.get(coords) === '.')
       .concat([
         outside.doorsToCoords[inside.pointsToDoors[point]],
         inside.doorsToCoords[outside.pointsToDoors[point]],
@@ -118,7 +118,7 @@ const getNeighborsRecursive =
     const point = $.toPoint(curr.coords)
     const neighbors = $.bordering(curr.coords, 'COORDS')
     const walkable = neighbors
-      .filter(coords => $.grid.at(grid, coords) === '.')
+      .filter(coords => grid.get(coords) === '.')
       .map(coords => ({ coords, depth: curr.depth }))
 
     const insideDoor = inside.pointsToDoors[point]
@@ -150,7 +150,7 @@ export const maze = (input: string[], recursive: boolean = false) => {
   const { width, height } = getDimensions(input)
   // This creates a grid from the given input except without the outside
   // padding. The middle part still contains the inside door names though.
-  const grid = $.grid.init(width, height, (ri, ci) => input[ri + 2][ci + 2])
+  const grid = new $.Grid(width, height, (ri, ci) => input[ri + 2][ci + 2])
   const outside = getOutsideCoords(grid, input)
   const inside = getInsideCoords(grid)
   const start: Node = { coords: outside.doorsToCoords.AA, depth: 0 }

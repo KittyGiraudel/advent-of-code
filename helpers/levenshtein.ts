@@ -1,5 +1,3 @@
-import grid from './grid'
-
 /**
  * Compute the levenshtein distance between strings a and b. It’s not the
  * fastest implementation, but it’s dependency-free so that’s something. It’s
@@ -9,7 +7,9 @@ const levenshtein = (a: string, b: string) => {
   if (a.length === 0) return b.length
   if (b.length === 0) return a.length
 
-  const matrix = grid.init<number>(a.length + 1, b.length + 1)
+  const matrix = Array.from({ length: b.length + 1 }, (_, ri) =>
+    Array.from({ length: a.length + 1 }, (_, ci) => 0)
+  )
 
   for (let i = 0; i <= b.length; i++) matrix[i][0] = i
   for (let j = 0; j <= a.length; j++) matrix[0][j] = j

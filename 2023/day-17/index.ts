@@ -42,10 +42,9 @@ const checkTurns = (
 const is = (a: Coords, b: Coords) => a[0] === b[0] && a[1] === b[1]
 
 export const run = (input: string[], advanced: boolean = false) => {
-  const grid = $.grid.from<number>(input, Number)
-  const { width, height } = $.grid.dimensions(grid)
+  const grid = $.Grid.fromRows<number>(input, Number)
   const startCoords: Coords = [0, 0]
-  const endCoords: Coords = [height - 1, width - 1]
+  const endCoords: Coords = [grid.height - 1, grid.width - 1]
   const start: State = {
     position: startCoords,
     streak: 0,
@@ -56,7 +55,7 @@ export const run = (input: string[], advanced: boolean = false) => {
     toKey,
     heuristic: curr => $.manhattan(curr.position, endCoords),
     isGoal: curr => is(curr.position, endCoords),
-    getCost: (_, next) => $.grid.at(grid, next.position),
+    getCost: (_, next) => grid.get(next.position),
     getNextNodes: curr => {
       const states: State[] = []
       const left = $.turn.left(curr.orientation)
@@ -81,18 +80,22 @@ export const run = (input: string[], advanced: boolean = false) => {
       if (curr.streak < maxStraight) states.push(straightMove)
       if (!advanced) states.push(leftMove, rightMove)
       else if (curr.streak >= 4 || is(curr.position, startCoords)) {
-        const { validLeft, validRight } = checkTurns(curr, width, height)
+        const { validLeft, validRight } = checkTurns(
+          curr,
+          grid.width,
+          grid.height
+        )
         if (validLeft) states.push(leftMove)
         if (validRight) states.push(rightMove)
       }
 
-      return states.filter(state => $.grid.at(grid, state.position))
+      return states.filter(state => grid.get(state.position))
     },
   })
 
   return $.pathfinding
     .path(from, toKey(start), toKey(end))
     .map(key => $.toCoords(key!.split(' ')[0] as Point))
-    .map(coords => $.grid.at(grid, coords))
+    .map(coords => grid.get(coords))
     .reduce((a, b) => a + b, 0)
 }

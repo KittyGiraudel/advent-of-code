@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Grid } from '../../types'
+import { Grid } from '../../types'
 import { Intcode } from '../day-05'
 
 export const getGrid = (input: string) => {
@@ -17,29 +17,26 @@ export const getGrid = (input: string) => {
   // join them all together to have a single large string. Then, split the
   // string on line breaks (formerly ASCII code 10), and split each row on
   // individual characters to make grid.
-  return (computer.getOutput() as number[])
-    .map(code => String.fromCharCode(code))
-    .join('')
-    .split('\n')
-    .map(row => row.split('')) as Grid<string>
+  return $.Grid.fromRows<string>(
+    (computer.getOutput() as number[])
+      .map(code => String.fromCharCode(code))
+      .join('')
+      .split('\n')
+  )
 }
 
 export const calibrate = (grid: Grid<string>) =>
-  $.grid.reduce(
-    grid,
-    (calibration, value, ri, ci) => {
-      if (value !== '#') return calibration
+  grid.reduce((calibration, value, ri, ci) => {
+    if (value !== '#') return calibration
 
-      const neighborcoords = $.bordering([ri, ci], 'COORDS')
-      const neighbors = neighborcoords.map(coords => $.grid.at(grid, coords))
-      const intersection = neighbors.every(neighbor => neighbor === '#')
+    const neighborcoords = $.bordering([ri, ci], 'COORDS')
+    const neighbors = neighborcoords.map(coords => grid.get(coords))
+    const intersection = neighbors.every(neighbor => neighbor === '#')
 
-      if (intersection) calibration += ri * ci
+    if (intersection) calibration += ri * ci
 
-      return calibration
-    },
-    0
-  )
+    return calibration
+  }, 0)
 
 export const scaffold = (input: string) => {
   const computer = new Intcode(input).updateMemory(0, 2)

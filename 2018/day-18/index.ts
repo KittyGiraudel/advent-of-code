@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Grid, Coords } from '../../types'
+import { Grid } from '../../types'
 
 const isTree = (n: string) => n === '|'
 const isLumberyard = (n: string) => n === '#'
@@ -21,12 +21,12 @@ const getScore = (grid: Grid<string>) => {
 
 export const run = (rows: string[], iterations: number = 1) => {
   const history = []
-  let curr = $.grid.from<string>(rows)
+  let curr = $.Grid.fromRows<string>(rows)
 
   for (let i = 0; i < iterations; i++) {
-    curr = $.grid.map(curr, (value, ri, ci) => {
-      const neighbors = $.surrounding([ri, ci], 'COORDS').map(
-        (coords: Coords) => $.grid.at(curr, coords)
+    curr = curr.map((value, ri, ci) => {
+      const neighbors = $.surrounding([ri, ci], 'COORDS').map(coords =>
+        curr.get(coords)
       )
 
       return getNextValue(value, neighbors)

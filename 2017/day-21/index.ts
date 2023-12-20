@@ -4,17 +4,17 @@ import { Grid } from '../../types'
 type Patterns = Record<string, string[]>
 type Cache = Record<string, string[]>
 
-const asGrid = (string: string) =>
-  string.split('/').map(row => Array.from(row)) as Grid<string>
+const asGrid = (string: string) => $.Grid.fromRows<string>(string.split('/'))
 
-const asString = (grid: Grid<string>) => grid.map(row => row.join('')).join('/')
+const asString = (grid: Grid<string>) =>
+  grid.rows.map(row => row.join('')).join('/')
 
 const getPatterns = (lines: string[]) => {
   const patterns: Patterns = {}
 
   lines.forEach(line => {
     const [input, output] = line.split(' => ')
-    const variants = $.grid.variants(asGrid(input)).map(asString)
+    const variants = asGrid(input).variants().map(asString)
     const out = output.split('/')
 
     // Pre-compute the 8 rotated varients of a given pattern to avoid having
@@ -59,21 +59,21 @@ const disassemble = (curr: string[]) => {
   return $.chunk(rows, size).flatMap($.zip)
 }
 
-const reassemble = (grids: Grid<string>) => {
+const reassemble = (grids: string[][]) => {
   // If there is only one subgrid, return it as there is nothing to reassemble.
   if (grids.length === 1) return grids[0]
 
-  const size = Math.sqrt(grids.length)
-
   // Group grids into groups of the expected size, and zip their respective
   // items before flattening the whole thing.
-  return $.chunk(grids, size)
-    .map($.zip)
-    .flatMap(group => group.map(grid => grid.join('')))
+  return $.chunk(grids, Math.sqrt(grids.length)).flatMap(group =>
+    $.zip(group).map(grid => grid.join(''))
+  )
 }
 
-const cycle = (curr: string[], patterns: Patterns, cache: Cache) =>
-  reassemble(disassemble(curr).map(sub => enhance(sub, patterns, cache)))
+const cycle = (curr: string[], patterns: Patterns, cache: Cache) => {
+  let next = disassemble(curr).map(sub => enhance(sub, patterns, cache))
+  return reassemble(next)
+}
 
 export const run = (input: string[], iterations: number = 1) => {
   const patterns = getPatterns(input)

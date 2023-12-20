@@ -1,14 +1,14 @@
 import $ from '../../helpers'
 import { Grid, Coords } from '../../types'
 
-const KEYPAD_1: Grid<number> = [
+const KEYPAD_1: number[][] = [
   [1, 2, 3],
   [4, 5, 6],
   [7, 8, 9],
 ]
 
 // prettier-ignore
-const KEYPAD_2: Grid<number | string | undefined> = [
+const KEYPAD_2: (number | string | undefined)[][] = [
   [   ,    ,  1 ,    ,   ],
   [   ,  2 ,  3 ,  4 ,   ],
   [ 5 ,  6 ,  7 ,  8 , 9 ],
@@ -32,10 +32,10 @@ export const run = (instructions: string[], advanced: boolean = false) => {
     .map(instruction => {
       Array.from(instruction).forEach(char => {
         const next = $.applyVector(position, VECTORS[char as Vector])
-        if ($.grid.at(keypad, next)) position = next
+        if (keypad?.[next[0]]?.[next[1]]) position = next
       })
 
-      return $.grid.at(keypad, position)
+      return keypad[position[0]][position[1]]
     })
     .join('')
 }

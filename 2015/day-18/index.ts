@@ -1,28 +1,27 @@
 import $ from '../../helpers'
-import { Coords, Point } from '../../types'
+import { Point } from '../../types'
 
 export const run = (
   input: string[],
   iterations: number,
   advanced: boolean = false
 ) => {
-  let curr = $.grid.from<string>(input)
-  const { width, height } = $.grid.dimensions(curr)
+  let curr = $.Grid.fromRows<string>(input)
   const corners: Point[] = [
     `0,0`,
-    `0,${width - 1}`,
-    `${height - 1},0`,
-    `${height - 1},${width - 1}`,
+    `0,${curr.width - 1}`,
+    `${curr.height - 1},0`,
+    `${curr.height - 1},${curr.width - 1}`,
   ]
 
   if (advanced) {
-    corners.forEach(point => $.grid.set(curr, $.toCoords(point), '#'))
+    corners.forEach(point => curr.set(point, '#'))
   }
 
   while (iterations--) {
-    curr = $.grid.map(curr, (value, ...coords) => {
+    curr = curr.map((value, ...coords) => {
       const neighbors = $.surrounding(coords, 'COORDS')
-      const on = neighbors.filter(coords => $.grid.at(curr, coords) === '#')
+      const on = neighbors.filter(coords => curr.get(coords) === '#')
 
       if (advanced && corners.includes($.toPoint(coords))) {
         return '#'
@@ -36,5 +35,5 @@ export const run = (
     })
   }
 
-  return $.countInString(curr.join(''), '#')
+  return $.countInString(curr.stringify(), '#')
 }

@@ -3,23 +3,20 @@ import { Coords, Grid } from '../../types'
 
 const calculateWeight = (grid: Grid<string>) =>
   $.sum(
-    grid.flatMap(
-      (row, ri) => $.countInString(row.join(''), 'O') * (grid.length - ri)
-    )
+    grid.flatMap((row, ri) => $.countInString(row, 'O') * (grid.height - ri))
   )
 
 const tilt = (grid: Grid<string>, vector: Coords) => {
-  const { width, height } = $.grid.dimensions(grid)
   const northOrWest = vector.includes(-1)
 
-  for (let ri = 0; ri < height; ri++) {
-    for (let ci = 0; ci < width; ci++) {
+  for (let ri = 0; ri < grid.height; ri++) {
+    for (let ci = 0; ci < grid.width; ci++) {
       const curr: Coords = [
-        northOrWest ? ri : height - 1 - ri,
-        northOrWest ? ci : width - 1 - ci,
+        northOrWest ? ri : grid.height - 1 - ri,
+        northOrWest ? ci : grid.width - 1 - ci,
       ]
 
-      if ($.grid.at(grid, curr) !== 'O') continue
+      if (grid.get(curr) !== 'O') continue
 
       let next: Coords = curr
 
@@ -29,14 +26,11 @@ const tilt = (grid: Grid<string>, vector: Coords) => {
       // faster, as it moves every “O” to its final stage immediately (since
       // their trajectory don’t impact one another provided we iterate on the
       // grid in the correct direction).
-      while ($.grid.at(grid, $.applyVector(next, vector)) === '.') {
+      while (grid.get($.applyVector(next, vector)) === '.') {
         next = $.applyVector(next, vector)
       }
 
-      if ($.grid.at(grid, next) === '.') {
-        $.grid.set(grid, next, 'O')
-        $.grid.set(grid, curr, '.')
-      }
+      if (grid.get(next) === '.') grid.set(next, 'O').set(curr, '.')
     }
   }
 }
@@ -50,7 +44,7 @@ const cycle = (grid: Grid<string>) =>
   ].forEach(vector => tilt(grid, vector as Coords))
 
 export const run = (input: string[], advanced: boolean = false) => {
-  const grid = $.grid.from<string>(input)
+  const grid = $.Grid.fromRows<string>(input)
   const cycles = 1_000_000_000
 
   if (!advanced) {

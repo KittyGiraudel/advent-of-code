@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Grid } from '../../types'
+import { Grid } from '../../types'
 
 type Mirror = { column: number | null; row: number | null }
 
@@ -15,7 +15,7 @@ type Mirror = { column: number | null; row: number | null }
 const searchAxis = (grid: Grid<string>, not?: number | null) => {
   // This is not necessary per se but we can speed things up by treating the
   // grid as an array of rows instead of a two-dimensional grid.
-  const rows = grid.map(row => row.join(''))
+  const rows = grid.rows.map(row => row.join(''))
 
   for (let li = 0, ri = li + 1; li < rows.length - 1; li++, ri++) {
     // This check is not necessary per se but it significantly speeds up the
@@ -37,7 +37,7 @@ const searchAxis = (grid: Grid<string>, not?: number | null) => {
 // width/height rows/columns, but someone on Reddit made a good point that
 // rotating the grid is ultimately simpler.
 const findMirror = (grid: Grid<string>, not?: Mirror) => ({
-  column: searchAxis($.grid.rotate(grid), not?.column),
+  column: searchAxis(grid.rotate(), not?.column),
   row: searchAxis(grid, not?.row),
 })
 
@@ -47,18 +47,18 @@ const summarize = (mirror: Mirror) => {
   return 0
 }
 
-// This creates a grid variant by cloning the grid, and replacing the row
+// This creates grid variants by cloning the grid, and replacing the row
 // containing the smudge (at index ri) with the opposite character at the right
 // column index (ci).
-const getVariant = (grid: Grid<string>, coords: Coords) =>
-  $.grid.set(
-    $.grid.clone(grid),
-    coords,
-    $.grid.at(grid, coords) === '#' ? '.' : '#'
-  )
+const getVariants = (grid: Grid<string>) => {
+  const variants: Grid<string>[] = []
 
-const getVariants = (grid: Grid<string>) =>
-  $.grid.map(grid, (_, ...coords) => getVariant(grid, coords)).flat()
+  grid.forEach((value, ...coords) => {
+    variants.push(grid.clone().set(coords, value === '#' ? '.' : '#'))
+  })
+
+  return variants
+}
 
 const summarizeVariant =
   (mirror: Mirror) => (acc: number, variant: Grid<string>) =>
@@ -67,7 +67,7 @@ const summarizeVariant =
 export const run = (blocks: string[], advanced: boolean = false) =>
   $.sum(
     blocks
-      .map(block => $.grid.from<string>(block.split('\n')))
+      .map(block => $.Grid.fromRows<string>(block.split('\n')))
       .map(grid => ({ grid, mirror: findMirror(grid) }))
       .map(({ grid, mirror }) =>
         advanced

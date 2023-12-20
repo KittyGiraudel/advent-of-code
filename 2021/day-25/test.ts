@@ -26,7 +26,7 @@ test('Day 25 — Sample', t => {
   `)
 
   t.is(
-    $.grid.render(steps(sampleA, 4)),
+    steps(sampleA, 4).render(),
     $.sample(
       `
     >......
@@ -40,7 +40,7 @@ test('Day 25 — Sample', t => {
     ).join('\n')
   )
   t.is(
-    $.grid.render(steps(sampleB, 5)),
+    steps(sampleB, 5).render(),
     $.sample(
       `
     vv>...>v>.
@@ -57,7 +57,7 @@ test('Day 25 — Sample', t => {
   )
 
   t.is(
-    $.grid.render(steps(sampleB, 10)),
+    steps(sampleB, 10).render(),
     $.sample(
       `
     ..>..>>vv.
@@ -74,7 +74,7 @@ test('Day 25 — Sample', t => {
   )
 
   t.is(
-    $.grid.render(steps(sampleB, 58)),
+    steps(sampleB, 58).render(),
     $.sample(
       `
     ..>>v>vv..

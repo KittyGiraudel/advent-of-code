@@ -20,15 +20,14 @@ export const run = (input: string[], advanced: boolean = false) => {
   const keys: Record<Point, string> = {}
   const doors: Record<Point, string> = {}
   const lookup = new Set<Point>()
-  const grid = $.grid.from<string>(input)
+  const grid = $.Grid.fromRows<string>(input)
 
-  $.grid.forEach<string>(grid, (value, ...coords) => {
+  grid.forEach((value, ...coords) => {
     const point = $.toPoint(coords)
     if (value === '@') startPositions.push(point)
     if (KEY_RE.test(value)) keys[point] = value
     if (DOOR_RE.test(value)) doors[point] = value
     if (value !== '#') lookup.add(point)
-    return value === '#' ? value : '.'
   })
 
   if (advanced) {

@@ -25,8 +25,7 @@ const getRiskLevel = (x: number, y: number, target: Coords, depth: number) =>
   getErosionLevel(x, y, target, depth) % 3
 
 export const getRisk = (depth: number, target: Coords) =>
-  $.grid.reduce(
-    $.grid.init(target[0] + 1, target[1] + 1),
+  new $.Grid(target[0] + 1, target[1] + 1).reduce(
     (acc, value, ri, ci) => acc + getRiskLevel(ci, ri, target, depth),
     0
   )

@@ -77,9 +77,9 @@ const getSubgrids = (grid: Grid<string>) =>
           index,
           orientation,
         })) as NeighborGrid[],
-      grid: grid
-        .slice(ri, ri + 50)
-        .map(row => row.slice(ci, ci + 50)) as Grid<string>,
+      grid: $.Grid.fromRows(
+        grid.rows.slice(ri, ri + 50).map(row => row.slice(ci, ci + 50).join(''))
+      ),
     } as Subgrid
   })
 
@@ -100,8 +100,8 @@ const getWrapNeighbors = (
   const findFirstIndex = Boolean
   const findLastIndex = (acc: number, item: string, index: number) =>
     item ? index : acc
-  const row = grid[ri]
-  const column = $.column(grid, ci)
+  const row = grid.rows[ri]
+  const column = grid.column(ci)
 
   return [
     {
@@ -121,9 +121,9 @@ const getWrapNeighbors = (
       wrap: [column.reduce(findLastIndex, 0), ci] as Coords,
     },
   ].map(({ adjacent, wrap }) => {
-    if ($.grid.at(grid, adjacent) === '.') return adjacent
-    if ($.grid.at(grid, adjacent) === '#') return null
-    if ($.grid.at(grid, wrap) === '.') return wrap
+    if (grid.get(adjacent) === '.') return adjacent
+    if (grid.get(adjacent) === '#') return null
+    if (grid.get(wrap) === '.') return wrap
     return null
   })
 }
@@ -137,7 +137,7 @@ const getCubicNeighbors = (
 ): CubicNeighbor[] => {
   return VECTORS.map((vector, i) => {
     const nextPos = $.applyVector([ri, ci], vector)
-    const nextValue = $.grid.at(grid, nextPos)
+    const nextValue = grid.get(nextPos)
 
     // If the next position is available, this is easy: return the next
     // position (current position + vector).
@@ -151,12 +151,8 @@ const getCubicNeighbors = (
       const subgrids = getSubgrids(grid)
       const currSubgrid = subgrids.find(
         ({ boundaries, grid }) =>
-          $.isClamped(
-            ri,
-            boundaries[0],
-            boundaries[0] + $.grid.height(grid) - 1
-          ) &&
-          $.isClamped(ci, boundaries[1], boundaries[1] + $.grid.width(grid) - 1)
+          $.isClamped(ri, boundaries[0], boundaries[0] + grid.height - 1) &&
+          $.isClamped(ci, boundaries[1], boundaries[1] + grid.width - 1)
       )
 
       // Which grid we land on depends on both which subgrid we are currently
@@ -165,10 +161,10 @@ const getCubicNeighbors = (
       const { grid: nextSubgrid, boundaries } = subgrids[next.index]
       // Since we’re dealing with a cube, faces are squares so we don’t have to
       // check width and height separately.
-      const last = nextSubgrid.length - 1
+      const last = nextSubgrid.height - 1
       // These are the adjusted coords relative to the subgrid.
-      const ari = ri % nextSubgrid.length
-      const aci = ci % nextSubgrid.length
+      const ari = ri % nextSubgrid.height
+      const aci = ci % nextSubgrid.width
       const nextCoords: Coords = [0, 0]
 
       // If we’re entering the next grid from the left (therefore facing right),
@@ -193,7 +189,7 @@ const getCubicNeighbors = (
       // the position is an empty space, we can return it (along with the new
       // orientation).
       const position = $.applyVector(boundaries, nextCoords)
-      const cell = $.grid.at(grid, position)
+      const cell = grid.get(position)
 
       if (cell === SPACE) return { position, orientation: next.orientation }
       if (cell === WALL) return null
@@ -207,7 +203,7 @@ type CacheMap = Record<Point, CubicNeighbor[] | WrapNeighbor[]>
 const getNeighbors =
   (grid: Grid<string>, asCube: boolean) =>
   (acc: CacheMap, _: string, ri: number, ci: number) => {
-    if ($.grid.at(grid, [ri, ci])) {
+    if (grid.get([ri, ci])) {
       acc[$.toPoint([ri, ci])] = asCube
         ? getCubicNeighbors(grid, ri, ci)
         : getWrapNeighbors(grid, ri, ci)
@@ -220,16 +216,12 @@ export const maze = (input: string, asCube: boolean = false) => {
   const [map, last] = input.split('\n\n')
   const instructions = $.match(last, /(\d+|L|R)/g).map(v => +v || v)
   const rows = map.split('\n').filter(Boolean)
-  const grid = $.grid.from(rows, v => (v === ' ' ? '' : v))
-  const neighborMap = $.grid.reduce<string, CacheMap>(
-    grid,
-    getNeighbors(grid, asCube),
-    {}
-  )
+  const grid = $.Grid.fromRows(rows, v => (v === ' ' ? '' : v))
+  const neighborMap = grid.reduce<CacheMap>(getNeighbors(grid, asCube), {})
 
   let position: Coords = [
     0,
-    grid[0].findIndex((_, ci) => grid[0][ci] === SPACE),
+    grid.rows[0].findIndex((_, ci) => grid.get([0, ci]) === SPACE),
   ]
   let orientation = '>'
 
@@ -247,7 +239,7 @@ export const maze = (input: string, asCube: boolean = false) => {
           position = next.position
           if (next.orientation) orientation = next.orientation
         }
-        grid[position[0]][position[1]] = orientation
+        grid.set([position[0], position[1]], orientation)
       }
     }
   })

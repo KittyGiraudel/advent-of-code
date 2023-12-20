@@ -15,10 +15,10 @@ const parseRow = (row: string) =>
 //  1   2   3
 // Output:
 // [ ['N', 'Z'], ['D', 'C', 'M'], ['P'] ]
-const parseMap = (map: string) =>
-  $.grid
-    .rotate(map.split('\n').filter(Boolean).slice(0, -1).map(parseRow))
-    .map(column => column.filter(Boolean).reverse())
+const parseMap = (map: string[]) =>
+  $.Grid.from<string, string>(map.filter(Boolean).slice(0, -1).map(parseRow))
+    .rotate()
+    .rows.map(column => column.filter(Boolean).reverse())
 
 const parseInstructions = (instructions: string) =>
   instructions
@@ -27,7 +27,7 @@ const parseInstructions = (instructions: string) =>
     .map(instruction => $.numbers(instruction))
 
 export const process = (input: [string, string], batch: boolean = false) => {
-  const map = parseMap(input[0])
+  const map = parseMap(input[0].split('\n'))
   const instructions = parseInstructions(input[1])
 
   instructions.forEach(([amount, from, to]) => {

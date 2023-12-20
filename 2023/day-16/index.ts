@@ -24,7 +24,7 @@ const energize = (grid: Grid<string>, position: Coords, direction: Coords) => {
 
     const point = $.toPoint(beam.position)
     const key = point + ';' + $.toPoint(beam.direction)
-    const value = $.grid.at(grid, beam.position)
+    const value = grid.get(beam.position)
 
     if (!value || visited.has(key)) {
       beams.shift()
@@ -49,21 +49,20 @@ const energize = (grid: Grid<string>, position: Coords, direction: Coords) => {
 }
 
 export const run = (input: string[], advanced: boolean = false) => {
-  const grid = $.grid.from<string>(input)
-  const { width, height } = $.grid.dimensions(grid)
+  const grid = $.Grid.fromRows<string>(input)
 
   if (!advanced) {
     return energize(grid, [0, -1], [0, +1])
   }
 
   return Math.max(
-    ...$.range(height).flatMap(ri => [
+    ...$.range(grid.height).flatMap(ri => [
       energize(grid, [ri, -1], [0, +1]),
-      energize(grid, [ri, width], [0, -1]),
+      energize(grid, [ri, grid.width], [0, -1]),
     ]),
-    ...$.range(width).flatMap(ci => [
+    ...$.range(grid.width).flatMap(ci => [
       energize(grid, [-1, ci], [+1, 0]),
-      energize(grid, [height, ci], [-1, 0]),
+      energize(grid, [grid.height, ci], [-1, 0]),
     ])
   )
 }

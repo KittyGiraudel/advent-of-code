@@ -1,11 +1,11 @@
 import $ from '../../helpers'
-import { Grid, Coords, Point } from '../../types'
+import { Coords, Grid, Point } from '../../types'
 
 type UnitType = 'G' | 'E'
 
 const getBorderingSpace = (grid: Grid<string>, curr: Coords) => {
   const [N, E, S, W] = $.bordering(curr, 'COORDS')
-  return [N, W, E, S].filter(neighbor => $.grid.at(grid, neighbor) === '.')
+  return [N, W, E, S].filter(neighbor => grid.get(neighbor) === '.')
 }
 
 class Unit {
@@ -122,7 +122,7 @@ class Game {
   constructor(rows: string[], elvishPower: number = 3) {
     this.turns = 0
     this.units = []
-    this.grid = $.grid.from(rows, (value, ri, ci) => {
+    this.grid = $.Grid.fromRows(rows, (value, ri, ci) => {
       if (value === 'G' || value === 'E') {
         const power = value === 'E' ? elvishPower : 3
         const unit = new Unit(value, [ri, ci], power)
@@ -170,12 +170,12 @@ class Game {
 
   render() {
     const turn = 'Turn: ' + this.turns
-    const map = $.grid.render(
-      $.grid.map(this.grid, (value, ...position) => {
+    const map = this.grid
+      .map((value, ...position) => {
         const unit = this.units.find(unit => unit.isAt(position) && unit.alive)
         return unit?.type ?? value
       })
-    )
+      .render()
 
     return ['', turn, map].join('\n')
   }

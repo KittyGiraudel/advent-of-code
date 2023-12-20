@@ -12,7 +12,7 @@ import dump from './dump'
 import frequency from './frequency'
 import fromAscii from './fromAscii'
 import gcd from './gcd'
-import grid from './grid'
+import Grid from './Grid'
 import groupBy from './groupBy'
 import hexToBin from './hexToBin'
 import indices from './indices'
@@ -68,7 +68,7 @@ export default {
   frequency,
   fromAscii,
   gcd,
-  grid,
+  Grid,
   groupBy,
   hexToBin,
   indices,

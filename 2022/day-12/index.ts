@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Grid, Coords } from '../../types'
+import { Coords, Grid } from '../../types'
 
 type Node = {
   position: Coords
@@ -9,7 +9,7 @@ type Node = {
 const parse = (input: string[]) => {
   const start: Node = { position: [0, 0], elevation: 0 }
   const end: Node = { position: [0, 0], elevation: 0 }
-  const grid = $.grid.from(input, (value, ri, ci) => {
+  const grid = $.Grid.fromRows(input, (value, ri, ci) => {
     if (value === 'S') {
       start.position = [ri, ci]
       return (start.elevation = 'a'.charCodeAt(0))
@@ -29,15 +29,14 @@ const parse = (input: string[]) => {
 const isWithinBounds =
   (grid: Grid<number>) =>
   ([ri, ci]: Coords) =>
-    $.isClamped(ri, 0, $.grid.height(grid) - 1) &&
-    $.isClamped(ci, 0, $.grid.width(grid) - 1)
+    $.isClamped(ri, 0, grid.height - 1) && $.isClamped(ci, 0, grid.width - 1)
 
 const getNextNodes =
   (grid: Grid<number>) =>
   ({ position, elevation }: Node) =>
     $.bordering(position, 'COORDS')
       .filter(isWithinBounds(grid))
-      .map(position => ({ position, elevation: $.grid.at(grid, position) }))
+      .map(position => ({ position, elevation: grid.get(position) }))
       .filter((next: Node) => next.elevation - elevation <= 1)
 
 const getPathLength = (grid: Grid<number>, start: Node, end: Node) => {
@@ -64,8 +63,7 @@ export const findPath = (input: string[]) => {
 export const findShortestPath = (input: string[]) => {
   const { grid, end } = parse(input)
 
-  return $.grid.reduce(
-    grid,
+  return grid.reduce(
     (min, elevation, ri, ci) =>
       elevation === 'a'.charCodeAt(0)
         ? Math.min(

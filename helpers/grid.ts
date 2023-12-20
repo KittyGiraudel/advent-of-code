@@ -1,167 +1,200 @@
-import { Coords } from '../types'
+import { Coords, Point } from '../types'
+import $ from './'
 
-export type Grid<T> = T[][]
 type Mapper<I, O> = (value: I, ri: number, ci: number) => O
-type Handler =
-  | 'forEach'
-  | 'filter'
-  | 'map'
-  | 'flatMap'
-  | 'find'
-  | 'every'
-  | 'some'
+const identity = <I, O>(value: I, ri: number, ci: number) =>
+  value as unknown as O
 
-const loopOnGrid =
-  <T, U>(handler: Handler) =>
-  (grid: Grid<T>, callback: (item: T, ri: number, ci: number) => U) =>
-    (grid[handler].bind(grid) as CallableFunction)((row: T[], ri: number) =>
-      (row[handler].bind(row) as CallableFunction)((item: T, ci: number) =>
-        callback(item, ri, ci)
+class Grid<T> {
+  private data: T[][]
+
+  constructor(
+    width: number,
+    height: number = width,
+    value: T | null | ((ci: number, ri: number) => T) = null
+  ) {
+    this.data = Array.from({ length: height }, (_, ri) =>
+      Array.from({ length: width }, (_, ci) =>
+        typeof value === 'function'
+          ? (value as CallableFunction)(ri, ci)
+          : value
       )
     )
+  }
 
-const gridForEach = <T>(
-  grid: Grid<T>,
-  callback: (item: T, ri: number, ci: number) => void
-): void => loopOnGrid<T, void>('forEach')(grid, callback)
+  get width() {
+    return this.data[0].length
+  }
 
-const gridMap = <T, U>(
-  grid: Grid<T>,
-  callback: (item: T, ri: number, ci: number) => U
-): Grid<U> => loopOnGrid<T, U>('map')(grid, callback)
+  get height() {
+    return this.data.length
+  }
 
-const gridFilter = <T>(
-  grid: Grid<T>,
-  callback: (item: T, ri: number, ci: number) => boolean
-) => gridFlatMap(grid, callback).filter(Boolean)
+  get rows() {
+    return this.data
+  }
 
-const gridFlatMap = <T, U>(
-  grid: Grid<T>,
-  callback: (item: T, ri: number, ci: number) => U
-): U[] => loopOnGrid<T, U>('flatMap')(grid, callback)
+  get columns() {
+    return $.range(this.width).map(index => this.column(index))
+  }
 
-const gridEvery = <T>(
-  grid: Grid<T>,
-  callback: (item: T, ri: number, ci: number) => boolean
-) => loopOnGrid<T, boolean>('every')(grid, callback)
+  row(index: number) {
+    return this.data.at(index) ?? []
+  }
 
-const gridSome = <T>(
-  grid: Grid<T>,
-  callback: (item: T, ri: number, ci: number) => boolean
-) => loopOnGrid<T, boolean>('some')(grid, callback)
+  column(index: number) {
+    return $.column<T>(this.rows, index)
+  }
 
-const gridFind = <T>(
-  grid: Grid<T>,
-  callback: (item: T, ri: number, ci: number) => boolean
-): T => loopOnGrid<T, boolean>('find')(grid, callback)
+  get(position: Point | Coords) {
+    const coords =
+      typeof position === 'string' ? $.toCoords(position) : position
 
-const gridReduce = <T, U>(
-  grid: Grid<T>,
-  callback: (acc: U, current: T, ci: number, ri: number) => U,
-  initialValue: U
-): U =>
-  grid.reduce(
-    (accRow, row, ri) =>
-      row.reduce((accCol, item, ci) => callback(accCol, item, ri, ci), accRow),
-    initialValue
-  )
+    return this.data?.[coords[0]]?.[coords[1]]
+  }
 
-const gridFindCoords = <T>(
-  grid: Grid<T>,
-  callback: (item: T, ri: number, ci: number) => boolean
-) =>
-  gridReduce<T, Coords | null>(
-    grid,
-    (acc, item, ri, ci) => acc || (callback(item, ri, ci) ? [ri, ci] : acc),
-    null
-  )
+  set(position: Point | Coords, value: T) {
+    const coords =
+      typeof position === 'string' ? $.toCoords(position) : position
 
-const identity = <T>(value: string, ri: number, ci: number) => value as T
-const gridFrom = <T>(
-  rows: string[],
-  mapper: Mapper<string, T> = identity
-): Grid<T> =>
-  rows.map((row, ri) => Array.from(row).map((item, ci) => mapper(item, ri, ci)))
+    this.data[coords[0]][coords[1]] = value
 
-const cloneGrid = <T>(grid: Grid<T>): Grid<T> =>
-  grid.slice(0).map(row => row.slice(0))
+    return this
+  }
 
-const initGrid = <T>(
-  width: number,
-  height: number = width,
-  value: T | null | ((ci: number, ri: number) => T) = null
-): Grid<T> =>
-  Array.from({ length: height }, (_, ri) =>
-    Array.from({ length: width }, (_, ci) =>
-      typeof value === 'function' ? (value as CallableFunction)(ri, ci) : value
-    )
-  )
+  static from<I, O>(input: I[][], mapper: Mapper<I, O> = identity) {
+    const width = input[0].length
+    const height = input.length
+    const grid = new Grid<O>(width, height)
 
-const renderGrid = <T>(
-  grid: Grid<T>,
-  separator: string = '',
-  mapper = (value: T) => String(value)
-) =>
-  gridMap(grid, mapper)
-    .map(row => row.join(separator))
-    .join('\n')
+    input.forEach((row, ri) => {
+      Array.from(row).forEach((value, ci) => {
+        grid.set([ri, ci], mapper(value, ri, ci))
+      })
+    })
 
-const gridRotate = <T>(grid: Grid<T>): Grid<T> =>
-  Array.from(grid[0]).map((_, ci) => grid.map(row => row[ci]).reverse())
-
-const gridVariants = <T>(grid: Grid<T>) => {
-  const variants: Grid<T>[] = []
-  const clone = cloneGrid(grid)
-
-  const rotate = (grid: Grid<T>, rotations: number = 0) => {
-    for (let i = 0; i < rotations; i++) grid = gridRotate(grid)
     return grid
   }
 
-  for (let i = 0; i <= 3; i++) {
-    const rotated = rotate(clone, i)
-    const flipped = rotated.slice(0).reverse()
-    variants.push(rotated)
-    variants.push(flipped)
+  static fromRows<O>(input: string[], mapper: Mapper<string, O> = identity) {
+    return Grid.from(
+      input.map(row => Array.from(row)),
+      mapper
+    )
   }
 
-  return variants
+  clone() {
+    return new Grid<T>(this.width, this.height, (...coords) => this.get(coords))
+  }
+
+  forEach(handler: (item: T, ri: number, ci: number) => void) {
+    this.rows.forEach((row, ri) =>
+      row.forEach((value, ci) => handler(value, ri, ci))
+    )
+  }
+
+  map<O extends T>(handler: (item: T, ri: number, ci: number) => O) {
+    const next = this.clone() as Grid<O>
+
+    this.forEach((value, ...coords) =>
+      next.set(coords, handler(value, ...coords))
+    )
+
+    return next
+  }
+
+  flatMap<O>(handler: (item: T, ri: number, ci: number) => O): O[] {
+    return this.rows.flatMap((row, ri) =>
+      row.flatMap((value, ci) => handler(value, ri, ci))
+    )
+  }
+
+  every(handler: (item: T, ri: number, ci: number) => boolean) {
+    return this.rows.every((row, ri) =>
+      row.every((value, ci) => handler(value, ri, ci))
+    )
+  }
+
+  some(handler: (item: T, ri: number, ci: number) => boolean) {
+    return this.rows.some((row, ri) =>
+      row.some((value, ci) => handler(value, ri, ci))
+    )
+  }
+
+  // @TODO: fix return type
+  filter(handler: (item: T, ri: number, ci: number) => boolean) {
+    return this.flatMap(handler).filter(Boolean)
+  }
+
+  // @TODO: fix return type
+  find(handler: (item: T, ri: number, ci: number) => T) {
+    return this.rows.find((row, ri) =>
+      row.find((value, ci) => handler(value, ri, ci))
+    )
+  }
+
+  reduce<O>(
+    handler: (acc: O, item: T, ri: number, ci: number) => O,
+    initialValue: O
+  ) {
+    return this.data.reduce(
+      (accRow, row, ri) =>
+        row.reduce((accCol, item, ci) => handler(accCol, item, ri, ci), accRow),
+      initialValue
+    )
+  }
+
+  findCoords(handler: (item: T, ri: number, ci: number) => boolean) {
+    return this.reduce<Coords | null>(
+      (acc, item, ri, ci) => acc || (handler(item, ri, ci) ? [ri, ci] : acc),
+      null
+    )
+  }
+
+  render(
+    separator: string = '',
+    mapper: (value: T) => string = value => String(value)
+  ) {
+    return this.rows.map(row => row.map(mapper).join(separator)).join('\n')
+  }
+
+  flat() {
+    return this.rows.flat()
+  }
+
+  stringify() {
+    return this.rows.map(row => row.join(',')).join('')
+  }
+
+  rotate(): Grid<T> {
+    const next = new Grid<T>(0)
+
+    this.rows[0].forEach((_, ci) => {
+      next.rows.push(this.rows.map(row => row[ci]).reverse())
+    })
+
+    return next
+  }
+
+  variants() {
+    const variants: Grid<T>[] = []
+
+    const rotate = (rotations: number = 0) => {
+      let grid = this.clone()
+      for (let i = 0; i < rotations; i++) grid = grid.rotate()
+      return grid
+    }
+
+    for (let i = 0; i <= 3; i++) {
+      const rotated = rotate(i)
+      const flipped = rotated.clone()
+      flipped.rows.reverse()
+      variants.push(rotated)
+      variants.push(flipped)
+    }
+
+    return variants
+  }
 }
 
-const gridAt = <T>(grid: Grid<T>, coords: Coords) =>
-  grid?.[coords[0]]?.[coords[1]]
-
-const gridSet = <T>(grid: Grid<T>, coords: Coords, value: T) => {
-  grid[coords[0]][coords[1]] = value
-  return grid
-}
-
-const gridWidth = (grid: Grid<any>) => grid[0].length
-const gridHeight = (grid: Grid<any>) => grid.length
-const gridDimensions = (grid: Grid<any>) => ({
-  width: gridWidth(grid),
-  height: gridHeight(grid),
-})
-
-export default {
-  at: gridAt,
-  clone: cloneGrid,
-  dimensions: gridDimensions,
-  every: gridEvery,
-  filter: gridFilter,
-  find: gridFind,
-  findCoords: gridFindCoords,
-  flatMap: gridFlatMap,
-  forEach: gridForEach,
-  from: gridFrom,
-  height: gridHeight,
-  init: initGrid,
-  map: gridMap,
-  reduce: gridReduce,
-  render: renderGrid,
-  rotate: gridRotate,
-  set: gridSet,
-  some: gridSome,
-  variants: gridVariants,
-  width: gridWidth,
-}
+export default Grid

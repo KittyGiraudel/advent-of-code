@@ -7,16 +7,15 @@ const isSymbol = (input: string) => input && !isNumber(input) && !isEmpty(input)
 const isGear = (input: string) => input === '*'
 
 export const run = (input: string[], advanced: boolean = false) => {
-  const grid = $.grid.from<string>(input)
-  const getValue = (coords: Coords) => $.grid.at(grid, coords)
+  const grid = $.Grid.fromRows<string>(input)
+  const getValue = (coords: Coords) => grid.get(coords)
   type State = { current: number; total: number; symbol: boolean }
 
   if (advanced) {
     return getGearRatio(input)
   }
 
-  return $.grid.reduce<string, State>(
-    grid,
+  return grid.reduce<State>(
     (acc, value, ...coords) => {
       if (isNumber(value)) {
         // Because we iterate left-to-right, and because numbers are always
@@ -49,7 +48,7 @@ export const run = (input: string[], advanced: boolean = false) => {
 }
 
 const getSurroundingNumber = (grid: Grid<string>) => (coords: Coords) => {
-  let value = $.grid.at(grid, coords)
+  let value = grid.get(coords)
   const x = coords[1]
 
   if (!isNumber(value)) {
@@ -59,16 +58,16 @@ const getSurroundingNumber = (grid: Grid<string>) => (coords: Coords) => {
   // Start to the right of the current value, and add a digit to the
   // current number for as long as we find a digit
   coords[1] = x + 1
-  while (isNumber($.grid.at(grid, coords))) {
-    value = value + $.grid.at(grid, coords)
+  while (isNumber(grid.get(coords))) {
+    value = value + grid.get(coords)
     coords[1]++
   }
 
   // Start to the left of the current value, and prepend a digit to the
   // current number for as long as we find a digit
   coords[1] = x - 1
-  while (isNumber($.grid.at(grid, coords))) {
-    value = $.grid.at(grid, coords) + value
+  while (isNumber(grid.get(coords))) {
+    value = grid.get(coords) + value
     coords[1]--
   }
 
@@ -76,32 +75,28 @@ const getSurroundingNumber = (grid: Grid<string>) => (coords: Coords) => {
 }
 
 export const getGearRatio = (input: string[]) => {
-  const grid = $.grid.from<string>(input)
+  const grid = $.Grid.fromRows<string>(input)
 
-  return $.grid.reduce<string, number>(
-    grid,
-    (acc, item, ri, ci) => {
-      // Only consider gears, and ignore anything else.
-      if (!isGear(item)) return acc
+  return grid.reduce<number>((acc, item, ri, ci) => {
+    // Only consider gears, and ignore anything else.
+    if (!isGear(item)) return acc
 
-      // Retrieve the surrounding numbers from the gear. Beware: numbers can be
-      // returned twice. For instance in the following case, 35 will be returned
-      // twice because it will be retrieve from the 3 and retrieved from the 5
-      // individually.
-      // . . * .
-      // . 3 5 .
-      const neighbors = $.surrounding([ri, ci], 'COORDS')
-      const numbers = neighbors.map(getSurroundingNumber(grid))
+    // Retrieve the surrounding numbers from the gear. Beware: numbers can be
+    // returned twice. For instance in the following case, 35 will be returned
+    // twice because it will be retrieve from the 3 and retrieved from the 5
+    // individually.
+    // . . * .
+    // . 3 5 .
+    const neighbors = $.surrounding([ri, ci], 'COORDS')
+    const numbers = neighbors.map(getSurroundingNumber(grid))
 
-      // Because of the way I retrieve surrounding numbers, I had to assume that
-      // gears were *not* surrounded by twice the same number, which turned out
-      // fine for my input, but may not be a correct for all inputs.
-      const uniqueNumbers = $.unique(numbers)
-      const nonZeroNumbers = uniqueNumbers.filter(value => value !== 0)
-      const product = $.product(nonZeroNumbers)
+    // Because of the way I retrieve surrounding numbers, I had to assume that
+    // gears were *not* surrounded by twice the same number, which turned out
+    // fine for my input, but may not be a correct for all inputs.
+    const uniqueNumbers = $.unique(numbers)
+    const nonZeroNumbers = uniqueNumbers.filter(value => value !== 0)
+    const product = $.product(nonZeroNumbers)
 
-      return acc + (nonZeroNumbers.length === 2 ? product : 0)
-    },
-    0
-  )
+    return acc + (nonZeroNumbers.length === 2 ? product : 0)
+  }, 0)
 }

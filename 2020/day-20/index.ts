@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Grid, Coords } from '../../types'
+import { Coords, Grid } from '../../types'
 
 type Tile = {
   id: number
@@ -36,10 +36,10 @@ const MONSTER_PATTERN: Coords[] = [
 // matters later on).
 const getSides = (grid: Grid<string>) =>
   [
-    /* Top    */ grid[0],
-    /* Right  */ $.column(grid, $.grid.width(grid) - 1),
-    /* Bottom */ grid.at(-1),
-    /* Left   */ $.column(grid, 0),
+    /* Top    */ grid.rows[0],
+    /* Right  */ grid.column(grid.width - 1),
+    /* Bottom */ grid.rows.at(-1),
+    /* Left   */ grid.column(0),
   ].map(line => line!.join(''))
 
 // Parse the snapshot into a collection of 8 variants (all rotations + flips
@@ -47,10 +47,10 @@ const getSides = (grid: Grid<string>) =>
 const parseSnapshot = (snapshot: string) => {
   const [header, ...lines] = snapshot.split('\n')
   const [id] = $.numbers(header)
-  const grid = $.grid.from<string>(lines)
+  const grid = $.Grid.fromRows<string>(lines)
 
-  return $.grid
-    .variants(grid)
+  return grid
+    .variants()
     .map(grid => ({ sides: getSides(grid), grid, id } as Tile))
 }
 
@@ -63,18 +63,18 @@ const jigsaw = (tiles: Tile[], start: Tile) => {
   // snapshot). For instance, if there are 72 tiles, it means 9 snapshots, so a
   // 3x3 mozaic.
   const length = Math.sqrt(tiles.length / 8)
-  const mozaic = $.grid.init<Tile>(length, length)
+  const mozaic = new $.Grid<Tile>(length, length)
   const used = new Set()
 
-  mozaic[0][0] = start
+  mozaic.set([0, 0], start)
   used.add(start.id)
 
-  for (let ri = 0; ri < mozaic.length; ri++) {
-    for (let ci = 0; ci < mozaic[0].length; ci++) {
+  for (let ri = 0; ri < mozaic.height; ri++) {
+    for (let ci = 0; ci < mozaic.width; ci++) {
       if (ri === 0 && ci === 0) continue
 
-      const left = $.grid.at(mozaic, [ri, ci - 1])
-      const top = $.grid.at(mozaic, [ri - 1, ci])
+      const left = mozaic.get([ri, ci - 1])
+      const top = mozaic.get([ri - 1, ci])
 
       // Look amongst the tiles that are not used yet for one that matches the
       // top and left tiles (if any).
@@ -89,7 +89,7 @@ const jigsaw = (tiles: Tile[], start: Tile) => {
       // incorrect and we can abort.
       if (!next) return
 
-      mozaic[ri][ci] = next
+      mozaic.set([ri, ci], next)
       used.add(next.id)
     }
   }
@@ -98,15 +98,15 @@ const jigsaw = (tiles: Tile[], start: Tile) => {
 }
 
 const assemble = (mozaic: Grid<Tile>) => {
-  const grid: Grid<string> = []
+  const grid = new $.Grid<string>(0)
 
   // For every row of 3 tiles …
-  for (let ri = 0; ri < mozaic.length; ri++) {
-    const row = mozaic[ri]
+  for (let ri = 0; ri < mozaic.height; ri++) {
+    const row = mozaic.rows[ri]
 
     // Loop over the lines of the tiles, omitting the first and the last.
-    for (let i = 1; i < row[0].grid.length - 1; i++) {
-      grid.push(row.map(tile => tile.grid[i].slice(1, -1)).flat())
+    for (let i = 1; i < row[0].grid.height - 1; i++) {
+      grid.rows.push(row.map(tile => tile.grid.rows[i].slice(1, -1)).flat())
     }
   }
 
@@ -116,22 +116,18 @@ const assemble = (mozaic: Grid<Tile>) => {
 const isMonsterTail = (image: Grid<string>, ri: number, ci: number) =>
   MONSTER_PATTERN.every(vector => {
     const coords = $.applyVector([ri, ci], vector)
-    return $.grid.at(image, coords) === '#'
+    return image.get(coords) === '#'
   })
 
 // Count the amount of sea monsters in the given image.
 const countMonsters = (image: Grid<string>) =>
-  $.grid.reduce(
-    image,
-    (acc, _, ri, ci) => acc + +isMonsterTail(image, ri, ci),
-    0
-  )
+  image.reduce((acc, _, ri, ci) => acc + +isMonsterTail(image, ri, ci), 0)
 
 // Iterate over all 8 variants of the given image (rotated and flipped) to find
 // the maximum number of sea monsters that can be spotted. Then, computed how
 // many `#` do not belong to a sea monster pattern.
 const inspectWaters = (image: Grid<string>) => {
-  const variants = $.grid.variants(image)
+  const variants = image.variants()
   const monsters = Math.max(...variants.map(countMonsters))
   const sharps = $.countInString(image.flat().join(''), '#')
 
@@ -140,17 +136,14 @@ const inspectWaters = (image: Grid<string>) => {
 
 // Compute the mozaic checksum by multiplying the ID of the 4 corner tiles.
 const checksum = (mozaic: Grid<Tile>) => {
-  const length = mozaic.length
   const corners: Coords[] = [
     /* Top left     */ [0, 0],
-    /* Top right    */ [0, length - 1],
-    /* Bottom left  */ [length - 1, 0],
-    /* Bottom right */ [length - 1, length - 1],
+    /* Top right    */ [0, mozaic.width - 1],
+    /* Bottom left  */ [mozaic.height - 1, 0],
+    /* Bottom right */ [mozaic.height - 1, mozaic.width - 1],
   ]
 
-  const ids = corners
-    .map(coords => $.grid.at(mozaic, coords))
-    .map(tile => tile.id)
+  const ids = corners.map(coords => mozaic.get(coords)).map(tile => tile.id)
 
   return $.product(ids)
 }
