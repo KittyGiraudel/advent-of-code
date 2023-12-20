@@ -16,7 +16,7 @@ const parseRow = (row: string) =>
 // Output:
 // [ ['N', 'Z'], ['D', 'C', 'M'], ['P'] ]
 const parseMap = (map: string[]) =>
-  $.Grid.from<string, string>(map.filter(Boolean).slice(0, -1).map(parseRow))
+  $.Grid.from<string>(map.slice(0, -1).map(parseRow))
     .rotate()
     .rows.map(column => column.filter(Boolean).reverse())
 

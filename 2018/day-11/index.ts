@@ -48,7 +48,7 @@ export const getFuelLoose = (serial: number) => {
   // The following algorithm is inspired from this Ruby version:
   // https://www.reddit.com/r/adventofcode/comments/a53r6i/comment/ebjsc3u/?utm_source=reddit&utm_medium=web2x&context=3
   summed.forEach((v, ri, ci) => {
-    const get = (ri: number, ci: number) => summed.get([ri, ci]) ?? 0
+    const get = (...coords: Coords) => summed.get(coords) ?? 0
 
     summed.set(
       [ri, ci],
@@ -61,8 +61,8 @@ export const getFuelLoose = (serial: number) => {
 
     // Iterate over the Y axis.
     ranges.forEach(yMin => {
-      const yMins = summed.rows[yMin - 1]
-      const yMaxes = summed.rows[yMin - 1 + i]
+      const yMins = summed.row(yMin - 1)
+      const yMaxes = summed.row(yMin - 1 + i)
 
       // Iterate over the X axis.
       ranges.forEach(xMin => {

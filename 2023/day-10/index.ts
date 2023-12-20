@@ -113,14 +113,14 @@ export const run = (input: string[], advanced: boolean = false) => {
   const { from: flooded } = floodGrid(grid)
   const { from: scaledFlooded } = floodGrid(scaleUpGrid(grid, pipe))
   const floodedSize = Object.keys(flooded).length
-  const enclavesCount = grid.filter(
+  const enclavesCount = grid.count(
     (_, ...coords) =>
       // If the cell does *not* belong to the pipe, and does *not* belong to
       // the outside, but was flooded when scaling up, it is an enclave.
       !($.toPoint(coords) in pipe) &&
       !($.toPoint(coords) in flooded) &&
       $.toPoint(scaleUp(coords)) in scaledFlooded
-  ).length
+  )
 
   // The amount of cells belonging to the loop is the total area of the grid
   // minus the length of the pipe + all flooded cells from the outside + all the

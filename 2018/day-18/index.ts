@@ -13,21 +13,17 @@ const getNextValue = (value: string, neighbors: string[]) => {
   return value
 }
 
-const getScore = (grid: Grid<string>) => {
-  const counters = $.frequency(grid.flat())
-
-  return counters['#'] * counters['|']
-}
+const getScore = (grid: Grid<string>) =>
+  grid.count(v => v === '#') * grid.count(v => v === '|')
 
 export const run = (rows: string[], iterations: number = 1) => {
   const history = []
   let curr = $.Grid.fromRows<string>(rows)
 
   for (let i = 0; i < iterations; i++) {
-    curr = curr.map((value, ri, ci) => {
-      const neighbors = $.surrounding([ri, ci], 'COORDS').map(coords =>
-        curr.get(coords)
-      )
+    curr = curr.map((value, ...coords) => {
+      const surroundings = $.surrounding(coords, 'COORDS')
+      const neighbors = surroundings.map(coords => curr.get(coords))
 
       return getNextValue(value, neighbors)
     })

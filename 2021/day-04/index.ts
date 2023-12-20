@@ -3,12 +3,11 @@ import { Grid } from '../../types'
 
 type BingoCell = { marked: boolean; value: number }
 
-const isGridComplete = (grid: Grid<BingoCell>) => {
-  const hasFullRow = grid.rows.some(row => row.every(item => item.marked))
-  const hasFullCol = grid.columns.some(col => col.every(item => item.marked))
+const isLineComplete = (rowOrCol: BingoCell[]) =>
+  rowOrCol.every(item => item.marked)
 
-  return hasFullRow || hasFullCol
-}
+const isGridComplete = (grid: Grid<BingoCell>) =>
+  grid.someRow(isLineComplete) || grid.someColumn(isLineComplete)
 
 const roll = (grids: Grid<BingoCell>[], number: number) => {
   grids.forEach(grid => {
@@ -40,7 +39,7 @@ export const getBingos = (input: string) => {
 }
 
 const formatGrid = (grid: string) =>
-  $.Grid.from<BingoCell, BingoCell>(
+  $.Grid.from<BingoCell>(
     grid.split('\n').map((row: string) =>
       row
         .split(/\s+/g)

@@ -22,7 +22,8 @@ const isRowEmpty = (row: string[]) => row && row.join('') === EMPTY_ROW
 // empty line at the top of the grid only to add back the right amount. It could
 // figure out how many to add/remove instead but heh.
 const adjustHeight = (grid: Grid<string>, rock: Rock) => {
-  while (isRowEmpty(grid.rows[0])) grid.rows.shift()
+  while (isRowEmpty(grid.row(0))) grid.rows.shift()
+
   for (let i = 0; i < 3 + rock.length; i++)
     grid.rows.unshift(EMPTY_ROW.split(''))
 
@@ -62,8 +63,6 @@ const halt = (grid: Grid<string>, blocks: Blocks) => {
 
 const getHeight = (grid: Grid<string>) =>
   grid.rows.filter(row => row.join('') !== EMPTY_ROW).length
-
-const render = (grid: Grid<string>) => [log(grid.render()), log('')]
 
 export const tetris = (input: string, count: number = 2022) => {
   const grid = new $.Grid<string>(0)

@@ -35,5 +35,5 @@ export const run = (
     })
   }
 
-  return $.countInString(curr.stringify(), '#')
+  return curr.count(v => v === '#')
 }

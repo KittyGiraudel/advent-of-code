@@ -3,27 +3,35 @@ import $ from '../../helpers'
 export const countVisibleTrees = (rows: string[]) => {
   const grid = $.Grid.fromRows<string>(rows)
 
-  return grid
-    .flatMap((tree, ri, ci) => {
-      const isSmaller = (t: string) => +t < +tree
+  return grid.filter((tree, ri, ci) => {
+    const isLower = (t: string) => +t < +tree
 
-      // Edge check
-      if (ri === 0 || ci === 0) return true
-      if (ri === grid.height - 1 || ci === grid.width - 1) return true
+    // Edge check
+    if (ri === 0 || ci === 0) return true
+    if (ri === grid.height - 1 || ci === grid.width - 1) return true
 
-      // Left/right check
-      if (grid.rows[ri].slice(0, ci).every(isSmaller)) return true
-      if (grid.rows[ri].slice(ci + 1).every(isSmaller)) return true
+    // Left/right check
+    if (grid.row(ri).slice(0, ci).every(isLower)) return true
+    if (
+      grid
+        .row(ri)
+        .slice(ci + 1)
+        .every(isLower)
+    )
+      return true
 
-      // Top/bottom check
-      if ($.column<string>(grid.rows.slice(0, ri), ci).every(isSmaller))
-        return true
-      if ($.column<string>(grid.rows.slice(ri + 1), ci).every(isSmaller))
-        return true
+    // Top/bottom check
+    if (grid.column(ci).slice(0, ri).every(isLower)) return true
+    if (
+      grid
+        .column(ci)
+        .slice(ri + 1)
+        .every(isLower)
+    )
+      return true
 
-      return false
-    })
-    .filter(Boolean).length
+    return false
+  }).length
 }
 
 export const getHighestScenicScore = (rows: string[]) => {

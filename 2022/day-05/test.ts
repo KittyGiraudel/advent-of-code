@@ -4,8 +4,7 @@ import { process } from './'
 
 test('Day 05 — Sample', t => {
   const sample = $.sample(
-    `
-    [D]    
+    `    [D]    
 [N] [C]    
 [Z] [M] [P]
 1   2   3

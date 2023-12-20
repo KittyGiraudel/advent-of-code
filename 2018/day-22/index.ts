@@ -26,7 +26,7 @@ const getRiskLevel = (x: number, y: number, target: Coords, depth: number) =>
 
 export const getRisk = (depth: number, target: Coords) =>
   new $.Grid(target[0] + 1, target[1] + 1).reduce(
-    (acc, value, ri, ci) => acc + getRiskLevel(ci, ri, target, depth),
+    (acc, _, ri, ci) => acc + getRiskLevel(ci, ri, target, depth),
     0
   )
 

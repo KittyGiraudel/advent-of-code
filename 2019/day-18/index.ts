@@ -95,21 +95,23 @@ export const run = (input: string[], advanced: boolean = false) => {
     return nodes
   }
 
+  const getCost = (curr: State, next: State) => {
+    let index = 0
+    for (let i = 0; i < curr.positions.length; i++) {
+      if (next.positions[i] !== curr.positions[i]) {
+        index = i
+        break
+      }
+    }
+
+    return distances[curr.positions[index]][next.positions[index]].distance
+  }
+
   const { end } = $.pathfinding.dijkstra<State>({
     start,
     toKey,
     isGoal: curr => curr.keys.length === keyCount,
-    getCost: (curr, next) => {
-      let index = 0
-      for (let i = 0; i < curr.positions.length; i++) {
-        if (next.positions[i] !== curr.positions[i]) {
-          index = i
-          break
-        }
-      }
-
-      return distances[curr.positions[index]][next.positions[index]].distance
-    },
+    getCost,
     getNextNodes,
   })
 
@@ -119,6 +121,3 @@ export const run = (input: string[], advanced: boolean = false) => {
 
   return end.steps
 }
-
-const input = $.readInput(import.meta)
-console.log(run(input, true))

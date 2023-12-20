@@ -1,9 +1,9 @@
 import $ from '../../helpers'
-import { Coords, Grid, Point } from '../../types'
+import { Coords, Point } from '../../types'
 import { Computer } from '../day-10'
 
 export const run = (key: string, advanced: boolean = false) => {
-  let grid: Grid<number> = new $.Grid(0)
+  const grid = new $.Grid<number>(0)
 
   for (let i = 0; i < 128; i++) {
     const hash = new Computer(key + '-' + i).round(64).getHash()
@@ -40,5 +40,5 @@ export const run = (key: string, advanced: boolean = false) => {
 
   return advanced
     ? new Set(Object.values(visited)).size
-    : $.countInString(grid.stringify(), '1')
+    : grid.count(v => v === 1)
 }

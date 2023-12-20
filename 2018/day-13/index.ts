@@ -96,7 +96,7 @@ export const run = (rows: string[], cleanUp: boolean = false) => {
   // 1. Collect the coordinates and orientation of every cart.
   // 2. Restore the proper track value underneath the grid.
   // From there onwards, the grid is never modified again, and is only read.
-  const grid = $.Grid.fromRows<string>(rows, (value, ri, ci) => {
+  const grid = $.Grid.fromRows(rows, (value, ri, ci) => {
     if (/[<>v^]/.test(value))
       carts[$.toPoint([ri, ci])] = {
         orientation: value as Orientation,

@@ -1,5 +1,4 @@
 import $ from '../../helpers'
-import { Grid } from '../../types'
 
 type Output = { gamma: string; epsilon: string }
 

@@ -36,9 +36,9 @@ const MONSTER_PATTERN: Coords[] = [
 // matters later on).
 const getSides = (grid: Grid<string>) =>
   [
-    /* Top    */ grid.rows[0],
-    /* Right  */ grid.column(grid.width - 1),
-    /* Bottom */ grid.rows.at(-1),
+    /* Top    */ grid.row(0),
+    /* Right  */ grid.column(-1),
+    /* Bottom */ grid.row(-1),
     /* Left   */ grid.column(0),
   ].map(line => line!.join(''))
 
@@ -87,7 +87,7 @@ const jigsaw = (tiles: Tile[], start: Tile) => {
 
       // If we could not find a tile here, that means previous pieces were
       // incorrect and we can abort.
-      if (!next) return
+      if (!next) return null
 
       mozaic.set([ri, ci], next)
       used.add(next.id)
@@ -155,7 +155,7 @@ const solve = (snapshots: string[]) =>
     .map(parseSnapshot)
     .flat()
     .reduce<Grid<Tile> | null>(
-      (acc, tile, _, tiles) => acc ?? jigsaw(tiles, tile) ?? null,
+      (acc, tile, _, tiles) => acc ?? jigsaw(tiles, tile),
       null
     )
 

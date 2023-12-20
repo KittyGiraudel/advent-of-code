@@ -18,10 +18,10 @@ export const run = (
         $.rotate(grid.row(+index), +iterations)
       } else {
         const column = $.rotate(grid.column(+index), +iterations)
-        grid.rows.forEach((row, i) => (row[+index] = column[i]))
+        grid.rows.forEach((row, ri) => (row[+index] = column[ri]))
       }
     }
   })
 
-  return $.countInString(grid.stringify(), '#')
+  return grid.count(v => v === '#')
 }

@@ -38,7 +38,7 @@ export const render = (dots: Set<Point>) => {
   const isDot = (x: number, y: number) => dots.has($.toPoint([x, y]))
   const coords = Array.from(dots).map($.toCoords)
   const [, xMax, , yMax] = $.boundaries(coords)
-  const grid = new $.Grid<string>(xMax + 1, yMax + 1, (ri, ci) =>
+  const grid = new $.Grid(xMax + 1, yMax + 1, (ri, ci) =>
     isDot(ci, ri) ? '#' : ' '
   )
 

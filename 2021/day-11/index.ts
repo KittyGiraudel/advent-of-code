@@ -9,9 +9,6 @@ const makeGrid = (rows: string[]) =>
     flashed: false,
   }))
 
-const countNewFlashes = (grid: Grid<Octopus>) =>
-  grid.reduce((acc, octopus) => acc + +octopus.flashed, 0)
-
 const processFlashes = (grid: Grid<Octopus>) => {
   const toIncrement: Coords[] = []
 
@@ -38,7 +35,7 @@ const cycle = (grid: Grid<Octopus>) => {
   processFlashes(grid)
 
   // 2b. Count flashes
-  const flashes = countNewFlashes(grid)
+  const flashes = grid.count(octopus => octopus.flashed)
 
   // 3. Reset
   grid.forEach(octopus => {

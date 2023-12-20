@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Grid, Coords } from '../../types'
+import { Coords } from '../../types'
 
 const KEYPAD_1: number[][] = [
   [1, 2, 3],

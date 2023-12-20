@@ -62,7 +62,7 @@ class Grid<T> {
     return this
   }
 
-  static from<I, O>(input: I[][], mapper: Mapper<I, O> = identity) {
+  static from<I, O = I>(input: I[][], mapper: Mapper<I, O> = identity) {
     const width = input[0].length
     const height = input.length
     const grid = new Grid<O>(width, height)
@@ -119,6 +119,18 @@ class Grid<T> {
     return this.rows.some((row, ri) =>
       row.some((value, ci) => handler(value, ri, ci))
     )
+  }
+
+  someRow(handler: (row: T[], ri: number) => boolean) {
+    return this.rows.some(handler)
+  }
+
+  someColumn(handler: (column: T[], ri: number) => boolean) {
+    return this.columns.some(handler)
+  }
+
+  count(handler: (item: T, ri: number, ci: number) => boolean) {
+    return this.filter(handler).length
   }
 
   // @TODO: fix return type
@@ -194,6 +206,13 @@ class Grid<T> {
     }
 
     return variants
+  }
+
+  toMap() {
+    return this.reduce<Map<Point, T>>(
+      (map, value, ...coords) => map.set($.toPoint(coords), value),
+      new Map()
+    )
   }
 }
 

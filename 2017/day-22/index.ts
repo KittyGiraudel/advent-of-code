@@ -17,10 +17,7 @@ export const run = (
   advanced: boolean = false
 ) => {
   const grid = $.Grid.fromRows<string>(rows)
-  const nodes = grid.reduce<Map<Point, string>>(
-    (nodes, value, ...coords) => nodes.set($.toPoint(coords), value),
-    new Map()
-  )
+  const nodes = grid.toMap()
   const state: State = {
     position: [Math.floor(grid.height / 2), Math.floor(grid.width / 2)],
     direction: $.turn.DIRECTIONS[0],

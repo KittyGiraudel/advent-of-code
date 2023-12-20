@@ -100,7 +100,7 @@ const getWrapNeighbors = (
   const findFirstIndex = Boolean
   const findLastIndex = (acc: number, item: string, index: number) =>
     item ? index : acc
-  const row = grid.rows[ri]
+  const row = grid.row(ri)
   const column = grid.column(ci)
 
   return [
@@ -202,11 +202,11 @@ type CacheMap = Record<Point, CubicNeighbor[] | WrapNeighbor[]>
 
 const getNeighbors =
   (grid: Grid<string>, asCube: boolean) =>
-  (acc: CacheMap, _: string, ri: number, ci: number) => {
-    if (grid.get([ri, ci])) {
-      acc[$.toPoint([ri, ci])] = asCube
-        ? getCubicNeighbors(grid, ri, ci)
-        : getWrapNeighbors(grid, ri, ci)
+  (acc: CacheMap, _: string, ...coords: Coords) => {
+    if (grid.get(coords)) {
+      acc[$.toPoint(coords)] = asCube
+        ? getCubicNeighbors(grid, ...coords)
+        : getWrapNeighbors(grid, ...coords)
     }
 
     return acc
@@ -219,10 +219,7 @@ export const maze = (input: string, asCube: boolean = false) => {
   const grid = $.Grid.fromRows(rows, v => (v === ' ' ? '' : v))
   const neighborMap = grid.reduce<CacheMap>(getNeighbors(grid, asCube), {})
 
-  let position: Coords = [
-    0,
-    grid.rows[0].findIndex((_, ci) => grid.get([0, ci]) === SPACE),
-  ]
+  let position = grid.findCoords((value, ri) => ri === 0 && value === SPACE)!
   let orientation = '>'
 
   instructions.slice(0).forEach(instruction => {
@@ -239,7 +236,7 @@ export const maze = (input: string, asCube: boolean = false) => {
           position = next.position
           if (next.orientation) orientation = next.orientation
         }
-        grid.set([position[0], position[1]], orientation)
+        grid.set(position, orientation)
       }
     }
   })
