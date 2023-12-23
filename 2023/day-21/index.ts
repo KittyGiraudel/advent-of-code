@@ -6,61 +6,63 @@ export const run = (input: string[], advanced: boolean = false) => {
   const grid = $.Grid.fromRows<string>(input)
   const start = grid.findCoords(v => v === 'S')!
 
-  const solve = (maxdist: number) => {
+  const solve = (steps: number) => {
     const { width, height } = grid
-    const frontier = new PriorityQueue<[Coords, number]>((a, b) => a[1] - b[1])
-    frontier.push([start, 0])
-    const visited = new Set<Point>()
-    const parity = maxdist % 2
-    let result = 0
+    const frontier = [start]
+    const distances = { [$.toPoint(start)]: 0 }
 
-    while (!frontier.isEmpty()) {
-      const [coords, dist] = frontier.pop()!
-      const point = $.toPoint(coords)
+    while (frontier.length) {
+      const curr = frontier.pop()!
 
-      if (dist > maxdist) break
-      if (visited.has(point)) continue
-      else visited.add(point)
-      if (dist % 2 === parity) result += 1
-
-      $.bordering(coords, 'COORDS')
-        .filter(([ri, ci]) => grid.get([ri % height, ci % width]) !== '#')
-        .filter(coords => !visited.has($.toPoint(coords)))
-        .forEach(coords => frontier.push([coords, dist + 1]))
+      grid
+        .bordering(
+          curr,
+          (_, ri, ci) => grid.get([ri % height, ci % width]) !== '#'
+        )
+        .filter(coords => !($.toPoint(coords) in distances))
+        .forEach(coords => {
+          distances[$.toPoint(coords)] = 1 + distances[$.toPoint(curr)]
+          if (distances[$.toPoint(coords)] + 1 <= steps)
+            frontier.unshift(coords)
+        })
     }
 
-    console.log('Solving for', maxdist, '=', result)
+    const values = Object.values(distances)
+    const result = values.filter(v => v <= steps && v % 2 === steps % 2).length
+    console.log('Solving for', steps, '=', result)
+
     return result
   }
 
+  if (!advanced) return solve(64)
+
   const steps = 26_501_365
-  const mod = steps % grid.height
+  const remainder = steps % grid.width
 
-  console.log('Part 1', solve(64))
+  const a = solve(remainder)
+  const b = solve(remainder + grid.width)
+  const c = solve(remainder + grid.width * 2)
 
-  const a = solve(mod)
-  const b = solve(mod + grid.width)
-  const c = solve(mod + grid.width * 2)
+  // const fdiff1 = b - a
+  // const fdiff2 = c - b
+  // const second_diff = fdiff2 - fdiff1
+  // const A = Math.floor(second_diff / 2)
+  // const B = fdiff1 - 3 * A
+  // const C = a - B - A
+  // const f = (n: number) => A * n ** 2 + B * n + C
 
-  const first_diff1 = b - a
-  const first_diff2 = c - b
-  const second_diff = first_diff2 - first_diff1
+  const A = (a - 2 * b + c) / 2
+  const B = (-3 * a + 4 * b - c) / 2
+  const C = a
+  const n = Math.ceil(steps / grid.width)
+  const result = A * n ** 2 + B * n + C
+  console.log('Count', result)
 
-  const A = Math.floor(second_diff / 2)
-  const B = first_diff1 - 3 * A
-  const C = a - B - A
-  const f = (n: number) => A * n ** 2 + B * n + C
+  // console.log('Part 2 (ceil)', f(Math.ceil(steps / grid.width)))
+  // console.log('Part 2 (floor)', f(Math.floor(steps / grid.width)))
+  // console.log('Part 2 (round)', f(Math.round(steps / grid.width)))
 
-  // const A = (a - 2 * b + c) / 2
-  // const B = (-3 * a + 4 * b - c) / 2
-  // const C = a
-  // const n = Math.round(steps / grid.width)
-  // const result = A * n ** 2 + B * n + C
-  // console.log('Count', result)
-
-  console.log('Part 2', f(Math.ceil(steps / grid.width)))
-
-  return
+  return result // f(Math.ceil(steps / grid.width))
 }
 
 const input = $.readInput(import.meta)

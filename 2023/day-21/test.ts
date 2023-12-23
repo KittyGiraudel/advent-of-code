@@ -22,15 +22,17 @@ test('Day 21 — Sample', t => {
   t.is(run(sample), 42)
 })
 
-test.skip('Day 21 — Solutions', t => {
+test('Day 21 — Solutions', t => {
   const input = $.readInput(import.meta)
+  const result = run(input, true)
   t.is(run(input), 3658)
+  t.is(run(input, true), 608_193_767_979_991)
   // Too high
-  t.not(run(input, true), 624686496796191)
+  t.not(result, 624686496796191)
   // Too low
-  t.not(run(input, true), 591700984542658)
-  t.not(run(input, true), 608193713358858)
+  t.not(result, 591700984542658)
+  t.not(result, 608193713358858)
   // Unknown
-  t.not(run(input, true), 624680320982867)
-  t.not(run(input, true), 681525230170553)
+  t.not(result, 624680320982867)
+  t.not(result, 681525230170553)
 })
