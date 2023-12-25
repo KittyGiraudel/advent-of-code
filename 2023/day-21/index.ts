@@ -2,7 +2,7 @@ import { PriorityQueue } from '@datastructures-js/priority-queue'
 import $ from '../../helpers'
 import { Coords, Point } from '../../types'
 
-export const run = (input: string[], advanced: boolean = false) => {
+export const run = (input: string[], part2: boolean = false) => {
   const grid = $.Grid.fromRows<string>(input)
   const start = grid.findCoords(v => v === 'S')!
 
@@ -31,7 +31,7 @@ export const run = (input: string[], advanced: boolean = false) => {
     return result
   }
 
-  if (!advanced) return solve(64)
+  if (!part2) return solve(64)
 
   const steps = 26_501_365
   const remainder = steps % grid.width

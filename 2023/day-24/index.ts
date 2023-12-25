@@ -49,7 +49,7 @@ const checkIntersection = (pair: [Hailstone, Hailstone]) => {
   return true
 }
 
-export const run = async (input: string[], advanced: boolean = false) => {
+export const run = async (input: string[], part2: boolean = false) => {
   const paths = input.map(line => $.chunk($.numbers(line), 3) as Hailstone)
   const pairs = $.combinations(paths, 2) as [Hailstone, Hailstone][]
 
@@ -59,7 +59,7 @@ export const run = async (input: string[], advanced: boolean = false) => {
   // with a Z3 solver library. I wrote none of this, and I’m not even mad; I
   // just don’t have fun with these.
   // See: https://pastebin.com/a6FjzJnj
-  if (advanced) {
+  if (part2) {
     const { Context } = await init()
     // @ts-ignore
     const { Solver, Int } = new Context('main')

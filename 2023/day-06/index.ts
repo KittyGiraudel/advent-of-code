@@ -1,7 +1,7 @@
 import $ from '../../helpers'
 
-export const run = (input: string[], advanced: boolean = false) => {
-  if (advanced) {
+export const run = (input: string[], part2: boolean = false) => {
+  if (part2) {
     const time = +$.numbers(input[0]).join('')
     const distance = +$.numbers(input[1]).join('')
     const pivot = Math.ceil(time / 2)

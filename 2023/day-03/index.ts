@@ -60,12 +60,12 @@ export const getGearRatio = (input: string[]) => {
   }, 0)
 }
 
-export const run = (input: string[], advanced: boolean = false) => {
+export const run = (input: string[], part2: boolean = false) => {
   const grid = $.Grid.fromRows<string>(input)
   const getValue = (coords: Coords) => grid.get(coords)
   type State = { current: number; total: number; symbol: boolean }
 
-  if (advanced) {
+  if (part2) {
     return getGearRatio(input)
   }
 

@@ -75,7 +75,7 @@ const formatData = ([guardId, minutes]: [string, number[]]) => ({
     .sort((a, b) => b.occurrences - a.occurrences),
 })
 
-export const find = (input: string[], advanced: boolean = false) => {
+export const find = (input: string[], part2: boolean = false) => {
   const data = Object.entries(
     input
       .map(parseLog)
@@ -86,7 +86,7 @@ export const find = (input: string[], advanced: boolean = false) => {
       .reduce(aggregateEvents, {})
   ).map(formatData)
 
-  if (!advanced) {
+  if (!part2) {
     const sleepiestGuard = data
       .slice(0)
       .sort((a, b) => a.duration - b.duration)

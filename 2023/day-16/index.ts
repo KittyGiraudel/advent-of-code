@@ -48,10 +48,10 @@ const energize = (grid: Grid<string>, position: Coords, direction: Coords) => {
   return energized.size
 }
 
-export const run = (input: string[], advanced: boolean = false) => {
+export const run = (input: string[], part2: boolean = false) => {
   const grid = $.Grid.fromRows<string>(input)
 
-  if (!advanced) {
+  if (!part2) {
     return energize(grid, [0, -1], [0, +1])
   }
 

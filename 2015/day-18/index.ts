@@ -4,7 +4,7 @@ import { Point } from '../../types'
 export const run = (
   input: string[],
   iterations: number,
-  advanced: boolean = false
+  part2: boolean = false
 ) => {
   let curr = $.Grid.fromRows<string>(input)
   const corners: Point[] = [
@@ -14,7 +14,7 @@ export const run = (
     `${curr.height - 1},${curr.width - 1}`,
   ]
 
-  if (advanced) {
+  if (part2) {
     corners.forEach(point => curr.set(point, '#'))
   }
 
@@ -23,7 +23,7 @@ export const run = (
       const neighbors = $.surrounding(coords, 'COORDS')
       const on = neighbors.filter(coords => curr.get(coords) === '#')
 
-      if (advanced && corners.includes($.toPoint(coords))) {
+      if (part2 && corners.includes($.toPoint(coords))) {
         return '#'
       }
 

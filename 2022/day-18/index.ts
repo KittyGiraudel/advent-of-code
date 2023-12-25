@@ -19,10 +19,7 @@ const getArea = (cubes: TriCoords[], predicate: (point: TriPoint) => boolean) =>
     .map(coords => $.toPoint(coords))
     .filter(point => predicate(point)).length
 
-export const getSurfaceArea = (
-  points: TriPoint[],
-  advanced: boolean = false
-) => {
+export const getSurfaceArea = (points: TriPoint[], part2: boolean = false) => {
   const cubes: TriCoords[] = points.map(point => $.toCoords(point))
   const [minX, maxX, minY, maxY, minZ, maxZ] = $.boundaries(cubes)
   const isWithinBounds = ([x, y, z]: TriCoords) =>
@@ -30,7 +27,7 @@ export const getSurfaceArea = (
     $.isClamped(y, minY - 1, maxY + 1) &&
     $.isClamped(z!, minZ - 1, maxZ + 1)
 
-  if (!advanced) {
+  if (!part2) {
     return getArea(cubes, point => !points.includes(point))
   }
 

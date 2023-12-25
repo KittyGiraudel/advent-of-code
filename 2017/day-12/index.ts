@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 
-export const run = (input: string[], advanced: boolean = false) => {
+export const run = (input: string[], part2: boolean = false) => {
   const graph = new Map()
 
   input.forEach(line => {
@@ -23,7 +23,7 @@ export const run = (input: string[], advanced: boolean = false) => {
     return visited
   }
 
-  if (!advanced) return walk(0).length
+  if (!part2) return walk(0).length
 
   const visited: number[] = []
   let groups = 0

@@ -87,12 +87,12 @@ class GardenMap {
 
 export const run = (
   [seedGroup, ...rawGroups]: string[],
-  advanced: boolean = false
+  part2: boolean = false
 ) => {
   const seeds = $.numbers(seedGroup)
   const rangeGroups = rawGroups.map(createRanges)
 
-  if (!advanced) {
+  if (!part2) {
     return Math.min(...seeds.map(seed => rangeGroups.reduce(convert, seed)))
   }
 

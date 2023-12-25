@@ -30,7 +30,7 @@ const countCollisions = (particles: Particle[]) =>
       return acc
     }, new Set()).size
 
-export const run = (input: string[], advanced: boolean = false) => {
+export const run = (input: string[], part2: boolean = false) => {
   const particles = input.map((line, index) => {
     const [p, v, a] = line.split(', ')
     const position = $.toCoords(p.slice(3, -1) as TriPoint)
@@ -50,5 +50,5 @@ export const run = (input: string[], advanced: boolean = false) => {
     count -= countCollisions(particles.map(tick))
   }
 
-  return advanced ? count : particles.sort(sortByDistance).pop()!.index
+  return part2 ? count : particles.sort(sortByDistance).pop()!.index
 }

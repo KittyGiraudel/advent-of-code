@@ -23,9 +23,9 @@ const VECTORS: Record<string, Coords> = {
   L: [0, -1],
 }
 
-export const run = (instructions: string[], advanced: boolean = false) => {
-  const keypad = advanced ? KEYPAD_2 : KEYPAD_1
-  let position: Coords = advanced ? [2, 0] : [1, 1]
+export const run = (instructions: string[], part2: boolean = false) => {
+  const keypad = part2 ? KEYPAD_2 : KEYPAD_1
+  let position: Coords = part2 ? [2, 0] : [1, 1]
   type Vector = keyof typeof VECTORS
 
   return instructions

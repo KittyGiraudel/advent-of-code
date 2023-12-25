@@ -92,14 +92,14 @@ const floodGrid = (grid: Grid<string>, start: Coords = [0, 0]) =>
 const scaleUp = (coords: Coords) =>
   [coords[0] * 3 + 1, coords[1] * 3 + 1] as Coords
 
-export const run = (input: string[], advanced: boolean = false) => {
+export const run = (input: string[], part2: boolean = false) => {
   const grid = $.Grid.fromRows<string>(input)
   const pipe = mapOutLoopingPipe(grid)
   const pipeLength = Object.keys(pipe).length
 
   // For part 1, the further point from the start is on the other side of the
   // looping pipe, which is half the looping pipe length.
-  if (!advanced) return pipeLength / 2
+  if (!part2) return pipeLength / 2
 
   // For part 2, we need to find the amount of cells contained within the
   // looping pipe. In theory, this can be done by subtracting the pipe size plus

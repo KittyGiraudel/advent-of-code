@@ -14,7 +14,7 @@ const FLAGGED = 'F'
 export const run = (
   rows: string[],
   iterations: number,
-  advanced: boolean = false
+  part2: boolean = false
 ) => {
   const grid = $.Grid.fromRows<string>(rows)
   const nodes = grid.toMap()
@@ -30,16 +30,16 @@ export const run = (
 
     if (curr === CLEAN) {
       state.direction = $.turn.left(state.direction)!
-      // In advanced mode, it moves into weakened state, and therefore the
-      // infection count shouldn’t be updated.
-      nodes.set(point, advanced ? WEAKENED : INFECTED)
-      if (!advanced) infections++
+      // For part 2, it moves into weakened state, and therefore the infection
+      // count shouldn’t be updated.
+      nodes.set(point, part2 ? WEAKENED : INFECTED)
+      if (!part2) infections++
     }
 
     if (curr === INFECTED) {
       state.direction = $.turn.right(state.direction)
-      // In advanced mode, it goes to flagged state, otherwise it gets cleaned.
-      nodes.set(point, advanced ? FLAGGED : CLEAN)
+      // For part 2, it goes to flagged state, otherwise it gets cleaned.
+      nodes.set(point, part2 ? FLAGGED : CLEAN)
     }
 
     if (curr === WEAKENED) {

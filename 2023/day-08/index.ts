@@ -26,11 +26,11 @@ const process = (
 
 export const run = (
   [directions, , ...lines]: string[],
-  advanced: boolean = false
+  part2: boolean = false
 ) => {
   const map = createMap(lines)
 
-  if (!advanced) {
+  if (!part2) {
     return process(map, directions, 'AAA', curr => curr === 'ZZZ')
   }
 

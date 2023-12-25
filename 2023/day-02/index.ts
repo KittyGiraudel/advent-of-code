@@ -28,13 +28,13 @@ const aggregateMaxSet = (set: Set, item: Set) => ({
   blue: Math.max(set.blue, item.blue),
 })
 
-export const run = (input: string[], advanced: boolean = false) => {
+export const run = (input: string[], part2: boolean = false) => {
   const games = input.map(parseGame)
 
   // For part 1, find every game with *every* one of its draws being valid (as
   // in under the given arbitrary threshold). Then, sum all the game IDs
   // together to find the result.
-  if (!advanced) {
+  if (!part2) {
     const isValidDraw = ({ red, green, blue }: Set) =>
       red <= 12 && green <= 13 && blue <= 14
     const validGames = games.filter(game => game.draws.every(isValidDraw))

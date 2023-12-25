@@ -1,7 +1,7 @@
 import $ from '../../helpers'
 import { Coords, Point } from '../../types'
 
-export const run = (steps: string[], advanced: boolean = false) => {
+export const run = (steps: string[], part2: boolean = false) => {
   let map: Set<Point> = new Set()
   let position: Coords = [0, 0]
   let direction: Coords | undefined = $.turn.DIRECTIONS[0]
@@ -24,6 +24,6 @@ export const run = (steps: string[], advanced: boolean = false) => {
     }
   })
 
-  if (advanced) return $.manhattan(location!, [0, 0])
+  if (part2) return $.manhattan(location!, [0, 0])
   return $.manhattan(position, [0, 0])
 }

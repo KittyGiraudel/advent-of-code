@@ -29,10 +29,10 @@ const parseRoom = (line: string) => {
   return { name: rotate(hash, +id), id: +id, valid } as Room
 }
 
-export const run = (input: string[], advanced: boolean = false) => {
+export const run = (input: string[], part2: boolean = false) => {
   const rooms = input.map(parseRoom)
 
-  return advanced
+  return part2
     ? rooms.find(room => room.name.includes('north'))?.id
     : $.sum(rooms.filter(room => room.valid).map(room => room.id))
 }

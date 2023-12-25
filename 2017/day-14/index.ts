@@ -2,7 +2,7 @@ import $ from '../../helpers'
 import { Coords, Point } from '../../types'
 import { Computer } from '../day-10'
 
-export const run = (key: string, advanced: boolean = false) => {
+export const run = (key: string, part2: boolean = false) => {
   const grid = new $.Grid<number>(0)
 
   for (let i = 0; i < 128; i++) {
@@ -38,7 +38,5 @@ export const run = (key: string, advanced: boolean = false) => {
     }
   })
 
-  return advanced
-    ? new Set(Object.values(visited)).size
-    : grid.count(v => v === 1)
+  return part2 ? new Set(Object.values(visited)).size : grid.count(v => v === 1)
 }

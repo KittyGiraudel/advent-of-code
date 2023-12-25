@@ -201,19 +201,19 @@ const countWays = $.memo((line: string, groups: number[]): number => {
   )
 })
 
-export const run = (input: string[], advanced: boolean = false) => {
+export const run = (input: string[], part2: boolean = false) => {
   return $.sum(
     input.map(line => {
       let [input, pattern] = line.split(' ')
       let patternAsNumbers = $.numbers(pattern)
 
-      if (advanced) {
+      if (part2) {
         input = Array(5).fill(input).join('?')
         pattern = Array(5).fill(patternAsNumbers).join(',')
         patternAsNumbers = $.numbers(pattern)
       }
 
-      return advanced
+      return part2
         ? // dp(input, patternAsNumbers)(0, 0, 0)
           countWays(input, patternAsNumbers)
         : // Preserving my P1 version, even though both dp and countWays work

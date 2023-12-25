@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 
-export const run = (salt: string, advanced: boolean = false) => {
+export const run = (salt: string, part2: boolean = false) => {
   let password1: string[] = []
   let password2: (string | undefined)[] = $.array(8)
   let i = 0
@@ -18,5 +18,5 @@ export const run = (salt: string, advanced: boolean = false) => {
     if (password1.length === 8 && password2.every(Boolean)) break
   }
 
-  return advanced ? password2.join('') : password1.join('')
+  return part2 ? password2.join('') : password1.join('')
 }

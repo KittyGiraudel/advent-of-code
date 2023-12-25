@@ -1,11 +1,11 @@
 import $ from '../../helpers'
 
-export const checksum = (input: string[], advanced: boolean = false) =>
+export const checksum = (input: string[], part2: boolean = false) =>
   $.sum(
     input.map(row => {
       const numbers = $.numbers(row)
 
-      if (!advanced) {
+      if (!part2) {
         return Math.max(...numbers) - Math.min(...numbers)
       }
 

@@ -42,7 +42,7 @@ const createMap = (input: string[]) =>
       })
   )
 
-export const run = (input: string[], advanced: boolean = false) => {
+export const run = (input: string[], part2: boolean = false) => {
   let count = { high: 0, low: 0 }
 
   const send = (map: ReturnType<typeof createMap>) => {
@@ -94,7 +94,7 @@ export const run = (input: string[], advanced: boolean = false) => {
   // (least-significant-bit) to MSB (most-significant-bit). These 4 numbers are
   // the 4 cycles’ length, which gives us the result when LCM-ing them.
   // https://www.reddit.com/r/adventofcode/comments/18mmfxb/comment/ke5v9bb/
-  if (advanced)
+  if (part2)
     return ['111010010101', '111111111101', '111111111011', '111101000111']
       .map(binary => parseInt(binary, 2))
       .reduce((a, b) => $.lcm(a, b), 1)

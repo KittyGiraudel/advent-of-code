@@ -41,7 +41,7 @@ const checkTurns = (
 
 const is = (a: Coords, b: Coords) => a[0] === b[0] && a[1] === b[1]
 
-export const run = (input: string[], advanced: boolean = false) => {
+export const run = (input: string[], part2: boolean = false) => {
   const grid = $.Grid.fromRows<number>(input, Number)
   const startCoords: Coords = [0, 0]
   const endCoords: Coords = [grid.height - 1, grid.width - 1]
@@ -60,7 +60,7 @@ export const run = (input: string[], advanced: boolean = false) => {
       const states: State[] = []
       const left = $.turn.left(curr.orientation)
       const right = $.turn.right(curr.orientation)
-      const maxStraight = advanced ? 10 : 3
+      const maxStraight = part2 ? 10 : 3
       const leftMove = {
         position: $.applyVector(curr.position, left),
         orientation: left,
@@ -78,7 +78,7 @@ export const run = (input: string[], advanced: boolean = false) => {
       }
 
       if (curr.streak < maxStraight) states.push(straightMove)
-      if (!advanced) states.push(leftMove, rightMove)
+      if (!part2) states.push(leftMove, rightMove)
       else if (curr.streak >= 4 || is(curr.position, startCoords)) {
         const { validLeft, validRight } = checkTurns(
           curr,

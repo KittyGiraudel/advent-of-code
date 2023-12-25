@@ -25,10 +25,10 @@ const matchAll = (input: string) =>
       DIGITS.includes(value) ? String(DIGITS.indexOf(value) + 1) : value
     )
 
-export const run = (input: string[], advanced: boolean = false) =>
+export const run = (input: string[], part2: boolean = false) =>
   $.sum(
     input
-      .map(line => (advanced ? matchAll(line) : $.match(line, /(\d)/g)))
+      .map(line => (part2 ? matchAll(line) : $.match(line, /(\d)/g)))
       .map(matches => String(matches.at(0)) + String(matches.at(-1)))
       .map(Number)
   )

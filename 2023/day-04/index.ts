@@ -7,10 +7,10 @@ const parseCard = (line: string) => {
   return { score, count: 1 }
 }
 
-export const run = (input: string[], advanced: boolean = false) => {
+export const run = (input: string[], part2: boolean = false) => {
   const cards = input.map(parseCard)
 
-  if (advanced) {
+  if (part2) {
     // Iterate through the deck sequentially. For each card, iterate as many
     // times as it had winning numbers, and increase the amount of copies of the
     // subsequent cards in the deck. For instance, if cards (plural intended) #4
@@ -21,7 +21,7 @@ export const run = (input: string[], advanced: boolean = false) => {
         cards[i + j].count += cards[i].count
   }
 
-  const scores = advanced
+  const scores = part2
     ? cards.map(card => card.count)
     : cards.map(card => (card.score ? 2 ** (card.score - 1) : 0))
 

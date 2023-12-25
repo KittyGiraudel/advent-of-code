@@ -36,18 +36,18 @@ const resolveJokers = (cards: Cards) => {
   return cards.replace(/J/g, mostFrequent ?? 'A') as Cards
 }
 
-const getType = (cards: Cards, advanced: boolean) =>
-  TYPES.find(type => isType(type, advanced ? resolveJokers(cards) : cards))
+const getType = (cards: Cards, part2: boolean) =>
+  TYPES.find(type => isType(type, part2 ? resolveJokers(cards) : cards))
 
 // Break down the lines into a hand of cards and their bet, then resolve the
 // type of each hand (considering jokers for part 2), sort them, and resolve
 // their score based on the final order.
-export const run = (input: string[], advanced: boolean = false) =>
+export const run = (input: string[], part2: boolean = false) =>
   input
     .map(line => line.split(' ') as [Cards, number])
     .map(
-      ([cards, bet]) => ({ cards, bet, type: getType(cards, advanced) } as Hand)
+      ([cards, bet]) => ({ cards, bet, type: getType(cards, part2) } as Hand)
     )
-    .sort(sortHands(advanced ? 'AKQT98765432J' : 'AKQJT98765432'))
+    .sort(sortHands(part2 ? 'AKQT98765432J' : 'AKQJT98765432'))
     .map((game, index, array) => game.bet * (array.length - index))
     .reduce((a, b) => a + b, 0)

@@ -10,11 +10,11 @@ const DOOR_RE = /[A-Z]/
 
 const toKey = (curr: State) => curr.positions + ':' + curr.keys
 
-export const run = (input: string[], advanced: boolean = false) => {
+export const run = (input: string[], part2: boolean = false) => {
   const startPositions: Point[] = []
   const start: State = {
     keys: '',
-    positions: advanced ? '0123' : '0',
+    positions: part2 ? '0123' : '0',
     steps: 0,
   }
   const keys: Record<Point, string> = {}
@@ -30,7 +30,7 @@ export const run = (input: string[], advanced: boolean = false) => {
     if (value !== '#') lookup.add(point)
   })
 
-  if (advanced) {
+  if (part2) {
     const start = startPositions.pop()!
     const [sRi, sCi] = $.toCoords(start)
     lookup.delete(start)

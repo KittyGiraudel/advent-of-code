@@ -1,7 +1,7 @@
 import $ from '../../helpers'
 import { Coords, CoordsAndPoint, Grid, Point, TriPoint } from '../../types'
 
-const createGraph = (grid: Grid<string>, advanced: boolean = false) => {
+const createGraph = (grid: Grid<string>, part2: boolean = false) => {
   const lookup = grid.toMap()
   const edges: Record<Point, Set<TriPoint>> = {}
   const connect = (from: Coords, to: Coords) => {
@@ -12,7 +12,7 @@ const createGraph = (grid: Grid<string>, advanced: boolean = false) => {
   }
 
   const isValid = (next: Coords) =>
-    !advanced
+    !part2
       ? lookup.get($.toPoint(next)) === '.'
       : lookup.get($.toPoint(next)) !== '#'
 
@@ -26,10 +26,10 @@ const createGraph = (grid: Grid<string>, advanced: boolean = false) => {
           connect(next, coords)
           connect(coords, next)
         })
-    } else if (!advanced && value === '>') {
+    } else if (!part2 && value === '>') {
       connect(coords, $.applyVector(coords, [0, +1]))
       connect($.applyVector(coords, [0, -1]), coords)
-    } else if (!advanced && value === 'v') {
+    } else if (!part2 && value === 'v') {
       connect(coords, $.applyVector(coords, [+1, 0]))
       connect($.applyVector(coords, [-1, 0]), coords)
     }
@@ -39,7 +39,7 @@ const createGraph = (grid: Grid<string>, advanced: boolean = false) => {
   // down the number of nodes by continuously reducing nodes with only 2 edges,
   // connecting them with their neighbors.
   // https://gist.github.com/qwewqa/00d8272766c2945f4aa965ea36dba7f5
-  if (advanced) {
+  if (part2) {
     let entry = null
     while ((entry = Object.entries(edges).find(([, set]) => set.size === 2))) {
       const point = entry[0] as Point
@@ -99,12 +99,12 @@ const findLongestPath = (
   return best
 }
 
-export const run = (input: string[], advanced: boolean = false) => {
+export const run = (input: string[], part2: boolean = false) => {
   const grid = $.Grid.fromRows<string>(input)
   const { height } = grid
   const startCoords = grid.findCoords((v, ri) => ri === 0 && v === '.')!
   const endCoords = grid.findCoords((v, ri) => ri === height - 1 && v === '.')!
-  const graph = createGraph(grid, advanced)
+  const graph = createGraph(grid, part2)
 
   return findLongestPath(graph, $.toPoint(startCoords), $.toPoint(endCoords))
 }

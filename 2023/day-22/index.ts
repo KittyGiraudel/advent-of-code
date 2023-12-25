@@ -4,7 +4,7 @@ import { TriCoords, TriPoint } from '../../types'
 type Brick = [TriCoords, TriCoords]
 type Store = { height: number; brick: number }
 
-export const run = (input: string[], advanced: boolean = false) => {
+export const run = (input: string[], part2: boolean = false) => {
   const bricks = input
     .map(
       line => line.split('~').map(part => $.toCoords(part as TriPoint)) as Brick
@@ -67,7 +67,7 @@ export const run = (input: string[], advanced: boolean = false) => {
     })
   })
 
-  if (!advanced) {
+  if (!part2) {
     const safe = $.array(graph.length).map(() => true)
 
     for (const { supportedBy } of graph) {

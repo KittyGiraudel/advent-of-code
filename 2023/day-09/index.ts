@@ -1,7 +1,7 @@
 import $ from '../../helpers'
 
 const extrapolate =
-  (advanced: boolean = false) =>
+  (part2: boolean = false) =>
   (history: number[]) => {
     let layers = [history]
 
@@ -15,11 +15,10 @@ const extrapolate =
     // layer of zeroeis (first in our array of layers), and for each layer, we
     // update the accumulate based on the current edge.
     return layers.reduce(
-      (acc, layer) =>
-        advanced ? layer[0] - acc : layer[layer.length - 1] + acc,
+      (acc, layer) => (part2 ? layer[0] - acc : layer[layer.length - 1] + acc),
       0
     )
   }
 
-export const run = (input: string[], advanced: boolean = false) =>
-  $.sum(input.map($.numbers).map(extrapolate(advanced)))
+export const run = (input: string[], part2: boolean = false) =>
+  $.sum(input.map($.numbers).map(extrapolate(part2)))

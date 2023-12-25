@@ -21,8 +21,8 @@ const parse = (input: string) => {
   return { type, label, id, value } as Lens
 }
 
-export const run = (input: string[], advanced: boolean = false) => {
-  if (!advanced) {
+export const run = (input: string[], part2: boolean = false) => {
+  if (!part2) {
     return $.sum(input.map(hash))
   }
 

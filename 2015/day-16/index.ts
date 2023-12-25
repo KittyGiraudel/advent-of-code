@@ -22,7 +22,7 @@ const parseProperties = (properties: string[]) =>
       {}
     )
 
-export const run = (input: string[], advanced: boolean = false) => {
+export const run = (input: string[], part2: boolean = false) => {
   const aunts = input.map((line, index) => ({
     id: index + 1,
     properties: parseProperties($.match(line, /\w+: \d+/g)),
@@ -33,10 +33,10 @@ export const run = (input: string[], advanced: boolean = false) => {
       Object.entries(aunt.properties).every(([property, actual]) => {
         const expected = SAMPLE[property as Sample]
 
-        if (advanced && ['cats', 'trees'].includes(property))
+        if (part2 && ['cats', 'trees'].includes(property))
           return actual > expected
 
-        if (advanced && ['pomeranians', 'goldfish'].includes(property))
+        if (part2 && ['pomeranians', 'goldfish'].includes(property))
           return actual < expected
 
         return actual === expected

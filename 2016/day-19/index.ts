@@ -1,7 +1,7 @@
 import $ from '../../helpers'
 import Circularray from 'circularray'
 
-export const run = (size: number, advanced: boolean = false) => {
+export const run = (size: number, part2: boolean = false) => {
   const circle = new Circularray($.range(size, 1))
 
   // Find the node that’s on the opposite site of the circle, and store it as a
@@ -13,7 +13,7 @@ export const run = (size: number, advanced: boolean = false) => {
 
   // Iterate until we have only one item remaining.
   while (circle.size > 1) {
-    if (advanced) {
+    if (part2) {
       // The pointer sits right before the item being deleted. Move the pointer
       // to that item, and connect its edges to essentially remove it from the
       // linked list and manually update the list size.
