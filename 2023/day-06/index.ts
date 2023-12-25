@@ -15,7 +15,6 @@ export const run = (input: string[], advanced: boolean = false) => {
     // use the difference.
     return (pivot - boundary) * 2 + 1
 
-    /*
     // Leaving here my original, working and fast enough implementation for part
     // 2 for posterity. I only authored the binary search approach after having
     // browsed Reddit (although I did write it myself).
@@ -24,21 +23,19 @@ export const run = (input: string[], advanced: boolean = false) => {
     // it’s imperceptibly fast. While doing part 1, I noticed the distribution
     // of winning configurations is on a bell curve, with the winning ones
     // sitting in the middle. So instead of brute-forcing from 0 to time, I
-    // brute-force twice from the middle to 0 and from the middle to time,
-    // stopping as soon as we find the first falsy value.
+    // brute-force from the middle to time (or from the middle to 0 — either),
+    // stopping as soon as we find the first falsy value, and multiplying that
+    // value by 2.
+    /*
     let count = 0
 
-    for (let i = Math.ceil(time / 2); i < time; i++)
-      if ((time - i) * i > distance) count++
-      else break
-
-    for (let i = Math.floor(time / 2); i > 0; i--)
+    for (let i = pivot; i < time; i++)
       if ((time - i) * i > distance) count++
       else break
 
     // We need to subtract one because we count the pivot twice in case of an
     // even number input (which is the case).
-    return count - 1
+    return count * 2 - 1
     */
   }
 
