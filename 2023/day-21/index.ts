@@ -14,11 +14,8 @@ export const run = (input: string[], advanced: boolean = false) => {
     while (frontier.length) {
       const curr = frontier.pop()!
 
-      grid
-        .bordering(
-          curr,
-          (_, ri, ci) => grid.get([ri % height, ci % width]) !== '#'
-        )
+      $.bordering(curr, 'COORDS')
+        .filter(([ri, ci]) => grid.get([ri % height, ci % width]) !== '#')
         .filter(coords => !($.toPoint(coords) in distances))
         .forEach(coords => {
           distances[$.toPoint(coords)] = 1 + distances[$.toPoint(curr)]
@@ -64,6 +61,3 @@ export const run = (input: string[], advanced: boolean = false) => {
 
   return result // f(Math.ceil(steps / grid.width))
 }
-
-const input = $.readInput(import.meta)
-run(input)
