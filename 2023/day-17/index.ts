@@ -42,7 +42,7 @@ const checkTurns = (
 const is = (a: Coords, b: Coords) => a[0] === b[0] && a[1] === b[1]
 
 export const run = (input: string[], part2: boolean = false) => {
-  const grid = $.Grid.fromRows<number>(input, Number)
+  const grid = $.Grid.fromRows(input, Number)
   const startCoords: Coords = [0, 0]
   const endCoords: Coords = [grid.height - 1, grid.width - 1]
   const start: State = {

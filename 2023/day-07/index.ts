@@ -29,10 +29,10 @@ const resolveJokers = (cards: Cards) => {
   const others = Object.keys(frequency).filter(key => key !== 'J')
   const [mostFrequent] = others.sort((a, b) => frequency[b] - frequency[a])
 
-  // My first implementation was much *much* longer than this. I checked every
-  // hand type individually, and then refactored and refactored and refactored
-  // until I read up that the best use of a joker is to replace it by the most
-  // frequent (non-joker) card in the hand.
+  // My first implementation was much *much* longer than this (although working
+  // perfectly). I checked every hand type individually, and then refactored and
+  // refactored and refactored until I read up that the best use of a joker is
+  // to replace it by the most frequent (non-joker) card in the hand.
   return cards.replace(/J/g, mostFrequent ?? 'A') as Cards
 }
 

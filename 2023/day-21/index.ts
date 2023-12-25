@@ -1,6 +1,4 @@
-import { PriorityQueue } from '@datastructures-js/priority-queue'
 import $ from '../../helpers'
-import { Coords, Point } from '../../types'
 
 export const run = (input: string[], part2: boolean = false) => {
   const grid = $.Grid.fromRows<string>(input)

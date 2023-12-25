@@ -36,7 +36,7 @@ export const run = (
 
   // Like a basic bitch, I initially attempted to brute-force part 2. Because it
   // obviously didn’t work, I assumed it was a performance problem, until I
-  // tried to solve it sort of manually. Basically, for each start node, I tried
+  // tried to solve it kind of manually. Basically, for each start node, I tried
   // to find the distance to every end node. It quickly became apparent that
   // not every end node can be reached from every start node; in fact, only one
   // end node can be reached by a given start node. Anyway, once we find the

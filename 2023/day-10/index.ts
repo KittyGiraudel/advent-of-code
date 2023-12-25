@@ -40,7 +40,7 @@ const getNextPipeNodes = (grid: Grid<string>) => (coords: Coords) =>
   })
 
 const mapOutLoopingPipe = (grid: Grid<string>) => {
-  const start = grid.findCoords(v => v === 'S') as Coords
+  const start = grid.findCoords(v => v === 'S')!
   const getNextNodes = getNextPipeNodes(grid)
 
   // To avoid having to deal with the cell “S” within BFS, start by replacing
@@ -55,11 +55,11 @@ const mapOutLoopingPipe = (grid: Grid<string>) => {
 const scaleUpGrid = (grid: Grid<string>, from: PipeMap) => {
   const scaledUpGrid = new $.Grid(grid.width * 3, grid.height * 3, '.')
 
-  grid.forEach((value, ri, ci) => {
-    if (!($.toPoint([ri, ci]) in from)) return '.'
+  grid.forEach((value, ...coords) => {
+    if (!($.toPoint(coords) in from)) return '.'
 
-    const coords: Coords = scaleUp([ri, ci])
-    const [N, E, S, W] = $.bordering(coords, 'COORDS')
+    const scaledUpCoords: Coords = scaleUp(coords)
+    scaledUpGrid.set(scaledUpCoords, value)
 
     // A given cell remains itself on the scaled up grid; it’s its surroundings
     // which get updated. For instance:
@@ -68,7 +68,7 @@ const scaleUpGrid = (grid: Grid<string>, from: PipeMap) => {
     //  .|.
     //  .L-
     //  ...
-    scaledUpGrid.set(coords, value)
+    const [N, E, S, W] = $.bordering(scaledUpCoords, 'COORDS')
     if (BOTTOM.includes(value)) scaledUpGrid.set(N, '|')
     if (LEFT.includes(value)) scaledUpGrid.set(E, '-')
     if (TOP.includes(value)) scaledUpGrid.set(S, '|')
