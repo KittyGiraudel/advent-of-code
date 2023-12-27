@@ -58,16 +58,16 @@ export const getData = (dump: string[]) => {
   // While the data is not in the top-left corner (coords 0,0), repeatedly
   // position the empty disk on its left, and swap both disks.
   while (data[0] || data[1]) {
-    // Find the path from the empty disk to the left of the data disk.
+    // Find the path from the empty disk to the left of the data disk, then
+    // increment the total amount of moves by the length of this path.
     const end: Coords = [data[0], data[1] - 1]
-    const graph = $.pathfinding.bfs({
-      start: curr,
-      isGoal: curr => curr[0] === end[0] && curr[1] === end[1],
-      getNextNodes,
-    })
-
-    // Increment the total amount of moves by the length of this path.
-    total += $.pathfinding.path(graph.from, curr, end).length
+    total += $.pathfinding
+      .bfs({
+        start: curr,
+        isGoal: curr => curr[0] === end[0] && curr[1] === end[1],
+        getNextNodes,
+      })
+      .getPath().length
 
     // Swap both disks for an additional move.
     curr = data

@@ -16,30 +16,21 @@ const addProgramCopy = (curr: Node) => (next: Node, index: number) =>
     program: curr.program.snapshot().setInput(DIRECTIONS[index]).run(),
   } as Node)
 
-const discover = (input: string) => {
-  const start: Node = { position: [0, 0], program: new Intcode(input) }
-  const getNextNodes = (curr: Node) =>
-    $.bordering(curr.position, 'COORDS')
-      .map(coords => ({ position: coords, program: new Intcode('') }))
-      .map(addProgramCopy(curr))
-      .filter((next: Node) => next.program.outputs[0])
-
-  const { from, end } = $.pathfinding.bfs({
-    start,
+const discover = (input: string) =>
+  $.pathfinding.bfs<Node>({
+    start: { position: [0, 0], program: new Intcode(input) },
     emptyAfterGoal: true,
-    getNextNodes,
     toKey: curr => $.toPoint(curr.position),
     isGoal: curr => curr.program.getOutput() === 2,
+    getNextNodes: (curr: Node) =>
+      $.bordering(curr.position, 'COORDS')
+        .map(coords => ({ position: coords, program: new Intcode('') }))
+        .map(addProgramCopy(curr))
+        .filter((next: Node) => next.program.outputs[0]),
   })
 
-  return { from, start, end }
-}
-
-export const getDistanceToOxygen = (input: string) => {
-  const { from, start, end } = discover(input)
-
-  return $.pathfinding.path(from, start.position, end.position).length
-}
+export const getDistanceToOxygen = (input: string) =>
+  discover(input).getPath().length
 
 const padGrid = (grid: Grid<string>) => {
   const line = (size: number) => Array.from('#'.repeat(size))
@@ -65,13 +56,13 @@ const render = ({
     Object.keys(from).includes(ri + minY + ',' + (ci + minX)) ? '.' : '#'
   const grid = new $.Grid(width, height, handler)
 
-  grid.set([end.coords[1], end.coords[0]], 'O')
+  grid.set(end.coords, 'O')
 
   return padGrid(grid).render()
 }
 
 export const getOxygenDuration = (input: string) => {
-  const { from, end } = discover(input)
+  const { graph, end } = discover(input)
   let maxMinutes = 0
 
   $.pathfinding.bfs({
@@ -80,7 +71,7 @@ export const getOxygenDuration = (input: string) => {
     getNextNodes: curr => {
       // If the position does not appear in the graph, it means it’s a wall and
       // should therefore not continue any further.
-      if (!($.toPoint(curr.position) in from)) return []
+      if (!($.toPoint(curr.position) in graph)) return []
 
       maxMinutes = Math.max(curr.minutes, maxMinutes)
 

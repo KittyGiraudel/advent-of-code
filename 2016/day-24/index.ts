@@ -37,12 +37,11 @@ export const discover = (input: string[], roundTrip: boolean = false) => {
       if (!(start in acc)) acc[start] = {}
       if (!(end in acc)) acc[end] = {}
 
-      const graph = $.pathfinding.bfs({
+      const length = $.pathfinding.bfs({
         start,
         isGoal: curr => curr[0] === end[0] && curr[1] === end[1],
         getNextNodes
-      })
-      const length = $.pathfinding.path(graph.from, start, end).length
+      }).getPath().length
 
       acc[start][end] = acc[end][start] = length
 
@@ -69,7 +68,7 @@ export const discover = (input: string[], roundTrip: boolean = false) => {
       // used previously: my first version does pathfinding on the go with some
       // aggressive caching while the second version precomputes all distances
       // and just does summing to find the shortest path.
-      count += $.pathfinding.path(search(curr, next).from, curr, next).length
+      count += search(curr, next).getPath().length
       // count += distances[curr][next]
       curr = next
     }

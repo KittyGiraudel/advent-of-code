@@ -40,7 +40,7 @@ export const releasePressure = (input: string[]) => {
   )
   type DistanceKey = keyof typeof distanceMap
 
-  const { from } = $.pathfinding.dijkstra({
+  const { graph } = $.pathfinding.dijkstra({
     start: {
       name: 'AA',
       time: 30,
@@ -71,5 +71,5 @@ export const releasePressure = (input: string[]) => {
         }),
   })
 
-  return Math.max(...Object.keys(from).map(Number))
+  return Math.max(...Object.keys(graph).map(Number))
 }

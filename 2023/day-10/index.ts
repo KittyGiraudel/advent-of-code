@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, CoordsAndPoint, Grid } from '../../types'
+import { Coords, Grid } from '../../types'
 
 const TOP = ['|', '7', 'F']
 const BOTTOM = ['|', 'L', 'J']
@@ -49,7 +49,7 @@ const mapOutLoopingPipe = (grid: Grid<string>) => {
 
   // Mapping out the looping pipe means running BFS from the start until we
   // cannot find a new node which means we’re back at the start.
-  return $.pathfinding.bfs({ start, toKey: $.toPoint, getNextNodes }).from
+  return $.pathfinding.bfs({ start, getNextNodes }).graph
 }
 
 const scaleUpGrid = (grid: Grid<string>, from: PipeMap) => {
@@ -110,8 +110,8 @@ export const run = (input: string[], part2: boolean = false) => {
   // from their top-left corner. Then for every empty cell within the normal-
   // size grid which was *not* flooded (potential enclave), we check whether it
   // was flooded in the big grid; if it was, it’s an enclave.
-  const { from: flooded } = floodGrid(grid)
-  const { from: scaledFlooded } = floodGrid(scaleUpGrid(grid, pipe))
+  const { graph: flooded } = floodGrid(grid)
+  const { graph: scaledFlooded } = floodGrid(scaleUpGrid(grid, pipe))
   const floodedSize = Object.keys(flooded).length
   const enclavesCount = grid.count(
     (_, ...coords) =>

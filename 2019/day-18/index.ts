@@ -50,7 +50,7 @@ export const run = (input: string[], part2: boolean = false) => {
   const combinations = $.combinations([...keyPoints, ...startPositions], 2)
 
   combinations.forEach(([a, b]) => {
-    const { from, end } = $.pathfinding.gbfs<Point>({
+    const { end, getPath } = $.pathfinding.gbfs<Point>({
       start: a,
       heuristic: curr => $.manhattan($.toCoords(curr), $.toCoords(b)),
       isGoal: curr => curr === b,
@@ -60,7 +60,7 @@ export const run = (input: string[], part2: boolean = false) => {
         ),
     })
     if (!end) return
-    const path = $.pathfinding.path(from, a, b) as Point[]
+    const path = getPath() as Point[]
     const locks = path.filter(p => p in doors).map(p => doors[p].toLowerCase())
     const keyA = keys[a] ?? String(startPositions.indexOf(a))
     const keyB = keys[b] ?? String(startPositions.indexOf(b))

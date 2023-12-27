@@ -79,7 +79,7 @@ class Unit {
     const alive = units.filter(unit => unit.alive)
     const enemies = alive.filter(unit => unit.isEnemy(this.type))
 
-    const graph = $.pathfinding.bfs({
+    const { end, getPath } = $.pathfinding.bfs({
       start: this.coords,
       getNextNodes: curr =>
         getBorderingSpace(grid, curr).filter(
@@ -93,9 +93,8 @@ class Unit {
 
     // If we found a target that we can reach, and we are not already in melee
     // range of it, move one step towards that target.
-    if (graph.end) {
-      const path = $.pathfinding.path(graph.from, this.coords, graph.end)
-      const point = path.pop() as Point
+    if (end) {
+      const point = getPath().pop() as Point
 
       if (point) this.coords = $.toCoords(point)
     }

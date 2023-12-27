@@ -15,18 +15,15 @@ const isOpenSpace =
 
 export const run = (end: Coords, n: number, part2: boolean = false) => {
   const start: Coords = [1, 1]
-  const { from: graph } = $.pathfinding.bfs({
+  const { graph, getPath } = $.pathfinding.bfs({
     start,
     getNextNodes: curr => $.bordering(curr, 'COORDS').filter(isOpenSpace(n)),
     isGoal: ([ri, ci]) => ri === end[0] && ci === end[1],
   })
 
-  const getDistanceFromStart = (from: string | Coords) =>
-    $.pathfinding.path(graph, start, from).length
-
   return part2
     ? Object.keys(graph)
-        .map(getDistanceFromStart)
+        .map((from: string) => getPath(start, from).length)
         .filter(distance => distance <= 50).length
-    : getDistanceFromStart(end)
+    : getPath().length
 }

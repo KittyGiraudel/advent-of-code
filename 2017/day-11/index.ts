@@ -21,14 +21,6 @@ const distance = $.memo(([xA, yA]: Coords, [xB, yB]: Coords) => {
 const getNextNodes = (curr: Coords) =>
   Object.values(VECTORS).map(vector => $.applyVector(curr, vector))
 
-const createGraph = (start: Coords, end: Coords) =>
-  $.pathfinding.gbfs({
-    start,
-    getNextNodes,
-    isGoal: curr => curr[0] === end[0] && curr[1] === end[1],
-    heuristic: next => distance(next, end),
-  }).from
-
 const walk = (steps: string[]) =>
   steps.reduce<{ position: Coords; visited: Set<Point> }>(
     (acc, step) => {
@@ -39,8 +31,13 @@ const walk = (steps: string[]) =>
     { position: [0, 0], visited: new Set(['0,0']) }
   )
 
-const getPathLength = (start: Coords, end: Coords) =>
-  $.pathfinding.path(createGraph(start, end), start, end).length
+const createGraph = (start: Coords, end: Coords) =>
+  $.pathfinding.gbfs({
+    start,
+    getNextNodes,
+    isGoal: curr => curr[0] === end[0] && curr[1] === end[1],
+    heuristic: next => distance(next, end),
+  })
 
 export const run = (instructions: string[], part2: boolean = false) => {
   const { position: end, visited } = walk(instructions)
@@ -50,5 +47,7 @@ export const run = (instructions: string[], part2: boolean = false) => {
     .sort((a, b) => distance(a, start) - distance(b, start))
     .pop()!
 
-  return part2 ? getPathLength(start, furthest) : getPathLength(start, end)
+  return part2
+    ? createGraph(start, furthest).getPath().length
+    : createGraph(start, end).getPath().length
 }

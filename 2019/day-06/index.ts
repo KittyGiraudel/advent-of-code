@@ -31,15 +31,18 @@ export const getPaths = (
 }
 
 export const countOrbits = (graph: Graph, to: string = 'COM') => {
-  return Array.from(graph.keys()).reduce((orbits, key) => {
-    const { from } = $.pathfinding.bfs({
-      start: key,
-      isGoal: curr => curr === to,
-      getNextNodes: curr => Array.from(graph.get(curr)!),
-    })
-
-    return orbits + $.pathfinding.path(from, key, to).length
-  }, 0)
+  return Array.from(graph.keys()).reduce(
+    (orbits, key) =>
+      orbits +
+      $.pathfinding
+        .bfs({
+          start: key,
+          isGoal: curr => curr === to,
+          getNextNodes: curr => Array.from(graph.get(curr)!),
+        })
+        .getPath().length,
+    0
+  )
 
   // This is my original version, which recursively walks the graph. It is
   // incredibly slower than the newer version using the BFS utility though
@@ -56,16 +59,17 @@ export const countTransfers = (
   start: string = 'YOU',
   end: string = 'SAN'
 ) => {
-  const { from } = $.pathfinding.bfs({
-    start,
-    isGoal: curr => curr === end,
-    getNextNodes: curr => Array.from(graph.get(curr)!),
-  })
-  const path = $.pathfinding.path(from, start, end)
-
   // This is the original version, which is much slower.
   // const [path] = getPaths(graph, start, end)
 
   // Drop the 2 extremities as they shouldn’t count in the amount of transfers.
-  return path.length - 2
+  return (
+    $.pathfinding
+      .bfs({
+        start,
+        isGoal: curr => curr === end,
+        getNextNodes: curr => Array.from(graph.get(curr)!),
+      })
+      .getPath().length - 2
+  )
 }

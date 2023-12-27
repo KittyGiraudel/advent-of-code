@@ -35,7 +35,7 @@ export const getSurfaceArea = (points: TriPoint[], part2: boolean = false) => {
   // of the bounding box on purpose, and flood the gaps (which are positions
   // that are not listed as part of our input).
   const start: TriCoords = [minX - 1, minY - 1, minZ - 1]
-  const { from: flooded } = $.pathfinding.bfs({
+  const { graph: flooded } = $.pathfinding.bfs({
     start,
     getNextNodes: (coords: TriCoords) =>
       getSides(coords)

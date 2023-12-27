@@ -153,20 +153,18 @@ export const maze = (input: string[], recursive: boolean = false) => {
   const grid = new $.Grid(width, height, (ri, ci) => input[ri + 2][ci + 2])
   const outside = getOutsideCoords(grid, input)
   const inside = getInsideCoords(grid)
-  const start: Node = { coords: outside.doorsToCoords.AA, depth: 0 }
-  const end: Node = { coords: outside.doorsToCoords.ZZ, depth: 0 }
-  const toKey = (curr: Node) => $.toPoint(curr.coords) + '/' + curr.depth
+  const endCoords = outside.doorsToCoords.ZZ
   const getNeighbors = recursive ? getNeighborsRecursive : getNeighborsFlat
 
-  const { from } = $.pathfinding.bfs({
-    start,
-    toKey,
-    getNextNodes: getNeighbors(grid, inside, outside),
-    isGoal: curr =>
-      curr.depth === 0 &&
-      curr.coords[0] === end.coords[0] &&
-      curr.coords[1] === end.coords[1],
-  })
-
-  return $.pathfinding.path(from, toKey(start), toKey(end)).length
+  return $.pathfinding
+    .bfs<Node>({
+      start: { coords: outside.doorsToCoords.AA, depth: 0 },
+      toKey: (curr: Node) => $.toPoint(curr.coords) + '/' + curr.depth,
+      getNextNodes: getNeighbors(grid, inside, outside),
+      isGoal: curr =>
+        curr.depth === 0 &&
+        curr.coords[0] === endCoords[0] &&
+        curr.coords[1] === endCoords[1],
+    })
+    .getPath().length
 }

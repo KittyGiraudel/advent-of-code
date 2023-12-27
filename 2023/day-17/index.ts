@@ -50,7 +50,7 @@ export const run = (input: string[], part2: boolean = false) => {
     streak: 0,
     orientation: $.turn.DIRECTIONS[2],
   }
-  const { from, end } = $.pathfinding.aStar<State>({
+  const { end, costs } = $.pathfinding.aStar<State>({
     start,
     toKey,
     heuristic: curr => $.manhattan(curr.position, endCoords),
@@ -93,9 +93,5 @@ export const run = (input: string[], part2: boolean = false) => {
     },
   })
 
-  return $.pathfinding
-    .path(from, toKey(start), toKey(end))
-    .map(key => $.toCoords(key!.split(' ')[0] as Point))
-    .map(coords => grid.get(coords))
-    .reduce((a, b) => a + b, 0)
+  return costs[toKey(end)]
 }

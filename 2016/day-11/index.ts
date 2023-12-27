@@ -36,37 +36,36 @@ export const run = (floors: Floors) => {
   const nextElevators = [[1], [0, 2], [1, 3], [2]]
   const count = floors.flat().length
 
-  const start: State = { elevator: 0, floors }
-  const { from, end } = $.pathfinding.bfs<State>({
-    start,
-    toKey,
-    isGoal: curr => curr.floors[3].length === count,
-    getNextNodes: curr => {
-      const elevator = curr.elevator
-      const currFloor = curr.floors[elevator]
-      const combinations = $.combinations(currFloor, 2).concat(
-        currFloor.map(item => [item])
-      )
+  return $.pathfinding
+    .bfs<State>({
+      start: { elevator: 0, floors },
+      toKey,
+      isGoal: curr => curr.floors[3].length === count,
+      getNextNodes: curr => {
+        const elevator = curr.elevator
+        const currFloor = curr.floors[elevator]
+        const combinations = $.combinations(currFloor, 2).concat(
+          currFloor.map(item => [item])
+        )
 
-      const nextStates: State[] = []
+        const nextStates: State[] = []
 
-      nextElevators[elevator].forEach(nextElevator => {
-        const nextFloor = curr.floors[nextElevator]
+        nextElevators[elevator].forEach(nextElevator => {
+          const nextFloor = curr.floors[nextElevator]
 
-        for (const content of combinations) {
-          if (!nextFloor.concat(content).every(isValid)) continue
+          for (const content of combinations) {
+            if (!nextFloor.concat(content).every(isValid)) continue
 
-          const nextFloors = curr.floors.slice(0) as Floors
-          nextFloors[elevator] = unconcat(currFloor, content).sort()
-          nextFloors[nextElevator] = nextFloor.concat(content).sort()
+            const nextFloors = curr.floors.slice(0) as Floors
+            nextFloors[elevator] = unconcat(currFloor, content).sort()
+            nextFloors[nextElevator] = nextFloor.concat(content).sort()
 
-          nextStates.push({ elevator: nextElevator, floors: nextFloors })
-        }
-      })
+            nextStates.push({ elevator: nextElevator, floors: nextFloors })
+          }
+        })
 
-      return nextStates
-    },
-  })
-
-  return $.pathfinding.path(from, toKey(start), toKey(end)).length
+        return nextStates
+      },
+    })
+    .getPath().length
 }

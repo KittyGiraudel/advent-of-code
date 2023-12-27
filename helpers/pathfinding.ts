@@ -9,10 +9,16 @@ const DEFAULT_OPTIONS = {
 type Heuristic<T> = (curr: T) => number
 type GetCost<T> = (curr: T, next: T) => number
 type Frontier<T> = PriorityQueue<[T, number]> | T[]
+type GetPath<T> = (start?: T | string, end?: T | string) => string[]
 
 export type SearchCosts = Record<string, number>
 export type SearchGraph = Record<string, string | null>
-export type SearchOutput<T> = { from: SearchGraph; end: T }
+export type SearchOutput<T> = {
+  graph: SearchGraph
+  end: T
+  getPath: GetPath<T>
+}
+export type SearchOutputWithCosts<T> = SearchOutput<T> & { costs: SearchCosts }
 export type SearchOptions<T> = {
   start: T
   getNextNodes: (curr: T) => T[]
@@ -34,7 +40,7 @@ const _core = <T>(
   isGoal: SearchOptions<T>['isGoal'] = DEFAULT_OPTIONS.isGoal,
   emptyAfterGoal: SearchOptions<T>['emptyAfterGoal'] = DEFAULT_OPTIONS.emptyAfterGoal
 ) => {
-  let end = null
+  let end: T | null = null
 
   while (!isEmpty(frontier)) {
     const curr = pop(frontier)!
@@ -73,18 +79,23 @@ export const bfs = <T>({
   emptyAfterGoal = DEFAULT_OPTIONS.emptyAfterGoal,
 }: SearchOptions<T>) => {
   const frontier: T[] = [start]
-  const from: SearchOutput<T>['from'] = { [toKey(start)]: null }
+  const graph: SearchOutput<T>['graph'] = { [toKey(start)]: null }
 
   const handler = (curr: T) => (next: T) => {
-    if (!(toKey(next) in from)) {
+    if (!(toKey(next) in graph)) {
       frontier.unshift(next)
-      from[toKey(next)] = toKey(curr)
+      graph[toKey(next)] = toKey(curr)
     }
   }
 
   const end = _core(handler, frontier, getNextNodes, isGoal, emptyAfterGoal)
 
-  return { end, from } as SearchOutput<T>
+  return {
+    end,
+    graph,
+    getPath: (a?: T, b?: T) =>
+      getPath(graph, toKey(a ?? start), b ? toKey(b) : end ? toKey(end) : null),
+  } as SearchOutput<T>
 }
 
 /**
@@ -105,18 +116,23 @@ export const gbfs = <T>({
 }: SearchOptions<T> & { heuristic: Heuristic<T> }) => {
   const frontier = new PriorityQueue<[T, number]>((a, b) => a[1] - b[1])
   frontier.push([start, 0])
-  const from: SearchGraph = { [toKey(start)]: null }
+  const graph: SearchGraph = { [toKey(start)]: null }
 
   const handler = (curr: T) => (next: T) => {
-    if (!(toKey(next) in from)) {
+    if (!(toKey(next) in graph)) {
       frontier.push([next, heuristic(next)])
-      from[toKey(next)] = toKey(curr)
+      graph[toKey(next)] = toKey(curr)
     }
   }
 
   const end = _core(handler, frontier, getNextNodes, isGoal, emptyAfterGoal)
 
-  return { from, end } as SearchOutput<T>
+  return {
+    graph,
+    end,
+    getPath: (a?: T, b?: T) =>
+      getPath(graph, toKey(a ?? start), b ? toKey(b) : end ? toKey(end) : null),
+  } as SearchOutput<T>
 }
 
 /**
@@ -137,7 +153,7 @@ export const dijkstra = <T>({
 }: SearchOptions<T> & { getCost: GetCost<T> }) => {
   const frontier = new PriorityQueue<[T, number]>((a, b) => a[1] - b[1])
   frontier.push([start, 0])
-  const from: SearchGraph = { [toKey(start)]: null }
+  const graph: SearchGraph = { [toKey(start)]: null }
   const costs: SearchCosts = { [toKey(start)]: 0 }
 
   const handler = (curr: T) => (next: T) => {
@@ -148,13 +164,19 @@ export const dijkstra = <T>({
     if (!(nextKey in costs) || newCost < costs[nextKey]) {
       frontier.push([next, newCost])
       costs[toKey(next)] = newCost
-      from[toKey(next)] = toKey(curr)
+      graph[toKey(next)] = toKey(curr)
     }
   }
 
   const end = _core(handler, frontier, getNextNodes, isGoal)
 
-  return { from, costs, end } as SearchOutput<T> & { costs: SearchCosts }
+  return {
+    graph,
+    costs,
+    end,
+    getPath: (a?: T, b?: T) =>
+      getPath(graph, toKey(a ?? start), b ? toKey(b) : end ? toKey(end) : null),
+  } as SearchOutputWithCosts<T>
 }
 
 /**
@@ -179,7 +201,7 @@ export const aStar = <T>({
 }) => {
   const frontier = new PriorityQueue<[T, number]>((a, b) => a[1] - b[1])
   frontier.push([start, 0])
-  const from: SearchGraph = { [toKey(start)]: null }
+  const graph: SearchGraph = { [toKey(start)]: null }
   const costs: SearchCosts = { [toKey(start)]: 0 }
 
   const handler = (curr: T) => (next: T) => {
@@ -190,21 +212,30 @@ export const aStar = <T>({
     if (!(nextKey in costs) || newCost < costs[nextKey]) {
       frontier.push([next, newCost + heuristic(next)])
       costs[toKey(next)] = newCost
-      from[toKey(next)] = toKey(curr)
+      graph[toKey(next)] = toKey(curr)
     }
   }
 
   const end = _core(handler, frontier, getNextNodes, isGoal)
 
-  return { from, costs, end } as SearchOutput<T> & { costs: SearchCosts }
+  return {
+    graph,
+    costs,
+    end,
+    getPath: (a?: T, b?: T) =>
+      getPath(graph, toKey(a ?? start), b ? toKey(b) : end ? toKey(end) : null),
+  } as SearchOutputWithCosts<T>
 }
 
-const reconstruct = (graph: SearchGraph, start: unknown, end: unknown) => {
-  let path = []
-  let current: string | null = typeof end === 'string' ? end : String(end)
-  start = typeof start === 'string' ? start : String(start)
+const getPath = (graph: SearchGraph, start: string, end: string | null) => {
+  const path: string[] = []
+  let current = end
 
-  while (current !== start) {
+  if (!end) {
+    throw new Error('Cannot reconstruct path as no end node was provided.')
+  }
+
+  while (current && current !== start) {
     path.push(current)
     current = current ? graph[current] : null
   }
@@ -217,5 +248,4 @@ export default {
   gbfs,
   dijkstra,
   aStar,
-  path: reconstruct,
 }
