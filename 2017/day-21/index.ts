@@ -4,7 +4,7 @@ import { Grid } from '../../types'
 type Patterns = Record<string, string[]>
 type Cache = Record<string, string[]>
 
-const asGrid = (string: string) => $.Grid.fromRows<string>(string.split('/'))
+const asGrid = (string: string) => $.Grid.fromRows(string.split('/'))
 
 const asString = (grid: Grid<string>) =>
   grid.rows.map(row => row.join('')).join('/')

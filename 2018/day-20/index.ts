@@ -166,9 +166,11 @@ const createGrid = map => {
   })
 
   // Add outer walls.
-  grid.rows.unshift('#'.repeat(width).split(''))
-  grid.rows.push('#'.repeat(width).split(''))
-  grid.rows.forEach(row => [row.unshift('#'), row.push('#')])
+  const line = (size: number) => Array.from('#'.repeat(size))
+  grid.prependRow(line(grid.width))
+  grid.appendRow(line(grid.width))
+  grid.appendColumn(line(grid.height))
+  grid.prependColumn(line(grid.height))
 
   return grid
 }

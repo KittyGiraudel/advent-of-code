@@ -62,8 +62,7 @@ export const run = (input: string[], part2: boolean = false) => {
 
       // Finally, we update our map to store the current brick and its tallest
       // Z at every coordinate
-      grid.rows[ri][ci].height = top + height
-      grid.rows[ri][ci].brick = index
+      grid.set([ri, ci], { brick: index, height: top + height })
     })
   })
 

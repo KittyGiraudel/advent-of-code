@@ -47,7 +47,7 @@ const getSides = (grid: Grid<string>) =>
 const parseSnapshot = (snapshot: string) => {
   const [header, ...lines] = snapshot.split('\n')
   const [id] = $.numbers(header)
-  const grid = $.Grid.fromRows<string>(lines)
+  const grid = $.Grid.fromRows(lines)
 
   return grid
     .variants()
@@ -106,7 +106,7 @@ const assemble = (mozaic: Grid<Tile>) => {
 
     // Loop over the lines of the tiles, omitting the first and the last.
     for (let i = 1; i < row[0].grid.height - 1; i++) {
-      grid.rows.push(row.map(tile => tile.grid.rows[i].slice(1, -1)).flat())
+      grid.appendRow(row.map(tile => tile.grid.row(i).slice(1, -1)).flat())
     }
   }
 

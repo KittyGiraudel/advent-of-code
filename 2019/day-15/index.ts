@@ -41,12 +41,14 @@ export const getDistanceToOxygen = (input: string) => {
   return $.pathfinding.path(from, start.position, end.position).length
 }
 
-const padGrid = (grid: Grid<string>, width: number) =>
-  $.Grid.fromRows<string>([
-    '#'.repeat(width + 2),
-    ...grid.rows.map(row => ['#', ...row, '#'].join('')),
-    '#'.repeat(width + 2),
-  ])
+const padGrid = (grid: Grid<string>) => {
+  const line = (size: number) => Array.from('#'.repeat(size))
+  grid.prependRow(line(grid.width))
+  grid.appendRow(line(grid.width))
+  grid.appendColumn(line(grid.height))
+  grid.prependColumn(line(grid.height))
+  return grid
+}
 
 const render = ({
   from,
@@ -65,7 +67,7 @@ const render = ({
 
   grid.set([end.coords[1], end.coords[0]], 'O')
 
-  return padGrid(grid, width).render()
+  return padGrid(grid).render()
 }
 
 export const getOxygenDuration = (input: string) => {

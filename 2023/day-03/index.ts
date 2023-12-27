@@ -34,7 +34,7 @@ const getSurroundingNumber = (grid: Grid<string>) => (coords: Coords) => {
 }
 
 export const getGearRatio = (input: string[]) => {
-  const grid = $.Grid.fromRows<string>(input)
+  const grid = $.Grid.fromRows(input)
 
   return grid.reduce<number>((acc, item, ...coords) => {
     // Only consider gears, and ignore anything else.
@@ -61,7 +61,7 @@ export const getGearRatio = (input: string[]) => {
 }
 
 export const run = (input: string[], part2: boolean = false) => {
-  const grid = $.Grid.fromRows<string>(input)
+  const grid = $.Grid.fromRows(input)
   const getValue = (coords: Coords) => grid.get(coords)
   type State = { current: number; total: number; symbol: boolean }
 

@@ -5,9 +5,9 @@ import { run } from './'
 test('Day 19 — Sample', t => {
   const sample = $.sample(
     `
-      |
-      |  +--+
-      A  |  C
+      |         
+      |  +--+   
+      A  |  C   
   F---|----E|--+
       |  |  |  D
       +B-+  +--+`,

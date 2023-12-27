@@ -20,7 +20,7 @@ export const run = (input: string[], part2: boolean = false) => {
   const keys: Record<Point, string> = {}
   const doors: Record<Point, string> = {}
   const lookup = new Set<Point>()
-  const grid = $.Grid.fromRows<string>(input)
+  const grid = $.Grid.fromRows(input)
 
   grid.forEach((value, ...coords) => {
     const point = $.toPoint(coords)

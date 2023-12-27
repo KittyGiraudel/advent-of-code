@@ -4,21 +4,19 @@ import $ from '../../helpers'
 
 test('Day 13 — Sample', t => {
   const sampleA = $.sample(
-    `
-/->-\\
+    `/->-\\        
 |   |  /----\\
 | /-+--+-\\  |
 | | |  | v  |
 \\-+-/  \\-+--/
-  \\------/
+  \\------/   
   `,
     { trim: false, deindent: false }
   ).filter(Boolean)
 
   const sampleB = $.sample(
-    `
-/>-<\\
-|   |
+    `/>-<\\  
+|   |  
 | /<+-\\
 | | | v
 \\>+</ |

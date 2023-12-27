@@ -100,7 +100,7 @@ const findLongestPath = (
 }
 
 export const run = (input: string[], part2: boolean = false) => {
-  const grid = $.Grid.fromRows<string>(input)
+  const grid = $.Grid.fromRows(input)
   const { height } = grid
   const startCoords = grid.findCoords((v, ri) => ri === 0 && v === '.')!
   const endCoords = grid.findCoords((v, ri) => ri === height - 1 && v === '.')!

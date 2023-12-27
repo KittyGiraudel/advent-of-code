@@ -21,10 +21,10 @@ const getNextNodes = (
 }
 
 export const run = (input: string[]): [string, number] => {
-  const grid = $.Grid.fromRows<string>(input)
+  const grid = $.Grid.fromRows(input)
   const read = (coords: Coords) => grid.get(coords)?.trim()
   const visited: Point[] = []
-  let position: Coords = [0, grid.row(0).findIndex(v => v === '|')]
+  let position = grid.findCoords((v, ri) => ri === 0 && v === '|') as Coords
   let vector: Coords = VECTORS[2]
   let letters = ''
   let value = null
@@ -36,6 +36,7 @@ export const run = (input: string[]): [string, number] => {
     // … change direction when hitting a corner …
     if (value === '+') {
       const index = $.bordering(position, 'BOTH')
+
         // … by finding the neighboring track that’s not yet visited …
         .findIndex(
           ({ coords, point }) => !visited.includes(point) && read(coords)

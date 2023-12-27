@@ -6,7 +6,7 @@ export const run = (
   iterations: number,
   part2: boolean = false
 ) => {
-  let curr = $.Grid.fromRows<string>(input)
+  let curr = $.Grid.fromRows(input)
   const corners: Point[] = [
     `0,0`,
     `0,${curr.width - 1}`,

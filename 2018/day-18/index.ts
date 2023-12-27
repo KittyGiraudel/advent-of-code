@@ -18,7 +18,7 @@ const getScore = (grid: Grid<string>) =>
 
 export const run = (rows: string[], iterations: number = 1) => {
   const history = []
-  let curr = $.Grid.fromRows<string>(rows)
+  let curr = $.Grid.fromRows(rows)
 
   for (let i = 0; i < iterations; i++) {
     curr = curr.map((value, ...coords) => {

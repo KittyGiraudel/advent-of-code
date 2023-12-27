@@ -24,8 +24,7 @@ const isRowEmpty = (row: string[]) => row && row.join('') === EMPTY_ROW
 const adjustHeight = (grid: Grid<string>, rock: Rock) => {
   while (isRowEmpty(grid.row(0))) grid.rows.shift()
 
-  for (let i = 0; i < 3 + rock.length; i++)
-    grid.rows.unshift(EMPTY_ROW.split(''))
+  for (let i = 0; i < 3 + rock.length; i++) grid.prependRow(EMPTY_ROW.split(''))
 
   return grid
 }

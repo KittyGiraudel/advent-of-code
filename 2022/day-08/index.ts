@@ -1,7 +1,7 @@
 import $ from '../../helpers'
 
 export const countVisibleTrees = (rows: string[]) => {
-  const grid = $.Grid.fromRows<string>(rows)
+  const grid = $.Grid.fromRows(rows)
 
   return grid.filter((tree, ri, ci) => {
     const isLower = (t: string) => +t < +tree
@@ -35,7 +35,7 @@ export const countVisibleTrees = (rows: string[]) => {
 }
 
 export const getHighestScenicScore = (rows: string[]) => {
-  const grid = $.Grid.fromRows<string>(rows)
+  const grid = $.Grid.fromRows(rows)
 
   return Math.max(
     ...grid.flatMap((tree, ri, ci) => {

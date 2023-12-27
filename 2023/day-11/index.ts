@@ -35,7 +35,7 @@ const findGalaxies = (grid: Grid<string>, factor: number) => {
 }
 
 export const run = (input: string[], factor = 2) => {
-  const grid = $.Grid.fromRows<string>(input)
+  const grid = $.Grid.fromRows(input)
   const galaxies = findGalaxies(grid, factor)
   const pairs = $.combinations(galaxies, 2)
 

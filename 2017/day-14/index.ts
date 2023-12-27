@@ -10,7 +10,7 @@ export const run = (key: string, part2: boolean = false) => {
     const bin = Array.from(Array.from(hash).map($.hexToBin).join('')).map(
       Number
     )
-    grid.rows.push(bin)
+    grid.appendRow(bin)
   }
 
   const visited: Record<Point, Point> = {}

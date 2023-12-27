@@ -17,7 +17,7 @@ export const getGrid = (input: string) => {
   // join them all together to have a single large string. Then, split the
   // string on line breaks (formerly ASCII code 10), and split each row on
   // individual characters to make grid.
-  return $.Grid.fromRows<string>(
+  return $.Grid.fromRows(
     (computer.getOutput() as number[])
       .map(code => String.fromCharCode(code))
       .join('')

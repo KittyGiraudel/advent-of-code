@@ -93,7 +93,7 @@ const scaleUp = (coords: Coords) =>
   [coords[0] * 3 + 1, coords[1] * 3 + 1] as Coords
 
 export const run = (input: string[], part2: boolean = false) => {
-  const grid = $.Grid.fromRows<string>(input)
+  const grid = $.Grid.fromRows(input)
   const pipe = mapOutLoopingPipe(grid)
   const pipeLength = Object.keys(pipe).length
 

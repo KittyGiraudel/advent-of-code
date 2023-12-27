@@ -16,7 +16,7 @@ export const run = (
   iterations: number,
   part2: boolean = false
 ) => {
-  const grid = $.Grid.fromRows<string>(rows)
+  const grid = $.Grid.fromRows(rows)
   const nodes = grid.toMap()
   const state: State = {
     position: [Math.floor(grid.height / 2), Math.floor(grid.width / 2)],

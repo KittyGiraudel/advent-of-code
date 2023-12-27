@@ -44,7 +44,7 @@ const cycle = (grid: Grid<string>) =>
   ].forEach(vector => tilt(grid, vector as Coords))
 
 export const run = (input: string[], part2: boolean = false) => {
-  const grid = $.Grid.fromRows<string>(input)
+  const grid = $.Grid.fromRows(input)
   const cycles = 1_000_000_000
 
   if (!part2) {

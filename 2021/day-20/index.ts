@@ -22,7 +22,7 @@ const padInput = (input: string, defaultChar: string = '.') => {
 
 const step = (algorithm: string, input: string, defaultChar: string = '.') => {
   const rows = padInput(input, defaultChar)
-  const curr = $.Grid.fromRows<string>(rows)
+  const curr = $.Grid.fromRows(rows)
   const next = curr.map((_, ri, ci) => {
     const value = $.toDec(
       getTilingCoords(ri, ci)

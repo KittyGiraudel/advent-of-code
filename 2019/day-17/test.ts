@@ -15,7 +15,7 @@ test('Day 17 — Sample', t => {
   `
   )
 
-  t.is(calibrate($.Grid.fromRows<string>(sample)), 76)
+  t.is(calibrate($.Grid.fromRows(sample)), 76)
 })
 
 test('Day 17 — Solutions', t => {

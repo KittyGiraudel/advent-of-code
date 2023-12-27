@@ -1,7 +1,7 @@
 import $ from '../../helpers'
 
 export const run = (input: string[], part2: boolean = false) => {
-  const grid = $.Grid.fromRows<string>(input)
+  const grid = $.Grid.fromRows(input)
   const start = grid.findCoords(v => v === 'S')!
 
   const solve = (steps: number) => {

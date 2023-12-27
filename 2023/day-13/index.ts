@@ -67,7 +67,7 @@ const summarizeVariant =
 export const run = (blocks: string[], part2: boolean = false) =>
   $.sum(
     blocks
-      .map(block => $.Grid.fromRows<string>(block.split('\n')))
+      .map(block => $.Grid.fromRows(block.split('\n')))
       .map(grid => ({ grid, mirror: findMirror(grid) }))
       .map(({ grid, mirror }) =>
         part2
