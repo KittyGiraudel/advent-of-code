@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 import { Coords } from '../../types'
-import { Intcode } from '../day-05'
+import { Intcode } from '../05'
 
 type Node = {
   computer: Intcode

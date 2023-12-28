@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { Intcode } from '../day-05'
+import { Intcode } from '../05'
 
 test('Day 09 — Sample', t => {
   const sample = '109,1,204,-1,1001,100,1,100,1008,100,16,101,1006,101,0,99'

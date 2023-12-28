@@ -1,4 +1,4 @@
-import { Intcode } from '../day-05'
+import { Intcode } from '../05'
 import $ from '../../helpers'
 import { Coords, Point } from '../../types'
 

@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 import { Coords, Point } from '../../types'
-import { Intcode } from '../day-05'
+import { Intcode } from '../05'
 
 type State = {
   direction: Coords

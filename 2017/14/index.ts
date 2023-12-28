@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 import { Coords, Point } from '../../types'
-import { Computer } from '../day-10'
+import { Computer } from '../10'
 
 export const run = (key: string, part2: boolean = false) => {
   const grid = new $.Grid<number>(0)

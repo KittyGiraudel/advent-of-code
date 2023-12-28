@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { findMatches } from '../day-01'
+import { findMatches } from '../01'
 
 // Find the first number in `input` which cannot be obtained by summing 2
 // numbers in its preamble (`size` previous numbers).

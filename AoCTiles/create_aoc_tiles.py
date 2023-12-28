@@ -44,7 +44,7 @@ SHOW_CHECKMARK_INSTEAD_OF_TIME_RANK = True
 # called "day1" to "day25" then set the pattern to r"day\d{1,2}". The script extracts
 # a number from the folder and tries to guess its day that way.
 YEAR_PATTERN = r"\d{4}"
-DAY_PATTERN = r"day-\d{2}"
+DAY_PATTERN = r"\d{2}"
 
 # You can change this code entirely, or just change patterns above. You get more control if you change the code.
 def get_solution_paths_dict_for_years() -> dict[int, dict[int, list[str]]]:

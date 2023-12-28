@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Intcode } from '../day-05'
+import { Intcode } from '../05'
 
 export const inspect = (input: string) => {
   const computer = new Intcode(input).run()

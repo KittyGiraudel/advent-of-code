@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Intcode } from '../day-05'
+import { Intcode } from '../05'
 
 export const run = (input: string, mode: string = 'WALK') => {
   const computer = new Intcode(input)

@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Intcode } from '../day-05'
+import { Intcode } from '../05'
 
 export const amplify = (numbers: string, sequence: number[]) =>
   sequence.reduce<number>(

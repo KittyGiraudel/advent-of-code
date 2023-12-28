@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 import { Grid } from '../../types'
-import { Intcode } from '../day-05'
+import { Intcode } from '../05'
 
 export const getGrid = (input: string) => {
   const computer = new Intcode(input)

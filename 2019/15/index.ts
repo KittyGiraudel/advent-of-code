@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 import { Coords, Grid, Point, SearchGraph } from '../../types'
-import { Intcode } from '../day-05'
+import { Intcode } from '../05'
 
 const DIRECTIONS = [1, 4, 2, 3]
 
