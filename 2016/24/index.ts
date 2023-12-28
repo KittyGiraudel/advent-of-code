@@ -11,7 +11,7 @@ export const discover = (input: string[], roundTrip: boolean = false) => {
   })
 
   const getNextNodes = (curr: Coords) =>
-    $.bordering(curr, 'COORDS').filter(coords => grid.get(coords) !== '#')
+    $.bordering(curr).filter(coords => grid.get(coords) !== '#')
 
   // I originally cached the neighbors in a map to speed things up but it’s
   // negligible. What really makes a difference is not doing search on paths we

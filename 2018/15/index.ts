@@ -4,7 +4,7 @@ import { Coords, Grid, Point } from '../../types'
 type UnitType = 'G' | 'E'
 
 const getBorderingSpace = (grid: Grid<string>, curr: Coords) => {
-  const [N, E, S, W] = $.bordering(curr, 'COORDS')
+  const [N, E, S, W] = $.bordering(curr)
   return [N, W, E, S].filter(neighbor => grid.get(neighbor) === '.')
 }
 
@@ -38,7 +38,7 @@ class Unit {
   }
 
   get neighbors() {
-    const [N, E, S, W] = $.bordering(this.position, 'COORDS')
+    const [N, E, S, W] = $.bordering(this.position)
     return [N, W, E, S]
   }
 

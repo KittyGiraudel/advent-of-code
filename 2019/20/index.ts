@@ -98,7 +98,7 @@ const getNeighborsFlat =
   ) =>
   (curr: Node) => {
     const point = $.toPoint(curr.coords)
-    return $.bordering(curr.coords, 'COORDS')
+    return $.bordering(curr.coords)
       .filter((coords: Coords) => grid.get(coords) === '.')
       .concat([
         outside.doorsToCoords[inside.pointsToDoors[point]],
@@ -116,7 +116,7 @@ const getNeighborsRecursive =
   ) =>
   (curr: Node) => {
     const point = $.toPoint(curr.coords)
-    const neighbors = $.bordering(curr.coords, 'COORDS')
+    const neighbors = $.bordering(curr.coords)
     const walkable = neighbors
       .filter(coords => grid.get(coords) === '.')
       .map(coords => ({ coords, depth: curr.depth }))

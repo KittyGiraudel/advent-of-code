@@ -50,7 +50,7 @@ export const getData = (dump: string[]) => {
   let total: number = 0
 
   const getNextNodes = (curr: Coords) =>
-    $.bordering(curr, 'COORDS').filter(coords => {
+    $.bordering(curr).filter(coords => {
       const point = $.toPoint(coords)
       return availableDisks.includes(point) && point !== $.toPoint(data)
     })

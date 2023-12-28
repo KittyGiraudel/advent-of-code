@@ -5,13 +5,13 @@ import { Coords, CoordsAndPoint, Grid, Point } from '../../types'
 // number, and get its 4 neighbors. If all existing neighbors are higher than
 // the current point, it’s a low point.
 const getLowPoints = (grid: Grid<number>) =>
-  grid.reduce<Coords[]>((acc, point, ri, ci) => {
+  grid.reduce<Coords[]>((acc, value, ri, ci) => {
     const coords: Coords = [ri, ci]
 
     if (
-      $.bordering(coords, 'COORDS')
-        .map((coords: Coords) => grid.get(coords) ?? Infinity)
-        .every((n: number) => n > point)
+      $.bordering(coords)
+        .map(coords => grid.get(coords) ?? Infinity)
+        .every(n => n > value)
     ) {
       acc.push(coords)
     }
@@ -23,32 +23,27 @@ const getBasin = (
   grid: Grid<number>,
   position: Coords,
   evaluated: Point[] = []
-): CoordsAndPoint[] => {
+): Coords[] => {
   // Look for the neighbors of the current point, and preserve only the
   // neighbors that:
   // - Have not been visited yet.
   // - Exist (as in, are within the bounds of the grid).
   // - Are not high points (value of 9).
-  const neighbors = $.bordering(position, 'BOTH').filter(
-    ({ coords, point }) => {
-      if (evaluated.includes(point)) return false
-      if (typeof grid.get(coords) === 'undefined') return false
-      if (grid.get(coords) === 9) return false
-      return true
-    }
-  )
+  const neighbors = $.bordering(position).filter(coords => {
+    if (evaluated.includes($.toPoint(coords))) return false
+    if (typeof grid.get(coords) === 'undefined') return false
+    if (grid.get(coords) === 9) return false
+    return true
+  })
 
   // Start from the neighbors of the current point, and recursively find the
   // neighbors of each neighbor that belong to the basin.
-  return neighbors.reduce(
-    (coords: CoordsAndPoint[], neighbor: CoordsAndPoint) => {
-      const points = coords.map(({ point }) => point)
-      const nCoords = getBasin(grid, neighbor.coords, evaluated.concat(points))
+  return neighbors.reduce<Coords[]>((coords, neighbor) => {
+    const points = coords.map(coords => $.toPoint(coords))
+    const nCoords = getBasin(grid, neighbor, evaluated.concat(points))
 
-      return coords.concat(nCoords)
-    },
-    neighbors
-  )
+    return coords.concat(nCoords)
+  }, neighbors)
 }
 
 export const sumLowPointsRisk = (rows: string[]) => {

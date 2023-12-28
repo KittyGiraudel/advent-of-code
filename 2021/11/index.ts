@@ -15,7 +15,7 @@ const processFlashes = (grid: Grid<Octopus>) => {
   grid.forEach((octopus, ri, ci) => {
     if (!octopus.flashed && octopus.value > 9) {
       octopus.flashed = true
-      toIncrement.push(...$.surrounding([ri, ci], 'COORDS'))
+      toIncrement.push(...$.surrounding([ri, ci]))
     }
   })
 

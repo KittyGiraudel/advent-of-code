@@ -23,7 +23,7 @@ const discover = (input: string) =>
     toKey: curr => $.toPoint(curr.position),
     isGoal: curr => curr.program.getOutput() === 2,
     getNextNodes: (curr: Node) =>
-      $.bordering(curr.position, 'COORDS')
+      $.bordering(curr.position)
         .map(coords => ({ position: coords, program: new Intcode('') }))
         .map(addProgramCopy(curr))
         .filter((next: Node) => next.program.outputs[0]),
@@ -75,7 +75,7 @@ export const getOxygenDuration = (input: string) => {
 
       maxMinutes = Math.max(curr.minutes, maxMinutes)
 
-      return $.bordering(curr.position, 'COORDS').map(position => ({
+      return $.bordering(curr.position).map(position => ({
         position,
         minutes: curr.minutes + 1,
       }))

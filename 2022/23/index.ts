@@ -9,9 +9,7 @@ const SIDES = {
 }
 type Side = keyof typeof SIDES
 
-const getNeighbors = $.memo((point: Point) =>
-  $.surrounding($.toCoords(point), 'POINTS')
-)
+const getNeighbors = $.memo((point: Point) => $.surrounding(point))
 
 const mapPositions = (input: string[]) =>
   $.Grid.fromRows(input).reduce<Set<Point>>(

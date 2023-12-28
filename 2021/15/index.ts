@@ -20,7 +20,7 @@ const getLowestCost = (grid: Grid<number>, mapSize = 1) => {
   const withinBounds = ([ri, ci]: Coords) =>
     $.isClamped(ri, 0, height) && $.isClamped(ci, 0, width)
   const getNextNodes = (coords: Coords) =>
-    $.bordering(coords, 'COORDS').filter(withinBounds)
+    $.bordering(coords).filter(withinBounds)
 
   const { costs } = $.search.aStar({
     start,

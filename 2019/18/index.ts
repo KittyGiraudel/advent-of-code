@@ -39,11 +39,10 @@ export const run = (input: string[], part2: boolean = false) => {
   // as the 4 diagonals to the previous starting point.
   if (part2) {
     const start = startPositions.pop()!
-    const coords = $.toCoords(start)
-    const [N, NE, E, SE, S, SW, W, NW] = $.surrounding(coords, 'POINTS')
+    const [N, NE, E, SE, S, SW, W, NW] = $.surrounding(start)
 
-    ;[start, N, E, S, W].forEach(coords => lookup.delete(coords))
-    ;[NE, SE, SW, NW].forEach(coords => startPositions.push(coords))
+    ;[start, N, E, S, W].forEach(point => lookup.delete(point))
+    ;[NE, SE, SW, NW].forEach(point => startPositions.push(point))
   }
 
   const distances: Distances = {}
@@ -57,9 +56,7 @@ export const run = (input: string[], part2: boolean = false) => {
       heuristic: curr => $.manhattan($.toCoords(curr), $.toCoords(b)),
       isGoal: curr => curr === b,
       getNextNodes: curr =>
-        $.bordering($.toCoords(curr), 'POINTS').filter(point =>
-          lookup.has(point)
-        ),
+        $.bordering(curr).filter(point => lookup.has(point)),
     })
     if (!end) return
     const path = getPath() as Point[]

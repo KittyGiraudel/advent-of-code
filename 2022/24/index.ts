@@ -64,7 +64,7 @@ type Node = {
 }
 
 const getMoves = (curr: Node) =>
-  $.bordering(curr.coords, 'COORDS')
+  $.bordering(curr.coords)
     .concat([curr.coords])
     .map((coords: Coords) => ({ coords, time: curr.time + 1 } as Node))
 

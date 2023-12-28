@@ -12,7 +12,7 @@ export const run = (input: string[], part2: boolean = false) => {
     while (frontier.length) {
       const curr = frontier.pop()!
 
-      $.bordering(curr, 'COORDS')
+      $.bordering(curr)
         .filter(([ri, ci]) => grid.get([ri % height, ci % width]) !== '#')
         .filter(coords => !($.toPoint(coords) in distances))
         .forEach(coords => {

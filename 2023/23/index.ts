@@ -20,7 +20,7 @@ const createGraph = (grid: Grid<string>, part2: boolean = false) => {
     const coords: Coords = [ri, ci]
 
     if (value === '.') {
-      $.bordering([ri, ci], 'COORDS')
+      $.bordering([ri, ci])
         .filter(isValid)
         .forEach(next => {
           connect(next, coords)

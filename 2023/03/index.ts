@@ -46,7 +46,7 @@ export const getGearRatio = (input: string[]) => {
     // individually.
     // . . * .
     // . 3 5 .
-    const neighbors = $.surrounding(coords, 'COORDS')
+    const neighbors = $.surrounding(coords)
     const numbers = neighbors.map(getSurroundingNumber(grid))
 
     // Because of the way I retrieve surrounding numbers, I had to assume that
@@ -81,8 +81,7 @@ export const run = (input: string[], part2: boolean = false) => {
         // cell and retrieve their value. Then, preserve only the symbols (not a
         // number and not empty). Finally, record that we found a symbol.
         acc.symbol ||=
-          $.surrounding(coords, 'COORDS').map(getValue).filter(isSymbol)
-            .length > 0
+          $.surrounding(coords).map(getValue).filter(isSymbol).length > 0
       }
 
       // When we reach a non-number (either a symbol or an empty space), we need

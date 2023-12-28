@@ -18,9 +18,10 @@ export const run = (key: string, part2: boolean = false) => {
   // Starting from the cell at the given coordinates, explore the active and not
   // yet explored neighbors, marking them all part of the same group.
   const walk = (coords: Coords, group: Point) =>
-    $.bordering(coords, 'BOTH')
-      .filter(({ coords }) => grid.get(coords))
-      .forEach(({ coords, point }) => {
+    $.bordering(coords)
+      .filter(coords => grid.get(coords))
+      .forEach(coords => {
+        const point = $.toPoint(coords)
         if (!(point in visited)) {
           visited[point] = group
           walk(coords, group)

@@ -32,7 +32,7 @@ export const getRisk = (depth: number, target: Coords) =>
 
 const getNeighbors = $.memo(
   (x: number, y: number, width: number, height: number) =>
-    $.bordering([x, y], 'COORDS').filter(
+    $.bordering([x, y]).filter(
       ([x, y]) => x >= 0 && x < width && y >= 0 && y < height
     )
 )

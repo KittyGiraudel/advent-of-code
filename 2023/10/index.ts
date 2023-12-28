@@ -19,7 +19,7 @@ type PipePiece = keyof typeof CHAR_VALIDITY_MAP
 type PipeMap = ReturnType<typeof mapOutLoopingPipe>
 
 const resolveStart = (grid: Grid<string>, startCoords: Coords) => {
-  const [N, E, S, W] = $.bordering(startCoords, 'COORDS')
+  const [N, E, S, W] = $.bordering(startCoords)
     .map(coords => grid.get(coords))
     .map((value, index) => DIRECTIONS[index].includes(value))
 
@@ -32,7 +32,7 @@ const resolveStart = (grid: Grid<string>, startCoords: Coords) => {
 }
 
 const getNextPipeNodes = (grid: Grid<string>) => (coords: Coords) =>
-  $.bordering(coords, 'COORDS').filter((neighbor, index) => {
+  $.bordering(coords).filter((neighbor, index) => {
     const currValue = grid.get(coords) as PipePiece
     const nextValue = grid.get(neighbor)
 
@@ -68,7 +68,7 @@ const scaleUpGrid = (grid: Grid<string>, from: PipeMap) => {
     //  .|.
     //  .L-
     //  ...
-    const [N, E, S, W] = $.bordering(scaledUpCoords, 'COORDS')
+    const [N, E, S, W] = $.bordering(scaledUpCoords)
     if (BOTTOM.includes(value)) scaledUpGrid.set(N, '|')
     if (LEFT.includes(value)) scaledUpGrid.set(E, '-')
     if (TOP.includes(value)) scaledUpGrid.set(S, '|')
@@ -86,7 +86,7 @@ const floodGrid = (grid: Grid<string>, start: Coords = [0, 0]) =>
   $.search.bfs({
     start,
     getNextNodes: curr =>
-      $.bordering(curr, 'COORDS').filter(coords => grid.get(coords) === '.'),
+      $.bordering(curr).filter(coords => grid.get(coords) === '.'),
   })
 
 const scaleUp = (coords: Coords) =>

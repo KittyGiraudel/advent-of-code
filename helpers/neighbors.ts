@@ -1,7 +1,6 @@
 import { Coords, Point, CoordsAndPoint } from '../types'
+import toCoords from './toCoords'
 import toPoint from './toPoint'
-
-type Strategy = 'COORDS' | 'POINTS' | 'BOTH'
 
 const cache: Map<string, Coords[] | Point[] | CoordsAndPoint[]> = new Map()
 
@@ -10,19 +9,28 @@ const cache: Map<string, Coords[] | Point[] | CoordsAndPoint[]> = new Map()
  * diagonals are considered) the cells at `ri` (row index) and `ci` (column
  * index) as [Y, X] tuples (Y first because rows are read before columns in a
  * bi-dimensional array, e.g. `grid[row][column]`).
+ * @param coords - Either a point, a set of Y,X coords, or both
  * @param withDiagonals - Whether to return NE, SE, SW and NW coords
- * @param coords - Row index (Y) + Column index (X)
- * @param strategy - COORDS, POINTS or BOTH
  */
-function getCoords(
-  [ri, ci]: Coords,
-  withDiagonals: boolean,
-  strategy: Strategy = 'BOTH'
-) {
+function getNeighbors<T extends Coords | Point | CoordsAndPoint>(
+  position: T,
+  withDiagonals: boolean
+): T[] {
+  const [ri, ci] =
+    typeof position === 'string'
+      ? toCoords(position)
+      : Array.isArray(position)
+      ? position
+      : position.coords
+
+  let strategy = 'BOTH'
+  if (typeof position === 'string') strategy = 'POINTS'
+  if (Array.isArray(position)) strategy = 'COORDS'
+
   const key = ri + ',' + ci + '-' + withDiagonals + '-' + strategy
 
   if (cache.has(key)) {
-    return cache.get(key)
+    return cache.get(key) as T[]
   }
 
   const neighbors = [
@@ -39,14 +47,11 @@ function getCoords(
   let result
 
   if (strategy === 'POINTS') {
-    result = neighbors.map<Point>(coords => toPoint(coords))
+    result = neighbors.map(coords => toPoint(coords))
   } else if (strategy === 'COORDS') {
     result = neighbors
   } else if (strategy === 'BOTH') {
-    result = neighbors.map<CoordsAndPoint>(coords => ({
-      coords,
-      point: toPoint(coords),
-    }))
+    result = neighbors.map(coords => ({ coords, point: toPoint(coords) }))
   }
 
   if (!result) {
@@ -55,19 +60,19 @@ function getCoords(
 
   cache.set(key, result)
 
-  return result
+  return result as T[]
 }
 
-export function bordering(coords: Coords, strategy: 'BOTH'): CoordsAndPoint[]
-export function bordering(coords: Coords, strategy: 'POINTS'): Point[]
-export function bordering(coords: Coords, strategy: 'COORDS'): Coords[]
-export function bordering(coords: Coords, strategy?: Strategy) {
-  return getCoords(coords, false, strategy)
+export function bordering(position: Coords): Coords[]
+export function bordering(position: Point): Point[]
+export function bordering(position: CoordsAndPoint): CoordsAndPoint[]
+export function bordering(position: Coords | Point | CoordsAndPoint) {
+  return getNeighbors(position, false)
 }
 
-export function surrounding(coords: Coords, strategy: 'BOTH'): CoordsAndPoint[]
-export function surrounding(coords: Coords, strategy: 'POINTS'): Point[]
-export function surrounding(coords: Coords, strategy: 'COORDS'): Coords[]
-export function surrounding(coords: Coords, strategy?: Strategy) {
-  return getCoords(coords, true, strategy)
+export function surrounding(position: Coords): Coords[]
+export function surrounding(position: Point): Point[]
+export function surrounding(position: CoordsAndPoint): CoordsAndPoint[]
+export function surrounding(position: Coords | Point | CoordsAndPoint) {
+  return getNeighbors(position, true)
 }

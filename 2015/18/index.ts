@@ -20,8 +20,9 @@ export const run = (
 
   while (iterations--) {
     curr = curr.map((value, ...coords) => {
-      const neighbors = $.surrounding(coords, 'COORDS')
-      const on = neighbors.filter(coords => curr.get(coords) === '#')
+      const on = $.surrounding(coords).filter(
+        coords => curr.get(coords) === '#'
+      )
 
       if (part2 && corners.includes($.toPoint(coords))) {
         return '#'

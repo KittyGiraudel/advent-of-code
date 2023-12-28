@@ -29,7 +29,7 @@ const parse = (input: string[]) => {
 const getNextNodes =
   (grid: Grid<number>) =>
   ({ position, elevation }: Node) =>
-    $.bordering(position, 'COORDS')
+    $.bordering(position)
       .filter(position => grid.get(position))
       .map(position => ({ position, elevation: grid.get(position) }))
       .filter((next: Node) => next.elevation - elevation <= 1)
