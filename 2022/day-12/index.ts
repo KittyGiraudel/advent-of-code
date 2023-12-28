@@ -35,7 +35,7 @@ const getNextNodes =
       .filter((next: Node) => next.elevation - elevation <= 1)
 
 const getPathLength = (grid: Grid<number>, start: Node, end: Node) => {
-  const { graph, getPath } = $.pathfinding.bfs({
+  const { graph, getPath } = $.search.bfs({
     start,
     getNextNodes: getNextNodes(grid),
     toKey: curr => $.toPoint(curr.position),

@@ -1,4 +1,4 @@
-export { SearchCosts, SearchGraph, SearchOutput } from '../helpers/pathfinding'
+export { SearchCosts, SearchGraph, SearchOutput } from '../helpers/search'
 import GridClass from '../helpers/Grid'
 
 export type Grid<T> = InstanceType<typeof GridClass<T>>

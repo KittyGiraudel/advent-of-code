@@ -14,12 +14,12 @@ export const discover = (input: string[], roundTrip: boolean = false) => {
     $.bordering(curr, 'COORDS').filter(coords => grid.get(coords) !== '#')
 
   // I originally cached the neighbors in a map to speed things up but it’s
-  // negligible. What really makes a difference is not doing pathfinding on
-  // paths we have alreadu done (hence this memoization).
-  // Memoize the pathfinding between two points to avoid computing it again and
-  // again for every possible order.
+  // negligible. What really makes a difference is not doing search on paths we
+  // have already done (hence this memoization).
+  // Memoize the search between two points to avoid computing it again and again
+  // for every possible order.
   const search = $.memo((from: Coords, to: Coords) =>
-    $.pathfinding.bfs({
+    $.search.bfs({
       start: from,
       isGoal: curr => curr[0] === to[0] && curr[1] === to[1],
       getNextNodes,
@@ -37,7 +37,7 @@ export const discover = (input: string[], roundTrip: boolean = false) => {
       if (!(start in acc)) acc[start] = {}
       if (!(end in acc)) acc[end] = {}
 
-      const length = $.pathfinding.bfs({
+      const length = $.search.bfs({
         start,
         isGoal: curr => curr[0] === end[0] && curr[1] === end[1],
         getNextNodes

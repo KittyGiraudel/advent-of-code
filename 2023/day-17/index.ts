@@ -50,7 +50,7 @@ export const run = (input: string[], part2: boolean = false) => {
     streak: 0,
     orientation: $.turn.DIRECTIONS[2],
   }
-  const { end, costs } = $.pathfinding.aStar<State>({
+  const { end, costs } = $.search.aStar<State>({
     start,
     toKey,
     heuristic: curr => $.manhattan(curr.position, endCoords),

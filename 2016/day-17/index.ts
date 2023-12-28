@@ -20,7 +20,7 @@ type Node = {
 }
 
 export const run = (input: string, longest: boolean = false) =>
-  $.pathfinding
+  $.search
     .bfs<Node>({
       start: { coords: [0, 0], path: input },
       emptyAfterGoal: longest,

@@ -30,13 +30,13 @@ import median from './median'
 import memo from './memo'
 import numbers from './numbers'
 import { bordering, surrounding } from './neighbors'
-import pathfinding from './pathfinding'
 import permutations from './permutations'
 import product from './product'
 import range from './range'
 import readInput from './readInput'
 import rotate from './rotate'
 import sample from './sample'
+import search from './search'
 import shoelace from './shoelace'
 import stringMap from './stringMap'
 import sum from './sum'
@@ -84,7 +84,6 @@ export default {
   median,
   memo,
   numbers,
-  pathfinding,
   permutations,
   product,
   range,
@@ -92,6 +91,7 @@ export default {
   rotate,
   match,
   sample,
+  search,
   shoelace,
   stringMap,
   sum,

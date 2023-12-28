@@ -36,7 +36,7 @@ export const run = (floors: Floors) => {
   const nextElevators = [[1], [0, 2], [1, 3], [2]]
   const count = floors.flat().length
 
-  return $.pathfinding
+  return $.search
     .bfs<State>({
       start: { elevator: 0, floors },
       toKey,

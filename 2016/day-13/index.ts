@@ -15,7 +15,7 @@ const isOpenSpace =
 
 export const run = (end: Coords, n: number, part2: boolean = false) => {
   const start: Coords = [1, 1]
-  const { graph, getPath } = $.pathfinding.bfs({
+  const { graph, getPath } = $.search.bfs({
     start,
     getNextNodes: curr => $.bordering(curr, 'COORDS').filter(isOpenSpace(n)),
     isGoal: ([ri, ci]) => ri === end[0] && ci === end[1],

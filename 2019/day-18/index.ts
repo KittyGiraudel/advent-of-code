@@ -50,7 +50,7 @@ export const run = (input: string[], part2: boolean = false) => {
   const combinations = $.combinations([...keyPoints, ...startPositions], 2)
 
   combinations.forEach(([a, b]) => {
-    const { end, getPath } = $.pathfinding.gbfs<Point>({
+    const { end, getPath } = $.search.gbfs<Point>({
       start: a,
       heuristic: curr => $.manhattan($.toCoords(curr), $.toCoords(b)),
       isGoal: curr => curr === b,
@@ -107,7 +107,7 @@ export const run = (input: string[], part2: boolean = false) => {
     return distances[curr.positions[index]][next.positions[index]].distance
   }
 
-  const { end } = $.pathfinding.dijkstra<State>({
+  const { end } = $.search.dijkstra<State>({
     start,
     toKey,
     isGoal: curr => curr.keys.length === keyCount,

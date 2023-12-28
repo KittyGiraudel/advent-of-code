@@ -49,7 +49,7 @@ const mapOutLoopingPipe = (grid: Grid<string>) => {
 
   // Mapping out the looping pipe means running BFS from the start until we
   // cannot find a new node which means we’re back at the start.
-  return $.pathfinding.bfs({ start, getNextNodes }).graph
+  return $.search.bfs({ start, getNextNodes }).graph
 }
 
 const scaleUpGrid = (grid: Grid<string>, from: PipeMap) => {
@@ -83,7 +83,7 @@ const scaleUpGrid = (grid: Grid<string>, from: PipeMap) => {
 // much all around the looping pipe. This will *not* work properly if the
 // looping pipe touches the edges of the grid.
 const floodGrid = (grid: Grid<string>, start: Coords = [0, 0]) =>
-  $.pathfinding.bfs({
+  $.search.bfs({
     start,
     getNextNodes: curr =>
       $.bordering(curr, 'COORDS').filter(coords => grid.get(coords) === '.'),

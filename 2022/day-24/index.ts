@@ -74,7 +74,7 @@ const cross = (
   endCoords: Coords,
   time = 0
 ) =>
-  $.pathfinding.gbfs({
+  $.search.gbfs({
     start: { coords: startCoords, time },
     isGoal: curr => $.toPoint(curr.coords) === $.toPoint(endCoords),
     toKey: curr => $.toPoint(curr.coords) + ((curr.time + 1) % grids.size),

@@ -40,7 +40,7 @@ export const releasePressure = (input: string[]) => {
   )
   type DistanceKey = keyof typeof distanceMap
 
-  const { graph } = $.pathfinding.dijkstra({
+  const { graph } = $.search.dijkstra({
     start: {
       name: 'AA',
       time: 30,

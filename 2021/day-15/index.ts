@@ -22,7 +22,7 @@ const getLowestCost = (grid: Grid<number>, mapSize = 1) => {
   const getNextNodes = (coords: Coords) =>
     $.bordering(coords, 'COORDS').filter(withinBounds)
 
-  const { costs } = $.pathfinding.aStar({
+  const { costs } = $.search.aStar({
     start,
     getNextNodes,
     getCost: (_, to) => getCost(grid, to),

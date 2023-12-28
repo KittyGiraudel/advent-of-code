@@ -17,7 +17,7 @@ const addProgramCopy = (curr: Node) => (next: Node, index: number) =>
   } as Node)
 
 const discover = (input: string) =>
-  $.pathfinding.bfs<Node>({
+  $.search.bfs<Node>({
     start: { position: [0, 0], program: new Intcode(input) },
     emptyAfterGoal: true,
     toKey: curr => $.toPoint(curr.position),
@@ -65,7 +65,7 @@ export const getOxygenDuration = (input: string) => {
   const { graph, end } = discover(input)
   let maxMinutes = 0
 
-  $.pathfinding.bfs({
+  $.search.bfs({
     start: { position: end.position, minutes: 0 },
     toKey: curr => $.toPoint(curr.position),
     getNextNodes: curr => {

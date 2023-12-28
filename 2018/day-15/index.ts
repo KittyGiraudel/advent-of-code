@@ -79,7 +79,7 @@ class Unit {
     const alive = units.filter(unit => unit.alive)
     const enemies = alive.filter(unit => unit.isEnemy(this.type))
 
-    const { end, getPath } = $.pathfinding.bfs({
+    const { end, getPath } = $.search.bfs({
       start: this.coords,
       getNextNodes: curr =>
         getBorderingSpace(grid, curr).filter(

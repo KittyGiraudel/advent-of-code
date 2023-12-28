@@ -156,7 +156,7 @@ export const maze = (input: string[], recursive: boolean = false) => {
   const endCoords = outside.doorsToCoords.ZZ
   const getNeighbors = recursive ? getNeighborsRecursive : getNeighborsFlat
 
-  return $.pathfinding
+  return $.search
     .bfs<Node>({
       start: { coords: outside.doorsToCoords.AA, depth: 0 },
       toKey: (curr: Node) => $.toPoint(curr.coords) + '/' + curr.depth,

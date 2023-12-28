@@ -34,7 +34,7 @@ export const countOrbits = (graph: Graph, to: string = 'COM') => {
   return Array.from(graph.keys()).reduce(
     (orbits, key) =>
       orbits +
-      $.pathfinding
+      $.search
         .bfs({
           start: key,
           isGoal: curr => curr === to,
@@ -64,7 +64,7 @@ export const countTransfers = (
 
   // Drop the 2 extremities as they shouldn’t count in the amount of transfers.
   return (
-    $.pathfinding
+    $.search
       .bfs({
         start,
         isGoal: curr => curr === end,

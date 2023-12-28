@@ -61,7 +61,7 @@ export const getData = (dump: string[]) => {
     // Find the path from the empty disk to the left of the data disk, then
     // increment the total amount of moves by the length of this path.
     const end: Coords = [data[0], data[1] - 1]
-    total += $.pathfinding
+    total += $.search
       .bfs({
         start: curr,
         isGoal: curr => curr[0] === end[0] && curr[1] === end[1],

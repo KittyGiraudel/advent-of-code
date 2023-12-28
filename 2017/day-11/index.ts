@@ -32,7 +32,7 @@ const walk = (steps: string[]) =>
   )
 
 const createGraph = (start: Coords, end: Coords) =>
-  $.pathfinding.gbfs({
+  $.search.gbfs({
     start,
     getNextNodes,
     isGoal: curr => curr[0] === end[0] && curr[1] === end[1],
