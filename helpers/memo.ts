@@ -20,9 +20,7 @@ const getKey = <Args extends unknown[]>(...args: Args): string =>
  */
 const memo = <Args extends unknown[], T>(
   fn: (...args: Args) => T,
-  {
-    cacheKey,
-  }: { cacheKey: <Args extends unknown[]>(...args: Args) => string } = {
+  { cacheKey }: { cacheKey: (...args: Parameters<typeof fn>) => string } = {
     cacheKey: getKey,
   }
 ) => {

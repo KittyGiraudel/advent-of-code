@@ -10,6 +10,11 @@ const DOOR_RE = /[A-Z]/
 
 const toKey = (curr: State) => curr.positions + ':' + curr.keys
 
+// I wasn’t able to solve it without looking for hints on Reddit. Basically, we
+// need to pre-compute the distance between every pair of keys as well as the
+// robot with BFS (or GBFS), and from there run Dijkstra so that we focus only
+// on the positions that really matter and skip everything in between. Still, it
+// took me a while to write all the code but I’m happy I made it.
 export const run = (input: string[], part2: boolean = false) => {
   const startPositions: Point[] = []
   const start: State = {
@@ -20,9 +25,8 @@ export const run = (input: string[], part2: boolean = false) => {
   const keys: Record<Point, string> = {}
   const doors: Record<Point, string> = {}
   const lookup = new Set<Point>()
-  const grid = $.Grid.fromRows(input)
 
-  grid.forEach((value, ...coords) => {
+  $.Grid.fromRows(input).forEach((value, ...coords) => {
     const point = $.toPoint(coords)
     if (value === '@') startPositions.push(point)
     if (KEY_RE.test(value)) keys[point] = value
@@ -30,18 +34,16 @@ export const run = (input: string[], part2: boolean = false) => {
     if (value !== '#') lookup.add(point)
   })
 
+  // For part 2, we need to mark the normal starting position and its 4
+  // bordering positions as walls, and then define the new 4 starting positions
+  // as the 4 diagonals to the previous starting point.
   if (part2) {
     const start = startPositions.pop()!
-    const [sRi, sCi] = $.toCoords(start)
-    lookup.delete(start)
-    lookup.delete($.toPoint([sRi, sCi + 1] as Coords))
-    lookup.delete($.toPoint([sRi, sCi - 1] as Coords))
-    lookup.delete($.toPoint([sRi + 1, sCi] as Coords))
-    lookup.delete($.toPoint([sRi - 1, sCi] as Coords))
-    startPositions.push($.toPoint([sRi - 1, sCi - 1] as Coords))
-    startPositions.push($.toPoint([sRi - 1, sCi + 1] as Coords))
-    startPositions.push($.toPoint([sRi + 1, sCi + 1] as Coords))
-    startPositions.push($.toPoint([sRi + 1, sCi - 1] as Coords))
+    const coords = $.toCoords(start)
+    const [N, NE, E, SE, S, SW, W, NW] = $.surrounding(coords, 'POINTS')
+
+    ;[start, N, E, S, W].forEach(coords => lookup.delete(coords))
+    ;[NE, SE, SW, NW].forEach(coords => startPositions.push(coords))
   }
 
   const distances: Distances = {}
@@ -86,7 +88,13 @@ export const run = (input: string[], part2: boolean = false) => {
       nodes.push(
         ...nextKeys.map(nextKey => ({
           positions: $.updateAtIndex(curr.positions, i, nextKey),
-          keys: curr.keys + nextKey,
+          // It took me a while to realise that sorting the keys is important,
+          // as this is what makes it possible for the search to avoid visiting
+          // similar states multiple times. Semantically, abc is the same as acb
+          // or bca, or cab.
+          keys: Array.from(curr.keys + nextKey)
+            .sort()
+            .join(''),
           steps: curr.steps + dict[nextKey].distance,
         }))
       )
@@ -96,13 +104,9 @@ export const run = (input: string[], part2: boolean = false) => {
   }
 
   const getCost = (curr: State, next: State) => {
-    let index = 0
-    for (let i = 0; i < curr.positions.length; i++) {
-      if (next.positions[i] !== curr.positions[i]) {
-        index = i
-        break
-      }
-    }
+    const index = Array.from(curr.positions).findIndex(
+      (position, index) => position !== next.positions[index]
+    )
 
     return distances[curr.positions[index]][next.positions[index]].distance
   }
