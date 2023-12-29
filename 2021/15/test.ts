@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { getLowestRisk } from './'
+import { run } from './'
 
 test('Day 15 — Sample', t => {
   const sample = $.sample(`
@@ -16,13 +16,13 @@ test('Day 15 — Sample', t => {
   2311944581
   `)
 
-  t.is(getLowestRisk(sample), 40)
-  t.is(getLowestRisk(sample, 5), 315)
+  t.is(run(sample), 40)
+  t.is(run(sample, 5), 315)
 })
 
 test('Day 15 — Solutions', t => {
   const input = $.readInput(import.meta)
 
-  t.is(getLowestRisk(input), 361)
-  // t.is(getLowestRisk(input, 5), 2838)
+  t.is(run(input), 361)
+  t.is(run(input, 5), 2838)
 })

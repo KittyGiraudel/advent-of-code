@@ -46,8 +46,8 @@ const cycle = (grid: Grid<Octopus>) => {
   return flashes
 }
 
-export const countFlashes = (rows: string[], steps: number) => {
-  const grid = makeGrid(rows)
+const countFlashes = (input: string[], steps: number = 100) => {
+  const grid = makeGrid(input)
   let flashes = 0
 
   for (let s = 0; s < steps; s++) flashes += cycle(grid)
@@ -58,11 +58,15 @@ export const countFlashes = (rows: string[], steps: number) => {
 const isSynced = (grid: Grid<Octopus>) =>
   grid.every(octopus => octopus.value === 0)
 
-export const findSynchronocity = (rows: string[]) => {
-  const grid = makeGrid(rows)
+const findSynchronocity = (input: string[]) => {
+  const grid = makeGrid(input)
   let i = 0
 
   while (!isSynced(grid)) i++, cycle(grid)
 
   return i
+}
+
+export const run = (input: string[], part2: boolean = false) => {
+  return part2 ? findSynchronocity(input) : countFlashes(input)
 }

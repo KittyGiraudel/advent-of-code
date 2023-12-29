@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { count, decode, total } from './'
+import { run, decode } from './'
 
 test('Day 08 — Sample', t => {
   const sample = $.sample(`
@@ -16,7 +16,7 @@ test('Day 08 — Sample', t => {
   gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce
   `)
 
-  t.is(count(sample), 26)
+  t.is(run(sample), 26)
   t.is(
     decode(
       'acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf'
@@ -83,12 +83,12 @@ test('Day 08 — Sample', t => {
     ),
     4315
   )
-  t.is(total(sample), 61_229)
+  t.is(run(sample, true), 61_229)
 })
 
 test('Day 08 — Solutions', t => {
   const input = $.readInput(import.meta)
 
-  t.is(count(input), 554)
-  t.is(total(input), 990_964)
+  t.is(run(input), 554)
+  t.is(run(input, true), 990_964)
 })

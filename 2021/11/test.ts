@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { countFlashes, findSynchronocity } from './'
+import { run } from './'
 
 test('Day 11 — Sample', t => {
   const sample = $.sample(`
@@ -16,13 +16,13 @@ test('Day 11 — Sample', t => {
   5283751526
   `)
 
-  t.is(countFlashes(sample, 100), 1656)
-  t.is(findSynchronocity(sample), 195)
+  t.is(run(sample), 1656)
+  t.is(run(sample, true), 195)
 })
 
 test('Day 11 — Solutions', t => {
   const input = $.readInput(import.meta)
 
-  t.is(countFlashes(input, 100), 1661)
-  t.is(findSynchronocity(input), 334)
+  t.is(run(input), 1661)
+  t.is(run(input, true), 334)
 })

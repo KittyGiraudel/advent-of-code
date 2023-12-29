@@ -46,7 +46,7 @@ const getBasin = (
   }, neighbors)
 }
 
-export const sumLowPointsRisk = (rows: string[]) => {
+const sumLowPointsRisk = (rows: string[]) => {
   const grid = $.Grid.fromRows(rows, Number)
   const lowPoints = getLowPoints(grid)
 
@@ -55,10 +55,7 @@ export const sumLowPointsRisk = (rows: string[]) => {
   )
 }
 
-export const getProductOfBiggestBasins = (
-  rows: string[],
-  amount: number = 3
-) => {
+const getProductOfBiggestBasins = (rows: string[]) => {
   const grid = $.Grid.fromRows(rows, Number)
   const lowPoints = getLowPoints(grid)
 
@@ -66,6 +63,10 @@ export const getProductOfBiggestBasins = (
     lowPoints
       .map(position => getBasin(grid, position).length)
       .sort((a, b) => a - b)
-      .slice(amount * -1)
+      .slice(-3)
   )
+}
+
+export const run = (input: string[], part2: boolean = false) => {
+  return part2 ? getProductOfBiggestBasins(input) : sumLowPointsRisk(input)
 }

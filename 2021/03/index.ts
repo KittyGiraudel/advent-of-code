@@ -2,7 +2,7 @@ import $ from '../../helpers'
 
 type Output = { gamma: string; epsilon: string }
 
-export const getEpsilonAndGamma = (items: string[]) =>
+const getEpsilonAndGamma = (items: string[]) =>
   $.array(items[0].length).reduce(
     (acc, _, i) => {
       const column = $.column(items, i).join('')
@@ -26,5 +26,15 @@ const getGasValue =
       return acc.length === 1 ? acc : acc.filter(item => +item[i] === main)
     }, items)[0]
 
-export const getOxygen = getGasValue(hasMore1 => +hasMore1)
-export const getCO2 = getGasValue(hasMore1 => +!hasMore1)
+const getOxygen = getGasValue(hasMore1 => +hasMore1)
+const getCO2 = getGasValue(hasMore1 => +!hasMore1)
+
+export const run = (input: string[], part2: boolean = false) => {
+  const { gamma, epsilon } = getEpsilonAndGamma(input)
+  const oxygen = getOxygen(input)
+  const CO2 = getCO2(input)
+
+  return part2
+    ? parseInt(oxygen, 2) * parseInt(CO2, 2)
+    : parseInt(gamma, 2) * parseInt(epsilon, 2)
+}

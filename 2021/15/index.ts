@@ -33,5 +33,5 @@ const getLowestCost = (grid: Grid<number>, mapSize = 1) => {
   return costs[$.toPoint(end)]
 }
 
-export const getLowestRisk = (input: string[], mapSize: number = 1) =>
+export const run = (input: string[], mapSize: number = 1) =>
   getLowestCost($.Grid.fromRows(input, Number), mapSize)

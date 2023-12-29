@@ -51,7 +51,7 @@ export const isSuccessfulLaunch = (
   return null
 }
 
-export const findSuccessfulLaunches = (input: string) => {
+const findSuccessfulLaunches = (input: string) => {
   const boundaries = getBoundaries(input)
   const [[, xMax], [, yMax]] = boundaries
   const heights = []
@@ -75,5 +75,9 @@ export const findSuccessfulLaunches = (input: string) => {
   return heights
 }
 
-export const findMaxHeight = (input: string) =>
+const findMaxHeight = (input: string) =>
   Math.max(...findSuccessfulLaunches(input))
+
+export const run = (input: string, part2: boolean = false) => {
+  return part2 ? findSuccessfulLaunches(input).length : findMaxHeight(input)
+}

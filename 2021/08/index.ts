@@ -7,7 +7,7 @@ const parseInput = (line: string) =>
       value.split(' ').map(pattern => pattern.split('').sort().join(''))
     )
 
-export const count = (lines: string[]) =>
+const count = (lines: string[]) =>
   lines
     .map(parseInput)
     .map(line => line[1])
@@ -98,4 +98,7 @@ export const decode = (line: string) => {
   )
 }
 
-export const total = (lines: string[]) => $.sum(lines.map(decode))
+const total = (lines: string[]) => $.sum(lines.map(decode))
+
+export const run = (input: string[], part2: boolean = false) =>
+  part2 ? total(input) : count(input)

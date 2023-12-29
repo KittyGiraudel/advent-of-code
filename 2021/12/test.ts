@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { findPaths } from './'
+import { run } from './'
 
 test('Day 12 — Sample', t => {
   const sampleA = $.sample(`
@@ -47,16 +47,16 @@ test('Day 12 — Sample', t => {
   start-RW
   `)
 
-  t.is(findPaths(sampleA).length, 10)
-  t.is(findPaths(sampleB).length, 19)
-  t.is(findPaths(sampleA, true).length, 36)
-  t.is(findPaths(sampleB, true).length, 103)
-  t.is(findPaths(sampleC, true).length, 3509)
+  t.is(run(sampleA).length, 10)
+  t.is(run(sampleB).length, 19)
+  t.is(run(sampleA, true).length, 36)
+  t.is(run(sampleB, true).length, 103)
+  t.is(run(sampleC, true).length, 3509)
 })
 
 test('Day 12 — Solutions', t => {
   const input = $.readInput(import.meta)
 
-  t.is(findPaths(input).length, 4775)
-  t.is(findPaths(input, true).length, 152_480)
+  t.is(run(input).length, 4775)
+  t.is(run(input, true).length, 152_480)
 })

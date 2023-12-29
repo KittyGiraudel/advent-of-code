@@ -1,13 +1,10 @@
 import $ from '../../helpers'
 import { Point } from '../../types'
 
-export const getOverlappingPoints = (
-  lines: string[],
-  withDiagonals: boolean = false
-) => {
+export const run = (input: string[], withDiagonals: boolean = false) => {
   // Break down every line into a pair of vectors, each vector being a pair of
   // number (x,y coordinates).
-  const vectors = lines.map(line =>
+  const vectors = input.map(line =>
     (line.split(' -> ') as Point[]).map($.toCoords)
   )
 

@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { sumLowPointsRisk, getProductOfBiggestBasins } from './'
+import { run } from './'
 
 test('Day 09 — Sample', t => {
   const sample = $.sample(`
@@ -11,13 +11,13 @@ test('Day 09 — Sample', t => {
   9899965678
   `)
 
-  t.is(sumLowPointsRisk(sample), 15)
-  t.is(getProductOfBiggestBasins(sample), 1134)
+  t.is(run(sample), 15)
+  t.is(run(sample, true), 1134)
 })
 
 test('Day 09 — Solutions', t => {
   const input = $.readInput(import.meta)
 
-  t.is(sumLowPointsRisk(input), 500)
-  t.is(getProductOfBiggestBasins(input), 970_200)
+  t.is(run(input), 500)
+  t.is(run(input, true), 970_200)
 })

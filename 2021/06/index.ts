@@ -1,8 +1,8 @@
 import $ from '../../helpers/'
 
-export const countFish = (fish: string, days: number = 80) => {
-  let curr = $.array(9).map((_, i) => $.countInString(fish, String(i)))
-
+export const run = (input: string, days: number = 80) => {
+  let curr = $.array(9).map((_, i) => $.countInString(input, String(i)))
+  input
   while (days--) {
     let next = []
 

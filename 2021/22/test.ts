@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { reboot } from './'
+import { run } from './'
 
 test('Day 22 — Sample', t => {
   const sampleA = $.sample(`
@@ -98,14 +98,14 @@ test('Day 22 — Sample', t => {
   off x=-93533..-4276,y=-16170..68771,z=-104985..-24507
   `)
 
-  t.is(reboot(sampleA, 50), 39)
-  t.is(reboot(sampleB, 50), 590_784)
-  t.is(reboot(sampleC, Infinity), 2_758_514_936_282_235)
+  t.is(run(sampleA, 50), 39)
+  t.is(run(sampleB, 50), 590_784)
+  t.is(run(sampleC, Infinity), 2_758_514_936_282_235)
 })
 
 test('Day 22 — Solutions', t => {
   const input = $.readInput(import.meta)
 
-  t.is(reboot(input, 50), 606_484)
-  t.is(reboot(input, Infinity), 1_162_571_910_364_852)
+  t.is(run(input, 50), 606_484)
+  t.is(run(input, Infinity), 1_162_571_910_364_852)
 })

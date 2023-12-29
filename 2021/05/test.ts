@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { getOverlappingPoints } from './'
+import { run } from './'
 
 test('Day 05 — Sample', t => {
   const sample = $.sample(`
@@ -16,13 +16,13 @@ test('Day 05 — Sample', t => {
   5,5 -> 8,2
   `)
 
-  t.is(getOverlappingPoints(sample), 5)
-  t.is(getOverlappingPoints(sample, true), 12)
+  t.is(run(sample), 5)
+  t.is(run(sample, true), 12)
 })
 
 test('Day 05 — Solutions', t => {
   const input = $.readInput(import.meta)
 
-  t.is(getOverlappingPoints(input), 7269)
-  t.is(getOverlappingPoints(input, true), 21_140)
+  t.is(run(input), 7269)
+  t.is(run(input, true), 21_140)
 })

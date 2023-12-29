@@ -65,7 +65,5 @@ const getPaths = (
   )
 }
 
-export const findPaths = (
-  connections: string[],
-  withDuplicate: boolean = false
-) => getPaths(createGraph(connections), 'start', withDuplicate)
+export const run = (connections: string[], part2: boolean = false) =>
+  getPaths(createGraph(connections), 'start', part2)

@@ -20,7 +20,7 @@ const roll = (grids: Grid<BingoCell>[], number: number) => {
 const computeGridScore = (grid: Grid<BingoCell>) =>
   grid.reduce((acc, item) => acc + (item.marked ? 0 : item.value), 0)
 
-export const getBingos = (input: string) => {
+export const run = (input: string, part2: boolean = false) => {
   const [numbers, ...grids] = parseInput(input)
   const bingos = []
 
@@ -35,7 +35,7 @@ export const getBingos = (input: string) => {
     }
   }
 
-  return bingos
+  return part2 ? bingos.at(-1) : bingos[0]
 }
 
 const formatGrid = (grid: string) =>

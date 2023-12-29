@@ -38,14 +38,14 @@ export const processLine = (line: string) => {
 const getLinesFromType = (lines: string[], type: string) =>
   lines.map(processLine).filter(line => line.type === type)
 
-export const getCorruptionScore = (lines: string[]) =>
+const getCorruptionScore = (lines: string[]) =>
   (getLinesFromType(lines, 'CORRUPTED') as CorruptedLine[]).reduce(
     (score, { character }) =>
       score + CORRUPTION_SCORE_MAP[character as CorruptionKey],
     0
   )
 
-export const getCompletionScore = (lines: string[]) => {
+const getCompletionScore = (lines: string[]) => {
   const scores = (getLinesFromType(lines, 'INCOMPLETE') as IncompleteLine[])
     .map(line =>
       line.opened.reduceRight(
@@ -57,4 +57,8 @@ export const getCompletionScore = (lines: string[]) => {
     .sort((a, b) => b - a)
 
   return scores[Math.floor(scores.length / 2)]
+}
+
+export const run = (input: string[], part2: boolean = false) => {
+  return part2 ? getCompletionScore(input) : getCorruptionScore(input)
 }

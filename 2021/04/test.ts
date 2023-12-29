@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { getBingos } from './'
+import { run } from './'
 
 test('Day 04 — Sample', t => {
   const sample = $.sample(
@@ -26,16 +26,14 @@ test('Day 04 — Sample', t => {
    2  0 12  3  7
    `
   ).join('\n')
-  const sampleBingos = getBingos(sample)
 
-  t.is(sampleBingos[0], 4512)
-  t.is(sampleBingos[sampleBingos.length - 1], 1924)
+  t.is(run(sample), 4512)
+  t.is(run(sample, true), 1924)
 })
 
 test('Day 04 — Solutions', t => {
   const [input] = $.readInput(import.meta, { delimiter: '' })
-  const bingos = getBingos(input)
 
-  t.is(bingos[0], 45_031)
-  t.is(bingos.at(-1), 2568)
+  t.is(run(input), 45_031)
+  t.is(run(input, true), 2568)
 })

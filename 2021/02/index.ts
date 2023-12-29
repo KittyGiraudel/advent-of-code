@@ -1,4 +1,4 @@
-export const proceed = (instructions: string[]) =>
+const proceed = (instructions: string[]) =>
   instructions
     .map(instruction => instruction.split(' '))
     .reduce(
@@ -11,7 +11,7 @@ export const proceed = (instructions: string[]) =>
       { position: 0, depth: 0 }
     )
 
-export const proceedWithAim = (instructions: string[]) =>
+const proceedWithAim = (instructions: string[]) =>
   instructions
     .map(instruction => instruction.split(' '))
     .reduce(
@@ -25,3 +25,9 @@ export const proceedWithAim = (instructions: string[]) =>
       },
       { position: 0, depth: 0, aim: 0 }
     )
+
+export const run = (input: string[], part2: boolean = false) => {
+  const { depth, position } = part2 ? proceedWithAim(input) : proceed(input)
+
+  return depth * position
+}
