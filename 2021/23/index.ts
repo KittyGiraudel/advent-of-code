@@ -121,14 +121,11 @@ const roomsToHallway = (curr: State) => {
       }
 
       const steps = hallwaySlice.length + podIndexInRoom
+      const nextCurrentRoom = $.replace(currentRoom, podIndexInRoom, '.')
 
       next.push({
         hallway: $.replace(curr.hallway, hallwayIndex, pod),
-        rooms: $.replace(
-          curr.rooms,
-          roomIndex,
-          $.replace(currentRoom, podIndexInRoom, '.')
-        ),
+        rooms: $.replace(curr.rooms, roomIndex, nextCurrentRoom),
         cost: curr.cost + MOVEMENT_COST[pod as Cell] * steps,
       })
     })

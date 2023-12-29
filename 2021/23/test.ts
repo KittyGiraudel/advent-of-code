@@ -14,12 +14,12 @@ test('Day 23 — Sample', t => {
   )
 
   t.is(run(sample), 12521)
-  // t.is(run(sample, true), 44169)
+  t.is(run(sample, true), 44169)
 })
 
 test('Day 23 — Solutions', t => {
   const input = $.readInput(import.meta)
 
   t.is(run(input), 16508)
-  // t.is(run(input, true), 43626)
+  t.is(run(input, true), 43626)
 })
