@@ -44,7 +44,7 @@ const hallwayToRooms = (curr: State) => {
 
     const roomIndex = 'ABCD'.indexOf(pod)
     const room = curr.rooms[roomIndex]
-    const spaceInRoom = $.countInString(room, '\\.')
+    const spaceInRoom = $.countInString(room, '.')
     const otherPodsInRoom = Array.from(room).filter(value => value !== '.')
 
     if (

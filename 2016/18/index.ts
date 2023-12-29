@@ -16,11 +16,11 @@ const next = (prev: string) => {
 
 export const run = (input: string, size: number = 40) => {
   let row = '.' + input + '.'
-  let count = $.countInString(row, '\\.') - 2
+  let count = $.countInString(row, '.') - 2
 
   for (let i = 1; i < size; i++) {
     row = next(row)
-    count += $.countInString(row, '\\.') - 2
+    count += $.countInString(row, '.') - 2
   }
 
   return count
