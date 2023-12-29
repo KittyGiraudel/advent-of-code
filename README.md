@@ -158,7 +158,7 @@
   <img src="Media/2022/25.png" alt="Day 25 2022: Partially complete" width="161px">
 </a>
 <h1 align="center">
-  2021 - 45 ⭐
+  2021 - 47 ⭐
 </h1>
 <a href="2021/01/index.ts">
   <img src="Media/2021/01.png" alt="Day 1 2021: Complete" width="161px">
@@ -227,7 +227,7 @@
   <img src="Media/2021/22.png" alt="Day 22 2021: Complete" width="161px">
 </a>
 <a href="2021/23/index.ts">
-  <img src="Media/2021/23.png" alt="Day 23 2021: Incomplete" width="161px">
+  <img src="Media/2021/23.png" alt="Day 23 2021: Complete" width="161px">
 </a>
 <a href="2021/24/index.ts">
   <img src="Media/2021/24.png" alt="Day 24 2021: Complete" width="161px">
