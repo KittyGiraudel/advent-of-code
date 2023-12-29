@@ -30,7 +30,7 @@ export const calibrate = (input: string[]) => {
 // Ref: https://www.reddit.com/r/adventofcode/comments/3xflz8/comment/cy4h7ji/
 export const recompose = (input: string[]) => {
   const molecule = input.at(-1)!
-  const tokens = $.countInString(molecule, '[A-Z]', false)
+  const tokens = $.countInString(molecule, '[A-Z]', false, false)
   const Rn = $.countInString(molecule, 'Rn', false)
   const Ar = $.countInString(molecule, 'Ar', false)
   const Y = $.countInString(molecule, 'Y', false)

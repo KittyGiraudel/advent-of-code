@@ -8,10 +8,14 @@ function escapeRegExp(text: string) {
 const countInString = (
   haystack: string,
   needle: string,
-  insensitive: Boolean = true
+  insensitive: boolean = true,
+  escape: boolean = true
 ) => {
   const flags = ['g', insensitive ? 'i' : ''].join('')
-  const regex = new RegExp(`(?=(${escapeRegExp(needle)}))`, flags)
+  const regex = new RegExp(
+    `(?=(${escape ? escapeRegExp(needle) : needle}))`,
+    flags
+  )
   const matches = haystack.matchAll(regex)
 
   return Array.from(matches).length || 0
