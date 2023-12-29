@@ -34,6 +34,7 @@ import permutations from './permutations'
 import product from './product'
 import range from './range'
 import readInput from './readInput'
+import replace from './replace'
 import rotate from './rotate'
 import sample from './sample'
 import search from './search'
@@ -49,7 +50,6 @@ import toPoint from './toPoint'
 import triangular from './triangular'
 import turn from './turn'
 import unique from './unique'
-import updateAtIndex from './updateAtIndex'
 import zip from './zip'
 
 export default {
@@ -88,6 +88,7 @@ export default {
   product,
   range,
   readInput,
+  replace,
   rotate,
   match,
   sample,
@@ -105,6 +106,5 @@ export default {
   triangular,
   turn,
   unique,
-  updateAtIndex,
   zip,
 }

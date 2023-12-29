@@ -8,22 +8,22 @@ type Sample = {
 
 type Operation = (regs: number[], [A, B, C]: number[]) => number[]
 const OPCODES: Record<string, Operation> = {
-  addr: (regs, [A, B, C]) => $.updateAtIndex(regs, C, regs[A] + regs[B]),
-  addi: (regs, [A, B, C]) => $.updateAtIndex(regs, C, regs[A] + B),
-  mulr: (regs, [A, B, C]) => $.updateAtIndex(regs, C, regs[A] * regs[B]),
-  muli: (regs, [A, B, C]) => $.updateAtIndex(regs, C, regs[A] * B),
-  banr: (regs, [A, B, C]) => $.updateAtIndex(regs, C, regs[A] & regs[B]),
-  bani: (regs, [A, B, C]) => $.updateAtIndex(regs, C, regs[A] & B),
-  borr: (regs, [A, B, C]) => $.updateAtIndex(regs, C, regs[A] | regs[B]),
-  bori: (regs, [A, B, C]) => $.updateAtIndex(regs, C, regs[A] | B),
-  setr: (regs, [A, B, C]) => $.updateAtIndex(regs, C, regs[A]),
-  seti: (regs, [A, B, C]) => $.updateAtIndex(regs, C, A),
-  gtir: (regs, [A, B, C]) => $.updateAtIndex(regs, C, +(A > regs[B])),
-  gtri: (regs, [A, B, C]) => $.updateAtIndex(regs, C, +(regs[A] > B)),
-  gtrr: (regs, [A, B, C]) => $.updateAtIndex(regs, C, +(regs[A] > regs[B])),
-  eqir: (regs, [A, B, C]) => $.updateAtIndex(regs, C, +(A === regs[B])),
-  eqri: (regs, [A, B, C]) => $.updateAtIndex(regs, C, +(regs[A] === B)),
-  eqrr: (regs, [A, B, C]) => $.updateAtIndex(regs, C, +(regs[A] === regs[B])),
+  addr: (regs, [A, B, C]) => $.replace(regs, C, regs[A] + regs[B]),
+  addi: (regs, [A, B, C]) => $.replace(regs, C, regs[A] + B),
+  mulr: (regs, [A, B, C]) => $.replace(regs, C, regs[A] * regs[B]),
+  muli: (regs, [A, B, C]) => $.replace(regs, C, regs[A] * B),
+  banr: (regs, [A, B, C]) => $.replace(regs, C, regs[A] & regs[B]),
+  bani: (regs, [A, B, C]) => $.replace(regs, C, regs[A] & B),
+  borr: (regs, [A, B, C]) => $.replace(regs, C, regs[A] | regs[B]),
+  bori: (regs, [A, B, C]) => $.replace(regs, C, regs[A] | B),
+  setr: (regs, [A, B, C]) => $.replace(regs, C, regs[A]),
+  seti: (regs, [A, B, C]) => $.replace(regs, C, A),
+  gtir: (regs, [A, B, C]) => $.replace(regs, C, +(A > regs[B])),
+  gtri: (regs, [A, B, C]) => $.replace(regs, C, +(regs[A] > B)),
+  gtrr: (regs, [A, B, C]) => $.replace(regs, C, +(regs[A] > regs[B])),
+  eqir: (regs, [A, B, C]) => $.replace(regs, C, +(A === regs[B])),
+  eqri: (regs, [A, B, C]) => $.replace(regs, C, +(regs[A] === B)),
+  eqrr: (regs, [A, B, C]) => $.replace(regs, C, +(regs[A] === regs[B])),
 }
 type Opcode = keyof typeof OPCODES
 

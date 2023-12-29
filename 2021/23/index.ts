@@ -63,11 +63,11 @@ const hallwayToRooms = (curr: State) => {
       }
 
       const steps = hallwaySlice.length + spaceInRoom
-      const roomNextState = $.updateAtIndex(room, spaceInRoom - 1, pod)
+      const roomNextState = $.replace(room, spaceInRoom - 1, pod)
 
       next.push({
-        hallway: $.updateAtIndex(curr.hallway, hallwayIndex, '.'),
-        rooms: $.updateAtIndex(curr.rooms, roomIndex, roomNextState),
+        hallway: $.replace(curr.hallway, hallwayIndex, '.'),
+        rooms: $.replace(curr.rooms, roomIndex, roomNextState),
         cost: curr.cost + MOVEMENT_COST[pod as Cell] * steps,
       })
     }
@@ -123,11 +123,11 @@ const roomsToHallway = (curr: State) => {
       const steps = hallwaySlice.length + podIndexInRoom
 
       next.push({
-        hallway: $.updateAtIndex(curr.hallway, hallwayIndex, pod),
-        rooms: $.updateAtIndex(
+        hallway: $.replace(curr.hallway, hallwayIndex, pod),
+        rooms: $.replace(
           curr.rooms,
           roomIndex,
-          $.updateAtIndex(currentRoom, podIndexInRoom, '.')
+          $.replace(currentRoom, podIndexInRoom, '.')
         ),
         cost: curr.cost + MOVEMENT_COST[pod as Cell] * steps,
       })

@@ -84,7 +84,7 @@ export const run = (input: string[], part2: boolean = false) => {
 
       nodes.push(
         ...nextKeys.map(nextKey => ({
-          positions: $.updateAtIndex(curr.positions, i, nextKey),
+          positions: $.replace(curr.positions, i, nextKey),
           // It took me a while to realise that sorting the keys is important,
           // as this is what makes it possible for the search to avoid visiting
           // similar states multiple times. Semantically, abc is the same as acb

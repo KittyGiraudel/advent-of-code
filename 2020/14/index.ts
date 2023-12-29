@@ -44,8 +44,8 @@ export const processLoose = (
 const resolveAddresses = (value: string[]): string[][] =>
   value.includes('X')
     ? [
-        ...resolveAddresses($.updateAtIndex(value, value.indexOf('X'), '0')),
-        ...resolveAddresses($.updateAtIndex(value, value.indexOf('X'), '1')),
+        ...resolveAddresses($.replace(value, value.indexOf('X'), '0')),
+        ...resolveAddresses($.replace(value, value.indexOf('X'), '1')),
       ]
     : [value]
 

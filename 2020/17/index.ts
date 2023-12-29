@@ -14,14 +14,14 @@ type NeighborCache = Map<
 >
 type Mappy = Map<Point | TriPoint | QuadriPoint, string>
 
-const W = (coords: Coords) => $.updateAtIndex(coords, 0, coords[0] - 1)
-const E = (coords: Coords) => $.updateAtIndex(coords, 0, coords[0] + 1)
-const N = (coords: Coords) => $.updateAtIndex(coords, 1, coords[1] - 1)
-const S = (coords: Coords) => $.updateAtIndex(coords, 1, coords[1] + 1)
-const B = (coords: TriCoords) => $.updateAtIndex(coords, 2, coords[2] - 1)
-const F = (coords: TriCoords) => $.updateAtIndex(coords, 2, coords[2] + 1)
-const H = (coords: QuadriCoords) => $.updateAtIndex(coords, 3, coords[3] - 1)
-const C = (coords: QuadriCoords) => $.updateAtIndex(coords, 3, coords[3] + 1)
+const W = (coords: Coords) => $.replace(coords, 0, coords[0] - 1)
+const E = (coords: Coords) => $.replace(coords, 0, coords[0] + 1)
+const N = (coords: Coords) => $.replace(coords, 1, coords[1] - 1)
+const S = (coords: Coords) => $.replace(coords, 1, coords[1] + 1)
+const B = (coords: TriCoords) => $.replace(coords, 2, coords[2] - 1)
+const F = (coords: TriCoords) => $.replace(coords, 2, coords[2] + 1)
+const H = (coords: QuadriCoords) => $.replace(coords, 3, coords[3] - 1)
+const C = (coords: QuadriCoords) => $.replace(coords, 3, coords[3] + 1)
 const NE = $.compose(N, E)
 const SE = $.compose(S, E)
 const SW = $.compose(S, W)
