@@ -1,9 +1,8 @@
 import { Coords, Point } from '../types'
 import $ from './'
 
-type Mapper<I, O> = (value: I, ri: number, ci: number) => O
-const identity = <I, O>(value: I, ri: number, ci: number) =>
-  value as unknown as O
+type Mapper<I, O> = (value: I, coords: Coords) => O
+const identity = <I, O>(value: I, coords: Coords) => value as unknown as O
 
 class Grid<T> {
   private data: T[][]
@@ -16,12 +15,12 @@ class Grid<T> {
   constructor(
     width: number,
     height: number = width,
-    value: T | null | ((ci: number, ri: number) => T) = null
+    value: T | null | ((coords: Coords) => T) = null
   ) {
     this.data = Array.from({ length: height }, (_, ri) =>
       Array.from({ length: width }, (_, ci) =>
         typeof value === 'function'
-          ? (value as CallableFunction)(ri, ci)
+          ? (value as CallableFunction)([ri, ci])
           : value
       )
     )
@@ -33,8 +32,8 @@ class Grid<T> {
    * @example $.Grid.from<string, number>([['0', '1'], ['1', '2']], Number)
    */
   static from<I, O = I>(input: I[][], mapper: Mapper<I, O> = identity) {
-    return new Grid<O>(input[0].length, input.length, (ri, ci) =>
-      mapper(input[ri][ci], ri, ci)
+    return new Grid<O>(input[0].length, input.length, ([ri, ci]) =>
+      mapper(input[ri][ci], [ri, ci])
     )
   }
 
@@ -82,7 +81,9 @@ class Grid<T> {
    * Note: Mutating these will *not* mutate the grid data.
    */
   get columns() {
-    return $.range(this.width).map(index => this.column(index))
+    return Array.from({ length: this.width }, (_, ci) =>
+      this.rows.map(row => row.at(ci) as T)
+    )
   }
 
   /**
@@ -201,23 +202,19 @@ class Grid<T> {
   }
 
   /**
-   * Return a new grid instance. In case the `deep` parameter is passed as
-   * `true`, each value is deep-cloned before being assigned to the new grid;
-   * this can matter when cloning a grid containing non-primitive values.
+   * Return a new grid instance.
    */
-  clone(deep: boolean = false) {
-    return new Grid<T>(this.width, this.height, (...coords) =>
-      deep ? structuredClone(this.get(coords)) : this.get(coords)
-    )
+  clone() {
+    return Grid.from(structuredClone(this.data))
   }
 
   /**
    * Iterate over the grid from top-to-bottom and left-to-right, applying the
    * given handler for each entry.
    */
-  forEach(handler: (item: T, ri: number, ci: number) => void) {
+  forEach(handler: (item: T, coords: Coords) => void) {
     this.rows.forEach((row, ri) =>
-      row.forEach((value, ci) => handler(value, ri, ci))
+      row.forEach((value, ci) => handler(value, [ri, ci]))
     )
   }
 
@@ -225,12 +222,10 @@ class Grid<T> {
    * Iterate over the grid from top-to-bottom and left-to-right, returning the
    * result of the given handler for each entry.
    */
-  map<O>(handler: (item: T, ri: number, ci: number) => O) {
+  map<O>(handler: (item: T, coords: Coords) => O) {
     const next = Grid.from(this.data) as Grid<O>
 
-    this.forEach((value, ...coords) =>
-      next.set(coords, handler(value, ...coords))
-    )
+    this.forEach((value, coords) => next.set(coords, handler(value, coords)))
 
     return next
   }
@@ -240,9 +235,9 @@ class Grid<T> {
    * result of the given handler for each entry, and flattening the result into
    * a single flat array.
    */
-  flatMap<O>(handler: (item: T, ri: number, ci: number) => O) {
+  flatMap<O>(handler: (item: T, coords: Coords) => O) {
     return this.rows.flatMap((row, ri) =>
-      row.flatMap((value, ci) => handler(value, ri, ci))
+      row.flatMap((value, ci) => handler(value, [ri, ci]))
     )
   }
 
@@ -250,9 +245,9 @@ class Grid<T> {
    * Iterate over the grid from top-to-bottom and left-to-right, returning true
    * if every entry matches the given predicate, or false otherwise.
    */
-  every(predicate: (item: T, ri: number, ci: number) => boolean) {
+  every(predicate: (item: T, coords: Coords) => boolean) {
     return this.rows.every((row, ri) =>
-      row.every((value, ci) => predicate(value, ri, ci))
+      row.every((value, ci) => predicate(value, [ri, ci]))
     )
   }
 
@@ -260,9 +255,9 @@ class Grid<T> {
    * Iterate over the grid from top-to-bottom and left-to-right, returning true
    * if some entry matches the given predicate, or false otherwise.
    */
-  some(predicate: (item: T, ri: number, ci: number) => boolean) {
+  some(predicate: (item: T, coords: Coords) => boolean) {
     return this.rows.some((row, ri) =>
-      row.some((value, ci) => predicate(value, ri, ci))
+      row.some((value, ci) => predicate(value, [ri, ci]))
     )
   }
 
@@ -286,9 +281,9 @@ class Grid<T> {
    * Iterate over the grid from top-to-bottom and left-to-right, returning as a
    * flat array only the entries that match the given predicate.
    */
-  filter(predicate: (item: T, ri: number, ci: number) => boolean) {
+  filter(predicate: (item: T, coords: Coords) => boolean) {
     return this.rows
-      .map((row, ri) => row.filter((value, ci) => predicate(value, ri, ci)))
+      .map((row, ri) => row.filter((value, ci) => predicate(value, [ri, ci])))
       .filter(row => row.length > 0)
       .flat()
   }
@@ -296,7 +291,7 @@ class Grid<T> {
   /**
    * Count the number of entries that match the given predicate.
    */
-  count(predicate: (item: T, ri: number, ci: number) => boolean) {
+  count(predicate: (item: T, coords: Coords) => boolean) {
     return this.filter(predicate).length
   }
 
@@ -304,9 +299,9 @@ class Grid<T> {
    * Find the first set of Y,X coordinates where the entry matches the given
    * predicate, or undefined otherwise.
    */
-  findCoords(predicate: (item: T, ri: number, ci: number) => boolean) {
+  findCoords(predicate: (item: T, coords: Coords) => boolean) {
     return this.reduce<Coords | undefined>(
-      (acc, item, ri, ci) => acc ?? (predicate(item, ri, ci) ? [ri, ci] : acc),
+      (acc, item, coords) => acc ?? (predicate(item, coords) ? coords : acc),
       undefined
     )
   }
@@ -315,7 +310,7 @@ class Grid<T> {
    * Find the first entry that matches the given predicate, or undefined
    * otherwise.
    */
-  find(predicate: (item: T, ri: number, ci: number) => boolean) {
+  find(predicate: (item: T, coords: Coords) => boolean) {
     const coords = this.findCoords(predicate)
 
     return coords ? this.get(coords) : undefined
@@ -325,13 +320,13 @@ class Grid<T> {
    * Reduce the grid data into a single value starting from the given initial
    * value (and its associated type).
    */
-  reduce<O>(
-    handler: (acc: O, item: T, ri: number, ci: number) => O,
-    initialValue: O
-  ) {
+  reduce<O>(handler: (acc: O, item: T, coords: Coords) => O, initialValue: O) {
     return this.data.reduce(
       (accRow, row, ri) =>
-        row.reduce((accCol, item, ci) => handler(accCol, item, ri, ci), accRow),
+        row.reduce(
+          (accCol, item, ci) => handler(accCol, item, [ri, ci]),
+          accRow
+        ),
       initialValue
     )
   }
@@ -358,7 +353,7 @@ class Grid<T> {
   /**
    * Return a new grid made by rotating the current grid 90° clockwise.
    */
-  rotate(): Grid<T> {
+  rotate() {
     const next = new Grid<T>(0)
 
     this.columns.forEach((_, ci) => {
@@ -372,7 +367,7 @@ class Grid<T> {
    * Return a new grid made by flipping the current grid horizontally (i.e.
    * reversing the order of rows).
    */
-  flip(): Grid<T> {
+  flip() {
     const flipped = this.clone()
     flipped.rows.reverse()
     return flipped
@@ -406,7 +401,7 @@ class Grid<T> {
    */
   toMap() {
     return this.reduce<Map<Point, T>>(
-      (map, value, ...coords) => map.set($.toPoint(coords), value),
+      (map, value, coords) => map.set($.toPoint(coords), value),
       new Map()
     )
   }
@@ -416,7 +411,7 @@ class Grid<T> {
    * points and values are their corresponding value.
    */
   toObj() {
-    return this.reduce<Record<Point, T>>((obj, value, ...coords) => {
+    return this.reduce<Record<Point, T>>((obj, value, coords) => {
       obj[$.toPoint(coords)] = value
       return obj
     }, {})

@@ -18,7 +18,7 @@ const findGalaxies = (grid: Grid<string>, factor: number) => {
   const { emptyRowIndices, emptyColumnIndices } = calculateExpansion(grid)
   const galaxies: Coords[] = []
 
-  grid.forEach((value, ri, ci) => {
+  grid.forEach((value, [ri, ci]) => {
     if (value === '#')
       galaxies.push([
         // If I’m being honest, I am not 100% clear on why this should be

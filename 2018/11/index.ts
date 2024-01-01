@@ -12,7 +12,7 @@ const computeCellPower = (serial: number, x: number, y: number) => {
 }
 
 const getGrid = (serial: number) =>
-  new $.Grid(SIZE, SIZE, (ri, ci) => computeCellPower(serial, ri + 1, ci + 1))
+  new $.Grid(SIZE, SIZE, ([ri, ci]) => computeCellPower(serial, ri + 1, ci + 1))
 
 export const getFuelStrict = (serial: number) => {
   const max = { value: -Infinity, coords: [0, 0] as Coords }
@@ -47,7 +47,7 @@ export const getFuelLoose = (serial: number) => {
   // reports the sum of all points above and to the left of (y, x).
   // The following algorithm is inspired from this Ruby version:
   // https://www.reddit.com/r/adventofcode/comments/a53r6i/comment/ebjsc3u/?utm_source=reddit&utm_medium=web2x&context=3
-  summed.forEach((v, ri, ci) => {
+  summed.forEach((v, [ri, ci]) => {
     const get = (...coords: Coords) => summed.get(coords) ?? 0
 
     summed.set(

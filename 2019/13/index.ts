@@ -27,7 +27,7 @@ export const render = (board: Board) => {
   const grid = new $.Grid(
     maxX + 1,
     maxY + 1,
-    (y, x) => SYMBOLS[board.get(`${x},${y}`) as Symbol]
+    ([y, x]) => SYMBOLS[board.get(`${x},${y}`) as Symbol]
   )
 
   return grid.render(' ')

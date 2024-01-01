@@ -55,7 +55,7 @@ const mapOutLoopingPipe = (grid: Grid<string>) => {
 const scaleUpGrid = (grid: Grid<string>, from: PipeMap) => {
   const scaledUpGrid = new $.Grid(grid.width * 3, grid.height * 3, '.')
 
-  grid.forEach((value, ...coords) => {
+  grid.forEach((value, coords) => {
     if (!($.toPoint(coords) in from)) return '.'
 
     const scaledUpCoords: Coords = scaleUp(coords)
@@ -114,7 +114,7 @@ export const run = (input: string[], part2: boolean = false) => {
   const { graph: scaledFlooded } = floodGrid(scaleUpGrid(grid, pipe))
   const floodedSize = Object.keys(flooded).length
   const enclavesCount = grid.count(
-    (_, ...coords) =>
+    (_, coords) =>
       // If the cell does *not* belong to the pipe, and does *not* belong to
       // the outside, but was flooded when scaling up, it is an enclave.
       !($.toPoint(coords) in pipe) &&

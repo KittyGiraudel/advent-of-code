@@ -26,14 +26,14 @@ export const getGrid = (input: string) => {
 }
 
 export const calibrate = (grid: Grid<string>) =>
-  grid.reduce((calibration, value, ri, ci) => {
+  grid.reduce((calibration, value, coords) => {
     if (value !== '#') return calibration
 
-    const neighborcoords = $.bordering([ri, ci])
+    const neighborcoords = $.bordering(coords)
     const neighbors = neighborcoords.map(coords => grid.get(coords))
     const intersection = neighbors.every(neighbor => neighbor === '#')
 
-    if (intersection) calibration += ri * ci
+    if (intersection) calibration += coords[0] * coords[1]
 
     return calibration
   }, 0)

@@ -64,7 +64,7 @@ const getInsideCoords = (grid: Grid<string>) => {
   const pointsToDoors: PointsToDoors = {}
   const doorsToCoords: DoorsToCoords = {}
 
-  grid.forEach((value, ri, ci) => {
+  grid.forEach((value, [ri, ci]) => {
     if (!/[A-Z]/.test(value)) return
     const bottom = grid.get([ri + 1, ci]).trim()
 
@@ -150,7 +150,7 @@ export const maze = (input: string[], recursive: boolean = false) => {
   const { width, height } = getDimensions(input)
   // This creates a grid from the given input except without the outside
   // padding. The middle part still contains the inside door names though.
-  const grid = new $.Grid(width, height, (ri, ci) => input[ri + 2][ci + 2])
+  const grid = new $.Grid(width, height, ([ri, ci]) => input[ri + 2][ci + 2])
   const outside = getOutsideCoords(grid, input)
   const inside = getInsideCoords(grid)
   const endCoords = outside.doorsToCoords.ZZ

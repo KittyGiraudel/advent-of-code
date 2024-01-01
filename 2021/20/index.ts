@@ -1,9 +1,9 @@
 import $ from '../../helpers'
 import { Coords } from '../../types'
 
-const getTilingCoords = (ri: number, ci: number) => {
-  const [N, NE, E, SE, S, SW, W, NW] = $.surrounding([ri, ci])
-  const C: Coords = [ri, ci]
+const getTilingCoords = (coords: Coords) => {
+  const [N, NE, E, SE, S, SW, W, NW] = $.surrounding(coords)
+  const C: Coords = coords
 
   // prettier-ignore
   return [
@@ -23,9 +23,9 @@ const padInput = (input: string, defaultChar: string = '.') => {
 const step = (algorithm: string, input: string, defaultChar: string = '.') => {
   const rows = padInput(input, defaultChar)
   const curr = $.Grid.fromRows(rows)
-  const next = curr.map((_, ri, ci) => {
+  const next = curr.map((_, coords) => {
     const value = $.toDec(
-      getTilingCoords(ri, ci)
+      getTilingCoords(coords)
         .map(coords => curr.get(coords) ?? defaultChar)
         .map(value => +(value === '#'))
         .join('')

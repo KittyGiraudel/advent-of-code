@@ -19,7 +19,7 @@ export const run = (
   }
 
   while (iterations--) {
-    curr = curr.map((value, ...coords) => {
+    curr = curr.map((value, coords) => {
       const on = $.surrounding(coords).filter(
         coords => curr.get(coords) === '#'
       )
@@ -36,5 +36,5 @@ export const run = (
     })
   }
 
-  return curr.count(v => v === '#')
+  return curr.count(value => value === '#')
 }

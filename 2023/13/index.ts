@@ -53,7 +53,7 @@ const summarize = (mirror: Mirror) => {
 const getVariants = (grid: Grid<string>) => {
   const variants: Grid<string>[] = []
 
-  grid.forEach((value, ...coords) => {
+  grid.forEach((value, coords) => {
     variants.push(grid.clone().set(coords, value === '#' ? '.' : '#'))
   })
 

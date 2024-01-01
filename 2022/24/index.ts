@@ -28,15 +28,15 @@ const getGrids = (input: string[]) => {
     // taken, everything else is considered empty. Note that we preserve the
     // border value because while it’s often `['#']`, it is in fact `[]` for
     // doors.
-    const next = grid.map((value, ri, ci) =>
-      isWallOrDoor(grid, ri, ci) ? value : []
+    const next = grid.map((value, coords) =>
+      isWallOrDoor(grid, ...coords) ? value : []
     )
 
     // Then iterate through the *current* grid to generate the next one: skip
     // the borders (they are essentially immutable as blizzards cannot reach the
     // doords), and for each cell, iterate over its hypothetical blizzards and
     // move them.
-    curr.forEach((value, ri, ci) => {
+    curr.forEach((value, [ri, ci]) => {
       if (isWallOrDoor(curr, ri, ci)) return
 
       value.forEach(direction => {

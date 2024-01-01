@@ -121,10 +121,10 @@ class Game {
   constructor(rows: string[], elvishPower: number = 3) {
     this.turns = 0
     this.units = []
-    this.grid = $.Grid.fromRows(rows, (value, ri, ci) => {
+    this.grid = $.Grid.fromRows(rows, (value, coords) => {
       if (value === 'G' || value === 'E') {
         const power = value === 'E' ? elvishPower : 3
-        const unit = new Unit(value, [ri, ci], power)
+        const unit = new Unit(value, coords, power)
         this.units.push(unit)
         return '.'
       }
@@ -170,7 +170,7 @@ class Game {
   render() {
     const turn = 'Turn: ' + this.turns
     const map = this.grid
-      .map((value, ...position) => {
+      .map((value, position) => {
         const unit = this.units.find(unit => unit.isAt(position) && unit.alive)
         return unit?.type ?? value
       })

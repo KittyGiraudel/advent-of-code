@@ -16,11 +16,9 @@ const createGraph = (grid: Grid<string>, part2: boolean = false) => {
       ? lookup.get($.toPoint(next)) === '.'
       : lookup.get($.toPoint(next)) !== '#'
 
-  grid.forEach((value, ri, ci) => {
-    const coords: Coords = [ri, ci]
-
+  grid.forEach((value, coords) => {
     if (value === '.') {
-      $.bordering([ri, ci])
+      $.bordering(coords)
         .filter(isValid)
         .forEach(next => {
           connect(next, coords)
@@ -102,8 +100,10 @@ const findLongestPath = (
 export const run = (input: string[], part2: boolean = false) => {
   const grid = $.Grid.fromRows(input)
   const { height } = grid
-  const startCoords = grid.findCoords((v, ri) => ri === 0 && v === '.')!
-  const endCoords = grid.findCoords((v, ri) => ri === height - 1 && v === '.')!
+  const startCoords = grid.findCoords((v, [ri]) => ri === 0 && v === '.')!
+  const endCoords = grid.findCoords(
+    (v, [ri]) => ri === height - 1 && v === '.'
+  )!
   const graph = createGraph(grid, part2)
 
   return findLongestPath(graph, $.toPoint(startCoords), $.toPoint(endCoords))

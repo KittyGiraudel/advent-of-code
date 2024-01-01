@@ -12,7 +12,7 @@ export const run = (input: string[]): [string, number] => {
   const grid = $.Grid.fromRows(input)
   const read = (position: Coords | Point) => grid.get(position)?.trim()
   const visited: Point[] = []
-  let position = grid.findCoords((v, ri) => ri === 0 && v === '|') as Coords
+  let position = grid.findCoords((v, [ri]) => ri === 0 && v === '|') as Coords
   let vector: Coords = VECTORS[2]
   let letters = ''
   let value = null

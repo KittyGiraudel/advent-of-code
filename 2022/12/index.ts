@@ -9,14 +9,14 @@ type Node = {
 const parse = (input: string[]) => {
   const start: Node = { position: [0, 0], elevation: 0 }
   const end: Node = { position: [0, 0], elevation: 0 }
-  const grid = $.Grid.fromRows(input, (value, ri, ci) => {
+  const grid = $.Grid.fromRows(input, (value, coords) => {
     if (value === 'S') {
-      start.position = [ri, ci]
+      start.position = coords
       return (start.elevation = 'a'.charCodeAt(0))
     }
 
     if (value === 'E') {
-      end.position = [ri, ci]
+      end.position = coords
       return (end.elevation = 'z'.charCodeAt(0))
     }
 
@@ -57,12 +57,9 @@ export const findShortestPath = (input: string[]) => {
   const { grid, end } = parse(input)
 
   return grid.reduce(
-    (min, elevation, ri, ci) =>
+    (min, elevation, position) =>
       elevation === 'a'.charCodeAt(0)
-        ? Math.min(
-            min,
-            getPathLength(grid, { position: [ri, ci], elevation }, end)
-          )
+        ? Math.min(min, getPathLength(grid, { position, elevation }, end))
         : min,
     Infinity
   )

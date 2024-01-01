@@ -36,7 +36,7 @@ const getSurroundingNumber = (grid: Grid<string>) => (coords: Coords) => {
 export const getGearRatio = (input: string[]) => {
   const grid = $.Grid.fromRows(input)
 
-  return grid.reduce<number>((acc, item, ...coords) => {
+  return grid.reduce<number>((acc, item, coords) => {
     // Only consider gears, and ignore anything else.
     if (!isGear(item)) return acc
 
@@ -70,7 +70,7 @@ export const run = (input: string[], part2: boolean = false) => {
   }
 
   return grid.reduce<State>(
-    (acc, value, ...coords) => {
+    (acc, value, coords) => {
       if (isNumber(value)) {
         // Because we iterate left-to-right, and because numbers are always
         // contained within a single row, we can safely compose our number

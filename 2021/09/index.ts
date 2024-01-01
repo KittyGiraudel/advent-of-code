@@ -5,9 +5,7 @@ import { Coords, CoordsAndPoint, Grid, Point } from '../../types'
 // number, and get its 4 neighbors. If all existing neighbors are higher than
 // the current point, it’s a low point.
 const getLowPoints = (grid: Grid<number>) =>
-  grid.reduce<Coords[]>((acc, value, ri, ci) => {
-    const coords: Coords = [ri, ci]
-
+  grid.reduce<Coords[]>((acc, value, coords) => {
     if (
       $.bordering(coords)
         .map(coords => grid.get(coords) ?? Infinity)

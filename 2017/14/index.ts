@@ -28,14 +28,14 @@ export const run = (key: string, part2: boolean = false) => {
         }
       })
 
-  grid.forEach((active, ri, ci) => {
+  grid.forEach((active, coords) => {
     if (!active) return
 
-    const point = $.toPoint([ri, ci])
+    const point = $.toPoint(coords)
 
     if (!(point in visited)) {
       visited[point] = point
-      walk([ri, ci], point)
+      walk(coords, point)
     }
   })
 

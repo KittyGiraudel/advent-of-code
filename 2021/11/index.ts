@@ -12,10 +12,10 @@ const makeGrid = (rows: string[]) =>
 const processFlashes = (grid: Grid<Octopus>) => {
   const toIncrement: Coords[] = []
 
-  grid.forEach((octopus, ri, ci) => {
+  grid.forEach((octopus, coords) => {
     if (!octopus.flashed && octopus.value > 9) {
       octopus.flashed = true
-      toIncrement.push(...$.surrounding([ri, ci]))
+      toIncrement.push(...$.surrounding(coords))
     }
   })
 

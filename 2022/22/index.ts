@@ -202,7 +202,7 @@ type CacheMap = Record<Point, CubicNeighbor[] | WrapNeighbor[]>
 
 const getNeighbors =
   (grid: Grid<string>, asCube: boolean) =>
-  (acc: CacheMap, _: string, ...coords: Coords) => {
+  (acc: CacheMap, _: string, coords: Coords) => {
     if (grid.get(coords)) {
       acc[$.toPoint(coords)] = asCube
         ? getCubicNeighbors(grid, ...coords)
@@ -219,7 +219,7 @@ export const maze = (input: string, asCube: boolean = false) => {
   const grid = $.Grid.fromRows(rows, v => (v === ' ' ? '' : v))
   const neighborMap = grid.reduce<CacheMap>(getNeighbors(grid, asCube), {})
 
-  let position = grid.findCoords((value, ri) => ri === 0 && value === SPACE)!
+  let position = grid.findCoords((value, [ri]) => ri === 0 && value === SPACE)!
   let orientation = '>'
 
   instructions.slice(0).forEach(instruction => {

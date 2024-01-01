@@ -13,8 +13,7 @@ const getNeighbors = $.memo((point: Point) => $.surrounding(point))
 
 const mapPositions = (input: string[]) =>
   $.Grid.fromRows(input).reduce<Set<Point>>(
-    (acc, value, ri, ci) =>
-      value === '#' ? acc.add((ri + ',' + ci) as Point) : acc,
+    (acc, value, coords) => (value === '#' ? acc.add($.toPoint(coords)) : acc),
     new Set()
   )
 

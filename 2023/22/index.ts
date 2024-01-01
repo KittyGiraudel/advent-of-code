@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { TriCoords, TriPoint } from '../../types'
+import { Coords, TriCoords, TriPoint } from '../../types'
 
 type Brick = [TriCoords, TriCoords]
 type Store = { height: number; brick: number }
@@ -18,11 +18,11 @@ export const run = (input: string[], part2: boolean = false) => {
 
   const onBrick = (
     [start, end]: Brick,
-    handler: (value: Store, ri: number, ci: number) => void
+    handler: (value: Store, coords: Coords) => void
   ) => {
     for (let ci = start[0]; ci <= end[0]; ci++) {
       for (let ri = start[1]; ri <= end[1]; ri++) {
-        handler(grid.get([ri, ci]), ri, ci)
+        handler(grid.get([ri, ci]), [ri, ci])
       }
     }
   }
@@ -46,7 +46,7 @@ export const run = (input: string[], part2: boolean = false) => {
     })
 
     // Then, we iterate each block from the brick one more time
-    onBrick(brick, (cell, ri, ci) => {
+    onBrick(brick, (cell, coords) => {
       // If the block is (one of) the highest in the brick, we need to mark it
       // as such so that subsequent bricks know it’s there
       if (cell.height === top) {
@@ -62,7 +62,7 @@ export const run = (input: string[], part2: boolean = false) => {
 
       // Finally, we update our map to store the current brick and its tallest
       // Z at every coordinate
-      grid.set([ri, ci], { brick: index, height: top + height })
+      grid.set(coords, { brick: index, height: top + height })
     })
   })
 

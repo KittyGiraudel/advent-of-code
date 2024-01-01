@@ -3,7 +3,7 @@ import { Coords, Grid } from '../../types'
 
 const calculateWeight = (grid: Grid<string>) =>
   $.sum(
-    grid.flatMap((row, ri) => $.countInString(row, 'O') * (grid.height - ri))
+    grid.flatMap((row, [ri]) => $.countInString(row, 'O') * (grid.height - ri))
   )
 
 const tilt = (grid: Grid<string>, vector: Coords) => {

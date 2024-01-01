@@ -6,9 +6,9 @@ const generateMap = (input: string[]) =>
     const match = line.match(/([xy])=(\d+), ([xy])=(\d+)..(\d+)/)!
 
     for (let i = +match[4]; i <= +match[5]; i++) {
-      const y = match[1] === 'y' ? +match[2] : i
-      const x = match[1] === 'x' ? +match[2] : i
-      acc[$.toPoint([x, y])] = '#'
+      const ri = match[1] === 'y' ? +match[2] : i
+      const ci = match[1] === 'x' ? +match[2] : i
+      acc[$.toPoint([ri, ci])] = '#'
     }
 
     return acc
@@ -19,75 +19,66 @@ const fillLevel = (grid: Grid<string>, position: Coords) => {
   fillSide(grid, position, -1)
 }
 
-const fillSide = (grid: Grid<string>, [x, y]: Coords, xOffset: number) => {
-  let currentX = x
-  while (true) {
-    if (grid.get([y, currentX]) === '#') return
-    grid.set([y, currentX], grid.get([y + 1, currentX]) === '|' ? '|' : '~')
-    currentX += xOffset
+const fillSide = (grid: Grid<string>, [ri, ci]: Coords, ciOffset: number) => {
+  while (grid.get([ri, ci]) !== '#') {
+    grid.set([ri, ci], grid.get([ri + 1, ci]) === '|' ? '|' : '~')
+    ci += ciOffset
   }
 }
 
-const hasWall = (grid: Grid<string>, [x, y]: Coords, xOffset: number) => {
-  let currentX = x
+const hasWall = (grid: Grid<string>, [ri, ci]: Coords, ciOffset: number) => {
   while (true) {
-    if (grid.get([y, currentX]) === '.') return false
-    if (grid.get([y, currentX]) === '#') return true
-    if (!grid.get([y, currentX])) return false
-    currentX += xOffset
+    if (!grid.get([ri, ci])) return false
+    if (grid.get([ri, ci]) === '.') return false
+    if (grid.get([ri, ci]) === '#') return true
+    ci += ciOffset
   }
 }
 
-const hasBothWalls = (grid: Grid<string>, position: Coords) => {
-  return hasWall(grid, position, 1) && hasWall(grid, position, -1)
+const hasWallOnBothSides = (grid: Grid<string>, position: Coords) => {
+  return hasWall(grid, position, +1) && hasWall(grid, position, -1)
 }
 
-const fillFrom = (grid: Grid<string>, [x, y]: Coords, maxY: number) => {
-  if (y >= maxY) return
+const fillFrom = (grid: Grid<string>, position: Coords, maxRi: number) => {
+  if (position[0] >= maxRi) return
+
+  const [, E, S, W] = $.bordering(position)
 
   // If the south cell is free, fill it.
-  if (grid.get([y + 1, x]) === '.') {
-    grid.set([y + 1, x], '|')
-    fillFrom(grid, [x, y + 1], maxY)
+  if (grid.get(S) === '.') {
+    grid.set(S, '|')
+    fillFrom(grid, S, maxRi)
   }
 
   // If the south cell is filled and the east cell is free, fill it.
-  if (
-    ['#', '~'].includes(grid.get([y + 1, x])) &&
-    grid.get([y, x + 1]) === '.'
-  ) {
-    grid.set([y, x + 1], '|')
-    fillFrom(grid, [x + 1, y], maxY)
+  if (['#', '~'].includes(grid.get(S)) && grid.get(E) === '.') {
+    grid.set(E, '|')
+    fillFrom(grid, E, maxRi)
   }
 
   // If the south cell is filled and the west cell is free, fill it.
-  if (
-    ['#', '~'].includes(grid.get([y + 1, x])) &&
-    grid.get([y, x - 1]) === '.'
-  ) {
-    grid.set([y, x - 1], '|')
-    fillFrom(grid, [x - 1, y], maxY)
+  if (['#', '~'].includes(grid.get(S)) && grid.get(W) === '.') {
+    grid.set(W, '|')
+    fillFrom(grid, W, maxRi)
   }
 
   // If there are walls on both side of the current cell, fill the whole level
   // with water.
-  if (hasBothWalls(grid, [x, y])) {
-    fillLevel(grid, [x, y])
-  }
+  if (hasWallOnBothSides(grid, position)) fillLevel(grid, position)
 }
 
 export const scan = (
   input: string[],
-  source: Coords = [500, 0]
+  source: Coords = [0, 500]
 ): [number, number] => {
   const map = generateMap(input)
-  const [, maxX, minY, maxY] = $.boundaries(
+  const [minRi, maxRi, minCi, maxCi] = $.boundaries(
     (Object.keys(map) as Point[]).map($.toCoords)
   )
   const grid = new $.Grid(
-    maxX + 1,
-    maxY + 1,
-    (ri, ci) => map[$.toPoint([ci, ri])] || '.'
+    maxCi + 1,
+    maxRi + 1,
+    coords => map[$.toPoint(coords)] || '.'
   )
 
   // Honestly I couldn’t figure out to solve this problem so I took over a
@@ -96,9 +87,9 @@ export const scan = (
   // I also issued a fix for two minor edge cases in that solution, that I
   // encountered when running it on my input:
   // https://github.com/andrewgreenh/advent-of-code/pull/19
-  fillFrom(grid, source, maxY)
+  fillFrom(grid, source, maxRi)
 
-  const counters = $.frequency(grid.rows.slice(minY, maxY + 1).flat())
+  const counters = $.frequency(grid.rows.slice(minRi, maxRi + 1).flat())
 
   return [counters['~'], counters['|']]
 }

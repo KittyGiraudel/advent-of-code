@@ -113,15 +113,14 @@ const assemble = (mozaic: Grid<Tile>) => {
   return grid
 }
 
-const isMonsterTail = (image: Grid<string>, ri: number, ci: number) =>
-  MONSTER_PATTERN.every(vector => {
-    const coords = $.applyVector([ri, ci], vector)
-    return image.get(coords) === '#'
-  })
+const isMonsterTail = (image: Grid<string>, coords: Coords) =>
+  MONSTER_PATTERN.every(
+    vector => image.get($.applyVector(coords, vector)) === '#'
+  )
 
 // Count the amount of sea monsters in the given image.
 const countMonsters = (image: Grid<string>) =>
-  image.reduce((acc, _, ri, ci) => acc + +isMonsterTail(image, ri, ci), 0)
+  image.reduce((acc, _, coords) => acc + +isMonsterTail(image, coords), 0)
 
 // Iterate over all 8 variants of the given image (rotated and flipped) to find
 // the maximum number of sea monsters that can be spotted. Then, computed how

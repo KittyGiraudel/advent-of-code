@@ -21,12 +21,12 @@ export const run = (rows: string[], iterations: number = 1) => {
   let curr = $.Grid.fromRows(rows)
 
   for (let i = 0; i < iterations; i++) {
-    curr = curr.map((value, ...coords) => {
-      const surroundings = $.surrounding(coords, 'COORDS')
-      const neighbors = surroundings.map(coords => curr.get(coords))
-
-      return getNextValue(value, neighbors)
-    })
+    curr = curr.map((value, coords) =>
+      getNextValue(
+        value,
+        $.surrounding(coords).map(coords => curr.get(coords))
+      )
+    )
 
     const score = getScore(curr)
     const index = history.indexOf(score)

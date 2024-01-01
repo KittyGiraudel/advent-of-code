@@ -26,7 +26,7 @@ export const run = (input: string[], part2: boolean = false) => {
   const doors: Record<Point, string> = {}
   const lookup = new Set<Point>()
 
-  $.Grid.fromRows(input).forEach((value, ...coords) => {
+  $.Grid.fromRows(input).forEach((value, coords) => {
     const point = $.toPoint(coords)
     if (value === '@') startPositions.push(point)
     if (KEY_RE.test(value)) keys[point] = value

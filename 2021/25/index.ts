@@ -4,8 +4,8 @@ import { Grid } from '../../types'
 export const step = (grid: Grid<string>) => {
   const horizontal = grid.map<string>(() => '.')
 
-  grid.forEach((v, ri, ci) => {
-    if (v !== '>') return
+  grid.forEach((value, [ri, ci]) => {
+    if (value !== '>') return
     const right = ci === grid.width - 1 ? 0 : ci + 1
     const canMove = grid.get([ri, right]) === '.'
     horizontal.set([ri, canMove ? right : ci], '>')
@@ -13,8 +13,8 @@ export const step = (grid: Grid<string>) => {
 
   const vertical = horizontal.clone()
 
-  grid.forEach((v, ri, ci) => {
-    if (v !== 'v') return
+  grid.forEach((value, [ri, ci]) => {
+    if (value !== 'v') return
     const bottom = ri === grid.height - 1 ? 0 : ri + 1
     const canMove =
       grid.get([bottom, ci]) !== 'v' && horizontal.get([bottom, ci]) === '.'

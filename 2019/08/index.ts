@@ -27,9 +27,9 @@ export const recompose = (
     const layer = layers[i]
     const grid = $.Grid.from<number, number>($.chunk<number>(layer, size.width))
 
-    grid.forEach((pixel, ri, ci) => {
-      if ([null, 2].includes(image.get([ri, ci]))) {
-        image.set([ri, ci], pixel)
+    grid.forEach((pixel, coords) => {
+      if ([null, 2].includes(image.get(coords))) {
+        image.set(coords, pixel)
       }
     })
   }

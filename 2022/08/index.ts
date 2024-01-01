@@ -3,7 +3,7 @@ import $ from '../../helpers'
 export const countVisibleTrees = (rows: string[]) => {
   const grid = $.Grid.fromRows(rows)
 
-  return grid.filter((tree, ri, ci) => {
+  return grid.filter((tree, [ri, ci]) => {
     const isLower = (t: string) => +t < +tree
 
     // Edge check
@@ -38,7 +38,7 @@ export const getHighestScenicScore = (rows: string[]) => {
   const grid = $.Grid.fromRows(rows)
 
   return Math.max(
-    ...grid.flatMap((tree, ri, ci) => {
+    ...grid.flatMap((tree, [ri, ci]) => {
       // Edge shortcut
       if (ri === 0 || ci === 0) return 0
       if (ri === grid.height - 1 || ci === grid.width - 1) return 0
