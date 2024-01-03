@@ -16,5 +16,5 @@ class Scanner {
 
 export const parse = (input: string[]) => {
   const scanners = input.map(raw => new Scanner(raw))
-  const pairs = $.combinations(scanners, 2)
+  const pairs = $.pairs(scanners)
 }

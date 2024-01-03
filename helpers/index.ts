@@ -30,6 +30,7 @@ import median from './median'
 import memo from './memo'
 import numbers from './numbers'
 import { bordering, surrounding } from './neighbors'
+import pairs from './pairs'
 import permutations from './permutations'
 import product from './product'
 import range from './range'
@@ -84,6 +85,7 @@ export default {
   median,
   memo,
   numbers,
+  pairs,
   permutations,
   product,
   range,

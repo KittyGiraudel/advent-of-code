@@ -18,7 +18,7 @@ const getDisks = (dump: string[]) =>
 export const run = (dump: string[]) => {
   const disks = getDisks(dump)
 
-  return $.combinations(disks, 2).filter(
+  return $.pairs(disks).filter(
     ([a, b]) =>
       (a.used > 0 && a.used <= b.available) ||
       (b.used > 0 && b.used <= a.available)

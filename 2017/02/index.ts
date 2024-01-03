@@ -9,7 +9,7 @@ export const checksum = (input: string[], part2: boolean = false) =>
         return Math.max(...numbers) - Math.min(...numbers)
       }
 
-      const pair = $.combinations(numbers, 2)
+      const pair = $.pairs(numbers)
         .flatMap(([a, b]) => [
           [a, b],
           [b, a],

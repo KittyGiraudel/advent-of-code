@@ -44,7 +44,7 @@ const RINGS: Stats[] = [
 // - There can be 0-2 rings.
 const getCombinations = () => {
   const gears: Gear[] = []
-  const ringPairs = $.combinations(RINGS, 2) as [Stats, Stats][]
+  const ringPairs = $.pairs(RINGS) as [Stats, Stats][]
 
   WEAPONS.forEach(weapon => {
     gears.push([weapon])

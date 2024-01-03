@@ -37,7 +37,7 @@ const findGalaxies = (grid: Grid<string>, factor: number) => {
 export const run = (input: string[], factor = 2) => {
   const grid = $.Grid.fromRows(input)
   const galaxies = findGalaxies(grid, factor)
-  const pairs = $.combinations(galaxies, 2)
+  const pairs = $.pairs(galaxies)
 
   return $.sum(pairs.map(([a, b]) => $.manhattan(a, b)))
 }

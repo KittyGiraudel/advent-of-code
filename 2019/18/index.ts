@@ -48,7 +48,7 @@ export const run = (input: string[], part2: boolean = false) => {
   const distances: Distances = {}
   const keyPoints = Object.keys(keys) as Point[]
   const keyCount = keyPoints.length
-  const combinations = $.combinations([...keyPoints, ...startPositions], 2)
+  const combinations = $.pairs([...keyPoints, ...startPositions])
 
   combinations.forEach(([a, b]) => {
     const { end, getPath } = $.search.gbfs<Point>({

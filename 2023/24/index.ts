@@ -51,7 +51,7 @@ const checkIntersection = (pair: [Hailstone, Hailstone]) => {
 
 export const run = async (input: string[], part2: boolean = false) => {
   const paths = input.map(line => $.chunk($.numbers(line), 3) as Hailstone)
-  const pairs = $.combinations(paths, 2) as [Hailstone, Hailstone][]
+  const pairs = $.pairs(paths)
 
   // This is honestly not my type of problems… It’s basically pure math, with
   // solving 2N then 3N equations, which I’ve never really learnt or know how

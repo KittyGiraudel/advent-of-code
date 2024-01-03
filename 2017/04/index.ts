@@ -9,7 +9,6 @@ export const validate = (passphrase: string) =>
 // sort their individual letters, and compute the Levenshtein distance on the
 // output. If the Levenshtein is 0, they are anagrams. Otherwise, they’re not.
 export const validateStrict = (passphrase: string) =>
-  $.combinations(
-    passphrase.split(' ').map(word => Array.from(word).sort().join('')),
-    2
+  $.pairs(
+    passphrase.split(' ').map(word => Array.from(word).sort().join(''))
   ).every(pair => $.levenshtein(pair[0], pair[1]))

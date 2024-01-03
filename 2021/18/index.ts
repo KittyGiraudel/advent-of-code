@@ -91,7 +91,7 @@ export const sumFish = (...fishes: string[]) =>
 
 export const findHighestMagnitude = (...fishes: string[]) =>
   Math.max(
-    ...$.combinations(fishes, 2)
+    ...$.pairs(fishes)
       .map(pair => sumFish(...pair))
       .map(value => JSON.parse(value))
       .map(computeMagnitude)

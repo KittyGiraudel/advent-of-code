@@ -34,10 +34,8 @@ const applyVelocity = (moon: Moon) => {
   moon.position = $.applyVector(moon.position, moon.velocity)
 }
 
-const makePairs = (array: Moon[]) => $.combinations(array, 2) as [Moon, Moon][]
-
 const step = (moons: Moon[]) => {
-  makePairs(moons).forEach(moonPair => applyGravity(moonPair))
+  $.pairs(moons).forEach(moonPair => applyGravity(moonPair))
   moons.forEach(applyVelocity)
   return moons
 }
