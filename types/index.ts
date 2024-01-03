@@ -15,3 +15,14 @@ export type QuadriPoint = `${number},${number},${number},${number}`
 export type QuadriCoordsAndPoint = { coords: QuadriCoords; point: QuadriPoint }
 
 export type ValueOrArray<T> = T | ValueOrArray<T>[]
+
+// See: https://stackoverflow.com/a/60762482
+export type LengthArray<
+  T,
+  N extends number,
+  R extends T[] = []
+> = number extends N
+  ? T[]
+  : R['length'] extends N
+  ? R
+  : LengthArray<T, N, [T, ...R]>
