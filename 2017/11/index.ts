@@ -31,7 +31,7 @@ const walk = (steps: string[]) =>
     { position: [0, 0], visited: new Set(['0,0']) }
   )
 
-const createGraph = (start: Coords, end: Coords) =>
+const search = (start: Coords, end: Coords) =>
   $.search.gbfs({
     start,
     getNext,
@@ -44,10 +44,7 @@ export const run = (instructions: string[], part2: boolean = false) => {
   const start: Coords = [0, 0]
   const furthest = Array.from(visited)
     .map($.toCoords)
-    .sort((a, b) => distance(a, start) - distance(b, start))
-    .pop()!
+    .sort((a, b) => distance(b, start) - distance(a, start))[0]
 
-  return part2
-    ? createGraph(start, furthest).getPath().length
-    : createGraph(start, end).getPath().length
+  return search(start, part2 ? furthest : end).getPath().length
 }
