@@ -20,10 +20,9 @@ export const run = (end: Coords, n: number, part2: boolean = false) => {
     getNext: curr => $.bordering(curr).filter(isOpenSpace(n)),
     isGoal: ([ri, ci]) => ri === end[0] && ci === end[1],
   })
+  const points = Object.keys(graph)
 
   return part2
-    ? Object.keys(graph)
-        .map((from: string) => getPath(start, from).length)
-        .filter(distance => distance <= 50).length
+    ? points.filter(point => getPath(start, point).length <= 50).length
     : getPath().length
 }
