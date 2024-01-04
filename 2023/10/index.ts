@@ -41,7 +41,7 @@ const getNextPipeNodes = (grid: Grid<string>) => (coords: Coords) =>
 
 const mapOutLoopingPipe = (grid: Grid<string>) => {
   const start = grid.findCoords(v => v === 'S')!
-  const getNextNodes = getNextPipeNodes(grid)
+  const getNext = getNextPipeNodes(grid)
 
   // To avoid having to deal with the cell “S” within BFS, start by replacing
   // the starting point with the relevant tile.
@@ -49,7 +49,7 @@ const mapOutLoopingPipe = (grid: Grid<string>) => {
 
   // Mapping out the looping pipe means running BFS from the start until we
   // cannot find a new node which means we’re back at the start.
-  return $.search.bfs({ start, getNextNodes }).graph
+  return $.search.bfs({ start, getNext }).graph
 }
 
 const scaleUpGrid = (grid: Grid<string>, from: PipeMap) => {
@@ -85,7 +85,7 @@ const scaleUpGrid = (grid: Grid<string>, from: PipeMap) => {
 const floodGrid = (grid: Grid<string>, start: Coords = [0, 0]) =>
   $.search.bfs({
     start,
-    getNextNodes: curr =>
+    getNext: curr =>
       $.bordering(curr).filter(coords => grid.get(coords) === '.'),
   })
 

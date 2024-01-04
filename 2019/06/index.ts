@@ -38,7 +38,7 @@ export const countOrbits = (graph: Graph, to: string = 'COM') => {
         .bfs({
           start: key,
           isGoal: curr => curr === to,
-          getNextNodes: curr => Array.from(graph.get(curr)!),
+          getNext: curr => Array.from(graph.get(curr)!),
         })
         .getPath().length,
     0
@@ -68,7 +68,7 @@ export const countTransfers = (
       .bfs({
         start,
         isGoal: curr => curr === end,
-        getNextNodes: curr => Array.from(graph.get(curr)!),
+        getNext: curr => Array.from(graph.get(curr)!),
       })
       .getPath().length - 2
   )

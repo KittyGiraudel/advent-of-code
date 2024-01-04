@@ -21,7 +21,7 @@ export type SearchOutput<T> = {
 export type SearchOutputWithCosts<T> = SearchOutput<T> & { costs: SearchCosts }
 export type SearchOptions<T> = {
   start: T
-  getNextNodes: (curr: T) => T[]
+  getNext: (curr: T) => T[]
   toKey?: (curr: T) => string
   isGoal?: (curr: T) => boolean
   emptyAfterGoal?: boolean
@@ -36,7 +36,7 @@ const pop = <T>(frontier: Frontier<T>) =>
 const _core = <T>(
   handler: (curr: T) => (next: T) => void,
   frontier: Frontier<T>,
-  getNextNodes: SearchOptions<T>['getNextNodes'],
+  getNext: SearchOptions<T>['getNext'],
   isGoal: SearchOptions<T>['isGoal'] = DEFAULT_OPTIONS.isGoal,
   emptyAfterGoal: SearchOptions<T>['emptyAfterGoal'] = DEFAULT_OPTIONS.emptyAfterGoal
 ) => {
@@ -51,7 +51,7 @@ const _core = <T>(
       else break
     }
 
-    getNextNodes(curr).forEach(handler(curr))
+    getNext(curr).forEach(handler(curr))
   }
 
   return end
@@ -73,7 +73,7 @@ const _core = <T>(
  */
 export const bfs = <T>({
   start,
-  getNextNodes,
+  getNext,
   isGoal,
   toKey = DEFAULT_OPTIONS.toKey,
   emptyAfterGoal = DEFAULT_OPTIONS.emptyAfterGoal,
@@ -88,7 +88,7 @@ export const bfs = <T>({
     }
   }
 
-  const end = _core(handler, frontier, getNextNodes, isGoal, emptyAfterGoal)
+  const end = _core(handler, frontier, getNext, isGoal, emptyAfterGoal)
 
   return {
     end,
@@ -108,7 +108,7 @@ export const bfs = <T>({
  */
 export const gbfs = <T>({
   start,
-  getNextNodes,
+  getNext,
   heuristic,
   isGoal,
   toKey = DEFAULT_OPTIONS.toKey,
@@ -125,7 +125,7 @@ export const gbfs = <T>({
     }
   }
 
-  const end = _core(handler, frontier, getNextNodes, isGoal, emptyAfterGoal)
+  const end = _core(handler, frontier, getNext, isGoal, emptyAfterGoal)
 
   return {
     graph,
@@ -146,7 +146,7 @@ export const gbfs = <T>({
  */
 export const dijkstra = <T>({
   start,
-  getNextNodes,
+  getNext,
   getCost,
   isGoal = DEFAULT_OPTIONS.isGoal,
   toKey = DEFAULT_OPTIONS.toKey,
@@ -168,7 +168,7 @@ export const dijkstra = <T>({
     }
   }
 
-  const end = _core(handler, frontier, getNextNodes, isGoal)
+  const end = _core(handler, frontier, getNext, isGoal)
 
   return {
     graph,
@@ -190,7 +190,7 @@ export const dijkstra = <T>({
  */
 export const aStar = <T>({
   start,
-  getNextNodes,
+  getNext,
   getCost,
   heuristic,
   isGoal,
@@ -216,7 +216,7 @@ export const aStar = <T>({
     }
   }
 
-  const end = _core(handler, frontier, getNextNodes, isGoal)
+  const end = _core(handler, frontier, getNext, isGoal)
 
   return {
     graph,

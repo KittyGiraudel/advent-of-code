@@ -37,7 +37,7 @@ export const getSurfaceArea = (points: TriPoint[], part2: boolean = false) => {
   const start: TriCoords = [minX - 1, minY - 1, minZ - 1]
   const { graph: flooded } = $.search.bfs({
     start,
-    getNextNodes: (coords: TriCoords) =>
+    getNext: (coords: TriCoords) =>
       getSides(coords)
         .filter(coords => !points.includes($.toPoint(coords)))
         .filter(isWithinBounds),

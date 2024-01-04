@@ -22,7 +22,7 @@ const discover = (input: string) =>
     emptyAfterGoal: true,
     toKey: curr => $.toPoint(curr.position),
     isGoal: curr => curr.program.getOutput() === 2,
-    getNextNodes: (curr: Node) =>
+    getNext: (curr: Node) =>
       $.bordering(curr.position)
         .map(coords => ({ position: coords, program: new Intcode('') }))
         .map(addProgramCopy(curr))
@@ -68,7 +68,7 @@ export const getOxygenDuration = (input: string) => {
   $.search.bfs({
     start: { position: end.position, minutes: 0 },
     toKey: curr => $.toPoint(curr.position),
-    getNextNodes: curr => {
+    getNext: curr => {
       // If the position does not appear in the graph, it means it’s a wall and
       // should therefore not continue any further.
       if (!($.toPoint(curr.position) in graph)) return []

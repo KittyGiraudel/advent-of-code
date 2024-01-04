@@ -81,7 +81,7 @@ class Unit {
 
     const { end, getPath } = $.search.bfs({
       start: this.coords,
-      getNextNodes: curr =>
+      getNext: curr =>
         getBorderingSpace(grid, curr).filter(
           neighbor => !alive.find(unit => unit.isAt(neighbor))
         ),

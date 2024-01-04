@@ -56,7 +56,7 @@ export const run = (input: string[], part2: boolean = false) => {
     heuristic: curr => $.manhattan(curr.position, endCoords),
     isGoal: curr => is(curr.position, endCoords),
     getCost: (_, next) => grid.get(next.position),
-    getNextNodes: curr => {
+    getNext: curr => {
       const states: State[] = []
       const left = $.turn.left(curr.orientation)
       const right = $.turn.right(curr.orientation)

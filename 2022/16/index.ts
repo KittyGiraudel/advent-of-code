@@ -52,7 +52,7 @@ export const releasePressure = (input: string[]) => {
     toKey: curr => String(curr.pressure),
     isGoal: curr => curr.time <= 0,
     getCost: (curr, next) => distanceMap[curr.name as DistanceKey][next.name],
-    getNextNodes: curr =>
+    getNext: curr =>
       curr.remaining
         .filter(next => next !== curr.name)
         .filter(

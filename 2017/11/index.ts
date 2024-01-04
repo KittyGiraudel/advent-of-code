@@ -18,7 +18,7 @@ const distance = $.memo(([xA, yA]: Coords, [xB, yB]: Coords) => {
   return dX + Math.max(0, (dY - dX) / 2)
 })
 
-const getNextNodes = (curr: Coords) =>
+const getNext = (curr: Coords) =>
   Object.values(VECTORS).map(vector => $.applyVector(curr, vector))
 
 const walk = (steps: string[]) =>
@@ -34,7 +34,7 @@ const walk = (steps: string[]) =>
 const createGraph = (start: Coords, end: Coords) =>
   $.search.gbfs({
     start,
-    getNextNodes,
+    getNext,
     isGoal: curr => curr[0] === end[0] && curr[1] === end[1],
     heuristic: next => distance(next, end),
   })

@@ -55,8 +55,7 @@ export const run = (input: string[], part2: boolean = false) => {
       start: a,
       heuristic: curr => $.manhattan($.toCoords(curr), $.toCoords(b)),
       isGoal: curr => curr === b,
-      getNextNodes: curr =>
-        $.bordering(curr).filter(point => lookup.has(point)),
+      getNext: curr => $.bordering(curr).filter(point => lookup.has(point)),
     })
     if (!end) return
     const path = getPath() as Point[]
@@ -69,7 +68,7 @@ export const run = (input: string[], part2: boolean = false) => {
     distances[keyB][keyA] = { distance: path.length, locks }
   })
 
-  const getNextNodes = (curr: State) => {
+  const getNext = (curr: State) => {
     const nodes: State[] = []
 
     for (let i = 0; i < curr.positions.length; i++) {
@@ -113,7 +112,7 @@ export const run = (input: string[], part2: boolean = false) => {
     toKey,
     isGoal: curr => curr.keys.length === keyCount,
     getCost,
-    getNextNodes,
+    getNext,
   })
 
   if (!end) {

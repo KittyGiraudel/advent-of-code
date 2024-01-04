@@ -19,12 +19,11 @@ const getLowestCost = (grid: Grid<number>, mapSize = 1) => {
 
   const withinBounds = ([ri, ci]: Coords) =>
     $.isClamped(ri, 0, height) && $.isClamped(ci, 0, width)
-  const getNextNodes = (coords: Coords) =>
-    $.bordering(coords).filter(withinBounds)
+  const getNext = (coords: Coords) => $.bordering(coords).filter(withinBounds)
 
   const { costs } = $.search.aStar({
     start,
-    getNextNodes,
+    getNext,
     getCost: (_, to) => getCost(grid, to),
     isGoal: curr => curr[0] === end[0] && curr[1] === end[1],
     heuristic: next => $.manhattan(next, end),

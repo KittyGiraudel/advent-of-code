@@ -29,7 +29,7 @@ export const run = (input: string, longest: boolean = false) =>
       // Iterate over all 4 bordering directions. If the door is closed, move to
       // the next direction. Otherwise, check whether the coordinates remain
       // within boundaries. If they do, add the new cell to the frontier.
-      getNextNodes: curr => {
+      getNext: curr => {
         const hash = $.md5(curr.path)
 
         return DIRECTIONS.filter((_, index) => /[bcdef]/.test(hash[index]))

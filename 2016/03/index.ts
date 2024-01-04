@@ -1,5 +1,4 @@
 import $ from '../../helpers'
-import { TriCoords } from '../../types'
 
 const isValid = ([a, b, c]: number[]) => a + b > c && a + c > b && b + c > a
 

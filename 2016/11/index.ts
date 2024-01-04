@@ -41,7 +41,7 @@ export const run = (floors: Floors) => {
       start: { elevator: 0, floors },
       toKey,
       isGoal: curr => curr.floors[3].length === count,
-      getNextNodes: curr => {
+      getNext: curr => {
         const elevator = curr.elevator
         const currFloor = curr.floors[elevator]
         const combinations = $.combinations(currFloor, 2).concat(

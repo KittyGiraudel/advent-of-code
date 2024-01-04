@@ -160,7 +160,7 @@ export const maze = (input: string[], recursive: boolean = false) => {
     .bfs<Node>({
       start: { coords: outside.doorsToCoords.AA, depth: 0 },
       toKey: (curr: Node) => $.toPoint(curr.coords) + '/' + curr.depth,
-      getNextNodes: getNeighbors(grid, inside, outside),
+      getNext: getNeighbors(grid, inside, outside),
       isGoal: curr =>
         curr.depth === 0 &&
         curr.coords[0] === endCoords[0] &&

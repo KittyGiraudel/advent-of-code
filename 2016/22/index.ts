@@ -49,7 +49,7 @@ export const getData = (dump: string[]) => {
   let curr: Coords = emptyNode.coords
   let total: number = 0
 
-  const getNextNodes = (curr: Coords) =>
+  const getNext = (curr: Coords) =>
     $.bordering(curr).filter(coords => {
       const point = $.toPoint(coords)
       return availableDisks.includes(point) && point !== $.toPoint(data)
@@ -65,7 +65,7 @@ export const getData = (dump: string[]) => {
       .bfs({
         start: curr,
         isGoal: curr => curr[0] === end[0] && curr[1] === end[1],
-        getNextNodes,
+        getNext,
       })
       .getPath().length
 

@@ -140,6 +140,6 @@ export const run = (input: string[], part2: boolean = false) => {
     toKey,
     isGoal: isGoal(part2),
     getCost: (curr, next) => next.cost - curr.cost,
-    getNextNodes: curr => [...hallwayToRooms(curr), ...roomsToHallway(curr)],
+    getNext: curr => [...hallwayToRooms(curr), ...roomsToHallway(curr)],
   }).end.cost
 }

@@ -79,7 +79,7 @@ const cross = (
     isGoal: curr => $.toPoint(curr.coords) === $.toPoint(endCoords),
     toKey: curr => $.toPoint(curr.coords) + ((curr.time + 1) % grids.size),
     heuristic: curr => $.manhattan(curr.coords, endCoords) + curr.time + 1,
-    getNextNodes: curr => {
+    getNext: curr => {
       const index = (curr.time + 1) % grids.size
       // Retrieve the state of the maze based on the current time.
       const grid = grids.get(index)!

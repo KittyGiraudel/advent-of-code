@@ -27,7 +27,7 @@ export const run = (part2: boolean = false) => {
     isGoal: curr => curr.boss <= 0 && curr.health > 0,
     toKey: JSON.stringify,
     getCost: (curr, next) => next.spent - curr.spent,
-    getNextNodes: curr => {
+    getNext: curr => {
       // Apply part 2 DoT
       const nextHealth =
         part2 && curr.move === 'player' ? curr.health - 1 : curr.health

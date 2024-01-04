@@ -10,7 +10,7 @@ export const discover = (input: string[], roundTrip: boolean = false) => {
     return cell
   })
 
-  const getNextNodes = (curr: Coords) =>
+  const getNext = (curr: Coords) =>
     $.bordering(curr).filter(coords => grid.get(coords) !== '#')
 
   // I originally cached the neighbors in a map to speed things up but it’s
@@ -22,7 +22,7 @@ export const discover = (input: string[], roundTrip: boolean = false) => {
     $.search.bfs({
       start: from,
       isGoal: curr => curr[0] === to[0] && curr[1] === to[1],
-      getNextNodes,
+      getNext,
     })
   )
 
@@ -40,7 +40,7 @@ export const discover = (input: string[], roundTrip: boolean = false) => {
       const length = $.search.bfs({
         start,
         isGoal: curr => curr[0] === end[0] && curr[1] === end[1],
-        getNextNodes
+        getNext
       }).getPath().length
 
       acc[start][end] = acc[end][start] = length

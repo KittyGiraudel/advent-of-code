@@ -26,7 +26,7 @@ const parse = (input: string[]) => {
   return { grid, start, end }
 }
 
-const getNextNodes =
+const getNext =
   (grid: Grid<number>) =>
   ({ position, elevation }: Node) =>
     $.bordering(position)
@@ -37,7 +37,7 @@ const getNextNodes =
 const getPathLength = (grid: Grid<number>, start: Node, end: Node) => {
   const { graph, getPath } = $.search.bfs({
     start,
-    getNextNodes: getNextNodes(grid),
+    getNext: getNext(grid),
     toKey: curr => $.toPoint(curr.position),
     isGoal: curr =>
       curr.position[0] === end.position[0] &&
