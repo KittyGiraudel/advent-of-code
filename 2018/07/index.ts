@@ -1,6 +1,3 @@
-import $ from '../../helpers'
-const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
-
 const getGraph = (input: string[]) => {
   const pairs = input.map(line => line.slice(1).match(/([A-Z])/g) as string[])
   const graph = new Map<string, Set<string>>()
@@ -17,8 +14,17 @@ const getGraph = (input: string[]) => {
 }
 
 export const sequential = (input: string[]) => {
-  const order = []
   const graph = getGraph(input)
+  const keys = Array.from(graph.keys()).sort()
+  const order: string[] = []
+
+  const findNext = (key: string) =>
+    !order.includes(key) &&
+    Array.from(graph.get(key)!).every(item => order.includes(item))
+
+  while (order.length !== keys.length) order.push(keys.find(findNext)!)
+
+  return order.join('')
 
   // Algorithm taken from Reddit because mine, while very clever, didn’t quite
   // work unfortunately. This one seems to make sense and is simple enough.
@@ -28,6 +34,8 @@ export const sequential = (input: string[]) => {
   // 4. Push it into the order.
   // 5. Repeat.
   // https://www.reddit.com/r/adventofcode/comments/a3wmnl/comment/ebbg934/?utm_source=reddit&utm_medium=web2x&context=3
+  // Edit: Implementation preserved for posterity, but replaced with a BFS
+  // search which works just as well.
   while (graph.size) {
     const next = Array.from(graph.keys())
       .sort()
@@ -42,58 +50,53 @@ export const sequential = (input: string[]) => {
 
 export const parallel = (
   input: string[],
-  workers: number = 5,
+  help: number = 5,
   offset: number = 60
 ) => {
+  type Worker = { collecting: string; timer: number }
+
   const graph = getGraph(input)
-  // Contains the letter in order of resolution, just like in the sequential
-  // function.
-  const order: string[] = []
-  // Contains the parallel jobs as dealt by the workers.
-  const jobs: { time: number; letter: string }[] = []
-  // Contains the next item to be fully resolved as it got processed by a job.
-  let next: string | null = null
-  // Contains the duration it takes to fulfill the whole queue.
-  let duration = 0
+  const keys = Array.from(graph.keys()).sort()
 
-  while (graph.size) {
-    // Find all jobs that:
-    // 1. Do not have any dependency in the graph, and thus considered ready.
-    // 2. Are not currently being processed by a worker already.
-    // 3. Have not been fully processed by a worker yet.
-    const ready = Array.from(graph.keys())
-      .sort()
-      .filter(letter => {
-        const isReady = graph.get(letter)!.size === 0
-        const isProcessed = jobs.map(job => job.letter).includes(letter)
-        const isNext = letter === next
+  const createWorker = () => ({ collecting: '', timer: Infinity })
+  const getLetterDuration = (letter: string) =>
+    offset + letter.charCodeAt(0) - 64
+  const findNext = (workers: Worker[], collected: string[]) =>
+    keys.find(key => {
+      if (collected.includes(key)) return false
+      if (workers.find(worker => worker.collecting === key)) return false
+      const dependencies = Array.from(graph.get(key)!)
+      return dependencies.every(item => collected.includes(item))
+    })
 
-        return isReady && !isProcessed && !isNext
+  const workers = Array.from({ length: help }, createWorker)
+  const collected: string[] = []
+  let time = 0
+
+  while (collected.length !== keys.length) {
+    // 1. Let idle workers pick up a task
+    workers
+      .filter(worker => !worker.collecting)
+      .forEach(worker => {
+        const next = findNext(workers, collected)
+        if (next) {
+          worker.collecting = next
+          worker.timer = getLetterDuration(next)
+        }
       })
 
-    jobs.push(
-      ...ready.slice(0, workers - jobs.length).map(letter => ({
-        letter,
-        time: offset + ALPHABET.indexOf(letter) + 1,
-      }))
-    )
+    // 2. Decrease all timers by 1, and collect done timers
+    workers.forEach(worker => {
+      if (--worker.timer === 0) {
+        collected.push(worker.collecting)
+        worker.collecting = ''
+        worker.timer = Infinity
+      }
+    })
 
-    // Fully resolving an item (as in removing it from the graph) is more of a
-    // side-effect and should not be counted in the loop run. That means no
-    // incrementing of the counter, and no ticking down running jobs.
-    if (next) {
-      graph.delete(next)
-      for (let [key] of graph) graph.get(key)!.delete(next)
-      order.push(next)
-      next = null
-    } else {
-      duration++
-      jobs.forEach(job => job.time--)
-      jobs.forEach((job, i, array) => {
-        if (!job.time) next = array.splice(i, 1).pop()!.letter
-      })
-    }
+    // 3. Increase the time by 1
+    time++
   }
 
-  return { duration, order: order.join('') }
+  return { duration: time, order: collected.join('') }
 }
