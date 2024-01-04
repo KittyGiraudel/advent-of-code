@@ -1,9 +1,6 @@
-import $ from '../../helpers'
-
 const ALPHABET = 'abcdefghijklmnopqrstuvwxyz'.split('')
 
 const makeRegExp = (pairs: string[]) => new RegExp('(' + pairs.join('|') + ')')
-
 const GLOBAL_RE = makeRegExp(
   ALPHABET.flatMap(letter => [
     letter + letter.toUpperCase(),
