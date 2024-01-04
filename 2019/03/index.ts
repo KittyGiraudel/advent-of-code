@@ -5,7 +5,7 @@ const parseLine = (line: string) =>
   line.split(',').map(i => [i[0], +i.slice(1)]) as [string, number][]
 
 const draw = (line: [string, number][]) => {
-  const visited: Map<Point, number> = new Map()
+  const visited = new Map<Point, number>()
   let curr: Coords = [0, 0]
   let steps = 0
 

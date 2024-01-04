@@ -40,7 +40,7 @@ const parse = (blocks: string[]) => {
 
 export const run = (input: string[]) => {
   const data = parse(input)
-  const tape: Map<number, number> = new Map()
+  const tape = new Map<number, number>()
   let state = data.initial
   let pointer = 0
 

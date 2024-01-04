@@ -1,11 +1,9 @@
 import $ from '../../helpers'
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 
-type Graph = Map<string, Set<string>>
-
 const getGraph = (input: string[]) => {
   const pairs = input.map(line => line.slice(1).match(/([A-Z])/g) as string[])
-  const graph: Graph = new Map()
+  const graph = new Map<string, Set<string>>()
 
   pairs.forEach(([a, b]) => {
     const setA = graph.get(a) || new Set()

@@ -17,7 +17,7 @@ const INITIAL_STATE: State = {
   score: 0,
   ball: [0, 0],
   paddle: [0, 0],
-  board: new Map(),
+  board: new Map<Point, number>(),
 }
 
 export const render = (board: Board) => {

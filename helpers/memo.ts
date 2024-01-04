@@ -24,11 +24,11 @@ const memo = <Args extends unknown[], T>(
     cacheKey: getKey,
   }
 ) => {
-  const cache = new Map()
+  const cache = new Map<string, ReturnType<typeof fn>>()
 
   return (...args: Args): ReturnType<typeof fn> => {
     const key = cacheKey(...args)
-    if (cache.has(key)) return cache.get(key)
+    if (cache.has(key)) return cache.get(key)!
     const result = fn(...args)
     cache.set(key, result)
     return result

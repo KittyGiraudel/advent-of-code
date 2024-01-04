@@ -1,4 +1,3 @@
-type Graph = Map<string, { deps: RegExpMatchArray | null; raw: string }>
 type Registers = Record<string, number>
 
 const STR_RE = /[a-z]+/g
@@ -23,7 +22,10 @@ const prepare = (string: string) => {
 }
 
 export const run = (input: string[], registers: Registers = {}) => {
-  const graph: Graph = new Map()
+  const graph = new Map<
+    string,
+    { deps: RegExpMatchArray | null; raw: string }
+  >()
 
   input.forEach(line => {
     const [left, right] = line.split(' -> ')

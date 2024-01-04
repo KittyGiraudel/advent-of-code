@@ -1,10 +1,10 @@
 import $ from '../../helpers'
-import { Coords, Point } from '../../types'
+import { Point } from '../../types'
 
 export const mapOut = (lines: string[], limit?: number) => {
   const points = lines.map(line => line.replace(' ', '')) as Point[]
-  const counters: Map<number, number> = new Map()
-  const edges: Set<number> = new Set()
+  const counters = new Map<number, number>()
+  const edges = new Set<number>()
   const [minX, maxX, minY, maxY] = $.boundaries(points.map($.toCoords))
   let regionSize = 0
 

@@ -78,7 +78,7 @@ const patternize = (input: string) =>
 // See: https://github.com/jonathanpaulson/AdventOfCode/blob/master/2023/12.py
 // See: https://pastecode.io/s/gvco1hhn
 const dp = (line: string, groups: number[]) => {
-  const cache: Map<string, number> = new Map()
+  const cache = new Map<string, number>()
 
   const resolve = (
     charIndex: number,

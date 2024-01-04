@@ -41,7 +41,7 @@ export const getDuration = (depth: number, target: Coords) => {
   const height = 5 + (target[1] + 1)
   const width = 50 + (target[0] + 1)
   const frontier: number[][] = [[0, 0, 0, 1]]
-  const timeMap: Map<string, number> = new Map()
+  const timeMap = new Map<string, number>()
 
   while (frontier.length) {
     const [min, x, y, tool] = frontier.shift()!

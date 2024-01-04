@@ -1,7 +1,7 @@
 import $ from '../../helpers'
 
 export const run = (input: string[], part2: boolean = false) => {
-  const graph = new Map()
+  const graph = new Map<number, Set<number>>()
 
   input.forEach(line => {
     const [leftNode, ...rightNodes] = $.numbers(line)
@@ -19,7 +19,7 @@ export const run = (input: string[], part2: boolean = false) => {
   const walk = (node: number, visited: number[] = []) => {
     if (visited.includes(node)) return []
     visited.push(node)
-    graph.get(node).forEach((connection: number) => walk(connection, visited))
+    graph.get(node)!.forEach(connection => walk(connection, visited))
     return visited
   }
 

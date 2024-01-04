@@ -26,7 +26,7 @@ export const run = (input: string[], part2: boolean = false) => {
     return $.sum(input.map(hash))
   }
 
-  const boxes: Map<number, Lens[]> = new Map()
+  const boxes = new Map<number, Lens[]>()
 
   input.map(parse).forEach(lens => {
     if (!boxes.has(lens.id)) boxes.set(lens.id, [])

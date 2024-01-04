@@ -26,7 +26,7 @@ type Node = {
 const mapOut = (input: string) => {
   let curr: Node = { x: 0, y: 0, distance: 0 }
   const stack: Node[] = [curr]
-  const map: Map<Point, Node> = new Map()
+  const map = new Map<Point, Node>()
 
   function step([dx, dy]: Coords) {
     const x = curr.x + dx

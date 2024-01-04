@@ -30,13 +30,16 @@ const getRegularExpression = (input: string, fixes: Fixes) => {
     .split('\n')
     .map(line => (line in fixes ? fixes[line] : line))
     .map(line => line.match(/^(\d+): (.+)$/))
-    .reduce((acc, match) => acc.set(match![1], match![2]), new Map())
+    .reduce(
+      (acc, match) => acc.set(match![1], match![2]),
+      new Map<string, string>()
+    )
 
   for (let [key, value] of map.entries()) {
     map.set(key, resolveRule(value, map))
   }
 
-  return new RegExp('^' + map.get('0').replace(/\s+/g, '') + '$')
+  return new RegExp('^' + map.get('0')!.replace(/\s+/g, '') + '$')
 }
 
 // Count the amount of messages matching rules.

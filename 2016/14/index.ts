@@ -9,7 +9,7 @@ export const run = (salt: string, iterations: number = 1) => {
     return value
   })
 
-  const cache: Map<string, string> = new Map()
+  const cache = new Map<string, string>()
   const keys: Set<number> = new Set()
   const re5 = /(\w)\1{4}/
   const re3 = /(\w)\1{2}/

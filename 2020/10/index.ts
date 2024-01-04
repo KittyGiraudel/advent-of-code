@@ -8,7 +8,7 @@ import $ from '../../helpers'
 function countPathsToEnd(
   adapters: number[],
   current: number = adapters[0],
-  cache: Map<number, number> = new Map()
+  cache = new Map<number, number>()
 ): number {
   // If we have already computed whether the current value leads to the device,
   // return the value from the cache.

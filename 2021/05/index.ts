@@ -8,7 +8,7 @@ export const run = (input: string[], withDiagonals: boolean = false) => {
     (line.split(' -> ') as Point[]).map($.toCoords)
   )
 
-  const map = vectors.reduce((acc, vector) => {
+  const map = vectors.reduce<Map<Point, number>>((acc, vector) => {
     const [start, end] = vector
     const bump = (x: number, y: number) =>
       acc.set(`${x},${y}`, (acc.get(`${x},${y}`) || 0) + 1)

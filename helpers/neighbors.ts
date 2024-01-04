@@ -2,7 +2,7 @@ import { Coords, Point, CoordsAndPoint } from '../types'
 import toCoords from './toCoords'
 import toPoint from './toPoint'
 
-const cache: Map<string, Coords[] | Point[] | CoordsAndPoint[]> = new Map()
+const cache = new Map<string, Coords[] | Point[] | CoordsAndPoint[]>()
 
 /**
  * Return the coordinates of the cells around (4 or 8, depending on whether
