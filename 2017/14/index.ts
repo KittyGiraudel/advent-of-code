@@ -13,31 +13,27 @@ export const run = (key: string, part2: boolean = false) => {
     grid.appendRow(bin)
   }
 
-  const visited: Record<Point, Point> = {}
-
-  // Starting from the cell at the given coordinates, explore the active and not
-  // yet explored neighbors, marking them all part of the same group.
-  const walk = (coords: Coords, group: Point) =>
-    $.bordering(coords)
-      .filter(coords => grid.get(coords))
-      .forEach(coords => {
-        const point = $.toPoint(coords)
-        if (!(point in visited)) {
-          visited[point] = group
-          walk(coords, group)
-        }
-      })
-
-  grid.forEach((active, coords) => {
-    if (!active) return
-
+  // This reduces the grid into a map that associates every active point where
+  // the cell is active (`1`) to the first point in a group of active cells
+  // (where first means highest in top-to-bottom/left-to-right order). Part 1 is
+  // the amount of total active cells, part 2 is the amount of groups, found by
+  // picking unique values.
+  const groups = grid.reduce<Record<Point, Point>>((groups, active, coords) => {
     const point = $.toPoint(coords)
 
-    if (!(point in visited)) {
-      visited[point] = point
-      walk(coords, point)
-    }
-  })
+    if (!active || point in groups) return groups
 
-  return part2 ? new Set(Object.values(visited)).size : grid.count(v => v === 1)
+    const { graph } = $.search.bfs({
+      start: coords,
+      getNext: curr => $.bordering(curr).filter(coords => grid.get(coords)),
+    })
+
+    ;(Object.keys(graph) as Point[]).forEach(key => (groups[key] = point))
+
+    return groups
+  }, {})
+
+  const cells = Object.values(groups)
+
+  return part2 ? $.unique(cells).length : cells.length
 }
