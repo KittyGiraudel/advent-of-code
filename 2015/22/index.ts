@@ -1,6 +1,5 @@
-const OUT_OF_HEALTH = Infinity
-const OUT_OF_MOVES = Infinity
-const ILLEGAL_MOVE = Infinity
+import $ from '../../helpers'
+
 const SPELL_COST = {
   M: 53,
   D: 73,
@@ -9,87 +8,105 @@ const SPELL_COST = {
   R: 229,
 }
 
-const fight = (actions: string[], hard: boolean) => {
-  let effects = { P: 0, S: 0, R: 0 }
-  let player = 50
-  let boss = 51
-  let mana = 500
-  let total = 0
-  let turn = false
+export const run = (part2: boolean = false) => {
+  const initial = {
+    move: 'player',
+    damage: 9,
+    boss: 51,
+    health: 50,
+    mana: 500,
+    armor: 0,
+    poison: 0,
+    shield: 0,
+    recharge: 0,
+    spent: 0,
+  }
 
-  while (actions.length) {
-    turn = !turn
+  return $.search.dijkstra({
+    start: initial,
+    isGoal: curr => curr.boss <= 0 && curr.health > 0,
+    toKey: JSON.stringify,
+    getCost: (curr, next) => next.spent - curr.spent,
+    getNextNodes: curr => {
+      // Apply part 2 DoT
+      const nextHealth =
+        part2 && curr.move === 'player' ? curr.health - 1 : curr.health
 
-    // Part 2, apply DoT before anything else at the start of the player’s turn
-    if (hard && turn && --player <= 0) return OUT_OF_HEALTH
+      // If killed by DoT, game over
+      if (nextHealth <= 0) return []
 
-    // Resolve effects
-    if (effects.S) effects.S--
-    if (effects.P) effects.P--, (boss -= 3)
-    if (effects.R) effects.R--, (mana += 101)
+      // Apply effects
+      const nextMana = curr.recharge ? curr.mana + 101 : curr.mana
+      const nextBoss = curr.poison ? curr.boss - 3 : curr.boss
+      const nextArmor = curr.shield ? 7 : 0
 
-    // Check if poison killed the boss
-    if (boss <= 0) return total
-
-    if (turn) {
-      const spell = actions.shift()
-
-      type Spell = keyof typeof SPELL_COST
-      mana -= SPELL_COST[spell as Spell]
-      total += SPELL_COST[spell as Spell]
-
-      // If not enough mana to cast the spell, abort
-      if (mana < 0) return ILLEGAL_MOVE
-
-      if (spell === 'M') boss -= 4
-      else if (spell === 'D') (boss -= 2), (player += 2)
-      else {
-        type Effect = keyof typeof effects
-        if (effects[spell as Effect]) return ILLEGAL_MOVE
-        effects[spell as Effect] = spell === 'R' ? 5 : 6
+      // If killed by poison, game over
+      // Note: it took me a while to understand that I *have to* return that
+      // state, since the `isGoal` check is performed when entering the main
+      // loop. Without that, a boss death by poison would never be counted.
+      if (nextBoss <= 0) {
+        return [{ ...curr, boss: nextBoss }]
       }
 
-      // Check if the spell killed the boss
-      if (boss <= 0) return total
-    } else {
-      // Resolve boss attack
-      player -= 9 - (effects.S ? 7 : 0)
+      // Decrease timers
+      const nextShield = Math.max(curr.shield - 1, 0)
+      const nextPoison = Math.max(curr.poison - 1, 0)
+      const nextRecharge = Math.max(curr.recharge - 1, 0)
 
-      // Check if the attack killed the player
-      if (player <= 0) return OUT_OF_HEALTH
-    }
-  }
+      // Boss turn
+      if (curr.move === 'boss') {
+        return [
+          {
+            move: 'player',
+            spent: curr.spent,
+            damage: curr.damage,
+            mana: nextMana,
+            armor: nextArmor,
+            health: nextHealth - Math.max(curr.damage - nextArmor, 1),
+            boss: nextBoss,
+            poison: nextPoison,
+            shield: nextShield,
+            recharge: nextRecharge,
+          },
+        ]
+      }
 
-  return OUT_OF_MOVES
-}
+      // Player turn
+      return (
+        Object.entries(SPELL_COST)
+          // Discard moves that are too costly or illegal
+          .filter(([spell, cost]) => {
+            if (spell === 'S' && nextShield > 0) return false
+            if (spell === 'R' && nextRecharge > 0) return false
+            if (spell === 'P' && nextPoison > 0) return false
+            return cost <= nextMana
+          })
+          .map(([spell, cost]) => {
+            const move = {
+              move: 'boss',
+              spent: curr.spent + cost,
+              damage: curr.damage,
+              mana: nextMana - cost,
+              health: nextHealth,
+              armor: nextArmor,
+              boss: nextBoss,
+              poison: nextPoison,
+              shield: nextShield,
+              recharge: nextRecharge,
+            }
 
-const iterate = (actions: string[], position: number = 0) => {
-  const index = 'MDSPR'.indexOf(actions[position])
+            if (spell === 'M') move.boss -= 4
+            if (spell === 'P') move.poison = 6
+            if (spell === 'S') move.shield = 6
+            if (spell === 'R') move.recharge = 5
+            if (spell === 'D') {
+              move.health += 2
+              move.boss -= 2
+            }
 
-  actions[position] = 'DSPRM'[index]
-
-  if (actions[position] === 'M' && position + 1 <= actions.length)
-    iterate(actions, position + 1)
-}
-
-export const run = (hard: boolean) => {
-  // The amount of moves is totally arbitrary here. We estimate that the fight
-  // will be over in a maximum of 10 moves. This may vary based on the input.
-  const actions = Array.from('M'.repeat(10))
-
-  let min = Infinity
-
-  // I tried doing it with Dijkstra but didn’t manage to figure out the best way
-  // to store/cache paths, so I ended up taking inspiration from a brute-force
-  // Python implementation:
-  // https://www.reddit.com/r/adventofcode/comments/3xspyl/day_22_solutions/cy7l25a/
-  // I must say I’m not too sure how many paths we should try. I originally used
-  // 1,000,000, and then realized we get the right answer after 100,000 so…
-  for (let i = 0; i < 100_000; i++) {
-    min = Math.min(min, fight(actions.slice(0), hard))
-    // Try the next series of spells.
-    iterate(actions)
-  }
-
-  return min
+            return move
+          })
+      )
+    },
+  }).end.spent
 }
