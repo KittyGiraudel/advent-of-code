@@ -9,7 +9,11 @@ const NORTH: Coords = [0, -1]
 export const resolve = (bound: number) => {
   // Given the value increments by 1 for every new cell, use an array where the
   // index serves as the value itself, hence why we skip the first cell (0).
-  const coords: (Coords | null)[] = [null, [0, 0]]
+  const coords: Coords[] = [
+    [Infinity, Infinity],
+    [0, 0],
+  ]
+
   // Taking a step means applying a directional vector to the last recorded
   // set of coordinates.
   const step = (vector: Coords) =>
@@ -28,13 +32,13 @@ export const resolve = (bound: number) => {
     for (let i = 0; i < steps; i++) step(SOUTH)
   }
 
-  return $.manhattan(coords[bound]!, [0, 0])
+  return $.manhattan(coords[bound], [0, 0])
 }
 
 export const resolve2 = (bound: number) => {
   let steps = 0
   let position: Coords = [0, 0]
-  const map: Map<Point, number> = new Map([['0,0', 1]])
+  const map = new Map<Point, number>([['0,0', 1]])
 
   // Taking a step still means applying a directional vector to the last
   // recorded set of coordinates. But the stored value depends on the sum of the
@@ -61,4 +65,8 @@ export const resolve2 = (bound: number) => {
     for (let i = 0; i < steps; i++) if (step(WEST) > bound) return peek()
     for (let i = 0; i < steps; i++) if (step(SOUTH) > bound) return peek()
   }
+}
+
+export const run = (bound: number, part2: boolean = false) => {
+  return part2 ? resolve2(bound) : resolve(bound)
 }
