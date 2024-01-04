@@ -1,5 +1,3 @@
-import $ from '../../helpers'
-
 export const run = (
   input: string[],
   maximum: number,
