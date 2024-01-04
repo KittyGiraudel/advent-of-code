@@ -6,8 +6,8 @@ const getGraph = (input: string[]) => {
   const graph = new Map<string, Set<string>>()
 
   pairs.forEach(([a, b]) => {
-    const setA = graph.get(a) || new Set()
-    const setB = graph.get(b) || new Set()
+    const setA = graph.get(a) || new Set<string>()
+    const setB = graph.get(b) || new Set<string>()
     setB.add(a)
     graph.set(a, setA)
     graph.set(b, setB)

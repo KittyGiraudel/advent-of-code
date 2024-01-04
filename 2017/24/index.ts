@@ -1,7 +1,7 @@
 export type Path = { score: number; length: number }
 
 const discard = (set: string[] | Set<string>, value: string) => {
-  const next = new Set(set)
+  const next = new Set<string>(set)
   next.delete(value)
   return next
 }

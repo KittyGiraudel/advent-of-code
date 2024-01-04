@@ -4,7 +4,7 @@ import { Point } from '../../types'
 type Fold = ['x' | 'y', number]
 
 export const parseInput = ([coords, instructions]: string[]) => {
-  const dots = new Set(coords.split('\n') as Point[])
+  const dots = new Set<Point>(coords.split('\n') as Point[])
   const folds = instructions.split('\n').map(instruction => {
     const [, axis, line] = $.match(instruction, /([xy])=(\d+)$/)
     return [axis, +line] as Fold
@@ -14,7 +14,7 @@ export const parseInput = ([coords, instructions]: string[]) => {
 }
 
 export const foldOnce = (dots: Set<Point>, [axis, line]: Fold) =>
-  Array.from(dots).reduce((acc, dot) => {
+  Array.from(dots).reduce<Set<Point>>((acc, dot) => {
     const [x, y] = $.toCoords(dot)
 
     if (axis === 'x' && x >= line) {

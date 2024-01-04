@@ -7,8 +7,8 @@ export const createGraph = (lines: string[]) => {
 
   lines.forEach(line => {
     const [orbited, orbiting] = line.split(')')
-    if (!map.has(orbiting)) map.set(orbiting, new Set())
-    if (!map.has(orbited)) map.set(orbited, new Set())
+    if (!map.has(orbiting)) map.set(orbiting, new Set<string>())
+    if (!map.has(orbited)) map.set(orbited, new Set<string>())
     map.set(orbited, map.get(orbited)!.add(orbiting))
     map.set(orbiting, map.get(orbiting)!.add(orbited))
   })

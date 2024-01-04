@@ -28,7 +28,7 @@ const walk = (steps: string[]) =>
       acc.visited.add($.toPoint(acc.position))
       return acc
     },
-    { position: [0, 0], visited: new Set(['0,0']) }
+    { position: [0, 0], visited: new Set<Point>(['0,0']) }
   )
 
 const search = (start: Coords, end: Coords) =>

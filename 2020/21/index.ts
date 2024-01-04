@@ -39,7 +39,7 @@ const mapFood = (input: string[]) =>
 // Map allergens to a specific ingredient.
 // @param map - Food map (output of `mapFood`)
 const mapAllergens = (map: Map) => {
-  const found: Set<string> = new Set()
+  const found = new Set<string>()
   const isNotFound = (ingredient: string) => !found.has(ingredient)
   const isResolved = (allergen: string) => Boolean(map[allergen].food)
   const keys = Object.keys(map)

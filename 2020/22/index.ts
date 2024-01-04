@@ -40,10 +40,7 @@ export const fightRegular = (decks: Deck[]) => {
 // Perform a recursive fight between deck a and b.
 // @param decks - Decks of cards
 // @return Outcome with `index` (0 or 1) and `decks` (final decks)
-export const fightRecursive = (
-  decks: Deck[],
-  cache: Set<string> = new Set()
-) => {
+export const fightRecursive = (decks: Deck[], cache = new Set<string>()) => {
   while (decks.every(isNotEmpty)) {
     const key = serializeGame(decks)
 

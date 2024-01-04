@@ -2,7 +2,7 @@ import $ from '../../helpers'
 import { Coords, Point } from '../../types'
 
 export const run = (steps: string[], part2: boolean = false) => {
-  let map: Set<Point> = new Set()
+  let map = new Set<Point>()
   let position: Coords = [0, 0]
   let direction: Coords | undefined = $.turn.DIRECTIONS[0]
   let location: Coords | null = null

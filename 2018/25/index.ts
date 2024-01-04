@@ -26,7 +26,7 @@ export const observe = (input: QuadriPoint[]) => {
     // If the point doesn’t belong to any constellation, it should start one of
     // its own.
     if (hosts.length === 0) {
-      constellations.push(new Set([coords]))
+      constellations.push(new Set<QuadriCoords>([coords]))
     }
 
     // Otherwise, it should do 2 things:

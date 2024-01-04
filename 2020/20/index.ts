@@ -64,7 +64,7 @@ const jigsaw = (tiles: Tile[], start: Tile) => {
   // 3x3 mozaic.
   const length = Math.sqrt(tiles.length / 8)
   const mozaic = new $.Grid<Tile>(length, length)
-  const used = new Set()
+  const used = new Set<number>()
 
   mozaic.set([0, 0], start)
   used.add(start.id)
