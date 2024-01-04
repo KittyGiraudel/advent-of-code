@@ -9,21 +9,20 @@ const asGrid = (string: string) => $.Grid.fromRows(string.split('/'))
 const asString = (grid: Grid<string>) =>
   grid.rows.map(row => row.join('')).join('/')
 
-const getPatterns = (lines: string[]) => {
-  const patterns: Patterns = {}
+const getVariants = (input: string) => asGrid(input).variants().map(asString)
 
-  lines.forEach(line => {
-    const [input, output] = line.split(' => ')
-    const variants = asGrid(input).variants().map(asString)
-    const out = output.split('/')
+const getPatterns = (lines: string[]) =>
+  lines
+    .map(line => line.split(' => '))
+    .reduce<Patterns>((patterns, [input, output]) => {
+      // Pre-compute the 8 rotated variants of a given pattern to avoid having
+      // to rotate the matrix instead.
+      getVariants(input).forEach(variant => {
+        patterns[variant] = output.split('/')
+      })
 
-    // Pre-compute the 8 rotated varients of a given pattern to avoid having
-    // to rotate the matrix instead.
-    variants.forEach(variant => (patterns[variant] = out))
-  })
-
-  return patterns
-}
+      return patterns
+    }, {})
 
 const enhance = (
   curr: string[],
@@ -70,10 +69,8 @@ const reassemble = (grids: string[][]) => {
   )
 }
 
-const cycle = (curr: string[], patterns: Patterns, cache: Cache) => {
-  let next = disassemble(curr).map(sub => enhance(sub, patterns, cache))
-  return reassemble(next)
-}
+const cycle = (curr: string[], patterns: Patterns, cache: Cache) =>
+  reassemble(disassemble(curr).map(sub => enhance(sub, patterns, cache)))
 
 export const run = (input: string[], iterations: number = 1) => {
   const patterns = getPatterns(input)
