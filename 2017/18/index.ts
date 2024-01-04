@@ -8,16 +8,15 @@ class Network {
   }
 
   addNode(node: Computer) {
-    node
-      .boot(this.instructions)
-      .on('send', (value: number) => this.dispatch(node, value))
+    node.boot(this.instructions)
+    node.on('send', value => this.dispatch(node, value))
 
     this.nodes.push(node)
   }
 
   dispatch(node: Computer, value: number) {
     this.nodes
-      .filter(n => node.id !== n.id)
+      .filter(({ id }) => node.id !== id)
       .forEach(node => node.register(value))
   }
 
@@ -70,7 +69,7 @@ class Computer {
     return this
   }
 
-  on(eventName: string, listener: Function) {
+  on(eventName: string, listener: (value: number) => void) {
     this.listeners[eventName] = this.listeners[eventName] || []
     this.listeners[eventName].push(listener)
     return this
