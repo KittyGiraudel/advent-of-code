@@ -1,44 +1,34 @@
 import $ from '../../helpers'
+import { Point } from '../../types'
 
 type Boundary = {
   id?: number
-  xMin?: number
-  yMin?: number
-  xMax: number
-  yMax: number
+  ciMin?: number
+  riMin?: number
+  ciMax: number
+  riMax: number
 }
 
-const findBoundaries = (claims: Boundary[]) =>
-  claims.reduce<Boundary>(
-    (acc, claim) => ({
-      xMax: Math.max(claim.xMax, acc.xMax),
-      yMax: Math.max(claim.yMax, acc.yMax),
-    }),
-    { xMax: -Infinity, yMax: -Infinity }
-  )
-
-// This is a bit of an ugly solution, because it’s incredibly slow. It would
-// fail miserably on any input that’s bigger than that (either in terms of
-// amount of claims, or in terms of size). But I couldn’t figure out the logic
-// to figure out the right result based on intersections only.
-// So this one literally renders every rectangle, then groups the inches based
-// on how many times they were drawn over. The final result is found
-// discarding the inches that have not been drawn over at all, or only once (no
-// intersection), and that’s the result.
+// This is a bit of an ugly solution, because it’s quite slow. It would likely
+// fail on any input that’s bigger than that (in terms of size mainly). But I
+// couldn’t figure out the logic to figure out the right result based on
+// intersections only. So this one literally renders every rectangle, then
+// groups the inches based on how many times they were drawn over. The final
+// result is found discarding the inches that have not been drawn over at all,
+// or only once (no intersection), and that’s the result.
 // @param input - Raw unparsed lines
 // @return {Number}
 export const countOverlappingInches = (input: string[]) => {
   const claims = parseClaims(input)
-  const boundaries = findBoundaries(claims)
-  const grid = new $.Grid(boundaries.xMax + 1, boundaries.yMax + 1, 0)
+  const map = new Map<Point, number>()
 
-  claims.forEach(({ xMin, xMax, yMin, yMax }) => {
-    for (let x = xMin as number; x <= xMax; x++)
-      for (let y = yMin as number; y <= yMax; y++)
-        grid.set([y, x], grid.get([y, x]) + 1)
+  claims.forEach(({ ciMin, ciMax, riMin, riMax }) => {
+    for (let ci = ciMin as number; ci <= ciMax; ci++)
+      for (let ri = riMin as number; ri <= riMax; ri++)
+        map.set(`${ri},${ci}`, (map.get(`${ri},${ci}`) ?? 0) + 1)
   })
 
-  const counts = $.frequency(grid.flat())
+  const counts = $.frequency(Array.from(map.values()))
 
   delete counts['0']
   delete counts['1']
@@ -47,27 +37,27 @@ export const countOverlappingInches = (input: string[]) => {
 }
 
 const getIntersection = (a: Boundary, b: Boundary) => {
-  const xMin = Math.max(a.xMin as number, b.xMin as number)
-  const xMax = Math.min(a.xMax, b.xMax)
-  const yMin = Math.max(a.yMin as number, b.yMin as number)
-  const yMax = Math.min(a.yMax, b.yMax)
+  const ciMin = Math.max(a.ciMin as number, b.ciMin as number)
+  const ciMax = Math.min(a.ciMax, b.ciMax)
+  const riMin = Math.max(a.riMin as number, b.riMin as number)
+  const riMax = Math.min(a.riMax, b.riMax)
 
-  if (xMin > xMax || yMin > yMax) return null
+  if (ciMin > ciMax || riMin > riMax) return null
 
-  return { xMin, xMax, yMin, yMax } as Boundary
+  return { ciMin, ciMax, riMin, riMax } as Boundary
 }
 
 const parseClaims = (lines: string[]) =>
   lines
     .map(line => $.match(line, /(\d+)/g).map(Number))
     .map(
-      ([id, xMin, yMin, width, height]) =>
+      ([id, ciMin, riMin, width, height]) =>
         ({
           id,
-          xMin,
-          xMax: xMin + width - 1,
-          yMin,
-          yMax: yMin + height - 1,
+          ciMin,
+          ciMax: ciMin + width - 1,
+          riMin,
+          riMax: riMin + height - 1,
         } as Boundary)
     )
 
