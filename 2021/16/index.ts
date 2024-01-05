@@ -95,11 +95,11 @@ const sumVersions = ({
   packets,
 }: {
   version: number
-  packets: Packet[]
+  packets: Packet[] | Packt[]
 }): number =>
   packets.reduce((total, packet) => total + sumVersions(packet), version)
 
-const getPacketValue = (packet: Packet): number => {
+const getPacketValue = (packet: Packet | Packt): number => {
   const { id, packets, value } = packet
 
   switch (id) {
@@ -122,7 +122,7 @@ const getPacketValue = (packet: Packet): number => {
   }
 }
 
-const render = (packet: Packet, depth: number = 1): string => {
+const render = (packet: Packet | Packt, depth: number = 1): string => {
   const SYMBOLS = ['+', '*', '↓', '↑', ' ', '>', '<', '=']
   const symbol = SYMBOLS[packet.id]
   const value = getPacketValue(packet)
@@ -139,12 +139,11 @@ const render = (packet: Packet, depth: number = 1): string => {
   )
 }
 
-// @ts-ignore
-export const getVersionSums = $.compose(sumVersions, decode, parseHex)
-// @ts-ignore
-export const evaluate = $.compose(getPacketValue, decode, parseHex)
-// @ts-ignore
-export const visualize = $.compose(render, decode, parseHex)
+export const getVersionSums = (input: string) =>
+  sumVersions(decode(parseHex(input)))
+export const evaluate = (input: string) =>
+  getPacketValue(decode(parseHex(input)))
+export const visualize = (input: string) => render(decode(parseHex(input)))
 
 // Class-oriented approach authored once finished based on that elegant version
 // found on GitHub: https://github.com/Awjin/advent-of-code/blob/main/2021/16/utils.ts

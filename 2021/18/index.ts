@@ -6,7 +6,7 @@ const split = (value: string) =>
   `[${Math.floor(+value / 2)},${Math.ceil(+value / 2)}]`
 
 const handleExplosions = (string: string): string => {
-  const openings = []
+  const openings: number[] = []
   let left: number | null = null
   let right: number | null = null
   let current = ''
@@ -34,7 +34,7 @@ const handleExplosions = (string: string): string => {
         return handleExplosions(
           string
             .slice(0, openingIndex)
-            .replace(/(\d+)([^\d]*)$/, (_, n, rest) =>
+            .replace(/(\d+)([^\d]*)$/, (_, n: number, rest: string) =>
               String(+n + left! + rest)
             ) +
             '0' +
@@ -55,10 +55,7 @@ const handleExplosions = (string: string): string => {
 const handleLeftMostSplit = (string: string) =>
   string.replace(/(\d{2,})/, split)
 
-const reduceFish = $.compose<(string: string) => string>(
-  handleLeftMostSplit,
-  handleExplosions
-)
+const reduceFish = (fish: string) => handleLeftMostSplit(handleExplosions(fish))
 
 // The reducing logic is as follow:
 // 1. First do all explosions that can be done.

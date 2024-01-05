@@ -1,42 +1,44 @@
 import $ from '../../helpers'
-import {
-  Coords,
-  Point,
-  QuadriCoords,
-  QuadriPoint,
-  TriCoords,
-  TriPoint,
-} from '../../types'
+import { Point } from '../../types'
 
-type NeighborCache = Map<
-  Point | TriPoint | QuadriPoint,
-  (Point | TriPoint | QuadriPoint)[]
->
-type Mappy = Map<Point | TriPoint | QuadriPoint, string>
+// I spent a lot of time trying to making the typing work nicely for 2, 3 or 4
+// dimensions but it’s honestly a nightmare and I’m not good enough with TS for
+// that, so I ended up converting everything to strings and number[] instead of
+// Point/Coords, TriPoint/TriCoords, QuadriPoint/QuadriCoords.
+type NeighborCache = Map<string, string[]>
+type Mappy = Map<string, string>
 
-const W = (coords: Coords) => $.replace(coords, 0, coords[0] - 1)
-const E = (coords: Coords) => $.replace(coords, 0, coords[0] + 1)
-const N = (coords: Coords) => $.replace(coords, 1, coords[1] - 1)
-const S = (coords: Coords) => $.replace(coords, 1, coords[1] + 1)
-const B = (coords: TriCoords) => $.replace(coords, 2, coords[2] - 1)
-const F = (coords: TriCoords) => $.replace(coords, 2, coords[2] + 1)
-const H = (coords: QuadriCoords) => $.replace(coords, 3, coords[3] - 1)
-const C = (coords: QuadriCoords) => $.replace(coords, 3, coords[3] + 1)
-const NE = $.compose(N, E)
-const SE = $.compose(S, E)
-const SW = $.compose(S, W)
-const NW = $.compose(N, W)
+const W = (coords: number[]) => $.replace(coords, 0, coords[0] - 1)
+const E = (coords: number[]) => $.replace(coords, 0, coords[0] + 1)
+const N = (coords: number[]) => $.replace(coords, 1, coords[1] - 1)
+const S = (coords: number[]) => $.replace(coords, 1, coords[1] + 1)
+const B = (coords: number[]) => $.replace(coords, 2, coords[2] - 1)
+const F = (coords: number[]) => $.replace(coords, 2, coords[2] + 1)
+const H = (coords: number[]) => $.replace(coords, 3, coords[3] - 1)
+const C = (coords: number[]) => $.replace(coords, 3, coords[3] + 1)
+const NE = (input: number[]): typeof input => N(E(input))
+const SE = (input: number[]): typeof input => S(E(input))
+const SW = (input: number[]): typeof input => S(W(input))
+const NW = (input: number[]): typeof input => N(W(input))
 
 const Dim2Handlers = [N, NE, E, SE, S, SW, W, NW]
 const Dim3Handlers = [
   ...Dim2Handlers,
-  ...Dim2Handlers.map((fn: Function) => $.compose(fn, B)).concat(B),
-  ...Dim2Handlers.map((fn: Function) => $.compose(fn, F)).concat(F),
+  ...Dim2Handlers.map(
+    (fn: (typeof Dim2Handlers)[number]) => (input: number[]) => fn(B(input))
+  ).concat(B),
+  ...Dim2Handlers.map(
+    (fn: (typeof Dim2Handlers)[number]) => (input: number[]) => fn(F(input))
+  ).concat(F),
 ]
 const Dim4Handlers = [
   ...Dim3Handlers,
-  ...Dim3Handlers.map((fn: Function) => $.compose(fn, H)).concat(H),
-  ...Dim3Handlers.map((fn: Function) => $.compose(fn, C)).concat(C),
+  ...Dim3Handlers.map(
+    (fn: (typeof Dim3Handlers)[number]) => (input: number[]) => fn(H(input))
+  ).concat(H),
+  ...Dim3Handlers.map(
+    (fn: (typeof Dim3Handlers)[number]) => (input: number[]) => fn(C(input))
+  ).concat(C),
 ]
 const FNS = {
   '2': Dim2Handlers,
@@ -51,7 +53,7 @@ const FNS = {
 // @param cache - Coordinates cache
 // @return Stringified coordinates of all neighbours (26 or 80)
 const getNeighborCoords = (
-  coords: Point | TriPoint | QuadriPoint,
+  coords: string,
   dimensions: number,
   cache: NeighborCache
 ) => {
@@ -89,7 +91,7 @@ const mutate = (cell: string, count: number) =>
 // @param dimensions - Either 3 or 4 dimensions
 // @param cache - Coordinates cache
 const transition = (
-  coords: Point | TriPoint | QuadriPoint,
+  coords: string,
   origin: Mappy,
   dimensions: number,
   cache: NeighborCache
@@ -106,7 +108,11 @@ const transition = (
 // @param origin - Storage map
 // @param dimensions - Either 3 or 4 dimensions
 // @param cache - Coordinates cache
-const cycle = (origin: Mappy, dimensions: number, cache: NeighborCache) =>
+const cycle = (
+  origin: Mappy = new Map(),
+  dimensions: number,
+  cache: NeighborCache
+) =>
   Array.from(origin.keys()).reduce((acc, key) => {
     // Get the coordinates of all the neighbours to the current cell. For each
     // neighbouring coordinates which does not exist in the dimensional space,
@@ -136,7 +142,8 @@ const init = (rows: string[]) =>
 
 // Count the amount of alive cells in the map.
 // @param map - Storage map
-const count = (map: Mappy) => Array.from(map.values()).filter(isAlive).length
+const count = (map: Map<string, string>) =>
+  Array.from(map.values()).filter(isAlive).length
 
 // Run the game of life on the given initial input for a certain amount of
 // cycles on a given amount of dimensions.

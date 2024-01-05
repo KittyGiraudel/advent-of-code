@@ -6,7 +6,6 @@ import boundaries from './boundaries'
 import chunk from './chunk'
 import column from './column'
 import combinations from './combinations'
-import compose from './compose'
 import countInString from './countInString'
 import dump from './dump'
 import frequency from './frequency'
@@ -63,7 +62,6 @@ export default {
   chunk,
   column,
   combinations,
-  compose,
   countInString,
   dump,
   frequency,
