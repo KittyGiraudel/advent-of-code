@@ -25,11 +25,11 @@ class Unit {
     return this.coords
   }
 
-  get y() {
+  get ri() {
     return this.coords[0]
   }
 
-  get x() {
+  get ci() {
     return this.coords[1]
   }
 
@@ -53,7 +53,7 @@ class Unit {
   isAt(input: Point | Coords) {
     if (typeof input === 'string') return input === this.point
     if (typeof Array.isArray(input))
-      return input[0] === this.y && input[1] === this.x
+      return input[0] === this.ri && input[1] === this.ci
     return false
   }
 
@@ -157,7 +157,7 @@ class Game {
   round() {
     if (
       this.units
-        .sort((a, b) => a.y - b.y || a.x - b.x)
+        .sort((a, b) => a.ri - b.ri || a.ci - b.ci)
         .every(unit => unit.takeTurn(this.grid, this.units))
     )
       this.turns++
