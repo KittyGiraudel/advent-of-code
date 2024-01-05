@@ -117,8 +117,8 @@ export const run = (rows: string[], cleanUp: boolean = false) => {
     tick(grid, carts, cleanUp)
   }
 
-  // Finally, we can return the crash site, or the last cart standing, without
-  // forgetting to flip the coordinates.
+  // Finally, we can return to the crash site, or the last cart standing,
+  // without forgetting to flip the coordinates.
   const points = Object.keys(carts) as Point[]
   const flip = (point: Point) => $.toCoords(point).reverse()
   const interest = points.find(point => carts[point].crashed) || points[0]
