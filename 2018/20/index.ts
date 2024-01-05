@@ -2,8 +2,7 @@ import $ from '../../helpers'
 import { Coords, Point } from '../../types'
 
 type Node = {
-  x: number
-  y: number
+  position: Coords
   distance: number
 }
 
@@ -24,24 +23,26 @@ type Node = {
 // comment:
 // https://www.reddit.com/r/adventofcode/comments/a7uk3f/2018_day_20_solutions/ec61727/
 const mapOut = (input: string) => {
-  let curr: Node = { x: 0, y: 0, distance: 0 }
+  let curr: Node = { position: [0, 0], distance: 0 }
   const stack: Node[] = [curr]
   const map = new Map<Point, Node>()
 
-  function step([dx, dy]: Coords) {
-    const x = curr.x + dx
-    const y = curr.y + dy
-    const node = map.get($.toPoint([x, y])) || { x, y, distance: Infinity }
+  function step(vector: Coords) {
+    const nextPosition = $.applyVector(curr.position, vector)
+    const node = map.get($.toPoint(nextPosition)) ?? {
+      position: nextPosition,
+      distance: Infinity,
+    }
     node.distance = Math.min(node.distance, curr.distance + 1)
-    curr = node
-    map.set($.toPoint([node.x, node.y]), node)
+    map.set($.toPoint(node.position), node)
+    return node
   }
 
   Array.from(input).forEach(char => {
-    if (char === 'N') step([0, -1])
-    if (char === 'S') step([0, +1])
-    if (char === 'E') step([+1, 0])
-    if (char === 'W') step([-1, 0])
+    if (char === 'N') curr = step([-1, 0])
+    if (char === 'S') curr = step([+1, 0])
+    if (char === 'E') curr = step([0, +1])
+    if (char === 'W') curr = step([0, -1])
     if (char === '(') stack.push(curr)
     if (char === ')') curr = stack.pop()!
     if (char === '|') curr = stack.at(-1)!
