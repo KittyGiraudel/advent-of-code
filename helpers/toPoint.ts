@@ -16,6 +16,7 @@ import {
 function toPoint(coords: Coords): Point
 function toPoint(coords: TriCoords): TriPoint
 function toPoint(coords: QuadriCoords): QuadriPoint
+function toPoint(coords: number[]): string
 function toPoint(coords: number[]): string {
   return coords.join(',')
 }

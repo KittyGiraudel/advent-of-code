@@ -19,6 +19,7 @@ function toCoords(point: Point): Coords
 function toCoords(point: TriPoint): TriCoords
 function toCoords(point: QuadriPoint): QuadriCoords
 function toCoords(point: Point, index: number, array: Point[]): Coords
+function toCoords(point: string): number[]
 function toCoords(point: string): number[] {
   return point.split(/,\s?/g).map(Number)
 }
