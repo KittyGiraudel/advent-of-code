@@ -7,14 +7,16 @@ const applyVelocity = ([position, velocity]: [Coords, Coords]) =>
 const parseLine = (line: string) =>
   $.chunk($.numbers(line), 2) as [Coords, Coords]
 
-const getDimensions = ([minX, maxX, minY, maxY]: number[]) => [
-  maxX + 1 - minX,
-  maxY + 1 - minY,
-]
+const getDimensions = ([minX, maxX, minY, maxY]: [
+  number,
+  number,
+  number,
+  number
+]) => [maxX + 1 - minX, maxY + 1 - minY]
 
 export const plot = (input: string[]) => {
   let curr = input.map(parseLine)
-  let [width, height] = [Infinity, Infinity]
+  let height = Infinity
   let seconds = 0
 
   // This condition is somewhat arbitrary. I assumed the message would be
@@ -28,9 +30,7 @@ export const plot = (input: string[]) => {
     // Apply the velocity to every point.
     curr = curr.map(applyVelocity)
     // Compute the new grid dimensions based on the updated points.
-    const positions = curr.map(([position]) => position)
-    const boundaries = $.boundaries(positions)
-    ;[width, height] = getDimensions(boundaries)
+    height = getDimensions($.boundaries(curr.map(([position]) => position)))[1]
   }
 
   return seconds
