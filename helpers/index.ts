@@ -15,7 +15,6 @@ import Grid from './Grid'
 import groupBy from './groupBy'
 import hexToBin from './hexToBin'
 import indices from './indices'
-import inspect from './inspect'
 import intersection from './intersection'
 import isClamped from './isClamped'
 import lcm from './lcm'
@@ -71,7 +70,6 @@ export default {
   groupBy,
   hexToBin,
   indices,
-  inspect,
   intersection,
   isClamped,
   lcm,
