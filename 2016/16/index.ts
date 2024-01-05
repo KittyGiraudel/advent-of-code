@@ -1,5 +1,5 @@
 const getChecksum = (disk: number[]): number[] => {
-  const checksum = []
+  const checksum: number[] = []
 
   for (let i = 0; i < disk.length; i += 2) {
     checksum.push(+(disk[i] === disk[i + 1]))

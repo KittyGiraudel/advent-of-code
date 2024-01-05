@@ -17,7 +17,7 @@ const getScore = (grid: Grid<string>) =>
   grid.count(v => v === '#') * grid.count(v => v === '|')
 
 export const run = (rows: string[], iterations: number = 1) => {
-  const history = []
+  const history: number[] = []
   let curr = $.Grid.fromRows(rows)
 
   for (let i = 0; i < iterations; i++) {

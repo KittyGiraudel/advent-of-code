@@ -22,7 +22,7 @@ const computeGridScore = (grid: Grid<BingoCell>) =>
 
 export const run = (input: string, part2: boolean = false) => {
   const [numbers, ...grids] = parseInput(input)
-  const bingos = []
+  const bingos: number[] = []
 
   for (let i = 0; i < numbers.length; i++) {
     roll(grids, numbers[i])

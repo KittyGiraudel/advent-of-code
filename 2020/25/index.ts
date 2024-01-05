@@ -23,7 +23,7 @@ const guessLoopSize = (subject: number, expected: number) => {
 // @param subject - Subject
 // @param loopSize - loopSize
 const getKey = (subject: number, loopSize: number) => {
-  let key = undefined
+  let key: number | undefined = undefined
 
   for (let i = 0; i < loopSize; i++) key = transform(subject, key)
 

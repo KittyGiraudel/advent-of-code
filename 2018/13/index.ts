@@ -4,7 +4,7 @@ import { Coords, Grid, Point } from '../../types'
 type Orientation = '^' | 'v' | '<' | '>'
 type Cart = {
   orientation: Orientation
-  index: Generator
+  index: Generator<number, number, number>
   crashed?: boolean
 }
 type CartMap = Record<Point, Cart>

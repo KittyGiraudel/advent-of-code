@@ -10,7 +10,7 @@ export const isValidPassword = (str: string, secure: boolean = false) =>
 
 export const findPasswords = (input: string, secure: boolean = false) => {
   const [min, max] = input.split('-').map(Number)
-  const passwords = []
+  const passwords: string[] = []
 
   for (let i = min; i <= max; i++) {
     const string = String(i)

@@ -52,7 +52,7 @@ export const run = (input: string[], part2: boolean = false) => {
     return calculateWeight(grid)
   }
 
-  const history = []
+  const history: number[] = []
 
   for (let i = 0; i < cycles; i++) {
     cycle(grid)

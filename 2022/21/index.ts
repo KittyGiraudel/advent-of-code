@@ -1,4 +1,5 @@
 import $ from '../../helpers'
+import { Entries } from '../../types'
 
 type Map = {
   [key: string]: number | string | undefined
@@ -26,10 +27,9 @@ export const getRootNumber = (input: Map | string[]) => {
 
 // Find the next map entry whose value is a number.
 const getNextNumber = (map: Map) =>
-  Object.entries(map).find(([, value]) => typeof value === 'number') as [
-    string,
-    number
-  ]
+  Object.entries(map).find(
+    ([, value]) => typeof value === 'number'
+  ) as Entries<Map>[number]
 
 // Reduce the map 1 time by finding the next entry whose value is a number, and
 // replacing every other value that mentions its key with its value.

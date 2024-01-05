@@ -4,7 +4,7 @@
  * ref: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec
  */
 const matchLast = (string: string, regex: RegExp) => {
-  let match = null
+  let match: RegExpExecArray | null = null
 
   while (true) {
     let next = regex.exec(string)

@@ -12,7 +12,7 @@ export const run = (offset: number) => {
 
 export const run2 = (offset: number) => {
   let position = 0
-  let next = null
+  let next: number | null = null
 
   // For part 2, an array of 50,000,000 entries is not going to cut it, and we
   // also don’t need it. We only need to keep track of the current position in

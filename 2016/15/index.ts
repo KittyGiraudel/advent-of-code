@@ -3,7 +3,7 @@ import $ from '../../helpers'
 class Disk {
   id: number
   size: number
-  index: Generator
+  index: Generator<number, number, number>
   position: number
   initial: number
 

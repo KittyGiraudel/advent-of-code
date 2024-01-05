@@ -1,11 +1,13 @@
 import $ from '../../helpers'
 import { ValueOrArray } from '../../types'
 
-const toArray = (value: any | any[]) => (Array.isArray(value) ? value : [value])
+const toArray = (value: ValueOrArray<number>) =>
+  Array.isArray(value) ? value : [value]
 
-const isDefined = (value: any) => typeof value !== 'undefined'
+const isDefined = (value: ValueOrArray<number> | ReturnType<typeof compare>) =>
+  typeof value !== 'undefined'
 
-const isNumber = (value: any) => typeof value === 'number'
+const isNumber = (value: ValueOrArray<number>) => typeof value === 'number'
 
 // Compare two values and return `true`, `false` or `undefined` whether they are
 // respectively ordered properly, ordered wrongly, or cannot be compared. The
@@ -44,7 +46,9 @@ export const compare = (
 export const getScore = (pairs: string[]) =>
   $.sum(
     pairs.map((pair, index) => {
-      const [a, b] = pair.split('\n').map(value => JSON.parse(value))
+      const [a, b] = pair
+        .split('\n')
+        .map(value => JSON.parse(value)) as ValueOrArray<number>[]
 
       return compare(a, b) ? index + 1 : 0
     })
@@ -56,7 +60,7 @@ export const getScore = (pairs: string[]) =>
 // packets based, and find the index of the dividers again.
 export const sort = (pairs: string[]) => {
   const dividers = `[[2]]\n[[6]]`
-  const packets = pairs
+  const packets: ValueOrArray<number>[] = pairs
     .concat(dividers)
     .join('\n')
     .split('\n')

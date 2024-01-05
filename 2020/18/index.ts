@@ -42,7 +42,7 @@ export const computeLoose = (input: string) => {
 const replace = (
   input: string,
   expression: RegExp,
-  replacer: (substring: string, ...args: any[]) => string
+  replacer: (substring: string, ...args: string[]) => string
 ): string =>
   expression.test(input)
     ? replace(input.replace(expression, replacer), expression, replacer)

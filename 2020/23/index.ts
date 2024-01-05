@@ -14,7 +14,7 @@ const getDest = (current: number, picks: number[], max: number): number => {
 // @param map - Map of links
 // @param current - Current cup value
 const pickCups = (map: Uint32Array, current: number) => {
-  const picks = []
+  const picks: number[] = []
 
   picks.push(map[current])
   picks.push(map[picks[0]])

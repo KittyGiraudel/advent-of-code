@@ -13,7 +13,7 @@ function boundaries(
 function boundaries(
   items: QuadriCoords[]
 ): [number, number, number, number, number, number, number, number]
-function boundaries(items: any[]) {
+function boundaries(items: Coords[] | TriCoords[] | QuadriCoords[]) {
   if (!items.length) return []
 
   if (items[0].length === 4) {

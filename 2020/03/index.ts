@@ -8,7 +8,7 @@ import { Coords } from '../../types'
 export const getTreeCountForSlope = (rows: string[], vector: Coords) => {
   const width = rows[0].length
   const coords = [0, 0]
-  const pings = []
+  const pings: string[] = []
   const length = Math.ceil(rows.length / vector[1])
 
   for (let i = 0; i < length; i++) {

@@ -26,7 +26,7 @@ export class Computer {
   }
 
   sliceOut(length: number) {
-    const slice = []
+    const slice: number[] = []
 
     for (let i = 0; i < length; i++) slice.unshift(this.memory.shift())
 

@@ -28,7 +28,7 @@ type Opcode = keyof typeof OPCODES
 // https://nbviewer.org/github/mjpieters/adventofcode/blob/master/2018/Day%2019.ipynb
 // console.log(sumFactors(10_551_387))
 const sumFactors = (n: number) => {
-  const result = []
+  const result: number[] = []
 
   for (let i = 1; i < n ** 0.5 + 1; i++)
     n % i || result.push(i, Math.ceil(n / i))

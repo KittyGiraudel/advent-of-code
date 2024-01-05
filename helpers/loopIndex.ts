@@ -2,7 +2,10 @@
  * Return a generator that loops between the given minimum and maximum value
  * (both included).
  */
-function* loopIndex(min: number, max: number): Generator<number> {
+function* loopIndex(
+  min: number,
+  max: number
+): Generator<number, number, number> {
   let index = min
   while (true) {
     yield index++

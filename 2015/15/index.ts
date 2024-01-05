@@ -7,12 +7,12 @@ type Permutation = Permutation2 | Permutation4
 const getPermutationsBy2 = () =>
   $.range(101).map(i => [i, 100 - i] as Permutation2)
 const getPermutationsBy4 = () => {
-  const permutations = []
+  const permutations: Permutation4[] = []
 
   for (let i = 0; i <= 100; i++) {
     for (let j = 0; j <= 100 - i; j++) {
       for (let k = 0; k <= 100 - i - j; k++) {
-        permutations.push([i, j, k, 100 - i - j - k] as Permutation4)
+        permutations.push([i, j, k, 100 - i - j - k])
       }
     }
   }

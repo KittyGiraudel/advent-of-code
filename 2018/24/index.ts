@@ -1,9 +1,9 @@
 import $ from '../../helpers'
 
-type ArmyName = 'Immune System' | 'Infection'
-const IMMUNE_SYSTEM: ArmyName = 'Immune System'
-const INFECTION: ArmyName = 'Infection'
+const IMMUNE_SYSTEM = 'Immune System'
+const INFECTION = 'Infection'
 const ARMY_NAMES = [IMMUNE_SYSTEM, INFECTION]
+type ArmyName = (typeof ARMY_NAMES)[number]
 
 class Game {
   armies: Army[]
@@ -79,7 +79,7 @@ class Army {
       .sort((a, b) => b.power - a.power || b.initiative - a.initiative)
       .forEach(group => group.pickTarget(army.groups))
 
-    this.stale = this.stale || this.groups.every(group => !group.target)
+    this.stale ||= this.groups.every(group => !group.target)
   }
 
   endTurn() {

@@ -64,7 +64,7 @@ export const fightRecursive = (decks: Deck[], cache = new Set<string>()) => {
 // @param resolver - Either `fightRegular` or `fightRecursive`
 export const getGameScore = (
   input: string[],
-  resolver: Function = fightRegular
+  resolver: typeof fightRecursive | typeof fightRegular = fightRegular
 ) => {
   const decks = parseInput(input)
   const outcome = resolver(decks)

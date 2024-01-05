@@ -44,23 +44,24 @@ function getNeighbors<T extends Coords | Point | CoordsAndPoint>(
     withDiagonals && /* NW */ [ri - 1, ci - 1],
   ].filter(Boolean) as Coords[]
 
-  let result
-
   if (strategy === 'POINTS') {
-    result = neighbors.map(coords => toPoint(coords))
+    const results = neighbors.map(coords => toPoint(coords))
+    cache.set(key, results)
+    return results as T[]
   } else if (strategy === 'COORDS') {
-    result = neighbors
+    const results = neighbors
+    cache.set(key, results)
+    return results as T[]
   } else if (strategy === 'BOTH') {
-    result = neighbors.map(coords => ({ coords, point: toPoint(coords) }))
+    const results = neighbors.map(coords => ({
+      coords,
+      point: toPoint(coords),
+    }))
+    cache.set(key, results)
+    return results as T[]
   }
 
-  if (!result) {
-    throw new Error(`Could not return neighbors for key ${key}.`)
-  }
-
-  cache.set(key, result)
-
-  return result as T[]
+  throw new Error('Invalid strategy ' + strategy)
 }
 
 export function bordering(position: Coords): Coords[]

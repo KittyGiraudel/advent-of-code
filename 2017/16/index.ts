@@ -11,7 +11,7 @@ export const dance = (
   iterations: number = 1
 ) => {
   const programs = $.range(size, 97).map(a => String.fromCharCode(a))
-  const history = []
+  const history: string[] = []
 
   const instructions = input.map(line => {
     if (line.startsWith('s'))

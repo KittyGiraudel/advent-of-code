@@ -1,7 +1,7 @@
 import $ from '../../helpers'
 
 const findSimilarIds = (ids: string[]) => {
-  const candidates = []
+  const candidates: string[] = []
 
   for (let i = 0; i < ids.length; i++) {
     for (let j = 0; j < i; j++) {

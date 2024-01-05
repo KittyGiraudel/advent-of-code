@@ -15,7 +15,7 @@ export const run = (input: string[]): [string, number] => {
   let position = grid.findCoords((v, [ri]) => ri === 0 && v === '|') as Coords
   let vector: Coords = VECTORS[2]
   let letters = ''
-  let value = null
+  let value: string | null = null
 
   // While on the circuit …
   while ((value = read(position))) {

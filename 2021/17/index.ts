@@ -33,7 +33,7 @@ export const isSuccessfulLaunch = (
   velocity: Coords
 ) => {
   let curr = step({ probe: [0, 0], velocity })
-  let heights = []
+  let heights: number[] = []
 
   // While the probe has not gone beyond the upper X boundary, and below the
   // lower Y boundary, keep moving, recording the maximum height at the same
@@ -54,7 +54,7 @@ export const isSuccessfulLaunch = (
 const findSuccessfulLaunches = (input: string) => {
   const boundaries = getBoundaries(input)
   const [[, xMax], [, yMax]] = boundaries
-  const heights = []
+  const heights: number[] = []
 
   // The initial X velocity cannot be below 0 (as it would be throwing the
   // probe in the wrong X direction), and cannot go beyond the upper X boundary

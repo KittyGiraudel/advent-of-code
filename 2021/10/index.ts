@@ -11,7 +11,7 @@ type IncompleteLine = { type: 'INCOMPLETE'; opened: string[] }
 type CorruptedLine = { type: 'CORRUPTED'; character: string }
 
 export const processLine = (line: string) => {
-  const opened = []
+  const opened: string[] = []
   const characters = line.split('')
 
   for (let i = 0; i < characters.length; i++) {

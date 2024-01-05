@@ -7,7 +7,6 @@ export class Intcode {
   outputs: number[]
   withLogs: boolean
   base: number
-  execute?: Function
 
   constructor(memory: string | number[]) {
     // Holds whether the program has reached an opcode 99 instruction, causing
@@ -279,5 +278,9 @@ export class Intcode {
     output.base = this.base
 
     return output
+  }
+
+  execute(input: string) {
+    return this
   }
 }

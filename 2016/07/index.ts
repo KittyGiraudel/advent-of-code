@@ -12,7 +12,7 @@ const getABBA = (line: string) => line.match(ABBA_RE)
 const getABA = (string: string) => {
   const ABA = new RegExp(ABA_RE)
   const result: string[] = []
-  let match = null
+  let match: RegExpExecArray | null = null
 
   while ((match = ABA.exec(string))) {
     result.push(match[0] as string)

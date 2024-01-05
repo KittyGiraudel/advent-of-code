@@ -16,7 +16,7 @@ export const mapOutSpace = (rows: string[]) => {
   keys.forEach(current => {
     const [xC, yC] = $.toCoords(current)
     const asteroids: Point[] = keys.filter(key => current !== key)
-    const vectors: Point[] = asteroids.map((asteroid: Point) => {
+    const vectors = asteroids.map(asteroid => {
       const [xD, yD] = $.toCoords(asteroid)
       const vector: Coords = [xD - xC, yD - yC]
       const gcd = $.gcd(vector[0], vector[1])

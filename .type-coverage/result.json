@@ -1,0 +1,3166 @@
+{
+  "cache": {
+    "helpers/search.ts": {
+      "hash": "4ea70e650abf3f2f9c17abb05a473c6579532422",
+      "correctCount": 485,
+      "totalCount": 490,
+      "anys": []
+    },
+    "helpers/Grid.ts": {
+      "hash": "f43a0ed094dfdc535fad088950ce2c71835f8c56",
+      "correctCount": 620,
+      "totalCount": 622,
+      "anys": []
+    },
+    "types/index.ts": {
+      "hash": "f143e8566c03876a2b75a103c501ed2aa60ad360",
+      "correctCount": 57,
+      "totalCount": 57,
+      "anys": []
+    },
+    "helpers/applyVector.ts": {
+      "hash": "2bbc4e3ab5c91e390e9202cf609a2e30145d69ea",
+      "correctCount": 44,
+      "totalCount": 45,
+      "anys": []
+    },
+    "helpers/array.ts": {
+      "hash": "874542cb3abba72cbaa3f156ef2aaba36aca6cfb",
+      "correctCount": 7,
+      "totalCount": 7,
+      "anys": []
+    },
+    "helpers/sum.ts": {
+      "hash": "c82361aa81e1e26329c152c8ee6af361209d4c5a",
+      "correctCount": 9,
+      "totalCount": 9,
+      "anys": []
+    },
+    "helpers/average.ts": {
+      "hash": "5e23718497d36b4cf094c5bcbf50028f6eca96fc",
+      "correctCount": 8,
+      "totalCount": 8,
+      "anys": []
+    },
+    "helpers/binarySearch.ts": {
+      "hash": "ac9dc59616b6a412795a3d8f733c5b9412cff713",
+      "correctCount": 25,
+      "totalCount": 25,
+      "anys": []
+    },
+    "helpers/boundaries.ts": {
+      "hash": "97dc582ad72ae70bb975d68f27014df240a54ad2",
+      "correctCount": 132,
+      "totalCount": 132,
+      "anys": []
+    },
+    "helpers/chunk.ts": {
+      "hash": "968c77c1ab7d43bb6aa55ed021ebc352f7302c57",
+      "correctCount": 44,
+      "totalCount": 44,
+      "anys": []
+    },
+    "helpers/column.ts": {
+      "hash": "fa6b86dcd05573e1e51e05465a048c6bbf37c56c",
+      "correctCount": 28,
+      "totalCount": 29,
+      "anys": []
+    },
+    "helpers/combinations.ts": {
+      "hash": "f1312acee5e7f197c836cf470f595b894c3376d8",
+      "correctCount": 40,
+      "totalCount": 40,
+      "anys": []
+    },
+    "helpers/compose.ts": {
+      "hash": "0c26461ff40b5f4b040784a07b5a2304c422fcd5",
+      "correctCount": 14,
+      "totalCount": 14,
+      "anys": []
+    },
+    "helpers/countInString.ts": {
+      "hash": "318e6bc467a1f67d86155101fc9b9babdfaf794c",
+      "correctCount": 28,
+      "totalCount": 28,
+      "anys": []
+    },
+    "helpers/md5.ts": {
+      "hash": "d83f133a6570dafa4ee9827277570046c8d764b5",
+      "correctCount": 9,
+      "totalCount": 9,
+      "anys": []
+    },
+    "helpers/dump.ts": {
+      "hash": "874a2e11f585544d66ad0f0235fa305ed1f0a783",
+      "correctCount": 35,
+      "totalCount": 35,
+      "anys": []
+    },
+    "helpers/frequency.ts": {
+      "hash": "809b85bf5fe79301b400d1dd5f6b32aa79c536ae",
+      "correctCount": 39,
+      "totalCount": 39,
+      "anys": []
+    },
+    "helpers/fromAscii.ts": {
+      "hash": "0ddeffad8a005dd41285580bc3e654fa1b1397c0",
+      "correctCount": 10,
+      "totalCount": 10,
+      "anys": []
+    },
+    "helpers/gcd.ts": {
+      "hash": "11bc523ac1e182ee849a4e03e940945eccdf1d8c",
+      "correctCount": 10,
+      "totalCount": 10,
+      "anys": []
+    },
+    "helpers/groupBy.ts": {
+      "hash": "9c6b26c4a406d0a92913d8c19ad906ab0c5e393c",
+      "correctCount": 23,
+      "totalCount": 25,
+      "anys": []
+    },
+    "helpers/hexToBin.ts": {
+      "hash": "e7756f406bbc1542ac3a2382f1ee1a2328b3dea7",
+      "correctCount": 6,
+      "totalCount": 6,
+      "anys": []
+    },
+    "helpers/indices.ts": {
+      "hash": "4099a22741b44c96b1fce1c086c91faa3df62012",
+      "correctCount": 19,
+      "totalCount": 19,
+      "anys": []
+    },
+    "helpers/inspect.ts": {
+      "hash": "51b13d847dfca7b138fbf54840172b65b8e61a63",
+      "correctCount": 14,
+      "totalCount": 16,
+      "anys": [
+        {
+          "line": 6,
+          "character": 2,
+          "text": "value",
+          "kind": 1
+        },
+        {
+          "line": 10,
+          "character": 18,
+          "text": "value",
+          "kind": 1
+        }
+      ]
+    },
+    "helpers/intersection.ts": {
+      "hash": "65e8d591e32639c3eafbd013b980651f77dc3163",
+      "correctCount": 19,
+      "totalCount": 20,
+      "anys": []
+    },
+    "helpers/isClamped.ts": {
+      "hash": "f1f265f4990a4263ea00f5b072d085f935b4283d",
+      "correctCount": 9,
+      "totalCount": 9,
+      "anys": []
+    },
+    "helpers/lcm.ts": {
+      "hash": "f4c1499d88f38ea48becf82212e2fef1d27a4f45",
+      "correctCount": 10,
+      "totalCount": 10,
+      "anys": []
+    },
+    "helpers/levenshtein.ts": {
+      "hash": "6bf9a4e488e7af17c79a3f9fbe1dff2ca20ade51",
+      "correctCount": 83,
+      "totalCount": 83,
+      "anys": []
+    },
+    "helpers/loopIndex.ts": {
+      "hash": "106357b9ee383ef4b8ee231cbfb31e82b3276718",
+      "correctCount": 12,
+      "totalCount": 12,
+      "anys": []
+    },
+    "helpers/manhattan.ts": {
+      "hash": "674059db86def1207651bd85909ee85ed0e2534b",
+      "correctCount": 68,
+      "totalCount": 68,
+      "anys": []
+    },
+    "helpers/match.ts": {
+      "hash": "04cddc0e88b194b20e457658d76431ca16d3f814",
+      "correctCount": 10,
+      "totalCount": 10,
+      "anys": []
+    },
+    "helpers/matchLast.ts": {
+      "hash": "30aacaad1ff4464990abe8ac2e01200059085529",
+      "correctCount": 15,
+      "totalCount": 15,
+      "anys": []
+    },
+    "helpers/median.ts": {
+      "hash": "acf93c21d50ccba912adb33b10faeb602b506937",
+      "correctCount": 24,
+      "totalCount": 24,
+      "anys": []
+    },
+    "helpers/memo.ts": {
+      "hash": "d19b46791d64bf9d4fa7ca0a11b9ef33583e9716",
+      "correctCount": 62,
+      "totalCount": 63,
+      "anys": []
+    },
+    "helpers/numbers.ts": {
+      "hash": "73034d22d275852e3f91de252b5db0c12bff4096",
+      "correctCount": 8,
+      "totalCount": 8,
+      "anys": []
+    },
+    "helpers/toCoords.ts": {
+      "hash": "e9c380fdff90f0522bd8d0725cbf24da158f05e4",
+      "correctCount": 34,
+      "totalCount": 34,
+      "anys": []
+    },
+    "helpers/toPoint.ts": {
+      "hash": "302863e7ed492a3df9c4679b61e75eed96670996",
+      "correctCount": 25,
+      "totalCount": 25,
+      "anys": []
+    },
+    "helpers/neighbors.ts": {
+      "hash": "2cac6166031e140bc60cee1674d6bb321f9b05d0",
+      "correctCount": 150,
+      "totalCount": 150,
+      "anys": []
+    },
+    "helpers/pairs.ts": {
+      "hash": "9fbf2364cd0470b358db57cae17ca8a15ac04f6e",
+      "correctCount": 10,
+      "totalCount": 11,
+      "anys": []
+    },
+    "helpers/permutations.ts": {
+      "hash": "23c016085d450f609a13e46adc4c055ee0ef1189",
+      "correctCount": 44,
+      "totalCount": 44,
+      "anys": []
+    },
+    "helpers/product.ts": {
+      "hash": "4e1b8f3dbd44d5e67802b181898daae3c8ac9b9c",
+      "correctCount": 11,
+      "totalCount": 11,
+      "anys": []
+    },
+    "helpers/range.ts": {
+      "hash": "6f618d3fc3a2bb5e921bc7ac45a715e4b3ba0add",
+      "correctCount": 11,
+      "totalCount": 11,
+      "anys": []
+    },
+    "helpers/readInput.ts": {
+      "hash": "452a256a12a6197d28f8e33c29151022d25f5d32",
+      "correctCount": 41,
+      "totalCount": 41,
+      "anys": []
+    },
+    "helpers/replace.ts": {
+      "hash": "f4f1c8e66ea6b2c0e47aa9f939fb5a5ff7cf3479",
+      "correctCount": 63,
+      "totalCount": 63,
+      "anys": []
+    },
+    "helpers/rotate.ts": {
+      "hash": "bd0165665d36bc9ddc85fb061ecf4f3e4810e2b1",
+      "correctCount": 19,
+      "totalCount": 21,
+      "anys": []
+    },
+    "helpers/sample.ts": {
+      "hash": "e53a61b0334da1c309bbc1b4b5b73a372b151d04",
+      "correctCount": 26,
+      "totalCount": 26,
+      "anys": []
+    },
+    "helpers/shoelace.ts": {
+      "hash": "609c2337cc7d14cfe335f1408e75986f79a58276",
+      "correctCount": 29,
+      "totalCount": 29,
+      "anys": []
+    },
+    "helpers/stringMap.ts": {
+      "hash": "9f470ab134bf4df0fa9866fecba2966b063ef798",
+      "correctCount": 13,
+      "totalCount": 13,
+      "anys": []
+    },
+    "helpers/swap.ts": {
+      "hash": "76a21f1e42bc0d3c87e7013f2506ccd542f09a76",
+      "correctCount": 16,
+      "totalCount": 16,
+      "anys": []
+    },
+    "helpers/toAscii.ts": {
+      "hash": "2fca7f38223a3589b606205a76a57493ebb774d5",
+      "correctCount": 12,
+      "totalCount": 12,
+      "anys": []
+    },
+    "helpers/toBin.ts": {
+      "hash": "0eb3b4ce68c9fbb30c14cf4d3aade48e2d57dff2",
+      "correctCount": 5,
+      "totalCount": 5,
+      "anys": []
+    },
+    "helpers/toDec.ts": {
+      "hash": "737a6dff8aaaad3589678208abe11e812767a1e3",
+      "correctCount": 5,
+      "totalCount": 5,
+      "anys": []
+    },
+    "helpers/triangular.ts": {
+      "hash": "116f3eb51303d0121731521f25e71fe20fc59a40",
+      "correctCount": 5,
+      "totalCount": 5,
+      "anys": []
+    },
+    "helpers/turn.ts": {
+      "hash": "5995b66da435329405212e70bce778001d6685cc",
+      "correctCount": 51,
+      "totalCount": 51,
+      "anys": []
+    },
+    "helpers/unique.ts": {
+      "hash": "64565a787ff9aacbe026c023626e92252ebbb3a5",
+      "correctCount": 10,
+      "totalCount": 10,
+      "anys": []
+    },
+    "helpers/zip.ts": {
+      "hash": "c95bdc14bc5c8b7d344bd6c6769517a2c03faa4a",
+      "correctCount": 22,
+      "totalCount": 22,
+      "anys": []
+    },
+    "helpers/index.ts": {
+      "hash": "045e0fdc92fb4a49d440dc86d726757c34bd859f",
+      "correctCount": 106,
+      "totalCount": 106,
+      "anys": []
+    },
+    "maze.ts": {
+      "hash": "6c22e136f9791cd3f3851e22ab9643a5dbf25a81",
+      "correctCount": 119,
+      "totalCount": 119,
+      "anys": []
+    },
+    "2015/01/index.ts": {
+      "hash": "842364d41c611d1eafcae57aeed89498ebbaefed",
+      "correctCount": 22,
+      "totalCount": 22,
+      "anys": []
+    },
+    "2015/01/test.ts": {
+      "hash": "d24280010af92c184242612e7e69eacf2b555616",
+      "correctCount": 13,
+      "totalCount": 13,
+      "anys": []
+    },
+    "2015/02/index.ts": {
+      "hash": "9345801828593db568b5041bd9470a027fe57802",
+      "correctCount": 62,
+      "totalCount": 62,
+      "anys": []
+    },
+    "2015/02/test.ts": {
+      "hash": "d90de9c6e3697d1d90e59a10842a009569cfb5cd",
+      "correctCount": 25,
+      "totalCount": 25,
+      "anys": []
+    },
+    "2015/03/index.ts": {
+      "hash": "e5da0b40f25e0090bccf58ec02553c93ceee4226",
+      "correctCount": 54,
+      "totalCount": 54,
+      "anys": []
+    },
+    "2015/03/test.ts": {
+      "hash": "3286360049c9c9bdef464f95a6223d5210ca3f15",
+      "correctCount": 25,
+      "totalCount": 25,
+      "anys": []
+    },
+    "2015/04/index.ts": {
+      "hash": "d60d92fab579921f8f1a42569015dbb39ff7992e",
+      "correctCount": 15,
+      "totalCount": 15,
+      "anys": []
+    },
+    "2015/04/test.ts": {
+      "hash": "366767b3b3497c0ce4b2489b42132dd3213540ff",
+      "correctCount": 15,
+      "totalCount": 15,
+      "anys": []
+    },
+    "2015/05/index.ts": {
+      "hash": "c7db0e8f666f42708c37d0d29f4130dae9eb6ac6",
+      "correctCount": 58,
+      "totalCount": 58,
+      "anys": []
+    },
+    "2015/05/test.ts": {
+      "hash": "734cddef85b1eef6c55143f5825ebd3b29f4c1a4",
+      "correctCount": 46,
+      "totalCount": 46,
+      "anys": []
+    },
+    "2015/07/index.ts": {
+      "hash": "6cf4f5cb71348d70acca2f8fc385985b35d9def9",
+      "correctCount": 90,
+      "totalCount": 95,
+      "anys": []
+    },
+    "2015/07/test.ts": {
+      "hash": "452b7069fdc34e31a61d628cc2aaf93d10f3c33e",
+      "correctCount": 65,
+      "totalCount": 65,
+      "anys": []
+    },
+    "2015/08/index.ts": {
+      "hash": "cd396e8107494460bfced6adf818f969ee2cf57a",
+      "correctCount": 26,
+      "totalCount": 26,
+      "anys": []
+    },
+    "2015/08/test.ts": {
+      "hash": "1d812a7abc3ec6b607af52ecb27d190f309234fb",
+      "correctCount": 33,
+      "totalCount": 33,
+      "anys": []
+    },
+    "2015/06/index.ts": {
+      "hash": "58ced5c395ff948da5c309b54716210b31f1d649",
+      "correctCount": 66,
+      "totalCount": 66,
+      "anys": []
+    },
+    "2015/06/test.ts": {
+      "hash": "7078dbd8791869e1252cb265d57f97857720c4be",
+      "correctCount": 17,
+      "totalCount": 17,
+      "anys": []
+    },
+    "2015/09/index.ts": {
+      "hash": "cfe228e3b63d330fb335ef478aabebf2a1402195",
+      "correctCount": 65,
+      "totalCount": 65,
+      "anys": []
+    },
+    "2015/09/test.ts": {
+      "hash": "b51e71768dcfd3c3b3f131d3b659eeb24610242d",
+      "correctCount": 38,
+      "totalCount": 38,
+      "anys": []
+    },
+    "2015/10/index.ts": {
+      "hash": "92bc4a821522ea15da59b4a850ee4fc0327f008b",
+      "correctCount": 29,
+      "totalCount": 29,
+      "anys": []
+    },
+    "2015/10/test.ts": {
+      "hash": "798c2ae14d55b287827383914c7fa1af8c44a8fc",
+      "correctCount": 27,
+      "totalCount": 27,
+      "anys": []
+    },
+    "2015/11/index.ts": {
+      "hash": "e57dfe2f278da2be57cd7efd4bccb9b1dd25236d",
+      "correctCount": 62,
+      "totalCount": 63,
+      "anys": []
+    },
+    "2015/11/test.ts": {
+      "hash": "f8d4d53e173ab17c63fa63fbd13415437428f189",
+      "correctCount": 28,
+      "totalCount": 28,
+      "anys": []
+    },
+    "2015/13/index.ts": {
+      "hash": "818ffbc1fc0139234a18aa235bb8cb0f35fb1cb5",
+      "correctCount": 86,
+      "totalCount": 86,
+      "anys": []
+    },
+    "2015/13/test.ts": {
+      "hash": "803bdcb9b185e60f55e65a1714ba10fcbb4f8293",
+      "correctCount": 26,
+      "totalCount": 26,
+      "anys": []
+    },
+    "2015/12/index.ts": {
+      "hash": "974027abf87548b04654ee4e75e06a70697b242d",
+      "correctCount": 41,
+      "totalCount": 41,
+      "anys": []
+    },
+    "2015/12/test.ts": {
+      "hash": "a33c5a1ac9ebf8cc9d9e15992a93bc1c02f82ae4",
+      "correctCount": 40,
+      "totalCount": 40,
+      "anys": []
+    },
+    "2015/14/index.ts": {
+      "hash": "7ff75ca159685ed79372acefb0d46af9e93ad43a",
+      "correctCount": 121,
+      "totalCount": 121,
+      "anys": []
+    },
+    "2015/14/test.ts": {
+      "hash": "4901f6347bc0f8f27df727a035a823c0554e2bd3",
+      "correctCount": 26,
+      "totalCount": 26,
+      "anys": []
+    },
+    "2015/15/index.ts": {
+      "hash": "c1bb1591fc0cd3a1a2f61c160f1aa546c075ec2b",
+      "correctCount": 109,
+      "totalCount": 109,
+      "anys": []
+    },
+    "2015/15/test.ts": {
+      "hash": "11013a55d08dfa3b75d0372503bb83558d6b14b0",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2015/16/index.ts": {
+      "hash": "beaf03c8723dec5b5e24202dc4557ad1ad5665a7",
+      "correctCount": 72,
+      "totalCount": 73,
+      "anys": []
+    },
+    "2015/16/test.ts": {
+      "hash": "f066e2b6e17c11bed7cd4af5bb00cd2f65d8040a",
+      "correctCount": 17,
+      "totalCount": 17,
+      "anys": []
+    },
+    "2015/17/index.ts": {
+      "hash": "d692a4b52cd0971a9b55b32170a9ed5efd533b2f",
+      "correctCount": 56,
+      "totalCount": 56,
+      "anys": []
+    },
+    "2015/17/test.ts": {
+      "hash": "be7769bb79e90f5750aabf655536ec7f8ff48308",
+      "correctCount": 23,
+      "totalCount": 23,
+      "anys": []
+    },
+    "2015/18/index.ts": {
+      "hash": "49c769c473b237e8c03a6bc2772c63aec6f9b4fa",
+      "correctCount": 60,
+      "totalCount": 60,
+      "anys": []
+    },
+    "2015/18/test.ts": {
+      "hash": "deec0524d1886619d229f5159a3afeee40b51944",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2015/19/index.ts": {
+      "hash": "0426091b9340c5c810fef47a3a0d80d336aa9dd1",
+      "correctCount": 72,
+      "totalCount": 74,
+      "anys": []
+    },
+    "2015/19/test.ts": {
+      "hash": "c526ab64712e24f33d89e7dddfec6ad801a99188",
+      "correctCount": 34,
+      "totalCount": 34,
+      "anys": []
+    },
+    "2015/20/index.ts": {
+      "hash": "3790a95bacad45ca1993a1e72e0dcfc2407b8794",
+      "correctCount": 40,
+      "totalCount": 40,
+      "anys": []
+    },
+    "2015/20/test.ts": {
+      "hash": "123d3224b218143071459d9afe5d1bc16cad987a",
+      "correctCount": 12,
+      "totalCount": 12,
+      "anys": []
+    },
+    "2015/21/index.ts": {
+      "hash": "c0c28895db525a76f7b50f958066ae56ddfd532d",
+      "correctCount": 193,
+      "totalCount": 193,
+      "anys": []
+    },
+    "2015/21/test.ts": {
+      "hash": "559c4f9ad0f57e479438d9995695c35880ac2611",
+      "correctCount": 7,
+      "totalCount": 7,
+      "anys": []
+    },
+    "2015/22/index.ts": {
+      "hash": "69f04591d80efbd2db5ec7c1cce2385f72af8f42",
+      "correctCount": 177,
+      "totalCount": 177,
+      "anys": []
+    },
+    "2015/22/test.ts": {
+      "hash": "466008ddbb332e3e8e0bf914f9703499e858ef77",
+      "correctCount": 10,
+      "totalCount": 10,
+      "anys": []
+    },
+    "2015/23/index.ts": {
+      "hash": "73f7f57feff195074ae6c9157fc0d697872d67d4",
+      "correctCount": 50,
+      "totalCount": 55,
+      "anys": []
+    },
+    "2015/23/test.ts": {
+      "hash": "f9b74003bf9376b482ebea2be98cbc6ab191f05c",
+      "correctCount": 29,
+      "totalCount": 29,
+      "anys": []
+    },
+    "2015/24/index.ts": {
+      "hash": "03f7bdda9c847f68553fae520dfd86541f2cfd80",
+      "correctCount": 70,
+      "totalCount": 72,
+      "anys": [
+        {
+          "line": 10,
+          "character": 12,
+          "text": "groups",
+          "kind": 2
+        },
+        {
+          "line": 11,
+          "character": 26,
+          "text": "groups",
+          "kind": 2
+        }
+      ]
+    },
+    "2015/24/test.ts": {
+      "hash": "0c2f6eb11d6e472913f9c82f19c5ea546d337457",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2015/25/index.ts": {
+      "hash": "0fb8b6d5586d0c3b793371cac1315c490e670efd",
+      "correctCount": 20,
+      "totalCount": 20,
+      "anys": []
+    },
+    "2015/25/test.ts": {
+      "hash": "57acef2531d64609464de094e52987b1d24423e1",
+      "correctCount": 7,
+      "totalCount": 7,
+      "anys": []
+    },
+    "2016/01/index.ts": {
+      "hash": "c3ea5bfb005fb46fa0db05b9707d30cf7a50472c",
+      "correctCount": 70,
+      "totalCount": 71,
+      "anys": []
+    },
+    "2016/01/test.ts": {
+      "hash": "fb2c062a975d9d2eb2778ae03b7d5f65e4396603",
+      "correctCount": 36,
+      "totalCount": 36,
+      "anys": []
+    },
+    "2016/02/index.ts": {
+      "hash": "a45c0079b961cad59b68a8314d8d9796b82fa3a8",
+      "correctCount": 47,
+      "totalCount": 47,
+      "anys": []
+    },
+    "2016/02/test.ts": {
+      "hash": "4ca8566d3327e3a10647339c30f895fee51edd9c",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2016/03/index.ts": {
+      "hash": "f93fa082fa711132e6e924b6275ecbe4c72f5c37",
+      "correctCount": 44,
+      "totalCount": 44,
+      "anys": []
+    },
+    "2016/03/test.ts": {
+      "hash": "d5ec827998c64d476c31b197189695918963298c",
+      "correctCount": 17,
+      "totalCount": 17,
+      "anys": []
+    },
+    "2016/04/index.ts": {
+      "hash": "d90098518ad2b637d20e60a0cea8afded642ad05",
+      "correctCount": 100,
+      "totalCount": 100,
+      "anys": []
+    },
+    "2016/04/test.ts": {
+      "hash": "3eddae97bf9c9ff1988952245150d3741ce5d9f3",
+      "correctCount": 26,
+      "totalCount": 26,
+      "anys": []
+    },
+    "2016/05/index.ts": {
+      "hash": "3754d51cbb0138a3286b28e4fa518c908ff9b7a4",
+      "correctCount": 43,
+      "totalCount": 43,
+      "anys": []
+    },
+    "2016/05/test.ts": {
+      "hash": "e2e4d9002eae7c27c5d43a4b5cb9f262ccb22dca",
+      "correctCount": 17,
+      "totalCount": 17,
+      "anys": []
+    },
+    "2016/06/index.ts": {
+      "hash": "25d85a7047f8abd59fe4406c0c1dd3cf92f21315",
+      "correctCount": 41,
+      "totalCount": 42,
+      "anys": []
+    },
+    "2016/06/test.ts": {
+      "hash": "e99e7bde4b7102f66315a199cd29fa56036f748b",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2016/07/index.ts": {
+      "hash": "7631e971bf4960532acbba468b5ff3c6a1b2a4d4",
+      "correctCount": 88,
+      "totalCount": 88,
+      "anys": []
+    },
+    "2016/07/test.ts": {
+      "hash": "1fe037f4f46daf411b21a3b21fc0d225695e4b67",
+      "correctCount": 33,
+      "totalCount": 33,
+      "anys": []
+    },
+    "2016/08/index.ts": {
+      "hash": "17a77ce2e9ff8cceee70db285833e46554b187bd",
+      "correctCount": 63,
+      "totalCount": 63,
+      "anys": []
+    },
+    "2016/08/test.ts": {
+      "hash": "ab16ba1d8a6ea1e5f2349d4f352f4d50d0fcec6d",
+      "correctCount": 22,
+      "totalCount": 22,
+      "anys": []
+    },
+    "2016/09/index.ts": {
+      "hash": "1f3b68b401d59d338722bf5c3278f1749b75afc8",
+      "correctCount": 122,
+      "totalCount": 122,
+      "anys": []
+    },
+    "2016/09/test.ts": {
+      "hash": "8f22617be7caa75992e0949a9352b52eb70934e0",
+      "correctCount": 50,
+      "totalCount": 50,
+      "anys": []
+    },
+    "2016/10/index.ts": {
+      "hash": "5f4541a72bc24f17f733fac37de0e1ae3335ef66",
+      "correctCount": 118,
+      "totalCount": 118,
+      "anys": []
+    },
+    "2016/10/test.ts": {
+      "hash": "107777e40b7ad51990f3c7e354cd53ac9cacb009",
+      "correctCount": 22,
+      "totalCount": 22,
+      "anys": []
+    },
+    "2016/11/index.ts": {
+      "hash": "9881fe3a394fe33872a9deb606400b6dd961e851",
+      "correctCount": 145,
+      "totalCount": 146,
+      "anys": []
+    },
+    "2016/11/test.ts": {
+      "hash": "e8fbac6510527affdb7e17525f193c37102d4123",
+      "correctCount": 25,
+      "totalCount": 25,
+      "anys": []
+    },
+    "2016/12/index.ts": {
+      "hash": "261f0f7c19b64cc24064931d3eed32eda52a7dae",
+      "correctCount": 54,
+      "totalCount": 58,
+      "anys": []
+    },
+    "2016/12/test.ts": {
+      "hash": "627a42ef9b51b951bce5fda1487c71edd2446394",
+      "correctCount": 26,
+      "totalCount": 26,
+      "anys": []
+    },
+    "2016/13/index.ts": {
+      "hash": "9ea9c24148e7d96ce5fc4783c7b60dbb599c6eab",
+      "correctCount": 71,
+      "totalCount": 71,
+      "anys": []
+    },
+    "2016/13/test.ts": {
+      "hash": "270c0d585b9bdc313bd6ce75bebdd466bba78b33",
+      "correctCount": 15,
+      "totalCount": 15,
+      "anys": []
+    },
+    "2016/14/index.ts": {
+      "hash": "fcc65f737da989cc4757dbefd3d99be2a1fce950",
+      "correctCount": 71,
+      "totalCount": 73,
+      "anys": []
+    },
+    "2016/14/test.ts": {
+      "hash": "d689738acb015871dc25020c027becd836c467b9",
+      "correctCount": 12,
+      "totalCount": 12,
+      "anys": []
+    },
+    "2016/15/index.ts": {
+      "hash": "7f693d415f95734405a31bbbfef76d5ef9cb9c7e",
+      "correctCount": 85,
+      "totalCount": 85,
+      "anys": []
+    },
+    "2016/15/test.ts": {
+      "hash": "a3733a203ce30f8e4ea4db6cf885aac0923ec9ba",
+      "correctCount": 29,
+      "totalCount": 29,
+      "anys": []
+    },
+    "2016/16/index.ts": {
+      "hash": "0df7a1322e5d1ea3baea0d2d5c2581bd0308a5c4",
+      "correctCount": 48,
+      "totalCount": 48,
+      "anys": []
+    },
+    "2016/16/test.ts": {
+      "hash": "0411582896188cb62feceaac24457c0de78745b8",
+      "correctCount": 15,
+      "totalCount": 15,
+      "anys": []
+    },
+    "2016/17/index.ts": {
+      "hash": "ef64a56b60c6cd8a90df85dd46161c7ff1118467",
+      "correctCount": 83,
+      "totalCount": 83,
+      "anys": []
+    },
+    "2016/17/test.ts": {
+      "hash": "181673acea2754d1d6e27a0da5579ebd456462a5",
+      "correctCount": 34,
+      "totalCount": 34,
+      "anys": []
+    },
+    "2016/18/index.ts": {
+      "hash": "bc542544f12409c3bdc7993a2c1c8c45bae99812",
+      "correctCount": 36,
+      "totalCount": 36,
+      "anys": []
+    },
+    "2016/18/test.ts": {
+      "hash": "96ba5554b15b37bf921c5d3d363a571925a932b2",
+      "correctCount": 18,
+      "totalCount": 18,
+      "anys": []
+    },
+    "2016/19/index.ts": {
+      "hash": "ea38db6b40a87f89b0b68b611587ac9a5810fa8b",
+      "correctCount": 45,
+      "totalCount": 45,
+      "anys": []
+    },
+    "2016/19/test.ts": {
+      "hash": "0ec04c5489853484c623e3ca8e55b1737dd92595",
+      "correctCount": 18,
+      "totalCount": 18,
+      "anys": []
+    },
+    "2016/20/index.ts": {
+      "hash": "a2e3804ee82e80ef4bee408d66b83a4a7be10c3e",
+      "correctCount": 54,
+      "totalCount": 54,
+      "anys": []
+    },
+    "2016/20/test.ts": {
+      "hash": "baba14241960f65ca72daf3968b10f3e6969e317",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2016/21/index.ts": {
+      "hash": "9253efea6117710743cb2092a0732e5f74e4579a",
+      "correctCount": 126,
+      "totalCount": 127,
+      "anys": []
+    },
+    "2016/21/test.ts": {
+      "hash": "018910bf85fb91831084cd4145eb7dfc744bb933",
+      "correctCount": 27,
+      "totalCount": 27,
+      "anys": []
+    },
+    "2016/22/index.ts": {
+      "hash": "1b10d0f80f93828d246cd05f1c39dd7f47754a4a",
+      "correctCount": 158,
+      "totalCount": 159,
+      "anys": []
+    },
+    "2016/22/test.ts": {
+      "hash": "e9fa53b6183049569560eaeeb3ef7afc4fa9ccee",
+      "correctCount": 18,
+      "totalCount": 18,
+      "anys": []
+    },
+    "2016/23/index.ts": {
+      "hash": "06b335b48cea56a0e2cfa9b60cf8920d786f1db3",
+      "correctCount": 79,
+      "totalCount": 83,
+      "anys": []
+    },
+    "2016/23/test.ts": {
+      "hash": "a49ced8125751d9e2d84b3b8a0e003d5915d5313",
+      "correctCount": 22,
+      "totalCount": 22,
+      "anys": []
+    },
+    "2016/24/index.ts": {
+      "hash": "5b1018064c6ca685f0c83281cf7084aa0a45f282",
+      "correctCount": 87,
+      "totalCount": 88,
+      "anys": []
+    },
+    "2016/24/test.ts": {
+      "hash": "10bf74554b639f18cdede5b64a6031c9f6f960ae",
+      "correctCount": 17,
+      "totalCount": 17,
+      "anys": []
+    },
+    "2016/25/index.ts": {
+      "hash": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+      "correctCount": 0,
+      "totalCount": 0,
+      "anys": []
+    },
+    "2016/25/test.ts": {
+      "hash": "93c55f32e5b2b057d3da00786e7166095c66dc8a",
+      "correctCount": 12,
+      "totalCount": 12,
+      "anys": []
+    },
+    "2017/01/index.ts": {
+      "hash": "120e7015af2e21fc8ff7984e5edd59a814b7fe82",
+      "correctCount": 26,
+      "totalCount": 26,
+      "anys": []
+    },
+    "2017/01/test.ts": {
+      "hash": "06b234389b9ba1fd7a2aefe36dc6321dcb169868",
+      "correctCount": 46,
+      "totalCount": 46,
+      "anys": []
+    },
+    "2017/03/index.ts": {
+      "hash": "bb813fed05bc9e63e0deda2b62747649a1576ce4",
+      "correctCount": 145,
+      "totalCount": 146,
+      "anys": []
+    },
+    "2017/03/test.ts": {
+      "hash": "2e0e0760bba14f2c063f9a9506e0219a264377a4",
+      "correctCount": 18,
+      "totalCount": 18,
+      "anys": []
+    },
+    "2017/02/index.ts": {
+      "hash": "d41f768c486184f11c08d9ce5480c57168fba233",
+      "correctCount": 40,
+      "totalCount": 41,
+      "anys": []
+    },
+    "2017/02/test.ts": {
+      "hash": "949210dd2eeb748f63895931cb12dc56c72cdae4",
+      "correctCount": 33,
+      "totalCount": 33,
+      "anys": []
+    },
+    "2017/04/index.ts": {
+      "hash": "22e1de3757e260914b6cc3a37f993cc538c8ad00",
+      "correctCount": 32,
+      "totalCount": 32,
+      "anys": []
+    },
+    "2017/04/test.ts": {
+      "hash": "f592005d2b70760cb6c06d125e514736d893bea1",
+      "correctCount": 48,
+      "totalCount": 48,
+      "anys": []
+    },
+    "2017/05/index.ts": {
+      "hash": "2cad454ff707842e376c265ba278d45c971268f9",
+      "correctCount": 24,
+      "totalCount": 24,
+      "anys": []
+    },
+    "2017/05/test.ts": {
+      "hash": "a18268f3e1a87d88b5d3bcd0d6894938328b61db",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2017/07/index.ts": {
+      "hash": "53c706d0d88b3e166b0811424299d3ecdb99a5bb",
+      "correctCount": 178,
+      "totalCount": 185,
+      "anys": []
+    },
+    "2017/07/test.ts": {
+      "hash": "27622f28f15b20bb8f9613fd48f29cdd120d0046",
+      "correctCount": 34,
+      "totalCount": 34,
+      "anys": []
+    },
+    "2017/06/index.ts": {
+      "hash": "cdd2813f092d3840bacbfdcf666c3b12f196469f",
+      "correctCount": 44,
+      "totalCount": 44,
+      "anys": []
+    },
+    "2017/06/test.ts": {
+      "hash": "c9093b5749103a299a595b8430a8f09dd451667d",
+      "correctCount": 26,
+      "totalCount": 26,
+      "anys": []
+    },
+    "2017/08/index.ts": {
+      "hash": "a20ac1afe42c99afac2ba0da7dc1a6ea4bc77ab0",
+      "correctCount": 51,
+      "totalCount": 51,
+      "anys": []
+    },
+    "2017/08/test.ts": {
+      "hash": "537f5e9549965dd51fb5e3ceb4da0e26525ba9fe",
+      "correctCount": 34,
+      "totalCount": 34,
+      "anys": []
+    },
+    "2017/09/index.ts": {
+      "hash": "0434b52546352d6eb43bcf859118501ea31a6422",
+      "correctCount": 29,
+      "totalCount": 29,
+      "anys": []
+    },
+    "2017/09/test.ts": {
+      "hash": "509bec1ab2df6c6139e21c0c9adbedaf15c88e57",
+      "correctCount": 81,
+      "totalCount": 81,
+      "anys": []
+    },
+    "2017/10/index.ts": {
+      "hash": "bfe0029a0e8f154b5fdbb77d5c2da4545f8a9f73",
+      "correctCount": 152,
+      "totalCount": 152,
+      "anys": []
+    },
+    "2017/10/test.ts": {
+      "hash": "7bef4ba9b9fc3266cec31cf9407b8c433ed1374a",
+      "correctCount": 39,
+      "totalCount": 39,
+      "anys": []
+    },
+    "2017/11/index.ts": {
+      "hash": "ca3139dc8da10a5c8444b69bcb86bb9c2306a3ec",
+      "correctCount": 133,
+      "totalCount": 133,
+      "anys": []
+    },
+    "2017/11/test.ts": {
+      "hash": "2a024b5dad7c5ef650f898676979485b3ccf3d32",
+      "correctCount": 32,
+      "totalCount": 32,
+      "anys": []
+    },
+    "2017/12/index.ts": {
+      "hash": "3b679ae7cbb2dd33dd5ef32befb1729867432ab9",
+      "correctCount": 80,
+      "totalCount": 81,
+      "anys": []
+    },
+    "2017/12/test.ts": {
+      "hash": "e6014845c186f6acbbbfdfa1284b62ce47b5219e",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2017/13/index.ts": {
+      "hash": "c0c513906662d50302388aa2df0911dc78fc311c",
+      "correctCount": 65,
+      "totalCount": 65,
+      "anys": []
+    },
+    "2017/13/test.ts": {
+      "hash": "e1e794915b6e066cf331f9dba429507dfad01b45",
+      "correctCount": 31,
+      "totalCount": 31,
+      "anys": []
+    },
+    "2017/14/index.ts": {
+      "hash": "7a3a61cfd463f2d07b2cc96f2eb41f0a2ce580ff",
+      "correctCount": 88,
+      "totalCount": 89,
+      "anys": []
+    },
+    "2017/14/test.ts": {
+      "hash": "3ff6f3874758d8019f4b79f12dd3f8944f2071b2",
+      "correctCount": 18,
+      "totalCount": 18,
+      "anys": []
+    },
+    "2017/15/index.ts": {
+      "hash": "da391d2742ed043ac76c1a9e69d11a3d0e0d8177",
+      "correctCount": 47,
+      "totalCount": 47,
+      "anys": []
+    },
+    "2017/15/test.ts": {
+      "hash": "b49fc59aa59843569df3d657836b2140eeedf29d",
+      "correctCount": 24,
+      "totalCount": 24,
+      "anys": []
+    },
+    "2017/16/index.ts": {
+      "hash": "1c8555d0bcf34b4accf3746be0c5e5076ed5541b",
+      "correctCount": 122,
+      "totalCount": 122,
+      "anys": []
+    },
+    "2017/16/test.ts": {
+      "hash": "538126bcf8318d2f45aa66e1ea9fc1823791b813",
+      "correctCount": 24,
+      "totalCount": 24,
+      "anys": []
+    },
+    "2017/17/index.ts": {
+      "hash": "3d37ce3843d66b7dff2c90eab152641bdd05f3cf",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2017/17/test.ts": {
+      "hash": "75b0b387835157d8dd747eb0b019721ba451bb72",
+      "correctCount": 16,
+      "totalCount": 16,
+      "anys": []
+    },
+    "2017/18/index.ts": {
+      "hash": "1e4edd84a09148fec180a7d239e97cc24bb4a0f2",
+      "correctCount": 288,
+      "totalCount": 293,
+      "anys": []
+    },
+    "2017/18/test.ts": {
+      "hash": "816424fdc4f5fd4695d6a4cddeec9f25fd42f60b",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2017/19/index.ts": {
+      "hash": "3906d65fab3db76ee3ef7cb556cfd7e23ba27b38",
+      "correctCount": 73,
+      "totalCount": 73,
+      "anys": []
+    },
+    "2017/19/test.ts": {
+      "hash": "dc3314062d995c20f7a6c7e1aeec1b216dba6cf8",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2017/20/index.ts": {
+      "hash": "811b6cdcf2506507a8ab328a12fc71520674d5af",
+      "correctCount": 134,
+      "totalCount": 138,
+      "anys": []
+    },
+    "2017/20/test.ts": {
+      "hash": "f5271bfbb7fd0cd01c615627f0b546f9bff1d01c",
+      "correctCount": 26,
+      "totalCount": 26,
+      "anys": []
+    },
+    "2017/21/index.ts": {
+      "hash": "61fe5695c257015ac6e566f626642fc1ec44900e",
+      "correctCount": 164,
+      "totalCount": 165,
+      "anys": []
+    },
+    "2017/21/test.ts": {
+      "hash": "4faf593cdbc064c3531242fdf39c2c51bcfacdc0",
+      "correctCount": 26,
+      "totalCount": 26,
+      "anys": []
+    },
+    "2017/22/index.ts": {
+      "hash": "a181db2a1af429331a8c620d727c8be63607eb87",
+      "correctCount": 115,
+      "totalCount": 118,
+      "anys": []
+    },
+    "2017/22/test.ts": {
+      "hash": "2b922f8c9d1609f9f7572f496600042ee508dad6",
+      "correctCount": 42,
+      "totalCount": 42,
+      "anys": []
+    },
+    "2017/23/index.ts": {
+      "hash": "f0c1723b519a9f1bc23c6e0980c94fe00efcc55e",
+      "correctCount": 146,
+      "totalCount": 147,
+      "anys": []
+    },
+    "2017/23/test.ts": {
+      "hash": "2a5ce2c214ecea9167b202155e032e98f6b70451",
+      "correctCount": 17,
+      "totalCount": 17,
+      "anys": []
+    },
+    "2017/24/index.ts": {
+      "hash": "329729cdc359baa24d61f19b966338b9a7d3d38a",
+      "correctCount": 90,
+      "totalCount": 90,
+      "anys": []
+    },
+    "2017/24/test.ts": {
+      "hash": "aeb66b65102b7c2b3b7342c7273b897b1ac2fa9a",
+      "correctCount": 71,
+      "totalCount": 71,
+      "anys": []
+    },
+    "2017/25/index.ts": {
+      "hash": "9c4dc684f8a044463b14570480ebfce2ca1cd97d",
+      "correctCount": 100,
+      "totalCount": 102,
+      "anys": []
+    },
+    "2017/25/test.ts": {
+      "hash": "d50125d972a8d54c39980b4723a7946f9c01bf07",
+      "correctCount": 24,
+      "totalCount": 24,
+      "anys": []
+    },
+    "2019/01/index.ts": {
+      "hash": "b8dea64f74fac4c9ffa29c80926df2b7f444bb86",
+      "correctCount": 20,
+      "totalCount": 20,
+      "anys": []
+    },
+    "2019/01/test.ts": {
+      "hash": "d63b5ef8afbe1f42605945b2f62fca1bcd9f457c",
+      "correctCount": 46,
+      "totalCount": 46,
+      "anys": []
+    },
+    "2019/02/index.ts": {
+      "hash": "8f05f1c60338312baadbdd6c873ac365a0d546ed",
+      "correctCount": 129,
+      "totalCount": 129,
+      "anys": []
+    },
+    "2019/02/test.ts": {
+      "hash": "60185b22d4bce09e4888c277089527fefd204beb",
+      "correctCount": 39,
+      "totalCount": 39,
+      "anys": []
+    },
+    "2019/03/index.ts": {
+      "hash": "60e297834736c20e85077cd76def7d49aa6bb685",
+      "correctCount": 116,
+      "totalCount": 117,
+      "anys": []
+    },
+    "2019/03/test.ts": {
+      "hash": "3547bd758d7b7562bc6acce51365b46c1b6b0986",
+      "correctCount": 47,
+      "totalCount": 48,
+      "anys": []
+    },
+    "2019/04/index.ts": {
+      "hash": "b7e6b8ced97058a0c846cb5dbc5ef419caafccde",
+      "correctCount": 52,
+      "totalCount": 52,
+      "anys": []
+    },
+    "2019/04/test.ts": {
+      "hash": "e4b99845709e0994060179916bc0d866c0de68d8",
+      "correctCount": 39,
+      "totalCount": 39,
+      "anys": []
+    },
+    "2019/05/index.ts": {
+      "hash": "83321a4de1cbd3ac80d9457e035cc53108dbef19",
+      "correctCount": 449,
+      "totalCount": 449,
+      "anys": []
+    },
+    "2019/05/test.ts": {
+      "hash": "71fe9b6658d3b976a8086b25b152b09c36795d0f",
+      "correctCount": 69,
+      "totalCount": 70,
+      "anys": []
+    },
+    "2019/06/index.ts": {
+      "hash": "6980edf964b2558f9a4d0716e888e7369c597882",
+      "correctCount": 144,
+      "totalCount": 149,
+      "anys": []
+    },
+    "2019/06/test.ts": {
+      "hash": "8e446d0d3723f608a35be304ae14465171b53981",
+      "correctCount": 40,
+      "totalCount": 40,
+      "anys": []
+    },
+    "2019/07/index.ts": {
+      "hash": "b01b741deb759fa424573c7f6845131f027962a5",
+      "correctCount": 53,
+      "totalCount": 57,
+      "anys": [
+        {
+          "line": 11,
+          "character": 8,
+          "text": "index",
+          "kind": 2
+        },
+        {
+          "line": 16,
+          "character": 23,
+          "text": "index",
+          "kind": 2
+        },
+        {
+          "line": 16,
+          "character": 36,
+          "text": "value",
+          "kind": 1
+        }
+      ]
+    },
+    "2019/07/test.ts": {
+      "hash": "efe5d10ad434f3f1b87d7c40a75f1c523ff636f1",
+      "correctCount": 35,
+      "totalCount": 35,
+      "anys": []
+    },
+    "2019/08/index.ts": {
+      "hash": "4e12b9b67ee8edc92c2626fd5c8ffcb7e6c8617b",
+      "correctCount": 98,
+      "totalCount": 99,
+      "anys": []
+    },
+    "2019/08/test.ts": {
+      "hash": "d7f7418980e80be4a0a06a26a19c666f5d27efb4",
+      "correctCount": 28,
+      "totalCount": 28,
+      "anys": []
+    },
+    "2019/09/index.ts": {
+      "hash": "4fc3f2ced46aba1bf7bd77642011f2cd7dca8f85",
+      "correctCount": 1,
+      "totalCount": 1,
+      "anys": []
+    },
+    "2019/09/test.ts": {
+      "hash": "bebbb2d5e8e9b34195d3b8b549c67c146465da45",
+      "correctCount": 87,
+      "totalCount": 88,
+      "anys": []
+    },
+    "2019/10/index.ts": {
+      "hash": "ca51f33829ebdf8071f5da2f5201461dac592753",
+      "correctCount": 256,
+      "totalCount": 258,
+      "anys": []
+    },
+    "2019/10/test.ts": {
+      "hash": "712c308e3fb17b7059306162596e0f5a3acf7708",
+      "correctCount": 87,
+      "totalCount": 87,
+      "anys": []
+    },
+    "2019/11/index.ts": {
+      "hash": "937fb2bae671315505d2e9b4ff6867cd37670b66",
+      "correctCount": 118,
+      "totalCount": 120,
+      "anys": []
+    },
+    "2019/11/test.ts": {
+      "hash": "f696b72248c53012ca0cf694aacc6888e73a03f3",
+      "correctCount": 22,
+      "totalCount": 22,
+      "anys": []
+    },
+    "2019/12/index.ts": {
+      "hash": "0378094b4f4db915d0964409dd702ef7f93f253c",
+      "correctCount": 172,
+      "totalCount": 173,
+      "anys": []
+    },
+    "2019/12/test.ts": {
+      "hash": "254fce1f8b1a0790932fb8e0eb5653deac1d26c2",
+      "correctCount": 38,
+      "totalCount": 38,
+      "anys": []
+    },
+    "2019/13/index.ts": {
+      "hash": "edb73477d550f33e93f4b56ae5059a375f5e37b5",
+      "correctCount": 136,
+      "totalCount": 138,
+      "anys": []
+    },
+    "2019/13/test.ts": {
+      "hash": "3f9090a5212b7f3fefd9a38a645aa46d997a46c4",
+      "correctCount": 36,
+      "totalCount": 36,
+      "anys": []
+    },
+    "2019/14/index.ts": {
+      "hash": "e73f45fd35417f392f78027e4b321a8f9d52550c",
+      "correctCount": 136,
+      "totalCount": 136,
+      "anys": []
+    },
+    "2019/14/test.ts": {
+      "hash": "409a7c93636296ecbb3fa654d5fb078c6bee19c7",
+      "correctCount": 56,
+      "totalCount": 56,
+      "anys": []
+    },
+    "2019/16/index.ts": {
+      "hash": "8ffcbdf104dea78d7100f9e1f6d3eb740bf38188",
+      "correctCount": 126,
+      "totalCount": 126,
+      "anys": []
+    },
+    "2019/16/test.ts": {
+      "hash": "e57bf5e914fd966c0bcfac5072d9f700421cb286",
+      "correctCount": 34,
+      "totalCount": 34,
+      "anys": []
+    },
+    "2019/17/index.ts": {
+      "hash": "af6c13e69ada342713f7705e234959f32d1a3487",
+      "correctCount": 85,
+      "totalCount": 85,
+      "anys": []
+    },
+    "2019/17/test.ts": {
+      "hash": "d5362794ed561dce96c31bd728b28e398ae34530",
+      "correctCount": 32,
+      "totalCount": 32,
+      "anys": []
+    },
+    "2019/18/index.ts": {
+      "hash": "e3bbb6cad9b57d6ec4bc7168bf898d4491f7d2ab",
+      "correctCount": 320,
+      "totalCount": 323,
+      "anys": []
+    },
+    "2019/18/test.ts": {
+      "hash": "cd68c9255092d733f4662bb153441308b9afbfe8",
+      "correctCount": 71,
+      "totalCount": 71,
+      "anys": []
+    },
+    "2019/15/index.ts": {
+      "hash": "66522bfe8f6b6bc6af39a766fa759ffaacd8287c",
+      "correctCount": 209,
+      "totalCount": 210,
+      "anys": []
+    },
+    "2019/15/test.ts": {
+      "hash": "36a3380c040e88f3e043086f99945df9bcafd29e",
+      "correctCount": 18,
+      "totalCount": 18,
+      "anys": []
+    },
+    "2019/19/index.ts": {
+      "hash": "5c96b3492f4d7f1a0be6f6c1f80f4176dab29def",
+      "correctCount": 94,
+      "totalCount": 96,
+      "anys": []
+    },
+    "2019/19/test.ts": {
+      "hash": "a8ff89c37675825b7132236018dc732dd575866f",
+      "correctCount": 17,
+      "totalCount": 17,
+      "anys": []
+    },
+    "2019/20/index.ts": {
+      "hash": "e11a21b306eb5fa58b46c7f896617537d1427653",
+      "correctCount": 406,
+      "totalCount": 409,
+      "anys": []
+    },
+    "2019/20/test.ts": {
+      "hash": "c19a46d7d34547d2972fe35d698f91bcb99516c6",
+      "correctCount": 41,
+      "totalCount": 41,
+      "anys": []
+    },
+    "2019/21/index.ts": {
+      "hash": "76742884a310f8a03e85672d45a05de121d89d61",
+      "correctCount": 24,
+      "totalCount": 25,
+      "anys": []
+    },
+    "2019/21/test.ts": {
+      "hash": "e234fc039569d3913aecfd6dfbefe7822b3c149f",
+      "correctCount": 13,
+      "totalCount": 13,
+      "anys": []
+    },
+    "2019/22/index.ts": {
+      "hash": "48bfcda72f6b149c138e0e05557fb34bf2f27257",
+      "correctCount": 62,
+      "totalCount": 65,
+      "anys": []
+    },
+    "2019/22/test.ts": {
+      "hash": "2cb704ef2666bd29cd63df6af38ba49147088664",
+      "correctCount": 50,
+      "totalCount": 50,
+      "anys": []
+    },
+    "2019/23/index.ts": {
+      "hash": "019d893ba9470cdc55d90cf3c958e2c620241a33",
+      "correctCount": 169,
+      "totalCount": 170,
+      "anys": []
+    },
+    "2019/23/test.ts": {
+      "hash": "96bb78999eb17491d2cd221055dd998efd30ffe9",
+      "correctCount": 19,
+      "totalCount": 19,
+      "anys": []
+    },
+    "2019/24/index.ts": {
+      "hash": "5d6e54569835cbd2da66a0609717107eb98207a0",
+      "correctCount": 253,
+      "totalCount": 255,
+      "anys": []
+    },
+    "2019/24/test.ts": {
+      "hash": "75b705d60e6fd3584c12622bbb75dfd55d73ec78",
+      "correctCount": 37,
+      "totalCount": 37,
+      "anys": []
+    },
+    "2019/25/index.ts": {
+      "hash": "915ac771705ed7e23f3b96208856ca58c2088384",
+      "correctCount": 29,
+      "totalCount": 32,
+      "anys": []
+    },
+    "2019/25/test.ts": {
+      "hash": "964e51e6b43c7e23bcf6d3c316100311639239a6",
+      "correctCount": 13,
+      "totalCount": 13,
+      "anys": []
+    },
+    "2018/01/index.ts": {
+      "hash": "9a564c049e54e028142df4acd0f78bc9866799f5",
+      "correctCount": 24,
+      "totalCount": 24,
+      "anys": []
+    },
+    "2018/01/test.ts": {
+      "hash": "1676fe72224400fcb53145e5344ea6f00bd16a57",
+      "correctCount": 34,
+      "totalCount": 34,
+      "anys": []
+    },
+    "2018/02/index.ts": {
+      "hash": "acc9e957b57cc60c704e37f07ad274e4014cf132",
+      "correctCount": 77,
+      "totalCount": 77,
+      "anys": []
+    },
+    "2018/02/test.ts": {
+      "hash": "193e5ab2ea2a4a37b72e475676f701200ebb979d",
+      "correctCount": 23,
+      "totalCount": 23,
+      "anys": []
+    },
+    "2018/03/index.ts": {
+      "hash": "9e33134e7c5e4018bffe09ffe740ec6b3cfe7e41",
+      "correctCount": 144,
+      "totalCount": 151,
+      "anys": []
+    },
+    "2018/03/test.ts": {
+      "hash": "fd263979f9733b4af314cdc94f9315a148c6774b",
+      "correctCount": 27,
+      "totalCount": 27,
+      "anys": []
+    },
+    "2018/04/index.ts": {
+      "hash": "f605060fcc5cbb2dfdfbae1cf945e3b1a1110a42",
+      "correctCount": 188,
+      "totalCount": 192,
+      "anys": []
+    },
+    "2018/04/test.ts": {
+      "hash": "70f65f192c7fc0ade4a266f8197ae3678599fb36",
+      "correctCount": 17,
+      "totalCount": 17,
+      "anys": []
+    },
+    "2018/07/index.ts": {
+      "hash": "450fc4d721bc56969d5627958ad9d7c741137edb",
+      "correctCount": 209,
+      "totalCount": 216,
+      "anys": []
+    },
+    "2018/07/test.ts": {
+      "hash": "034acf812cca8eeb41890f50de24509d55a784e1",
+      "correctCount": 35,
+      "totalCount": 35,
+      "anys": []
+    },
+    "2018/05/index.ts": {
+      "hash": "f5ee3d394d2e592c80d0b861e3eb468f2ba457df",
+      "correctCount": 62,
+      "totalCount": 63,
+      "anys": []
+    },
+    "2018/05/test.ts": {
+      "hash": "3852ed70e1de50c0360c9c75e348f94ea08919aa",
+      "correctCount": 27,
+      "totalCount": 27,
+      "anys": []
+    },
+    "2018/06/index.ts": {
+      "hash": "aebbfc1f23236221bc9a380366190ca53b316e6e",
+      "correctCount": 122,
+      "totalCount": 126,
+      "anys": []
+    },
+    "2018/06/test.ts": {
+      "hash": "2c7552e6c7396677092a038f8b7731e943e5445d",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2018/08/index.ts": {
+      "hash": "ec6355fbd618e53320da6c63ba0a93a0807102ac",
+      "correctCount": 80,
+      "totalCount": 82,
+      "anys": []
+    },
+    "2018/08/test.ts": {
+      "hash": "2fd03b90e7a0d1d3c3e0e39695fce8491a271142",
+      "correctCount": 40,
+      "totalCount": 40,
+      "anys": []
+    },
+    "2018/09/index.ts": {
+      "hash": "da092f71634cf43ac6b4ceefaac3600601e984c3",
+      "correctCount": 34,
+      "totalCount": 34,
+      "anys": []
+    },
+    "2018/09/test.ts": {
+      "hash": "d769a4ebe97ce3824c1641737508ba956cf97261",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2018/10/index.ts": {
+      "hash": "a1984e4c8e8d5c128aadef3f2b407b7268dcd6c2",
+      "correctCount": 58,
+      "totalCount": 59,
+      "anys": []
+    },
+    "2018/10/test.ts": {
+      "hash": "6c81581b76ab65b73accd360a8072641a119dfad",
+      "correctCount": 13,
+      "totalCount": 13,
+      "anys": []
+    },
+    "2018/11/index.ts": {
+      "hash": "b3acab31e8110a32abfd28bd83dbc2ada5c814e0",
+      "correctCount": 170,
+      "totalCount": 170,
+      "anys": []
+    },
+    "2018/11/test.ts": {
+      "hash": "95b5266fd74a70b19568b9b6b929a5a3932af934",
+      "correctCount": 32,
+      "totalCount": 32,
+      "anys": []
+    },
+    "2018/12/index.ts": {
+      "hash": "c6b1da6c8e91bfafdca2465a8a692d0c52ac49b4",
+      "correctCount": 143,
+      "totalCount": 143,
+      "anys": []
+    },
+    "2018/12/test.ts": {
+      "hash": "8654d16f498d2b092ff4a7626fc9a54103dde308",
+      "correctCount": 28,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2018/14/index.ts": {
+      "hash": "86ee12a9d75db83129ecee81a2e28cfb234f5415",
+      "correctCount": 70,
+      "totalCount": 70,
+      "anys": []
+    },
+    "2018/14/test.ts": {
+      "hash": "bf6c7cea167a7d32813aab1744596d4b4476b2af",
+      "correctCount": 37,
+      "totalCount": 37,
+      "anys": []
+    },
+    "2018/13/index.ts": {
+      "hash": "813db91dd2a00ea7ad0013a33a0060de9549b1f6",
+      "correctCount": 219,
+      "totalCount": 219,
+      "anys": []
+    },
+    "2018/13/test.ts": {
+      "hash": "8eed152566e3138804b0199ddab75ecece721d2f",
+      "correctCount": 46,
+      "totalCount": 46,
+      "anys": []
+    },
+    "2018/15/index.ts": {
+      "hash": "6ee49505076cfa31c1b5d168f3fc202948c7206e",
+      "correctCount": 400,
+      "totalCount": 403,
+      "anys": []
+    },
+    "2018/15/test.ts": {
+      "hash": "6a744ee98e12bb7028629719303643c7ce9e6cc5",
+      "correctCount": 78,
+      "totalCount": 78,
+      "anys": []
+    },
+    "2018/16/index.ts": {
+      "hash": "1bb44816e7d3c234c766895d0ba588abaf4ae11c",
+      "correctCount": 331,
+      "totalCount": 336,
+      "anys": []
+    },
+    "2018/16/test.ts": {
+      "hash": "16decb9e78ce1f28ef125b7c2dd9fc64706a9add",
+      "correctCount": 14,
+      "totalCount": 14,
+      "anys": []
+    },
+    "2018/17/index.ts": {
+      "hash": "6cc3dc49e3adefd7a4f2e0e02ddf20d6c50f4589",
+      "correctCount": 201,
+      "totalCount": 203,
+      "anys": []
+    },
+    "2018/17/test.ts": {
+      "hash": "b9e7472429054a4fc71e673ce58c59bc42fa2c16",
+      "correctCount": 34,
+      "totalCount": 34,
+      "anys": []
+    },
+    "2018/18/index.ts": {
+      "hash": "9844c69ceb65bb29c7e141eaf6c2b8efbad0e11c",
+      "correctCount": 94,
+      "totalCount": 94,
+      "anys": []
+    },
+    "2018/18/test.ts": {
+      "hash": "18e47a8d9b64e236ad4b2cd9aac119efd48023a2",
+      "correctCount": 26,
+      "totalCount": 26,
+      "anys": []
+    },
+    "2018/19/index.ts": {
+      "hash": "f9d27c0555d7935b45c04fcdd118797eeef45967",
+      "correctCount": 240,
+      "totalCount": 240,
+      "anys": []
+    },
+    "2018/19/test.ts": {
+      "hash": "8ebb14e4b52c3d251f351c93a92e566d9ea8bbfe",
+      "correctCount": 22,
+      "totalCount": 22,
+      "anys": []
+    },
+    "2018/20/index.ts": {
+      "hash": "5ce3243dbfef3b247326466866a80ec9d4b715e7",
+      "correctCount": 108,
+      "totalCount": 110,
+      "anys": []
+    },
+    "2018/20/test.ts": {
+      "hash": "64b83c444a1885dd10a93c0c1a4b68a543a9845a",
+      "correctCount": 41,
+      "totalCount": 41,
+      "anys": []
+    },
+    "2018/22/index.ts": {
+      "hash": "c20d462f923c6b39b7388758af724f84329af2b1",
+      "correctCount": 169,
+      "totalCount": 170,
+      "anys": []
+    },
+    "2018/22/test.ts": {
+      "hash": "66251e47034330087672093d538b43fe4bbd31d6",
+      "correctCount": 18,
+      "totalCount": 18,
+      "anys": []
+    },
+    "2018/21/index.ts": {
+      "hash": "af1bc2da486756f0d38115099bb4d2dc3d6af2be",
+      "correctCount": 1,
+      "totalCount": 1,
+      "anys": []
+    },
+    "2018/21/test.ts": {
+      "hash": "a556341f53c41924ef32c46e4150edd1d2d64f9f",
+      "correctCount": 13,
+      "totalCount": 13,
+      "anys": []
+    },
+    "2018/23/index.ts": {
+      "hash": "090074b0645e8ffba33215177c840615af506f90",
+      "correctCount": 109,
+      "totalCount": 109,
+      "anys": []
+    },
+    "2018/23/test.ts": {
+      "hash": "f7e6250d6688b80e25197802cc40d015a0498690",
+      "correctCount": 33,
+      "totalCount": 33,
+      "anys": []
+    },
+    "2018/24/index.ts": {
+      "hash": "c6b7048e92c805de455be414dc9dc40c89c8e408",
+      "correctCount": 496,
+      "totalCount": 499,
+      "anys": []
+    },
+    "2018/24/test.ts": {
+      "hash": "1203cc0f3fc5390f5bde30677c8f2342cff83a3b",
+      "correctCount": 33,
+      "totalCount": 33,
+      "anys": []
+    },
+    "2018/25/index.ts": {
+      "hash": "d1c44922387d11a22a32e2b52770ddb5c89e8084",
+      "correctCount": 80,
+      "totalCount": 82,
+      "anys": []
+    },
+    "2018/25/test.ts": {
+      "hash": "6c3aec0a85893b65dc24cf0c226c4abbcaa07b9e",
+      "correctCount": 49,
+      "totalCount": 54,
+      "anys": []
+    },
+    "2020/01/index.ts": {
+      "hash": "d53a92bfc9e0c2806e2e85c904f5e4bb1ad84017",
+      "correctCount": 15,
+      "totalCount": 16,
+      "anys": []
+    },
+    "2020/01/test.ts": {
+      "hash": "4dac27673a30f2472f746e5403737f091120242c",
+      "correctCount": 31,
+      "totalCount": 31,
+      "anys": []
+    },
+    "2020/02/index.ts": {
+      "hash": "dd36a60f9ceecc8e150d67cf02eab1b15e0b8978",
+      "correctCount": 40,
+      "totalCount": 40,
+      "anys": []
+    },
+    "2020/02/test.ts": {
+      "hash": "bdde5f71e80cc30a72176abcbc7fa4198931d479",
+      "correctCount": 42,
+      "totalCount": 42,
+      "anys": []
+    },
+    "2020/03/index.ts": {
+      "hash": "d117cbc7377a6c862affe8c2893df4b7a4b90e31",
+      "correctCount": 48,
+      "totalCount": 48,
+      "anys": []
+    },
+    "2020/03/test.ts": {
+      "hash": "f24ab6d6ffe3bb3af40c82789ecf74bfdba392cf",
+      "correctCount": 47,
+      "totalCount": 47,
+      "anys": []
+    },
+    "2020/04/index.ts": {
+      "hash": "521c6f9dc27d836afd3445d624e234e74119daac",
+      "correctCount": 83,
+      "totalCount": 84,
+      "anys": []
+    },
+    "2020/04/test.ts": {
+      "hash": "26fe85011b43f9738cbbb1a5aa3e840331829df4",
+      "correctCount": 118,
+      "totalCount": 118,
+      "anys": []
+    },
+    "2020/05/index.ts": {
+      "hash": "d1d1dab71015dfe7383c8c1702bb79c51f85a48b",
+      "correctCount": 64,
+      "totalCount": 65,
+      "anys": []
+    },
+    "2020/05/test.ts": {
+      "hash": "08e9f795dd5b34214bce6f2f08e8f07c7c685542",
+      "correctCount": 48,
+      "totalCount": 48,
+      "anys": []
+    },
+    "2020/06/index.ts": {
+      "hash": "805fd5bc64aca82b06103a80bca0a4f5a17b0962",
+      "correctCount": 38,
+      "totalCount": 41,
+      "anys": [
+        {
+          "line": 8,
+          "character": 27,
+          "text": "prototype",
+          "kind": 2
+        },
+        {
+          "line": 18,
+          "character": 60,
+          "text": "prototype",
+          "kind": 2
+        },
+        {
+          "line": 19,
+          "character": 61,
+          "text": "prototype",
+          "kind": 2
+        }
+      ]
+    },
+    "2020/06/test.ts": {
+      "hash": "4d739a934957738e261b7d8b39d814834f766783",
+      "correctCount": 60,
+      "totalCount": 60,
+      "anys": []
+    },
+    "2020/07/index.ts": {
+      "hash": "0325dcb146830983657e863b0659fa3509c4bdbe",
+      "correctCount": 98,
+      "totalCount": 98,
+      "anys": []
+    },
+    "2020/07/test.ts": {
+      "hash": "772629b6e7520f4d39c6797d1b1b0b7105a97492",
+      "correctCount": 86,
+      "totalCount": 86,
+      "anys": []
+    },
+    "2020/08/index.ts": {
+      "hash": "29142fcc53159043d46fdbf30951d05ec7642a52",
+      "correctCount": 75,
+      "totalCount": 75,
+      "anys": []
+    },
+    "2020/08/test.ts": {
+      "hash": "3d8a354ebf0e8abbfc9e2508577d363f03072e6b",
+      "correctCount": 77,
+      "totalCount": 77,
+      "anys": []
+    },
+    "2020/09/index.ts": {
+      "hash": "d9c58e87ae940b296800f732e9d0c813b48b94ec",
+      "correctCount": 50,
+      "totalCount": 51,
+      "anys": []
+    },
+    "2020/09/test.ts": {
+      "hash": "c6e15dd4974f40c432c29e6033d012239a7472eb",
+      "correctCount": 34,
+      "totalCount": 34,
+      "anys": []
+    },
+    "2020/10/index.ts": {
+      "hash": "733468ab50d94bf8fdb9895181dd767f3583294a",
+      "correctCount": 77,
+      "totalCount": 78,
+      "anys": []
+    },
+    "2020/10/test.ts": {
+      "hash": "1594b8f4759eac4d225de19370f2ee215c1572c8",
+      "correctCount": 46,
+      "totalCount": 46,
+      "anys": []
+    },
+    "2020/11/index.ts": {
+      "hash": "d443e520775f89c1c9426fb46c05e5d3589bf4cd",
+      "correctCount": 125,
+      "totalCount": 125,
+      "anys": []
+    },
+    "2020/11/test.ts": {
+      "hash": "ee81724a0e251d11db05b9729547f54f44729ac7",
+      "correctCount": 105,
+      "totalCount": 105,
+      "anys": []
+    },
+    "2020/12/index.ts": {
+      "hash": "531ac67ee2614fca8a4c0aa36458b1ebfd9f2f2e",
+      "correctCount": 135,
+      "totalCount": 136,
+      "anys": []
+    },
+    "2020/12/test.ts": {
+      "hash": "a8b5866eb8bce51a51fc7035e4d3e4501eeb07a4",
+      "correctCount": 28,
+      "totalCount": 28,
+      "anys": []
+    },
+    "2020/13/index.ts": {
+      "hash": "a8b33a6a80a73ed7762089e7df9ea4e0eb1b3aec",
+      "correctCount": 91,
+      "totalCount": 92,
+      "anys": []
+    },
+    "2020/13/test.ts": {
+      "hash": "0fd4a6ef3b34c2999b80ca7ffda141c66b3d11ac",
+      "correctCount": 64,
+      "totalCount": 66,
+      "anys": []
+    },
+    "2020/14/index.ts": {
+      "hash": "b42fb10a9e3abc4757e0496e452708904018707f",
+      "correctCount": 133,
+      "totalCount": 135,
+      "anys": []
+    },
+    "2020/14/test.ts": {
+      "hash": "fb79746f90b80c0f7636d759c395b8eb8cb70d4e",
+      "correctCount": 44,
+      "totalCount": 44,
+      "anys": []
+    },
+    "2020/15/index.ts": {
+      "hash": "37e07d3e53a4bf028b9ef7a3b30c43779ac37afb",
+      "correctCount": 31,
+      "totalCount": 31,
+      "anys": []
+    },
+    "2020/15/test.ts": {
+      "hash": "9b00be3dcc8f767782af693590fb608a1b693b26",
+      "correctCount": 45,
+      "totalCount": 45,
+      "anys": []
+    },
+    "2020/16/index.ts": {
+      "hash": "fc1943fdca7973f95182733e7da0914b4d10dfbb",
+      "correctCount": 214,
+      "totalCount": 220,
+      "anys": []
+    },
+    "2020/16/test.ts": {
+      "hash": "7b1342be3e4038382414dec85dd6fb0c8f59bac2",
+      "correctCount": 79,
+      "totalCount": 79,
+      "anys": []
+    },
+    "2020/17/index.ts": {
+      "hash": "5215bf2f7de03a571d21bae4029209adb32044ad",
+      "correctCount": 304,
+      "totalCount": 304,
+      "anys": []
+    },
+    "2020/17/test.ts": {
+      "hash": "cb5e863c44b2fcf8bea166dddfa48411ba003a47",
+      "correctCount": 35,
+      "totalCount": 35,
+      "anys": []
+    },
+    "2020/18/index.ts": {
+      "hash": "de20760207197ea05cdd01259a19321ff78b3128",
+      "correctCount": 90,
+      "totalCount": 90,
+      "anys": []
+    },
+    "2020/18/test.ts": {
+      "hash": "a20a4998a1f73e0dbda97e145bca8fb041fe4ec1",
+      "correctCount": 56,
+      "totalCount": 56,
+      "anys": []
+    },
+    "2020/19/index.ts": {
+      "hash": "136e9e591410a24e651f1ec6406df6a824b9bd9e",
+      "correctCount": 85,
+      "totalCount": 89,
+      "anys": []
+    },
+    "2020/19/test.ts": {
+      "hash": "e06baf7f7db13a979185da28044eca9387044770",
+      "correctCount": 54,
+      "totalCount": 54,
+      "anys": []
+    },
+    "2020/20/index.ts": {
+      "hash": "eb7bb25624df85b7dc945a7555d2ae8f37e27b1c",
+      "correctCount": 263,
+      "totalCount": 265,
+      "anys": []
+    },
+    "2020/20/test.ts": {
+      "hash": "322b026c959068c525d6fea649d45b97d3493031",
+      "correctCount": 24,
+      "totalCount": 24,
+      "anys": []
+    },
+    "2020/21/index.ts": {
+      "hash": "e759e695af60552fa620a98d505665f6ef01fa2a",
+      "correctCount": 174,
+      "totalCount": 174,
+      "anys": []
+    },
+    "2020/21/test.ts": {
+      "hash": "ba38deb63ae7dbb90a2bcaf5cd1b626e856fc17b",
+      "correctCount": 31,
+      "totalCount": 31,
+      "anys": []
+    },
+    "2020/22/index.ts": {
+      "hash": "3ea029c753aca84199d4ea239a9060d0a5fecdb1",
+      "correctCount": 160,
+      "totalCount": 160,
+      "anys": []
+    },
+    "2020/22/test.ts": {
+      "hash": "a3e8d15ba630bed35b97dee4d1ba1fedaa4981a9",
+      "correctCount": 35,
+      "totalCount": 35,
+      "anys": []
+    },
+    "2020/25/index.ts": {
+      "hash": "91914e1036f2688ea02980861402b3763e9eb0a1",
+      "correctCount": 54,
+      "totalCount": 54,
+      "anys": []
+    },
+    "2020/25/test.ts": {
+      "hash": "2bce2e678bc7dd968baa8d8a1e8eb199d51cc219",
+      "correctCount": 22,
+      "totalCount": 22,
+      "anys": []
+    },
+    "2020/24/index.ts": {
+      "hash": "470098e9423f4a0f3f7cb2fa1badcf3c3a4ffa36",
+      "correctCount": 214,
+      "totalCount": 214,
+      "anys": []
+    },
+    "2020/24/test.ts": {
+      "hash": "e813d9f75efc797bec1aad2f3d1c23fe036f5480",
+      "correctCount": 42,
+      "totalCount": 42,
+      "anys": []
+    },
+    "2020/23/index.ts": {
+      "hash": "b0e72a74ea9d022e24786c59fc57498d68272b0c",
+      "correctCount": 129,
+      "totalCount": 129,
+      "anys": []
+    },
+    "2020/23/test.ts": {
+      "hash": "00bb9cb7b5211bff0cabe30185414389587e546f",
+      "correctCount": 44,
+      "totalCount": 44,
+      "anys": []
+    },
+    "2021/01/index.ts": {
+      "hash": "772ede2bf2147ed1042425c492e74d844ef13874",
+      "correctCount": 38,
+      "totalCount": 38,
+      "anys": []
+    },
+    "2021/01/test.ts": {
+      "hash": "8d34858afb35deff00677b5bc79c9b6c179eaf48",
+      "correctCount": 27,
+      "totalCount": 27,
+      "anys": []
+    },
+    "2021/03/index.ts": {
+      "hash": "c5ce6643141d71d7c749639905d25c05adb34eb7",
+      "correctCount": 103,
+      "totalCount": 103,
+      "anys": []
+    },
+    "2021/03/test.ts": {
+      "hash": "f8c86b2b58525445949ef0de2918260352bf00be",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2021/02/index.ts": {
+      "hash": "e5e3aee22c8ca953ce2653c66ebc591896c829ad",
+      "correctCount": 70,
+      "totalCount": 70,
+      "anys": []
+    },
+    "2021/02/test.ts": {
+      "hash": "579a00cb2b613ff6c6a79b7751e4a5b4ea847bde",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2021/04/index.ts": {
+      "hash": "0a74faf55b71c721988f47796d4cd5d84ac83c41",
+      "correctCount": 126,
+      "totalCount": 126,
+      "anys": []
+    },
+    "2021/04/test.ts": {
+      "hash": "2ef48874f69379075198d9cbfa55456f7ac9ed95",
+      "correctCount": 32,
+      "totalCount": 32,
+      "anys": []
+    },
+    "2021/05/index.ts": {
+      "hash": "ef00aa4efe62463f877cec2ccd808c2f49ae0fbc",
+      "correctCount": 133,
+      "totalCount": 134,
+      "anys": []
+    },
+    "2021/05/test.ts": {
+      "hash": "88633eb36d9274fcc299809921080a943da254eb",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2021/06/index.ts": {
+      "hash": "bde9043e5934c036a707fe62f2259daa9c1c2220",
+      "correctCount": 35,
+      "totalCount": 35,
+      "anys": []
+    },
+    "2021/06/test.ts": {
+      "hash": "0f62fbe3fa0562f009f431f4f980af35dd16c560",
+      "correctCount": 32,
+      "totalCount": 32,
+      "anys": []
+    },
+    "2021/07/index.ts": {
+      "hash": "38d7e114616849f10ee2ffebe47ea0bb7751b4c6",
+      "correctCount": 63,
+      "totalCount": 63,
+      "anys": []
+    },
+    "2021/07/test.ts": {
+      "hash": "8ff7a41217d31f47705db6f24606405eebf9284d",
+      "correctCount": 34,
+      "totalCount": 34,
+      "anys": []
+    },
+    "2021/08/index.ts": {
+      "hash": "466db97314d6d157681fd5d0a1368e5ea9abecdf",
+      "correctCount": 186,
+      "totalCount": 197,
+      "anys": []
+    },
+    "2021/08/test.ts": {
+      "hash": "db763ccc2909fbedc58c7a345b966b73dd190d9f",
+      "correctCount": 64,
+      "totalCount": 64,
+      "anys": []
+    },
+    "2021/09/index.ts": {
+      "hash": "62d9a91aa1d54b7b98bbfd51adc63676509b350a",
+      "correctCount": 136,
+      "totalCount": 136,
+      "anys": []
+    },
+    "2021/09/test.ts": {
+      "hash": "1bc92f8af7ff0194c59d878f459f403d784829a0",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2021/10/index.ts": {
+      "hash": "b1a9941167cc5a856cad8277766c886e74ee1c8d",
+      "correctCount": 114,
+      "totalCount": 114,
+      "anys": []
+    },
+    "2021/10/test.ts": {
+      "hash": "377702220e7eff7f8896daf2b8e070f8513095ba",
+      "correctCount": 67,
+      "totalCount": 67,
+      "anys": []
+    },
+    "2021/11/index.ts": {
+      "hash": "c90762fef17641e7cfc1c19e982ec6c9e016311e",
+      "correctCount": 123,
+      "totalCount": 123,
+      "anys": []
+    },
+    "2021/11/test.ts": {
+      "hash": "3981746021bbc744304dcbbac7436b74ea66942d",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2021/13/index.ts": {
+      "hash": "f4a4da7432fd9137964ba1fd7c615341c6b150d1",
+      "correctCount": 131,
+      "totalCount": 133,
+      "anys": []
+    },
+    "2021/13/test.ts": {
+      "hash": "bc63820b95d3deea33c4b224ccc20ad56400ada0",
+      "correctCount": 59,
+      "totalCount": 59,
+      "anys": []
+    },
+    "2021/12/index.ts": {
+      "hash": "6c16ac6a7af0dddd9ab481a1d9d82cebf45cc1a0",
+      "correctCount": 111,
+      "totalCount": 111,
+      "anys": []
+    },
+    "2021/12/test.ts": {
+      "hash": "9b22ffa5b38f08ac793bdd575cc9e9b0e4e23431",
+      "correctCount": 55,
+      "totalCount": 55,
+      "anys": []
+    },
+    "2021/15/index.ts": {
+      "hash": "1d0cf41cfae58a1c8550592368301c20c0ea33e4",
+      "correctCount": 107,
+      "totalCount": 107,
+      "anys": []
+    },
+    "2021/15/test.ts": {
+      "hash": "f7731768ab5799cd06e20dc6b22ff34385cd8b9f",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2021/16/index.ts": {
+      "hash": "695ddaf7e817301e7a02913bf4e8b5ae6d2a6e14",
+      "correctCount": 395,
+      "totalCount": 395,
+      "anys": []
+    },
+    "2021/16/test.ts": {
+      "hash": "3e594b91a64212b0f2be7b57b512350099f706e7",
+      "correctCount": 68,
+      "totalCount": 68,
+      "anys": []
+    },
+    "2021/14/index.ts": {
+      "hash": "ad576f4f68beb2f83af7c420ee994734849323d7",
+      "correctCount": 92,
+      "totalCount": 92,
+      "anys": []
+    },
+    "2021/14/test.ts": {
+      "hash": "16e1ff838c3895e8aaf5ea5f5bb501f13a2a4f95",
+      "correctCount": 32,
+      "totalCount": 32,
+      "anys": []
+    },
+    "2021/17/index.ts": {
+      "hash": "62865b89f75036e1f3fc9de88082603890cc4553",
+      "correctCount": 133,
+      "totalCount": 133,
+      "anys": []
+    },
+    "2021/17/test.ts": {
+      "hash": "8da551c7b3b13fbcb32e5b5eebe516637344135b",
+      "correctCount": 62,
+      "totalCount": 62,
+      "anys": []
+    },
+    "2021/18/index.ts": {
+      "hash": "0b8871efea73c7d9e5dd59e8488c710a46541244",
+      "correctCount": 133,
+      "totalCount": 133,
+      "anys": []
+    },
+    "2021/18/test.ts": {
+      "hash": "321115953e3d82090d59b1e685ae36ec4185ea17",
+      "correctCount": 101,
+      "totalCount": 101,
+      "anys": []
+    },
+    "2021/19/index.ts": {
+      "hash": "4e21a28bbb16ba6c6914924a02eea7c92781ae5e",
+      "correctCount": 37,
+      "totalCount": 38,
+      "anys": []
+    },
+    "2021/19/test.ts": {
+      "hash": "77ca80838db6414c13e15fa6987b10a2a2bf129c",
+      "correctCount": 19,
+      "totalCount": 19,
+      "anys": []
+    },
+    "2021/20/index.ts": {
+      "hash": "16163135fd81ca53a1afd67da156fd5b24905124",
+      "correctCount": 118,
+      "totalCount": 118,
+      "anys": []
+    },
+    "2021/20/test.ts": {
+      "hash": "ebecd6e1b1953ba7f3631f06c8b2504872fc3018",
+      "correctCount": 48,
+      "totalCount": 48,
+      "anys": []
+    },
+    "2021/21/index.ts": {
+      "hash": "39e3a7b70050e192fe0fba008b3a44ab10395474",
+      "correctCount": 208,
+      "totalCount": 216,
+      "anys": [
+        {
+          "line": 16,
+          "character": 8,
+          "text": "dice",
+          "kind": 2
+        },
+        {
+          "line": 21,
+          "character": 10,
+          "text": "rolls",
+          "kind": 2
+        },
+        {
+          "line": 21,
+          "character": 19,
+          "text": "dice",
+          "kind": 2
+        },
+        {
+          "line": 21,
+          "character": 32,
+          "text": "dice",
+          "kind": 2
+        },
+        {
+          "line": 21,
+          "character": 45,
+          "text": "dice",
+          "kind": 2
+        },
+        {
+          "line": 21,
+          "character": 69,
+          "text": "value",
+          "kind": 1
+        }
+      ]
+    },
+    "2021/21/test.ts": {
+      "hash": "6f4baaa7fbf624a2ce0e6f6bc294ef1fab30466e",
+      "correctCount": 18,
+      "totalCount": 18,
+      "anys": []
+    },
+    "2021/22/index.ts": {
+      "hash": "a331d98a04f6fbd5a0815fff18508e02e136ff1d",
+      "correctCount": 179,
+      "totalCount": 181,
+      "anys": []
+    },
+    "2021/22/test.ts": {
+      "hash": "ba4b27d5e973835975dd28e37cc981553353b6c5",
+      "correctCount": 42,
+      "totalCount": 42,
+      "anys": []
+    },
+    "2021/23/index.ts": {
+      "hash": "68ccf5f0e346c2cd018d30b31bfb91f36137851c",
+      "correctCount": 292,
+      "totalCount": 295,
+      "anys": []
+    },
+    "2021/23/test.ts": {
+      "hash": "f0eb7939538a31a84a9b22cedeae6248f5610cdf",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2021/24/index.ts": {
+      "hash": "0e45f9a1ba2213c1978ad4ec43902722e66ad082",
+      "correctCount": 141,
+      "totalCount": 155,
+      "anys": []
+    },
+    "2021/24/test.ts": {
+      "hash": "4ce98ebbc391d634ae83f66ba17ff68777991775",
+      "correctCount": 41,
+      "totalCount": 41,
+      "anys": []
+    },
+    "2021/25/index.ts": {
+      "hash": "44c5fd47db93625a4a3c4c9247cc519ac3425f4d",
+      "correctCount": 94,
+      "totalCount": 94,
+      "anys": []
+    },
+    "2021/25/test.ts": {
+      "hash": "12cc471473dcc63825b812f99d69a58989d0e496",
+      "correctCount": 58,
+      "totalCount": 58,
+      "anys": []
+    },
+    "2022/01/index.ts": {
+      "hash": "9b5aaeacb64e938a40982faa7eadac4554c94957",
+      "correctCount": 41,
+      "totalCount": 41,
+      "anys": []
+    },
+    "2022/01/test.ts": {
+      "hash": "28c0fc8ccf09bbc68eda391f82c532b72868bb08",
+      "correctCount": 33,
+      "totalCount": 33,
+      "anys": []
+    },
+    "2022/02/index.ts": {
+      "hash": "49e4f0d3456634ee57692ea560941839abcc4cfd",
+      "correctCount": 139,
+      "totalCount": 139,
+      "anys": []
+    },
+    "2022/02/test.ts": {
+      "hash": "c4a1a0d2b036502c1f7468d87cfd2c42f6a1637d",
+      "correctCount": 31,
+      "totalCount": 31,
+      "anys": []
+    },
+    "2022/03/index.ts": {
+      "hash": "2ae24a429072df6f430c77bc5c0a4904c51c414e",
+      "correctCount": 50,
+      "totalCount": 50,
+      "anys": []
+    },
+    "2022/03/test.ts": {
+      "hash": "37824425f80ff845fbc7ab28e522ab4427bbafa7",
+      "correctCount": 31,
+      "totalCount": 31,
+      "anys": []
+    },
+    "2022/04/index.ts": {
+      "hash": "e412aae51f84262939bd3511fbc5ce2afe50f226",
+      "correctCount": 67,
+      "totalCount": 68,
+      "anys": []
+    },
+    "2022/04/test.ts": {
+      "hash": "70e3d7c44eea19d9a4a0fabb21596e41dca7362a",
+      "correctCount": 31,
+      "totalCount": 31,
+      "anys": []
+    },
+    "2022/05/index.ts": {
+      "hash": "a81767a10e1c71081a39a6b7f9bdd9b527568e01",
+      "correctCount": 75,
+      "totalCount": 76,
+      "anys": []
+    },
+    "2022/05/test.ts": {
+      "hash": "9d2f6be58aec63b4919e2f6e04c0b926545b656c",
+      "correctCount": 35,
+      "totalCount": 37,
+      "anys": []
+    },
+    "2022/06/index.ts": {
+      "hash": "db7c3a9f1fc6041c29f66c4523a705fc4fe3dc43",
+      "correctCount": 26,
+      "totalCount": 26,
+      "anys": []
+    },
+    "2022/06/test.ts": {
+      "hash": "9908682b50478bfa01b03e8342f6b21b2d3af4a6",
+      "correctCount": 49,
+      "totalCount": 49,
+      "anys": []
+    },
+    "2022/08/index.ts": {
+      "hash": "1aeb8add32ff9bbc9bba0e6976af44dd656a8f0d",
+      "correctCount": 128,
+      "totalCount": 128,
+      "anys": []
+    },
+    "2022/08/test.ts": {
+      "hash": "d1a7d98542878dbcc703f7853317ab0a3abc50e7",
+      "correctCount": 31,
+      "totalCount": 31,
+      "anys": []
+    },
+    "2022/07/index.ts": {
+      "hash": "8634922b42c2f079e1430d619178098032d64168",
+      "correctCount": 172,
+      "totalCount": 182,
+      "anys": []
+    },
+    "2022/07/test.ts": {
+      "hash": "ef407b3babbd47fb96608c631c2fc48cf3341097",
+      "correctCount": 38,
+      "totalCount": 38,
+      "anys": []
+    },
+    "2022/09/index.ts": {
+      "hash": "b3bacc2089e3b8624946f803950c0d0cbd751338",
+      "correctCount": 145,
+      "totalCount": 146,
+      "anys": []
+    },
+    "2022/09/test.ts": {
+      "hash": "a3f8b2bf0d06111f6bcc58a6ec68fa2233ce2227",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2022/10/index.ts": {
+      "hash": "6c32ea8d94e5fe469feb05e71e459053facff417",
+      "correctCount": 88,
+      "totalCount": 89,
+      "anys": []
+    },
+    "2022/10/test.ts": {
+      "hash": "cff5049e2d7f1599c02f26be4135cc8cd67f6f3f",
+      "correctCount": 42,
+      "totalCount": 42,
+      "anys": []
+    },
+    "2022/12/index.ts": {
+      "hash": "5f66eae1d64a0b36b25d4b35d22f8987e41349a4",
+      "correctCount": 144,
+      "totalCount": 144,
+      "anys": []
+    },
+    "2022/12/test.ts": {
+      "hash": "5ef6c2b1b4fdddc95967023ddfa9934644ffe947",
+      "correctCount": 31,
+      "totalCount": 31,
+      "anys": []
+    },
+    "2022/11/index.ts": {
+      "hash": "1d63de5f7ed7f3c0d4b8a9c72ca14efe90550a50",
+      "correctCount": 186,
+      "totalCount": 190,
+      "anys": []
+    },
+    "2022/11/test.ts": {
+      "hash": "79cd55a6e95ecf013510a0ef744b30bfdb754e15",
+      "correctCount": 32,
+      "totalCount": 32,
+      "anys": []
+    },
+    "2022/13/index.ts": {
+      "hash": "b70aebd83cf85deabc9948dac2b86a30aa6d6223",
+      "correctCount": 125,
+      "totalCount": 125,
+      "anys": []
+    },
+    "2022/13/test.ts": {
+      "hash": "f5525dafa286a7e14e9c9f76f75a6fe7b89a01c5",
+      "correctCount": 58,
+      "totalCount": 58,
+      "anys": []
+    },
+    "2022/14/index.ts": {
+      "hash": "5ff99992abe271608b302abc797f72ecb0778244",
+      "correctCount": 235,
+      "totalCount": 236,
+      "anys": []
+    },
+    "2022/14/test.ts": {
+      "hash": "02a9c91604f4980bb7a3172444297bb91184263e",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2022/15/index.ts": {
+      "hash": "e74b2c44f7962f0405fcf8e1356a747bcfbafd94",
+      "correctCount": 219,
+      "totalCount": 222,
+      "anys": []
+    },
+    "2022/15/test.ts": {
+      "hash": "e09e8c974e4c494e0b18b00003e5d12bdcc983d6",
+      "correctCount": 32,
+      "totalCount": 32,
+      "anys": []
+    },
+    "2022/16/index.ts": {
+      "hash": "ea847fb858c9d558bcc931e72dd84f6eade58427",
+      "correctCount": 169,
+      "totalCount": 172,
+      "anys": []
+    },
+    "2022/16/test.ts": {
+      "hash": "5dd93faec873e0d0220e6854017c67de78d34131",
+      "correctCount": 22,
+      "totalCount": 22,
+      "anys": []
+    },
+    "2022/17/index.ts": {
+      "hash": "f15e7f2b1e024fb23c1defb8a9c66ca5a00bb8cd",
+      "correctCount": 183,
+      "totalCount": 187,
+      "anys": [
+        {
+          "line": 67,
+          "character": 8,
+          "text": "sideIndex",
+          "kind": 2
+        },
+        {
+          "line": 82,
+          "character": 56,
+          "text": "sideIndex",
+          "kind": 2
+        },
+        {
+          "line": 82,
+          "character": 73,
+          "text": "value",
+          "kind": 1
+        }
+      ]
+    },
+    "2022/17/test.ts": {
+      "hash": "2bd7b5014adb6f3d08a4b404d0f0be84c8b613b7",
+      "correctCount": 20,
+      "totalCount": 20,
+      "anys": []
+    },
+    "2022/18/index.ts": {
+      "hash": "24c68112747b8ff4ac60372a3ca447b999c01bae",
+      "correctCount": 112,
+      "totalCount": 113,
+      "anys": []
+    },
+    "2022/18/test.ts": {
+      "hash": "e167b26ac819bf79a5a2f3785fbded60c499efae",
+      "correctCount": 33,
+      "totalCount": 35,
+      "anys": []
+    },
+    "2022/19/index.ts": {
+      "hash": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+      "correctCount": 0,
+      "totalCount": 0,
+      "anys": []
+    },
+    "2022/19/test.ts": {
+      "hash": "43cf2c38e3b32bc89f642c7adb0b341ff0e80b6f",
+      "correctCount": 8,
+      "totalCount": 8,
+      "anys": []
+    },
+    "2022/20/index.ts": {
+      "hash": "3d4d5370718ade98d61a04e0a4f4c0d450f28471",
+      "correctCount": 63,
+      "totalCount": 63,
+      "anys": []
+    },
+    "2022/20/test.ts": {
+      "hash": "73e53301c8232efbb50778774daab890016ff0d9",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2022/21/index.ts": {
+      "hash": "118421d1015158541ab38b06eafd43986632f7d4",
+      "correctCount": 166,
+      "totalCount": 166,
+      "anys": []
+    },
+    "2022/21/test.ts": {
+      "hash": "b4cb5096f1a97047ab9917106abdc3855cc47f4e",
+      "correctCount": 36,
+      "totalCount": 36,
+      "anys": []
+    },
+    "2022/22/index.ts": {
+      "hash": "27a219e2be3bd65d3337d7f28bdff8b5ee9e12c2",
+      "correctCount": 445,
+      "totalCount": 449,
+      "anys": []
+    },
+    "2022/22/test.ts": {
+      "hash": "d09c3a3644f884ea1354f3588946efd555d438e4",
+      "correctCount": 55,
+      "totalCount": 55,
+      "anys": []
+    },
+    "2022/23/index.ts": {
+      "hash": "54ecaa7fc979ea6f4076796b5d76f9a82bf7f962",
+      "correctCount": 162,
+      "totalCount": 166,
+      "anys": []
+    },
+    "2022/23/test.ts": {
+      "hash": "9d67ac8fccbb5c24812cdf3784daa73e837d3ad0",
+      "correctCount": 32,
+      "totalCount": 32,
+      "anys": []
+    },
+    "2022/24/index.ts": {
+      "hash": "6e612eb1f88ab2310c42d740d95cb77dfb8f1ad2",
+      "correctCount": 228,
+      "totalCount": 231,
+      "anys": []
+    },
+    "2022/24/test.ts": {
+      "hash": "29a3b01deb6b4a8f6a5bbc3703a5e8ee819bfc42",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2022/day-25/index.ts": {
+      "hash": "8b4390d21625276f1131091887a263cf6717433b",
+      "correctCount": 47,
+      "totalCount": 47,
+      "anys": []
+    },
+    "2022/day-25/test.ts": {
+      "hash": "3d7a7aaf24ee5d69411eb86f19710448388e51d7",
+      "correctCount": 68,
+      "totalCount": 70,
+      "anys": []
+    },
+    "2023/01/index.ts": {
+      "hash": "a0a9dc0f90a0e9973d4f89c9ddaea7628a52ad19",
+      "correctCount": 50,
+      "totalCount": 50,
+      "anys": []
+    },
+    "2023/01/test.ts": {
+      "hash": "a47ca3da1f3cd41db98b40eb493a819a54a166a3",
+      "correctCount": 33,
+      "totalCount": 33,
+      "anys": []
+    },
+    "2023/02/index.ts": {
+      "hash": "72b33ab4e443679b85e830f12e2316508379b92f",
+      "correctCount": 132,
+      "totalCount": 133,
+      "anys": []
+    },
+    "2023/02/test.ts": {
+      "hash": "161e5b03fcf37324688baa9c3b65a58202a0c653",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2023/04/index.ts": {
+      "hash": "f2203e2d3c0f01a686fc734cdd152a0fcb6d5af6",
+      "correctCount": 60,
+      "totalCount": 60,
+      "anys": []
+    },
+    "2023/04/test.ts": {
+      "hash": "631b3d78f88a7708d6ed3a71998841373b946b85",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2023/03/index.ts": {
+      "hash": "317e1089d30e1f395264ac8c6277efd6af9e8093",
+      "correctCount": 165,
+      "totalCount": 165,
+      "anys": []
+    },
+    "2023/03/test.ts": {
+      "hash": "b739f5dd53a4ebd5225844d7827d389098e23b1b",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2023/05/index.ts": {
+      "hash": "9fe77bbd7602677e0369989f15dd7a75d1757c81",
+      "correctCount": 254,
+      "totalCount": 255,
+      "anys": []
+    },
+    "2023/05/test.ts": {
+      "hash": "c4e761ea6142593d94c293e2e401dafd162d8c93",
+      "correctCount": 32,
+      "totalCount": 32,
+      "anys": []
+    },
+    "2023/06/index.ts": {
+      "hash": "fa4e81c2753573722114b9c22679cdfb187ec828",
+      "correctCount": 54,
+      "totalCount": 54,
+      "anys": []
+    },
+    "2023/06/test.ts": {
+      "hash": "a5a7b5d5e517d5ac7d4ef348429bfbce820c4988",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2023/07/index.ts": {
+      "hash": "9cd6f56fc9dd30e20e595a8b9b98aa22c3a297ea",
+      "correctCount": 141,
+      "totalCount": 144,
+      "anys": []
+    },
+    "2023/07/test.ts": {
+      "hash": "1ef2b09ed0bf074dff25859f16e07c997e13c0a2",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2023/08/index.ts": {
+      "hash": "5cd4259020d5da4b01ed24279535b6c6857c1fd6",
+      "correctCount": 82,
+      "totalCount": 82,
+      "anys": []
+    },
+    "2023/08/test.ts": {
+      "hash": "7a905af3f4f41e14c473a7601be54990a19fa947",
+      "correctCount": 33,
+      "totalCount": 33,
+      "anys": []
+    },
+    "2023/09/index.ts": {
+      "hash": "0b905ed47d38c62ba431afcd160dbf3a322e6eee",
+      "correctCount": 43,
+      "totalCount": 43,
+      "anys": []
+    },
+    "2023/09/test.ts": {
+      "hash": "d6d689bb05891f3853db500952e063754ec3b153",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2023/10/index.ts": {
+      "hash": "7d387ec5fdf03cf3fc134ade7fdfe03adb1f09ab",
+      "correctCount": 260,
+      "totalCount": 262,
+      "anys": []
+    },
+    "2023/10/test.ts": {
+      "hash": "5f39995430e6f4d334ce2604e717958542f9b6e6",
+      "correctCount": 54,
+      "totalCount": 54,
+      "anys": []
+    },
+    "2023/11/index.ts": {
+      "hash": "c032e357517c35384b7ee5a68906c00900311ff4",
+      "correctCount": 97,
+      "totalCount": 99,
+      "anys": []
+    },
+    "2023/11/test.ts": {
+      "hash": "d043b7cf2b6fbad9e6465415b63b6e75e410e9ef",
+      "correctCount": 34,
+      "totalCount": 34,
+      "anys": []
+    },
+    "2023/12/index.ts": {
+      "hash": "8a77e4f301814a5ff79be3bcc2e14385c98cbfba",
+      "correctCount": 266,
+      "totalCount": 267,
+      "anys": []
+    },
+    "2023/12/test.ts": {
+      "hash": "ef3417d24ff74ed1535a5994f7775bdde86978a4",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2023/13/index.ts": {
+      "hash": "019a88f2819cfdf679bd1722907311c0c3218393",
+      "correctCount": 147,
+      "totalCount": 147,
+      "anys": []
+    },
+    "2023/13/test.ts": {
+      "hash": "328a8585e2f97dcc00589c965c487e6d88538b72",
+      "correctCount": 40,
+      "totalCount": 40,
+      "anys": []
+    },
+    "2023/14/index.ts": {
+      "hash": "611d0ed3955a55924ca769724003fa133c1f9e45",
+      "correctCount": 127,
+      "totalCount": 127,
+      "anys": []
+    },
+    "2023/14/test.ts": {
+      "hash": "30ceeab8f5bce4081ada227bd6a30b0ad925972b",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2023/15/index.ts": {
+      "hash": "a536dc4630b87cdff677d2d882482c0bf1f0305c",
+      "correctCount": 108,
+      "totalCount": 110,
+      "anys": []
+    },
+    "2023/15/test.ts": {
+      "hash": "5facf8f3a6b2b0d5e6f91e9b9b2c9dca0ea4cba5",
+      "correctCount": 39,
+      "totalCount": 39,
+      "anys": []
+    },
+    "2023/16/index.ts": {
+      "hash": "8e1d2d197985cb4bf3cd319eaf6a0746eaef5761",
+      "correctCount": 143,
+      "totalCount": 143,
+      "anys": []
+    },
+    "2023/16/test.ts": {
+      "hash": "153a6488505b1b9dc6000b87d273d5b3398d4824",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2023/17/index.ts": {
+      "hash": "7e0b08247775f941cd0d67dbb95b47feb5959469",
+      "correctCount": 223,
+      "totalCount": 223,
+      "anys": []
+    },
+    "2023/17/test.ts": {
+      "hash": "d6e7d6992b76aa4fed2a4c8448b7d841552d4980",
+      "correctCount": 37,
+      "totalCount": 37,
+      "anys": []
+    },
+    "2023/18/index.ts": {
+      "hash": "1b6988c4209aa8448e258753d559f59e566a74f1",
+      "correctCount": 50,
+      "totalCount": 51,
+      "anys": []
+    },
+    "2023/18/test.ts": {
+      "hash": "2892e105dbdffa2784bafc965252f82173ba5c9e",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2023/19/index.ts": {
+      "hash": "37c8227700e0f7ed0bcd7a0b0a1c155ebe098d85",
+      "correctCount": 262,
+      "totalCount": 263,
+      "anys": []
+    },
+    "2023/19/test.ts": {
+      "hash": "4350acb0de7d2e30be1775a61685e58add4131de",
+      "correctCount": 28,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2023/20/index.ts": {
+      "hash": "4110c0b00bb47bde7901312296279b99921ad96c",
+      "correctCount": 203,
+      "totalCount": 207,
+      "anys": []
+    },
+    "2023/20/test.ts": {
+      "hash": "d5285752efcf14bcdd7155b4a58f8e66b9094341",
+      "correctCount": 33,
+      "totalCount": 33,
+      "anys": []
+    },
+    "2023/21/index.ts": {
+      "hash": "4274115c3889cfded956e50972213e2abf4eb91d",
+      "correctCount": 130,
+      "totalCount": 132,
+      "anys": []
+    },
+    "2023/21/test.ts": {
+      "hash": "5ea1ed3f9012925ad1eea9cc9d8fa9addef277ed",
+      "correctCount": 41,
+      "totalCount": 41,
+      "anys": []
+    },
+    "2023/22/index.ts": {
+      "hash": "328a4745eaaa77535469ced9883c412b6012a76c",
+      "correctCount": 216,
+      "totalCount": 219,
+      "anys": []
+    },
+    "2023/22/test.ts": {
+      "hash": "d32a9ffe625e9020a5fc11cdaa21a6b08e6c1554",
+      "correctCount": 30,
+      "totalCount": 30,
+      "anys": []
+    },
+    "2023/23/index.ts": {
+      "hash": "2c46df1e59518b7ff9a8734ab98ef9e1f0ee8b48",
+      "correctCount": 294,
+      "totalCount": 294,
+      "anys": []
+    },
+    "2023/23/test.ts": {
+      "hash": "e87edf4ea2dbea5c795be8838a52ddfe369277a8",
+      "correctCount": 26,
+      "totalCount": 26,
+      "anys": []
+    },
+    "2023/25/index.ts": {
+      "hash": "8afd2f2b364bc0092c7f2c4d12320bd530359159",
+      "correctCount": 127,
+      "totalCount": 128,
+      "anys": []
+    },
+    "2023/25/test.ts": {
+      "hash": "516d8db2d1250f9624b957408cd4fcfd8f992e2a",
+      "correctCount": 23,
+      "totalCount": 23,
+      "anys": []
+    },
+    "2023/24/index.ts": {
+      "hash": "e24d9035314b13fa9984957197c578c302275ad5",
+      "correctCount": 213,
+      "totalCount": 214,
+      "anys": []
+    },
+    "2023/24/test.ts": {
+      "hash": "1886428e952cf83ca84df665e96c104f490521e3",
+      "correctCount": 27,
+      "totalCount": 27,
+      "anys": []
+    }
+  }
+}

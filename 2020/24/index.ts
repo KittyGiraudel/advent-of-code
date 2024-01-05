@@ -16,7 +16,7 @@ const VECTORS: Record<string, Coords> = {
 // Parse a given line into a series of directions.
 // @param line - Raw series of steps
 const parseLine = (line: string) => {
-  const directions = []
+  const directions: string[] = []
   let pointer = 0
 
   while (pointer < line.length) {

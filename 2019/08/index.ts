@@ -21,7 +21,7 @@ export const recompose = (
   size: { width: number; height: number }
 ) => {
   const layers = parse(input, size)
-  const image = new $.Grid<number>(size.width, size.height)
+  const image = new $.Grid<number>(size.width, size.height, null)
 
   for (let i = 0; i < layers.length; i++) {
     const layer = layers[i]

@@ -4,7 +4,7 @@ export const run = (salt: string, part2: boolean = false) => {
   let password1: string[] = []
   let password2: (string | undefined)[] = $.array(8)
   let i = 0
-  let curr = null
+  let curr: string | null = null
 
   while (true) {
     do curr = $.md5(salt + ++i)

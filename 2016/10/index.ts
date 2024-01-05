@@ -23,7 +23,7 @@ export const run = (input: string[]) => {
     }
   }
 
-  let index = null
+  let index: number | null = null
 
   do {
     index = state.bot.findIndex(item => item && item.length === 2)

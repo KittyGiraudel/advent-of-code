@@ -4,7 +4,7 @@ export const cycle2 = (input: string, iterations: number = 1) => {
   const offset = +input.slice(0, 7)
   const code = input.split('').map(Number).slice(offset)
   const curr = code.slice()
-  const next = new Array(code.length)
+  const next = new Array<number>(code.length)
 
   // Solution shamelessly borrowed from Reddit, because I couldn’t figure out
   // how to further optimize my code. It only works for inputs with an offset
@@ -38,7 +38,7 @@ const reduceAny = (acc: number, chunk: number[], i: number) =>
 
 export const cycle = (input: string, iterations: number = 1) => {
   let curr = input.split('').map(Number)
-  let next = []
+  let next: number[] = []
 
   for (let i = 0; i < iterations; i++) {
     for (let d = 0; d < curr.length; d++) {

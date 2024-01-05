@@ -10,7 +10,8 @@ const gen = function* (init: number, factor: number, modulo: number = 1) {
   }
 }
 
-const tick = (gen: Generator) => $.toBin(gen.next().value).slice(-16)
+const tick = (generator: ReturnType<typeof gen>) =>
+  $.toBin(generator.next().value).slice(-16)
 
 export const run = (
   a: number,

@@ -26,3 +26,7 @@ export type LengthArray<
   : R['length'] extends N
   ? R
   : LengthArray<T, N, [T, ...R]>
+
+export type Entries<T> = {
+  [K in keyof T]: [K, T[K]]
+}[keyof T][]
