@@ -1,12 +1,5 @@
 import $ from '../../helpers'
-import {
-  Coords,
-  CoordsAndPoint,
-  Entries,
-  Grid,
-  Point,
-  TriPoint,
-} from '../../types'
+import { Coords, Entries, Grid, Point, TriPoint } from '../../types'
 
 const createGraph = (grid: Grid<string>, part2: boolean = false) => {
   const lookup = grid.toMap()
@@ -45,10 +38,13 @@ const createGraph = (grid: Grid<string>, part2: boolean = false) => {
   // connecting them with their neighbors.
   // https://gist.github.com/qwewqa/00d8272766c2945f4aa965ea36dba7f5
   if (part2) {
-    const entries = Object.entries(edges) as Entries<typeof edges>
     let entry: Entries<typeof edges>[number] | undefined = undefined
 
-    while ((entry = entries.find(([, set]) => set.size === 2))) {
+    while (
+      (entry = (Object.entries(edges) as Entries<typeof edges>).find(
+        ([, set]) => set.size === 2
+      ))
+    ) {
       const point = entry[0] as Point
       const coords = $.toCoords(point)
       const [a, b] = Array.from(entry[1]).map(value =>

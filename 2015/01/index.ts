@@ -5,7 +5,7 @@ export const run = (string: string) => {
   for (let i = 0; i < string.length; i++) {
     if (string[i] === '(') floor++
     if (string[i] === ')') floor--
-    if (!basement && floor === -1) basement = i + 1
+    if (!isFinite(basement) && floor === -1) basement = i + 1
   }
 
   return [floor, basement] as [number, number]
