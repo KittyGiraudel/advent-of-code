@@ -24,7 +24,7 @@ export const run = (input: string[], part2: boolean = false) => {
 
     const values = Object.values(distances)
     const result = values.filter(v => v <= steps && v % 2 === steps % 2).length
-    console.log('Solving for', steps, '=', result)
+    // console.log('Solving for', steps, '=', result)
 
     return result
   }
