@@ -36,7 +36,7 @@ export const run = (input: string[], rounds: number = 10) => {
           if (next) return { curr: point, next: next[0] }
         }
       })
-      .filter(Boolean)
+      .filter((item): item is { curr: Point; next: Point } => Boolean(item))
 
     // This is for part 2.
     if (!moving.length) return i + 1
@@ -44,8 +44,8 @@ export const run = (input: string[], rounds: number = 10) => {
     // Stage 2: every elf in the map moves provided they are the only one that
     // was supposed to move to that direction
     moving.forEach((moving, _, array) => {
-      const { curr, next } = moving!
-      if (!array.find(item => item!.curr !== curr && item!.next === next)) {
+      const { curr, next } = moving
+      if (!array.find(item => item.curr !== curr && item.next === next)) {
         positions.add(next)
         positions.delete(curr)
       }

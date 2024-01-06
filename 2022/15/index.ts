@@ -45,8 +45,9 @@ export const detect = (input: string[], y?: number, max?: number) => {
   // and within the range of a sensor.
   if (y && !max) {
     const sorted = sensors.sort((a, b) => a.position[0] - b.position[0])
+    const last = sorted[sorted.length - 1]
     const minX = sorted[0].position[0] - sorted[0].radius
-    const maxX = sorted.at(-1)!.position[0] + sorted.at(-1)!.radius
+    const maxX = last.position[0] + last.radius
 
     let count = 0
 
@@ -128,7 +129,11 @@ export const detect = (input: string[], y?: number, max?: number) => {
         return null
       },
       null
-    )!
+    )
+
+    if (!candidate) {
+      throw new Error('Could not find candidate')
+    }
 
     return candidate[0] * 4_000_000 + candidate[1]
   }

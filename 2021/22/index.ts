@@ -11,15 +11,15 @@ type Cube = {
 }
 
 // Return the boundaries of a cubic area of the given width.
-const getArea = (width: number = Infinity) =>
-  ({
-    xMin: width * -1,
-    xMax: width,
-    yMin: width * -1,
-    yMax: width,
-    zMin: width * -1,
-    zMax: width,
-  } as Cube)
+const getArea = (width: number = Infinity): Cube => ({
+  xMin: width * -1,
+  xMax: width,
+  yMin: width * -1,
+  yMax: width,
+  zMin: width * -1,
+  zMax: width,
+  sign: Infinity,
+})
 
 // Parse a given instruction into a set of boundaries and a sign.
 const parseLine = (line: string) => {
@@ -61,9 +61,9 @@ export const run = (input: string[], max: number) => {
   const cuboids = instructions.reduce<Cube[]>((acc, instruction) => {
     const intersections = acc
       .map(cuboid => getIntersection(cuboid, instruction))
-      .filter(Boolean)
+      .filter((cube): cube is Cube => Boolean(cube))
     if (instruction.sign === 1) intersections.push(instruction)
-    return acc.concat(intersections as Cube[])
+    return acc.concat(intersections)
   }, [])
 
   return $.sum(cuboids.map(cuboid => getVolume(cuboid) * cuboid.sign))

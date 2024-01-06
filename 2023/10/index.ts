@@ -40,8 +40,12 @@ const getNextPipeNodes = (grid: Grid<string>) => (coords: Coords) =>
   })
 
 const mapOutLoopingPipe = (grid: Grid<string>) => {
-  const start = grid.findCoords(v => v === 'S')!
+  const start = grid.findCoords(v => v === 'S')
   const getNext = getNextPipeNodes(grid)
+
+  if (!start) {
+    throw new Error('Could not find a start node')
+  }
 
   // To avoid having to deal with the cell “S” within BFS, start by replacing
   // the starting point with the relevant tile.

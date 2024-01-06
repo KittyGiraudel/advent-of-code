@@ -3,7 +3,7 @@ import { Coords, Grid, Point } from '../../types'
 
 const generateMap = (input: string[]) =>
   input.reduce<Record<Point, string>>((acc, line) => {
-    const match = line.match(/([xy])=(\d+), ([xy])=(\d+)..(\d+)/)!
+    const match = $.match(line, /([xy])=(\d+), ([xy])=(\d+)..(\d+)/)
 
     for (let i = +match[4]; i <= +match[5]; i++) {
       const ri = match[1] === 'y' ? +match[2] : i
@@ -73,7 +73,7 @@ export const scan = (
 ): [number, number] => {
   const map = generateMap(input)
   const [minRi, maxRi, minCi, maxCi] = $.boundaries(
-    (Object.keys(map) as Point[]).map($.toCoords)
+    $.keys<Point>(map).map($.toCoords)
   )
   const grid = new $.Grid(
     maxCi + 1,

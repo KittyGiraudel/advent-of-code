@@ -63,7 +63,9 @@ export const discover = (input: string[], roundTrip: boolean = false) => {
     if (roundTrip) order.push(curr)
 
     while (order.length) {
-      const next = order.shift()!
+      const next = order.shift()
+      if (!next) break
+
       // Which of the next two lines to comment out depends on which version is
       // used previously: my first version does pathfinding on the go with some
       // aggressive caching while the second version precomputes all distances

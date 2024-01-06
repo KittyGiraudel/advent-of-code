@@ -36,8 +36,7 @@ const parseSample = ([before, op, after]: string[]) =>
 
 export const debug = (input: string[]) => {
   const capacity = Object.keys(OPCODES).length
-  const program = input
-    .at(-1)!
+  const program = input[input.length - 1]
     .split('\n')
     .map(line => line.split(' ').map(Number))
   const registry: (string | Set<string>)[] = input
@@ -73,10 +72,8 @@ export const debug = (input: string[]) => {
     )
     registry[opIndex] = Array.from(registry[opIndex]).pop()!
     registry
-      .filter(item => typeof item !== 'string')
-      .forEach(item =>
-        (item as Set<string>).delete(registry[opIndex] as string)
-      )
+      .filter((item): item is Set<string> => typeof item !== 'string')
+      .forEach(item => item.delete(registry[opIndex] as string))
   }
 
   return program.reduce(

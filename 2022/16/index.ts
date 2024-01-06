@@ -52,15 +52,14 @@ export const releasePressure = (input: string[]) => {
     toKey: curr => String(curr.pressure),
     isGoal: curr => curr.time <= 0,
     getCost: (curr, next) => distanceMap[curr.name as DistanceKey][next.name],
-    getNext: curr =>
-      curr.remaining
+    getNext: curr => {
+      const key = curr.name as DistanceKey
+
+      return curr.remaining
         .filter(next => next !== curr.name)
-        .filter(
-          next => curr.time - distanceMap[curr.name as DistanceKey][next] > 1
-        )
+        .filter(next => curr.time - distanceMap[key][next] > 1)
         .map(next => {
-          const time =
-            curr.time - distanceMap[curr.name as DistanceKey][next] - 1
+          const time = curr.time - distanceMap[key][next] - 1
 
           return {
             name: next,
@@ -68,7 +67,8 @@ export const releasePressure = (input: string[]) => {
             remaining: curr.remaining.filter(node => node !== next),
             pressure: curr.pressure + time * map[next].flow,
           }
-        }),
+        })
+    },
   })
 
   return Math.max(...Object.keys(graph).map(Number))

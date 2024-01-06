@@ -7,6 +7,6 @@ export const run = (lines: string[], part2: boolean = false) => {
   )
 
   return part2
-    ? counters.map(counter => counter.at(-1)![0]).join('')
+    ? counters.map(counter => counter[counter.length - 1][0]).join('')
     : counters.map(counter => counter[0][0]).join('')
 }

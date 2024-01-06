@@ -44,9 +44,9 @@ const processEvent = (event: Event, index: number, log: Event[]) => {
     ;(log[index + 1] as Event).start = event.date.getUTCMinutes()
   }
 
-  if (event.type === 'wakes up') {
+  if (event.type === 'wakes up' && event.start !== undefined) {
     event.end = event.date.getUTCMinutes()
-    event.minutes = $.range(event.end - event.start!, event.start)
+    event.minutes = $.range(event.end - event.start, event.start)
   }
 
   return event
@@ -60,8 +60,8 @@ const aggregateEvents = (acc: Record<string, number[]>, event: Event) => {
     acc[event.id] = []
   }
 
-  if (event.type === 'wakes up') {
-    acc[event.id].push(...event.minutes!)
+  if (event.type === 'wakes up' && event.minutes) {
+    acc[event.id].push(...event.minutes)
   }
 
   return acc

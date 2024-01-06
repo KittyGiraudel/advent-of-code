@@ -6,7 +6,11 @@
  * arrays but not the first are also not returned.
  */
 const intersection = <T>(...arrays: T[][]) => {
-  return Array.from(arrays.shift()!).filter((item: T) =>
+  const first = arrays.shift()
+
+  if (!first) return []
+
+  return Array.from(first).filter((item: T) =>
     arrays.every((array: T[]) => array.includes(item))
   )
 }

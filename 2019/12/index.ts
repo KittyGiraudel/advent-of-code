@@ -6,11 +6,10 @@ type Moon = {
   velocity: TriCoords
 }
 
-const prepareMoon = (line: string) =>
-  ({
-    position: $.match(line, /(-?\d+)/g).map(Number),
-    velocity: [0, 0, 0],
-  } as Moon)
+const prepareMoon = (line: string): Moon => ({
+  position: $.match(line, /(-?\d+)/g).map(Number) as TriCoords,
+  velocity: [0, 0, 0],
+})
 
 const prepare = (moons: string[]) => moons.map(prepareMoon)
 

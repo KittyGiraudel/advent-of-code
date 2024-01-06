@@ -35,18 +35,20 @@ export const processLine = (line: string) => {
   return { type: 'VALID' } as ValidLine
 }
 
-const getLinesFromType = (lines: string[], type: string) =>
-  lines.map(processLine).filter(line => line.type === type)
+const getLinesFromType = <T extends ReturnType<typeof processLine>>(
+  lines: string[],
+  type: ValidLine['type'] | IncompleteLine['type'] | CorruptedLine['type']
+) => lines.map(processLine).filter((line): line is T => line.type === type)
 
 const getCorruptionScore = (lines: string[]) =>
-  (getLinesFromType(lines, 'CORRUPTED') as CorruptedLine[]).reduce(
+  getLinesFromType<CorruptedLine>(lines, 'CORRUPTED').reduce(
     (score, { character }) =>
       score + CORRUPTION_SCORE_MAP[character as CorruptionKey],
     0
   )
 
 const getCompletionScore = (lines: string[]) => {
-  const scores = (getLinesFromType(lines, 'INCOMPLETE') as IncompleteLine[])
+  const scores = getLinesFromType<IncompleteLine>(lines, 'INCOMPLETE')
     .map(line =>
       line.opened.reduceRight(
         (score, character) =>

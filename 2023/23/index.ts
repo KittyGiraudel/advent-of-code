@@ -77,7 +77,9 @@ const findLongestPath = (
   let best = 0
 
   while (queue.length) {
-    const [point, dist] = queue.pop()!
+    const next = queue.pop()
+    if (!next) break
+    const [point, dist] = next
 
     if (dist === -1) {
       visited.delete(point)
@@ -105,11 +107,13 @@ const findLongestPath = (
 export const run = (input: string[], part2: boolean = false) => {
   const grid = $.Grid.fromRows(input)
   const { height } = grid
-  const startCoords = grid.findCoords((v, [ri]) => ri === 0 && v === '.')!
-  const endCoords = grid.findCoords(
-    (v, [ri]) => ri === height - 1 && v === '.'
-  )!
+  const startCoords = grid.findCoords((v, [ri]) => ri === 0 && v === '.')
+  const endCoords = grid.findCoords((v, [ri]) => ri === height - 1 && v === '.')
   const graph = createGraph(grid, part2)
+
+  if (!startCoords || !endCoords) {
+    throw new Error('Could not find start or end coordinates')
+  }
 
   return findLongestPath(graph, $.toPoint(startCoords), $.toPoint(endCoords))
 }

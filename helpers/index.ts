@@ -17,6 +17,7 @@ import hexToBin from './hexToBin'
 import indices from './indices'
 import intersection from './intersection'
 import isClamped from './isClamped'
+import keys from './keys'
 import lcm from './lcm'
 import levenshtein from './levenshtein'
 import loopIndex from './loopIndex'
@@ -72,6 +73,7 @@ export default {
   indices,
   intersection,
   isClamped,
+  keys,
   lcm,
   levenshtein,
   loopIndex,

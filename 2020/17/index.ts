@@ -98,7 +98,7 @@ const transition = (
 ) => {
   const cell = origin.get(coords) as string
   const neighbourCoords = getNeighborCoords(coords, dimensions, cache)
-  const neighbours = neighbourCoords.map(coords => origin.get(coords)!)
+  const neighbours = neighbourCoords.map(coords => origin.get(coords))
   const count = neighbours.filter(isAlive).length
 
   return mutate(cell, count)

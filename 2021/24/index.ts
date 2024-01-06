@@ -4,9 +4,10 @@ export const run = (instructions: string[], inputs: number[]) => {
   const data = { w: 0, x: 0, y: 0, z: 0 }
 
   instructions.forEach(line => {
+    type Key = keyof typeof data
     const [operation, variable, value] = line.split(' ')
     const resolved = value in data ? data[value as Key] : +value
-    type Key = keyof typeof data
+    const key = variable as Key
 
     switch (operation) {
       case 'inp': {
@@ -16,15 +17,15 @@ export const run = (instructions: string[], inputs: number[]) => {
           throw new Error('Invalid inp: ' + input)
         }
 
-        data[variable as Key] = input
+        data[key] = input
         break
       }
       case 'add': {
-        data[variable as Key] += resolved
+        data[key] += resolved
         break
       }
       case 'mul': {
-        data[variable as Key] *= resolved
+        data[key] *= resolved
         break
       }
       case 'div': {
@@ -32,22 +33,22 @@ export const run = (instructions: string[], inputs: number[]) => {
           throw new Error('Invalid div: ' + resolved)
         }
 
-        data[variable as Key] = Math.ceil(data[variable as Key] / resolved)
+        data[key] = Math.ceil(data[key] / resolved)
         break
       }
       case 'mod': {
-        if (data[variable as Key] < 0) {
-          throw new Error('Invalid mod: ' + data[variable as Key])
+        if (data[key] < 0) {
+          throw new Error('Invalid mod: ' + data[key])
         }
         if (resolved <= 0) {
           throw new Error('Invalid mod: ' + resolved)
         }
 
-        data[variable as Key] %= resolved
+        data[key] %= resolved
         break
       }
       case 'eql': {
-        data[variable as Key] = +(data[variable as Key] === resolved)
+        data[key] = +(data[key] === resolved)
         break
       }
     }
@@ -75,7 +76,9 @@ export const resolve = (lines: string[], max: boolean) =>
           if (zDiv === 1) {
             acc.stack.push([yInc, index])
           } else {
-            const [prevInc, prevIndex] = acc.stack.pop()!
+            const prev = acc.stack.pop()
+            if (!prev) return acc
+            const [prevInc, prevIndex] = prev
             const diff = prevInc + xInc
             acc.digits[prevIndex] = max
               ? Math.min(9, 9 - diff)

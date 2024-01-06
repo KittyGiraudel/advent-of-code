@@ -1,5 +1,7 @@
+import $ from '../../helpers'
+
 const getGraph = (input: string[]) => {
-  const pairs = input.map(line => line.slice(1).match(/([A-Z])/g) as string[])
+  const pairs = input.map(line => $.match(line.slice(1), /([A-Z])/g))
   const graph = new Map<string, Set<string>>()
 
   pairs.forEach(([a, b]) => {

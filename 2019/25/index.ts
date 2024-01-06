@@ -39,7 +39,7 @@ export const inspect = (input: string) => {
     'west', // Pass the Security Checkpoint
   ]
     .map(instruction => $.toAscii(instruction))
-    .map(code => computer.setInput(code).run().getOutput() as number[])
+    .map(code => computer.setInput(code).run().getOutput())
     .map(output => $.fromAscii(output))
 
   return +moves.pop()!.match(/\d+/)![0]

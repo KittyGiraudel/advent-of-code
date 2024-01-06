@@ -28,7 +28,7 @@ export const run = (key: string, part2: boolean = false) => {
       getNext: curr => $.bordering(curr).filter(coords => grid.get(coords)),
     })
 
-    ;(Object.keys(graph) as Point[]).forEach(key => (groups[key] = point))
+    $.keys<Point>(graph).forEach(key => (groups[key] = point))
 
     return groups
   }, {})

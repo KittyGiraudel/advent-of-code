@@ -18,7 +18,8 @@ export const getGrid = (input: string) => {
   // string on line breaks (formerly ASCII code 10), and split each row on
   // individual characters to make grid.
   return $.Grid.fromRows(
-    (computer.getOutput() as number[])
+    computer
+      .getOutput()
       .map(code => String.fromCharCode(code))
       .join('')
       .split('\n')
@@ -51,13 +52,12 @@ export const scaffold = (input: string) => {
   // The inputs were manually resolved by printing the map and listing out all
   // the instructions one by one to go from start to finish to begin with. Then
   // by figuring out 3 repeated patterns that are no longer than 20 characters.
-  return (
-    computer
-      .execute('A,B,A,C,B,A,C,B,A,C')
-      .execute('L,6,L,4,R,6,6')
-      .execute('L,6,R,6,6,R,6,6,L,8')
-      .execute('L,6,L,5,5,L,5,5,L,6')
-      .execute('n')
-      .getOutput() as number[]
-  ).pop()
+  return computer
+    .execute('A,B,A,C,B,A,C,B,A,C')
+    .execute('L,6,L,4,R,6,6')
+    .execute('L,6,R,6,6,R,6,6,L,8')
+    .execute('L,6,L,5,5,L,5,5,L,6')
+    .execute('n')
+    .getOutput()
+    .pop()
 }

@@ -1,3 +1,5 @@
+import $ from '../../helpers'
+
 type Instruction = [number, number, string]
 type State = Instruction[]
 type States = Record<string, State>
@@ -16,8 +18,6 @@ type States = Record<string, State>
 // }
 const parse = (blocks: string[]) => {
   const [header, ...rest] = blocks.map(block => block.split('\n'))
-  const initial = header[0].slice(-2, -1)
-  const iterations = +header[1].match(/(\d+)/)![1]
   const states = rest.reduce<States>((acc, block) => {
     const name = block[0].slice(-2, -1)
     const if0 = block.slice(2, 5)
@@ -35,7 +35,11 @@ const parse = (blocks: string[]) => {
     return acc
   }, {})
 
-  return { initial, iterations, states }
+  return {
+    initial: header[0].slice(-2, -1),
+    iterations: $.numbers(header[1])[0],
+    states,
+  }
 }
 
 export const run = (input: string[]) => {

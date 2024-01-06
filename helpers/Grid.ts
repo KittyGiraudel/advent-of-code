@@ -2,7 +2,7 @@ import { Coords, Point } from '../types'
 import $ from './'
 
 type Mapper<I, O> = (value: I, coords: Coords) => O
-const identity = <I, O>(value: I, coords: Coords) => value as unknown as O
+const identity = <I, O>(value: I) => value as unknown as O
 
 class Grid<T> {
   private data: T[][]

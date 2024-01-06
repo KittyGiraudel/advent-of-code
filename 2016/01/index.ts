@@ -24,6 +24,5 @@ export const run = (steps: string[], part2: boolean = false) => {
     }
   })
 
-  if (part2) return $.manhattan(location!, [0, 0])
-  return $.manhattan(position, [0, 0])
+  return $.manhattan((part2 ? location : position)!, [0, 0])
 }

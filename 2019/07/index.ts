@@ -4,7 +4,7 @@ import { Intcode } from '../05'
 export const amplify = (numbers: string, sequence: number[]) =>
   sequence.reduce<number>(
     (acc, digit) =>
-      +new Intcode(numbers).setInput([digit, acc]).run().getOutput(),
+      +new Intcode(numbers).setInput([digit, acc]).run().getOutput<number>(),
     0
   )
 
@@ -17,7 +17,7 @@ export const loop = (input: string, sequence: number[]) => {
     signal = computers[index.next().value]
       .setInput(signal)
       .run()
-      .getOutput() as number
+      .getOutput<number>()
   }
 
   return signal

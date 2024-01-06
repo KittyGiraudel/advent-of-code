@@ -17,8 +17,12 @@ export const findWeakness = (input: number[], size: number = 25) =>
 // @param input - Array of numbers
 // @param size - Size of the preamble
 export const breakWeakness = (input: number[], size: number = 25) => {
-  const weakness = findWeakness(input, size)!
+  const weakness = findWeakness(input, size)
   const range = [0, 1]
+
+  if (!weakness) {
+    throw new Error('Could not find a weakness')
+  }
 
   while (range[1] < input.length) {
     const slice = input.slice(...range)

@@ -56,7 +56,7 @@ export const run = (floors: Floors) => {
           for (const content of combinations) {
             if (!nextFloor.concat(content).every(isValid)) continue
 
-            const nextFloors = curr.floors.slice(0) as Floors
+            const nextFloors = structuredClone(curr.floors)
             nextFloors[elevator] = unconcat(currFloor, content).sort()
             nextFloors[nextElevator] = nextFloor.concat(content).sort()
 

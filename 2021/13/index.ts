@@ -5,9 +5,9 @@ type Fold = ['x' | 'y', number]
 
 export const parseInput = ([coords, instructions]: string[]) => {
   const dots = new Set<Point>(coords.split('\n') as Point[])
-  const folds = instructions.split('\n').map(instruction => {
+  const folds = instructions.split('\n').map<Fold>(instruction => {
     const [, axis, line] = $.match(instruction, /([xy])=(\d+)$/)
-    return [axis, +line] as Fold
+    return [axis as Fold[0], +line]
   })
 
   return { dots, folds }

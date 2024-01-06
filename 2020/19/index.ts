@@ -1,3 +1,5 @@
+import $ from '../../helpers'
+
 type Cache = Map<string, string>
 type Fixes = Record<string, string>
 
@@ -29,9 +31,9 @@ const getRegularExpression = (input: string, fixes: Fixes) => {
     .replace(/"/g, '')
     .split('\n')
     .map(line => (line in fixes ? fixes[line] : line))
-    .map(line => line.match(/^(\d+): (.+)$/))
+    .map(line => $.match(line, /^(\d+): (.+)$/))
     .reduce(
-      (acc, match) => acc.set(match![1], match![2]),
+      (acc, match) => acc.set(match[1], match[2]),
       new Map<string, string>()
     )
 

@@ -97,7 +97,7 @@ export const play = (input: string[], worried: boolean = false) => {
         operation: groups.operation.replace(/(new|old)/g, 'item'),
       })
     })
-    .filter(Boolean) as Player[]
+    .filter((it): it is Player => Boolean(it))
 
   // Truth be told I had to read Reddit to figure out that part. I went pretty
   // far with a BigInt implementation but I got slightly off results so I had to

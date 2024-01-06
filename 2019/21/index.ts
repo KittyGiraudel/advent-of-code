@@ -23,7 +23,7 @@ export const run = (input: string, mode: string = 'WALK') => {
     .run()
     .setInput(instructions.flatMap(i => $.toAscii(i)))
     .run()
-    .getOutput() as number[]
+    .getOutput()
 
   // Print debug information
   // console.log($.fromAscii(output))

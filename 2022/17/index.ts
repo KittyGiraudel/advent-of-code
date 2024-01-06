@@ -37,8 +37,8 @@ const getBlocks = (rock: Rock) =>
       // swear I handled empty spaces properly before (hence why I had the right
       // result on the sample), but there must have been something I didn’t
       // handle properly that only showed up in my input. Oh well.
-      .map((col, ci) => (col === '.' ? null : ([ri, ci + 2] as Coords)))
-      .filter(Boolean)
+      .map((col, ci) => (col === '.' ? null : [ri, ci + 2]))
+      .filter((coords): coords is Coords => Boolean(coords))
   ) as Blocks
 
 const move = (grid: Grid<string>, blocks: Blocks, vector: Coords) => {

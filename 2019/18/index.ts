@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Point } from '../../types'
+import { Point } from '../../types'
 
 type State = { keys: string; positions: string; steps: number }
 type Distance = { distance: number; locks: string[] }
@@ -38,7 +38,8 @@ export const run = (input: string[], part2: boolean = false) => {
   // bordering positions as walls, and then define the new 4 starting positions
   // as the 4 diagonals to the previous starting point.
   if (part2) {
-    const start = startPositions.pop()!
+    const start = startPositions.pop()
+    if (!start) throw new Error('Could not find starting position')
     const [N, NE, E, SE, S, SW, W, NW] = $.surrounding(start)
 
     ;[start, N, E, S, W].forEach(point => lookup.delete(point))
@@ -46,7 +47,7 @@ export const run = (input: string[], part2: boolean = false) => {
   }
 
   const distances: Distances = {}
-  const keyPoints = Object.keys(keys) as Point[]
+  const keyPoints = $.keys<Point>(keys)
   const keyCount = keyPoints.length
   const combinations = $.pairs([...keyPoints, ...startPositions])
 

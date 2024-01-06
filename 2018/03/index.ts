@@ -3,8 +3,8 @@ import { Point } from '../../types'
 
 type Boundary = {
   id?: number
-  ciMin?: number
-  riMin?: number
+  ciMin: number
+  riMin: number
   ciMax: number
   riMax: number
 }
@@ -23,8 +23,8 @@ export const countOverlappingInches = (input: string[]) => {
   const map = new Map<Point, number>()
 
   claims.forEach(({ ciMin, ciMax, riMin, riMax }) => {
-    for (let ci = ciMin as number; ci <= ciMax; ci++)
-      for (let ri = riMin as number; ri <= riMax; ri++)
+    for (let ci = ciMin; ci <= ciMax; ci++)
+      for (let ri = riMin; ri <= riMax; ri++)
         map.set(`${ri},${ci}`, (map.get(`${ri},${ci}`) ?? 0) + 1)
   })
 

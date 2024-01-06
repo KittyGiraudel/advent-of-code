@@ -31,7 +31,7 @@ const parseRooms = (input: string[], part2: boolean = false) => {
       part2 ? ['D', 'C', 'B', 'A'] : undefined,
       part2 ? ['D', 'B', 'A', 'C'] : undefined,
       bottom,
-    ].filter(Boolean) as string[][]
+    ].filter((input): input is string[] => Boolean(input))
   ).map(row => row.join(''))
 }
 
@@ -135,11 +135,17 @@ const roomsToHallway = (curr: State) => {
 }
 
 export const run = (input: string[], part2: boolean = false) => {
-  return $.search.dijkstra<State>({
+  const search = $.search.dijkstra<State>({
     start: { hallway: '...........', rooms: parseRooms(input, part2), cost: 0 },
     toKey,
     isGoal: isGoal(part2),
     getCost: (curr, next) => next.cost - curr.cost,
     getNext: curr => [...hallwayToRooms(curr), ...roomsToHallway(curr)],
-  }).end.cost
+  })
+
+  if (search.end) {
+    throw new Error('Could not find end node')
+  }
+
+  return search.end.cost
 }

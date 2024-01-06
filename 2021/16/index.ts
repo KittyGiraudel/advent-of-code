@@ -1,5 +1,12 @@
 import $ from '../../helpers'
 
+type Packetish = {
+  id: number
+  value: number | undefined | null
+  version: number
+  packets: Packetish[]
+}
+
 type Packt = {
   version: number
   id: number
@@ -90,16 +97,10 @@ const decode = (string: string) => {
   return packet
 }
 
-const sumVersions = ({
-  version,
-  packets,
-}: {
-  version: number
-  packets: Packet[] | Packt[]
-}): number =>
+const sumVersions = ({ version, packets }: Packetish): number =>
   packets.reduce((total, packet) => total + sumVersions(packet), version)
 
-const getPacketValue = (packet: Packet | Packt): number => {
+const getPacketValue = (packet: Packetish): number => {
   const { id, packets, value } = packet
 
   switch (id) {
@@ -122,12 +123,12 @@ const getPacketValue = (packet: Packet | Packt): number => {
   }
 }
 
-const render = (packet: Packet | Packt, depth: number = 1): string => {
+const render = (packet: Packetish, depth: number = 1): string => {
   const SYMBOLS = ['+', '*', '↓', '↑', ' ', '>', '<', '=']
   const symbol = SYMBOLS[packet.id]
   const value = getPacketValue(packet)
 
-  return packet.packets.reduce(
+  return packet.packets.reduce<string>(
     (acc, packet, index, packets) =>
       acc +
       '\n' +

@@ -73,8 +73,8 @@ const cross = (
   startCoords: Coords,
   endCoords: Coords,
   time = 0
-) =>
-  $.search.gbfs({
+) => {
+  const search = $.search.gbfs({
     start: { coords: startCoords, time },
     isGoal: curr => $.toPoint(curr.coords) === $.toPoint(endCoords),
     toKey: curr => $.toPoint(curr.coords) + ((curr.time + 1) % grids.size),
@@ -88,14 +88,24 @@ const cross = (
       // a free cell (no wall and no blizzard).
       return getMoves(curr).filter(next => grid.get(next.coords)?.length === 0)
     },
-  }).end.time
+  })
+
+  if (!search.end) {
+    throw new Error('Could not find end node')
+  }
+
+  return search.end.time
+}
 
 // Unfortunately I could not solve part 1 of this puzzle without help. I did
 // manage to cross the maze successfully (which is something!) but I couldn’t
 // find the shortest path (347 instead of 247).
 export const maze = (input: string[], withSnacks: boolean = false) => {
   const startCoords: Coords = [0, findDoor(input[0])]
-  const endCoords: Coords = [input.length - 1, findDoor(input.at(-1)!)]
+  const endCoords: Coords = [
+    input.length - 1,
+    findDoor(input[input.length - 1]),
+  ]
   const grids = getGrids(input)
   const time = cross(grids, startCoords, endCoords)
 

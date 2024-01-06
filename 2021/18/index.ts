@@ -1,6 +1,7 @@
 import $ from '../../helpers'
+import { ValueOrArray } from '../../types'
 
-type Fish = [number?, number?]
+type Fish = [ValueOrArray<number>, ValueOrArray<number>?]
 
 const split = (value: string) =>
   `[${Math.floor(+value / 2)},${Math.ceil(+value / 2)}]`
@@ -74,14 +75,8 @@ export const reduce = (string: string) => {
 }
 
 export const computeMagnitude = ([left, right]: Fish): number =>
-  (typeof left === 'number'
-    ? left
-    : computeMagnitude(left as unknown as Fish)) *
-    3 +
-  (typeof right === 'number'
-    ? right
-    : computeMagnitude(right as unknown as Fish)) *
-    2
+  (typeof left === 'number' ? left : computeMagnitude(left as Fish)) * 3 +
+  (typeof right === 'number' ? right : computeMagnitude(right as Fish)) * 2
 
 export const sumFish = (...fishes: string[]) =>
   fishes.reduce((acc, fish) => (acc ? reduce(`[${acc},${fish}]`) : fish))

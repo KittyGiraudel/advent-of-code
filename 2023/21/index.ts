@@ -2,7 +2,11 @@ import $ from '../../helpers'
 
 export const run = (input: string[], part2: boolean = false) => {
   const grid = $.Grid.fromRows(input)
-  const start = grid.findCoords(v => v === 'S')!
+  const start = grid.findCoords(v => v === 'S')
+
+  if (!start) {
+    throw new Error('Could not find a start node')
+  }
 
   const solve = (steps: number) => {
     const { width, height } = grid
@@ -10,7 +14,8 @@ export const run = (input: string[], part2: boolean = false) => {
     const distances = { [$.toPoint(start)]: 0 }
 
     while (frontier.length) {
-      const curr = frontier.pop()!
+      const curr = frontier.pop()
+      if (!curr) break
 
       $.bordering(curr)
         .filter(([ri, ci]) => grid.get([ri % height, ci % width]) !== '#')

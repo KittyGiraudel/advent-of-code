@@ -14,7 +14,7 @@ export const run = (
     for (let y = yAxis[0]; y < yAxis[1]; y++) {
       grid.set(
         [y - yAxis[0], x - xAxis[0]],
-        computer.reset().setInput([x, y]).run().getOutput() as number
+        computer.reset().setInput([x, y]).run().getOutput<number>()
       )
     }
   }
@@ -25,7 +25,7 @@ export const run = (
 const test = (input: string) => {
   const computer = new Intcode(input).run()
   const ping = (x: number, y: number) =>
-    computer.reset().setInput([x, y]).run().getOutput() as number
+    computer.reset().setInput([x, y]).run().getOutput<number>()
   const xOffset = 700
   const yOffset = 1134
   const grid = new $.Grid<number>(100)

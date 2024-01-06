@@ -22,7 +22,7 @@ export const run = (part2: boolean = false) => {
     spent: 0,
   }
 
-  return $.search.dijkstra({
+  const search = $.search.dijkstra({
     start: initial,
     isGoal: curr => curr.boss <= 0 && curr.health > 0,
     toKey: JSON.stringify,
@@ -108,5 +108,11 @@ export const run = (part2: boolean = false) => {
           })
       )
     },
-  }).end.spent
+  })
+
+  if (!search.end) {
+    throw new Error('Could not find an end node')
+  }
+
+  return search.end.spent
 }

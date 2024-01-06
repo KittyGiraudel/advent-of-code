@@ -71,7 +71,8 @@ const createNodes = (size: number) => {
 }
 
 export const countTailPositions = (input: string[], size: number = 2) => {
-  const head = createNodes(size)!
+  const head = createNodes(size)
+  if (!head) throw new Error('Could not create nodes')
 
   input.forEach(line => {
     const [direction, amount] = line.split(' ')

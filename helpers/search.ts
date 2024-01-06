@@ -9,13 +9,13 @@ const DEFAULT_OPTIONS = {
 type Heuristic<T> = (curr: T) => number
 type GetCost<T> = (curr: T, next: T) => number
 type Frontier<T> = PriorityQueue<[T, number]> | T[]
-type GetPath<T> = (start?: T | string, end?: T | string) => string[]
+type GetPath<T> = (start?: T, end?: T) => string[]
 
 export type SearchCosts = Record<string, number>
 export type SearchGraph = Record<string, string | null>
 export type SearchOutput<T> = {
   graph: SearchGraph
-  end: T
+  end: T | null
   getPath: GetPath<T>
 }
 export type SearchOutputWithCosts<T> = SearchOutput<T> & { costs: SearchCosts }
@@ -43,7 +43,8 @@ const _core = <T>(
   let end: T | null = null
 
   while (!isEmpty(frontier)) {
-    const curr = pop(frontier)!
+    const curr = pop(frontier)
+    if (!curr) break
 
     if (isGoal(curr)) {
       end = curr
@@ -77,7 +78,7 @@ export const bfs = <T>({
   isGoal,
   toKey = DEFAULT_OPTIONS.toKey,
   emptyAfterGoal = DEFAULT_OPTIONS.emptyAfterGoal,
-}: SearchOptions<T>) => {
+}: SearchOptions<T>): SearchOutput<T> => {
   const frontier: T[] = [start]
   const graph: SearchOutput<T>['graph'] = { [toKey(start)]: null }
 
@@ -95,7 +96,7 @@ export const bfs = <T>({
     graph,
     getPath: (a?: T, b?: T) =>
       getPath(graph, toKey(a ?? start), b ? toKey(b) : end ? toKey(end) : null),
-  } as SearchOutput<T>
+  }
 }
 
 /**
@@ -113,7 +114,7 @@ export const gbfs = <T>({
   isGoal,
   toKey = DEFAULT_OPTIONS.toKey,
   emptyAfterGoal = DEFAULT_OPTIONS.emptyAfterGoal,
-}: SearchOptions<T> & { heuristic: Heuristic<T> }) => {
+}: SearchOptions<T> & { heuristic: Heuristic<T> }): SearchOutput<T> => {
   const frontier = new PriorityQueue<[T, number]>((a, b) => a[1] - b[1])
   frontier.push([start, 0])
   const graph: SearchGraph = { [toKey(start)]: null }
@@ -132,7 +133,7 @@ export const gbfs = <T>({
     end,
     getPath: (a?: T, b?: T) =>
       getPath(graph, toKey(a ?? start), b ? toKey(b) : end ? toKey(end) : null),
-  } as SearchOutput<T>
+  }
 }
 
 /**
@@ -150,7 +151,7 @@ export const dijkstra = <T>({
   getCost,
   isGoal = DEFAULT_OPTIONS.isGoal,
   toKey = DEFAULT_OPTIONS.toKey,
-}: SearchOptions<T> & { getCost: GetCost<T> }) => {
+}: SearchOptions<T> & { getCost: GetCost<T> }): SearchOutputWithCosts<T> => {
   const frontier = new PriorityQueue<[T, number]>((a, b) => a[1] - b[1])
   frontier.push([start, 0])
   const graph: SearchGraph = { [toKey(start)]: null }
@@ -176,7 +177,7 @@ export const dijkstra = <T>({
     end,
     getPath: (a?: T, b?: T) =>
       getPath(graph, toKey(a ?? start), b ? toKey(b) : end ? toKey(end) : null),
-  } as SearchOutputWithCosts<T>
+  }
 }
 
 /**
@@ -198,7 +199,7 @@ export const aStar = <T>({
 }: SearchOptions<T> & {
   getCost: GetCost<T>
   heuristic: Heuristic<T>
-}) => {
+}): SearchOutputWithCosts<T> => {
   const frontier = new PriorityQueue<[T, number]>((a, b) => a[1] - b[1])
   frontier.push([start, 0])
   const graph: SearchGraph = { [toKey(start)]: null }
@@ -224,7 +225,7 @@ export const aStar = <T>({
     end,
     getPath: (a?: T, b?: T) =>
       getPath(graph, toKey(a ?? start), b ? toKey(b) : end ? toKey(end) : null),
-  } as SearchOutputWithCosts<T>
+  }
 }
 
 const getPath = (graph: SearchGraph, start: string, end: string | null) => {

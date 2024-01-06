@@ -36,7 +36,7 @@ class Network {
   runNode(node: Node) {
     const { computer, queue } = node
     const packet = queue.pop() || -1
-    const output = computer.setInput(packet).run().getOutput() as number[]
+    const output = computer.setInput(packet).run().getOutput()
     const isIdle = packet === -1 && !output.length
 
     if (output.length) {
@@ -93,5 +93,5 @@ export const boot = (input: string, size: number = 50) => {
 
   while (!network.isDone()) network.run()
 
-  return network.getOutput() as number[]
+  return network.getOutput()
 }

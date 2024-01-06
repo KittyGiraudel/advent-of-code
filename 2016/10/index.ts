@@ -15,10 +15,12 @@ export const run = (input: string[]) => {
       state.bot[id].push(value)
     } else {
       const [sender, low, high] = $.match(line, /(bot|output) \d+/g)
-      const id = sender!.split(' ').pop()!
-      pipelines[+id] = [
-        low.split(' ') as [KeyType, number],
-        high.split(' ') as [KeyType, number],
+      if (!sender) throw new Error('Could not find sender')
+      const id = sender.split(' ').pop()
+      if (!id) throw new Error('Could not find sender ID ')
+      pipelines[+id] = [low.split(' '), high.split(' ')] as [
+        [KeyType, number],
+        [KeyType, number]
       ]
     }
   }
@@ -32,8 +34,10 @@ export const run = (input: string[]) => {
     if (!next) break
 
     next.sort((a, b) => a - b)
-    const max = next.pop()!
-    const min = next.pop()!
+
+    const max = next.pop()
+    const min = next.pop()
+    if (max === undefined || min === undefined) break
 
     const [low, high] = pipelines[index]
     const [lowType, lowId] = low

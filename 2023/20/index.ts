@@ -51,7 +51,8 @@ export const run = (input: string[], part2: boolean = false) => {
     ]
 
     while (pulses.length) {
-      const pulse = pulses.shift()!
+      const pulse = pulses.shift()
+      if (!pulse) break
       count[pulse.frequency] += pulse.to.length
 
       for (const receiverName of pulse.to) {

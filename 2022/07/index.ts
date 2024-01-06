@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 
-const isDir = (item: unknown) => item instanceof Dir
+const isDir = (item: unknown): item is Dir => item instanceof Dir
 
 class Dir {
   name: string
@@ -42,9 +42,10 @@ export const parseOutput = (lines: string[]) => {
       if (name === '/') cwd = drive
       else if (name === '..') cwd = cwd!.parent
       else
-        cwd = cwd!.content
-          .filter(isDir)
-          .find(item => item.name === name) as Dir | null
+        cwd =
+          cwd!.content
+            .filter(isDir)
+            .find((item): item is Dir => item.name === name) ?? null
     }
 
     // If the line is a list command, there is nothing to do. The listed items
@@ -76,15 +77,9 @@ const getSize = (item: Dir | File): number =>
 
 // Return all the directories from the drive as a flat array (no longer nested).
 const getDirs = (drive: Dir) =>
-  drive.content.reduce<(File | Dir)[]>(function collectDirs(
-    acc,
-    item
-  ): (File | Dir)[] {
-    return isDir(item)
-      ? (item as Dir).content.reduce(collectDirs, [...acc, item])
-      : acc
-  },
-  [])
+  drive.content.reduce<Dir[]>(function collectDirs(acc, item): Dir[] {
+    return isDir(item) ? item.content.reduce(collectDirs, [...acc, item]) : acc
+  }, [])
 
 // This is part 1: it computes the total size of all directories which have a
 // size below 100,000. To do so, it lists all directories from the drive

@@ -31,7 +31,9 @@ export const run = (input: string[], part2: boolean = false) => {
   input.map(parse).forEach(lens => {
     if (!boxes.has(lens.id)) boxes.set(lens.id, [])
 
-    const box = boxes.get(lens.id)!
+    const box = boxes.get(lens.id)
+    if (!box) throw new Error('Could not find box with ID ' + lens.id)
+
     const index = box.findIndex(({ label }) => lens.label === label)
     const newIndex = index > -1 ? index : box.length
 

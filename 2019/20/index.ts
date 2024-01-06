@@ -34,7 +34,8 @@ const getOutsideCoords = (grid: Grid<string>, input: string[]) => {
   grid.row(-1).forEach((value, ci) => {
     if (value !== '.') return
     const coords: Coords = [height - 1, ci]
-    const door = input.at(-2)![ci + 2] + input.at(-1)![ci + 2]
+    const door =
+      input[input.length - 2][ci + 2] + input[input.length - 1][ci + 2]
     pointsToDoors[$.toPoint(coords)] = door
     doorsToCoords[door] = coords
   })

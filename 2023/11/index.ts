@@ -5,11 +5,11 @@ const isEmpty = (array: string[]) => array.every(value => value === '.')
 const calculateExpansion = (grid: Grid<string>) => {
   const emptyRowIndices = grid.rows
     .map((row, index) => (isEmpty(row) ? index : null))
-    .filter(Boolean) as number[]
+    .filter((index): index is number => Boolean(index))
 
   const emptyColumnIndices = grid.columns
     .map((column, index) => (isEmpty(column) ? index : null))
-    .filter(Boolean) as number[]
+    .filter((index): index is number => Boolean(index))
 
   return { emptyColumnIndices, emptyRowIndices }
 }

@@ -25,7 +25,7 @@ export const getSurfaceArea = (points: TriPoint[], part2: boolean = false) => {
   const isWithinBounds = ([x, y, z]: TriCoords) =>
     $.isClamped(x, minX - 1, maxX + 1) &&
     $.isClamped(y, minY - 1, maxY + 1) &&
-    $.isClamped(z!, minZ - 1, maxZ + 1)
+    $.isClamped(z, minZ - 1, maxZ + 1)
 
   if (!part2) {
     return getArea(cubes, point => !points.includes(point))

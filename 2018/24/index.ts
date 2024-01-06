@@ -43,8 +43,7 @@ class Game {
 
   fight() {
     this.armies.forEach(army => {
-      const opponent = this.armies.find(a => a.name !== army.name)!
-      army.pickTargets(opponent)
+      army.pickTargets(this.armies.find(a => a.name !== army.name)!)
     })
     this.groups.forEach(group => group.attack())
     this.armies.forEach(army => army.endTurn())

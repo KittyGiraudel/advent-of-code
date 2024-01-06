@@ -17,10 +17,10 @@ function boundaries(items: Coords[] | TriCoords[] | QuadriCoords[]) {
   if (!items.length) return []
 
   if (items[0].length === 4) {
-    const xs = (items as QuadriCoords[]).map(coords => coords[0])
-    const ys = (items as QuadriCoords[]).map(coords => coords[1])
-    const zs = (items as QuadriCoords[]).map(coords => coords[2])
-    const ts = (items as QuadriCoords[]).map(coords => coords[3])
+    const xs = items.map(coords => coords[0])
+    const ys = items.map(coords => coords[1])
+    const zs = items.map(coords => coords[2]) as number[]
+    const ts = items.map(coords => coords[3]) as number[]
 
     return [
       Math.min(...xs),
@@ -35,9 +35,9 @@ function boundaries(items: Coords[] | TriCoords[] | QuadriCoords[]) {
   }
 
   if (items[0].length === 3) {
-    const xs = (items as TriCoords[]).map(coords => coords[0])
-    const ys = (items as TriCoords[]).map(coords => coords[1])
-    const zs = (items as TriCoords[]).map(coords => coords[2])
+    const xs = items.map(coords => coords[0])
+    const ys = items.map(coords => coords[1])
+    const zs = items.map(coords => coords[2]) as number[]
 
     return [
       Math.min(...xs),
@@ -49,8 +49,8 @@ function boundaries(items: Coords[] | TriCoords[] | QuadriCoords[]) {
     ]
   }
 
-  const xs = (items as Coords[]).map(coords => coords[0])
-  const ys = (items as Coords[]).map(coords => coords[1])
+  const xs = items.map(coords => coords[0])
+  const ys = items.map(coords => coords[1])
 
   return [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)]
 }

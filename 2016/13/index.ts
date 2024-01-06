@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords } from '../../types'
+import { Coords, Point } from '../../types'
 
 const isOpenSpace =
   (n: number) =>
@@ -20,9 +20,10 @@ export const run = (end: Coords, n: number, part2: boolean = false) => {
     getNext: curr => $.bordering(curr).filter(isOpenSpace(n)),
     isGoal: ([ri, ci]) => ri === end[0] && ci === end[1],
   })
-  const points = Object.keys(graph)
+
+  const coords = $.keys<Point>(graph).map($.toCoords)
 
   return part2
-    ? points.filter(point => getPath(start, point).length <= 50).length
+    ? coords.filter(coords => getPath(start, coords).length <= 50).length
     : getPath().length
 }

@@ -21,7 +21,7 @@ const discover = (input: string) =>
     start: { position: [0, 0], program: new Intcode(input) },
     emptyAfterGoal: true,
     toKey: curr => $.toPoint(curr.position),
-    isGoal: curr => curr.program.getOutput() === 2,
+    isGoal: curr => curr.program.getOutput<number>() === 2,
     getNext: (curr: Node) =>
       $.bordering(curr.position)
         .map(coords => ({ position: coords, program: new Intcode('') }))
@@ -48,7 +48,7 @@ const render = ({
   from: SearchGraph
   end: { coords: Coords }
 }) => {
-  const cells = (Object.keys(from) as Point[]).map($.toCoords)
+  const cells = $.keys<Point>(from).map($.toCoords)
   const [minY, maxY, minX, maxX] = $.boundaries(cells)
   const width = maxX + 1 - minX
   const height = maxY + 1 - minY
@@ -64,6 +64,10 @@ const render = ({
 export const getOxygenDuration = (input: string) => {
   const { graph, end } = discover(input)
   let maxMinutes = 0
+
+  if (!end) {
+    throw new Error('Could not find end node')
+  }
 
   $.search.bfs({
     start: { position: end.position, minutes: 0 },

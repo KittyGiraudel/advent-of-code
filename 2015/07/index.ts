@@ -1,3 +1,5 @@
+import $ from '../../helpers'
+
 type Registers = Record<string, number>
 
 const STR_RE = /[a-z]+/g
@@ -22,29 +24,30 @@ const prepare = (string: string) => {
 }
 
 export const run = (input: string[], registers: Registers = {}) => {
-  const graph = new Map<
-    string,
-    { deps: RegExpMatchArray | null; raw: string }
-  >()
+  const graph = new Map<string, { deps: string[]; raw: string }>()
 
   input.forEach(line => {
     const [left, right] = line.split(' -> ')
 
     if (isNaN(+left)) {
-      graph.set(right, { deps: left.match(STR_RE), raw: left })
+      graph.set(right, { deps: $.match(left, STR_RE), raw: left })
     } else if (!(right in registers)) {
       registers[right] = +left
     }
   })
 
   while (graph.size) {
-    const keys = Array.from(graph.keys())
-    const next = keys.find(key =>
-      graph.get(key)!.deps!.every(dep => dep in registers)
-    )!
+    let next: string | undefined
+    graph.forEach((value, key) => {
+      if (value.deps.every(dep => dep in registers)) next = key
+    })
+    if (!next) break
+
+    const value = graph.get(next)
+    if (!value) break
 
     // This is how to keep bitwise NOT within the 0–65535 range.
-    registers[next] = eval(prepare(graph.get(next)!.raw)) & 65_535
+    registers[next] = eval(prepare(value.raw)) & 65_535
     graph.delete(next)
   }
 

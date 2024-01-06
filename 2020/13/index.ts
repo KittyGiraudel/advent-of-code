@@ -23,7 +23,7 @@ export const getNextDeparture = ([timestamp, sequence]: [string, string]) => {
 const makeTuples = (sequence: Sequence) =>
   sequence
     .map((value, index) => (value === 'x' ? null : [value, index]))
-    .filter(Boolean) as [number, number][]
+    .filter((input): input is [number, number] => Boolean(input))
 
 // @param sequence - Bus lines
 // @param timestamp - Start timestamp

@@ -73,10 +73,7 @@ const getSubgrids = (grid: Grid<string>) =>
       boundaries: face.boundaries as Coords,
       neighbors: face.neighbors
         .map(neighbor => Array.from(neighbor).map(value => +value || value))
-        .map(([index, orientation]) => ({
-          index,
-          orientation,
-        })) as NeighborGrid[],
+        .map(([index, orientation]) => ({ index, orientation })),
       grid: $.Grid.fromRows(
         grid.rows.slice(ri, ri + 50).map(row => row.slice(ci, ci + 50).join(''))
       ),
@@ -219,18 +216,22 @@ export const maze = (input: string, asCube: boolean = false) => {
   const grid = $.Grid.fromRows(rows, v => (v === ' ' ? '' : v))
   const neighborMap = grid.reduce<CacheMap>(getNeighbors(grid, asCube), {})
 
-  let position = grid.findCoords((value, [ri]) => ri === 0 && value === SPACE)!
+  let position = grid.findCoords((value, [ri]) => ri === 0 && value === SPACE)
   let orientation = '>'
+
+  if (!position) {
+    throw new Error('Could not find starting position')
+  }
 
   instructions.slice(0).forEach(instruction => {
     if (typeof instruction === 'string') {
       orientation = rotate(orientation, instruction)
     } else {
       for (let i = 0; i < instruction; i++) {
-        const neighbors = neighborMap[$.toPoint(position)]
+        const neighbors = neighborMap[$.toPoint(position!)]
         const next = neighbors[ORIENTATIONS.indexOf(orientation)]
         if (!next) break
-        if (Array.isArray(next)) position = next as Coords // Part 1
+        if (Array.isArray(next)) position = next // Part 1
         else {
           // Part 2
           position = next.position

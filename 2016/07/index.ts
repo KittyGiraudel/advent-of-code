@@ -46,5 +46,5 @@ const TYPES = {
 }
 type Type = keyof typeof TYPES
 
-export const run = (lines: string[], type: string) =>
-  lines.filter(TYPES[type as Type]).length
+export const run = (lines: string[], type: Type) =>
+  lines.filter(TYPES[type]).length

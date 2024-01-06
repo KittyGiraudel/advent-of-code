@@ -15,7 +15,7 @@ const cache = new Map<string, Coords[] | Point[] | CoordsAndPoint[]>()
 function getNeighbors<T extends Coords | Point | CoordsAndPoint>(
   position: T,
   withDiagonals: boolean
-): T[] {
+) {
   const [ri, ci] =
     typeof position === 'string'
       ? toCoords(position)
@@ -33,7 +33,7 @@ function getNeighbors<T extends Coords | Point | CoordsAndPoint>(
     return cache.get(key) as T[]
   }
 
-  const neighbors = [
+  const neighbors: Coords[] = [
     /* N  */ [ri - 1, ci],
     withDiagonals && /* NE */ [ri - 1, ci + 1],
     /* E  */ [ri, ci + 1],
@@ -42,23 +42,23 @@ function getNeighbors<T extends Coords | Point | CoordsAndPoint>(
     withDiagonals && /* SW */ [ri + 1, ci - 1],
     /* W  */ [ri, ci - 1],
     withDiagonals && /* NW */ [ri - 1, ci - 1],
-  ].filter(Boolean) as Coords[]
+  ].filter((coords): coords is Coords => Boolean(coords))
 
   if (strategy === 'POINTS') {
-    const results = neighbors.map(coords => toPoint(coords))
+    const results: Point[] = neighbors.map(coords => toPoint(coords))
     cache.set(key, results)
-    return results as T[]
+    return results
   } else if (strategy === 'COORDS') {
-    const results = neighbors
+    const results: Coords[] = neighbors
     cache.set(key, results)
-    return results as T[]
+    return results
   } else if (strategy === 'BOTH') {
-    const results = neighbors.map(coords => ({
+    const results: CoordsAndPoint[] = neighbors.map(coords => ({
       coords,
       point: toPoint(coords),
     }))
     cache.set(key, results)
-    return results as T[]
+    return results
   }
 
   throw new Error('Invalid strategy ' + strategy)

@@ -47,7 +47,7 @@ export const run = (depth: number, target: Coords, part2: boolean = false) => {
     tool: (typeof TOOLS)[number]
   }
 
-  return $.search.aStar<State>({
+  const search = $.search.aStar<State>({
     start: { time: 0, position: [0, 0], tool: TORCH },
     toKey: curr => curr.position + ' : ' + curr.tool,
     isGoal: curr =>
@@ -79,5 +79,11 @@ export const run = (depth: number, target: Coords, part2: boolean = false) => {
 
       return next
     },
-  }).end.time
+  })
+
+  if (!search.end) {
+    throw new Error('Could not find end node')
+  }
+
+  return search.end.time
 }

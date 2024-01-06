@@ -31,7 +31,7 @@ export const reduce = (input: string) => {
     .reduce<string[]>((acc, char) => {
       if (
         !acc.length ||
-        (acc.at(-1)!.charCodeAt(0) ^ char.charCodeAt(0)) !== 32
+        (acc[acc.length - 1].charCodeAt(0) ^ char.charCodeAt(0)) !== 32
       )
         acc.push(char)
       else acc.pop()

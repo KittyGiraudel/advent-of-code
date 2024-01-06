@@ -4,12 +4,7 @@ const replaceAt = (value: string, from: string, index: number, to: string) =>
   value.slice(0, index) + value.slice(index).replace(from, to)
 
 export const calibrate = (input: string[]) => {
-  const molecule = input.at(-1)!
-
-  if (!molecule) {
-    throw new Error('Cannot get molecule for calibration')
-  }
-
+  const molecule = input[input.length - 1]
   const molecules = input.slice(0, -2).flatMap(replacement => {
     const [from, to] = replacement.split(' => ')
     const indices = $.indices(molecule, from)
@@ -29,7 +24,7 @@ export const calibrate = (input: string[]) => {
 // Ref: https://www.reddit.com/r/adventofcode/comments/3xflz8/comment/cy4etju/
 // Ref: https://www.reddit.com/r/adventofcode/comments/3xflz8/comment/cy4h7ji/
 export const recompose = (input: string[]) => {
-  const molecule = input.at(-1)!
+  const molecule = input[input.length - 1]
   const tokens = $.countInString(molecule, '[A-Z]', false, false)
   const Rn = $.countInString(molecule, 'Rn', false)
   const Ar = $.countInString(molecule, 'Ar', false)

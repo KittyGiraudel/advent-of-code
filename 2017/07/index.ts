@@ -57,29 +57,35 @@ export const run = (input: string[]) => {
   const fix: Fix = { name: '', weight: Infinity, diff: 0, node: null }
 
   for (let key in graph) {
-    if (!graph[key].children.length) {
-      continue
-    }
+    const { weight, children: childrenNames } = graph[key]
 
-    const children = graph[key].children.map(name => graph[name])
-    const weights = children.map((node: Node) => node.weight!)
-    const incorrect = weights.find((w, i, a) => a.indexOf(w) === i)!
-    const correct = weights.find((w: number) => w !== incorrect)!
+    if (!childrenNames.length || !weight) continue
+
+    const children = childrenNames.map(name => graph[name])
+    const weights = children.map(node => node.weight)
+    const incorrect = weights.find((weight, i, a) => a.indexOf(weight) === i)
+    const correct = weights.find(weight => weight !== incorrect)
+
+    if (incorrect === undefined || correct === undefined) continue
 
     // The node is considered unstable if all its children have the same weight
     // but one of them. This is the node that needs to be corrected, *or* the
     // parent of the node that needs to be corrected. When multiple nodes are
     // found to be unstable, we use the one that’s deepest in the tree (since
     // its fix will cascade back up the tree).
-    if (Boolean(correct) && fix.weight > graph[key].weight!) {
-      fix.weight = graph[key].weight!
+    if (fix.weight > weight) {
+      fix.weight = weight
       fix.diff = incorrect - correct
       fix.node = children.find(node => node.weight === incorrect)!
     }
   }
 
+  if (!fix.node) {
+    throw new Error('Could not find fix node')
+  }
+
   return {
     root: getRootNode(graph),
-    fix: fix.node!.value - fix.diff,
+    fix: fix.node.value - fix.diff,
   }
 }

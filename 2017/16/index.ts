@@ -24,7 +24,8 @@ export const dance = (
     if (line.startsWith('p')) {
       return { type: 'PARTNER', value: line.slice(1).split('/') } as Partner
     }
-  }) as Instruction[]
+    throw new Error('Could not parse instruction')
+  })
 
   for (let i = 0; i < iterations; i++) {
     instructions.forEach(({ type, value }) => {

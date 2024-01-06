@@ -93,5 +93,9 @@ export const run = (input: string[], part2: boolean = false) => {
     },
   })
 
+  if (!end) {
+    throw new Error('Could not find an end node')
+  }
+
   return costs[toKey(end)]
 }

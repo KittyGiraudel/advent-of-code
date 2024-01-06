@@ -69,8 +69,8 @@ class Unit {
 
     this.neighbors
       .map(getAliveEnemyAt)
-      .filter(Boolean)
-      .sort((a, b) => a!.health - b!.health)
+      .filter((unit): unit is Unit => Boolean(unit))
+      .sort((a, b) => a.health - b.health)
       .shift()
       ?.hurt(this.power)
   }

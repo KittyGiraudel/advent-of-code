@@ -63,30 +63,32 @@ const gridOrder = (a: Point, b: Point) => {
 }
 
 const tick = (grid: Grid<string>, carts: CartMap, cleanUp: boolean = false) => {
-  ;(Object.keys(carts) as Point[]).sort(gridOrder).forEach(point => {
-    const cart = carts[point]
+  $.keys<Point>(carts)
+    .sort(gridOrder)
+    .forEach(point => {
+      const cart = carts[point]
 
-    // This cannot be done with a `.filter` because that would be resolved
-    // before iterating, while the object of carts gets updated within every
-    // loop iteration.
-    if (!cart || cart.crashed) return
+      // This cannot be done with a `.filter` because that would be resolved
+      // before iterating, while the object of carts gets updated within every
+      // loop iteration.
+      if (!cart || cart.crashed) return
 
-    // Get the coordinates of the destination cell, as well as the orientation
-    // for the cart once moved.
-    const next = move(grid, point, cart)
+      // Get the coordinates of the destination cell, as well as the orientation
+      // for the cart once moved.
+      const next = move(grid, point, cart)
 
-    // If there is already a cart in the destination cell, mark the existing
-    // cart as crashed (or delete it altogether if running in cleanup mode).
-    if (next.point in carts) {
-      if (cleanUp) delete carts[next.point]
-      else carts[next.point].crashed = true
-    } else {
-      carts[next.point] = { ...cart, orientation: next.orientation }
-    }
+      // If there is already a cart in the destination cell, mark the existing
+      // cart as crashed (or delete it altogether if running in cleanup mode).
+      if (next.point in carts) {
+        if (cleanUp) delete carts[next.point]
+        else carts[next.point].crashed = true
+      } else {
+        carts[next.point] = { ...cart, orientation: next.orientation }
+      }
 
-    // The cart has either moved or crashed, so it should always be deleted.
-    delete carts[point]
-  })
+      // The cart has either moved or crashed, so it should always be deleted.
+      delete carts[point]
+    })
 }
 
 export const run = (rows: string[], cleanUp: boolean = false) => {
@@ -111,15 +113,15 @@ export const run = (rows: string[], cleanUp: boolean = false) => {
   // have witnessed a crash. For part 2, it means until we have only one cart
   // left standing.
   while (
-    !Object.values(carts).some((cart: Cart) => cart.crashed) &&
-    Object.keys(carts).length > 1
+    !Object.values(carts).some(cart => cart.crashed) &&
+    $.keys<Point>(carts).length > 1
   ) {
     tick(grid, carts, cleanUp)
   }
 
   // Finally, we can return to the crash site, or the last cart standing,
   // without forgetting to flip the coordinates.
-  const points = Object.keys(carts) as Point[]
+  const points = $.keys<Point>(carts)
   const flip = (point: Point) => $.toCoords(point).reverse()
   const interest = points.find(point => carts[point].crashed) || points[0]
 

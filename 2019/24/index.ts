@@ -41,8 +41,8 @@ export const findBiodiversity = (input: string[]) => {
     curr
       .split('')
       .map((v, i) => (v === BUG ? i : null))
-      .filter(value => typeof value === 'number')
-      .map(i => Math.pow(2, i as number))
+      .filter((value): value is number => typeof value === 'number')
+      .map(i => Math.pow(2, i))
   )
 }
 

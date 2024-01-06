@@ -17,7 +17,7 @@ export const resolve = (bound: number) => {
   // Taking a step means applying a directional vector to the last recorded
   // set of coordinates.
   const step = (vector: Coords) =>
-    coords.push($.applyVector(coords.at(-1)!, vector))
+    coords.push($.applyVector(coords[coords.length - 1], vector))
 
   let steps = 0
   // Populating the grid goes like this: go east, then north, then west, then

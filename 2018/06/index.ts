@@ -29,11 +29,12 @@ export const mapOut = (lines: string[], limit?: number) => {
         regionSize++
       }
 
-      const closest = pointsByDist.pop()!
+      const closest = pointsByDist.pop()
+      if (!closest) continue
 
       // Unless the current tile is equi-distant to 2+ points from the list, it
       // belongs to the pool defined by the closest point.
-      if (closest.dist !== pointsByDist.at(-1)!.dist) {
+      if (closest.dist !== pointsByDist[pointsByDist.length - 1].dist) {
         const id = points.indexOf(closest.point)
         counters.set(id, (counters.get(id) || 0) + 1)
 

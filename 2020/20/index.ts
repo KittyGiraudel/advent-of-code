@@ -159,8 +159,11 @@ const solve = (snapshots: string[]) =>
     )
 
 export const run = (snapshots: string[]) => {
-  const mozaic = solve(snapshots)!
-  const image = assemble(mozaic)
+  const mozaic = solve(snapshots)
 
-  return [checksum(mozaic), inspectWaters(image)]
+  if (!mozaic) {
+    throw new Error('Could not solve the mozaic')
+  }
+
+  return [checksum(mozaic), inspectWaters(assemble(mozaic))]
 }

@@ -51,14 +51,14 @@ export class Intcode {
     return this
   }
 
-  getOutput() {
+  getOutput<T extends number | number[] = number[]>() {
     const output =
       this.outputs.length === 1 ? this.outputs[0] : this.outputs.slice(0)
 
     this.log('↩️ Returning output', output)
     this.outputs.length = 0
 
-    return output
+    return output as T
   }
 
   updateMemory(address: number, value: number) {

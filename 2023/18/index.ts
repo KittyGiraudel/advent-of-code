@@ -9,7 +9,7 @@ export const run = (input: string[], part2: boolean = false) => {
   input.forEach(line => {
     const [direction1, rawSteps, color] = line.split(' ')
     const steps = part2 ? parseInt(color.slice(2, -2), 16) : +rawSteps
-    const direction = part2 ? 'RDLU'[+color.at(-2)!] : direction1
+    const direction = part2 ? 'RDLU'[+color[color.length - 2]] : direction1
 
     if (direction === 'L') curr[1] -= steps
     if (direction === 'R') curr[1] += steps

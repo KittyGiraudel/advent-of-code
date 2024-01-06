@@ -18,13 +18,14 @@ const getValue = (node: Node, withRefs?: boolean): number =>
   )
 
 export const parse = (numbers: number[], withRefs?: boolean) => {
-  const node: Node = {
-    children: [],
-    size: numbers.shift()!,
-    metaSize: numbers.shift()!,
-    meta: [],
-    value: 0,
+  const size = numbers.shift()
+  const metaSize = numbers.shift()
+
+  if (size === undefined || metaSize === undefined) {
+    throw new Error('Not enough numbers to parse node')
   }
+
+  const node: Node = { children: [], size, metaSize, meta: [], value: 0 }
 
   while (node.children.length < node.size)
     node.children.push(parse(numbers, withRefs))

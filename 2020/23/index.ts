@@ -41,7 +41,7 @@ const init = (input: number[], size: number) => {
   // map to the first provided number.
   if (size > input.length) {
     map[size] = input[0]
-    map[input.at(-1)!] = input.length + 1
+    map[input[input.length - 1]] = input.length + 1
   }
 
   return map

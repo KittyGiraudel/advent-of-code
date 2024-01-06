@@ -38,7 +38,12 @@ export const run = (dump: string[]) => {
 export const getData = (dump: string[]) => {
   const disks = getDisks(dump)
   const maxCi = Math.max(...disks.map(disk => disk.coords[1]))
-  const emptyNode = disks.find(disk => disk.used === 0)!
+  const emptyNode = disks.find(disk => disk.used === 0)
+
+  if (!emptyNode) {
+    throw new Error('Could not find empty node')
+  }
+
   const oversizedDisks = disks.filter(disk => disk.used > emptyNode.size)
   const availableDisks = disks
     .filter(disk => disk.used <= emptyNode.size)
