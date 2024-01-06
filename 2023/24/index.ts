@@ -1,4 +1,4 @@
-import { init } from 'z3-solver'
+import { init, Solver, IntCreation, Context } from 'z3-solver'
 import $ from '../../helpers'
 import { TriCoords } from '../../types'
 
@@ -61,9 +61,14 @@ export const run = async (input: string[], part2: boolean = false) => {
   // See: https://pastebin.com/a6FjzJnj
   if (part2) {
     const { Context } = await init()
-    // @ts-ignore
-    const { Solver, Int } = new Context('main')
-    const solver = new Solver()
+    // @ts-ignore: There is something off with the typing of the `Context`
+    // constructor (I think because it’s not an actual constructor under the
+    // hood), so I resorted to manually typing some stuff so that the coverage
+    // is better (via `npx type-coverage`). That means having to @ts-ignore a
+    // thing or two though.
+    const ctx = new Context('main')
+    const Int: IntCreation<'main'> = ctx.Int
+    const solver: Solver<'main'> = new ctx.Solver()
     const x = Int.const('x')
     const y = Int.const('y')
     const z = Int.const('z')
@@ -80,6 +85,7 @@ export const run = async (input: string[], part2: boolean = false) => {
 
     await solver.check()
 
+    // @ts-ignore
     return Number(solver.model().eval(x.add(y).add(z)).value())
   }
 
