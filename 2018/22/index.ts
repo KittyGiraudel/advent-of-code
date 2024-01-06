@@ -47,13 +47,14 @@ export const run = (depth: number, target: Coords, part2: boolean = false) => {
     tool: (typeof TOOLS)[number]
   }
 
-  return $.search.dijkstra<State>({
+  return $.search.aStar<State>({
     start: { time: 0, position: [0, 0], tool: TORCH },
     toKey: curr => curr.position + ' : ' + curr.tool,
     isGoal: curr =>
       curr.position[0] === target[0] &&
       curr.position[1] === target[1] &&
       curr.tool === TORCH,
+    heuristic: curr => $.manhattan(curr.position, target),
     getCost: (curr, next) => next.time - curr.time,
     getNext: curr => {
       const next: State[] = []
