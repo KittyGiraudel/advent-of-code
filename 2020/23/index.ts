@@ -1,10 +1,12 @@
-import $ from '../../helpers'
-
 // Get the destination cup number.
 // @param current - Current cup value
 // @param picks - 3 picked cups
 // @param max - Maximum value
-const getDest = (current: number, picks: number[], max: number): number => {
+const getDest = (
+  current: number,
+  picks: [number, number, number],
+  max: number
+): number => {
   const destination = current - 1
   if (destination > 0 && !picks.includes(destination)) return destination
   return getDest(destination || max + 1, picks, max)
@@ -14,11 +16,11 @@ const getDest = (current: number, picks: number[], max: number): number => {
 // @param map - Map of links
 // @param current - Current cup value
 const pickCups = (map: Uint32Array, current: number) => {
-  const picks: number[] = []
+  const picks: [number, number, number] = [Infinity, Infinity, Infinity]
 
-  picks.push(map[current])
-  picks.push(map[picks[0]])
-  picks.push(map[picks[1]])
+  picks[0] = map[current]
+  picks[1] = map[picks[0]]
+  picks[2] = map[picks[1]]
 
   return picks
 }
@@ -33,7 +35,7 @@ const init = (input: number[], size: number) => {
   for (let i = 1; i <= size; i++) map[i] = i + 1
 
   // Go through the initial input, and map each value to the next one in the
-  // list (or the first to loop through).
+  // list (or the first, to loop around).
   input.forEach((n, index, array) => (map[n] = array[index + 1] || array[0]))
 
   // If there are more numbers than the initial provided ones, remap the value

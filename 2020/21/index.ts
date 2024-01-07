@@ -3,13 +3,13 @@ import $ from '../../helpers'
 // Parse a food to retrieve its ingredient and allergens.
 // @param food - Raw food
 const parseFood = (food: string) => {
-  // Delimiters          : /                           /
-  // Capture group       :  (     )
-  // Anything but `(`    :   [^(]+
-  // Literal `(contains `:         \(contains
-  // Capture group       :                    (     )
-  // Anything but `)`    :                     [^)]+
-  // Literal `)`         :                           \)
+  // Delimiters          :    /                           /
+  // Capture group       :     (     )
+  // Anything but `(`    :      [^(]+
+  // Literal `(contains `:            \(contains
+  // Capture group       :                       (     )
+  // Anything but `)`    :                        [^)]+
+  // Literal `)`         :                              \)
   const match = $.match(food, /([^(]+)\(contains ([^)]+)\)/).map(v => v.trim())
 
   return {

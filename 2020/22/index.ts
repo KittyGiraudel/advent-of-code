@@ -3,12 +3,12 @@ type Outcome = { index: number; decks: Deck[] }
 
 const isNotEmpty = (deck: Deck) => deck.length > 0
 
-const draw = (decks: Deck[]) => decks.map(deck => deck.shift()!)
+const draw = (decks: [Deck, Deck]) => decks.map(deck => deck.shift()!)
 
 const getWinningIndex = (cards: number[]) =>
   cards.findIndex(card => card === Math.max(...cards))
 
-const serializeGame = (decks: Deck[]) =>
+const serializeGame = (decks: [Deck, Deck]) =>
   decks.map(deck => deck.join(',')).join(';')
 
 // Compute the score of a given deck.
@@ -22,12 +22,12 @@ const computeScore = (cards: Deck) =>
 // Parse the given input.
 // @param input - Raw input
 const parseInput = (input: string[]) =>
-  input.map(stack => stack.split('\n').slice(1).map(Number)) as Deck[]
+  input.map(stack => stack.split('\n').slice(1).map(Number)) as [Deck, Deck]
 
 // Perform a regular fight between decks a and b.
 // @param decks - Decks of cards
 // @return Outcome with `index` (0 or 1) and `decks` (final decks)
-export const fightRegular = (decks: Deck[]) => {
+export const fightRegular = (decks: [Deck, Deck]) => {
   while (decks.every(isNotEmpty)) {
     const cards = draw(decks)
     const index = getWinningIndex(cards)
@@ -40,7 +40,10 @@ export const fightRegular = (decks: Deck[]) => {
 // Perform a recursive fight between deck a and b.
 // @param decks - Decks of cards
 // @return Outcome with `index` (0 or 1) and `decks` (final decks)
-export const fightRecursive = (decks: Deck[], cache = new Set<string>()) => {
+export const fightRecursive = (
+  decks: [Deck, Deck],
+  cache = new Set<string>()
+) => {
   while (decks.every(isNotEmpty)) {
     const key = serializeGame(decks)
 
@@ -49,8 +52,9 @@ export const fightRecursive = (decks: Deck[], cache = new Set<string>()) => {
 
     const cards = draw(decks)
     const index = decks.every((deck, i) => deck.length >= cards[i])
-      ? fightRecursive(decks.map((deck, i) => deck.slice(0, cards[i]) as Deck))
-          .index
+      ? fightRecursive(
+          decks.map((deck, i) => deck.slice(0, cards[i])) as [Deck, Deck]
+        ).index
       : getWinningIndex(cards)
 
     decks[index].push(cards[index], cards[+!index])

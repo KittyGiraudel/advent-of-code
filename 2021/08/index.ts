@@ -69,7 +69,7 @@ export const decode = (line: string) => {
 
   // Amongst the 3 patterns with 6 segments (0, 6 and 9), pattern 0 is the only
   // only with 4 overlapping segments with pattern 5 (both pattern 6 and pattern
-  // 9 have 5  segments in common with pattern 5) so it can be guessed this way.
+  // 9 have 5 segments in common with pattern 5) so it can be guessed this way.
   // We then remove it from the array as it has been figured out.
   const lettersFrom5 = lettersFrom(values[5])
   values[0] = with6Segments.find(
