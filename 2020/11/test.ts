@@ -87,26 +87,54 @@ test('Day 11 — Sample', t => {
   #.#L#L#.##
   `)
 
-  t.deepEqual(processLayout(GEN_1, processSeatLoose), GEN_2)
-  t.deepEqual(processLayout(GEN_2, processSeatLoose), GEN_3)
-  t.deepEqual(processLayout(GEN_3, processSeatLoose), GEN_4)
-  t.deepEqual(processLayout(GEN_4, processSeatLoose), GEN_5)
-  t.deepEqual(processLayout(GEN_5, processSeatLoose), GEN_6)
+  t.deepEqual(
+    processLayout($.Grid.fromRows(GEN_1), processSeatLoose).rows.map(row =>
+      row.join('')
+    ),
+    GEN_2
+  )
+  t.deepEqual(
+    processLayout($.Grid.fromRows(GEN_2), processSeatLoose).rows.map(row =>
+      row.join('')
+    ),
+    GEN_3
+  )
+  t.deepEqual(
+    processLayout($.Grid.fromRows(GEN_3), processSeatLoose).rows.map(row =>
+      row.join('')
+    ),
+    GEN_4
+  )
+  t.deepEqual(
+    processLayout($.Grid.fromRows(GEN_4), processSeatLoose).rows.map(row =>
+      row.join('')
+    ),
+    GEN_5
+  )
+  t.deepEqual(
+    processLayout($.Grid.fromRows(GEN_5), processSeatLoose).rows.map(row =>
+      row.join('')
+    ),
+    GEN_6
+  )
   t.is(waitAndCountOccupiedSeats(GEN_1, processSeatLoose), 37)
   t.is(
     getVisibleSeats(
-      $.sample(`
+      $.Grid.fromRows(
+        $.sample(`
       .............
       .L.L.#.#.#.#.
       .............
-      `),
+      `)
+      ),
       [1, 1]
     ).filter(s => s === 'L').length,
     1
   )
   t.is(
     getVisibleSeats(
-      $.sample(`
+      $.Grid.fromRows(
+        $.sample(`
       .......#.
       ...#.....
       .#.......
@@ -116,14 +144,16 @@ test('Day 11 — Sample', t => {
       .........
       #........
       ...#.....
-      `),
-      [3, 4]
+      `)
+      ),
+      [4, 3]
     ).filter(s => s === '#').length,
     8
   )
   t.is(
     getVisibleSeats(
-      $.sample(`
+      $.Grid.fromRows(
+        $.sample(`
       .##.##.
       #.#.#.#
       ##...##
@@ -131,7 +161,8 @@ test('Day 11 — Sample', t => {
       ##...##
       #.#.#.#
       .##.##.
-      `),
+      `)
+      ),
       [3, 3]
     ).filter(s => s === '#').length,
     0
