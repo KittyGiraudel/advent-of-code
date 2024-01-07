@@ -62,3 +62,40 @@ export const countBagsWithin = (map: Map, entry: string): number =>
     (acc, { count, type }) => acc + count * (1 + countBagsWithin(map, type)),
     0
   )
+
+// This is a different approach written years later. It’s not necessarily better
+// or faster, it’s just different. It uses BFS for the part 1 to figure out
+// which bag type connects to the expected type. For part 2, it just walks the
+// graph to find the total amount of bags, just like the other version.
+export const run = (input: string[], part2: boolean = false) => {
+  const graph = input
+    .map(parseRestriction)
+    .reduce<Record<string, Record<string, number>>>(
+      (acc, { type, contains }) => {
+        if (!(type in acc)) acc[type] = {}
+        contains.forEach(right => (acc[type][right.type] = right.count))
+        return acc
+      },
+      {}
+    )
+
+  const countTypesContainingType = (expected: string) =>
+    Object.keys(graph).filter(
+      type =>
+        $.search.bfs({
+          start: type,
+          isGoal: curr => curr === expected,
+          getNext: curr => Object.keys(graph[curr]),
+        }).end
+    ).length - 1
+
+  const countBagsWithin = (type: string, quantity = 1): number =>
+    Object.entries(graph[type]).reduce(
+      (acc, [key, value]) => acc + countBagsWithin(key, value * quantity),
+      quantity
+    )
+
+  return part2
+    ? countBagsWithin('shiny gold') - 1
+    : countTypesContainingType('shiny gold')
+}

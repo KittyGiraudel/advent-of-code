@@ -6,6 +6,7 @@ import {
   parseRestriction,
   mapRestrictions,
   countContainers,
+  run,
 } from './'
 
 test('Day 07 — Sample', t => {
@@ -56,7 +57,9 @@ test('Day 07 — Sample', t => {
   t.is(canContain(map1, 'bright white', 'shiny gold'), true)
   t.is(canContain(map1, 'dark orange', 'shiny gold'), true)
   t.is(countContainers(mapRestrictions(example1), 'shiny gold'), 4)
+  t.is(run(example1), 4)
   t.is(countBagsWithin(mapRestrictions(example1), 'shiny gold'), 32)
+  t.is(run(example1, true), 32)
   t.is(countBagsWithin(mapRestrictions(example2), 'shiny gold'), 126)
 })
 
@@ -66,5 +69,7 @@ test('Day 07 — Solutions', t => {
   const type = 'shiny gold'
 
   t.is(countContainers(map, type), 268)
+  t.is(run(input), 268)
   t.is(countBagsWithin(map, type), 7867)
+  t.is(run(input, true), 7867)
 })
