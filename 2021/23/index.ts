@@ -143,7 +143,7 @@ export const run = (input: string[], part2: boolean = false) => {
     getNext: curr => [...hallwayToRooms(curr), ...roomsToHallway(curr)],
   })
 
-  if (search.end) {
+  if (!search.end) {
     throw new Error('Could not find end node')
   }
 
