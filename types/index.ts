@@ -1,4 +1,5 @@
-export { SearchCosts, SearchGraph, SearchOutput } from '../helpers/search'
+export type { SearchCosts, SearchGraph, SearchOutput } from '../helpers/search'
+
 import GridClass from '../helpers/Grid'
 
 export type Grid<T> = InstanceType<typeof GridClass<T>>
