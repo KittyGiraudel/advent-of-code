@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { countOrbits, countTransfers, createGraph, getPaths } from './'
+import { countOrbits, countTransfers, createGraph } from './'
 
 test('Day 06 — Sample', t => {
   const sampleA = $.sample(`

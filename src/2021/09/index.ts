@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import type { Coords, CoordsAndPoint, Grid, Point } from '../../types'
+import type { Coords, Grid, Point } from '../../types'
 
 // Find the low points in the grid. To do so, iterate over every row, then every
 // number, and get its 4 neighbors. If all existing neighbors are higher than

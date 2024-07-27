@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import type { Coords, Point } from '../../types'
+import type { Coords } from '../../types'
 
 type State = {
   position: Coords

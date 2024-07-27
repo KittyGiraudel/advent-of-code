@@ -1,4 +1,4 @@
-import { Context, type IntCreation, type Solver, init } from 'z3-solver'
+import { type IntCreation, type Solver, init } from 'z3-solver'
 import $ from '../../helpers'
 import type { TriCoords } from '../../types'
 

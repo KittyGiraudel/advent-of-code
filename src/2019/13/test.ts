@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { draw, getInitialState, initComputer, render } from './'
+import { draw, getInitialState, initComputer } from './'
 
 test('Day 13 — Solutions', t => {
   const [input] = $.readInput(import.meta)

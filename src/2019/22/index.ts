@@ -1,5 +1,3 @@
-import $ from '../../helpers'
-
 const parseInstruction = (line: string) => {
   if (line.startsWith('cut'))
     return { type: 'CUT', value: +line.match(/(-?\d+)/)![1] }

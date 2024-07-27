@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import type { Coords, Point } from '../../types'
+import type { Point } from '../../types'
 import { Computer } from '../10'
 
 export const run = (key: string, part2 = false) => {
