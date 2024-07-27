@@ -108,11 +108,7 @@ const transition = (
 // @param origin - Storage map
 // @param dimensions - Either 3 or 4 dimensions
 // @param cache - Coordinates cache
-const cycle = (
-  origin: Mappy = new Map(),
-  dimensions: number,
-  cache: NeighborCache
-) =>
+const cycle = (origin: Mappy, dimensions: number, cache: NeighborCache) =>
   Array.from(origin.keys()).reduce((acc, key) => {
     // Get the coordinates of all the neighbours to the current cell. For each
     // neighbouring coordinates which does not exist in the dimensional space,

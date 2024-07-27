@@ -1,5 +1,5 @@
 import test from 'ava'
-import { isValidPassword, findPasswords } from './'
+import { findPasswords, isValidPassword } from './'
 
 test('Day 04 — Sample', t => {
   t.truthy(isValidPassword('111111'))
@@ -12,7 +12,7 @@ test('Day 04 — Sample', t => {
 })
 
 test('Day 04 — Solutions', t => {
-  const input = `272091-815432`
+  const input = '272091-815432'
 
   t.is(findPasswords(input).length, 931)
   t.is(findPasswords(input, true).length, 609)

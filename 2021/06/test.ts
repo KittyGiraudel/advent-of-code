@@ -3,7 +3,7 @@ import $ from '../../helpers'
 import { run } from './'
 
 test('Day 06 — Sample', t => {
-  const sample = `3,4,3,1,2`
+  const sample = '3,4,3,1,2'
 
   t.is(run(sample, 18), 26)
   t.is(run(sample, 80), 5934)

@@ -1,9 +1,9 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { getBoundaries, run, isSuccessfulLaunch } from './'
+import { getBoundaries, isSuccessfulLaunch, run } from './'
 
 test('Day 17 — Sample', t => {
-  const sample = `target area: x=20..30, y=-10..-5`
+  const sample = 'target area: x=20..30, y=-10..-5'
   const boundaries = getBoundaries(sample)
 
   t.truthy(typeof isSuccessfulLaunch(boundaries, [7, 2]) === 'number')

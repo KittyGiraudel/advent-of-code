@@ -9,11 +9,11 @@ const KEYPAD_1: number[][] = [
 
 // prettier-ignore
 const KEYPAD_2: (number | string | undefined)[][] = [
-  [, , 1, ,],
-  [, 2, 3, 4],
+  [undefined, undefined, 1, undefined, undefined],
+  [undefined, 2, 3, 4],
   [5, 6, 7, 8, 9],
-  [, 'A', 'B', 'C'],
-  [, , 'D', ,],
+  [undefined, 'A', 'B', 'C', undefined],
+  [undefined, undefined, 'D', undefined, undefined],
 ]
 
 const VECTORS: Record<string, Coords> = {

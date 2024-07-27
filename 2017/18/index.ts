@@ -32,13 +32,15 @@ class Network {
   }
 }
 
+type Listener = (value: number) => void
+
 class Computer {
   id: number
   registers: { p: number }
   queue: number[]
   pointer: number
   counters: Record<string, number>
-  listeners: Record<string, Function[]>
+  listeners: Record<string, Listener[]>
   instructions: string[]
   waiting: boolean
 
@@ -80,7 +82,7 @@ class Computer {
     this.counters[eventName]++
 
     const listeners = this.listeners[eventName] || []
-    listeners.forEach((listener: Function) => listener(value))
+    listeners.forEach((listener: Listener) => listener(value))
 
     return this
   }

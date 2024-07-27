@@ -15,6 +15,7 @@ test('Day 24 — Sample', async t => {
   t.is(await run(sample), 15107)
 })
 
+// biome-ignore lint/suspicious/noFocusedTests: on purpose
 test.only('Day 24 — Solutions', async t => {
   const input = $.readInput(import.meta)
   t.is(await run(input), 15107)

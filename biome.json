@@ -16,8 +16,12 @@
       "recommended": true,
       "complexity": { "noForEach": "off" },
       "security": { "noGlobalEval": "off" },
-      "performance": { "noAccumulatingSpread": "off" },
+      "performance": { "noAccumulatingSpread": "off", "noDelete": "off" },
+      "suspicious": { "noAssignInExpressions": "off" },
+      "correctness": { "noUnreachable": "off" },
       "style": {
+        "noCommaOperator": "off",
+        "noUselessElse": "off",
         "noNonNullAssertion": "off",
         "noParameterAssign": "off",
         "useTemplate": "off"

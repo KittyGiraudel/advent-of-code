@@ -1,5 +1,5 @@
 const pick = <T>(array: T[]) => array[Math.floor(Math.random() * array.length)]
-const toString = (set?: Set<string>) => (set ? Array.from(set).join(',') : '')
+const stringify = (set?: Set<string>) => (set ? Array.from(set).join(',') : '')
 
 export const run = (input: string[]) => {
   const values: string[] = []
@@ -24,7 +24,7 @@ export const run = (input: string[]) => {
       const indexL = subsets.findIndex(set => set.has(nodeL))
       const indexR = subsets.findIndex(set => set.has(nodeR))
 
-      if (toString(subsets[indexL]) !== toString(subsets[indexR])) {
+      if (stringify(subsets[indexL]) !== stringify(subsets[indexR])) {
         subsets[indexR].forEach(value => subsets[indexL].add(value))
         subsets.splice(indexR, 1)
       }
@@ -43,8 +43,8 @@ export const run = (input: string[]) => {
 
     const bridges = pairs.filter(
       ([left, right]) =>
-        toString(groups.find(set => set.has(left))) !==
-        toString(groups.find(set => set.has(right)))
+        stringify(groups.find(set => set.has(left))) !==
+        stringify(groups.find(set => set.has(right)))
     )
 
     if (bridges.length < 4) break

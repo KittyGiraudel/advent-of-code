@@ -125,8 +125,8 @@ export const getHumnNumber = (input: string[]) => {
   // multiplying the current value by 4.
   while (curr !== 'humn') {
     const [a, operator, b] = String(map[curr]).split(' ')
-    const next = isNaN(+a) ? a : b
-    const number = !isNaN(+b) ? +b : +a
+    const next = Number.isNaN(+a) ? a : b
+    const number = !Number.isNaN(+b) ? +b : +a
 
     if (operator === '*') value /= number
     if (operator === '+') value -= number
@@ -137,12 +137,12 @@ export const getHumnNumber = (input: string[]) => {
     // E.g. 10 = 20 / b is the same as b = 20 / 10, not b = 10 / 20
     // E.g. 10 = 20 - b is the same as b = 20 - 10, not b = 10 - 20
     if (operator === '/') {
-      if (!isNaN(+a)) value = number / value
+      if (!Number.isNaN(+a)) value = number / value
       else value *= number
     }
 
     if (operator === '-') {
-      if (!isNaN(+a)) value = number - value
+      if (!Number.isNaN(+a)) value = number - value
       else value += number
     }
 

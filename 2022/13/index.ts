@@ -59,7 +59,7 @@ export const getScore = (pairs: string[]) =>
 // to get an array of individual packets; parse them all as JSON. Then sort all
 // packets based, and find the index of the dividers again.
 export const sort = (pairs: string[]) => {
-  const dividers = `[[2]]\n[[6]]`
+  const dividers = '[[2]]\n[[6]]'
   const packets: ValueOrArray<number>[] = pairs
     .concat(dividers)
     .join('\n')

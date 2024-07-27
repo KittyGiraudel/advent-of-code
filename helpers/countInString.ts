@@ -9,11 +9,11 @@ const countInString = (
   haystack: string,
   needle: string,
   insensitive = true,
-  escape = true
+  escapeRE = true
 ) => {
   const flags = ['g', insensitive ? 'i' : ''].join('')
   const regex = new RegExp(
-    `(?=(${escape ? escapeRegExp(needle) : needle}))`,
+    `(?=(${escapeRE ? escapeRegExp(needle) : needle}))`,
     flags
   )
   const matches = haystack.matchAll(regex)

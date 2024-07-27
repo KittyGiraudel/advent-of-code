@@ -27,7 +27,7 @@ export const run = (weights: number[], count = 3) => {
   for (const group of groups) {
     // If we have already found a result, and we’re moving to a higher group
     // length, abort as we have found what we are looking for.
-    if (isFinite(quantum) && group.length > length) break
+    if (Number.isFinite(quantum) && group.length > length) break
 
     // Record the current group length, in case it increased.
     length = group.length

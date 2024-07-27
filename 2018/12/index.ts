@@ -64,7 +64,7 @@ export const cycle = (input: [string, string], cycles = 1) => {
     // If the difference between the new score and the current one is the same
     // as the difference between the previous score and the one before that, we
     // have reached equilibrium, and the final score can be computed.
-    if (nextScore - score == inc) {
+    if (nextScore - score === inc) {
       return nextScore + cycles * inc
     }
 

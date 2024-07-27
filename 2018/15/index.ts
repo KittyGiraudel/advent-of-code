@@ -52,7 +52,7 @@ class Unit {
 
   isAt(input: Point | Coords) {
     if (typeof input === 'string') return input === this.point
-    if (typeof Array.isArray(input))
+    if (Array.isArray(input))
       return input[0] === this.ri && input[1] === this.ci
     return false
   }

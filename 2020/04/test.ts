@@ -1,6 +1,6 @@
 import test from 'ava'
+import { VALIDATORS, isValidLoose, isValidStrict } from '.'
 import $ from '../../helpers'
-import { isValidLoose, isValidStrict, VALIDATORS } from '.'
 
 test('Day 04 — Sample', t => {
   t.is(
@@ -82,7 +82,7 @@ hcl:#623a2f`),
   )
   t.is(
     isValidStrict(
-      `iyr:2010 hgt:158cm hcl:#b6652a ecl:blu byr:1944 eyr:2021 pid:093154719`
+      'iyr:2010 hgt:158cm hcl:#b6652a ecl:blu byr:1944 eyr:2021 pid:093154719'
     ),
     true
   )

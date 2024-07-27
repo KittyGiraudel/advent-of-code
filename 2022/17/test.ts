@@ -3,7 +3,7 @@ import $ from '../../helpers'
 import { tetris } from './'
 
 test('Day 17 — Sample', t => {
-  const sample = `>>><<><>><<<>><>>><<<>>><<<><<<>><>><<>>`
+  const sample = '>>><<><>><<<>><>>><<<>>><<<><<<>><>><<>>'
 
   t.is(tetris(sample), 3068)
 })

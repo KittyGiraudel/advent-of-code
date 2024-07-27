@@ -4,7 +4,7 @@ import type { Point } from '../../types'
 export const run = (input: string[], iterations: number, part2 = false) => {
   let curr = $.Grid.fromRows(input)
   const corners: Point[] = [
-    `0,0`,
+    '0,0',
     `0,${curr.width - 1}`,
     `${curr.height - 1},0`,
     `${curr.height - 1},${curr.width - 1}`,

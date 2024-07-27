@@ -1,10 +1,13 @@
 /**
  * Group an array of objects by a certain key.
  */
-const groupBy = <T>(array: T[], key: string) => {
+const groupBy = <T extends Record<string, unknown>>(
+  array: T[],
+  key: string
+) => {
   return array.reduce<Record<string, T[]>>((acc, item) => {
-    ;(acc[(item as Record<string, any>)[key]] =
-      acc[(item as Record<string, any>)[key]] || []).push(item)
+    const value = item[key] as string
+    ;(acc[value] = acc[value] || []).push(item)
     return acc
   }, {})
 }
