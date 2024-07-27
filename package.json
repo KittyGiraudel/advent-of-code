@@ -5,7 +5,8 @@
     "tiles": "rm -rf AoCTiles/.aoc_tiles_cache && python3 AoCTiles/create_aoc_tiles.py",
     "check": "tsc --outDir dist --noEmit",
     "exec": "node --loader ts-node/esm --experimental-specifier-resolution=node --no-warnings",
-    "coverage": "type-coverage --detail --strict --ignore-files=test.ts"
+    "coverage": "type-coverage --detail --strict --ignore-files=test.ts",
+    "lint": "biome check --write --unsafe **/*.ts"
   },
   "engines": {
     "node": "20"
@@ -24,9 +25,7 @@
     "typescript": "^5.5.4"
   },
   "ava": {
-    "files": [
-      "./**/*test.ts"
-    ],
+    "files": ["./**/*test.ts"],
     "nodeArguments": [
       "--experimental-specifier-resolution=node",
       "--no-warnings"
