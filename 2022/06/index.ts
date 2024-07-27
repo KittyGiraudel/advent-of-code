@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 
-export const findMarker = (input: string, length: number = 4) => {
+export const findMarker = (input: string, length = 4) => {
   for (let i = length; i < input.length; i++) {
     const slice = input.slice(i - length, i)
     const unique = $.unique(Array.from(slice))

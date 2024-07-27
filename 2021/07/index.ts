@@ -23,7 +23,7 @@ const getIncrementalFuelConsumption = (numbers: number[]) =>
     getIncFuelConsumption(numbers, Math.floor)
   )
 
-export const run = (input: number[], part2: boolean = false) => {
+export const run = (input: number[], part2 = false) => {
   return part2
     ? getIncrementalFuelConsumption(input)
     : getFuelConsumption(input)

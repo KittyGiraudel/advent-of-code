@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 
-export const checksum = (input: string[], part2: boolean = false) =>
+export const checksum = (input: string[], part2 = false) =>
   $.sum(
     input.map(row => {
       const numbers = $.numbers(row)

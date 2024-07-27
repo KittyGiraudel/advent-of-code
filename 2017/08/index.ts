@@ -3,7 +3,7 @@
 // the maximum value reached by a register.
 // Write-up: https://kittygiraudel.com/2022/01/21/exploiting-javascript-quirks-for-fun-and-profit/
 export const run = (lines: string[]) => {
-  let absoluteMax = -Infinity
+  let absoluteMax = Number.NEGATIVE_INFINITY
   const registers: Record<string, number> = {}
 
   lines.forEach(line => {

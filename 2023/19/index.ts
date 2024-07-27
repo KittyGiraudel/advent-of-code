@@ -119,7 +119,7 @@ const process = (
   return result
 }
 
-export const run = (input: [string, string], part2: boolean = false) => {
+export const run = (input: [string, string], part2 = false) => {
   const ratings = input[1].split('\n').map(parseRating)
 
   // Part 1 was kinda fun: I solved it a in few different ways. First by kinda

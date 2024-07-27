@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 
-export const cycle2 = (input: string, iterations: number = 1) => {
+export const cycle2 = (input: string, iterations = 1) => {
   const offset = +input.slice(0, 7)
   const code = input.split('').map(Number).slice(offset)
   const curr = code.slice()
@@ -36,7 +36,7 @@ const reduceFirst = (acc: number, value: number, i: number) =>
 const reduceAny = (acc: number, chunk: number[], i: number) =>
   i % 2 ? acc + $.sum(chunk) * (i % 4 === 1 ? +1 : -1) : acc
 
-export const cycle = (input: string, iterations: number = 1) => {
+export const cycle = (input: string, iterations = 1) => {
   let curr = input.split('').map(Number)
   let next: number[] = []
 

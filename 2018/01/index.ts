@@ -1,6 +1,6 @@
 export const find = (
   input: number[],
-  value: number = 0,
+  value = 0,
   cache = new Map<number, number>([[0, 1]])
 ): number => {
   for (let i = 0; i < input.length; i++) {

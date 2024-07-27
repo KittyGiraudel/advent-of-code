@@ -18,10 +18,10 @@ function* getCombinations(array: number[]) {
   for (let i = 1; i <= array.length; i++) yield* getCombinationsN(array, i)
 }
 
-export const run = (weights: number[], count: number = 3) => {
+export const run = (weights: number[], count = 3) => {
   const totalWeight = $.sum(weights)
   const groups = getCombinations(weights)
-  let quantum = Infinity
+  let quantum = Number.POSITIVE_INFINITY
   let length = 1
 
   for (const group of groups) {

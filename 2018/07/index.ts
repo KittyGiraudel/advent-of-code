@@ -43,7 +43,7 @@ export const sequential = (input: string[]) => {
       .sort()
       .find(key => !graph.get(key)!.size)!
     graph.delete(next)
-    for (let [key] of graph) graph.get(key)!.delete(next)
+    for (const [key] of graph) graph.get(key)!.delete(next)
     order.push(next)
   }
 
@@ -52,15 +52,15 @@ export const sequential = (input: string[]) => {
 
 export const parallel = (
   input: string[],
-  help: number = 5,
-  offset: number = 60
+  help = 5,
+  offset = 60
 ) => {
   type Worker = { collecting: string; timer: number }
 
   const graph = getGraph(input)
   const keys = Array.from(graph.keys()).sort()
 
-  const createWorker = () => ({ collecting: '', timer: Infinity })
+  const createWorker = () => ({ collecting: '', timer: Number.POSITIVE_INFINITY })
   const getLetterDuration = (letter: string) =>
     offset + letter.charCodeAt(0) - 64
   const findNext = (workers: Worker[], collected: string[]) =>
@@ -92,7 +92,7 @@ export const parallel = (
       if (--worker.timer === 0) {
         collected.push(worker.collecting)
         worker.collecting = ''
-        worker.timer = Infinity
+        worker.timer = Number.POSITIVE_INFINITY
       }
     })
 

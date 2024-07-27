@@ -75,7 +75,7 @@ const formatData = ([guardId, minutes]: [string, number[]]) => ({
     .sort((a, b) => b.occurrences - a.occurrences),
 })
 
-export const find = (input: string[], part2: boolean = false) => {
+export const find = (input: string[], part2 = false) => {
   const data = Object.entries(
     input
       .map(parseLog)

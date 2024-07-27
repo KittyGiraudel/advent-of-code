@@ -40,7 +40,7 @@ const next = (curr: string[], patterns: Patterns) =>
     .map((_, index, array) => getSlice(array, index))
     .map(slice => patterns[slice] || '.')
 
-export const cycle = (input: [string, string], cycles: number = 1) => {
+export const cycle = (input: [string, string], cycles = 1) => {
   const [initial, instructions] = input
   const patterns = getPatterns(instructions)
   let curr = getInitialState(initial)

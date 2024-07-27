@@ -15,7 +15,7 @@ const wrap = (rule: string) => (rule.includes('|') ? '(?:' + rule + ')' : rule)
 // @param rule - Rule to resolve
 // @param map - Storage map
 // @param depth - Internal depth parameter; do not fill
-const resolveRule = (rule: string, map: Cache, depth: number = 0): string =>
+const resolveRule = (rule: string, map: Cache, depth = 0): string =>
   rule.replace(/\d+/g, match =>
     depth > 4
       ? match
@@ -37,7 +37,7 @@ const getRegularExpression = (input: string, fixes: Fixes) => {
       new Map<string, string>()
     )
 
-  for (let [key, value] of map.entries()) {
+  for (const [key, value] of map.entries()) {
     map.set(key, resolveRule(value, map))
   }
 

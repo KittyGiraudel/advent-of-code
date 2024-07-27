@@ -13,7 +13,7 @@ const lookAndSay = (input: string) => {
   return output
 }
 
-export const run = (input: string, n: number = 1) => {
+export const run = (input: string, n = 1) => {
   while (n--) {
     // The loop version is unsurprisingly faster than the regular expression
     // version.

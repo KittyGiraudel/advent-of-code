@@ -29,7 +29,7 @@ const parseRoom = (line: string) => {
   return { name: rotate(hash, +id), id: +id, valid } as Room
 }
 
-export const run = (input: string[], part2: boolean = false) => {
+export const run = (input: string[], part2 = false) => {
   const rooms = input.map(parseRoom)
 
   return part2

@@ -31,7 +31,7 @@ const createGraph = (connections: string[]) => {
 const getPaths = (
   graph: Graph,
   cave: string,
-  withDuplicate: boolean = false,
+  withDuplicate = false,
   path: string[] = []
 ): string[][] => {
   const { small, siblings } = graph[cave]
@@ -65,5 +65,5 @@ const getPaths = (
   )
 }
 
-export const run = (connections: string[], part2: boolean = false) =>
+export const run = (connections: string[], part2 = false) =>
   getPaths(createGraph(connections), 'start', part2)

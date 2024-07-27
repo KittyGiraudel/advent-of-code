@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 
-export const count = (input: string[], iterations: number = 1) => {
+export const count = (input: string[], iterations = 1) => {
   const string = input[0]
   // Initialize letter counters based on the characters of the initial string.
   const counters = $.frequency(string)
@@ -46,7 +46,7 @@ export const count = (input: string[], iterations: number = 1) => {
     })
 
     // Preserve untouched pairs from the previous string.
-    for (let pair in curr) next[pair] = (next[pair] || 0) + curr[pair]
+    for (const pair in curr) next[pair] = (next[pair] || 0) + curr[pair]
 
     // Replace the previous map with the new one for the next iteration.
     curr = next

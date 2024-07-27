@@ -100,12 +100,12 @@ test('Day 22 — Sample', t => {
 
   t.is(run(sampleA, 50), 39)
   t.is(run(sampleB, 50), 590_784)
-  t.is(run(sampleC, Infinity), 2_758_514_936_282_235)
+  t.is(run(sampleC, Number.POSITIVE_INFINITY), 2_758_514_936_282_235)
 })
 
 test('Day 22 — Solutions', t => {
   const input = $.readInput(import.meta)
 
   t.is(run(input, 50), 606_484)
-  t.is(run(input, Infinity), 1_162_571_910_364_852)
+  t.is(run(input, Number.POSITIVE_INFINITY), 1_162_571_910_364_852)
 })

@@ -42,7 +42,7 @@ const getType = (cards: Cards, part2: boolean) =>
 // Break down the lines into a hand of cards and their bet, then resolve the
 // type of each hand (considering jokers for part 2), sort them, and resolve
 // their score based on the final order.
-export const run = (input: string[], part2: boolean = false) =>
+export const run = (input: string[], part2 = false) =>
   input
     .map(line => line.split(' ') as [Cards, number])
     .map(

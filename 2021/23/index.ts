@@ -16,7 +16,7 @@ const toKey = (curr: State) =>
 const isGoal = (part2: boolean) => (curr: State) =>
   curr.rooms.join(' ') === (part2 ? 'AAAA BBBB CCCC DDDD' : 'AA BB CC DD')
 
-const parseRooms = (input: string[], part2: boolean = false) => {
+const parseRooms = (input: string[], part2 = false) => {
   // Read lines 2 and 3 (the lines with the rooms), and remove all spaces and
   // hashes to get 2 rows of 4 letters
   const [top, bottom] = input
@@ -134,7 +134,7 @@ const roomsToHallway = (curr: State) => {
   return next
 }
 
-export const run = (input: string[], part2: boolean = false) => {
+export const run = (input: string[], part2 = false) => {
   const search = $.search.dijkstra<State>({
     start: { hallway: '...........', rooms: parseRooms(input, part2), cost: 0 },
     toKey,

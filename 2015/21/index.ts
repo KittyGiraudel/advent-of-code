@@ -79,7 +79,7 @@ class Unit {
     cost: number,
     damage: number,
     armor: number,
-    health: number = 100
+    health = 100
   ) {
     this.health = health
     this.damage = damage

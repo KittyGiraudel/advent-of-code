@@ -22,6 +22,6 @@ const countWindowIncreases = (input: number[]) =>
     )
   )
 
-export const run = (input: number[], part2: boolean = false) => {
+export const run = (input: number[], part2 = false) => {
   return part2 ? countWindowIncreases(input) : countIncreases(input)
 }

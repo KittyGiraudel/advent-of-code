@@ -8,8 +8,8 @@ function escapeRegExp(text: string) {
 const countInString = (
   haystack: string,
   needle: string,
-  insensitive: boolean = true,
-  escape: boolean = true
+  insensitive = true,
+  escape = true
 ) => {
   const flags = ['g', insensitive ? 'i' : ''].join('')
   const regex = new RegExp(

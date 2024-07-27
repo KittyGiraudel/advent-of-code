@@ -27,7 +27,7 @@ class Game {
   }
 
   get score() {
-    return this.winner?.score ?? Infinity
+    return this.winner?.score ?? Number.POSITIVE_INFINITY
   }
 
   get groups() {

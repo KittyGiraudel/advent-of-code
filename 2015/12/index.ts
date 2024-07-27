@@ -16,5 +16,5 @@ const getSum = (item: unknown): number => {
   return 0
 }
 
-export const run = (input: string, part2: boolean = false) =>
+export const run = (input: string, part2 = false) =>
   getSum(part2 ? JSON.parse(input) : $.numbers(input))

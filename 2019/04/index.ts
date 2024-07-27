@@ -1,4 +1,4 @@
-export const isValidPassword = (str: string, secure: boolean = false) =>
+export const isValidPassword = (str: string, secure = false) =>
   str.length === 6 &&
   (secure
     ? // Check for all sequences of repeated numbers and make sure one at least
@@ -8,7 +8,7 @@ export const isValidPassword = (str: string, secure: boolean = false) =>
       str.match(/(\d)\1/) !== null) &&
   Array.from(str).every((char, i, str) => i === 0 || +char >= +str[i - 1])
 
-export const findPasswords = (input: string, secure: boolean = false) => {
+export const findPasswords = (input: string, secure = false) => {
   const [min, max] = input.split('-').map(Number)
   const passwords: string[] = []
 

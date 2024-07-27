@@ -79,7 +79,7 @@ class Game {
   }
 }
 
-export const play = (input: string[], worried: boolean = false) => {
+export const play = (input: string[], worried = false) => {
   const players = input
     .map(player => {
       // Courtesy of my brother: https://github.com/lgiraudel/advent-of-code/commit/05327d1fdd617003a3ca010d12119751b87c71dd#diff-5d9f4737b2b36f0267499d0e02982aa39794afb4facb7d805983ad3975fd355eR12

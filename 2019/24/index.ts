@@ -13,7 +13,7 @@ const getNext = (curr: string, count: number) => {
 
 export const cycle = (curr: string) => {
   let next = ''
-  let width = Math.sqrt(curr.length)
+  const width = Math.sqrt(curr.length)
 
   for (let i = 0; i < curr.length; i++) {
     const bugs = [

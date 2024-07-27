@@ -1,5 +1,5 @@
 import test from 'ava'
-import { Floors, run } from './'
+import { type Floors, run } from './'
 
 test('Day 11 — Sample', t => {
   const sample: Floors = [['HM', 'LM'], ['HG'], ['LG'], []]

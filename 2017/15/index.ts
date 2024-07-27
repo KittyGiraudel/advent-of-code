@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 
-const gen = function* (init: number, factor: number, modulo: number = 1) {
+const gen = function* (init: number, factor: number, modulo = 1) {
   let curr = init
 
   while (true) {

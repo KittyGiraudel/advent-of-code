@@ -26,7 +26,7 @@ const proceedWithAim = (instructions: string[]) =>
       { position: 0, depth: 0, aim: 0 }
     )
 
-export const run = (input: string[], part2: boolean = false) => {
+export const run = (input: string[], part2 = false) => {
   const { depth, position } = part2 ? proceedWithAim(input) : proceed(input)
 
   return depth * position

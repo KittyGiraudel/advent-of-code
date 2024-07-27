@@ -97,8 +97,8 @@ export const getSmallDirsSize = (drive: Dir) =>
 // do not match the predicate, after which it picks the smallest size.
 export const findFreeableSpace = (
   drive: Dir,
-  capacity: number = 70_000_000,
-  needed: number = 30_000_000
+  capacity = 70_000_000,
+  needed = 30_000_000
 ) => {
   const unused = capacity - getSize(drive)
 

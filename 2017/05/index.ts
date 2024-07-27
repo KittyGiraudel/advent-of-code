@@ -1,4 +1,4 @@
-export const run = (memory: number[], boundary: number = Infinity) => {
+export const run = (memory: number[], boundary: number = Number.POSITIVE_INFINITY) => {
   memory = memory.slice(0)
   let index = 0
   let i = 0

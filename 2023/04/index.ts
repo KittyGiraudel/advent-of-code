@@ -7,7 +7,7 @@ const parseCard = (line: string) => {
   return { score, count: 1 }
 }
 
-export const run = (input: string[], part2: boolean = false) => {
+export const run = (input: string[], part2 = false) => {
   const cards = input.map(parseCard)
 
   if (part2) {

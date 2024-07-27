@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 
-export const run = (input: string[], a: number = 0) => {
+export const run = (input: string[], a = 0) => {
   const registers = { a, b: 0 }
   let index = 0
 

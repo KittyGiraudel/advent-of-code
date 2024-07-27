@@ -11,7 +11,7 @@ export const getNextDeparture = ([timestamp, sequence]: [string, string]) => {
     .map(Number)
     .reduce(
       (acc, id) => ((+timestamp / id) % 1 > (+timestamp / acc) % 1 ? id : acc),
-      Infinity
+      Number.POSITIVE_INFINITY
     )
   const wait = Math.round(line - line * ((+timestamp / line) % 1))
 

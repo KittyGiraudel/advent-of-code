@@ -7,8 +7,8 @@ type Instruction = Spin | Exchange | Partner
 
 export const dance = (
   input: string[],
-  size: number = 16,
-  iterations: number = 1
+  size = 16,
+  iterations = 1
 ) => {
   const programs = $.range(size, 97).map(a => String.fromCharCode(a))
   const history: string[] = []

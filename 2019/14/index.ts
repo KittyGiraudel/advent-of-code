@@ -87,7 +87,7 @@ const getOreCost = (
 // Python on Reddit which I could follow and reimplement with a coding style
 // closer to what I originally wrote (a recursive approach).
 // Ref: https://github.com/jeffjeffjeffrey/advent-of-code/blob/master/2019/day_14.ipynb
-export const getFuelCost = (input: string[], amount: number = 1) =>
+export const getFuelCost = (input: string[], amount = 1) =>
   getOreCost(
     { recipes: parseRecipes(input), supplies: {}, ore: 0 },
     { ingredient: 'FUEL', amount }
@@ -95,5 +95,5 @@ export const getFuelCost = (input: string[], amount: number = 1) =>
 
 export const getFuelAmount = (
   input: string[],
-  supply: number = 1_000_000_000_000
+  supply = 1_000_000_000_000
 ) => $.binarySearch(1, supply, (i: number) => supply - getFuelCost(input, i))

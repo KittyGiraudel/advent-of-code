@@ -22,7 +22,7 @@ const count = (lines: string[]) =>
 const lettersFrom = (value: string) => new RegExp('[' + value + ']', 'g')
 
 export const decode = (line: string) => {
-  let [patterns, encodedDigits] = parseInput(line)
+  const [patterns, encodedDigits] = parseInput(line)
 
   // Store the 10 patterns in the right order in this array.
   const values: string[] = []
@@ -100,5 +100,5 @@ export const decode = (line: string) => {
 
 const total = (lines: string[]) => $.sum(lines.map(decode))
 
-export const run = (input: string[], part2: boolean = false) =>
+export const run = (input: string[], part2 = false) =>
   part2 ? total(input) : count(input)

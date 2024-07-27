@@ -1,7 +1,7 @@
 export const run = (
   input: string[],
   maximum: number,
-  part2: boolean = false
+  part2 = false
 ) => {
   const lists = input
     .map(a => a.split('-').map(Number))

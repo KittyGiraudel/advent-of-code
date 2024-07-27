@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { Path, run } from './'
+import { type Path, run } from './'
 
 const sortByScore = (a: Path, b: Path) => b.score - a.score
 const sortByLength = (a: Path, b: Path) =>

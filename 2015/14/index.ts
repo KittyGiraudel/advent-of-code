@@ -48,7 +48,7 @@ class Deer {
 
 export const run = (
   input: string[],
-  iterations: number = 1000
+  iterations = 1000
 ): [number, number] => {
   const deers = input.map(line => new Deer(line))
 

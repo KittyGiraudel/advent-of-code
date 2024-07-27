@@ -5,8 +5,8 @@ export const VALIDATORS = {
   iyr: (input: string) => $.isClamped(+input, 2010, 2020),
   eyr: (input: string) => $.isClamped(+input, 2020, 2030),
   hgt: (input: string) =>
-    (input.endsWith('cm') && $.isClamped(parseInt(input), 150, 193)) ||
-    (input.endsWith('in') && $.isClamped(parseInt(input), 59, 76)),
+    (input.endsWith('cm') && $.isClamped(Number.parseInt(input), 150, 193)) ||
+    (input.endsWith('in') && $.isClamped(Number.parseInt(input), 59, 76)),
   hcl: (input: string) => /^#[0-9a-f]{6}$/i.test(input),
   ecl: (input: string) =>
     'amb,blu,brn,gry,grn,hzl,oth'.split(',').includes(input),

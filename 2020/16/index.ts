@@ -62,7 +62,7 @@ const hasSingleOption = (entry: string | string[]) =>
 // @param tickets - Valid nearby tickets
 // @param rules - Rules to validate the tickets against
 const getRulesPossibilities = (tickets: Ticket[], rules: Rule[]) => {
-  let possibilities: Possibility[] = $.array(rules.length).map(() => [])
+  const possibilities: Possibility[] = $.array(rules.length).map(() => [])
 
   rules.forEach(rule => {
     const name = rule[0]

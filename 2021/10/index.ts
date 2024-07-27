@@ -61,6 +61,6 @@ const getCompletionScore = (lines: string[]) => {
   return scores[Math.floor(scores.length / 2)]
 }
 
-export const run = (input: string[], part2: boolean = false) => {
+export const run = (input: string[], part2 = false) => {
   return part2 ? getCompletionScore(input) : getCorruptionScore(input)
 }

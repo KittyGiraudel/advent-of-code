@@ -1,9 +1,9 @@
 import $ from '../../helpers'
 
 const extrapolate =
-  (part2: boolean = false) =>
+  (part2 = false) =>
   (history: number[]) => {
-    let layers = [history]
+    const layers = [history]
 
     // Note that we construct the layers *upwards* instead of downwards to ease
     // the code a bit and maintain the relevant layer at static index 0 instead
@@ -21,5 +21,5 @@ const extrapolate =
     )
   }
 
-export const run = (input: string[], part2: boolean = false) =>
+export const run = (input: string[], part2 = false) =>
   $.sum(input.map($.numbers).map(extrapolate(part2)))

@@ -26,7 +26,7 @@ const parseInstructions = (instructions: string) =>
     .filter(Boolean)
     .map(instruction => $.numbers(instruction))
 
-export const process = (input: [string, string], batch: boolean = false) => {
+export const process = (input: [string, string], batch = false) => {
   const map = parseMap(input[0].split('\n'))
   const instructions = parseInstructions(input[1])
 

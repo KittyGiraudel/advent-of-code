@@ -30,7 +30,7 @@ const getArrangementScore = (graph: Graph) => (arrangement: string[]) =>
     return acc + graph[item][next] + graph[next][item]
   }, 0)
 
-export const run = (input: string[], withOneself: boolean = false) => {
+export const run = (input: string[], withOneself = false) => {
   const graph = createGraph(input, withOneself)
   const keys = Object.keys(graph)
   const arrangements = $.permutations(keys)

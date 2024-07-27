@@ -42,8 +42,8 @@ const createMap = (input: string[]) =>
       })
   )
 
-export const run = (input: string[], part2: boolean = false) => {
-  let count = { high: 0, low: 0 }
+export const run = (input: string[], part2 = false) => {
+  const count = { high: 0, low: 0 }
 
   const send = (map: ReturnType<typeof createMap>) => {
     const pulses: Pulse[] = [
@@ -97,7 +97,7 @@ export const run = (input: string[], part2: boolean = false) => {
   // https://www.reddit.com/r/adventofcode/comments/18mmfxb/comment/ke5v9bb/
   if (part2)
     return ['111010010101', '111111111101', '111111111011', '111101000111']
-      .map(binary => parseInt(binary, 2))
+      .map(binary => Number.parseInt(binary, 2))
       .reduce((a, b) => $.lcm(a, b), 1)
 
   const map = createMap(input)

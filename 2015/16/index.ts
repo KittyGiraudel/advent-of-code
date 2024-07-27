@@ -22,7 +22,7 @@ const parseProperties = (properties: string[]) =>
       {}
     )
 
-export const run = (input: string[], part2: boolean = false) => {
+export const run = (input: string[], part2 = false) => {
   const aunts = input.map((line, index) => ({
     id: index + 1,
     properties: parseProperties($.match(line, /\w+: \d+/g)),

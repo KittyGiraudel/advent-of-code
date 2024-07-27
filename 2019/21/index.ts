@@ -1,7 +1,7 @@
 import $ from '../../helpers'
 import { Intcode } from '../05'
 
-export const run = (input: string, mode: string = 'WALK') => {
+export const run = (input: string, mode = 'WALK') => {
   const computer = new Intcode(input)
   const instructions = [
     // Figured out the commands based on this comment found on Reddit giving

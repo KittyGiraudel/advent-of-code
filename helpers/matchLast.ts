@@ -7,7 +7,7 @@ const matchLast = (string: string, regex: RegExp) => {
   let match: RegExpExecArray | null = null
 
   while (true) {
-    let next = regex.exec(string)
+    const next = regex.exec(string)
     if (next) match = next
     else break
   }

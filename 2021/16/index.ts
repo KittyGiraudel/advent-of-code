@@ -22,8 +22,8 @@ const decode = (string: string) => {
   // ID over the 3 next ones. Anything after that is unclear, and will depend on
   // whether or not the packet is a value (ID=4) or an operator.
   const packet: Packt = {
-    version: parseInt(string.slice(0, 3), 2),
-    id: parseInt(string.slice(3, 6), 2),
+    version: Number.parseInt(string.slice(0, 3), 2),
+    id: Number.parseInt(string.slice(3, 6), 2),
     packets: [],
     rest: string.slice(6),
     value: null,
@@ -47,7 +47,7 @@ const decode = (string: string) => {
     captureNextChunk()
 
     // Decode the encoded binary value in decimal.
-    packet.value = parseInt(binary, 2)
+    packet.value = Number.parseInt(binary, 2)
 
     return packet
   }
@@ -61,7 +61,7 @@ const decode = (string: string) => {
   // If the length type ID is a 0, the next 15 bits holds a number in binary
   // that dictates how many more bits after that are dedicated to this packet.
   if (lengthTypeId === 0) {
-    const subPacketsLength = parseInt(packet.rest.slice(0, 15), 2)
+    const subPacketsLength = Number.parseInt(packet.rest.slice(0, 15), 2)
 
     // This slice of the string holds one or more packets, so parse it and push
     // packets as children of the current one, until it’s empty or made only of
@@ -82,7 +82,7 @@ const decode = (string: string) => {
   // If the length type ID is a 1, the next 11 bits hold a number in binary that
   // dictates how many sub-packets are comprised within this one.
   else if (lengthTypeId === 1) {
-    const amountOfSubPackets = parseInt(packet.rest.slice(0, 11), 2)
+    const amountOfSubPackets = Number.parseInt(packet.rest.slice(0, 11), 2)
     packet.rest = packet.rest.slice(11)
 
     // Iterate once per expected packet, decode it, store it, and move the
@@ -123,7 +123,7 @@ const getPacketValue = (packet: Packetish): number => {
   }
 }
 
-const render = (packet: Packetish, depth: number = 1): string => {
+const render = (packet: Packetish, depth = 1): string => {
   const SYMBOLS = ['+', '*', '↓', '↑', ' ', '>', '<', '=']
   const symbol = SYMBOLS[packet.id]
   const value = getPacketValue(packet)
@@ -231,7 +231,7 @@ export class Decoder {
   }
 
   consumeNum(length: number) {
-    return parseInt(this.consume(length), 2)
+    return Number.parseInt(this.consume(length), 2)
   }
 
   consumeLiteral() {
@@ -243,6 +243,6 @@ export class Decoder {
       bits += this.consume(4)
     }
 
-    return parseInt(bits, 2)
+    return Number.parseInt(bits, 2)
   }
 }

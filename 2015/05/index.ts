@@ -21,5 +21,5 @@ const isValidStrict = (line: string) => {
   return Object.values(pairs).some(pair => pair.length > 1)
 }
 
-export const run = (input: string[], part2: boolean = false) =>
+export const run = (input: string[], part2 = false) =>
   input.filter(part2 ? isValidStrict : isValidLoose).length

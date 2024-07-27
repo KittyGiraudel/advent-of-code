@@ -14,8 +14,8 @@ const matches = (port: string, edge: string | number) =>
 const getPaths = (
   ports: Set<string>,
   edge: number,
-  score: number = 0,
-  length: number = 1
+  score = 0,
+  length = 1
 ): Path[] => {
   // Find the available ports which have an edge matching the current one.
   const options = Array.from(ports).filter(port => matches(port, edge))
@@ -43,7 +43,6 @@ const getPaths = (
 export const run = (input: string[]) =>
   input
     .filter(port => port.startsWith('0/'))
-    .map(start =>
+    .flatMap(start =>
       getPaths(discard(input, start), +(start.split('/').pop() || 0))
     )
-    .flat()

@@ -8,7 +8,7 @@ const SPELL_COST = {
   R: 229,
 }
 
-export const run = (part2: boolean = false) => {
+export const run = (part2 = false) => {
   const initial = {
     move: 'player',
     damage: 9,

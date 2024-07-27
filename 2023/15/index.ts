@@ -17,11 +17,11 @@ type Lens = { type: '=' | '-'; label: string; id: number; value: number }
 const parse = (input: string) => {
   const [label, type, rest] = input.split(/([=-])/)
   const id = hash(label)
-  const value = rest ? +rest : Infinity
+  const value = rest ? +rest : Number.POSITIVE_INFINITY
   return { type, label, id, value } as Lens
 }
 
-export const run = (input: string[], part2: boolean = false) => {
+export const run = (input: string[], part2 = false) => {
   if (!part2) {
     return $.sum(input.map(hash))
   }

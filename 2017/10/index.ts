@@ -18,7 +18,7 @@ export class Computer {
       : $.toAscii(input, false).concat(this.SUFFIX)
   }
 
-  round(iterations: number = 1) {
+  round(iterations = 1) {
     while (iterations--)
       this.lengths.forEach(length => this.processLength(length))
 

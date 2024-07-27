@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 
-export const run = (salt: string, iterations: number = 1) => {
+export const run = (salt: string, iterations = 1) => {
   // Declare the hash function within this scope because the memoization is more
   // effective when there is only one argument, as it doesn’t perform JSON
   // serialization on the args to get a key.
@@ -26,7 +26,7 @@ export const run = (salt: string, iterations: number = 1) => {
     if (!match5) continue
 
     for (let i = Math.max(0, index - 1000); i < index; i++) {
-      let match3 = cache.get(salt + i)!
+      const match3 = cache.get(salt + i)!
       if (keys.has(i) || !match3 || match3 !== match5[1][0]) continue
       keys.add(i)
     }

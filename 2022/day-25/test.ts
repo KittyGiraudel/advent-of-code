@@ -48,11 +48,11 @@ test('Day 25 — Sample', t => {
     122: 37,
   }
 
-  for (let test in TESTS) {
+  for (const test in TESTS) {
     t.is(unsnafu(String(test)), TESTS[test as keyof typeof TESTS])
   }
 
-  for (let test in TESTS) {
+  for (const test in TESTS) {
     t.is(snafu(TESTS[test as keyof typeof TESTS]), String(test))
   }
 

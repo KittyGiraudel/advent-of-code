@@ -16,7 +16,7 @@ const getDest = (
 // @param map - Map of links
 // @param current - Current cup value
 const pickCups = (map: Uint32Array, current: number) => {
-  const picks: [number, number, number] = [Infinity, Infinity, Infinity]
+  const picks: [number, number, number] = [Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY]
 
   picks[0] = map[current]
   picks[1] = map[picks[0]]
@@ -56,7 +56,7 @@ const init = (input: number[], size: number) => {
 // @param size - Amount of numbers in the list
 export const play = (
   input: number[],
-  rounds: number = 10,
+  rounds = 10,
   size: number = input.length
 ) => {
   const map = init(input, size)

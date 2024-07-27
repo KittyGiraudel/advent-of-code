@@ -67,7 +67,7 @@ export const countBagsWithin = (map: Map, entry: string): number =>
 // or faster, it’s just different. It uses BFS for the part 1 to figure out
 // which bag type connects to the expected type. For part 2, it just walks the
 // graph to find the total amount of bags, just like the other version.
-export const run = (input: string[], part2: boolean = false) => {
+export const run = (input: string[], part2 = false) => {
   const graph = input
     .map(parseRestriction)
     .reduce<Record<string, Record<string, number>>>(

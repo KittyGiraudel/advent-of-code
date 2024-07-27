@@ -1,6 +1,6 @@
 import $ from '../../helpers'
 
-export const run = (input: string[], part2: boolean = false) => {
+export const run = (input: string[], part2 = false) => {
   const graph = new Map<number, Set<number>>()
 
   input.forEach(line => {

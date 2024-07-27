@@ -19,7 +19,7 @@ const getRibbonMeasurements = (input: string[]) =>
     })
   )
 
-export const run = (input: string[], part2: boolean = false) => {
+export const run = (input: string[], part2 = false) => {
   if (part2) return getRibbonMeasurements(input)
   else return getPaperMeasurements(input)
 }

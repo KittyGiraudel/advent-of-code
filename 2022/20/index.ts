@@ -11,8 +11,8 @@ import Circularray from 'circularray'
 // https://www.reddit.com/r/adventofcode/comments/zqezkn/comment/j0ywkpy/?utm_source=share&utm_medium=web2x&context=3
 export const mix = (
   numbers: number[],
-  count: number = 1,
-  multiplier: number = 1
+  count = 1,
+  multiplier = 1
 ) => {
   const circle = new Circularray(
     numbers.map((n, index) => ({ number: n * multiplier, index }))

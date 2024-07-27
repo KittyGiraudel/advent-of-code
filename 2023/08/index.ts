@@ -26,7 +26,7 @@ const process = (
 
 export const run = (
   [directions, , ...lines]: string[],
-  part2: boolean = false
+  part2 = false
 ) => {
   const map = createMap(lines)
 

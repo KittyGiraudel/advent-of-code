@@ -14,7 +14,7 @@ const next = (prev: string) => {
   return curr + '.'
 }
 
-export const run = (input: string, size: number = 40) => {
+export const run = (input: string, size = 40) => {
   let row = '.' + input + '.'
   let count = $.countInString(row, '.') - 2
 

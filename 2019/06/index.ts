@@ -19,7 +19,7 @@ export const createGraph = (lines: string[]) => {
 export const getPaths = (
   graph: Graph,
   curr: string,
-  end: string = 'COM',
+  end = 'COM',
   path: string[] = []
 ): string[][] => {
   if (curr === end) return [path]
@@ -30,7 +30,7 @@ export const getPaths = (
   )
 }
 
-export const countOrbits = (graph: Graph, to: string = 'COM') => {
+export const countOrbits = (graph: Graph, to = 'COM') => {
   return Array.from(graph.keys()).reduce(
     (orbits, key) =>
       orbits +
@@ -56,8 +56,8 @@ export const countOrbits = (graph: Graph, to: string = 'COM') => {
 
 export const countTransfers = (
   graph: Graph,
-  start: string = 'YOU',
-  end: string = 'SAN'
+  start = 'YOU',
+  end = 'SAN'
 ) => {
   // This is the original version, which is much slower.
   // const [path] = getPaths(graph, start, end)

@@ -50,13 +50,13 @@ export const run = (input: string[]) => {
 
   // Recursively walk the graph to compute the total weight of each node, by
   // drilling through their children and summing their weight.
-  for (let key in graph) {
+  for (const key in graph) {
     graph[key].weight = sum(graph[key])
   }
 
-  const fix: Fix = { name: '', weight: Infinity, diff: 0, node: null }
+  const fix: Fix = { name: '', weight: Number.POSITIVE_INFINITY, diff: 0, node: null }
 
-  for (let key in graph) {
+  for (const key in graph) {
     const { weight, children: childrenNames } = graph[key]
 
     if (!childrenNames.length || !weight) continue

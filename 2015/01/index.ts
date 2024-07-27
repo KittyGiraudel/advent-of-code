@@ -1,6 +1,6 @@
 export const run = (string: string) => {
   let floor = 0
-  let basement = Infinity
+  let basement = Number.POSITIVE_INFINITY
 
   for (let i = 0; i < string.length; i++) {
     if (string[i] === '(') floor++

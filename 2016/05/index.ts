@@ -1,8 +1,8 @@
 import $ from '../../helpers'
 
-export const run = (salt: string, part2: boolean = false) => {
-  let password1: string[] = []
-  let password2: (string | undefined)[] = $.array(8)
+export const run = (salt: string, part2 = false) => {
+  const password1: string[] = []
+  const password2: (string | undefined)[] = $.array(8)
   let i = 0
   let curr: string | null = null
 

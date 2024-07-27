@@ -8,7 +8,7 @@ type Player = {
 const playDeterministically = (
   p1p: number,
   p2p: number,
-  max: number = 1000
+  max = 1000
 ) => {
   const players: [Player, Player] = [
     { position: p1p, score: 0 },
@@ -111,6 +111,6 @@ const getSumFrequencies = () => {
   return frequencies
 }
 
-export const run = ([a, b]: [number, number], part2: boolean = false) => {
+export const run = ([a, b]: [number, number], part2 = false) => {
   return part2 ? playQuantum(a, b) : playDeterministically(a, b).value
 }

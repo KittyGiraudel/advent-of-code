@@ -9,7 +9,7 @@ const parseInstruction = (line: string) => {
   throw new Error('Unknown line ' + line)
 }
 
-export const shuffle = (lines: string[], size: number = 10_007) =>
+export const shuffle = (lines: string[], size = 10_007) =>
   lines.reduce((acc, line) => {
     const { type, value } = parseInstruction(line)
     if (type === 'NEW') return acc.reverse()

@@ -1,10 +1,10 @@
 import $ from '../../helpers/'
 
-export const run = (input: string, days: number = 80) => {
+export const run = (input: string, days = 80) => {
   let curr = $.array(9).map((_, i) => $.countInString(input, String(i)))
   input
   while (days--) {
-    let next: number[] = []
+    const next: number[] = []
 
     for (let a = 7; a >= 0; a--) next[a] = curr[a + 1]
     next[8] = curr[0]

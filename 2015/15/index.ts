@@ -51,5 +51,5 @@ export const run = (input: string[], calories?: number) => {
       : 0
   })
 
-  return Math.max(...scores, calories ?? -Infinity)
+  return Math.max(...scores, calories ?? Number.NEGATIVE_INFINITY)
 }

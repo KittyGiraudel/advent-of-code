@@ -4,10 +4,10 @@ import $ from '../../helpers'
 // and easier to understand, not to mention doesn’t require some `@ts-ignore`
 // comments. Glad I managed to clean it up because I remember it giving me
 // troubles back then.
-export const run = (input: string[], part2: boolean = false) => {
+export const run = (input: string[], part2 = false) => {
   const memory = new Map<number, number>()
   const toBinary = (value: number) => String($.toBin(value)).padStart(36, '0')
-  let mask: string = ''
+  let mask = ''
 
   input.forEach(line => {
     if (line.startsWith('mask = ')) mask = line.split(' = ')[1]

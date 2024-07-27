@@ -87,7 +87,7 @@ class GardenMap {
 
 export const run = (
   [seedGroup, ...rawGroups]: string[],
-  part2: boolean = false
+  part2 = false
 ) => {
   const seeds = $.numbers(seedGroup)
   const rangeGroups = rawGroups.map(createRanges)
