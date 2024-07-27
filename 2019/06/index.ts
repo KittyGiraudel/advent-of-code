@@ -47,11 +47,13 @@ export const countOrbits = (graph: Graph, to = 'COM') => {
   // This is my original version, which recursively walks the graph. It is
   // incredibly slower than the newer version using the BFS utility though
   // (11s vs. <1s).
+  /*
   return Array.from(graph.keys()).reduce(
     (total, key) =>
       total + $.sum(getPaths(graph, key, 'COM').map(path => path.length)),
     0
   )
+  */
 }
 
 export const countTransfers = (graph: Graph, start = 'YOU', end = 'SAN') => {

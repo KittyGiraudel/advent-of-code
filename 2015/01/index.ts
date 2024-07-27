@@ -1,4 +1,4 @@
-export const run = (string: string) => {
+export const run = (string: string): [number, number] => {
   let floor = 0
   let basement = Number.POSITIVE_INFINITY
 
@@ -8,5 +8,5 @@ export const run = (string: string) => {
     if (!Number.isFinite(basement) && floor === -1) basement = i + 1
   }
 
-  return [floor, basement] as [number, number]
+  return [floor, basement]
 }

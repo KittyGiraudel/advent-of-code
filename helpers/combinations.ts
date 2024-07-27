@@ -12,7 +12,8 @@ function combinations<T>(
       tmp.push(item)
       combinations(array.slice(index + 1), n - 1, acc, tmp)
     } else {
-      acc.push((tmp.push(item), tmp).slice(0))
+      tmp.push(item)
+      acc.push(tmp.slice(0))
     }
 
     tmp.pop()

@@ -1,5 +1,8 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+  "files": {
+    "include": ["**/*.ts"]
+  },
   "formatter": {
     "enabled": true,
     "formatWithErrors": false,
@@ -18,9 +21,7 @@
       "security": { "noGlobalEval": "off" },
       "performance": { "noAccumulatingSpread": "off", "noDelete": "off" },
       "suspicious": { "noAssignInExpressions": "off" },
-      "correctness": { "noUnreachable": "off" },
       "style": {
-        "noCommaOperator": "off",
         "noUselessElse": "off",
         "noNonNullAssertion": "off",
         "noParameterAssign": "off",

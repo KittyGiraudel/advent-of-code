@@ -16,8 +16,14 @@ const getPatterns = (input: string) =>
     )
 
 const padState = (state: string[], offset: number) => {
-  if (state[0] === '#') state.unshift('.'), offset++
-  if (state[1] === '#') state.unshift('.'), offset++
+  if (state[0] === '#') {
+    state.unshift('.')
+    offset++
+  }
+  if (state[1] === '#') {
+    state.unshift('.')
+    offset++
+  }
   if (state[state.length - 1] === '#') state.push('.')
   if (state[state.length - 2] === '#') state.push('.')
 

@@ -38,6 +38,7 @@ export const sequential = (input: string[]) => {
   // https://www.reddit.com/r/adventofcode/comments/a3wmnl/comment/ebbg934/?utm_source=reddit&utm_medium=web2x&context=3
   // Edit: Implementation preserved for posterity, but replaced with a BFS
   // search which works just as well.
+  /*
   while (graph.size) {
     const next = Array.from(graph.keys())
       .sort()
@@ -48,6 +49,7 @@ export const sequential = (input: string[]) => {
   }
 
   return order.join('')
+  */
 }
 
 export const parallel = (input: string[], help = 5, offset = 60) => {

@@ -62,7 +62,10 @@ const findSynchronocity = (input: string[]) => {
   const grid = makeGrid(input)
   let i = 0
 
-  while (!isSynced(grid)) i++, cycle(grid)
+  while (!isSynced(grid)) {
+    i++
+    cycle(grid)
+  }
 
   return i
 }
