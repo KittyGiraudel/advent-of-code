@@ -1,26 +1,26 @@
 {
-	"compilerOptions": {
-		/* Base Options: */
-		"skipLibCheck": true,
-		"target": "es2022",
-		"esModuleInterop": true,
-		"allowJs": true,
-		"resolveJsonModule": true,
-		"moduleDetection": "force",
-		"isolatedModules": true,
+  "compilerOptions": {
+    /* Base Options: */
+    "skipLibCheck": true,
+    "target": "es2022",
+    "esModuleInterop": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "isolatedModules": true,
 
-		/* Strictness */
-		"strict": true,
+    /* Strictness */
+    "strict": true,
 
-		/* If NOT transpiling with tsc: */
-		"module": "Preserve",
-		"noEmit": true,
+    /* If NOT transpiling with tsc: */
+    "module": "Preserve",
+    "noEmit": true,
 
-		/* If your code doesn't run in the DOM: */
-		"lib": ["es2022"]
-	},
-	"ts-node": {
-		"swc": true
-	},
-	"exclude": ["node_modules"]
+    /* If your code doesn't run in the DOM: */
+    "lib": ["es2022"]
+  },
+  "ts-node": {
+    "swc": true
+  },
+  "exclude": ["node_modules"]
 }
