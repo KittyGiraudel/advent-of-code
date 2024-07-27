@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords } from '../../types'
+import type { Coords } from '../../types'
 import { Intcode } from '../05'
 
 export const run = (

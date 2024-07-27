@@ -1,10 +1,10 @@
 import $ from '../../helpers'
-import { Coords, TriCoords, TriPoint } from '../../types'
+import type { Coords, TriCoords, TriPoint } from '../../types'
 
 type Brick = [TriCoords, TriCoords]
 type Store = { height: number; brick: number }
 
-export const run = (input: string[], part2: boolean = false) => {
+export const run = (input: string[], part2 = false) => {
   const bricks = input
     .map(
       line => line.split('~').map(part => $.toCoords(part as TriPoint)) as Brick
@@ -13,7 +13,7 @@ export const run = (input: string[], part2: boolean = false) => {
   const [minX, maxX, minY, maxY] = $.boundaries(bricks.flat())
   const grid = new $.Grid<Store>(maxY + 1 - minY, maxX + 1 - minX, () => ({
     height: 0,
-    brick: Infinity,
+    brick: Number.POSITIVE_INFINITY,
   }))
 
   const onBrick = (
@@ -38,7 +38,7 @@ export const run = (input: string[], part2: boolean = false) => {
     const [start, end] = brick
     const height = end[2] - start[2] + 1
     let top = 0
-    let previous = Infinity
+    let previous = Number.POSITIVE_INFINITY
 
     // First, we find the tallest Z value from the brick
     onBrick(brick, cell => {

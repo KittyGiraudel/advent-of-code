@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Point } from '../../types'
+import type { Point } from '../../types'
 
 type Boundary = {
   id?: number
@@ -58,7 +58,7 @@ const parseClaims = (lines: string[]) =>
           ciMax: ciMin + width - 1,
           riMin,
           riMax: riMin + height - 1,
-        } as Boundary)
+        }) as Boundary
     )
 
 // Find the one claim that does not overlap with any other. To do so, iterate

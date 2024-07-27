@@ -1,4 +1,4 @@
-import { Coords, Point } from '../types'
+import type { Coords, Point } from '../types'
 import $ from './'
 
 type Mapper<I, O> = (value: I, coords: Coords) => O
@@ -344,7 +344,7 @@ class Grid<T> {
    * otherwise).
    */
   render(
-    separator: string = '',
+    separator = '',
     mapper: (value: T) => string = value => String(value)
   ) {
     return this.rows.map(row => row.map(mapper).join(separator)).join('\n')
@@ -379,7 +379,7 @@ class Grid<T> {
   variants() {
     const variants: Grid<T>[] = []
 
-    const rotate = (rotations: number = 0) => {
+    const rotate = (rotations = 0) => {
       let grid = this.clone()
       for (let i = 0; i < rotations; i++) grid = grid.rotate()
       return grid

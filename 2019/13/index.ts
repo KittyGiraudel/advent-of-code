@@ -1,6 +1,6 @@
-import { Intcode } from '../05'
 import $ from '../../helpers'
-import { Coords, Point } from '../../types'
+import type { Coords, Point } from '../../types'
+import { Intcode } from '../05'
 
 const SYMBOLS = [' ', 'x', '▫️', '_', 'o']
 

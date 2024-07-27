@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Grid } from '../../types'
+import type { Coords, Grid } from '../../types'
 
 type Grids = Map<number, Grid<string[]>>
 
@@ -21,39 +21,42 @@ const getGrids = (input: string[]) => {
   const isWallOrDoor = (grid: Grid<string[]>, ri: number, ci: number) =>
     ri === 0 || ri === grid.height - 1 || ci === 0 || ci === grid.width - 1
 
-  return $.array(height * width - 1).reduce<Grids>((acc, _, index) => {
-    const curr = acc.get(index)!
+  return $.array(height * width - 1).reduce<Grids>(
+    (acc, _, index) => {
+      const curr = acc.get(index)!
 
-    // Start the new maze from an empty grid: only the borders are marked as
-    // taken, everything else is considered empty. Note that we preserve the
-    // border value because while it’s often `['#']`, it is in fact `[]` for
-    // doors.
-    const next = grid.map((value, coords) =>
-      isWallOrDoor(grid, ...coords) ? value : []
-    )
+      // Start the new maze from an empty grid: only the borders are marked as
+      // taken, everything else is considered empty. Note that we preserve the
+      // border value because while it’s often `['#']`, it is in fact `[]` for
+      // doors.
+      const next = grid.map((value, coords) =>
+        isWallOrDoor(grid, ...coords) ? value : []
+      )
 
-    // Then iterate through the *current* grid to generate the next one: skip
-    // the borders (they are essentially immutable as blizzards cannot reach the
-    // doords), and for each cell, iterate over its hypothetical blizzards and
-    // move them.
-    curr.forEach((value, [ri, ci]) => {
-      if (isWallOrDoor(curr, ri, ci)) return
+      // Then iterate through the *current* grid to generate the next one: skip
+      // the borders (they are essentially immutable as blizzards cannot reach the
+      // doords), and for each cell, iterate over its hypothetical blizzards and
+      // move them.
+      curr.forEach((value, [ri, ci]) => {
+        if (isWallOrDoor(curr, ri, ci)) return
 
-      value.forEach(direction => {
-        let nRi = ri
-        let nCi = ci
+        value.forEach(direction => {
+          let nRi = ri
+          let nCi = ci
 
-        if (direction === '<' && --nCi === 0) nCi = width
-        if (direction === '>' && ++nCi === width + 1) nCi = 1
-        if (direction === 'v' && ++nRi === height + 1) nRi = 1
-        if (direction === '^' && --nRi === 0) nRi = height
+          if (direction === '<' && --nCi === 0) nCi = width
+          if (direction === '>' && ++nCi === width + 1) nCi = 1
+          if (direction === 'v' && ++nRi === height + 1) nRi = 1
+          if (direction === '^' && --nRi === 0) nRi = height
 
-        next.rows[nRi][nCi].push(direction)
+          next.rows[nRi][nCi].push(direction)
+        })
       })
-    })
 
-    return acc.set(index + 1, next)
-  }, new Map([[0, grid]]))
+      return acc.set(index + 1, next)
+    },
+    new Map([[0, grid]])
+  )
 }
 
 const findDoor = (row: string) => row.split('').findIndex(col => col === '.')
@@ -66,7 +69,7 @@ type Node = {
 const getMoves = (curr: Node) =>
   $.bordering(curr.coords)
     .concat([curr.coords])
-    .map((coords: Coords) => ({ coords, time: curr.time + 1 } as Node))
+    .map((coords: Coords) => ({ coords, time: curr.time + 1 }) as Node)
 
 const cross = (
   grids: Grids,
@@ -100,7 +103,7 @@ const cross = (
 // Unfortunately I could not solve part 1 of this puzzle without help. I did
 // manage to cross the maze successfully (which is something!) but I couldn’t
 // find the shortest path (347 instead of 247).
-export const maze = (input: string[], withSnacks: boolean = false) => {
+export const maze = (input: string[], withSnacks = false) => {
   const startCoords: Coords = [0, findDoor(input[0])]
   const endCoords: Coords = [
     input.length - 1,

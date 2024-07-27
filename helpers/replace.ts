@@ -1,4 +1,4 @@
-import { Coords, QuadriCoords, TriCoords } from '../types'
+import type { Coords, QuadriCoords, TriCoords } from '../types'
 
 /**
  * Return a new array with the value at given index updated with the given

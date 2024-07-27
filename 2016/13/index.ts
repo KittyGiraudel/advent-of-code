@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Point } from '../../types'
+import type { Coords, Point } from '../../types'
 
 const isOpenSpace =
   (n: number) =>
@@ -13,7 +13,7 @@ const isOpenSpace =
     return ones % 2 === 0
   }
 
-export const run = (end: Coords, n: number, part2: boolean = false) => {
+export const run = (end: Coords, n: number, part2 = false) => {
   const start: Coords = [1, 1]
   const { graph, getPath } = $.search.bfs({
     start,

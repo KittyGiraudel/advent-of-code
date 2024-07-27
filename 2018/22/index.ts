@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords } from '../../types'
+import type { Coords } from '../../types'
 
 // The number for each tool corresponds to the region type where that tool is
 // **not** allowed. For instance, the torch is not allowed in wet regions, which
@@ -30,7 +30,7 @@ const getGeologicIndex = (
   )
 }
 
-export const run = (depth: number, target: Coords, part2: boolean = false) => {
+export const run = (depth: number, target: Coords, part2 = false) => {
   let score = 0
 
   for (let ri = 0; ri <= target[0]; ri++) {

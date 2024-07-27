@@ -1,12 +1,12 @@
 import $ from '../../helpers'
-import { Coords } from '../../types'
+import type { Coords } from '../../types'
 
 type Direction = 'U' | 'D' | 'L' | 'R'
 const DIRECTIONS: [
   [Coords, Direction],
   [Coords, Direction],
   [Coords, Direction],
-  [Coords, Direction]
+  [Coords, Direction],
 ] = [
   [[0, -1], 'U'],
   [[0, +1], 'D'],
@@ -19,7 +19,7 @@ type Node = {
   path: string
 }
 
-export const run = (input: string, longest: boolean = false) => {
+export const run = (input: string, longest = false) => {
   const search = $.search.bfs<Node>({
     start: { coords: [0, 0], path: input },
     emptyAfterGoal: longest,

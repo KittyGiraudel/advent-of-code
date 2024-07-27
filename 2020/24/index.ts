@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Point } from '../../types'
+import type { Coords, Point } from '../../types'
 
 type Mappy = Map<Point, string>
 type Cache = Map<string, Point[]>
@@ -70,8 +70,8 @@ const flip = (color: string, count: number) =>
   color === 'B' && (count === 0 || count > 2)
     ? 'W'
     : color === 'W' && count === 2
-    ? 'B'
-    : color
+      ? 'B'
+      : color
 
 // Return the new color for the tile at given coords, based on its original
 // color, leveraging cache.
@@ -112,7 +112,7 @@ const countBlackTiles = (map: Mappy) =>
 // @param cache - Coordinates cache
 export const gameOfLife = (
   lines: string[],
-  cycles: number = 1,
+  cycles = 1,
   cache: Cache = new Map()
 ) =>
   countBlackTiles(

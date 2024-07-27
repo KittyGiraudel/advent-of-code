@@ -1,4 +1,4 @@
-import { Coords } from '../types'
+import type { Coords } from '../types'
 
 const DIRECTIONS: [Coords, Coords, Coords, Coords] = [
   /* N */ [-1, 0],

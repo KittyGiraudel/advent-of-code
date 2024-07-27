@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, CoordsAndPoint, Grid, Point } from '../../types'
+import type { Coords, CoordsAndPoint, Grid, Point } from '../../types'
 
 // Find the low points in the grid. To do so, iterate over every row, then every
 // number, and get its 4 neighbors. If all existing neighbors are higher than
@@ -8,7 +8,7 @@ const getLowPoints = (grid: Grid<number>) =>
   grid.reduce<Coords[]>((acc, value, coords) => {
     if (
       $.bordering(coords)
-        .map(coords => grid.get(coords) ?? Infinity)
+        .map(coords => grid.get(coords) ?? Number.POSITIVE_INFINITY)
         .every(n => n > value)
     ) {
       acc.push(coords)
@@ -65,6 +65,6 @@ const getProductOfBiggestBasins = (rows: string[]) => {
   )
 }
 
-export const run = (input: string[], part2: boolean = false) => {
+export const run = (input: string[], part2 = false) => {
   return part2 ? getProductOfBiggestBasins(input) : sumLowPointsRisk(input)
 }

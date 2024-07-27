@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Point } from '../../types'
+import type { Point } from '../../types'
 
 type Fold = ['x' | 'y', number]
 

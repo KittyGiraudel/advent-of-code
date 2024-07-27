@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Entries } from '../../types'
+import type { Entries } from '../../types'
 
 type Map = {
   [key: string]: number | string | undefined
@@ -39,7 +39,7 @@ const reduceNext = (map: Map) => {
   // Iterate on the map and look for the values that contain the current key. In
   // each expression, replace the current key by the current value, and if the
   // expression is now only made of numbers, evaluate it.
-  for (let key in map) {
+  for (const key in map) {
     const value = map[key]
 
     if (typeof value === 'string' && value.includes(nextKey)) {

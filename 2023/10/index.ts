@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Grid } from '../../types'
+import type { Coords, Grid } from '../../types'
 
 const TOP = ['|', '7', 'F']
 const BOTTOM = ['|', 'L', 'J']
@@ -96,7 +96,7 @@ const floodGrid = (grid: Grid<string>, start: Coords = [0, 0]) =>
 const scaleUp = (coords: Coords) =>
   [coords[0] * 3 + 1, coords[1] * 3 + 1] as Coords
 
-export const run = (input: string[], part2: boolean = false) => {
+export const run = (input: string[], part2 = false) => {
   const grid = $.Grid.fromRows(input)
   const pipe = mapOutLoopingPipe(grid)
   const pipeLength = Object.keys(pipe).length

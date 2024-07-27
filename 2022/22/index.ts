@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Grid, Point } from '../../types'
+import type { Coords, Grid, Point } from '../../types'
 
 const ORIENTATIONS = ['>', 'v', '<', '^']
 const WALL = '#'
@@ -209,7 +209,7 @@ const getNeighbors =
     return acc
   }
 
-export const maze = (input: string, asCube: boolean = false) => {
+export const maze = (input: string, asCube = false) => {
   const [map, last] = input.split('\n\n')
   const instructions = $.match(last, /(\d+|L|R)/g).map(v => +v || v)
   const rows = map.split('\n').filter(Boolean)
@@ -231,7 +231,8 @@ export const maze = (input: string, asCube: boolean = false) => {
         const neighbors = neighborMap[$.toPoint(position!)]
         const next = neighbors[ORIENTATIONS.indexOf(orientation)]
         if (!next) break
-        if (Array.isArray(next)) position = next // Part 1
+        if (Array.isArray(next))
+          position = next // Part 1
         else {
           // Part 2
           position = next.position

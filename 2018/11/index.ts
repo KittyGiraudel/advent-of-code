@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, TriCoords } from '../../types'
+import type { Coords, TriCoords } from '../../types'
 
 const SIZE = 300
 
@@ -15,10 +15,10 @@ const getGrid = (serial: number) =>
   new $.Grid(SIZE, SIZE, ([ri, ci]) => computeCellPower(serial, ri + 1, ci + 1))
 
 export const getFuelStrict = (serial: number) => {
-  const max = { value: -Infinity, coords: [0, 0] as Coords }
+  const max = { value: Number.NEGATIVE_INFINITY, coords: [0, 0] as Coords }
   const grid = getGrid(serial)
 
-  const square = (ci: number, ri: number, size: number = 3) =>
+  const square = (ci: number, ri: number, size = 3) =>
     $.sum(
       grid.rows.slice(ri, ri + size).flatMap(row => row.slice(ci, ci + size))
     )
@@ -38,7 +38,10 @@ export const getFuelStrict = (serial: number) => {
 }
 
 export const getFuelLoose = (serial: number) => {
-  const max = { value: -Infinity, coords: [0, 0, 0] as TriCoords }
+  const max = {
+    value: Number.NEGATIVE_INFINITY,
+    coords: [0, 0, 0] as TriCoords,
+  }
   const grid = getGrid(serial)
   const summed = grid.clone()
 

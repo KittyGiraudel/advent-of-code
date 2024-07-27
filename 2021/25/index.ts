@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Grid } from '../../types'
+import type { Grid } from '../../types'
 
 export const step = (grid: Grid<string>) => {
   const horizontal = grid.map<string>(() => '.')

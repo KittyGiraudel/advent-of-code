@@ -1,8 +1,8 @@
 import $ from '../../helpers'
-import { Coords, Point } from '../../types'
+import type { Coords, Point } from '../../types'
 
-export const run = (steps: string[], part2: boolean = false) => {
-  let map = new Set<Point>()
+export const run = (steps: string[], part2 = false) => {
+  const map = new Set<Point>()
   let position: Coords = [0, 0]
   let direction: Coords | undefined = $.turn.DIRECTIONS[0]
   let location: Coords | null = null

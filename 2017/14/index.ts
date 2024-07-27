@@ -1,8 +1,8 @@
 import $ from '../../helpers'
-import { Coords, Point } from '../../types'
+import type { Coords, Point } from '../../types'
 import { Computer } from '../10'
 
-export const run = (key: string, part2: boolean = false) => {
+export const run = (key: string, part2 = false) => {
   const grid = new $.Grid<number>(0)
 
   for (let i = 0; i < 128; i++) {

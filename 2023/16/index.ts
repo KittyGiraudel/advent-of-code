@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Grid, Point } from '../../types'
+import type { Coords, Grid, Point } from '../../types'
 
 const flip = (vector: Coords, value: '/' | '\\') =>
   [
@@ -48,7 +48,7 @@ const energize = (grid: Grid<string>, position: Coords, direction: Coords) => {
   return energized.size
 }
 
-export const run = (input: string[], part2: boolean = false) => {
+export const run = (input: string[], part2 = false) => {
   const grid = $.Grid.fromRows(input)
 
   if (!part2) {

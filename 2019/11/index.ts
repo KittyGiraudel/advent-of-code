@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Point } from '../../types'
+import type { Coords, Point } from '../../types'
 import { Intcode } from '../05'
 
 type State = {
@@ -36,7 +36,7 @@ const next = (computer: Intcode, state: State) => {
   return state
 }
 
-export const paint = (input: string, start: number = 0) => {
+export const paint = (input: string, start = 0) => {
   const computer = new Intcode(input)
   const state: State = {
     direction: $.turn.DIRECTIONS[0],

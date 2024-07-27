@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Grid, Point } from '../../types'
+import type { Coords, Grid, Point } from '../../types'
 
 const VECTORS: Coords[] = [
   [-1, 0],

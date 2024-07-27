@@ -1,5 +1,5 @@
 import $ from '../../helpers/'
-import { Grid } from '../../types'
+import type { Grid } from '../../types'
 
 type BingoCell = { marked: boolean; value: number }
 
@@ -20,7 +20,7 @@ const roll = (grids: Grid<BingoCell>[], number: number) => {
 const computeGridScore = (grid: Grid<BingoCell>) =>
   grid.reduce((acc, item) => acc + (item.marked ? 0 : item.value), 0)
 
-export const run = (input: string, part2: boolean = false) => {
+export const run = (input: string, part2 = false) => {
   const [numbers, ...grids] = parseInput(input)
   const bingos: number[] = []
 

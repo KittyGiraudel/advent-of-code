@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Point } from '../../types'
+import type { Coords, Point } from '../../types'
 
 type State = { position: Coords; orientation: Coords; streak: number }
 
@@ -41,7 +41,7 @@ const checkTurns = (
 
 const is = (a: Coords, b: Coords) => a[0] === b[0] && a[1] === b[1]
 
-export const run = (input: string[], part2: boolean = false) => {
+export const run = (input: string[], part2 = false) => {
   const grid = $.Grid.fromRows(input, Number)
   const startCoords: Coords = [0, 0]
   const endCoords: Coords = [grid.height - 1, grid.width - 1]

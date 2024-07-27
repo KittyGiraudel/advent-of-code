@@ -1,4 +1,4 @@
-import { Coords, QuadriCoords, TriCoords } from '../types'
+import type { Coords, QuadriCoords, TriCoords } from '../types'
 
 /**
  * Return the manhattan distance between two sets of coordinates, expressed

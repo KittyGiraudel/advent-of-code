@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords } from '../../types'
+import type { Coords } from '../../types'
 
 type Disk = {
   coords: Coords
@@ -52,7 +52,7 @@ export const getData = (dump: string[]) => {
 
   let data: Coords = [0, maxCi]
   let curr: Coords = emptyNode.coords
-  let total: number = 0
+  let total = 0
 
   const getNext = (curr: Coords) =>
     $.bordering(curr).filter(coords => {

@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Grid } from '../../types'
+import type { Coords, Grid } from '../../types'
 
 type Octopus = { value: number; flashed: boolean }
 
@@ -46,7 +46,7 @@ const cycle = (grid: Grid<Octopus>) => {
   return flashes
 }
 
-const countFlashes = (input: string[], steps: number = 100) => {
+const countFlashes = (input: string[], steps = 100) => {
   const grid = makeGrid(input)
   let flashes = 0
 
@@ -67,6 +67,6 @@ const findSynchronocity = (input: string[]) => {
   return i
 }
 
-export const run = (input: string[], part2: boolean = false) => {
+export const run = (input: string[], part2 = false) => {
   return part2 ? findSynchronocity(input) : countFlashes(input)
 }

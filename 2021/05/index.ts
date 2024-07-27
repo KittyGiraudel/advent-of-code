@@ -1,7 +1,7 @@
 import $ from '../../helpers'
-import { Point } from '../../types'
+import type { Point } from '../../types'
 
-export const run = (input: string[], withDiagonals: boolean = false) => {
+export const run = (input: string[], withDiagonals = false) => {
   // Break down every line into a pair of vectors, each vector being a pair of
   // number (x,y coordinates).
   const vectors = input.map(line =>

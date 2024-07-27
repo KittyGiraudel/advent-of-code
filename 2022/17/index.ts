@@ -1,10 +1,10 @@
 import $ from '../../helpers'
-import { Coords, Grid } from '../../types'
+import type { Coords, Grid } from '../../types'
 
 type Blocks = Coords[]
 type Rock = string[]
 
-let DEBUG = false
+const DEBUG = false
 const WIDTH = 7
 const ROCKS: string[][] = [
   '####'.split('\n'),
@@ -63,7 +63,7 @@ const halt = (grid: Grid<string>, blocks: Blocks) => {
 const getHeight = (grid: Grid<string>) =>
   grid.rows.filter(row => row.join('') !== EMPTY_ROW).length
 
-export const tetris = (input: string, count: number = 2022) => {
+export const tetris = (input: string, count = 2022) => {
   const grid = new $.Grid<string>(0)
   const sideIndex = $.loopIndex(0, input.length - 1)
 

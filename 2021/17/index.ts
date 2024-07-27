@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords } from '../../types'
+import type { Coords } from '../../types'
 
 type State = {
   probe: Coords
@@ -26,14 +26,14 @@ const step = ({ probe, velocity }: State) =>
   ({
     probe: $.applyVector(probe, velocity),
     velocity: [drag(velocity[0]), velocity[1] - 1],
-  } as State)
+  }) as State
 
 export const isSuccessfulLaunch = (
   [[xMin, xMax], [yMin, yMax]]: [Coords, Coords],
   velocity: Coords
 ) => {
   let curr = step({ probe: [0, 0], velocity })
-  let heights: number[] = []
+  const heights: number[] = []
 
   // While the probe has not gone beyond the upper X boundary, and below the
   // lower Y boundary, keep moving, recording the maximum height at the same
@@ -78,6 +78,6 @@ const findSuccessfulLaunches = (input: string) => {
 const findMaxHeight = (input: string) =>
   Math.max(...findSuccessfulLaunches(input))
 
-export const run = (input: string, part2: boolean = false) => {
+export const run = (input: string, part2 = false) => {
   return part2 ? findSuccessfulLaunches(input).length : findMaxHeight(input)
 }

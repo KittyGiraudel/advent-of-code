@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Grid } from '../../types'
+import type { Coords, Grid } from '../../types'
 
 type Tile = {
   id: number
@@ -27,9 +27,21 @@ type Tile = {
 // visualizing so why not.
 // prettier-ignore
 const MONSTER_PATTERN: Coords[] = [
-                                                                 [-1,18],
-[0,0],        [0,5],[0,6],         [0,11],[0,12],          [0,17],[0,18],[0,19],
-    [1,1],[1,4],        [1,7],[1,10],          [1,13],[1,16],
+  [-1, 18],
+  [0, 0],
+  [0, 5],
+  [0, 6],
+  [0, 11],
+  [0, 12],
+  [0, 17],
+  [0, 18],
+  [0, 19],
+  [1, 1],
+  [1, 4],
+  [1, 7],
+  [1, 10],
+  [1, 13],
+  [1, 16],
 ]
 
 // Get every side of the grid, ordered top -> right -> bottom -> left (which
@@ -51,7 +63,7 @@ const parseSnapshot = (snapshot: string) => {
 
   return grid
     .variants()
-    .map(grid => ({ sides: getSides(grid), grid, id } as Tile))
+    .map(grid => ({ sides: getSides(grid), grid, id }) as Tile)
 }
 
 // Brute-force the jigsaw in reading order (left-to-right and top-to-bottom)
@@ -106,7 +118,7 @@ const assemble = (mozaic: Grid<Tile>) => {
 
     // Loop over the lines of the tiles, omitting the first and the last.
     for (let i = 1; i < row[0].grid.height - 1; i++) {
-      grid.appendRow(row.map(tile => tile.grid.row(i).slice(1, -1)).flat())
+      grid.appendRow(row.flatMap(tile => tile.grid.row(i).slice(1, -1)))
     }
   }
 
@@ -151,8 +163,7 @@ const checksum = (mozaic: Grid<Tile>) => {
 // the jigsaw puzzle (mozaic).
 const solve = (snapshots: string[]) =>
   snapshots
-    .map(parseSnapshot)
-    .flat()
+    .flatMap(parseSnapshot)
     .reduce<Grid<Tile> | null>(
       (acc, tile, _, tiles) => acc ?? jigsaw(tiles, tile),
       null

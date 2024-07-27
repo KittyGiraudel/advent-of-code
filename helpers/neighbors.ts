@@ -1,4 +1,4 @@
-import { Coords, Point, CoordsAndPoint } from '../types'
+import type { Coords, CoordsAndPoint, Point } from '../types'
 import toCoords from './toCoords'
 import toPoint from './toPoint'
 
@@ -20,8 +20,8 @@ function getNeighbors<T extends Coords | Point | CoordsAndPoint>(
     typeof position === 'string'
       ? toCoords(position)
       : Array.isArray(position)
-      ? position
-      : position.coords
+        ? position
+        : position.coords
 
   let strategy = 'BOTH'
   if (typeof position === 'string') strategy = 'POINTS'

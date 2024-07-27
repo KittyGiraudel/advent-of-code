@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Grid } from '../../types'
+import type { Coords, Grid } from '../../types'
 
 const calculateWeight = (grid: Grid<string>) =>
   $.sum(
@@ -43,7 +43,7 @@ const cycle = (grid: Grid<string>) =>
     [0, +1],
   ].forEach(vector => tilt(grid, vector as Coords))
 
-export const run = (input: string[], part2: boolean = false) => {
+export const run = (input: string[], part2 = false) => {
   const grid = $.Grid.fromRows(input)
   const cycles = 1_000_000_000
 

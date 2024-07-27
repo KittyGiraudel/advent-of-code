@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Grid } from '../../types'
+import type { Coords, Grid } from '../../types'
 
 const getCost = (grid: Grid<number>, [ri, ci]: Coords) => {
   const riInc = Math.floor(ri / grid.height)
@@ -32,5 +32,5 @@ const getLowestCost = (grid: Grid<number>, mapSize = 1) => {
   return costs[$.toPoint(end)]
 }
 
-export const run = (input: string[], mapSize: number = 1) =>
+export const run = (input: string[], mapSize = 1) =>
   getLowestCost($.Grid.fromRows(input, Number), mapSize)

@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords } from '../../types'
+import type { Coords } from '../../types'
 
 const isWithinSensorRange = ({ position, radius }: Sensor, coords: Coords) =>
   $.manhattan(position, coords) <= radius

@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Grid } from '../../types'
+import type { Grid } from '../../types'
 
 type Mirror = { column: number | null; row: number | null }
 
@@ -64,7 +64,7 @@ const summarizeVariant =
   (mirror: Mirror) => (acc: number, variant: Grid<string>) =>
     acc || summarize(findMirror(variant, mirror))
 
-export const run = (blocks: string[], part2: boolean = false) =>
+export const run = (blocks: string[], part2 = false) =>
   $.sum(
     blocks
       .map(block => $.Grid.fromRows(block.split('\n')))

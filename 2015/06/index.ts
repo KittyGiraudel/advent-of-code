@@ -1,7 +1,7 @@
 import $ from '../../helpers'
-import { Coords } from '../../types'
+import type { Coords } from '../../types'
 
-export const run = (input: string[], part2: boolean = false) => {
+export const run = (input: string[], part2 = false) => {
   const grid = new $.Grid(1000, 1000, 0)
 
   input.forEach(line => {

@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { TriCoords } from '../../types'
+import type { TriCoords } from '../../types'
 
 type Moon = {
   position: TriCoords
@@ -42,7 +42,7 @@ const step = (moons: Moon[]) => {
 const calculateMoonEnergy = ({ position, velocity }: Moon) =>
   $.sum(position.map(Math.abs)) * $.sum(velocity.map(Math.abs))
 
-export const steps = (input: string[], amount: number = 1) =>
+export const steps = (input: string[], amount = 1) =>
   $.sum($.array(amount).reduce(step, prepare(input)).map(calculateMoonEnergy))
 
 const serialize = (moons: Moon[], axis: number) =>

@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Point } from '../../types'
+import type { Coords, Point } from '../../types'
 
 const BLOCK = '#'
 const SAND = 'o'
@@ -120,7 +120,7 @@ class Cave {
   }
 }
 
-export const countSandUnits = (input: string[], withFloor: boolean = false) => {
+export const countSandUnits = (input: string[], withFloor = false) => {
   const walls = input.map(wall =>
     wall.split(' -> ').map(string => $.toCoords(string as Point))
   )

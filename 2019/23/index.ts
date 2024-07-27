@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords } from '../../types'
+import type { Coords } from '../../types'
 import { Intcode } from '../05'
 
 type Node = {
@@ -13,7 +13,7 @@ class Network {
   nodes: Node[]
   withLogs: boolean
 
-  constructor(input: string, size: number, withLogs: boolean = false) {
+  constructor(input: string, size: number, withLogs = false) {
     this.outputs = []
     this.NAT = [0, 0]
     this.nodes = $.array(size).map((_, i) => this.createNode(i, input))
@@ -88,7 +88,7 @@ class Network {
   }
 }
 
-export const boot = (input: string, size: number = 50) => {
+export const boot = (input: string, size = 50) => {
   const network = new Network(input, size)
 
   while (!network.isDone()) network.run()

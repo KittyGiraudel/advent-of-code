@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Point } from '../../types'
+import type { Coords, Point } from '../../types'
 
 type Node = {
   position: Coords
@@ -31,7 +31,7 @@ const mapOut = (input: string) => {
     const nextPosition = $.applyVector(curr.position, vector)
     const node = map.get($.toPoint(nextPosition)) ?? {
       position: nextPosition,
-      distance: Infinity,
+      distance: Number.POSITIVE_INFINITY,
     }
     node.distance = Math.min(node.distance, curr.distance + 1)
     map.set($.toPoint(node.position), node)

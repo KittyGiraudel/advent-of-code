@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { TriCoords, TriPoint } from '../../types'
+import type { TriCoords, TriPoint } from '../../types'
 
 const VECTORS: TriCoords[] = [
   [1, 0, 0],
@@ -19,7 +19,7 @@ const getArea = (cubes: TriCoords[], predicate: (point: TriPoint) => boolean) =>
     .map(coords => $.toPoint(coords))
     .filter(point => predicate(point)).length
 
-export const getSurfaceArea = (points: TriPoint[], part2: boolean = false) => {
+export const getSurfaceArea = (points: TriPoint[], part2 = false) => {
   const cubes: TriCoords[] = points.map(point => $.toCoords(point))
   const [minX, maxX, minY, maxY, minZ, maxZ] = $.boundaries(cubes)
   const isWithinBounds = ([x, y, z]: TriCoords) =>

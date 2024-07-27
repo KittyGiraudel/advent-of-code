@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Point } from '../../types'
+import type { Coords, Point } from '../../types'
 
 const VECTORS: Record<string, Coords> = {
   n: [0, -2],
@@ -39,7 +39,7 @@ const search = (start: Coords, end: Coords) =>
     heuristic: next => distance(next, end),
   })
 
-export const run = (instructions: string[], part2: boolean = false) => {
+export const run = (instructions: string[], part2 = false) => {
   const { position: end, visited } = walk(instructions)
   const start: Coords = [0, 0]
   const furthest = Array.from(visited)

@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { TriCoords, TriPoint } from '../../types'
+import type { TriCoords, TriPoint } from '../../types'
 
 type Particle = {
   index: number
@@ -30,7 +30,7 @@ const countCollisions = (particles: Particle[]) =>
       return acc
     }, new Set()).size
 
-export const run = (input: string[], part2: boolean = false) => {
+export const run = (input: string[], part2 = false) => {
   const particles = input.map((line, index) => {
     const [p, v, a] = line.split(', ')
     const position = $.toCoords(p.slice(3, -1) as TriPoint)

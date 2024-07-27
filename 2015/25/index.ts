@@ -1,4 +1,4 @@
-import { Coords } from '../../types'
+import type { Coords } from '../../types'
 
 export const run = ([row, col]: Coords) => {
   let curr = 20_151_125

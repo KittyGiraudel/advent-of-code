@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Grid } from '../../types'
+import type { Grid } from '../../types'
 import { Intcode } from '../05'
 
 export const getGrid = (input: string) => {

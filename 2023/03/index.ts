@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Grid } from '../../types'
+import type { Coords, Grid } from '../../types'
 
 const isNumber = (input: string) => /\d/.test(input)
 const isEmpty = (input: string) => input === '.'
@@ -60,7 +60,7 @@ export const getGearRatio = (input: string[]) => {
   }, 0)
 }
 
-export const run = (input: string[], part2: boolean = false) => {
+export const run = (input: string[], part2 = false) => {
   const grid = $.Grid.fromRows(input)
   const getValue = (coords: Coords) => grid.get(coords)
   type State = { current: number; total: number; symbol: boolean }

@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Point } from '../../types'
+import type { Point } from '../../types'
 
 export const mapOut = (lines: string[], limit?: number) => {
   const points = lines.map(line => line.replace(' ', '')) as Point[]

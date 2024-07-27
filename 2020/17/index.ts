@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Point } from '../../types'
+import type { Point } from '../../types'
 
 // I spent a lot of time trying to making the typing work nicely for 2, 3 or 4
 // dimensions but it’s honestly a nightmare and I’m not good enough with TS for
@@ -81,8 +81,8 @@ const mutate = (cell: string, count: number) =>
       ? '#'
       : '.'
     : count === 3
-    ? '#'
-    : '.'
+      ? '#'
+      : '.'
 
 // Return the new value for the cell at given coords, based on its value in the
 // origin dimensional space, across dimensions, leveraging cache.
@@ -154,7 +154,7 @@ const count = (map: Map<string, string>) =>
 export const gameOfLife = (
   input: string[],
   cycles: number,
-  dimensions: number = 3,
+  dimensions = 3,
   cache: NeighborCache = new Map()
 ) =>
   count(

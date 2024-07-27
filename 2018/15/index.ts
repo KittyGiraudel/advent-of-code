@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Grid, Point } from '../../types'
+import type { Coords, Grid, Point } from '../../types'
 
 type UnitType = 'G' | 'E'
 
@@ -14,7 +14,7 @@ class Unit {
   coords: Coords
   health: number
 
-  constructor(type: UnitType, coords: Coords, power: number = 3) {
+  constructor(type: UnitType, coords: Coords, power = 3) {
     this.type = type
     this.power = power
     this.coords = coords
@@ -118,7 +118,7 @@ class Game {
   units: Unit[]
   grid: Grid<string>
 
-  constructor(rows: string[], elvishPower: number = 3) {
+  constructor(rows: string[], elvishPower = 3) {
     this.turns = 0
     this.units = []
     this.grid = $.Grid.fromRows(rows, (value, coords) => {

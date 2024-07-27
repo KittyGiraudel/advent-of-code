@@ -1,14 +1,14 @@
 import $ from '../../helpers'
-import { Coords } from '../../types'
+import type { Coords } from '../../types'
 
-export const run = (input: string[], part2: boolean = false) => {
+export const run = (input: string[], part2 = false) => {
   const curr: Coords = [0, 0]
   const vertices: Coords[] = []
   let perimeter = 0
 
   input.forEach(line => {
     const [direction1, rawSteps, color] = line.split(' ')
-    const steps = part2 ? parseInt(color.slice(2, -2), 16) : +rawSteps
+    const steps = part2 ? Number.parseInt(color.slice(2, -2), 16) : +rawSteps
     const direction = part2 ? 'RDLU'[+color[color.length - 2]] : direction1
 
     if (direction === 'L') curr[1] -= steps

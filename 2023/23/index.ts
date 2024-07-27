@@ -1,7 +1,7 @@
 import $ from '../../helpers'
-import { Coords, Entries, Grid, Point, TriPoint } from '../../types'
+import type { Coords, Entries, Grid, Point, TriPoint } from '../../types'
 
-const createGraph = (grid: Grid<string>, part2: boolean = false) => {
+const createGraph = (grid: Grid<string>, part2 = false) => {
   const lookup = grid.toMap()
   const edges: Record<Point, Set<TriPoint>> = {}
   const connect = (from: Coords, to: Coords) => {
@@ -104,7 +104,7 @@ const findLongestPath = (
   return best
 }
 
-export const run = (input: string[], part2: boolean = false) => {
+export const run = (input: string[], part2 = false) => {
   const grid = $.Grid.fromRows(input)
   const { height } = grid
   const startCoords = grid.findCoords((v, [ri]) => ri === 0 && v === '.')

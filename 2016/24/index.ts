@@ -1,7 +1,7 @@
 import $ from '../../helpers'
-import { Coords } from '../../types'
+import type { Coords } from '../../types'
 
-export const discover = (input: string[], roundTrip: boolean = false) => {
+export const discover = (input: string[], roundTrip = false) => {
   let start: Coords
   const locations: Coords[] = []
   const grid = $.Grid.fromRows(input, (cell, coords) => {
@@ -76,5 +76,5 @@ export const discover = (input: string[], roundTrip: boolean = false) => {
     }
 
     return Math.min(count, min)
-  }, Infinity)
+  }, Number.POSITIVE_INFINITY)
 }

@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Point } from '../../types'
+import type { Coords, Point } from '../../types'
 
 type State = {
   position: Coords
@@ -11,11 +11,7 @@ const WEAKENED = 'W'
 const INFECTED = '#'
 const FLAGGED = 'F'
 
-export const run = (
-  rows: string[],
-  iterations: number,
-  part2: boolean = false
-) => {
+export const run = (rows: string[], iterations: number, part2 = false) => {
   const grid = $.Grid.fromRows(rows)
   const nodes = grid.toMap()
   const state: State = {

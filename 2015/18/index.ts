@@ -1,11 +1,7 @@
 import $ from '../../helpers'
-import { Point } from '../../types'
+import type { Point } from '../../types'
 
-export const run = (
-  input: string[],
-  iterations: number,
-  part2: boolean = false
-) => {
+export const run = (input: string[], iterations: number, part2 = false) => {
   let curr = $.Grid.fromRows(input)
   const corners: Point[] = [
     `0,0`,

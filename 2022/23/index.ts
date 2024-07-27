@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Point } from '../../types'
+import type { Point } from '../../types'
 
 const SIDES = {
   N: ([N, NE, , , , , , NW]: Point[]) => [N, NW, NE],
@@ -17,7 +17,7 @@ const mapPositions = (input: string[]) =>
     new Set()
   )
 
-export const run = (input: string[], rounds: number = 10) => {
+export const run = (input: string[], rounds = 10) => {
   const positions = mapPositions(input)
   const directions = ['N', 'S', 'W', 'E']
   const isOccupied = (point: Point) => positions.has(point)

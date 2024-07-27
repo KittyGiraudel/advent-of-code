@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Point } from '../../types'
+import type { Coords, Point } from '../../types'
 
 // The trail is implemented as a linked list. Each node but the first is
 // following another node (stored in `previous`), and each node but the last
@@ -70,7 +70,7 @@ const createNodes = (size: number) => {
   return curr?.head ?? null
 }
 
-export const countTailPositions = (input: string[], size: number = 2) => {
+export const countTailPositions = (input: string[], size = 2) => {
   const head = createNodes(size)
   if (!head) throw new Error('Could not create nodes')
 

@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Grid } from '../../types'
+import type { Grid } from '../../types'
 
 const isTree = (n: string) => n === '|'
 const isLumberyard = (n: string) => n === '#'
@@ -16,7 +16,7 @@ const getNextValue = (value: string, neighbors: string[]) => {
 const getScore = (grid: Grid<string>) =>
   grid.count(v => v === '#') * grid.count(v => v === '|')
 
-export const run = (rows: string[], iterations: number = 1) => {
+export const run = (rows: string[], iterations = 1) => {
   const history: number[] = []
   let curr = $.Grid.fromRows(rows)
 

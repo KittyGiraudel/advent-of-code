@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Grid } from '../../types'
+import type { Grid } from '../../types'
 
 const parse = (input: string, size: { width: number; height: number }) =>
   $.chunk(Array.from(input).map(Number), size.width * size.height)

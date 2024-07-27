@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { TriPoint } from '../../types'
+import type { TriPoint } from '../../types'
 import { getSurfaceArea } from './'
 
 test('Day 18 — Sample', t => {

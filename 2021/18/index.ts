@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { ValueOrArray } from '../../types'
+import type { ValueOrArray } from '../../types'
 
 type Fish = [ValueOrArray<number>, ValueOrArray<number>?]
 
@@ -16,7 +16,7 @@ const handleExplosions = (string: string): string => {
     if (string[i] === '[') {
       openings.push(i)
     } else if (string[i] === ']') {
-      let openingIndex = openings.pop()
+      const openingIndex = openings.pop()
       right = +current
       current = ''
 

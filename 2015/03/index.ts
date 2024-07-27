@@ -1,7 +1,7 @@
 import $ from '../../helpers'
-import { Coords, Point } from '../../types'
+import type { Coords, Point } from '../../types'
 
-export const run = (instructions: string, part2: boolean = false) => {
+export const run = (instructions: string, part2 = false) => {
   const map: Record<Point, number> = { '0,0': part2 ? 2 : 1 }
   const position: [Coords, Coords] = [
     [0, 0],

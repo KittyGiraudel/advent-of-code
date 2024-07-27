@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Grid } from '../../types'
+import type { Coords, Grid } from '../../types'
 
 const isEmpty = (array: string[]) => array.every(value => value === '.')
 const calculateExpansion = (grid: Grid<string>) => {

@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { QuadriPoint, QuadriCoords } from '../../types'
+import type { QuadriCoords, QuadriPoint } from '../../types'
 
 type Constellation = Set<QuadriCoords>
 

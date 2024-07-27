@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Grid, Point } from '../../types'
+import type { Coords, Grid, Point } from '../../types'
 
 const generateMap = (input: string[]) =>
   input.reduce<Record<Point, string>>((acc, line) => {

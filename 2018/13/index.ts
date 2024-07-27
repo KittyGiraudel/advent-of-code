@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Grid, Point } from '../../types'
+import type { Coords, Grid, Point } from '../../types'
 
 type Orientation = '^' | 'v' | '<' | '>'
 type Cart = {
@@ -62,7 +62,7 @@ const gridOrder = (a: Point, b: Point) => {
   return aRi - bRi || aCi - bCi
 }
 
-const tick = (grid: Grid<string>, carts: CartMap, cleanUp: boolean = false) => {
+const tick = (grid: Grid<string>, carts: CartMap, cleanUp = false) => {
   $.keys<Point>(carts)
     .sort(gridOrder)
     .forEach(point => {
@@ -91,7 +91,7 @@ const tick = (grid: Grid<string>, carts: CartMap, cleanUp: boolean = false) => {
     })
 }
 
-export const run = (rows: string[], cleanUp: boolean = false) => {
+export const run = (rows: string[], cleanUp = false) => {
   const carts: CartMap = {}
 
   // Iterate over the grid to:

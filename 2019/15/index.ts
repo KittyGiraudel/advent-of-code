@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Grid, Point, SearchGraph } from '../../types'
+import type { Coords, Grid, Point, SearchGraph } from '../../types'
 import { Intcode } from '../05'
 
 const DIRECTIONS = [1, 4, 2, 3]
@@ -14,7 +14,7 @@ const addProgramCopy = (curr: Node) => (next: Node, index: number) =>
   ({
     ...next,
     program: curr.program.snapshot().setInput(DIRECTIONS[index]).run(),
-  } as Node)
+  }) as Node
 
 const discover = (input: string) =>
   $.search.bfs<Node>({

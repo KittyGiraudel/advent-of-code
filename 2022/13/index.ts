@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { ValueOrArray } from '../../types'
+import type { ValueOrArray } from '../../types'
 
 const toArray = (value: ValueOrArray<number>) =>
   Array.isArray(value) ? value : [value]

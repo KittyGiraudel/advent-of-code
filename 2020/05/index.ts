@@ -1,4 +1,4 @@
-import { Coords } from '../../types'
+import type { Coords } from '../../types'
 
 // Return the coords for the given seat encoding.
 // @param input - Seat encoding

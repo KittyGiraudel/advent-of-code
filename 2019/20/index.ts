@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Grid, Point } from '../../types'
+import type { Coords, Grid, Point } from '../../types'
 
 type PointsToDoors = Record<Point, string>
 type DoorsToCoords = Record<string, Coords>
@@ -147,7 +147,7 @@ const getNeighborsRecursive =
     return walkable
   }
 
-export const maze = (input: string[], recursive: boolean = false) => {
+export const maze = (input: string[], recursive = false) => {
   const { width, height } = getDimensions(input)
   // This creates a grid from the given input except without the outside
   // padding. The middle part still contains the inside door names though.

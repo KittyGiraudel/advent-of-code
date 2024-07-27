@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Grid } from '../../types'
+import type { Coords, Grid } from '../../types'
 
 type Node = {
   position: Coords
@@ -44,7 +44,9 @@ const getPathLength = (grid: Grid<number>, start: Node, end: Node) => {
       curr.position[1] === end.position[1],
   })
 
-  return $.toPoint(end.position) in graph ? getPath().length : Infinity
+  return $.toPoint(end.position) in graph
+    ? getPath().length
+    : Number.POSITIVE_INFINITY
 }
 
 export const findPath = (input: string[]) => {
@@ -61,6 +63,6 @@ export const findShortestPath = (input: string[]) => {
       elevation === 'a'.charCodeAt(0)
         ? Math.min(min, getPathLength(grid, { position, elevation }, end))
         : min,
-    Infinity
+    Number.POSITIVE_INFINITY
   )
 }

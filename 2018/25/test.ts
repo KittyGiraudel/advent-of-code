@@ -1,7 +1,7 @@
 import test from 'ava'
 import $ from '../../helpers'
+import type { QuadriPoint } from '../../types'
 import { observe } from './'
-import { QuadriPoint } from '../../types'
 
 test('Day 25 — Sample', t => {
   const sampleA = $.sample(`

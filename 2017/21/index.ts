@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Grid } from '../../types'
+import type { Grid } from '../../types'
 
 type Patterns = Record<string, string[]>
 type Cache = Record<string, string[]>
@@ -29,7 +29,7 @@ const enhance = (
   patterns: Patterns,
   cache: Record<string, string[]> = {}
 ) => {
-  let currStr = curr.join('/')
+  const currStr = curr.join('/')
   type CacheKey = keyof typeof cache
   type PatternKey = keyof typeof patterns
 
@@ -72,7 +72,7 @@ const reassemble = (grids: string[][]) => {
 const cycle = (curr: string[], patterns: Patterns, cache: Cache) =>
   reassemble(disassemble(curr).map(sub => enhance(sub, patterns, cache)))
 
-export const run = (input: string[], iterations: number = 1) => {
+export const run = (input: string[], iterations = 1) => {
   const patterns = getPatterns(input)
   const cache: Cache = {}
   let curr = ['.#.', '..#', '###']

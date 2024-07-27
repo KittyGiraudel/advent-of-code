@@ -1,4 +1,4 @@
-import { Coords, QuadriCoords, TriCoords } from '../types'
+import type { Coords, QuadriCoords, TriCoords } from '../types'
 
 /**
  * Retrieve the minimum and maximum values of a set of coordinates, reading

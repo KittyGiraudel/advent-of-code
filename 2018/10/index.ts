@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords } from '../../types'
+import type { Coords } from '../../types'
 
 const applyVelocity = ([position, velocity]: [Coords, Coords]) =>
   [$.applyVector(position, velocity), velocity] as [Coords, Coords]
@@ -11,12 +11,12 @@ const getDimensions = ([minX, maxX, minY, maxY]: [
   number,
   number,
   number,
-  number
+  number,
 ]) => [maxX + 1 - minX, maxY + 1 - minY]
 
 export const plot = (input: string[]) => {
   let curr = input.map(parseLine)
-  let height = Infinity
+  let height = Number.POSITIVE_INFINITY
   let seconds = 0
 
   // This condition is somewhat arbitrary. I assumed the message would be

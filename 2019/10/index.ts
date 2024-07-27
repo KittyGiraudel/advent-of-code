@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Point } from '../../types'
+import type { Coords, Point } from '../../types'
 
 type CoordsWithAngle = { coords: Coords; angle: number }
 type Group = { items: Coords[]; angle: number }
@@ -44,7 +44,7 @@ export const findBestSpot = (grid: string[]) => {
 
 const toCoordsWithAngle = (point: Point): CoordsWithAngle => ({
   coords: $.toCoords(point),
-  angle: Infinity,
+  angle: Number.POSITIVE_INFINITY,
 })
 
 const getAngleFromCoords = (coordsA: Coords) => (coordsB: Coords) =>

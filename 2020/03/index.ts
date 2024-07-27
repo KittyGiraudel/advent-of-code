@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords } from '../../types'
+import type { Coords } from '../../types'
 
 // Count the amount of trees encountered on a slope defined by given vector.
 // @param grid - Rows of strings

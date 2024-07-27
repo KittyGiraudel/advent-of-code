@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { TriCoords } from '../../types'
+import type { TriCoords } from '../../types'
 
 type Bot = {
   x: number

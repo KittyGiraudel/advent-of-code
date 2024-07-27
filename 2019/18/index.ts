@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Point } from '../../types'
+import type { Point } from '../../types'
 
 type State = { keys: string; positions: string; steps: number }
 type Distance = { distance: number; locks: string[] }
@@ -15,7 +15,7 @@ const toKey = (curr: State) => curr.positions + ':' + curr.keys
 // robot with BFS (or GBFS), and from there run Dijkstra so that we focus only
 // on the positions that really matter and skip everything in between. Still, it
 // took me a while to write all the code but I’m happy I made it.
-export const run = (input: string[], part2: boolean = false) => {
+export const run = (input: string[], part2 = false) => {
   const startPositions: Point[] = []
   const start: State = {
     keys: '',
@@ -41,7 +41,6 @@ export const run = (input: string[], part2: boolean = false) => {
     const start = startPositions.pop()
     if (!start) throw new Error('Could not find starting position')
     const [N, NE, E, SE, S, SW, W, NW] = $.surrounding(start)
-
     ;[start, N, E, S, W].forEach(point => lookup.delete(point))
     ;[NE, SE, SW, NW].forEach(point => startPositions.push(point))
   }

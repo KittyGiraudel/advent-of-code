@@ -1,26 +1,22 @@
 import $ from '../../helpers'
-import { Coords } from '../../types'
+import type { Coords } from '../../types'
 
 const getTilingCoords = (coords: Coords) => {
   const [N, NE, E, SE, S, SW, W, NW] = $.surrounding(coords)
   const C: Coords = coords
 
   // prettier-ignore
-  return [
-    NW, N, NE,
-     W, C,  E,
-    SW, S, SE,
-  ]
+  return [NW, N, NE, W, C, E, SW, S, SE]
 }
 
-const padInput = (input: string, defaultChar: string = '.') => {
+const padInput = (input: string, defaultChar = '.') => {
   const rows = input.split('\n')
   const padding = defaultChar.repeat(rows[0].length)
 
   return [padding, ...rows, padding].map(row => defaultChar + row + defaultChar)
 }
 
-const step = (algorithm: string, input: string, defaultChar: string = '.') => {
+const step = (algorithm: string, input: string, defaultChar = '.') => {
   const rows = padInput(input, defaultChar)
   const curr = $.Grid.fromRows(rows)
   const next = curr.map((_, coords) => {
@@ -40,7 +36,7 @@ const step = (algorithm: string, input: string, defaultChar: string = '.') => {
 export const processImage = (
   algorithm: string,
   image: string,
-  iterations: number = 1
+  iterations = 1
 ) =>
   $.array(iterations).reduce(
     acc => {

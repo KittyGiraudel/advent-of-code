@@ -1,5 +1,5 @@
 import $ from '../../helpers'
-import { Coords, Point } from '../../types'
+import type { Coords, Point } from '../../types'
 
 const EAST: Coords = [+1, 0]
 const WEST: Coords = [-1, 0]
@@ -10,7 +10,7 @@ export const resolve = (bound: number) => {
   // Given the value increments by 1 for every new cell, use an array where the
   // index serves as the value itself, hence why we skip the first cell (0).
   const coords: Coords[] = [
-    [Infinity, Infinity],
+    [Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY],
     [0, 0],
   ]
 
@@ -67,6 +67,6 @@ export const resolve2 = (bound: number) => {
   }
 }
 
-export const run = (bound: number, part2: boolean = false) => {
+export const run = (bound: number, part2 = false) => {
   return part2 ? resolve2(bound) : resolve(bound)
 }

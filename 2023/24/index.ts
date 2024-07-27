@@ -1,6 +1,6 @@
-import { init, Solver, IntCreation, Context } from 'z3-solver'
+import { Context, type IntCreation, type Solver, init } from 'z3-solver'
 import $ from '../../helpers'
-import { TriCoords } from '../../types'
+import type { TriCoords } from '../../types'
 
 type Hailstone = [TriCoords, TriCoords]
 
@@ -49,7 +49,7 @@ const checkIntersection = (pair: [Hailstone, Hailstone]) => {
   return true
 }
 
-export const run = async (input: string[], part2: boolean = false) => {
+export const run = async (input: string[], part2 = false) => {
   const paths = input.map(line => $.chunk($.numbers(line), 3) as Hailstone)
   const pairs = $.pairs(paths)
 

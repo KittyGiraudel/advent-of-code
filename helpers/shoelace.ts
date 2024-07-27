@@ -1,4 +1,4 @@
-import { Coords } from '../types'
+import type { Coords } from '../types'
 
 const shoelace = (vertices: Coords[]) => {
   let area = 0
