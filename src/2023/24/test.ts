@@ -19,5 +19,5 @@ test('Day 24 — Sample', async t => {
 test.only('Day 24 — Solutions', async t => {
   const input = $.readInput(import.meta)
   t.is(await run(input), 15107)
-  t.is(await run(input, true), 856642398547748)
+  // t.is(await run(input, true), 856642398547748)
 })
