@@ -4,3 +4,4 @@ node_modules
 session.cookie
 AoCTiles/.aoc_tiles_cache
 aoc-gitcrypt.key
+.type-coverage
