@@ -25,7 +25,7 @@
     "typescript": "^5.5.4"
   },
   "ava": {
-    "files": ["./**/*test.ts"],
+    "files": ["./src/**/*test.ts"],
     "nodeArguments": [
       "--experimental-specifier-resolution=node",
       "--no-warnings"

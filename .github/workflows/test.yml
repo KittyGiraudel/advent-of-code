@@ -30,4 +30,4 @@ jobs:
         run: npm ci --ignore-scripts
 
       - name: Run tests
-        run: npm test -- ${{ matrix.ci_index }}
+        run: npm test -- src/${{ matrix.ci_index }}
