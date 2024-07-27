@@ -21,12 +21,12 @@ export type ValueOrArray<T> = T | ValueOrArray<T>[]
 export type LengthArray<
   T,
   N extends number,
-  R extends T[] = []
+  R extends T[] = [],
 > = number extends N
   ? T[]
   : R['length'] extends N
-  ? R
-  : LengthArray<T, N, [T, ...R]>
+    ? R
+    : LengthArray<T, N, [T, ...R]>
 
 export type Entries<T> = {
   [K in keyof T]: [K, T[K]]
