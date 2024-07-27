@@ -12,16 +12,16 @@
     "node": "20"
   },
   "dependencies": {
-    "@datastructures-js/priority-queue": "^6.1.4",
+    "@datastructures-js/priority-queue": "^6.3.1",
     "circularray": "^0.2.2",
-    "z3-solver": "^4.12.4"
+    "z3-solver": "^4.13.0"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
-    "@swc/core": "^1.3.24",
-    "ava": "^5.1.0",
-    "ts-node": "^10.9.1",
-    "type-coverage": "^2.27.1",
+    "@swc/core": "^1.7.2",
+    "ava": "^6.1.3",
+    "ts-node": "^10.9.2",
+    "type-coverage": "^2.29.1",
     "typescript": "^5.5.4"
   },
   "ava": {
