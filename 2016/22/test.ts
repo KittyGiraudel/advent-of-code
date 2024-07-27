@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { run, getData } from './'
+import { getData, run } from './'
 
 test('Day 22 — Solutions', t => {
   const input = $.readInput(import.meta)

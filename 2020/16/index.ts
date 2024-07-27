@@ -25,7 +25,7 @@ export const parseInput = ([rawRules, rawTicket, rawNearbyTickets]: string[]) =>
       .split('\n')
       .slice(1)
       .map(ticket => ticket.split(',').map(Number)),
-  } as Input)
+  }) as Input
 
 // Return whether a given value matches any of the two ranges of a given rule.
 // @param value - Value to validate

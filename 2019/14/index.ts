@@ -93,7 +93,5 @@ export const getFuelCost = (input: string[], amount = 1) =>
     { ingredient: 'FUEL', amount }
   ).ore
 
-export const getFuelAmount = (
-  input: string[],
-  supply = 1_000_000_000_000
-) => $.binarySearch(1, supply, (i: number) => supply - getFuelCost(input, i))
+export const getFuelAmount = (input: string[], supply = 1_000_000_000_000) =>
+  $.binarySearch(1, supply, (i: number) => supply - getFuelCost(input, i))

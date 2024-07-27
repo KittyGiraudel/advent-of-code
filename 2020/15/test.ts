@@ -1,6 +1,6 @@
 import test from 'ava'
-import $ from '../../helpers'
 import { get } from '.'
+import $ from '../../helpers'
 
 test('Day 15 — Sample', t => {
   t.is(get([0, 3, 6], 2020), 436)

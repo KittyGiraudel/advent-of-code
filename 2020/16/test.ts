@@ -1,6 +1,6 @@
 import test from 'ava'
+import { getScanningErrorRate, getTicketValue, parseInput } from '.'
 import $ from '../../helpers'
-import { parseInput, getScanningErrorRate, getTicketValue } from '.'
 
 test('Day 16 — Sample', t => {
   const example = $.sample(

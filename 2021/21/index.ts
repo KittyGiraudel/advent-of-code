@@ -5,11 +5,7 @@ type Player = {
   score: number
 }
 
-const playDeterministically = (
-  p1p: number,
-  p2p: number,
-  max = 1000
-) => {
+const playDeterministically = (p1p: number, p2p: number, max = 1000) => {
   const players: [Player, Player] = [
     { position: p1p, score: 0 },
     { position: p2p, score: 0 },

@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { getSeatCoords, getSeatId, findOwnSeat } from './'
+import { findOwnSeat, getSeatCoords, getSeatId } from './'
 
 test('Day 05 — Sample', t => {
   t.deepEqual(getSeatCoords('FBFBBFFRLR'), [44, 5])

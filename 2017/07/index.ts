@@ -54,7 +54,12 @@ export const run = (input: string[]) => {
     graph[key].weight = sum(graph[key])
   }
 
-  const fix: Fix = { name: '', weight: Number.POSITIVE_INFINITY, diff: 0, node: null }
+  const fix: Fix = {
+    name: '',
+    weight: Number.POSITIVE_INFINITY,
+    diff: 0,
+    node: null,
+  }
 
   for (const key in graph) {
     const { weight, children: childrenNames } = graph[key]

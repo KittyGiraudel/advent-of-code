@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { steps, findRepeat } from './'
+import { findRepeat, steps } from './'
 
 test('Day 12 — Sample', t => {
   const sampleA = $.sample(`

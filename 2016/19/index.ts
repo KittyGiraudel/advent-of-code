@@ -1,5 +1,5 @@
-import $ from '../../helpers'
 import Circularray from 'circularray'
+import $ from '../../helpers'
 
 export const run = (size: number, part2 = false) => {
   const circle = new Circularray($.range(size, 1))

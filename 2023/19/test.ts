@@ -32,7 +32,7 @@ test('Day 19 — Sample', t => {
 test('Day 19 — Solutions', t => {
   const input = $.readInput(import.meta, { delimiter: '\n\n' }) as [
     string,
-    string
+    string,
   ]
   t.is(run(input), 330820)
   t.is(run(input, true), 123972546935551)

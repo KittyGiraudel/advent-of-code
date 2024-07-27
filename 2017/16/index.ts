@@ -5,11 +5,7 @@ type Exchange = { type: 'EXCHANGE'; value: number[] }
 type Partner = { type: 'PARTNER'; value: string[] }
 type Instruction = Spin | Exchange | Partner
 
-export const dance = (
-  input: string[],
-  size = 16,
-  iterations = 1
-) => {
+export const dance = (input: string[], size = 16, iterations = 1) => {
   const programs = $.range(size, 97).map(a => String.fromCharCode(a))
   const history: string[] = []
 

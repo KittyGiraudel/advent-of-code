@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { run, getHash } from './'
+import { getHash, run } from './'
 
 test('Day 10 — Sample', t => {
   t.is(run([3, 4, 1, 5], [0, 1, 2, 3, 4]), 12)

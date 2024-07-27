@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { getFuelCost, getFuelAmount } from './'
+import { getFuelAmount, getFuelCost } from './'
 
 test('Day 14 — Sample', t => {
   const sampleA = $.sample(`

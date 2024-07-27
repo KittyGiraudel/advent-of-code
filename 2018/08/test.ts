@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { score, parse } from './'
+import { parse, score } from './'
 
 test('Day 08 — Sample', t => {
   const sample = [2, 3, 0, 3, 10, 11, 12, 1, 1, 0, 1, 99, 2, 1, 1, 2]

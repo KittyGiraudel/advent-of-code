@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { getGrid, calibrate, scaffold } from './'
+import { calibrate, getGrid, scaffold } from './'
 
 test('Day 17 — Sample', t => {
   const sample = $.sample(

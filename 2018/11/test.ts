@@ -1,5 +1,5 @@
 import test from 'ava'
-import { getFuelStrict, getFuelLoose } from './'
+import { getFuelLoose, getFuelStrict } from './'
 
 test('Day 11 — Sample', t => {
   t.deepEqual(getFuelStrict(18), { coords: [33, 45], value: 29 })

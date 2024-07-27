@@ -32,7 +32,7 @@ const parseSample = ([before, op, after]: string[]) =>
     operation: op.split(' ').map(Number),
     before: JSON.parse(before.replace('Before: ', '')),
     after: JSON.parse(after.replace('After: ', '')),
-  } as Sample)
+  }) as Sample
 
 export const debug = (input: string[]) => {
   const capacity = Object.keys(OPCODES).length

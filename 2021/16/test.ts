@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { evaluate, getVersionSums, Decoder } from './'
+import { Decoder, evaluate, getVersionSums } from './'
 
 test('Day 16 — Sample', t => {
   t.is(getVersionSums('8A004A801A8002F478'), 16)

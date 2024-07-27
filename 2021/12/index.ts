@@ -10,7 +10,7 @@ const createNode = (cave: string) =>
   ({
     small: cave === cave.toLowerCase(),
     siblings: new Set(),
-  } as Node)
+  }) as Node
 
 const createGraph = (connections: string[]) => {
   const map: Graph = {}

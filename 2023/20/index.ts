@@ -32,11 +32,11 @@ const createMap = (input: string[]) =>
           type === '%'
             ? ({ ...base, enabled: false } as FlipFlop)
             : type === '&'
-            ? ({
-                ...base,
-                frequencies: getInitialFrequencies(name, array),
-              } as Conjunction)
-            : (base as Broadcaster)
+              ? ({
+                  ...base,
+                  frequencies: getInitialFrequencies(name, array),
+                } as Conjunction)
+              : (base as Broadcaster)
 
         return [name, module]
       })

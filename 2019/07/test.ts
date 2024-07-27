@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { findHighestSignal, amplify, loop } from './'
+import { amplify, findHighestSignal, loop } from './'
 
 test('Day 07 — Sample', t => {
   t.is(

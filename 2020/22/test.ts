@@ -1,6 +1,6 @@
 import test from 'ava'
+import { fightRecursive, getGameScore } from '.'
 import $ from '../../helpers'
-import { getGameScore, fightRecursive } from '.'
 
 test('Day 22 — Sample', t => {
   const example = $.sample(

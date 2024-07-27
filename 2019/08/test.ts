@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { validate, recompose } from './'
+import { recompose, validate } from './'
 
 test('Day 08 — Sample', t => {
   const sample = '0222112222120000'

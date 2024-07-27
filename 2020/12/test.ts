@@ -1,6 +1,6 @@
 import test from 'ava'
-import $ from '../../helpers'
 import { navigateLoose, navigateStrict } from '.'
+import $ from '../../helpers'
 
 test('Day 12 — Sample', t => {
   t.is(navigateLoose('F10,N3,F7,R90,F11'.split(',')), 25)

@@ -1,6 +1,6 @@
 import test from 'ava'
-import $ from '../../helpers'
 import { gameOfLife } from '.'
+import $ from '../../helpers'
 
 test('Day 24 — Sample', t => {
   const example = $.sample(`

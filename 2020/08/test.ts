@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { runProgram, runMonkeyPatchedProgram } from './'
+import { runMonkeyPatchedProgram, runProgram } from './'
 
 test('Day 08 — Sample', t => {
   const buggyInput = $.sample(`

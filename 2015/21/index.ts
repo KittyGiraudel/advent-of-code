@@ -75,12 +75,7 @@ class Unit {
   armor: number
   cost: number
 
-  constructor(
-    cost: number,
-    damage: number,
-    armor: number,
-    health = 100
-  ) {
+  constructor(cost: number, damage: number, armor: number, health = 100) {
     this.health = health
     this.damage = damage
     this.armor = armor

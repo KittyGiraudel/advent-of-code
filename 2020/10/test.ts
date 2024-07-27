@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { getDifferenceProduct, countArrangements } from './'
+import { countArrangements, getDifferenceProduct } from './'
 
 test('Day 10 — Sample', t => {
   const a = '16,10,15,5,1,11,7,19,6,12,4'.split(',').map(Number)

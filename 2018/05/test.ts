@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { reduce, findShortestPolymer } from './'
+import { findShortestPolymer, reduce } from './'
 
 test('Day 05 — Sample', t => {
   t.is(reduce('dabAcCaCBAcCcaDA'), 'dabCBAcaDA')

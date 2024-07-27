@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { vaporize, findBestSpot } from './'
+import { findBestSpot, vaporize } from './'
 
 test('Day 10 — Sample', t => {
   const sampleA = $.sample(`

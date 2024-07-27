@@ -20,7 +20,7 @@ const parseGame = (line: string) =>
   ({
     id: +line.split(':')[0].replace('Game ', ''),
     draws: line.split(':')[1].split('; ').map(parseDraws),
-  } as Game)
+  }) as Game
 
 const aggregateMaxSet = (set: Set, item: Set) => ({
   red: Math.max(set.red, item.red),

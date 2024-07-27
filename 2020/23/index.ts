@@ -16,7 +16,11 @@ const getDest = (
 // @param map - Map of links
 // @param current - Current cup value
 const pickCups = (map: Uint32Array, current: number) => {
-  const picks: [number, number, number] = [Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY]
+  const picks: [number, number, number] = [
+    Number.POSITIVE_INFINITY,
+    Number.POSITIVE_INFINITY,
+    Number.POSITIVE_INFINITY,
+  ]
 
   picks[0] = map[current]
   picks[1] = map[picks[0]]

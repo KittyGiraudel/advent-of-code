@@ -1,6 +1,6 @@
 import test from 'ava'
+import { getEarliestTimestamp, getNextDeparture } from '.'
 import $ from '../../helpers'
-import { getNextDeparture, getEarliestTimestamp } from '.'
 
 test('Day 13 — Sample', t => {
   t.is(

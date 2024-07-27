@@ -1,6 +1,6 @@
 import test from 'ava'
-import $ from '../../helpers'
 import { computeLoose, computeStrict } from '.'
+import $ from '../../helpers'
 
 test('Day 18 — Sample', t => {
   t.is(computeLoose('1 + (2 * 3) + (4 * (5 + 6))'), 51)

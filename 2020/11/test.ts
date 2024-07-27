@@ -1,10 +1,10 @@
 import test from 'ava'
 import $ from '../../helpers'
 import {
+  getVisibleSeats,
   processLayout,
   processSeatLoose,
   processSeatStrict,
-  getVisibleSeats,
   waitAndCountOccupiedSeats,
 } from './'
 

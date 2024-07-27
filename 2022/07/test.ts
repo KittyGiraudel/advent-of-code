@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { parseOutput, getSmallDirsSize, findFreeableSpace } from './'
+import { findFreeableSpace, getSmallDirsSize, parseOutput } from './'
 
 test('Day 07 — Sample', t => {
   const sample = $.sample(`

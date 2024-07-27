@@ -1,6 +1,6 @@
 import test from 'ava'
-import $ from '../../helpers'
 import { getEncryptionKey } from '.'
+import $ from '../../helpers'
 
 test('Day 25 — Sample', t => {
   t.is(getEncryptionKey(5_764_801, 17_807_724), 14_897_079)

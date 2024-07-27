@@ -1,5 +1,5 @@
-import $ from '../../helpers'
 import Circularray from 'circularray'
+import $ from '../../helpers'
 
 // Usage of a double-ended queue inspired by this comment on Reddit.
 // https://www.reddit.com/r/adventofcode/comments/a4i97s/2018_day_9_solutions/

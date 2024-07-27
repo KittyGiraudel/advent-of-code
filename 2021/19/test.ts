@@ -1,6 +1,6 @@
 import test from 'ava'
-import { parse } from './'
 import $ from '../../helpers'
+import { parse } from './'
 
 const sample = `--- scanner 0 ---
 404,-588,-901

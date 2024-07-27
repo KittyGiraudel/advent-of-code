@@ -1,6 +1,6 @@
 import test from 'ava'
-import $ from '../../helpers'
 import { count } from '.'
+import $ from '../../helpers'
 
 const PATCH = {
   '8: 42': '8: 42 | 42 8',

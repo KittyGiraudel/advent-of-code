@@ -31,7 +31,7 @@ test('Day 12 — Sample', t => {
 test('Day 12 — Solutions', t => {
   const input = $.readInput(import.meta, { delimiter: '\n\n' }) as [
     string,
-    string
+    string,
   ]
 
   t.is(cycle(input, 20), 3217)

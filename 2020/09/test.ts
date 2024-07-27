@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { findWeakness, breakWeakness } from './'
+import { breakWeakness, findWeakness } from './'
 
 test('Day 09 — Sample', t => {
   const sample =

@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { sequential, parallel } from './'
+import { parallel, sequential } from './'
 
 test('Day 07 — Sample', t => {
   const sample = $.sample(`

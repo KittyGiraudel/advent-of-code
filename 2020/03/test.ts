@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { getTreeCountForSlope, getResult } from './'
+import { getResult, getTreeCountForSlope } from './'
 
 test('Day 03 — Sample', t => {
   const example = $.sample(`

@@ -54,11 +54,7 @@ export const countOrbits = (graph: Graph, to = 'COM') => {
   )
 }
 
-export const countTransfers = (
-  graph: Graph,
-  start = 'YOU',
-  end = 'SAN'
-) => {
+export const countTransfers = (graph: Graph, start = 'YOU', end = 'SAN') => {
   // This is the original version, which is much slower.
   // const [path] = getPaths(graph, start, end)
 

@@ -3,7 +3,7 @@
   "scripts": {
     "test": "NODE_OPTIONS='--loader=ts-node/esm' ava --verbose --timeout=30s",
     "tiles": "rm -rf AoCTiles/.aoc_tiles_cache && python3 AoCTiles/create_aoc_tiles.py",
-    "check": "tsc && biome check --write --unsafe **/*.ts",
+    "check": "tsc && biome check --write --unsafe {2015..2023}/**/*.ts {helpers,types}/*.ts",
     "exec": "tsx",
     "coverage": "type-coverage --detail --strict --ignore-files=test.ts"
   },

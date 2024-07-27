@@ -46,7 +46,7 @@ export const run = (input: string[], part2 = false) =>
   input
     .map(line => line.split(' ') as [Cards, number])
     .map(
-      ([cards, bet]) => ({ cards, bet, type: getType(cards, part2) } as Hand)
+      ([cards, bet]) => ({ cards, bet, type: getType(cards, part2) }) as Hand
     )
     .sort(sortHands(part2 ? 'AKQT98765432J' : 'AKQJT98765432'))
     .map((game, index, array) => game.bet * (array.length - index))

@@ -1,6 +1,6 @@
 import test from 'ava'
-import { computeFuelCost, computeIterativeFuelCost } from './'
 import $ from '../../helpers'
+import { computeFuelCost, computeIterativeFuelCost } from './'
 
 test('Day 01 — Sample', t => {
   t.is(computeFuelCost(12), 2)

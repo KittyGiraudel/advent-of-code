@@ -9,11 +9,7 @@ import Circularray from 'circularray'
 //
 // Side note, kudos to that solution which is much simpler and faster:
 // https://www.reddit.com/r/adventofcode/comments/zqezkn/comment/j0ywkpy/?utm_source=share&utm_medium=web2x&context=3
-export const mix = (
-  numbers: number[],
-  count = 1,
-  multiplier = 1
-) => {
+export const mix = (numbers: number[], count = 1, multiplier = 1) => {
   const circle = new Circularray(
     numbers.map((n, index) => ({ number: n * multiplier, index }))
   )

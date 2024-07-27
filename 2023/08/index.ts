@@ -24,10 +24,7 @@ const process = (
   return count
 }
 
-export const run = (
-  [directions, , ...lines]: string[],
-  part2 = false
-) => {
+export const run = ([directions, , ...lines]: string[], part2 = false) => {
   const map = createMap(lines)
 
   if (!part2) {

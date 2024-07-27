@@ -10,14 +10,17 @@ const parseInstruction = (line: string) => {
 }
 
 export const shuffle = (lines: string[], size = 10_007) =>
-  lines.reduce((acc, line) => {
-    const { type, value } = parseInstruction(line)
-    if (type === 'NEW') return acc.reverse()
-    if (type === 'CUT') return acc.slice(value).concat(acc.slice(0, value))
-    if (type === 'INC') {
-      const next = acc.slice(0)
-      acc.forEach((item, i) => (next[(value! * i) % acc.length] = item))
-      return next
-    }
-    return acc
-  }, Array.from(Array(size).keys()))
+  lines.reduce(
+    (acc, line) => {
+      const { type, value } = parseInstruction(line)
+      if (type === 'NEW') return acc.reverse()
+      if (type === 'CUT') return acc.slice(value).concat(acc.slice(0, value))
+      if (type === 'INC') {
+        const next = acc.slice(0)
+        acc.forEach((item, i) => (next[(value! * i) % acc.length] = item))
+        return next
+      }
+      return acc
+    },
+    Array.from(Array(size).keys())
+  )

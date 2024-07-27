@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { parseInput, foldOnce, foldAll, render } from './'
+import { foldAll, foldOnce, parseInput, render } from './'
 
 test('Day 13 — Sample', t => {
   const sample = $.sample(

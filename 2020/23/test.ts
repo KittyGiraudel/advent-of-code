@@ -1,6 +1,6 @@
 import test from 'ava'
+import { getChainValue, play, serializeChain } from '.'
 import $ from '../../helpers'
-import { play, serializeChain, getChainValue } from '.'
 
 test('Day 23 — Sample', t => {
   const sample = '389125467'.split('').map(Number)

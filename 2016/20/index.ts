@@ -1,8 +1,4 @@
-export const run = (
-  input: string[],
-  maximum: number,
-  part2 = false
-) => {
+export const run = (input: string[], maximum: number, part2 = false) => {
   const lists = input
     .map(a => a.split('-').map(Number))
     .sort((a, b) => a[0] - b[0] || a[1] - b[1])

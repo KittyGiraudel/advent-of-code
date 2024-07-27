@@ -1,8 +1,7 @@
 // Transform the given value with the subject.
 // @param subject - Subject
 // @param value - value
-const transform = (subject: number, value = 1) =>
-  (value * subject) % 20_201_227
+const transform = (subject: number, value = 1) => (value * subject) % 20_201_227
 
 // Brute-force the loop size for the given subject until it reaches guess.
 // @param subject - Subject

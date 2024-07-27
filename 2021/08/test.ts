@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { run, decode } from './'
+import { decode, run } from './'
 
 test('Day 08 — Sample', t => {
   const sample = $.sample(`

@@ -1,6 +1,6 @@
 import test from 'ava'
-import $ from '../../helpers'
 import { countAllergenFreeOccurrences, getCanonicalDangerousList } from '.'
+import $ from '../../helpers'
 
 test('Day 21 — Sample', t => {
   const example = $.sample(`

@@ -50,17 +50,16 @@ export const sequential = (input: string[]) => {
   return order.join('')
 }
 
-export const parallel = (
-  input: string[],
-  help = 5,
-  offset = 60
-) => {
+export const parallel = (input: string[], help = 5, offset = 60) => {
   type Worker = { collecting: string; timer: number }
 
   const graph = getGraph(input)
   const keys = Array.from(graph.keys()).sort()
 
-  const createWorker = () => ({ collecting: '', timer: Number.POSITIVE_INFINITY })
+  const createWorker = () => ({
+    collecting: '',
+    timer: Number.POSITIVE_INFINITY,
+  })
   const getLetterDuration = (letter: string) =>
     offset + letter.charCodeAt(0) - 64
   const findNext = (workers: Worker[], collected: string[]) =>

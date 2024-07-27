@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { getLongestDistance, getDistancesAbove } from './'
+import { getDistancesAbove, getLongestDistance } from './'
 
 test('Day 20 — Sample', t => {
   const SAMPLES = [

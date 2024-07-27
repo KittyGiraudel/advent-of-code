@@ -3,9 +3,9 @@ import $ from '../../helpers'
 import {
   canContain,
   countBagsWithin,
-  parseRestriction,
-  mapRestrictions,
   countContainers,
+  mapRestrictions,
+  parseRestriction,
   run,
 } from './'
 

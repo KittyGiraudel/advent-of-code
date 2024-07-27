@@ -1,6 +1,6 @@
 import test from 'ava'
-import { maze, rotate } from './'
 import $ from '../../helpers'
+import { maze, rotate } from './'
 
 test('Day 22 — Sample', t => {
   const [sample] = $.sample(

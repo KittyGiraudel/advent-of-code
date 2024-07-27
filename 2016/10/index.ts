@@ -20,7 +20,7 @@ export const run = (input: string[]) => {
       if (!id) throw new Error('Could not find sender ID ')
       pipelines[+id] = [low.split(' '), high.split(' ')] as [
         [KeyType, number],
-        [KeyType, number]
+        [KeyType, number],
       ]
     }
   }

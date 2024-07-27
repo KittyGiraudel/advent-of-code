@@ -1,5 +1,5 @@
-import $ from '../../helpers'
 import Circularray from 'circularray'
+import $ from '../../helpers'
 
 export class Computer {
   pointer: number

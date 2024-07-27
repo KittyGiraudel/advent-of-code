@@ -1,5 +1,5 @@
 import test from 'ava'
-import { run, isValid } from './'
+import { isValid, run } from './'
 
 test('Day 11 — Sample', t => {
   t.is(isValid('hijklmmn'), false)

@@ -1,6 +1,6 @@
 import test from 'ava'
 import $ from '../../helpers'
-import { findFastestIntersection, findClosestIntersection } from './'
+import { findClosestIntersection, findFastestIntersection } from './'
 
 test('Day 03 — Sample', t => {
   const sampleA: [string, string] = ['R8,U5,L5,D3', 'U7,R6,D4,L4']
