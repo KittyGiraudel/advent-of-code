@@ -18,7 +18,7 @@ export const computeLoose = (input: string) => {
   // to right.
   const [total] = input
     .split(OPERATOR_RE)
-    .map(value => (isNaN(+value) ? value : +value))
+    .map(value => (Number.isNaN(+value) ? value : +value))
     .reduce<[number, string | null]>(
       ([total, operator], value) =>
         typeof value === 'string'

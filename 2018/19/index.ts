@@ -36,7 +36,7 @@ const sumFactors = (n: number) => {
   return $.sum(result)
 }
 
-export const run = (input: string[], init: number = 0) => {
+export const run = (input: string[], init = 0) => {
   const registers = new Int32Array(6)
   registers[0] = init
 
@@ -44,7 +44,7 @@ export const run = (input: string[], init: number = 0) => {
   const ipr = +pointer.replace('#ip ', '')
   const bound = lines.length
   const instructions = lines.map(a =>
-    a.split(' ').map(a => (isNaN(+a) ? a : +a))
+    a.split(' ').map(a => (Number.isNaN(+a) ? a : +a))
   )
   let ip = 0
 

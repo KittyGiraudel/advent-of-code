@@ -13,7 +13,7 @@ const OPERATORS = {
 type Operator = keyof typeof OPERATORS
 
 const prepare = (string: string) => {
-  for (let operator in OPERATORS)
+  for (const operator in OPERATORS)
     string = string.replace(operator, OPERATORS[operator as Operator])
 
   // Funnily enough, the `with (registers)` trick outlined in the article below
@@ -29,7 +29,7 @@ export const run = (input: string[], registers: Registers = {}) => {
   input.forEach(line => {
     const [left, right] = line.split(' -> ')
 
-    if (isNaN(+left)) {
+    if (Number.isNaN(+left)) {
       graph.set(right, { deps: $.match(left, STR_RE), raw: left })
     } else if (!(right in registers)) {
       registers[right] = +left
