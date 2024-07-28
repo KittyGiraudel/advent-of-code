@@ -1,5 +1,5 @@
 import test from 'node:test'
 
-test.skip('Day 19 — Sample', () => {})
+test('Day 19 — Sample', { skip: true }, () => {})
 
-test.skip('Day 19 — Solutions', () => {})
+test('Day 19 — Solutions', { skip: true }, () => {})

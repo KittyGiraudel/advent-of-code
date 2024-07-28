@@ -139,10 +139,10 @@ const sample = `--- scanner 0 ---
 -652,-548,-490
 30,-46,-14`.split('\n\n')
 
-test.skip('Day 19 — Sample', () => {
+test('Day 19 — Sample', { skip: true }, () => {
   const scanners = parse(sample)
 })
 
-test.skip('Day 19 — Solutions', () => {
+test('Day 19 — Solutions', { skip: true }, () => {
   const input = $.readInput(import.meta, { delimiter: '\n\n' })
 })

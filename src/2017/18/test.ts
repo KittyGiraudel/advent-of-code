@@ -3,7 +3,7 @@ import test from 'node:test'
 import $ from '../../helpers'
 import { run } from './'
 
-test.skip('Day 18 — Sample', () => {
+test('Day 18 — Sample', { skip: true }, () => {
   const sampleA = $.sample(`
   set a 1
   add a 2
