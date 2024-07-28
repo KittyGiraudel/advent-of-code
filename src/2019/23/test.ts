@@ -1,10 +1,11 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { boot } from './'
 
-test('Day 23 — Solutions', t => {
+test('Day 23 — Solutions', () => {
   const [input] = $.readInput(import.meta)
 
-  t.is(boot(input).pop(), 20_160)
-  t.is(boot(input).shift(), 13_164)
+  assert.strictEqual(boot(input).pop(), 20_160)
+  assert.strictEqual(boot(input).shift(), 13_164)
 })

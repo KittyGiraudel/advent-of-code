@@ -3,8 +3,9 @@ import type { Coords, Grid } from '../../types'
 
 const isNumber = (input: string) => /\d/.test(input)
 const isEmpty = (input: string) => input === '.'
-const isSymbol = (input: string) => input && !isNumber(input) && !isEmpty(input)
 const isGear = (input: string) => input === '*'
+const isSymbol = (input: string) =>
+  Boolean(input) && !isNumber(input) && !isEmpty(input)
 
 const getSurroundingNumber = (grid: Grid<string>) => (coords: Coords) => {
   let value = grid.get(coords)

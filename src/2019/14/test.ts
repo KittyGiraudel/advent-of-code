@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { getFuelAmount, getFuelCost } from './'
 
-test('Day 14 — Sample', t => {
+test('Day 14 — Sample', () => {
   const sampleA = $.sample(`
   10 ORE => 10 A
   1 ORE => 1 B
@@ -49,17 +50,17 @@ test('Day 14 — Sample', t => {
   176 ORE => 6 VJHF
   `)
 
-  t.is(getFuelCost(sampleA), 31)
-  t.is(getFuelCost(sampleB), 165)
-  t.is(getFuelCost(sampleC), 13_312)
-  t.is(getFuelCost(sampleD), 180_697)
-  t.is(getFuelAmount(sampleC), 82_892_753)
-  t.is(getFuelAmount(sampleD), 5_586_022)
+  assert.strictEqual(getFuelCost(sampleA), 31)
+  assert.strictEqual(getFuelCost(sampleB), 165)
+  assert.strictEqual(getFuelCost(sampleC), 13_312)
+  assert.strictEqual(getFuelCost(sampleD), 180_697)
+  assert.strictEqual(getFuelAmount(sampleC), 82_892_753)
+  assert.strictEqual(getFuelAmount(sampleD), 5_586_022)
 })
 
-test('Day 14 — Solutions', t => {
+test('Day 14 — Solutions', () => {
   const input = $.readInput(import.meta)
 
-  t.is(getFuelCost(input), 1_920_219)
-  t.is(getFuelAmount(input), 1_330_066)
+  assert.strictEqual(getFuelCost(input), 1_920_219)
+  assert.strictEqual(getFuelAmount(input), 1_330_066)
 })

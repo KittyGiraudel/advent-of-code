@@ -1,9 +1,10 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { run } from './'
 
-test('Day 01 — Solutions', t => {
+test('Day 01 — Solutions', () => {
   const [input] = $.readInput(import.meta)
 
-  t.deepEqual(run(input), [232, 1783])
+  assert.deepStrictEqual(run(input), [232, 1783])
 })

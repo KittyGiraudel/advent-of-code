@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import { fightRecursive, getGameScore } from '.'
 import $ from '../../helpers'
 
-test('Day 22 — Sample', t => {
+test('Day 22 — Sample', () => {
   const example = $.sample(
     `
   Player 1:
@@ -22,13 +23,13 @@ test('Day 22 — Sample', t => {
     { delimiter: '\n\n' }
   )
 
-  t.is(getGameScore(example), 306)
-  t.is(getGameScore(example, fightRecursive), 291)
+  assert.strictEqual(getGameScore(example), 306)
+  assert.strictEqual(getGameScore(example, fightRecursive), 291)
 })
 
-test('Day 22 — Solutions', t => {
+test('Day 22 — Solutions', () => {
   const input = $.readInput(import.meta, { delimiter: '\n\n' })
 
-  t.is(getGameScore(input), 34_664)
-  t.is(getGameScore(input, fightRecursive), 32_018)
+  assert.strictEqual(getGameScore(input), 34_664)
+  assert.strictEqual(getGameScore(input, fightRecursive), 32_018)
 })

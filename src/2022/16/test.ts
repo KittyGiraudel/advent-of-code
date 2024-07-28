@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { releasePressure } from './'
 
-test('Day 16 — Sample', t => {
+test('Day 16 — Sample', () => {
   const sample = $.sample(`
   Valve AA has flow rate=0; tunnels lead to valves DD, II, BB
   Valve BB has flow rate=13; tunnels lead to valves CC, AA
@@ -16,11 +17,11 @@ test('Day 16 — Sample', t => {
   Valve JJ has flow rate=21; tunnel leads to valve II
   `)
 
-  t.is(releasePressure(sample), 1651)
+  assert.strictEqual(releasePressure(sample), 1651)
 })
 
-test('Day 16 — Solutions', t => {
+test('Day 16 — Solutions', () => {
   const input = $.readInput(import.meta)
 
-  t.is(releasePressure(input), 1944)
+  assert.strictEqual(releasePressure(input), 1944)
 })

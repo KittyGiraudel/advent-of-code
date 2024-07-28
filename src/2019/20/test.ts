@@ -1,4 +1,5 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { maze } from './'
 
@@ -70,13 +71,13 @@ RE....#.#                           #......RF
   { trim: false, deindent: false }
 ).slice(1, -1)
 
-test('Day 20 — Sample', t => {
-  t.is(maze(sample), 23)
-  t.is(maze(sampleB, true), 396)
+test('Day 20 — Sample', () => {
+  assert.strictEqual(maze(sample), 23)
+  assert.strictEqual(maze(sampleB, true), 396)
 })
 
-test('Day 20 — Solutions', t => {
+test('Day 20 — Solutions', () => {
   const input = $.readInput(import.meta, { trim: false }).slice(0, -1)
-  t.is(maze(input), 432)
-  t.is(maze(input, true), 5214)
+  assert.strictEqual(maze(input), 432)
+  assert.strictEqual(maze(input, true), 5214)
 })

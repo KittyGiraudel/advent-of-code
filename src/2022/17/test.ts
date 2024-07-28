@@ -1,17 +1,18 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { tetris } from './'
 
-test('Day 17 — Sample', t => {
+test('Day 17 — Sample', () => {
   const sample = '>>><<><>><<<>><>>><<<>>><<<><<<>><>><<>>'
 
-  t.is(tetris(sample), 3068)
+  assert.strictEqual(tetris(sample), 3068)
 })
 
-test('Day 17 — Solutions', t => {
+test('Day 17 — Solutions', () => {
   const [input] = $.readInput(import.meta)
 
-  t.is(tetris(input), 3224)
+  assert.strictEqual(tetris(input), 3224)
   // Part 2 was done manually with a generous explanation found on Reddit.
   // The height after 1 trillion rocks is the height of the tower before the
   // cycle begins + the height done by full cycles + the height done by the

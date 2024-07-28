@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { findStrongestBot } from './'
 
-test('Day 23 — Sample', t => {
+test('Day 23 — Sample', () => {
   const sampleA = $.sample(`
   pos=<0,0,0>, r=4
   pos=<1,0,0>, r=1
@@ -24,13 +25,13 @@ test('Day 23 — Sample', t => {
   pos=<10,10,10>, r=5
   `)
 
-  t.is(findStrongestBot(sampleA)[0], 7)
-  t.is(findStrongestBot(sampleB)[1], 36)
+  assert.strictEqual(findStrongestBot(sampleA)[0], 7)
+  assert.strictEqual(findStrongestBot(sampleB)[1], 36)
 })
 
-test('Day 23 — Solutions', t => {
+test('Day 23 — Solutions', () => {
   const input = $.readInput(import.meta)
 
-  t.is(findStrongestBot(input)[0], 602)
-  t.is(findStrongestBot(input)[1], 110_620_102)
+  assert.strictEqual(findStrongestBot(input)[0], 602)
+  assert.strictEqual(findStrongestBot(input)[1], 110_620_102)
 })

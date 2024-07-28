@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { run, run2 } from './'
 
-test('Day 21 — Sample', t => {
+test('Day 21 — Sample', () => {
   const sample = $.sample(`
   swap position 4 with position 0
   swap letter d with letter b
@@ -14,12 +15,12 @@ test('Day 21 — Sample', t => {
   rotate based on position of letter d
   `)
 
-  t.is(run(sample, 'abcde'), 'decab')
+  assert.strictEqual(run(sample, 'abcde'), 'decab')
 })
 
-test('Day 21 — Solutions', t => {
+test('Day 21 — Solutions', () => {
   const input = $.readInput(import.meta)
 
-  t.is(run(input, 'abcdefgh'), 'gfdhebac')
-  t.is(run2(input), 'dhaegfbc')
+  assert.strictEqual(run(input, 'abcdefgh'), 'gfdhebac')
+  assert.strictEqual(run2(input), 'dhaegfbc')
 })

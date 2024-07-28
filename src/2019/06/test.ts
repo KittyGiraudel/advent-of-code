@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { countOrbits, countTransfers, createGraph } from './'
 
-test('Day 06 — Sample', t => {
+test('Day 06 — Sample', () => {
   const sampleA = $.sample(`
   COM)B
   B)C
@@ -33,13 +34,13 @@ test('Day 06 — Sample', t => {
   I)SAN
   `)
 
-  t.is(countOrbits(createGraph(sampleA)), 42)
-  t.is(countTransfers(createGraph(sampleB)), 4)
+  assert.strictEqual(countOrbits(createGraph(sampleA)), 42)
+  assert.strictEqual(countTransfers(createGraph(sampleB)), 4)
 })
 
-test('Day 06 — Solutions', t => {
+test('Day 06 — Solutions', () => {
   const input = $.readInput(import.meta)
 
-  t.is(countOrbits(createGraph(input)), 292_387)
-  t.is(countTransfers(createGraph(input)), 433)
+  assert.strictEqual(countOrbits(createGraph(input)), 292_387)
+  assert.strictEqual(countTransfers(createGraph(input)), 433)
 })

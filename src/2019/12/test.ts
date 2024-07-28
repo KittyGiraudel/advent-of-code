@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { findRepeat, steps } from './'
 
-test('Day 12 — Sample', t => {
+test('Day 12 — Sample', () => {
   const sampleA = $.sample(`
   <x=-8, y=-10, z=0>
   <x=5, y=5, z=10>
@@ -17,14 +18,14 @@ test('Day 12 — Sample', t => {
   <x=3, y=5, z=-1>
   `)
 
-  t.is(steps(sampleA, 100), 1940)
-  t.is(findRepeat(sampleB), 2772)
-  t.is(findRepeat(sampleA), 4_686_774_924)
+  assert.strictEqual(steps(sampleA, 100), 1940)
+  assert.strictEqual(findRepeat(sampleB), 2772)
+  assert.strictEqual(findRepeat(sampleA), 4_686_774_924)
 })
 
-test('Day 12 — Solutions', t => {
+test('Day 12 — Solutions', () => {
   const input = $.readInput(import.meta)
 
-  t.is(steps(input, 1000), 6849)
-  t.is(findRepeat(input), 356_658_899_375_688)
+  assert.strictEqual(steps(input, 1000), 6849)
+  assert.strictEqual(findRepeat(input), 356_658_899_375_688)
 })

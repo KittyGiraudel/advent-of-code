@@ -1,17 +1,18 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { decode, encode } from './'
 
-test('Day 08 — Sample', t => {
+test('Day 08 — Sample', () => {
   const sample = $.readInput(import.meta, { name: 'sample.txt' })
 
-  t.is(decode(sample), 12)
-  t.is(encode(sample), 19)
+  assert.strictEqual(decode(sample), 12)
+  assert.strictEqual(encode(sample), 19)
 })
 
-test('Day 08 — Solutions', t => {
+test('Day 08 — Solutions', () => {
   const input = $.readInput(import.meta)
 
-  t.is(decode(input), 1350)
-  t.is(encode(input), 2085)
+  assert.strictEqual(decode(input), 1350)
+  assert.strictEqual(encode(input), 2085)
 })

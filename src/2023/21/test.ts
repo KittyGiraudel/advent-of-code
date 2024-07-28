@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { run } from './'
 
-test.skip('Day 21 — Sample', t => {
+test('Day 21 — Sample', { skip: true }, () => {
   const sample = $.sample(
     `
     ...........
@@ -19,21 +20,21 @@ test.skip('Day 21 — Sample', t => {
     `
   )
 
-  t.is(run(sample), 42)
+  assert.strictEqual(run(sample), 42)
 })
 
-test('Day 21 — Solutions', t => {
+test('Day 21 — Solutions', () => {
   const input = $.readInput(import.meta)
   const result = run(input, true)
-  t.is(run(input), 3658)
-  // t.is(run(input, true), 608_193_767_979_991) // Actual answer, but doesn’t
+  assert.strictEqual(run(input), 3658)
+  // assert.strictEqual(run(input, true), 608_193_767_979_991) // Actual answer, but doesn’t
   // work for some reason :(
   // Too high
-  t.not(result, 624686496796191)
+  assert.notEqual(result, 624686496796191)
   // Too low
-  t.not(result, 591700984542658)
-  t.not(result, 608193713358858)
+  assert.notEqual(result, 591700984542658)
+  assert.notEqual(result, 608193713358858)
   // Unknown
-  t.not(result, 624680320982867)
-  t.not(result, 681525230170553)
+  assert.notEqual(result, 624680320982867)
+  assert.notEqual(result, 681525230170553)
 })

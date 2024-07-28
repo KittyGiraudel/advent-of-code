@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { run } from './'
 
-test('Day 25 — Sample', t => {
+test('Day 25 — Sample', () => {
   const sample = $.sample(
     `
     jqt: rhn xhk nvd
@@ -20,14 +21,14 @@ test('Day 25 — Sample', t => {
     frs: qnr lhk lsr
     `
   )
-  t.is(run(sample), 54)
+  assert.strictEqual(run(sample), 54)
 })
 
-test.skip('Day 25 — Solutions', t => {
+test.skip('Day 25 — Solutions', () => {
   const input = $.readInput(import.meta)
   // Taken from a short Python implementation on Reddit. The resolution time is
   // very random though as it repeatedly pick a pair at random; if it picks the
   // right now to begin with, it could be fast. Or not.
   // See: https://www.reddit.com/r/adventofcode/comments/18qbsxs/comment/ketzp94
-  t.is(run(input), 614_655)
+  assert.strictEqual(run(input), 614_655)
 })

@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { calibrate, getGrid, scaffold } from './'
 
-test('Day 17 — Sample', t => {
+test('Day 17 — Sample', () => {
   const sample = $.sample(
     `
   ..#..........
@@ -15,12 +16,12 @@ test('Day 17 — Sample', t => {
   `
   )
 
-  t.is(calibrate($.Grid.fromRows(sample)), 76)
+  assert.strictEqual(calibrate($.Grid.fromRows(sample)), 76)
 })
 
-test('Day 17 — Solutions', t => {
+test('Day 17 — Solutions', () => {
   const [input] = $.readInput(import.meta)
 
-  t.is(calibrate(getGrid(input)), 4864)
-  t.is(scaffold(input), 840_248)
+  assert.strictEqual(calibrate(getGrid(input)), 4864)
+  assert.strictEqual(scaffold(input), 840_248)
 })

@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { countVisibleTrees, getHighestScenicScore } from './'
 
-test('Day 08 — Sample', t => {
+test('Day 08 — Sample', () => {
   const sample = $.sample(`
   30373
   25512
@@ -11,13 +12,13 @@ test('Day 08 — Sample', t => {
   35390
   `)
 
-  t.is(countVisibleTrees(sample), 21)
-  t.is(getHighestScenicScore(sample), 8)
+  assert.strictEqual(countVisibleTrees(sample), 21)
+  assert.strictEqual(getHighestScenicScore(sample), 8)
 })
 
-test('Day 08 — Solutions', t => {
+test('Day 08 — Solutions', () => {
   const input = $.readInput(import.meta)
 
-  t.is(countVisibleTrees(input), 1827)
-  t.is(getHighestScenicScore(input), 335_580)
+  assert.strictEqual(countVisibleTrees(input), 1827)
+  assert.strictEqual(getHighestScenicScore(input), 335_580)
 })

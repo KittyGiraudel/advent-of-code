@@ -56,7 +56,6 @@ export const run = (input: string[], part2 = false) => {
   const C = a
   const n = Math.ceil(steps / grid.width)
   const result = A * n ** 2 + B * n + C
-  console.log('Count', result)
 
   // console.log('Part 2 (ceil)', f(Math.ceil(steps / grid.width)))
   // console.log('Part 2 (floor)', f(Math.floor(steps / grid.width)))

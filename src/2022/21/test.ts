@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { getHumnNumber, getHumnNumberByBruteForce, getRootNumber } from './'
 
-test('Day 21 — Sample', t => {
+test('Day 21 — Sample', () => {
   const sample = $.sample(`
   root: pppw + sjmn
   dbpl: 5
@@ -21,14 +22,14 @@ test('Day 21 — Sample', t => {
   hmdt: 32
   `)
 
-  t.is(getRootNumber(sample), 152)
-  t.is(getHumnNumber(sample), 301)
-  t.is(getHumnNumberByBruteForce(sample), 301)
+  assert.strictEqual(getRootNumber(sample), 152)
+  assert.strictEqual(getHumnNumber(sample), 301)
+  assert.strictEqual(getHumnNumberByBruteForce(sample), 301)
 })
 
-test('Day 21 — Solutions', t => {
+test('Day 21 — Solutions', () => {
   const input = $.readInput(import.meta)
 
-  t.is(getRootNumber(input), 82_225_382_988_628)
-  t.is(getHumnNumber(input), 3_429_411_069_028)
+  assert.strictEqual(getRootNumber(input), 82_225_382_988_628)
+  assert.strictEqual(getHumnNumber(input), 3_429_411_069_028)
 })

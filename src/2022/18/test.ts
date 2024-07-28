@@ -1,9 +1,10 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import type { TriPoint } from '../../types'
 import { getSurfaceArea } from './'
 
-test('Day 18 — Sample', t => {
+test('Day 18 — Sample', () => {
   const sample = $.sample(`
   2,2,2
   1,2,2
@@ -20,13 +21,13 @@ test('Day 18 — Sample', t => {
   2,3,5
   `) as TriPoint[]
 
-  t.is(getSurfaceArea(sample), 64)
-  t.is(getSurfaceArea(sample, true), 58)
+  assert.strictEqual(getSurfaceArea(sample), 64)
+  assert.strictEqual(getSurfaceArea(sample, true), 58)
 })
 
-test('Day 18 — Solutions', t => {
+test('Day 18 — Solutions', () => {
   const input = $.readInput(import.meta) as TriPoint[]
 
-  t.is(getSurfaceArea(input), 3412)
-  t.is(getSurfaceArea(input, true), 2018)
+  assert.strictEqual(getSurfaceArea(input), 3412)
+  assert.strictEqual(getSurfaceArea(input, true), 2018)
 })

@@ -1,5 +1,5 @@
-import test from 'ava'
+import test from 'node:test'
 
-test.skip('Day 19 — Sample', t => {})
+test.skip('Day 19 — Sample', () => {})
 
-test.skip('Day 19 — Solutions', t => {})
+test.skip('Day 19 — Solutions', () => {})

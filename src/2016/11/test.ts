@@ -1,12 +1,13 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import { type Floors, run } from './'
 
-test('Day 11 — Sample', t => {
+test('Day 11 — Sample', () => {
   const sample: Floors = [['HM', 'LM'], ['HG'], ['LG'], []]
-  t.is(run(sample), 11)
+  assert.strictEqual(run(sample), 11)
 })
 
-test('Day 11 — Solutions', t => {
+test('Day 11 — Solutions', () => {
   const floorsA: Floors = [
     ['PM', 'PG', 'SM', 'SG'],
     ['CM', 'CG', 'RM', 'RG', 'TG'],
@@ -19,6 +20,6 @@ test('Day 11 — Solutions', t => {
     ['TM'],
     [],
   ]
-  t.is(run(floorsA), 37)
-  t.is(run(floorsB), 61)
+  assert.strictEqual(run(floorsA), 37)
+  assert.strictEqual(run(floorsB), 61)
 })

@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { battle, cheat } from './'
 
-test('Day 15 — Sample', t => {
+test('Day 15 — Sample', () => {
   const sampleA = $.sample(`
   #######
   #.G...#
@@ -65,21 +66,21 @@ test('Day 15 — Sample', t => {
   #######
   `)
 
-  t.is(battle(sampleA), 27_730)
-  t.is(battle(sampleD), 28_944)
-  t.is(battle(sampleE), 18_740)
-  t.is(battle(sampleB), 36_334)
-  t.is(battle(sampleC), 39_514)
-  t.is(cheat(sampleA), 4988)
-  t.is(cheat(sampleC), 31_284)
-  t.is(cheat(sampleF), 3478)
-  t.is(cheat(sampleD), 6474)
-  t.is(cheat(sampleE), 1140)
+  assert.strictEqual(battle(sampleA), 27_730)
+  assert.strictEqual(battle(sampleD), 28_944)
+  assert.strictEqual(battle(sampleE), 18_740)
+  assert.strictEqual(battle(sampleB), 36_334)
+  assert.strictEqual(battle(sampleC), 39_514)
+  assert.strictEqual(cheat(sampleA), 4988)
+  assert.strictEqual(cheat(sampleC), 31_284)
+  assert.strictEqual(cheat(sampleF), 3478)
+  assert.strictEqual(cheat(sampleD), 6474)
+  assert.strictEqual(cheat(sampleE), 1140)
 })
 
-test('Day 15 — Solutions', t => {
+test('Day 15 — Solutions', () => {
   const input = $.readInput(import.meta)
 
-  t.is(battle(input), 181_522)
-  t.is(cheat(input), 68_324)
+  assert.strictEqual(battle(input), 181_522)
+  assert.strictEqual(cheat(input), 68_324)
 })

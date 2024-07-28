@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { run } from './'
 
-test('Day 24 — Sample', async t => {
+test('Day 24 — Sample', { skip: true }, async () => {
   const sample = $.sample(
     `
     19, 13, 30 @ -2,  1, -2
@@ -12,12 +13,11 @@ test('Day 24 — Sample', async t => {
     20, 19, 15 @  1, -5, -3
     `
   )
-  t.is(await run(sample), 15107)
+  assert.strictEqual(await run(sample), 15107)
 })
 
-// biome-ignore lint/suspicious/noFocusedTests: on purpose
-test.only('Day 24 — Solutions', async t => {
+test('Day 24 — Solutions', async () => {
   const input = $.readInput(import.meta)
-  t.is(await run(input), 15107)
-  // t.is(await run(input, true), 856642398547748)
+  assert.strictEqual(await run(input), 15107)
+  // assert.strictEqual(await run(input, true), 856642398547748)
 })

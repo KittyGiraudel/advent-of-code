@@ -1,4 +1,5 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import { count } from '.'
 import $ from '../../helpers'
 
@@ -7,7 +8,7 @@ const PATCH = {
   '11: 42 31': '11: 42 31 | 42 11 31',
 }
 
-test('Day 19 — Sample', t => {
+test('Day 19 — Sample', () => {
   const sample = $.sample(
     `
   0: 4 1 5
@@ -25,7 +26,7 @@ test('Day 19 — Sample', t => {
   `,
     { delimiter: '\n\n' }
   )
-  t.is(count(sample[0], sample[1]), 2)
+  assert.strictEqual(count(sample[0], sample[1]), 2)
 
   const sample2 = $.sample(
     `
@@ -96,13 +97,13 @@ test('Day 19 — Sample', t => {
   `,
     { delimiter: '\n\n' }
   )
-  t.is(count(sample2[0], sample2[1], PATCH), 12)
-  t.is(count(sample3[0], sample3[1], PATCH), 1)
+  assert.strictEqual(count(sample2[0], sample2[1], PATCH), 12)
+  assert.strictEqual(count(sample3[0], sample3[1], PATCH), 1)
 })
 
-test('Day 19 — Solutions', t => {
+test('Day 19 — Solutions', () => {
   const [rules, messages] = $.readInput(import.meta, { delimiter: '\n\n' })
 
-  t.is(count(rules, messages), 241)
-  t.is(count(rules, messages, PATCH), 424)
+  assert.strictEqual(count(rules, messages), 241)
+  assert.strictEqual(count(rules, messages, PATCH), 424)
 })

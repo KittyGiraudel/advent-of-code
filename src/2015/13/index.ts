@@ -36,5 +36,5 @@ export const run = (input: string[], withOneself = false) => {
   const arrangements = $.permutations(keys)
   const getScore = getArrangementScore(graph)
 
-  return Math.max(...arrangements.map(getScore))
+  return $.max(arrangements.map(getScore))
 }

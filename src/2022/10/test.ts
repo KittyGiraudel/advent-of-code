@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { Computer } from './'
 
-test('Day 10 — Sample', t => {
+test('Day 10 — Sample', () => {
   const sample = $.sample(`
   addx 15
   addx -11
@@ -153,8 +154,8 @@ test('Day 10 — Sample', t => {
   `)
   const program = new Computer(sample)
 
-  t.is(program.strength, 13_140)
-  t.is(
+  assert.strictEqual(program.strength, 13_140)
+  assert.strictEqual(
     program.print(),
     $.sample(
       `
@@ -169,12 +170,12 @@ test('Day 10 — Sample', t => {
   )
 })
 
-test('Day 10 — Solutions', t => {
+test('Day 10 — Solutions', () => {
   const input = $.readInput(import.meta)
   const program = new Computer(input)
 
-  t.is(program.strength, 15_880)
-  t.is(
+  assert.strictEqual(program.strength, 15_880)
+  assert.strictEqual(
     program.print(),
     $.sample(
       `

@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { run } from './'
 
-test('Day 18 — Sample', t => {
+test('Day 18 — Sample', () => {
   const sample = $.sample(`.#.#...|#.
   .....#|##|
   .|..|...#.
@@ -15,13 +16,13 @@ test('Day 18 — Sample', t => {
   ...#.|..|.
   `)
 
-  t.is(run(sample, 10), 1147)
+  assert.strictEqual(run(sample, 10), 1147)
 })
 
-test('Day 18 — Solutions', t => {
+test('Day 18 — Solutions', () => {
   const input = $.readInput(import.meta)
 
-  t.is(run(input, 10), 394_420)
+  assert.strictEqual(run(input, 10), 394_420)
 
   // Part 2 — which requires iterating 1 billion times — was initially solved
   // manually, then reverse-engineered to come up with the automated solution.
@@ -30,7 +31,7 @@ test('Day 18 — Solutions', t => {
   // logged the amount of each type of items at every cycle. Then, I searched
   // for duplicated lines within the set and noticed that almost half (~450)
   // were duplicated. That means we’re eventually (and quite quickly) hitting a
-  // loop. This is the way to stop iterating early.
+  // loop. assert.strictEqual is the way to stop iterating early.
   //
   // To find that loop, I dumped all 1,000 lines in VSC and looked for a
   // repeated sequence, which I found out start on line 522, and repeats every
@@ -44,5 +45,5 @@ test('Day 18 — Solutions', t => {
   // It turns out that a) the sequence doesn’t start on line 522 but 518 and b)
   // the sequence is not 27 items long but 28, so it’s kind of a miracle I found
   // the solution manually. ^^'
-  t.is(run(input, 1_000_000_000), 174_420)
+  assert.strictEqual(run(input, 1_000_000_000), 174_420)
 })

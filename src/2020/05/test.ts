@@ -1,21 +1,22 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { findOwnSeat, getSeatCoords, getSeatId } from './'
 
-test('Day 05 — Sample', t => {
-  t.deepEqual(getSeatCoords('FBFBBFFRLR'), [44, 5])
-  t.is(getSeatId('FBFBBFFRLR'), 357)
-  t.deepEqual(getSeatCoords('BFFFBBFRRR'), [70, 7])
-  t.is(getSeatId('BFFFBBFRRR'), 567)
-  t.deepEqual(getSeatCoords('FFFBBBFRRR'), [14, 7])
-  t.is(getSeatId('FFFBBBFRRR'), 119)
-  t.deepEqual(getSeatCoords('BBFFBBFRLL'), [102, 4])
-  t.is(getSeatId('BBFFBBFRLL'), 820)
+test('Day 05 — Sample', () => {
+  assert.deepStrictEqual(getSeatCoords('FBFBBFFRLR'), [44, 5])
+  assert.strictEqual(getSeatId('FBFBBFFRLR'), 357)
+  assert.deepStrictEqual(getSeatCoords('BFFFBBFRRR'), [70, 7])
+  assert.strictEqual(getSeatId('BFFFBBFRRR'), 567)
+  assert.deepStrictEqual(getSeatCoords('FFFBBBFRRR'), [14, 7])
+  assert.strictEqual(getSeatId('FFFBBBFRRR'), 119)
+  assert.deepStrictEqual(getSeatCoords('BBFFBBFRLL'), [102, 4])
+  assert.strictEqual(getSeatId('BBFFBBFRLL'), 820)
 })
 
-test('Day 05 — Solutions', t => {
+test('Day 05 — Solutions', () => {
   const input = $.readInput(import.meta)
 
-  t.is(Math.max(...input.map(getSeatId)), 855)
-  t.is(findOwnSeat(input), 552)
+  assert.strictEqual(Math.max(...input.map(getSeatId)), 855)
+  assert.strictEqual(findOwnSeat(input), 552)
 })

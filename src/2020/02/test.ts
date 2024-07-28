@@ -1,19 +1,20 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { isValidLoose, isValidStrict } from './'
 
-test('Day 02 — Sample', t => {
-  t.is(isValidLoose('1-3 a: abcde'), true)
-  t.is(isValidLoose('1-3 b: cdefg'), false)
-  t.is(isValidLoose('2-9 c: ccccccccc'), true)
-  t.is(isValidStrict('1-3 a: abcde'), true)
-  t.is(isValidStrict('1-3 b: cdefg'), false)
-  t.is(isValidStrict('2-9 c: ccccccccc'), false)
+test('Day 02 — Sample', () => {
+  assert.strictEqual(isValidLoose('1-3 a: abcde'), true)
+  assert.strictEqual(isValidLoose('1-3 b: cdefg'), false)
+  assert.strictEqual(isValidLoose('2-9 c: ccccccccc'), true)
+  assert.strictEqual(isValidStrict('1-3 a: abcde'), true)
+  assert.strictEqual(isValidStrict('1-3 b: cdefg'), false)
+  assert.strictEqual(isValidStrict('2-9 c: ccccccccc'), false)
 })
 
-test('Day 02 — Solutions', t => {
+test('Day 02 — Solutions', () => {
   const input = $.readInput(import.meta)
 
-  t.is(input.filter(isValidLoose).length, 500)
-  t.is(input.filter(isValidStrict).length, 313)
+  assert.strictEqual(input.filter(isValidLoose).length, 500)
+  assert.strictEqual(input.filter(isValidStrict).length, 313)
 })

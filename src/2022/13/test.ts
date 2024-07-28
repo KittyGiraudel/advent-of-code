@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { compare, getScore, sort } from './'
 
-test('Day 13 — Sample', t => {
+test('Day 13 — Sample', () => {
   const sample = $.sample(
     `
     [1,1,3,1,1]
@@ -32,27 +33,27 @@ test('Day 13 — Sample', t => {
     { delimiter: '\n\n' }
   )
 
-  t.is(compare([1, 1, 3, 1, 1], [1, 1, 5, 1, 1]), true)
-  t.is(compare([[1], [2, 3, 4]], [[1], 4]), true)
-  t.is(compare([9], [[8, 7, 6]]), false)
-  t.is(compare([[4, 4], 4, 4], [[4, 4], 4, 4, 4]), true)
-  t.is(compare([7, 7, 7, 7], [7, 7, 7]), false)
-  t.is(compare([], [3]), true)
-  t.is(compare([[[]]], [[]]), false)
-  t.is(
+  assert.strictEqual(compare([1, 1, 3, 1, 1], [1, 1, 5, 1, 1]), true)
+  assert.strictEqual(compare([[1], [2, 3, 4]], [[1], 4]), true)
+  assert.strictEqual(compare([9], [[8, 7, 6]]), false)
+  assert.strictEqual(compare([[4, 4], 4, 4], [[4, 4], 4, 4, 4]), true)
+  assert.strictEqual(compare([7, 7, 7, 7], [7, 7, 7]), false)
+  assert.strictEqual(compare([], [3]), true)
+  assert.strictEqual(compare([[[]]], [[]]), false)
+  assert.strictEqual(
     compare(
       [1, [2, [3, [4, [5, 6, 7]]]], 8, 9],
       [1, [2, [3, [4, [5, 6, 0]]]], 8, 9]
     ),
     false
   )
-  t.is(getScore(sample), 13)
-  t.is(sort(sample), 140)
+  assert.strictEqual(getScore(sample), 13)
+  assert.strictEqual(sort(sample), 140)
 })
 
-test('Day 13 — Solutions', t => {
+test('Day 13 — Solutions', () => {
   const input = $.readInput(import.meta, { delimiter: '\n\n' })
 
-  t.is(getScore(input), 5252)
-  t.is(sort(input), 20_592)
+  assert.strictEqual(getScore(input), 5252)
+  assert.strictEqual(sort(input), 20_592)
 })

@@ -1,10 +1,11 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { getDistanceToOxygen, getOxygenDuration } from './'
 
-test('Day 15 — Solutions', t => {
+test('Day 15 — Solutions', () => {
   const [input] = $.readInput(import.meta)
 
-  t.is(getDistanceToOxygen(input), 220)
-  t.is(getOxygenDuration(input), 334)
+  assert.strictEqual(getDistanceToOxygen(input), 220)
+  assert.strictEqual(getOxygenDuration(input), 334)
 })

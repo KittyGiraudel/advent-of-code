@@ -1,4 +1,5 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import {
   getVisibleSeats,
@@ -8,7 +9,7 @@ import {
   waitAndCountOccupiedSeats,
 } from './'
 
-test('Day 11 — Sample', t => {
+test('Day 11 — Sample', () => {
   const GEN_1 = $.sample(`
   L.LL.LL.LL
   LLLLLLL.LL
@@ -87,38 +88,38 @@ test('Day 11 — Sample', t => {
   #.#L#L#.##
   `)
 
-  t.deepEqual(
+  assert.deepStrictEqual(
     processLayout($.Grid.fromRows(GEN_1), processSeatLoose).rows.map(row =>
       row.join('')
     ),
     GEN_2
   )
-  t.deepEqual(
+  assert.deepStrictEqual(
     processLayout($.Grid.fromRows(GEN_2), processSeatLoose).rows.map(row =>
       row.join('')
     ),
     GEN_3
   )
-  t.deepEqual(
+  assert.deepStrictEqual(
     processLayout($.Grid.fromRows(GEN_3), processSeatLoose).rows.map(row =>
       row.join('')
     ),
     GEN_4
   )
-  t.deepEqual(
+  assert.deepStrictEqual(
     processLayout($.Grid.fromRows(GEN_4), processSeatLoose).rows.map(row =>
       row.join('')
     ),
     GEN_5
   )
-  t.deepEqual(
+  assert.deepStrictEqual(
     processLayout($.Grid.fromRows(GEN_5), processSeatLoose).rows.map(row =>
       row.join('')
     ),
     GEN_6
   )
-  t.is(waitAndCountOccupiedSeats(GEN_1, processSeatLoose), 37)
-  t.is(
+  assert.strictEqual(waitAndCountOccupiedSeats(GEN_1, processSeatLoose), 37)
+  assert.strictEqual(
     getVisibleSeats(
       $.Grid.fromRows(
         $.sample(`
@@ -131,7 +132,7 @@ test('Day 11 — Sample', t => {
     ).filter(s => s === 'L').length,
     1
   )
-  t.is(
+  assert.strictEqual(
     getVisibleSeats(
       $.Grid.fromRows(
         $.sample(`
@@ -150,7 +151,7 @@ test('Day 11 — Sample', t => {
     ).filter(s => s === '#').length,
     8
   )
-  t.is(
+  assert.strictEqual(
     getVisibleSeats(
       $.Grid.fromRows(
         $.sample(`
@@ -169,9 +170,9 @@ test('Day 11 — Sample', t => {
   )
 })
 
-test('Day 11 — Solutions', t => {
+test('Day 11 — Solutions', () => {
   const input = $.readInput(import.meta)
 
-  t.is(waitAndCountOccupiedSeats(input, processSeatLoose), 2261)
-  t.is(waitAndCountOccupiedSeats(input, processSeatStrict), 2039)
+  assert.strictEqual(waitAndCountOccupiedSeats(input, processSeatLoose), 2261)
+  assert.strictEqual(waitAndCountOccupiedSeats(input, processSeatStrict), 2039)
 })

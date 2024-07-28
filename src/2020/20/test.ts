@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import { run } from '.'
 import $ from '../../helpers'
 
-test('Day 20 — Sample', t => {
+test('Day 20 — Sample', () => {
   const example = $.sample(
     `
   Tile 2311:
@@ -116,11 +117,11 @@ test('Day 20 — Sample', t => {
     { delimiter: '\n\n' }
   )
 
-  t.deepEqual(run(example), [20_899_048_083_289, 273])
+  assert.deepStrictEqual(run(example), [20_899_048_083_289, 273])
 })
 
-test('Day 20 — Solutions', t => {
+test('Day 20 — Solutions', () => {
   const input = $.readInput(import.meta, { delimiter: '\n\n' })
 
-  t.deepEqual(run(input), [8_272_903_687_921, 2304])
+  assert.deepStrictEqual(run(input), [8_272_903_687_921, 2304])
 })

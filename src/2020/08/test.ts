@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { runMonkeyPatchedProgram, runProgram } from './'
 
-test('Day 08 — Sample', t => {
+test('Day 08 — Sample', () => {
   const buggyInput = $.sample(`
   nop +0
   acc +1
@@ -28,28 +29,28 @@ test('Day 08 — Sample', t => {
   `)
 
   const output = runProgram(buggyInput)
-  t.is(output.accumulator, 5)
-  t.is(output.exit, 1)
+  assert.strictEqual(output.accumulator, 5)
+  assert.strictEqual(output.exit, 1)
 
   const output2 = runProgram(fixedInput)
-  t.is(output2.accumulator, 8)
-  t.is(output2.exit, 0)
+  assert.strictEqual(output2.accumulator, 8)
+  assert.strictEqual(output2.exit, 0)
 
   const fixedOutput = runMonkeyPatchedProgram(buggyInput)
-  t.is(fixedOutput.accumulator, 8)
-  t.is(fixedOutput.exit, 0)
+  assert.strictEqual(fixedOutput.accumulator, 8)
+  assert.strictEqual(fixedOutput.exit, 0)
 
-  t.deepEqual(output2, fixedOutput)
+  assert.deepStrictEqual(output2, fixedOutput)
 })
 
-test('Day 08 — Solutions', t => {
+test('Day 08 — Solutions', () => {
   const input = $.readInput(import.meta)
 
   const output = runProgram(input)
-  t.is(output.accumulator, 1723)
-  t.is(output.exit, 1)
+  assert.strictEqual(output.accumulator, 1723)
+  assert.strictEqual(output.exit, 1)
 
   const fixedOutput = runMonkeyPatchedProgram(input)
-  t.is(fixedOutput.accumulator, 846)
-  t.is(fixedOutput.exit, 0)
+  assert.strictEqual(fixedOutput.accumulator, 846)
+  assert.strictEqual(fixedOutput.exit, 0)
 })

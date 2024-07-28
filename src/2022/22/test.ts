@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { maze, rotate } from './'
 
-test('Day 22 — Sample', t => {
+test('Day 22 — Sample', () => {
   const [sample] = $.sample(
     `
             ...#
@@ -23,23 +24,23 @@ test('Day 22 — Sample', t => {
     { delimiter: '', trim: false }
   )
 
-  t.is(rotate('>', 'L'), '^')
-  t.is(rotate('^', 'L'), '<')
-  t.is(rotate('<', 'L'), 'v')
-  t.is(rotate('v', 'L'), '>')
-  t.is(rotate('>', 'R'), 'v')
-  t.is(rotate('v', 'R'), '<')
-  t.is(rotate('<', 'R'), '^')
-  t.is(rotate('^', 'R'), '>')
-  t.is(maze(sample), 6032)
+  assert.strictEqual(rotate('>', 'L'), '^')
+  assert.strictEqual(rotate('^', 'L'), '<')
+  assert.strictEqual(rotate('<', 'L'), 'v')
+  assert.strictEqual(rotate('v', 'L'), '>')
+  assert.strictEqual(rotate('>', 'R'), 'v')
+  assert.strictEqual(rotate('v', 'R'), '<')
+  assert.strictEqual(rotate('<', 'R'), '^')
+  assert.strictEqual(rotate('^', 'R'), '>')
+  assert.strictEqual(maze(sample), 6032)
 })
 
-test('Day 22 — Solutions', t => {
+test('Day 22 — Solutions', () => {
   const [input] = $.readInput(import.meta, {
     delimiter: '',
     trim: false,
   })
 
-  t.is(maze(input), 191_010)
-  t.is(maze(input, true), 55_364)
+  assert.strictEqual(maze(input), 191_010)
+  assert.strictEqual(maze(input, true), 55_364)
 })

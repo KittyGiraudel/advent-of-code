@@ -1,7 +1,8 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import { run } from './'
 
-test('Day 22 — Solutions', t => {
-  t.is(run(false), 900)
-  t.is(run(true), 1216)
+test('Day 22 — Solutions', () => {
+  assert.strictEqual(run(false), 900)
+  assert.strictEqual(run(true), 1216)
 })

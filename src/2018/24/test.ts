@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { battle, cheat } from './'
 
-test('Day 24 — Sample', t => {
+test('Day 24 — Sample', () => {
   const sample = $.sample(
     `
   Immune System:
@@ -16,13 +17,13 @@ test('Day 24 — Sample', t => {
     { delimiter: '\n\n' }
   )
 
-  t.is(battle(sample), 5216)
-  t.is(cheat(sample), 51)
+  assert.strictEqual(battle(sample), 5216)
+  assert.strictEqual(cheat(sample), 51)
 })
 
-test('Day 24 — Solutions', t => {
+test('Day 24 — Solutions', () => {
   const input = $.readInput(import.meta, { delimiter: '\n\n' })
 
-  t.is(battle(input), 10_890)
-  t.is(cheat(input), 7730)
+  assert.strictEqual(battle(input), 10_890)
+  assert.strictEqual(cheat(input), 7730)
 })

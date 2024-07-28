@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import { countAllergenFreeOccurrences, getCanonicalDangerousList } from '.'
 import $ from '../../helpers'
 
-test('Day 21 — Sample', t => {
+test('Day 21 — Sample', () => {
   const example = $.sample(`
   mxmxvkd kfcds sqjhc nhms (contains dairy, fish)
   trh fvjkl sbzzf mxmxvkd (contains dairy)
@@ -10,15 +11,15 @@ test('Day 21 — Sample', t => {
   sqjhc mxmxvkd sbzzf (contains fish)
   `)
 
-  t.is(countAllergenFreeOccurrences(example), 5)
-  t.is(getCanonicalDangerousList(example), 'mxmxvkd,sqjhc,fvjkl')
+  assert.strictEqual(countAllergenFreeOccurrences(example), 5)
+  assert.strictEqual(getCanonicalDangerousList(example), 'mxmxvkd,sqjhc,fvjkl')
 })
 
-test('Day 21 — Solutions', t => {
+test('Day 21 — Solutions', () => {
   const input = $.readInput(import.meta)
 
-  t.is(countAllergenFreeOccurrences(input), 2280)
-  t.is(
+  assert.strictEqual(countAllergenFreeOccurrences(input), 2280)
+  assert.strictEqual(
     getCanonicalDangerousList(input),
     'vfvvnm,bvgm,rdksxt,xknb,hxntcz,bktzrz,srzqtccv,gbtmdb'
   )

@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { foldAll, foldOnce, parseInput, render } from './'
 
-test('Day 13 — Sample', t => {
+test('Day 13 — Sample', () => {
   const sample = $.sample(
     `
   6,10
@@ -33,17 +34,17 @@ test('Day 13 — Sample', t => {
   const data = parseInput(sample)
   const dotsAfterFirstFold = foldOnce(data.dots, data.folds[0])
   const dotsAfterSecondFold = foldOnce(dotsAfterFirstFold, data.folds[1])
-  t.is(dotsAfterFirstFold.size, 17)
-  t.is(dotsAfterSecondFold.size, 16)
+  assert.strictEqual(dotsAfterFirstFold.size, 17)
+  assert.strictEqual(dotsAfterSecondFold.size, 16)
 })
 
-test('Day 13 — Solutions', t => {
+test('Day 13 — Solutions', () => {
   const input = $.readInput(import.meta, { delimiter: '\n\n' })
   const data = parseInput(input)
   const dotsAfterFirstFold = foldOnce(data.dots, data.folds[0])
 
-  t.is(dotsAfterFirstFold.size, 807)
-  t.is(
+  assert.strictEqual(dotsAfterFirstFold.size, 807)
+  assert.strictEqual(
     '\n' + render(foldAll(input)),
     `
 #           # #     #     #   # # # #     # #     #     #   # # # #       # #

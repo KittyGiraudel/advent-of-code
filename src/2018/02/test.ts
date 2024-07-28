@@ -1,9 +1,10 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { checksum, findId } from './'
 
-test('Day 02 — Sample', t => {
-  t.is(
+test('Day 02 — Sample', () => {
+  assert.strictEqual(
     checksum([
       'abcdef',
       'bababc',
@@ -17,9 +18,9 @@ test('Day 02 — Sample', t => {
   )
 })
 
-test('Day 02 — Solutions', t => {
+test('Day 02 — Solutions', () => {
   const input = $.readInput(import.meta)
 
-  t.is(checksum(input), 6916)
-  t.is(findId(input), 'oeylbtcxjqnzhgyylfapviusr')
+  assert.strictEqual(checksum(input), 6916)
+  assert.strictEqual(findId(input), 'oeylbtcxjqnzhgyylfapviusr')
 })

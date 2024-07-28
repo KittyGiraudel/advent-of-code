@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { calibrate, recompose } from './'
 
-test('Day 19 — Sample', t => {
+test('Day 19 — Sample', () => {
   const sampleA = $.sample(`
   H => HO
   H => OH
@@ -19,13 +20,13 @@ test('Day 19 — Sample', t => {
   HOHOHO
   `)
 
-  t.is(calibrate(sampleA), 4)
-  t.is(calibrate(sampleB), 7)
+  assert.strictEqual(calibrate(sampleA), 4)
+  assert.strictEqual(calibrate(sampleB), 7)
 })
 
-test('Day 19 — Solutions', t => {
+test('Day 19 — Solutions', () => {
   const input = $.readInput(import.meta)
 
-  t.is(calibrate(input), 509)
-  t.is(recompose(input), 195)
+  assert.strictEqual(calibrate(input), 509)
+  assert.strictEqual(recompose(input), 195)
 })

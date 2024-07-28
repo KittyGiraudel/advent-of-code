@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { findPath, findShortestPath } from './'
 
-test('Day 12 — Sample', t => {
+test('Day 12 — Sample', () => {
   const sample = $.sample(`
   Sabqponm
   abcryxxl
@@ -11,13 +12,13 @@ test('Day 12 — Sample', t => {
   abdefghi
   `)
 
-  t.is(findPath(sample), 31)
-  t.is(findShortestPath(sample), 29)
+  assert.strictEqual(findPath(sample), 31)
+  assert.strictEqual(findShortestPath(sample), 29)
 })
 
-test('Day 12 — Solutions', t => {
+test('Day 12 — Solutions', () => {
   const input = $.readInput(import.meta)
 
-  t.is(findPath(input), 484)
-  t.is(findShortestPath(input), 478)
+  assert.strictEqual(findPath(input), 484)
+  assert.strictEqual(findShortestPath(input), 478)
 })

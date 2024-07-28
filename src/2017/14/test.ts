@@ -1,12 +1,13 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import { run } from './'
 
-test('Day 14 — Sample', t => {
-  t.is(run('flqrgnkx'), 8108)
-  t.is(run('flqrgnkx', true), 1242)
+test('Day 14 — Sample', () => {
+  assert.strictEqual(run('flqrgnkx'), 8108)
+  assert.strictEqual(run('flqrgnkx', true), 1242)
 })
 
-test('Day 14 — Solutions', t => {
-  t.is(run('vbqugkhl'), 8148)
-  t.is(run('vbqugkhl', true), 1180)
+test('Day 14 — Solutions', () => {
+  assert.strictEqual(run('vbqugkhl'), 8148)
+  assert.strictEqual(run('vbqugkhl', true), 1180)
 })

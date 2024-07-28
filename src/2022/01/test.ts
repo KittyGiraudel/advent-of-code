@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { findHighestGroup, findHighestGroups } from './'
 
-test('Day 01 — Sample', t => {
+test('Day 01 — Sample', () => {
   const sample = $.sample(
     `
     1000
@@ -23,13 +24,13 @@ test('Day 01 — Sample', t => {
     { delimiter: '\n\n' }
   )
 
-  t.is(findHighestGroup(sample), 24_000)
-  t.is(findHighestGroups(sample, 3), 45_000)
+  assert.strictEqual(findHighestGroup(sample), 24_000)
+  assert.strictEqual(findHighestGroups(sample, 3), 45_000)
 })
 
-test('Day 01 — Solutions', t => {
+test('Day 01 — Solutions', () => {
   const input = $.readInput(import.meta, { delimiter: '\n\n' })
 
-  t.is(findHighestGroup(input), 70_369)
-  t.is(findHighestGroups(input, 3), 203_002)
+  assert.strictEqual(findHighestGroup(input), 70_369)
+  assert.strictEqual(findHighestGroups(input, 3), 203_002)
 })

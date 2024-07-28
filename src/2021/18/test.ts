@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { computeMagnitude, findHighestMagnitude, reduce, sumFish } from './'
 
-test('Day 18 — Sample', t => {
+test('Day 18 — Sample', () => {
   const sampleA = $.sample(`
   [[[0,[4,5]],[0,0]],[[[4,5],[2,6]],[9,5]]]
   [7,[[[3,7],[4,3]],[[6,3],[8,8]]]]
@@ -29,66 +30,69 @@ test('Day 18 — Sample', t => {
   [[[[5,2],5],[8,[3,7]]],[[5,[7,5]],[4,4]]]
   `)
 
-  t.is(reduce('[[[[[9,8],1],2],3],4]'), '[[[[0,9],2],3],4]')
-  t.is(reduce('[7,[6,[5,[4,[3,2]]]]]'), '[7,[6,[5,[7,0]]]]')
-  t.is(
+  assert.strictEqual(reduce('[[[[[9,8],1],2],3],4]'), '[[[[0,9],2],3],4]')
+  assert.strictEqual(reduce('[7,[6,[5,[4,[3,2]]]]]'), '[7,[6,[5,[7,0]]]]')
+  assert.strictEqual(
     reduce('[[[[[4,3],4],4],[7,[[8,4],9]]],[1,1]]'),
     '[[[[0,7],4],[[7,8],[6,0]]],[8,1]]'
   )
-  t.is(reduce('[[6,[5,[4,[3,2]]]],1]'), '[[6,[5,[7,0]]],3]')
-  t.is(
+  assert.strictEqual(reduce('[[6,[5,[4,[3,2]]]],1]'), '[[6,[5,[7,0]]],3]')
+  assert.strictEqual(
     reduce('[[[[[[1,1],[2,2]],[3,3]],[4,4]],[5,5]],[6,6]]'),
     '[[[[5,0],[7,4]],[5,5]],[6,6]]'
   )
-  t.is(
+  assert.strictEqual(
     sumFish(
       '[[[0,[4,5]],[0,0]],[[[4,5],[2,6]],[9,5]]]',
       '[7,[[[3,7],[4,3]],[[6,3],[8,8]]]]'
     ),
     '[[[[4,0],[5,4]],[[7,7],[6,0]]],[[8,[7,7]],[[7,9],[5,0]]]]'
   )
-  t.is(
+  assert.strictEqual(
     sumFish(
       '[[[[4,0],[5,4]],[[7,7],[6,0]]],[[8,[7,7]],[[7,9],[5,0]]]]',
       '[[2,[[0,8],[3,4]]],[[[6,7],1],[7,[1,6]]]]'
     ),
     '[[[[6,7],[6,7]],[[7,7],[0,7]]],[[[8,7],[7,7]],[[8,8],[8,0]]]]'
   )
-  t.is(
+  assert.strictEqual(
     sumFish(
       '[[[[6,7],[6,7]],[[7,7],[0,7]]],[[[8,7],[7,7]],[[8,8],[8,0]]]]',
       '[[[[2,4],7],[6,[0,5]]],[[[6,8],[2,8]],[[2,1],[4,5]]]]'
     ),
     '[[[[7,0],[7,7]],[[7,7],[7,8]]],[[[7,7],[8,8]],[[7,7],[8,7]]]]'
   )
-  t.is(
+  assert.strictEqual(
     sumFish(
       '[[[[7,0],[7,7]],[[7,7],[7,8]]],[[[7,7],[8,8]],[[7,7],[8,7]]]]',
       '[7,[5,[[3,8],[1,4]]]]'
     ),
     '[[[[7,7],[7,8]],[[9,5],[8,7]]],[[[6,8],[0,8]],[[9,9],[9,0]]]]'
   )
-  t.is(
+  assert.strictEqual(
     sumFish(
       '[[[[7,7],[7,8]],[[9,5],[8,7]]],[[[6,8],[0,8]],[[9,9],[9,0]]]]',
       '[[2,[2,2]],[8,[8,1]]]'
     ),
     '[[[[6,6],[6,6]],[[6,0],[6,7]]],[[[7,7],[8,9]],[8,[8,1]]]]'
   )
-  t.is(
+  assert.strictEqual(
     sumFish(...sampleA),
     '[[[[8,7],[7,7]],[[8,6],[7,7]]],[[[0,7],[6,6]],[8,7]]]'
   )
-  t.is(
+  assert.strictEqual(
     sumFish(...sampleB),
     '[[[[6,6],[7,6]],[[7,7],[7,0]]],[[[7,7],[7,7]],[[7,8],[9,9]]]]'
   )
-  t.is(computeMagnitude(JSON.parse('[9,1]')), 29)
-  t.is(computeMagnitude(JSON.parse('[1,9]')), 21)
-  t.is(computeMagnitude(JSON.parse('[[1,2],[[3,4],5]]')), 143)
-  t.is(computeMagnitude(JSON.parse('[[9,1],[1,9]]')), 129)
-  t.is(computeMagnitude(JSON.parse('[[[[0,7],4],[[7,8],[6,0]]],[8,1]]')), 1384)
-  t.is(
+  assert.strictEqual(computeMagnitude(JSON.parse('[9,1]')), 29)
+  assert.strictEqual(computeMagnitude(JSON.parse('[1,9]')), 21)
+  assert.strictEqual(computeMagnitude(JSON.parse('[[1,2],[[3,4],5]]')), 143)
+  assert.strictEqual(computeMagnitude(JSON.parse('[[9,1],[1,9]]')), 129)
+  assert.strictEqual(
+    computeMagnitude(JSON.parse('[[[[0,7],4],[[7,8],[6,0]]],[8,1]]')),
+    1384
+  )
+  assert.strictEqual(
     computeMagnitude(
       JSON.parse(
         '[[[[6,6],[7,6]],[[7,7],[7,0]]],[[[7,7],[7,7]],[[7,8],[9,9]]]]'
@@ -98,10 +102,10 @@ test('Day 18 — Sample', t => {
   )
 })
 
-test('Day 18 — Solutions', t => {
+test('Day 18 — Solutions', () => {
   const input = $.readInput(import.meta)
   const final = sumFish(...input)
-  t.is(computeMagnitude(JSON.parse(final)), 3793)
+  assert.strictEqual(computeMagnitude(JSON.parse(final)), 3793)
 
-  t.is(findHighestMagnitude(...input), 4695)
+  assert.strictEqual(findHighestMagnitude(...input), 4695)
 })

@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { getDistancesAbove, getLongestDistance } from './'
 
-test('Day 20 — Sample', t => {
+test('Day 20 — Sample', () => {
   const SAMPLES = [
     '^WNE$',
     '^ENWWW(NEEE|SSE(EE|N))$',
@@ -12,19 +13,19 @@ test('Day 20 — Sample', t => {
     '^(E|SSEENNW)S$',
   ]
 
-  t.is(getLongestDistance(SAMPLES[0]), 3)
-  t.is(getLongestDistance(SAMPLES[1]), 10)
-  t.is(getLongestDistance(SAMPLES[2]), 18)
-  t.is(getLongestDistance(SAMPLES[3]), 23)
-  t.is(getLongestDistance(SAMPLES[4]), 31)
+  assert.strictEqual(getLongestDistance(SAMPLES[0]), 3)
+  assert.strictEqual(getLongestDistance(SAMPLES[1]), 10)
+  assert.strictEqual(getLongestDistance(SAMPLES[2]), 18)
+  assert.strictEqual(getLongestDistance(SAMPLES[3]), 23)
+  assert.strictEqual(getLongestDistance(SAMPLES[4]), 31)
   // Interestingly enough, both my own messy implementation and the clean one
-  // found on Reddit fail on this example.
-  // t.is(getLongestDistance(SAMPLES[5]), 4)
+  // found on Reddit fail on assert.strictEqual example.
+  // assert.strictEqual(getLongestDistance(SAMPLES[5]), 4)
 })
 
-test('Day 20 — Solutions', t => {
+test('Day 20 — Solutions', () => {
   const [input] = $.readInput(import.meta)
 
-  t.is(getLongestDistance(input), 3806)
-  t.is(getDistancesAbove(input, 1000), 8354)
+  assert.strictEqual(getLongestDistance(input), 3806)
+  assert.strictEqual(getDistancesAbove(input, 1000), 8354)
 })

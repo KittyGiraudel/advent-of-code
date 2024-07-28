@@ -1,4 +1,5 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import {
   canContain,
@@ -9,7 +10,7 @@ import {
   run,
 } from './'
 
-test('Day 07 — Sample', t => {
+test('Day 07 — Sample', () => {
   const example1 = $.sample(`
   light red bags contain 1 bright white bag, 2 muted yellow bags.
   dark orange bags contain 3 bright white bags, 4 muted yellow bags.
@@ -33,7 +34,7 @@ test('Day 07 — Sample', t => {
   dark violet bags contain no other bags.
   `)
 
-  t.deepEqual(
+  assert.deepStrictEqual(
     parseRestriction(
       'light red bags contain 1 bright white bag, 2 muted yellow bags.'
     ),
@@ -45,31 +46,46 @@ test('Day 07 — Sample', t => {
       ],
     }
   )
-  t.deepEqual(parseRestriction('bright white bags contain 1 shiny gold bag.'), {
-    type: 'bright white',
-    contains: [{ count: 1, type: 'shiny gold' }],
-  })
-  t.deepEqual(parseRestriction('faded blue bags contain no other bags.'), {
-    type: 'faded blue',
-    contains: [],
-  })
-  t.is(canContain(map1, 'faded blue', 'shiny gold'), false)
-  t.is(canContain(map1, 'bright white', 'shiny gold'), true)
-  t.is(canContain(map1, 'dark orange', 'shiny gold'), true)
-  t.is(countContainers(mapRestrictions(example1), 'shiny gold'), 4)
-  t.is(run(example1), 4)
-  t.is(countBagsWithin(mapRestrictions(example1), 'shiny gold'), 32)
-  t.is(run(example1, true), 32)
-  t.is(countBagsWithin(mapRestrictions(example2), 'shiny gold'), 126)
+  assert.deepStrictEqual(
+    parseRestriction('bright white bags contain 1 shiny gold bag.'),
+    {
+      type: 'bright white',
+      contains: [{ count: 1, type: 'shiny gold' }],
+    }
+  )
+  assert.deepStrictEqual(
+    parseRestriction('faded blue bags contain no other bags.'),
+    {
+      type: 'faded blue',
+      contains: [],
+    }
+  )
+  assert.strictEqual(canContain(map1, 'faded blue', 'shiny gold'), false)
+  assert.strictEqual(canContain(map1, 'bright white', 'shiny gold'), true)
+  assert.strictEqual(canContain(map1, 'dark orange', 'shiny gold'), true)
+  assert.strictEqual(
+    countContainers(mapRestrictions(example1), 'shiny gold'),
+    4
+  )
+  assert.strictEqual(run(example1), 4)
+  assert.strictEqual(
+    countBagsWithin(mapRestrictions(example1), 'shiny gold'),
+    32
+  )
+  assert.strictEqual(run(example1, true), 32)
+  assert.strictEqual(
+    countBagsWithin(mapRestrictions(example2), 'shiny gold'),
+    126
+  )
 })
 
-test('Day 07 — Solutions', t => {
+test('Day 07 — Solutions', () => {
   const input = $.readInput(import.meta)
   const map = mapRestrictions(input)
   const type = 'shiny gold'
 
-  t.is(countContainers(map, type), 268)
-  t.is(run(input), 268)
-  t.is(countBagsWithin(map, type), 7867)
-  t.is(run(input, true), 7867)
+  assert.strictEqual(countContainers(map, type), 268)
+  assert.strictEqual(run(input), 268)
+  assert.strictEqual(countBagsWithin(map, type), 7867)
+  assert.strictEqual(run(input, true), 7867)
 })

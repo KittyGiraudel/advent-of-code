@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import { gameOfLife } from '.'
 import $ from '../../helpers'
 
-test('Day 24 — Sample', t => {
+test('Day 24 — Sample', () => {
   const example = $.sample(`
   sesenwnenenewseeswwswswwnenewsewsw
   neeenesenwnwwswnenewnwwsewnenwseswesw
@@ -26,16 +27,16 @@ test('Day 24 — Sample', t => {
   wseweeenwnesenwwwswnew
   `)
 
-  t.is(gameOfLife(example, 0), 10)
-  t.is(gameOfLife(example, 1), 15)
-  t.is(gameOfLife(example, 2), 12)
-  t.is(gameOfLife(example, 10), 37)
-  t.is(gameOfLife(example, 100), 2208)
+  assert.strictEqual(gameOfLife(example, 0), 10)
+  assert.strictEqual(gameOfLife(example, 1), 15)
+  assert.strictEqual(gameOfLife(example, 2), 12)
+  assert.strictEqual(gameOfLife(example, 10), 37)
+  assert.strictEqual(gameOfLife(example, 100), 2208)
 })
 
-test('Day 24 — Solutions', t => {
+test('Day 24 — Solutions', () => {
   const input = $.readInput(import.meta)
 
-  t.is(gameOfLife(input, 0), 488)
-  t.is(gameOfLife(input, 100), 4118)
+  assert.strictEqual(gameOfLife(input, 0), 488)
+  assert.strictEqual(gameOfLife(input, 100), 4118)
 })

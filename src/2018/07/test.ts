@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { parallel, sequential } from './'
 
-test('Day 07 — Sample', t => {
+test('Day 07 — Sample', () => {
   const sample = $.sample(`
   Step C must be finished before step A can begin.
   Step C must be finished before step F can begin.
@@ -13,15 +14,18 @@ test('Day 07 — Sample', t => {
   Step F must be finished before step E can begin.
   `)
 
-  t.is(sequential(sample), 'CABDFE')
-  t.deepEqual(parallel(sample, 2, 0), { duration: 15, order: 'CABFDE' })
+  assert.strictEqual(sequential(sample), 'CABDFE')
+  assert.deepStrictEqual(parallel(sample, 2, 0), {
+    duration: 15,
+    order: 'CABFDE',
+  })
 })
 
-test('Day 07 — Solutions', t => {
+test('Day 07 — Solutions', () => {
   const input = $.readInput(import.meta)
 
-  t.is(sequential(input), 'GKRVWBESYAMZDPTIUCFXQJLHNO')
-  t.deepEqual(parallel(input, 5, 60), {
+  assert.strictEqual(sequential(input), 'GKRVWBESYAMZDPTIUCFXQJLHNO')
+  assert.deepStrictEqual(parallel(input, 5, 60), {
     duration: 903,
     order: 'GRWKBEVZDSYAPMTUCFIXQJLHNO',
   })

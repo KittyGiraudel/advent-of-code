@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { findClosestIntersection, findFastestIntersection } from './'
 
-test('Day 03 — Sample', t => {
+test('Day 03 — Sample', () => {
   const sampleA: [string, string] = ['R8,U5,L5,D3', 'U7,R6,D4,L4']
   const sampleB: [string, string] = [
     'R75,D30,R83,U83,L12,D49,R71,U7,L72',
@@ -13,17 +14,17 @@ test('Day 03 — Sample', t => {
     'U98,R91,D20,R16,D67,R40,U7,R15,U6,R7',
   ]
 
-  t.is(findClosestIntersection(sampleA), 6)
-  t.is(findClosestIntersection(sampleB), 159)
-  t.is(findClosestIntersection(sampleC), 135)
-  t.is(findFastestIntersection(sampleA), 30)
-  t.is(findFastestIntersection(sampleB), 610)
-  t.is(findFastestIntersection(sampleC), 410)
+  assert.strictEqual(findClosestIntersection(sampleA), 6)
+  assert.strictEqual(findClosestIntersection(sampleB), 159)
+  assert.strictEqual(findClosestIntersection(sampleC), 135)
+  assert.strictEqual(findFastestIntersection(sampleA), 30)
+  assert.strictEqual(findFastestIntersection(sampleB), 610)
+  assert.strictEqual(findFastestIntersection(sampleC), 410)
 })
 
-test('Day 03 — Solutions', t => {
+test('Day 03 — Solutions', () => {
   const lines = $.readInput(import.meta) as [string, string]
 
-  t.is(findClosestIntersection(lines), 806)
-  t.is(findFastestIntersection(lines), 66_076)
+  assert.strictEqual(findClosestIntersection(lines), 806)
+  assert.strictEqual(findFastestIntersection(lines), 66_076)
 })

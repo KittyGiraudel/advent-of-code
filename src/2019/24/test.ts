@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { cycle, findBiodiversity, findRecursiveBiodiversity } from './'
 
-test('Day 24 — Sample', t => {
+test('Day 24 — Sample', () => {
   const sampleA = $.sample(`
   ....#
   #..#.
@@ -11,14 +12,14 @@ test('Day 24 — Sample', t => {
   #....
   `)
 
-  t.is(cycle(sampleA.join('')), '#..#.####.###.###.##.##..')
-  t.is(findBiodiversity(sampleA), 2_129_920)
-  t.is(findRecursiveBiodiversity(sampleA, 10), 99)
+  assert.strictEqual(cycle(sampleA.join('')), '#..#.####.###.###.##.##..')
+  assert.strictEqual(findBiodiversity(sampleA), 2_129_920)
+  assert.strictEqual(findRecursiveBiodiversity(sampleA, 10), 99)
 })
 
-test('Day 24 — Solutions', t => {
+test('Day 24 — Solutions', () => {
   const input = $.readInput(import.meta)
 
-  t.is(findBiodiversity(input), 32_573_535)
-  t.is(findRecursiveBiodiversity(input, 200), 1951)
+  assert.strictEqual(findBiodiversity(input), 32_573_535)
+  assert.strictEqual(findRecursiveBiodiversity(input, 200), 1951)
 })

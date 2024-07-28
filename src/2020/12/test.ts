@@ -1,15 +1,16 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import { navigateLoose, navigateStrict } from '.'
 import $ from '../../helpers'
 
-test('Day 12 — Sample', t => {
-  t.is(navigateLoose('F10,N3,F7,R90,F11'.split(',')), 25)
-  t.is(navigateStrict('F10,N3,F7,R90,F11'.split(',')), 286)
+test('Day 12 — Sample', () => {
+  assert.strictEqual(navigateLoose('F10,N3,F7,R90,F11'.split(',')), 25)
+  assert.strictEqual(navigateStrict('F10,N3,F7,R90,F11'.split(',')), 286)
 })
 
-test('Day 12 — Solutions', t => {
+test('Day 12 — Solutions', () => {
   const input = $.readInput(import.meta)
 
-  t.is(navigateLoose(input), 1631)
-  t.is(navigateStrict(input), 58_606)
+  assert.strictEqual(navigateLoose(input), 1631)
+  assert.strictEqual(navigateStrict(input), 58_606)
 })

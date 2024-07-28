@@ -1,19 +1,20 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import { findPasswords, isValidPassword } from './'
 
-test('Day 04 — Sample', t => {
-  t.truthy(isValidPassword('111111'))
-  t.falsy(isValidPassword('223450'))
-  t.falsy(isValidPassword('123789'))
-  t.truthy(isValidPassword('111122', true))
-  t.truthy(isValidPassword('112222', true))
-  t.truthy(isValidPassword('112233', true))
-  t.falsy(isValidPassword('123789', true))
+test('Day 04 — Sample', () => {
+  assert.ok(isValidPassword('111111'))
+  assert.equal(isValidPassword('223450'), false)
+  assert.equal(isValidPassword('123789'), false)
+  assert.ok(isValidPassword('111122', true))
+  assert.ok(isValidPassword('112222', true))
+  assert.ok(isValidPassword('112233', true))
+  assert.equal(isValidPassword('123789', true), false)
 })
 
-test('Day 04 — Solutions', t => {
+test('Day 04 — Solutions', () => {
   const input = '272091-815432'
 
-  t.is(findPasswords(input).length, 931)
-  t.is(findPasswords(input, true).length, 609)
+  assert.strictEqual(findPasswords(input).length, 931)
+  assert.strictEqual(findPasswords(input, true).length, 609)
 })

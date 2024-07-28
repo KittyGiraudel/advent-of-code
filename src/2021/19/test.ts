@@ -1,4 +1,4 @@
-import test from 'ava'
+import test from 'node:test'
 import $ from '../../helpers'
 import { parse } from './'
 
@@ -139,10 +139,10 @@ const sample = `--- scanner 0 ---
 -652,-548,-490
 30,-46,-14`.split('\n\n')
 
-test.skip('Day 19 — Sample', t => {
+test.skip('Day 19 — Sample', () => {
   const scanners = parse(sample)
 })
 
-test.skip('Day 19 — Solutions', t => {
+test.skip('Day 19 — Solutions', () => {
   const input = $.readInput(import.meta, { delimiter: '\n\n' })
 })

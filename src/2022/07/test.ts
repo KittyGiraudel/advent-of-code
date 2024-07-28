@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { findFreeableSpace, getSmallDirsSize, parseOutput } from './'
 
-test('Day 07 — Sample', t => {
+test('Day 07 — Sample', () => {
   const sample = $.sample(`
   $ cd /
   $ ls
@@ -30,14 +31,14 @@ test('Day 07 — Sample', t => {
   `)
   const sampleDrive = parseOutput(sample)
 
-  t.is(getSmallDirsSize(sampleDrive), 95_437)
-  t.is(findFreeableSpace(sampleDrive), 24_933_642)
+  assert.strictEqual(getSmallDirsSize(sampleDrive), 95_437)
+  assert.strictEqual(findFreeableSpace(sampleDrive), 24_933_642)
 })
 
-test('Day 07 — Solutions', t => {
+test('Day 07 — Solutions', () => {
   const input = $.readInput(import.meta)
   const drive = parseOutput(input)
 
-  t.is(getSmallDirsSize(drive), 1_513_699)
-  t.is(findFreeableSpace(drive), 7_991_939)
+  assert.strictEqual(getSmallDirsSize(drive), 1_513_699)
+  assert.strictEqual(findFreeableSpace(drive), 7_991_939)
 })

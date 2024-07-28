@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { decode, run } from './'
 
-test('Day 08 — Sample', t => {
+test('Day 08 — Sample', () => {
   const sample = $.sample(`
   be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe
   edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec | fcgedb cgb dgebacf gc
@@ -16,79 +17,79 @@ test('Day 08 — Sample', t => {
   gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce
   `)
 
-  t.is(run(sample), 26)
-  t.is(
+  assert.strictEqual(run(sample), 26)
+  assert.strictEqual(
     decode(
       'acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf'
     ),
     5353
   )
-  t.is(
+  assert.strictEqual(
     decode(
       'be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe'
     ),
     8394
   )
-  t.is(
+  assert.strictEqual(
     decode(
       'edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec | fcgedb cgb dgebacf gc'
     ),
     9781
   )
-  t.is(
+  assert.strictEqual(
     decode(
       'fgaebd cg bdaec gdafb agbcfd gdcbef bgcad gfac gcb cdgabef | cg cg fdcagb cbg'
     ),
     1197
   )
-  t.is(
+  assert.strictEqual(
     decode(
       'fbegcd cbd adcefb dageb afcb bc aefdc ecdab fgdeca fcdbega | efabcd cedba gadfec cb'
     ),
     9361
   )
-  t.is(
+  assert.strictEqual(
     decode(
       'aecbfdg fbg gf bafeg dbefa fcge gcbea fcaegb dgceab fcbdga | gecf egdcabf bgf bfgea'
     ),
     4873
   )
-  t.is(
+  assert.strictEqual(
     decode(
       'fgeab ca afcebg bdacfeg cfaedg gcfdb baec bfadeg bafgc acf | gebdcfa ecba ca fadegcb'
     ),
     8418
   )
-  t.is(
+  assert.strictEqual(
     decode(
       'dbcfg fgd bdegcaf fgec aegbdf ecdfab fbedc dacgb gdcebf gf | cefg dcbef fcge gbcadfe'
     ),
     4548
   )
-  t.is(
+  assert.strictEqual(
     decode(
       'bdfegc cbegaf gecbf dfcage bdacg ed bedf ced adcbefg gebcd | ed bcgafe cdgba cbgef'
     ),
     1625
   )
-  t.is(
+  assert.strictEqual(
     decode(
       'egadfb cdbfeg cegd fecab cgb gbdefca cg fgcdab egfdb bfceg | gbdfcae bgc cg cgb'
     ),
     8717
   )
-  t.is(
+  assert.strictEqual(
     decode(
       'gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce'
     ),
     4315
   )
-  t.is(run(sample, true), 61_229)
+  assert.strictEqual(run(sample, true), 61_229)
 })
 
-test('Day 08 — Solutions', t => {
+test('Day 08 — Solutions', () => {
   const input = $.readInput(import.meta)
 
-  t.is(run(input), 554)
-  t.is(run(input, true), 990_964)
+  assert.strictEqual(run(input), 554)
+  assert.strictEqual(run(input, true), 990_964)
 })

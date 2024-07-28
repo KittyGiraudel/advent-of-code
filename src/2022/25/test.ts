@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
+import { snafu, unsnafu } from '.'
 import $ from '../../helpers'
-import { snafu, unsnafu } from './'
 
-test('Day 25 — Sample', t => {
+test('Day 25 — Sample', () => {
   const sample = $.sample(`
   1=-0-2
   12111
@@ -49,25 +50,28 @@ test('Day 25 — Sample', t => {
   }
 
   for (const test in TESTS) {
-    t.is(unsnafu(String(test)), TESTS[test as keyof typeof TESTS])
+    assert.strictEqual(unsnafu(String(test)), TESTS[test as keyof typeof TESTS])
   }
 
   for (const test in TESTS) {
-    t.is(snafu(TESTS[test as keyof typeof TESTS]), String(test))
+    assert.strictEqual(snafu(TESTS[test as keyof typeof TESTS]), String(test))
   }
 
-  t.is(
+  assert.strictEqual(
     sample.map(unsnafu).reduce((a, b) => a + b, 0),
     4890
   )
 
-  t.is(snafu(sample.map(unsnafu).reduce((a, b) => a + b, 0)), '2=-1=0')
+  assert.strictEqual(
+    snafu(sample.map(unsnafu).reduce((a, b) => a + b, 0)),
+    '2=-1=0'
+  )
 })
 
-test('Day 25 — Solutions', t => {
+test('Day 25 — Solutions', () => {
   const input = $.readInput(import.meta)
 
-  t.is(
+  assert.strictEqual(
     snafu(input.map(unsnafu).reduce((a, b) => a + b, 0)),
     '2=--00--0220-0-21==1'
   )

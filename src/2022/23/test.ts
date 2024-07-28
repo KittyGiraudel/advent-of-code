@@ -1,8 +1,9 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { run } from './'
 
-test('Day 23 — Sample', t => {
+test('Day 23 — Sample', () => {
   const sample = $.sample(`
   ....#..
   ..###.#
@@ -13,13 +14,13 @@ test('Day 23 — Sample', t => {
   .#..#..
   `)
 
-  t.is(run(sample), 110)
-  t.is(run(sample, Number.POSITIVE_INFINITY), 20)
+  assert.strictEqual(run(sample), 110)
+  assert.strictEqual(run(sample, Number.POSITIVE_INFINITY), 20)
 })
 
-test('Day 23 — Solutions', t => {
+test('Day 23 — Solutions', () => {
   const input = $.readInput(import.meta)
 
-  t.is(run(input), 4249)
-  t.is(run(input, Number.POSITIVE_INFINITY), 980)
+  assert.strictEqual(run(input), 4249)
+  assert.strictEqual(run(input, Number.POSITIVE_INFINITY), 980)
 })

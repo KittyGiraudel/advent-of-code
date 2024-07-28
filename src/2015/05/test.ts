@@ -1,22 +1,23 @@
-import test from 'ava'
+import assert from 'node:assert'
+import test from 'node:test'
 import $ from '../../helpers'
 import { run } from './'
 
-test('Day 05 — Sample', t => {
-  t.is(run(['ugknbfddgicrmopn']), 1)
-  t.is(run(['aaa']), 1)
-  t.is(run(['jchzalrnumimnmhp']), 0)
-  t.is(run(['haegwjzuvuyypxyu']), 0)
-  t.is(run(['dvszwmarrgswjxmb']), 0)
-  t.is(run(['qjhvhtzxzqqjkmpb'], true), 1)
-  t.is(run(['xxyxx'], true), 1)
-  t.is(run(['uurcxstgmygtbstg'], true), 0)
-  t.is(run(['ieodomkazucvgmuy'], true), 0)
+test('Day 05 — Sample', () => {
+  assert.strictEqual(run(['ugknbfddgicrmopn']), 1)
+  assert.strictEqual(run(['aaa']), 1)
+  assert.strictEqual(run(['jchzalrnumimnmhp']), 0)
+  assert.strictEqual(run(['haegwjzuvuyypxyu']), 0)
+  assert.strictEqual(run(['dvszwmarrgswjxmb']), 0)
+  assert.strictEqual(run(['qjhvhtzxzqqjkmpb'], true), 1)
+  assert.strictEqual(run(['xxyxx'], true), 1)
+  assert.strictEqual(run(['uurcxstgmygtbstg'], true), 0)
+  assert.strictEqual(run(['ieodomkazucvgmuy'], true), 0)
 })
 
-test('Day 05 — Solutions', t => {
+test('Day 05 — Solutions', () => {
   const input = $.readInput(import.meta)
 
-  t.is(run(input), 255)
-  t.is(run(input, true), 55)
+  assert.strictEqual(run(input), 255)
+  assert.strictEqual(run(input, true), 55)
 })
