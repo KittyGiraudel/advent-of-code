@@ -1,7 +1,7 @@
 {
   "type": "module",
   "scripts": {
-    "test": "tsx --test",
+    "test": "tsx --test-reporter spec --test",
     "tiles": "rm -rf AoCTiles/.aoc_tiles_cache && python3 AoCTiles/create_aoc_tiles.py",
     "check": "tsc && biome check --write --unsafe",
     "exec": "tsx",
