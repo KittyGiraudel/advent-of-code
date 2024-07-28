@@ -24,7 +24,7 @@ test('Day 25 — Sample', () => {
   assert.strictEqual(run(sample), 54)
 })
 
-test('Day 25 — Solutions', { skip: true }, () => {
+test('Day 25 — Solutions', { skip: 'Potentially too slow to run' }, () => {
   const input = $.readInput(import.meta)
   // Taken from a short Python implementation on Reddit. The resolution time is
   // very random though as it repeatedly pick a pair at random; if it picks the
