@@ -58,7 +58,7 @@ def get_solution_paths_dict_for_years() -> dict[int, dict[int, list[str]]]:
     """
     solution_paths_dict: dict[int, dict[int, list[str]]] = {}
 
-    for year_dir in sorted(get_paths_matching_regex(AOC_DIR, YEAR_PATTERN), reverse=True):
+    for year_dir in sorted(get_paths_matching_regex(AOC_DIR / "src", YEAR_PATTERN), reverse=True):
         year = find_first_number(year_dir.name)
         solution_paths_dict[year] = {}
 
