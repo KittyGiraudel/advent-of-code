@@ -704,3 +704,12 @@
   <img src="Media/2015/25.png" alt="Day 25 2015: Complete" width="161px">
 </a>
 <!-- AOC TILES END -->
+
+## Install
+
+```
+brew install git-crypt
+git-crypt unlock ./aoc-gitcrypt.key
+nvm use 22
+npm i
+```
