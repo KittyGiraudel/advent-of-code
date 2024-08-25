@@ -24,9 +24,7 @@ const getArea = (width: number = Number.POSITIVE_INFINITY): Cube => ({
 // Parse a given instruction into a set of boundaries and a sign.
 const parseLine = (line: string) => {
   const [state, rest] = line.split(' ')
-  const [xMin, xMax, yMin, yMax, zMin, zMax] = $.match(rest, /(-?\d+)/g).map(
-    Number
-  )
+  const [xMin, xMax, yMin, yMax, zMin, zMax] = $.numbers(rest)
   const sign = state === 'on' ? 1 : -1
 
   return { sign, xMin, xMax, yMin, yMax, zMin, zMax } as Cube

@@ -7,7 +7,7 @@ type Moon = {
 }
 
 const prepareMoon = (line: string): Moon => ({
-  position: $.match(line, /(-?\d+)/g).map(Number) as TriCoords,
+  position: $.numbers(line) as TriCoords,
   velocity: [0, 0, 0],
 })
 

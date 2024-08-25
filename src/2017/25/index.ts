@@ -26,7 +26,7 @@ const parse = (blocks: string[]) => {
     acc[name] = [if0, if1].map(
       ([write, move, then]) =>
         [
-          +write.match(/(\d+)/)![1],
+          $.numbers(write)[0],
           move.includes('left') ? -1 : +1,
           then.slice(-2, -1),
         ] as Instruction

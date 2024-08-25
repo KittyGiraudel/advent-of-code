@@ -116,7 +116,7 @@ export const getHumnNumber = (input: string[]) => {
 
   while (getNextNumber(map)) reduceNext(map)
 
-  let value = +$.match(String(map.root), /(\d+)/)[1]
+  let [value] = $.numbers(String(map.root))
   let [, curr] = $.match(String(map.root), /([a-z]+)/)
 
   // We walk up the operation chain until we reach the `humn` key. The idea is

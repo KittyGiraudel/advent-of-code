@@ -188,7 +188,7 @@ type GroupData = {
 }
 
 const parseGroup = (raw: string, index: number) => {
-  const [units, health, damage, initiative] = $.match(raw, /(\d+)/g).map(Number)
+  const [units, health, damage, initiative] = $.numbers(raw)
   const weakness = raw.match(/weak to ([^;)]+)/)?.[1].split(/, ?/g) ?? []
   const immunity = raw.match(/immune to ([^;)]+)/)?.[1].split(/, ?/g) ?? []
   const type = $.match(raw, /(\w+) damage/)[1]

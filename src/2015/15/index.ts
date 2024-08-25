@@ -34,13 +34,11 @@ const getPropertyScore =
     return Math.max($.sum(propertyScores), 0)
   }
 
-const parseIngredient = (line: string) => $.match(line, /-?\d+/g).map(Number)
-
 export const run = (input: string[], calories?: number) => {
   // I couldn’t find a solution that works for a dynamic amount of ingredients
   // since I compute the permutations beforehand.
   const permutations = PERMUTATIONS[input.length as keyof typeof PERMUTATIONS]
-  const ingredients = input.map(parseIngredient)
+  const ingredients = input.map($.numbers)
   const scores = permutations.map(ratios => {
     const getScore = getPropertyScore(ratios, ingredients)
     const propertiesScores = PROPERTIES.map(getScore)

@@ -1,9 +1,10 @@
+import $ from '../../helpers'
+
 const parseInstruction = (line: string) => {
-  if (line.startsWith('cut'))
-    return { type: 'CUT', value: +line.match(/(-?\d+)/)![1] }
+  if (line.startsWith('cut')) return { type: 'CUT', value: $.numbers(line)[0] }
   if (line === 'deal into new stack') return { type: 'NEW' }
   if (line.startsWith('deal with'))
-    return { type: 'INC', value: +line.match(/(-?\d+)/)![1] }
+    return { type: 'INC', value: $.numbers(line)[0] }
   throw new Error('Unknown line ' + line)
 }
 
