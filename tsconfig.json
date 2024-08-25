@@ -14,7 +14,7 @@
     "strict": true,
 
     /* If NOT transpiling with tsc: */
-    "module": "Preserve",
+    "module": "esnext",
     "noEmit": true,
 
     /* If your code doesn't run in the DOM: */
