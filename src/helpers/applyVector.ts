@@ -17,7 +17,7 @@ function applyVector(coords: number[], vector: number[]) {
     coords[1] + vector[1],
     hasThirdPart ? coords[2] + vector[2] : null,
     hasFourthPart ? coords[3] + vector[3] : null,
-  ].filter(segment => segment !== null) as number[]
+  ].filter(segment => segment !== null)
 }
 
 export default applyVector

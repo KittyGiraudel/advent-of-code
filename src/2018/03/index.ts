@@ -37,9 +37,9 @@ export const countOverlappingInches = (input: string[]) => {
 }
 
 const getIntersection = (a: Boundary, b: Boundary) => {
-  const ciMin = Math.max(a.ciMin as number, b.ciMin as number)
+  const ciMin = Math.max(a.ciMin, b.ciMin)
   const ciMax = Math.min(a.ciMax, b.ciMax)
-  const riMin = Math.max(a.riMin as number, b.riMin as number)
+  const riMin = Math.max(a.riMin, b.riMin)
   const riMax = Math.min(a.riMax, b.riMax)
 
   if (ciMin > ciMax || riMin > riMax) return null
@@ -49,7 +49,7 @@ const getIntersection = (a: Boundary, b: Boundary) => {
 
 const parseClaims = (lines: string[]) =>
   lines
-    .map(line => $.match(line, /(\d+)/g).map(Number))
+    .map(line => $.numbers(line))
     .map(
       ([id, ciMin, riMin, width, height]) =>
         ({

@@ -82,7 +82,7 @@ export const run = (input: string[], part2 = false) => {
     const fallen = new Set<number>()
 
     while (queue.length) {
-      const fallingIndex = queue.pop()!
+      const fallingIndex = queue.pop() as number
       const { supports, supportedBy } = clone[fallingIndex]
 
       // Add the current brick to the set of falling bricks; it is technically

@@ -109,7 +109,7 @@ class Computer {
     else if (op === 'jgz') this.pointer += this.get(a) > 0 ? this.get(b) - 1 : 0
     else if (op === 'snd') this.fire('send', this.get(a))
     else if (op === 'rcv') {
-      if (this.queue.length) this.set(a, this.queue.pop()!)
+      if (this.queue.length) this.set(a, this.queue.pop() as number)
       else return
     }
 

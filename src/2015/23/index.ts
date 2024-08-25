@@ -5,8 +5,7 @@ export const run = (input: string[], a = 0) => {
   while (input[index]) {
     const line = input[index]
     const [op, x, y] = line.replace(',', '').split(' ')
-    type Key = keyof typeof registers
-    const key = x as Key
+    const key = x as keyof typeof registers
 
     if (op === 'hlf') registers[key] /= 2
     if (op === 'tpl') registers[key] *= 3

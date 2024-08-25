@@ -44,7 +44,7 @@ const RINGS: Stats[] = [
 // - There can be 0-2 rings.
 const getCombinations = () => {
   const gears: Gear[] = []
-  const ringPairs = $.pairs(RINGS) as [Stats, Stats][]
+  const ringPairs = $.pairs(RINGS)
 
   WEAPONS.forEach(weapon => {
     gears.push([weapon])
@@ -131,7 +131,7 @@ class Fight {
 }
 
 export const run = (boss: number[]): [number, number] => {
-  const gears = getCombinations() as Stats[]
+  const gears = getCombinations()
   const matches = gears.map(gear => new Fight(gear, boss).resolve())
 
   return [
