@@ -4,6 +4,7 @@
  * arrays. If an item doesn’t exist in some arrays, it will not be returned. And
  * because of looping on the first array only, items that are present in other
  * arrays but not the first are also not returned.
+ * @param arrays - Arrays to find the intersection of
  */
 const intersection = <T>(...arrays: T[][]) => {
   const first = arrays.shift()

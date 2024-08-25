@@ -1,6 +1,7 @@
 /**
  * Zip several arrays into one by matching entries by index in a non-mutative
  * way.
+ * @params arrays - Arrays to zip together
  */
 const zip = <T>(arrays: T[][]) => {
   const array = arrays[0]

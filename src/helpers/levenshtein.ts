@@ -2,6 +2,8 @@
  * Compute the levenshtein distance between strings a and b. It’s not the
  * fastest implementation, but it’s dependency-free so that’s something. It’s
  * fast enough for the couple puzzles requiring it anyway.
+ * @param a - First string
+ * @param b - Second string
  */
 const levenshtein = (a: string, b: string) => {
   if (a.length === 0) return b.length
