@@ -1,7 +1,7 @@
 type Frequencies = Record<string, number>
 
 /**
- * Count the occurrences of every item in the given array or given stirng and
+ * Count the occurrences of every item in the given array or given string and
  * return an object mapping items/characters to their count.
  */
 function frequency(input: string): Frequencies

@@ -1,9 +1,9 @@
 import type { Coords, QuadriCoords, TriCoords } from '../types'
 
 /**
- * Retrieve the minimum and maximum values of a set of coordinates, reading
- * x, y, z keys if existing, otherwising array indices, thus providing support
- * for both types of data structures. It returns an array on purposes as the
+ * Retrieve the minimum and maximum values of a set of coordinates, reading x, y
+ * z, and t keys if existing, otherwising array indices, thus providing support
+ * for all 4 types of data structures. It returns an array on purposes as the
  * order of channels may vary (sometimes X comes first, sometimes Y does).
  */
 function boundaries(items: Coords[]): [number, number, number, number]

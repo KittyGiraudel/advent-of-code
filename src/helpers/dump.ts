@@ -6,7 +6,7 @@ import md5 from './md5'
 const getFileName = (content: string) => md5(content) + '.log'
 
 /**
- * Write the given data on a file on disk provided the file doesn’t already
+ * Write the given data in a file provided the file doesn’t already exist
  */
 const dump = (
   data: string,
