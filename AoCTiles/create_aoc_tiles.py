@@ -225,7 +225,7 @@ def draw_star(drawer: ImageDraw, at: tuple[int, int], size=9, color="#ffff0022",
         points.append((at[0] + math.cos(angle) * factor, at[1] + math.sin(angle) * factor))
     drawer.polygon(points, fill=color)
 
-def generate_day_tile_image(day: str, year: str, languages: list[str], day_scores: DayScores | None) -> Path:
+def generate_day_tile_image(day: str, year: str, languages: list[str], day_scores: DayScores = None) -> Path:
     """Saves a graphic for a given day and year. Returns the path to it."""
     image = get_alternating_background(
         languages,
@@ -273,7 +273,7 @@ def generate_day_tile_image(day: str, year: str, languages: list[str], day_score
     image.save(path)
     return path
 
-def handle_day(day: int, year: int, solutions: list[str], html: HTML, day_scores: DayScores | None):
+def handle_day(day: int, year: int, solutions: list[str], html: HTML, day_scores: DayScores = None):
     languages = []
     for solution in solutions:
         extension = "." + solution.split(".")[-1]
