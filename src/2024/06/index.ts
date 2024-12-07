@@ -76,6 +76,14 @@ export const run = (input: string[], part2 = false) => {
     if (!navigation.path.has(point) || point === $.toPoint(startPosition))
       return false
 
-    return navigate(grid.clone().set(coords, '#'), state).type === 'LOOP'
+    // This is not super pretty, but it’s a major performance optimization by
+    // avoiding to clone the map for every position. This way, we keep a single
+    // map, which we mutate before and restore after every navigation.
+    // See: https://www.reddit.com/r/adventofcode/comments/1h8g6za/2024_day_6_part_2_various_optimization_tricks/
+    grid.set(coords, '#')
+    const outcome = navigate(grid, state)
+    grid.set(coords, '.')
+
+    return outcome.type === 'LOOP'
   })
 }
