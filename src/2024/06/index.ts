@@ -7,18 +7,18 @@ type Outcome = { type: 'OUT'; path: Set<Point> } | { type: 'LOOP' }
 
 const getVector = (orientation: Orientation): Coords => {
   if (orientation === '^') return [-1, 0]
-  else if (orientation === '>') return [0, +1]
-  else if (orientation === 'v') return [+1, 0]
-  else if (orientation === '<') return [0, -1]
-  else throw new Error('Invalid orientation')
+  if (orientation === '>') return [0, +1]
+  if (orientation === 'v') return [+1, 0]
+  if (orientation === '<') return [0, -1]
+  throw new Error('Invalid orientation')
 }
 
 const turnRight = (orientation: Orientation): Orientation => {
   if (orientation === '^') return '>'
-  else if (orientation === '>') return 'v'
-  else if (orientation === 'v') return '<'
-  else if (orientation === '<') return '^'
-  else throw new Error('Invalid orientation')
+  if (orientation === '>') return 'v'
+  if (orientation === 'v') return '<'
+  if (orientation === '<') return '^'
+  throw new Error('Invalid orientation')
 }
 
 const navigate = (grid: Grid<string>, initialState: State): Outcome => {
