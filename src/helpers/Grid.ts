@@ -296,6 +296,23 @@ class Grid<T> {
   }
 
   /**
+   * Iterate over the grid from top-to-bottom and left-to-right, returning as a
+   * flat array only the coords that match the given predicate.
+   */
+  filterCoords(predicate: (item: T, coords: Coords) => boolean) {
+    return this.rows
+      .map((row, ri) =>
+        row
+          .map((value, ci) =>
+            predicate(value, [ri, ci]) ? ([ri, ci] as Coords) : null
+          )
+          .filter(value => value !== null)
+      )
+      .filter(row => row.length > 0)
+      .flat()
+  }
+
+  /**
    * Find the first set of Y,X coordinates where the entry matches the given
    * predicate, or undefined otherwise.
    */
