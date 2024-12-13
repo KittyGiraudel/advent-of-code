@@ -3,7 +3,7 @@ import test from 'node:test'
 import $ from '../../helpers'
 import { run } from './'
 
-test('Day 11 — Sample', () => {
+test('Day 12 — Sample', () => {
   const sample1 = $.sample(
     `
     AAAA
@@ -76,7 +76,7 @@ test('Day 11 — Sample', () => {
   assert.strictEqual(run(sample6, true), 946)
 })
 
-test('Day 11 — Solutions', () => {
+test('Day 12 — Solutions', () => {
   const input = $.readInput(import.meta)
 
   assert.strictEqual(run(input), 1489582)
