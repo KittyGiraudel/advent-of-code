@@ -1,7 +1,7 @@
 import assert from 'node:assert'
 import test from 'node:test'
 import $ from '../../helpers'
-import { run, run2 } from './'
+import { run } from './'
 
 test('Day 11 — Sample', () => {
   const sample1 = $.sample(
@@ -80,5 +80,5 @@ test('Day 11 — Solutions', () => {
   const input = $.readInput(import.meta)
 
   assert.strictEqual(run(input), 1489582)
-  assert.strictEqual(run2(input), 914966)
+  assert.strictEqual(run(input, true), 914966)
 })
