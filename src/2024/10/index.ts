@@ -37,21 +37,21 @@ export const run = (input: string[], part2 = false) => {
 }
 
 function countTrails(grid: Grid<number>, start: Coords) {
-  const frontier = [start]
   let count = 0
 
-  while (frontier.length) {
-    const curr = frontier.pop()!
-
-    if (grid.get(curr) === 9) {
-      count++
-      continue
-    }
-
-    $.bordering(curr)
-      .filter(coords => grid.get(coords) === grid.get(curr) + 1)
-      .forEach(coords => frontier.push(coords))
-  }
+  $.search.bfs({
+    start,
+    // Randomize the key to essentially bypass the visited set, so a given node
+    // can be visited multiple times.
+    toKey: () => String(Math.random()),
+    // Never mark a node as the goal in order to never stop early and process
+    // the whole queue.
+    isGoal: curr => (grid.get(curr) === 9 && count++, false),
+    getNext: curr =>
+      $.bordering(curr).filter(
+        coords => grid.get(coords) === grid.get(curr) + 1
+      ),
+  })
 
   return count
 }

@@ -28,6 +28,7 @@
       "performance": { "noAccumulatingSpread": "off", "noDelete": "off" },
       "suspicious": { "noAssignInExpressions": "off" },
       "style": {
+        "noCommaOperator": "off",
         "noUselessElse": "off",
         "noNonNullAssertion": "off",
         "noParameterAssign": "off",
